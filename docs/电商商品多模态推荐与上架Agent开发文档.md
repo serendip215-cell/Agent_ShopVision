@@ -133,13 +133,17 @@ product_id,image_path,title,description,category,color,material,price,tags,sourc
 ```text
 data/
 └── raw_data/
-    └── Amazon_data/
+    ├── Amazon_data/
+    │   ├── products.csv
+    │   ├── images/
+    │   └── image_quality_report.csv
+    └── MUGE_data/
         ├── products.csv
         ├── images/
         └── image_quality_report.csv
 ```
 
-`products.csv` 保存商品信息、图片路径和图片尺寸；`images/` 保存实际图片；`image_quality_report.csv` 保存图片完整性和质量检查结果。当前阶段将数据说明合并到数据目录的 `README.md`，不再拆分单独的字段字典、映射和来源文件。后续处理后的统一数据放入 `data/processed_data/`，不按商品类别拆分目录。
+每个数据集分别保存商品信息、图片和图片质量报告，暂不合并。各数据集的说明集中在自己的 `README.md` 中；后续处理后的统一数据放入 `data/processed_data/`，不按商品类别拆分目录。
 
 ## 5. 模型设计与训练（实验 2）
 
@@ -265,11 +269,15 @@ export_listing(draft, format) -> FilePath
 ecommerce-agent/
 ├── data/
 │   ├── raw_data/
-│   │   └── Amazon_data/
+│   │   ├── Amazon_data/
+│   │   │   ├── products.csv
+│   │   │   ├── images/
+│   │   │   └── image_quality_report.csv
+│   │   └── MUGE_data/
 │   │       ├── products.csv
 │   │       ├── images/
 │   │       └── image_quality_report.csv
-│   └── processed_data/       # 处理后的统一数据，扁平存放
+│   └── processed_data/       # 后续统一处理结果，扁平存放
 ├── models/
 │   ├── base_model/       # 不提交大模型权重
 │   └── lora_adapter/

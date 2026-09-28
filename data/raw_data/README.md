@@ -1,19 +1,27 @@
-# Amazon_data 数据说明
+﻿# raw_data 数据说明
 
-当前数据目录只保留三项内容：
+本目录保存当前使用的原始数据集。每个数据集单独存放，暂不合并。
 
 ```text
-Amazon_data/
-├── products.csv
-├── images/
-└── image_quality_report.csv
+raw_data/
+├── Amazon_data/
+│   ├── products.csv
+│   ├── images/
+│   ├── image_quality_report.csv
+│   └── README.md
+└── MUGE_data/
+    ├── products.csv
+    ├── images/
+    ├── image_quality_report.csv
+    └── README.md
 ```
 
-## 文件说明
+## 各数据集的共同文件
 
-- `products.csv`：商品信息、主图路径和图片尺寸。
-- `images/`：与 `products.csv` 中 `local_image_path` 对应的实际图片。
-- `image_quality_report.csv`：图片是否可读取、尺寸核对、格式和质量标记。
+- `products.csv`：商品信息、图片路径和图片尺寸；
+- `images/`：与 `products.csv` 中 `local_image_path` 对应的实际图片；
+- `image_quality_report.csv`：图片可读取性、尺寸、格式、文件大小、SHA-256 和质量状态；
+- `README.md`：该数据集的来源、字段和检查结果说明。
 
 ## `products.csv` 当前字段
 
@@ -30,7 +38,7 @@ image_height
 image_width
 ```
 
-标题和属性保留来源原文。缺失的颜色、材质等字段保持为空，不从图片或标题推断。
+标题和属性保留来源原文。缺失的字段保持为空，不根据图片或标题臆造商品属性。
 
 ## `image_quality_report.csv` 当前字段
 
@@ -50,15 +58,13 @@ quality_status
 quality_reason
 ```
 
-报告只使用项目中的本地 `image_path`，不保留来源图片路径或来源图片 ID。
+报告只使用项目内的 `image_path`，不依赖外部图片目录。
 
-## 当前检查结果
+## 当前数据集概况
 
-- 商品记录：1,158 条；
-- 图片文件：1,158 张；
-- 图片路径全部可定位；
-- 图片尺寸与来源尺寸一致；
-- 图片质量报告中 1,153 张为 `pass`，5 张为 `review`，0 张为 `failed`。
+| 数据集 | 商品记录 | 图片文件 | `pass` | `review` | `failed` |
+|---|---:|---:|---:|---:|---:|
+| Amazon_data | 1,158 | 1,158 | 1,153 | 5 | 0 |
+| MUGE_data | 4,704 | 4,704 | 4,704 | 0 | 0 |
 
-后续接入新数据集时，在 `raw_data/` 下新增数据集目录。处理后的统一数据放入 `processed_data/`，不按商品类别拆分目录。
-
+Amazon 和 MUGE 目前分别处理、分别维护质量报告。后续如需统一检索或训练，再单独设计合并流程。
