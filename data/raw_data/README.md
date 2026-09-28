@@ -1,6 +1,6 @@
 ﻿# raw_data 数据说明
 
-本目录保存当前使用的原始数据集。每个数据集单独存放，暂不合并。
+本目录保存当前使用的原始数据集，以及 Amazon 中文翻译暂存数据。每个数据集单独存放，暂不合并。
 
 ```text
 raw_data/
@@ -8,6 +8,8 @@ raw_data/
 │   ├── products.csv
 │   ├── images/
 │   ├── image_quality_report.csv
+│   └── README.md
+├── Amazon_data_translated/
 │   └── README.md
 ├── MUGE_data/
 │   ├── products.csv
@@ -27,6 +29,8 @@ raw_data/
     ├── image_quality_report.csv
     └── README.md
 ```
+
+`Amazon_data/` 是原始 Amazon 数据；`Amazon_data_translated/` 是翻译结果的暂存位置，暂时与原始数据放在同一层级。翻译暂存数据完成后还要继续整理和检查，不能直接作为正式训练数据。通过检查后再放入 `data/processed_data/`。
 
 ## 各数据集的共同文件
 

@@ -137,13 +137,15 @@ data/
     │   ├── products.csv
     │   ├── images/
     │   └── image_quality_report.csv
+    ├── Amazon_data_translated/  # Amazon 中文翻译暂存，尚未进入正式处理数据
+    │   └── README.md
     └── MUGE_data/
         ├── products.csv
         ├── images/
         └── image_quality_report.csv
 ```
 
-每个数据集分别保存商品信息、图片和图片质量报告，暂不合并。各数据集的说明集中在自己的 `README.md` 中；后续处理后的统一数据放入 `data/processed_data/`，不按商品类别拆分目录。
+每个数据集分别保存商品信息、图片和图片质量报告，暂不合并。`Amazon_data_translated/` 是 Amazon 翻译结果的暂存目录，翻译完成后还要继续整理和检查，不能直接作为训练数据。各数据集的说明集中在自己的 `README.md` 中；通过检查后的正式处理数据放入 `data/processed_data/`，不按商品类别拆分目录。
 
 ## 5. 模型设计与训练（实验 2）
 
@@ -273,6 +275,8 @@ ecommerce-agent/
 │   │   │   ├── products.csv
 │   │   │   ├── images/
 │   │   │   └── image_quality_report.csv
+    │   │   ├── Amazon_data_translated/
+    │   │   │   └── README.md
 │   │   └── MUGE_data/
 │   │       ├── products.csv
 │   │       ├── images/
