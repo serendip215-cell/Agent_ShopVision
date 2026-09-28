@@ -1,4 +1,4 @@
-# 电商商品多模态推荐与上架 Agent 开发文档
+﻿# 电商商品多模态推荐与上架 Agent 开发文档
 
 ## 1. 项目概述
 
@@ -132,18 +132,14 @@ product_id,image_path,title,description,category,color,material,price,tags,sourc
 
 ```text
 data/
-├── raw/
-├── processed/
-│   ├── images/
-│   ├── products.csv
-│   └── dialogues.jsonl
-├── data_dictionary.md
-├── source_and_license.md
-├── preprocessing_log.md
-└── README.md
+└── raw_data/
+    └── Amazon_data/
+        ├── products.csv
+        ├── images/
+        └── image_quality_report.csv
 ```
 
-README 必须说明数据来源、授权、字段、清洗规则、划分方式、隐私处理、已知限制和复现步骤。
+`products.csv` 保存商品信息、图片路径和图片尺寸；`images/` 保存实际图片；`image_quality_report.csv` 保存图片完整性和质量检查结果。当前阶段将数据说明合并到数据目录的 `README.md`，不再拆分单独的字段字典、映射和来源文件。后续处理后的统一数据放入 `data/processed_data/`，不按商品类别拆分目录。
 
 ## 5. 模型设计与训练（实验 2）
 
@@ -268,6 +264,12 @@ export_listing(draft, format) -> FilePath
 ```text
 ecommerce-agent/
 ├── data/
+│   ├── raw_data/
+│   │   └── Amazon_data/
+│   │       ├── products.csv
+│   │       ├── images/
+│   │       └── image_quality_report.csv
+│   └── processed_data/       # 处理后的统一数据，扁平存放
 ├── models/
 │   ├── base_model/       # 不提交大模型权重
 │   └── lora_adapter/
