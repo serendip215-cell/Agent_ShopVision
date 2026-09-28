@@ -9,7 +9,19 @@ raw_data/
 │   ├── images/
 │   ├── image_quality_report.csv
 │   └── README.md
-└── MUGE_data/
+├── MUGE_data/
+│   ├── products.csv
+│   ├── images/
+│   ├── image_quality_report.csv
+│   └── README.md
+├── GoodsCls_data/          # Kaggle 竞赛原始格式（train/test 划分）
+│   ├── train.csv
+│   ├── test.csv
+│   ├── sample_submission_products.csv
+│   ├── train_images/
+│   ├── test_images/
+│   └── README.md
+└── Suning_data/
     ├── products.csv
     ├── images/
     ├── image_quality_report.csv
@@ -22,6 +34,10 @@ raw_data/
 - `images/`：与 `products.csv` 中 `local_image_path` 对应的实际图片；
 - `image_quality_report.csv`：图片可读取性、尺寸、格式、文件大小、SHA-256 和质量状态；
 - `README.md`：该数据集的来源、字段和检查结果说明。
+
+GoodsCls_data 保留 Kaggle 竞赛原始格式，不套用上述共同结构；如需统一格式，
+处理后的数据放入 `processed_data/`，不在 `raw_data/` 下改写。
+Suning_data 在共同字段之外另含 `price`、`description`、`source_url`、`crawl_date` 列。
 
 ## `products.csv` 当前字段
 
@@ -62,9 +78,12 @@ quality_reason
 
 ## 当前数据集概况
 
-| 数据集 | 商品记录 | 图片文件 | `pass` | `review` | `failed` |
-|---|---:|---:|---:|---:|---:|
-| Amazon_data | 1,158 | 1,158 | 1,153 | 5 | 0 |
-| MUGE_data | 4,704 | 4,704 | 4,704 | 0 | 0 |
+| 数据集 | 商品记录 | 图片文件 | `pass` | `review` | `failed` | 说明 |
+|---|---:|---:|---:|---:|---:|---|
+| Amazon_data | 1,158 | 1,158 | 1,153 | 5 | 0 | 手机壳/厨具/鞋子/家具 |
+| MUGE_data | 4,704 | 4,704 | 4,704 | 0 | 0 | 中文：运动鞋/水杯/双肩包 |
+| GoodsCls_data | 42,000 | 42,000 | — | — | — | 竞赛原始格式，含 title/description |
+| Suning_data | 30 | 30 | 30 | 0 | 0 | 公开搜索页采集样本（手机壳） |
 
-Amazon 和 MUGE 目前分别处理、分别维护质量报告。后续如需统一检索或训练，再单独设计合并流程。
+各数据集分别处理、分别维护质量报告（GoodsCls_data 暂无质量报告，且无价格字段）。
+后续如需统一检索或训练，再单独设计合并流程。
