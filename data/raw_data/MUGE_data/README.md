@@ -25,6 +25,24 @@ image_width
 
 缺失的品牌、颜色和材质等字段保持为空，不根据图片或标题推断。
 
+这里列出的字段是原始 MUGE 表的字段。正式处理后的 MUGE 数据统一整理为 11 个字段，并增加经过确认的 `description`。正式处理时，`product_type` 使用较宽的大类，例如 `包`、`鞋`、`水杯`：
+
+```text
+item_id
+product_type
+item_name
+description
+brand
+color
+material
+local_image_path
+image_status
+image_height
+image_width
+```
+
+正式处理阶段先完成字段整理、图片对应检查和质量审核，再进入中文文本检索样本构建。
+
 ## `image_quality_report.csv` 字段
 
 ```text

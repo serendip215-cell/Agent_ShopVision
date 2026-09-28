@@ -1,24 +1,77 @@
-# processed_data 数据说明
+# processed_data
 
-本目录用于保存完成字段整理、路径统一、质量审核和训练数据构建后的正式处理数据。
-
-当前目录先建立结构，暂不放入 Amazon 翻译暂存数据。Amazon 翻译完成后，还需要经过字段检查、图片对应检查和质量审核，确认合格后再进入本目录。
-
-计划中的数据集目录：
+本目录保存当前项目使用的 **MUGE 商品数据**。正式处理层不按数据来源建立目录，而是按 `product_type` 分类：
 
 ```text
 processed_data/
-└── Amazon_data/
-    ├── products.csv
-    ├── images/
-    ├── image_quality_report.csv
-    └── README.md
+├── dataset_summary.csv
+├── 包/
+├── 水杯/
+└── 鞋/
 ```
 
-## 当前状态
+每个类别目录包含：
 
-- `data/raw_data/Amazon_data/`：Amazon 原始数据；
-- `data/raw_data/Amazon_data_translated/`：Amazon 中文翻译暂存数据；
-- `data/processed_data/`：正式处理数据目录，当前尚未导入 Amazon 数据。
+- `products.csv`：该类别商品记录；
+- `images/`：该类别商品图片；
+- `image_quality_report.csv`：图片存在性、可读取性、尺寸、格式和 SHA-256 检查结果；
+- `field_check_report.json`：字段、路径和图片对应检查结果。
 
-翻译暂存数据不能直接视为训练数据。只有完成整理、路径检查、图片和商品记录对应检查后，才可以复制或生成到本目录。
+`products.csv` 统一使用以下字段：
+
+```text
+item_id
+product_type
+item_name
+description
+brand
+color
+material
+local_image_path
+image_status
+image_height
+image_width
+```
+
+`local_image_path` 是相对于项目根目录的路径，例如：
+
+```text
+data/processed_data/水杯/images/741.jpg
+```
+
+## 当前数据
+
+当前只处理 MUGE 数据，共 3 类、4704 条记录：
+
+- 包：664 条（原始 `双肩包` 归一化）；
+- 水杯：1745 条；
+- 鞋：2295 条（原始 `运动鞋` 归一化）。
+
+图片有效率为 100%，具体统计查看 `dataset_summary.csv`。
+
+## 重新处理 MUGE 数据
+
+在项目根目录执行：
+
+```bash
+python scripts/classify_products.py \
+  --input-file data/raw_data/MUGE_data/products.csv \
+  --output-dir data/processed_data \
+  --category-map "双肩包=包,运动鞋=鞋"
+```
+
+脚本读取 CSV 中已有的 `product_type`，复制对应图片，并将 `local_image_path` 写成相对于项目根目录的路径。输入文件地址可以通过 `--input-file` 更换；脚本本身不限定数据来源。
+
+## 字段和路径检查
+
+```bash
+python scripts/check_product_fields.py \
+  --input-file data/processed_data/水杯/products.csv \
+  --report data/processed_data/水杯/field_check_report.json
+```
+
+检查器会检查必需字段、空值、重复商品 ID、绝对图片路径、缺失图片和 `image_status` 不一致。`valid` 为 `true` 才表示检查通过。
+
+## 说明
+
+`scripts/classify_products.py` 是按照已有 `product_type` 整理数据的工具，不会根据图片预测类别。若后续需要训练真正的图像分类模型，应把这三个类别目录作为训练数据，再编写独立的模型训练脚本。

@@ -35,4 +35,4 @@ Amazon_data_translated/
 └── README.md
 ```
 
-`products.csv` 的字段顺序与当前 MUGE 数据集一致。该目录不改变 `data/raw_data/Amazon_data/` 中的原始文件。
+`products.csv` 的字段顺序按正式统一结构整理为 11 个字段，并增加经过确认的 `description`。该目录不改变 `data/raw_data/Amazon_data/` 中的原始文件。

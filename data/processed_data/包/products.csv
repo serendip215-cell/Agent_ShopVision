@@ -1,0 +1,665 @@
+﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width
+muge_2532,包,小背包男斜挎小号,,,,,data/processed_data/包/images/2532.jpg,ok,224,224
+muge_6563,包,书包密码锁 学生 防盗,,,,,data/processed_data/包/images/6563.jpg,ok,224,224
+muge_7298,包,妈咪电脑包,,,,,data/processed_data/包/images/7298.jpg,ok,224,224
+muge_7520,包,200 600背包,,,,,data/processed_data/包/images/7520.jpg,ok,224,224
+muge_7727,包,男士背包 斜挎包,,,,,data/processed_data/包/images/7727.jpg,ok,224,224
+muge_8895,包,休闲背包小,,,,,data/processed_data/包/images/8895.jpg,ok,224,224
+muge_8971,包,初中女生书包四件套,,,,,data/processed_data/包/images/8971.jpg,ok,224,224
+muge_10785,包,ins风书包奶牛纹,,,,,data/processed_data/包/images/10785.jpg,ok,224,224
+muge_12129,包,双肩包女上班族 电脑,,,,,data/processed_data/包/images/12129.jpg,ok,224,224
+muge_12508,包,amello双肩包,,,,,data/processed_data/包/images/12508.jpg,ok,224,224
+muge_14003,包,宠物背包牵引绳,,,,,data/processed_data/包/images/14003.jpg,ok,224,224
+muge_18922,包,防水防盗旅行包,,,,,data/processed_data/包/images/18922.jpg,ok,224,224
+muge_19094,包,防丢书包一岁,,,,,data/processed_data/包/images/19094.jpg,ok,224,224
+muge_19529,包,妈咪外出小书包,,,,,data/processed_data/包/images/19529.jpg,ok,224,224
+muge_27349,包,外出背包女 时尚,,,,,data/processed_data/包/images/27349.jpg,ok,224,224
+muge_28509,包,focomes手提电脑包,,,,,data/processed_data/包/images/28509.jpg,ok,224,224
+muge_28813,包,小包包女包 新款秋冬网红背包休闲旅行包,,,,,data/processed_data/包/images/28813.jpg,ok,224,224
+muge_29413,包,透明书包儿童,,,,,data/processed_data/包/images/29413.jpg,ok,224,224
+muge_30130,包,疯马皮旅行包 大容量,,,,,data/processed_data/包/images/30130.jpg,ok,224,224
+muge_30717,包,双肩包 女可爱,,,,,data/processed_data/包/images/30717.jpg,ok,224,224
+muge_38871,包,母婴双肩包小,,,,,data/processed_data/包/images/38871.jpg,ok,224,224
+muge_40405,包,长隆双肩包,,,,,data/processed_data/包/images/40405.jpg,ok,224,224
+muge_44370,包,米白色书包,,,,,data/processed_data/包/images/44370.jpg,ok,224,224
+muge_44458,包,小学生手提书包 女孩,,,,,data/processed_data/包/images/44458.jpg,ok,224,224
+muge_51443,包,特价清仓书包,,,,,data/processed_data/包/images/51443.jpg,ok,224,224
+muge_53283,包,旅行背包小背包折叠,,,,,data/processed_data/包/images/53283.jpg,ok,224,224
+muge_54395,包,宽的旅行包,,,,,data/processed_data/包/images/54395.jpg,ok,224,224
+muge_54691,包,美职棒双肩包,,,,,data/processed_data/包/images/54691.jpg,ok,224,224
+muge_56899,包,背包2021新款时尚帆布,,,,,data/processed_data/包/images/56899.jpg,ok,224,224
+muge_57354,包,厚棉帆布背包,,,,,data/processed_data/包/images/57354.jpg,ok,224,224
+muge_57414,包,大拉锁双肩包,,,,,data/processed_data/包/images/57414.jpg,ok,224,224
+muge_60561,包,头层牛皮双肩背包,,,,,data/processed_data/包/images/60561.jpg,ok,224,224
+muge_60810,包,健身背包定制,,,,,data/processed_data/包/images/60810.jpg,ok,224,224
+muge_60993,包,旅行包女小型 轻便迷你,,,,,data/processed_data/包/images/60993.jpg,ok,224,224
+muge_61705,包,blackpink背包,,,,,data/processed_data/包/images/61705.jpg,ok,224,224
+muge_61719,包,双肩包女黑色简约,,,,,data/processed_data/包/images/61719.jpg,ok,224,224
+muge_62435,包,书包扎染女,,,,,data/processed_data/包/images/62435.jpg,ok,224,224
+muge_62777,包,带刺绣的手提和双肩背包两用小包,,,,,data/processed_data/包/images/62777.jpg,ok,224,224
+muge_66072,包,背包单肩迷你男,,,,,data/processed_data/包/images/66072.jpg,ok,224,224
+muge_67724,包,云南民族风小背包迷你,,,,,data/processed_data/包/images/67724.jpg,ok,224,224
+muge_69356,包,电脑包女可背,,,,,data/processed_data/包/images/69356.jpg,ok,224,224
+muge_69686,包,电脑包牛皮,,,,,data/processed_data/包/images/69686.jpg,ok,224,224
+muge_71527,包,男皮方側背包,,,,,data/processed_data/包/images/71527.jpg,ok,224,224
+muge_74017,包,牛皮双肩包女 当季上新,,,,,data/processed_data/包/images/74017.jpg,ok,224,224
+muge_76177,包,个性女背包,,,,,data/processed_data/包/images/76177.jpg,ok,224,224
+muge_76842,包,小人背包,,,,,data/processed_data/包/images/76842.jpg,ok,224,224
+muge_78375,包,双肩包女手提,,,,,data/processed_data/包/images/78375.jpg,ok,224,224
+muge_80430,包,老年大学用女式书包,,,,,data/processed_data/包/images/80430.jpg,ok,224,224
+muge_82890,包,荣耀笔记本电脑包16.1寸,,,,,data/processed_data/包/images/82890.jpg,ok,224,224
+muge_83002,包,书包枪,,,,,data/processed_data/包/images/83002.jpg,ok,224,224
+muge_88828,包,电脑包女手提时尚大容量,,,,,data/processed_data/包/images/88828.jpg,ok,224,224
+muge_91321,包,巴宝莉双肩包 尼龙,,,,,data/processed_data/包/images/91321.jpg,ok,224,224
+muge_92872,包,书包大容量女15寸,,,,,data/processed_data/包/images/92872.jpg,ok,224,224
+muge_93004,包,防走丢背包,,,,,data/processed_data/包/images/93004.jpg,ok,224,224
+muge_94301,包,12寸苹果笔记本电脑包,,,,,data/processed_data/包/images/94301.jpg,ok,224,224
+muge_94722,包,比卡丘背包男孩,,,,,data/processed_data/包/images/94722.jpg,ok,224,224
+muge_94776,包,小学生书包超轻轻便,,,,,data/processed_data/包/images/94776.jpg,ok,224,224
+muge_97660,包,潮流书包男韩版,,,,,data/processed_data/包/images/97660.jpg,ok,224,224
+muge_99320,包,迷你双肩包三合一,,,,,data/processed_data/包/images/99320.jpg,ok,224,224
+muge_99664,包,儿童书包女 小学生轻便小背包,,,,,data/processed_data/包/images/99664.jpg,ok,224,224
+muge_101097,包,单反 背包,,,,,data/processed_data/包/images/101097.jpg,ok,224,224
+muge_101972,包,cathkidston 双肩包,,,,,data/processed_data/包/images/101972.jpg,ok,224,224
+muge_102095,包,itx电脑背包,,,,,data/processed_data/包/images/102095.jpg,ok,224,224
+muge_103496,包,8岁补习书包,,,,,data/processed_data/包/images/103496.jpg,ok,224,224
+muge_104927,包,侨凡双肩包,,,,,data/processed_data/包/images/104927.jpg,ok,224,224
+muge_104953,包,饭团背包,,,,,data/processed_data/包/images/104953.jpg,ok,224,224
+muge_105535,包,梅西球迷背包,,,,,data/processed_data/包/images/105535.jpg,ok,224,224
+muge_105993,包,笔记本电脑包 定制,,,,,data/processed_data/包/images/105993.jpg,ok,224,224
+muge_106349,包,儿童书包三年级男 绿色,,,,,data/processed_data/包/images/106349.jpg,ok,224,224
+muge_106928,包,笔记本电脑包包女 时尚双肩,,,,,data/processed_data/包/images/106928.jpg,ok,224,224
+muge_110846,包,侧背包 hello lulu,,,,,data/processed_data/包/images/110846.jpg,ok,224,224
+muge_111615,包,小书包背包,,,,,data/processed_data/包/images/111615.jpg,ok,224,224
+muge_123687,包,书包女小号,,,,,data/processed_data/包/images/123687.jpg,ok,224,224
+muge_123927,包,鲨鱼背包,,,,,data/processed_data/包/images/123927.jpg,ok,224,224
+muge_124625,包,背包卷盖电脑,,,,,data/processed_data/包/images/124625.jpg,ok,224,224
+muge_125116,包,幼儿书包男 男童恐龙,,,,,data/processed_data/包/images/125116.jpg,ok,224,224
+muge_125536,包,菱格双肩包小,,,,,data/processed_data/包/images/125536.jpg,ok,224,224
+muge_127971,包,书包 光滑,,,,,data/processed_data/包/images/127971.jpg,ok,224,224
+muge_128164,包,天文望远镜背包,,,,,data/processed_data/包/images/128164.jpg,ok,224,224
+muge_129613,包,背包男斜挎包冠军,,,,,data/processed_data/包/images/129613.jpg,ok,224,224
+muge_133569,包,防走失背包恐龙little life,,,,,data/processed_data/包/images/133569.jpg,ok,224,224
+muge_134949,包,中年妇女双肩背包防水,,,,,data/processed_data/包/images/134949.jpg,ok,224,224
+muge_136739,包,初中生女生书包大容量,,,,,data/processed_data/包/images/136739.jpg,ok,224,224
+muge_142185,包,电脑包挂行李箱,,,,,data/processed_data/包/images/142185.jpg,ok,224,224
+muge_145287,包,正版甜甜圈双肩包,,,,,data/processed_data/包/images/145287.jpg,ok,224,224
+muge_145523,包,女孩儿书包小学生大号，黑色,,,,,data/processed_data/包/images/145523.jpg,ok,224,224
+muge_145739,包,牛仔多隔层男童双肩包,,,,,data/processed_data/包/images/145739.jpg,ok,224,224
+muge_146743,包,甜甜圈电脑包,,,,,data/processed_data/包/images/146743.jpg,ok,224,224
+muge_147763,包,3一6年级女生书包,,,,,data/processed_data/包/images/147763.jpg,ok,224,224
+muge_149537,包,博美犬背包外出 小型,,,,,data/processed_data/包/images/149537.jpg,ok,224,224
+muge_150049,包,假面背包,,,,,data/processed_data/包/images/150049.jpg,ok,224,224
+muge_150554,包,goyar 双肩包,,,,,data/processed_data/包/images/150554.jpg,ok,224,224
+muge_150866,包,旅行包大容量女拉杆,,,,,data/processed_data/包/images/150866.jpg,ok,224,224
+muge_155251,包,儿童书包 幼儿园 5岁男孩,,,,,data/processed_data/包/images/155251.jpg,ok,224,224
+muge_157631,包,一年级公主书包,,,,,data/processed_data/包/images/157631.jpg,ok,224,224
+muge_158301,包,练舞背包,,,,,data/processed_data/包/images/158301.jpg,ok,224,224
+muge_159293,包,北極狐背包带子,,,,,data/processed_data/包/images/159293.jpg,ok,224,224
+muge_159878,包,15.6寸电脑包双肩,,,,,data/processed_data/包/images/159878.jpg,ok,224,224
+muge_162377,包,双肩包浅色,,,,,data/processed_data/包/images/162377.jpg,ok,224,224
+muge_162816,包,小童背包小包潮 公主,,,,,data/processed_data/包/images/162816.jpg,ok,224,224
+muge_163071,包,背包双肩潮,,,,,data/processed_data/包/images/163071.jpg,ok,224,224
+muge_163291,包,双肩包军迷,,,,,data/processed_data/包/images/163291.jpg,ok,224,224
+muge_164055,包,真皮双肩包书包,,,,,data/processed_data/包/images/164055.jpg,ok,224,224
+muge_164121,包,女孩双肩包 时尚牛皮,,,,,data/processed_data/包/images/164121.jpg,ok,224,224
+muge_164282,包,软皮侧背包,,,,,data/processed_data/包/images/164282.jpg,ok,224,224
+muge_164938,包,书包男高中生 大容量 火影忍者,,,,,data/processed_data/包/images/164938.jpg,ok,224,224
+muge_169811,包,书包ins风韩版,,,,,data/processed_data/包/images/169811.jpg,ok,224,224
+muge_170183,包,双肩包女酒红色,,,,,data/processed_data/包/images/170183.jpg,ok,224,224
+muge_171426,包,男宝书包 幼儿园 潮 小童,,,,,data/processed_data/包/images/171426.jpg,ok,224,224
+muge_173218,包,mazzzzy电脑包,,,,,data/processed_data/包/images/173218.jpg,ok,224,224
+muge_174407,包,书包ins潮酷中性日系原宿风,,,,,data/processed_data/包/images/174407.jpg,ok,224,224
+muge_174635,包,玩偶背包斜挎,,,,,data/processed_data/包/images/174635.jpg,ok,224,224
+muge_176521,包,代购双肩包中号,,,,,data/processed_data/包/images/176521.jpg,ok,224,224
+muge_177091,包,背包女甜甜圈,,,,,data/processed_data/包/images/177091.jpg,ok,224,224
+muge_179086,包,旅行包包女短途双肩包60升,,,,,data/processed_data/包/images/179086.jpg,ok,224,224
+muge_180767,包,书包男时尚潮流帆布 简约休闲,,,,,data/processed_data/包/images/180767.jpg,ok,224,224
+muge_198793,包,背包男双肩包假面骑士,,,,,data/processed_data/包/images/198793.jpg,ok,224,224
+muge_200634,包,书包女ins潮酷,,,,,data/processed_data/包/images/200634.jpg,ok,224,224
+muge_201692,包,史迪奇 背包,,,,,data/processed_data/包/images/201692.jpg,ok,224,224
+muge_204610,包,幼儿园书包 uek,,,,,data/processed_data/包/images/204610.jpg,ok,224,224
+muge_207077,包,学院书包,,,,,data/processed_data/包/images/207077.jpg,ok,224,224
+muge_209000,包,suissewin双肩包,,,,,data/processed_data/包/images/209000.jpg,ok,224,224
+muge_210020,包,女士外出旅行包潮,,,,,data/processed_data/包/images/210020.jpg,ok,224,224
+muge_210169,包,361双肩包女,,,,,data/processed_data/包/images/210169.jpg,ok,224,224
+muge_210226,包,香港真皮双肩背包女,,,,,data/processed_data/包/images/210226.jpg,ok,224,224
+muge_210686,包,书包双肩背带,,,,,data/processed_data/包/images/210686.jpg,ok,224,224
+muge_211853,包,斜挎背包男潮,,,,,data/processed_data/包/images/211853.jpg,ok,224,224
+muge_215380,包,小书包女ins风斜挎,,,,,data/processed_data/包/images/215380.jpg,ok,224,224
+muge_216403,包,折叠背包 单间,,,,,data/processed_data/包/images/216403.jpg,ok,224,224
+muge_219132,包,logo定制双肩包,,,,,data/processed_data/包/images/219132.jpg,ok,224,224
+muge_219273,包,背包暖手袋,,,,,data/processed_data/包/images/219273.jpg,ok,224,224
+muge_223624,包,女士书包双肩韩版新款帆布,,,,,data/processed_data/包/images/223624.jpg,ok,224,224
+muge_223806,包,男童书包幼儿园中班,,,,,data/processed_data/包/images/223806.jpg,ok,224,224
+muge_226877,包,瑞典书包,,,,,data/processed_data/包/images/226877.jpg,ok,224,224
+muge_227915,包,双肩包女编织款,,,,,data/processed_data/包/images/227915.jpg,ok,224,224
+muge_228043,包,中学生书包有轮胎,,,,,data/processed_data/包/images/228043.jpg,ok,224,224
+muge_228969,包,苹果电脑包13寸 pro,,,,,data/processed_data/包/images/228969.jpg,ok,224,224
+muge_232195,包,芝麻街联名书包大容量,,,,,data/processed_data/包/images/232195.jpg,ok,224,224
+muge_232752,包,单肩背包皮包,,,,,data/processed_data/包/images/232752.jpg,ok,224,224
+muge_234496,包,宝露露背包,,,,,data/processed_data/包/images/234496.jpg,ok,224,224
+muge_237853,包,一年级书包 减压,,,,,data/processed_data/包/images/237853.jpg,ok,224,224
+muge_241679,包,德国mcneill书包,,,,,data/processed_data/包/images/241679.jpg,ok,224,224
+muge_242699,包,背包五星红旗,,,,,data/processed_data/包/images/242699.jpg,ok,224,224
+muge_242972,包,双肩包男潮流ins帆布,,,,,data/processed_data/包/images/242972.jpg,ok,224,224
+muge_243101,包,格仔小背包,,,,,data/processed_data/包/images/243101.jpg,ok,224,224
+muge_243866,包,贝壳双肩包女,,,,,data/processed_data/包/images/243866.jpg,ok,224,224
+muge_247419,包,背包真皮女双肩,,,,,data/processed_data/包/images/247419.jpg,ok,224,224
+muge_251382,包,吧唧痛包双肩包,,,,,data/processed_data/包/images/251382.jpg,ok,224,224
+muge_253317,包,真皮公文背包,,,,,data/processed_data/包/images/253317.jpg,ok,224,224
+muge_253328,包,背包男休闲小,,,,,data/processed_data/包/images/253328.jpg,ok,224,224
+muge_255372,包,日系暗黑书包,,,,,data/processed_data/包/images/255372.jpg,ok,224,224
+muge_256992,包,真皮旅行包男 单肩,,,,,data/processed_data/包/images/256992.jpg,ok,224,224
+muge_258982,包,红色书包潮牌,,,,,data/processed_data/包/images/258982.jpg,ok,224,224
+muge_262279,包,女士小背包单肩包,,,,,data/processed_data/包/images/262279.jpg,ok,224,224
+muge_264173,包,凹凸世界周边书包单肩包,,,,,data/processed_data/包/images/264173.jpg,ok,224,224
+muge_264470,包,背包改造肩带,,,,,data/processed_data/包/images/264470.jpg,ok,224,224
+muge_264603,包,宠物冬季背包,,,,,data/processed_data/包/images/264603.jpg,ok,224,224
+muge_266371,包,双肩包男简约帆布,,,,,data/processed_data/包/images/266371.jpg,ok,224,224
+muge_269212,包,斜背包男牛皮大容量,,,,,data/processed_data/包/images/269212.jpg,ok,224,224
+muge_271037,包,宝宝书包 韩版 幼儿园 迷你3岁,,,,,data/processed_data/包/images/271037.jpg,ok,224,224
+muge_272769,包,妈咪书包双肩包,,,,,data/processed_data/包/images/272769.jpg,ok,224,224
+muge_272956,包,书包韩版原宿ulzzang日系,,,,,data/processed_data/包/images/272956.jpg,ok,224,224
+muge_273742,包,美职棒双肩包,,,,,data/processed_data/包/images/273742.jpg,ok,224,224
+muge_274281,包,背包女斜挎包水桶皮包棕色,,,,,data/processed_data/包/images/274281.jpg,ok,224,224
+muge_274525,包,两岁小朋友背包,,,,,data/processed_data/包/images/274525.jpg,ok,224,224
+muge_276228,包,外贸双肩包,,,,,data/processed_data/包/images/276228.jpg,ok,224,224
+muge_277497,包,13年纪手提书包,,,,,data/processed_data/包/images/277497.jpg,ok,224,224
+muge_277690,包,铆钉书包男,,,,,data/processed_data/包/images/277690.jpg,ok,224,224
+muge_279678,包,红色背包斜挎结婚小,,,,,data/processed_data/包/images/279678.jpg,ok,224,224
+muge_287941,包,儿童外出背包轻便 男童,,,,,data/processed_data/包/images/287941.jpg,ok,224,224
+muge_288526,包,探迹者背包,,,,,data/processed_data/包/images/288526.jpg,ok,224,224
+muge_289876,包,海德薇背包,,,,,data/processed_data/包/images/289876.jpg,ok,224,224
+muge_290825,包,书包 ipad2019,,,,,data/processed_data/包/images/290825.jpg,ok,224,224
+muge_291171,包,双肩包女时尚果冻,,,,,data/processed_data/包/images/291171.jpg,ok,224,224
+muge_296923,包,森林系背包,,,,,data/processed_data/包/images/296923.jpg,ok,224,224
+muge_299736,包,超，变形金刚书包,,,,,data/processed_data/包/images/299736.jpg,ok,224,224
+muge_301535,包,书包 背拉两用初中,,,,,data/processed_data/包/images/301535.jpg,ok,224,224
+muge_302188,包,无印风书包,,,,,data/processed_data/包/images/302188.jpg,ok,224,224
+muge_303068,包,双肩包小花,,,,,data/processed_data/包/images/303068.jpg,ok,224,224
+muge_304737,包,牛仔双肩包男小容量,,,,,data/processed_data/包/images/304737.jpg,ok,224,224
+muge_307596,包,澳洲背包,,,,,data/processed_data/包/images/307596.jpg,ok,224,224
+muge_310325,包,高中书包男减负,,,,,data/processed_data/包/images/310325.jpg,ok,224,224
+muge_316226,包,熊猫背包斜挎,,,,,data/processed_data/包/images/316226.jpg,ok,224,224
+muge_317189,包,吾栗猫包外出便携包手提双肩包太空舱,,,,,data/processed_data/包/images/317189.jpg,ok,224,224
+muge_317826,包,卡通背包 女 双肩,,,,,data/processed_data/包/images/317826.jpg,ok,224,224
+muge_318282,包,束口背包大,,,,,data/processed_data/包/images/318282.jpg,ok,224,224
+muge_321297,包,背包防水女,,,,,data/processed_data/包/images/321297.jpg,ok,224,224
+muge_324205,包,真皮双肩包两用,,,,,data/processed_data/包/images/324205.jpg,ok,224,224
+muge_328983,包,推荐大赏排行榜双肩包,,,,,data/processed_data/包/images/328983.jpg,ok,224,224
+muge_330260,包,双肩包ins女潮百搭,,,,,data/processed_data/包/images/330260.jpg,ok,224,224
+muge_331684,包,运动背包代购,,,,,data/processed_data/包/images/331684.jpg,ok,224,224
+muge_332282,包,钩双肩包材料包,,,,,data/processed_data/包/images/332282.jpg,ok,224,224
+muge_333300,包,欧洲站男士头层牛皮小背包,,,,,data/processed_data/包/images/333300.jpg,ok,224,224
+muge_334737,包,女士书包双肩旅行,,,,,data/processed_data/包/images/334737.jpg,ok,224,224
+muge_337517,包,背包挂件玩偶 公仔,,,,,data/processed_data/包/images/337517.jpg,ok,224,224
+muge_337622,包,小电脑背包,,,,,data/processed_data/包/images/337622.jpg,ok,224,224
+muge_342218,包,背包男双肩包成熟,,,,,data/processed_data/包/images/342218.jpg,ok,224,224
+muge_344562,包,小恐龙书包,,,,,data/processed_data/包/images/344562.jpg,ok,224,224
+muge_345659,包,四年级学生拉杆书包 男孩,,,,,data/processed_data/包/images/345659.jpg,ok,224,224
+muge_347011,包,书包女童幼儿园 女,,,,,data/processed_data/包/images/347011.jpg,ok,224,224
+muge_348367,包,tommy双肩包,,,,,data/processed_data/包/images/348367.jpg,ok,224,224
+muge_349240,包,带钻的背包,,,,,data/processed_data/包/images/349240.jpg,ok,224,224
+muge_350169,包,宝妈背包袋外出小包,,,,,data/processed_data/包/images/350169.jpg,ok,224,224
+muge_350548,包,汽车总动员的书包,,,,,data/processed_data/包/images/350548.jpg,ok,224,224
+muge_350616,包,男童书包四五年级拉杆,,,,,data/processed_data/包/images/350616.jpg,ok,224,224
+muge_351284,包,餐盒包，双肩背包,,,,,data/processed_data/包/images/351284.jpg,ok,224,224
+muge_357043,包,小儿童书包 婴幼儿滑料,,,,,data/processed_data/包/images/357043.jpg,ok,224,224
+muge_359135,包,双肩包  男,,,,,data/processed_data/包/images/359135.jpg,ok,224,224
+muge_359353,包,奥特曼书包 幼儿园 男孩,,,,,data/processed_data/包/images/359353.jpg,ok,224,224
+muge_359464,包,休闲中年双肩女背包,,,,,data/processed_data/包/images/359464.jpg,ok,224,224
+muge_360018,包,书包3年级男岁,,,,,data/processed_data/包/images/360018.jpg,ok,224,224
+muge_364595,包,书包ins日系黑色,,,,,data/processed_data/包/images/364595.jpg,ok,224,224
+muge_364658,包,背包小挂件老虎,,,,,data/processed_data/包/images/364658.jpg,ok,224,224
+muge_368191,包,苹果pro电脑包,,,,,data/processed_data/包/images/368191.jpg,ok,224,224
+muge_369151,包,面包狗毛绒书包挂件,,,,,data/processed_data/包/images/369151.jpg,ok,224,224
+muge_371689,包,户外运动旅行包防水,,,,,data/processed_data/包/images/371689.jpg,ok,224,224
+muge_372947,包,斜书包,,,,,data/processed_data/包/images/372947.jpg,ok,224,224
+muge_374409,包,短期出差旅行包,,,,,data/processed_data/包/images/374409.jpg,ok,224,224
+muge_375158,包,双肩包 真皮 男女通用,,,,,data/processed_data/包/images/375158.jpg,ok,224,224
+muge_378345,包,跑步背包男女超轻,,,,,data/processed_data/包/images/378345.jpg,ok,224,224
+muge_382887,包,lpl书包,,,,,data/processed_data/包/images/382887.jpg,ok,224,224
+muge_383323,包,书包女韩版高中潮牌 少女,,,,,data/processed_data/包/images/383323.jpg,ok,224,224
+muge_385373,包,牟钉双肩包双拉链,,,,,data/processed_data/包/images/385373.jpg,ok,224,224
+muge_386560,包,穿山甲背包,,,,,data/processed_data/包/images/386560.jpg,ok,224,224
+muge_388165,包,aj13书包宽31高49厚20,,,,,data/processed_data/包/images/388165.jpg,ok,224,224
+muge_394602,包,nova5pro手机壳背包,,,,,data/processed_data/包/images/394602.jpg,ok,224,224
+muge_394931,包,双肩包女夏天皮,,,,,data/processed_data/包/images/394931.jpg,ok,224,224
+muge_398747,包,兔迷狼舍双肩背包2021,,,,,data/processed_data/包/images/398747.jpg,ok,224,224
+muge_399021,包,小学上书包轻便护脊,,,,,data/processed_data/包/images/399021.jpg,ok,224,224
+muge_399853,包,书包挂件小狮子,,,,,data/processed_data/包/images/399853.jpg,ok,224,224
+muge_401239,包,51m背包,,,,,data/processed_data/包/images/401239.jpg,ok,224,224
+muge_402034,包,流动广告背包旗,,,,,data/processed_data/包/images/402034.jpg,ok,224,224
+muge_403702,包,儿童书包大班,,,,,data/processed_data/包/images/403702.jpg,ok,224,224
+muge_404025,包,推的书包女孩子,,,,,data/processed_data/包/images/404025.jpg,ok,224,224
+muge_406886,包,男包双肩包个性,,,,,data/processed_data/包/images/406886.jpg,ok,224,224
+muge_408668,包,书包挂 龙猫,,,,,data/processed_data/包/images/408668.jpg,ok,224,224
+muge_409298,包,爬楼书包初中 三轮,,,,,data/processed_data/包/images/409298.jpg,ok,224,224
+muge_411116,包,iphone7plus手机壳背包,,,,,data/processed_data/包/images/411116.jpg,ok,224,224
+muge_412001,包,背包配件肩带鳄鱼,,,,,data/processed_data/包/images/412001.jpg,ok,224,224
+muge_412179,包,旅行包包女 短途迷你,,,,,data/processed_data/包/images/412179.jpg,ok,224,224
+muge_413551,包,背包女帆布小,,,,,data/processed_data/包/images/413551.jpg,ok,224,224
+muge_415215,包,高端轻薄电脑包,,,,,data/processed_data/包/images/415215.jpg,ok,224,224
+muge_415495,包,书包挂件 可爱,,,,,data/processed_data/包/images/415495.jpg,ok,224,224
+muge_417029,包,雙肩斜背包,,,,,data/processed_data/包/images/417029.jpg,ok,224,224
+muge_417616,包,双肩包漫威,,,,,data/processed_data/包/images/417616.jpg,ok,224,224
+muge_418730,包,日本大容量双肩背包,,,,,data/processed_data/包/images/418730.jpg,ok,224,224
+muge_420374,包,女牛皮双肩背包,,,,,data/processed_data/包/images/420374.jpg,ok,224,224
+muge_420809,包,书包狗子挂件,,,,,data/processed_data/包/images/420809.jpg,ok,224,224
+muge_429007,包,太阳花背包,,,,,data/processed_data/包/images/429007.jpg,ok,224,224
+muge_429725,包,儿童双肩包 小童男,,,,,data/processed_data/包/images/429725.jpg,ok,224,224
+muge_429907,包,书包手机袋,,,,,data/processed_data/包/images/429907.jpg,ok,224,224
+muge_431677,包,男士背包双肩包男正品,,,,,data/processed_data/包/images/431677.jpg,ok,224,224
+muge_434473,包,背包女 斜挎包 百搭宽带,,,,,data/processed_data/包/images/434473.jpg,ok,224,224
+muge_434896,包,亮片书包儿童,,,,,data/processed_data/包/images/434896.jpg,ok,224,224
+muge_439317,包,手工真皮男士双肩背包,,,,,data/processed_data/包/images/439317.jpg,ok,224,224
+muge_442469,包,电脑包魔术贴,,,,,data/processed_data/包/images/442469.jpg,ok,224,224
+muge_444172,包,13年级书包,,,,,data/processed_data/包/images/444172.jpg,ok,224,224
+muge_448289,包,黑色牛津布尼龙背包,,,,,data/processed_data/包/images/448289.jpg,ok,224,224
+muge_449225,包,男生背包大学生,,,,,data/processed_data/包/images/449225.jpg,ok,224,224
+muge_450118,包,吉祥物书包,,,,,data/processed_data/包/images/450118.jpg,ok,224,224
+muge_453507,包,动物 背包,,,,,data/processed_data/包/images/453507.jpg,ok,224,224
+muge_453755,包,儿童书包轻薄款,,,,,data/processed_data/包/images/453755.jpg,ok,224,224
+muge_454735,包,真皮男士旅行包,,,,,data/processed_data/包/images/454735.jpg,ok,224,224
+muge_455120,包,灰色女式斜背包,,,,,data/processed_data/包/images/455120.jpg,ok,224,224
+muge_457034,包,中年双肩包女,,,,,data/processed_data/包/images/457034.jpg,ok,224,224
+muge_457823,包,拉杆旅行包男,,,,,data/processed_data/包/images/457823.jpg,ok,224,224
+muge_460593,包,休闲双肩包ins风2020新款大容量百搭,,,,,data/processed_data/包/images/460593.jpg,ok,224,224
+muge_461823,包,男士商务包背包,,,,,data/processed_data/包/images/461823.jpg,ok,224,224
+muge_461878,包,撞色 电脑包,,,,,data/processed_data/包/images/461878.jpg,ok,224,224
+muge_465137,包,背包斜挎包男 大,,,,,data/processed_data/包/images/465137.jpg,ok,224,224
+muge_467026,包,行李箱专用背包,,,,,data/processed_data/包/images/467026.jpg,ok,224,224
+muge_467665,包,小众旅行包,,,,,data/processed_data/包/images/467665.jpg,ok,224,224
+muge_468292,包,初一书包 男孩,,,,,data/processed_data/包/images/468292.jpg,ok,224,224
+muge_472436,包,书包幼儿园女蛋壳,,,,,data/processed_data/包/images/472436.jpg,ok,224,224
+muge_473775,包,防水尼龙布双肩包,,,,,data/processed_data/包/images/473775.jpg,ok,224,224
+muge_474069,包,背包燈,,,,,data/processed_data/包/images/474069.jpg,ok,224,224
+muge_476537,包,书包置物架落地 家用,,,,,data/processed_data/包/images/476537.jpg,ok,224,224
+muge_477062,包,小娜书包,,,,,data/processed_data/包/images/477062.jpg,ok,224,224
+muge_477564,包,代购书包女可爱轻便,,,,,data/processed_data/包/images/477564.jpg,ok,224,224
+muge_477764,包,电滑板车背包,,,,,data/processed_data/包/images/477764.jpg,ok,224,224
+muge_478444,包,苹果电脑包女双肩,,,,,data/processed_data/包/images/478444.jpg,ok,224,224
+muge_482465,包,路亚 双肩包,,,,,data/processed_data/包/images/482465.jpg,ok,224,224
+muge_483730,包,苹果笔记本电脑包13寸,,,,,data/processed_data/包/images/483730.jpg,ok,224,224
+muge_485093,包,防水小学生书包,,,,,data/processed_data/包/images/485093.jpg,ok,224,224
+muge_486591,包,书包小学一年级女生,,,,,data/processed_data/包/images/486591.jpg,ok,224,224
+muge_486886,包,买菜双肩包,,,,,data/processed_data/包/images/486886.jpg,ok,224,224
+muge_487156,包,双肩包白色,,,,,data/processed_data/包/images/487156.jpg,ok,224,224
+muge_487489,包,书包儿童 幼儿园棉布,,,,,data/processed_data/包/images/487489.jpg,ok,224,224
+muge_488590,包,男包潮牌电脑包,,,,,data/processed_data/包/images/488590.jpg,ok,224,224
+muge_489319,包,书包多层暗格,,,,,data/processed_data/包/images/489319.jpg,ok,224,224
+muge_490672,包,塞尔达传说 背包,,,,,data/processed_data/包/images/490672.jpg,ok,224,224
+muge_491113,包,德国小学生书包mcneill,,,,,data/processed_data/包/images/491113.jpg,ok,224,224
+muge_493920,包,学生书包挎包,,,,,data/processed_data/包/images/493920.jpg,ok,224,224
+muge_494215,包,小背包双肩 防水,,,,,data/processed_data/包/images/494215.jpg,ok,224,224
+muge_496779,包,中型犬背包,,,,,data/processed_data/包/images/496779.jpg,ok,224,224
+muge_497610,包,霍尔文皮双肩包,,,,,data/processed_data/包/images/497610.jpg,ok,224,224
+muge_498460,包,一年级男生超轻书包,,,,,data/processed_data/包/images/498460.jpg,ok,224,224
+muge_500875,包,牛皮手工背包,,,,,data/processed_data/包/images/500875.jpg,ok,224,224
+muge_502047,包,everlane 双肩包,,,,,data/processed_data/包/images/502047.jpg,ok,224,224
+muge_502279,包,魔道祖师周边书包双肩包女,,,,,data/processed_data/包/images/502279.jpg,ok,224,224
+muge_503267,包,书包女帆布初中生黑色,,,,,data/processed_data/包/images/503267.jpg,ok,224,224
+muge_503344,包,机车背包女,,,,,data/processed_data/包/images/503344.jpg,ok,224,224
+muge_511083,包,单肩背包拉链,,,,,data/processed_data/包/images/511083.jpg,ok,224,224
+muge_511903,包,韩国ins男情侣双肩包,,,,,data/processed_data/包/images/511903.jpg,ok,224,224
+muge_513829,包,书包小学生 四年级,,,,,data/processed_data/包/images/513829.jpg,ok,224,224
+muge_518581,包,梦乐书包mr31,,,,,data/processed_data/包/images/518581.jpg,ok,224,224
+muge_521047,包,女斜跨休闲旅行包,,,,,data/processed_data/包/images/521047.jpg,ok,224,224
+muge_524140,包,男生背包朱亚文,,,,,data/processed_data/包/images/524140.jpg,ok,224,224
+muge_524204,包,男土背包 单肩 斜挎包,,,,,data/processed_data/包/images/524204.jpg,ok,224,224
+muge_526812,包,双肩背包男童,,,,,data/processed_data/包/images/526812.jpg,ok,224,224
+muge_527933,包,小学生背包旅游 轻便 休闲,,,,,data/processed_data/包/images/527933.jpg,ok,224,224
+muge_528933,包,背包皇马,,,,,data/processed_data/包/images/528933.jpg,ok,224,224
+muge_528998,包,防丢背包神器,,,,,data/processed_data/包/images/528998.jpg,ok,224,224
+muge_529278,包,双肩包女柳丁 铆钉,,,,,data/processed_data/包/images/529278.jpg,ok,224,224
+muge_530493,包,背包溢流,,,,,data/processed_data/包/images/530493.jpg,ok,224,224
+muge_533028,包,背包15.6,,,,,data/processed_data/包/images/533028.jpg,ok,224,224
+muge_533032,包,外卖保温背包,,,,,data/processed_data/包/images/533032.jpg,ok,224,224
+muge_533959,包,双肩包女笔记本电脑13,,,,,data/processed_data/包/images/533959.jpg,ok,224,224
+muge_534093,包,减压书包小学生 护脊男带密码锁,,,,,data/processed_data/包/images/534093.jpg,ok,224,224
+muge_535280,包,书包上好看的吊坠儿,,,,,data/processed_data/包/images/535280.jpg,ok,224,224
+muge_538453,包,uek书包 小学生,,,,,data/processed_data/包/images/538453.jpg,ok,224,224
+muge_538650,包,书包女双肩包韩版帆布,,,,,data/processed_data/包/images/538650.jpg,ok,224,224
+muge_538792,包,小学五年级书包女 女孩,,,,,data/processed_data/包/images/538792.jpg,ok,224,224
+muge_540243,包,小熊双肩包女 可爱,,,,,data/processed_data/包/images/540243.jpg,ok,224,224
+muge_542054,包,2岁女童迷你小背包,,,,,data/processed_data/包/images/542054.jpg,ok,224,224
+muge_543088,包,小学生拉杆书包53元,,,,,data/processed_data/包/images/543088.jpg,ok,224,224
+muge_544375,包,6年级学生书包女黑色普通要大一点的,,,,,data/processed_data/包/images/544375.jpg,ok,224,224
+muge_546376,包,学生书包女大学生草莓,,,,,data/processed_data/包/images/546376.jpg,ok,224,224
+muge_550927,包,背包 绑带,,,,,data/processed_data/包/images/550927.jpg,ok,224,224
+muge_562018,包,旅行包拉杆,,,,,data/processed_data/包/images/562018.jpg,ok,224,224
+muge_567887,包,电脑包line,,,,,data/processed_data/包/images/567887.jpg,ok,224,224
+muge_568233,包,书包可爱软妹日系 森系,,,,,data/processed_data/包/images/568233.jpg,ok,224,224
+muge_570411,包,男童旅行背包 立体袋,,,,,data/processed_data/包/images/570411.jpg,ok,224,224
+muge_571161,包,欧式旅行背包,,,,,data/processed_data/包/images/571161.jpg,ok,224,224
+muge_572467,包,书包wn联名,,,,,data/processed_data/包/images/572467.jpg,ok,224,224
+muge_572719,包,娃娃背包斜挎,,,,,data/processed_data/包/images/572719.jpg,ok,224,224
+muge_577710,包,女皮双肩包,,,,,data/processed_data/包/images/577710.jpg,ok,224,224
+muge_580592,包,男宝背包,,,,,data/processed_data/包/images/580592.jpg,ok,224,224
+muge_581862,包,书包4一6,,,,,data/processed_data/包/images/581862.jpg,ok,224,224
+muge_585439,包,奥赛双肩包户外健身登山包,,,,,data/processed_data/包/images/585439.jpg,ok,224,224
+muge_585544,包,书包小学生轻便挎包大容量,,,,,data/processed_data/包/images/585544.jpg,ok,224,224
+muge_586933,包,黄色双肩包帆布男,,,,,data/processed_data/包/images/586933.jpg,ok,224,224
+muge_596019,包,双肩包情侣款,,,,,data/processed_data/包/images/596019.jpg,ok,224,224
+muge_597406,包,书包挂坠小玩偶 日系,,,,,data/processed_data/包/images/597406.jpg,ok,224,224
+muge_600868,包,迷彩外賣背包,,,,,data/processed_data/包/images/600868.jpg,ok,224,224
+muge_601190,包,背包女双肩 女士 帆布,,,,,data/processed_data/包/images/601190.jpg,ok,224,224
+muge_602336,包,儿童双肩背包前搭扣,,,,,data/processed_data/包/images/602336.jpg,ok,224,224
+muge_603855,包,猫背包 太空舱可爱,,,,,data/processed_data/包/images/603855.jpg,ok,224,224
+muge_605946,包,tigerfamily书包爱心,,,,,data/processed_data/包/images/605946.jpg,ok,224,224
+muge_606204,包,男士时尚背包潮牌,,,,,data/processed_data/包/images/606204.jpg,ok,224,224
+muge_607669,包,旅行包 电脑插袋,,,,,data/processed_data/包/images/607669.jpg,ok,224,224
+muge_612615,包,双肩背包女软包,,,,,data/processed_data/包/images/612615.jpg,ok,224,224
+muge_614231,包,棕色皮背包,,,,,data/processed_data/包/images/614231.jpg,ok,224,224
+muge_615201,包,斜背包荧光,,,,,data/processed_data/包/images/615201.jpg,ok,224,224
+muge_616691,包,书包女韩版,,,,,data/processed_data/包/images/616691.jpg,ok,224,224
+muge_616752,包,拉杆书包高中男,,,,,data/processed_data/包/images/616752.jpg,ok,224,224
+muge_616790,包,广告背包带屏幕,,,,,data/processed_data/包/images/616790.jpg,ok,224,224
+muge_617127,包,书包女 网红,,,,,data/processed_data/包/images/617127.jpg,ok,224,224
+muge_617785,包,航拍背包,,,,,data/processed_data/包/images/617785.jpg,ok,224,224
+muge_622791,包,调教背包,,,,,data/processed_data/包/images/622791.jpg,ok,224,224
+muge_623279,包,deickes书包,,,,,data/processed_data/包/images/623279.jpg,ok,224,224
+muge_624649,包,大双肩包 大容量,,,,,data/processed_data/包/images/624649.jpg,ok,224,224
+muge_627140,包,小学生秋游双肩包女孩,,,,,data/processed_data/包/images/627140.jpg,ok,224,224
+muge_629025,包,卷口双肩包,,,,,data/processed_data/包/images/629025.jpg,ok,224,224
+muge_629750,包,斜挎大包女 大容量书包,,,,,data/processed_data/包/images/629750.jpg,ok,224,224
+muge_632098,包,大容量双肩包中老年女,,,,,data/processed_data/包/images/632098.jpg,ok,224,224
+muge_632132,包,宝宝书包北欧,,,,,data/processed_data/包/images/632132.jpg,ok,224,224
+muge_632453,包,网红编制背包,,,,,data/processed_data/包/images/632453.jpg,ok,224,224
+muge_635560,包,书包女大容量休闲,,,,,data/processed_data/包/images/635560.jpg,ok,224,224
+muge_635998,包,出旅双肩包,,,,,data/processed_data/包/images/635998.jpg,ok,224,224
+muge_636327,包,皮卡丘书包挂件公仔一套,,,,,data/processed_data/包/images/636327.jpg,ok,224,224
+muge_636557,包,亮面双肩背包,,,,,data/processed_data/包/images/636557.jpg,ok,224,224
+muge_637333,包,20l登山背包,,,,,data/processed_data/包/images/637333.jpg,ok,224,224
+muge_638446,包,小学生男背包 补习袋,,,,,data/processed_data/包/images/638446.jpg,ok,224,224
+muge_638570,包,时尚潮流双肩背包,,,,,data/processed_data/包/images/638570.jpg,ok,224,224
+muge_638795,包,哈雷骑士背包,,,,,data/processed_data/包/images/638795.jpg,ok,224,224
+muge_639525,包,摺疊背包,,,,,data/processed_data/包/images/639525.jpg,ok,224,224
+muge_639911,包,背包挂件批发,,,,,data/processed_data/包/images/639911.jpg,ok,224,224
+muge_642089,包,锦纶双肩包,,,,,data/processed_data/包/images/642089.jpg,ok,224,224
+muge_645409,包,宝宝双肩包尼龙布,,,,,data/processed_data/包/images/645409.jpg,ok,224,224
+muge_646691,包,男士帆布手拿单背包,,,,,data/processed_data/包/images/646691.jpg,ok,224,224
+muge_647070,包,帆布双肩包中老年,,,,,data/processed_data/包/images/647070.jpg,ok,224,224
+muge_649483,包,牛津布双肩包女 牛津纺,,,,,data/processed_data/包/images/649483.jpg,ok,224,224
+muge_655741,包,大号背包男帆布包,,,,,data/processed_data/包/images/655741.jpg,ok,224,224
+muge_655798,包,书包女宽肩带,,,,,data/processed_data/包/images/655798.jpg,ok,224,224
+muge_656087,包,恐龙小书包 幼儿,,,,,data/processed_data/包/images/656087.jpg,ok,224,224
+muge_659503,包,30升斜背包,,,,,data/processed_data/包/images/659503.jpg,ok,224,224
+muge_659672,包,保温双肩背包,,,,,data/processed_data/包/images/659672.jpg,ok,224,224
+muge_660666,包,背包  剪标,,,,,data/processed_data/包/images/660666.jpg,ok,224,224
+muge_664837,包,恐龙书包,,,,,data/processed_data/包/images/664837.jpg,ok,224,224
+muge_665275,包,高中书包女 大容量学院,,,,,data/processed_data/包/images/665275.jpg,ok,224,224
+muge_668794,包,奥旅背包,,,,,data/processed_data/包/images/668794.jpg,ok,224,224
+muge_670648,包,马拉松背包 超轻,,,,,data/processed_data/包/images/670648.jpg,ok,224,224
+muge_672382,包,真皮双肩包男女潮流,,,,,data/processed_data/包/images/672382.jpg,ok,224,224
+muge_672698,包,双肩包上学,,,,,data/processed_data/包/images/672698.jpg,ok,224,224
+muge_672882,包,书包尼龙布,,,,,data/processed_data/包/images/672882.jpg,ok,224,224
+muge_676327,包,粉色软妹书包,,,,,data/processed_data/包/images/676327.jpg,ok,224,224
+muge_677136,包,男生书包 大学生 简约,,,,,data/processed_data/包/images/677136.jpg,ok,224,224
+muge_677750,包,多样式皮布结合背包,,,,,data/processed_data/包/images/677750.jpg,ok,224,224
+muge_678724,包,大猩猩书包,,,,,data/processed_data/包/images/678724.jpg,ok,224,224
+muge_679318,包,书包女大学生透明,,,,,data/processed_data/包/images/679318.jpg,ok,224,224
+muge_681170,包,书包幼儿园女小班4岁,,,,,data/processed_data/包/images/681170.jpg,ok,224,224
+muge_681551,包,吉他 透明 背包,,,,,data/processed_data/包/images/681551.jpg,ok,224,224
+muge_681818,包,结实耐用的书包,,,,,data/processed_data/包/images/681818.jpg,ok,224,224
+muge_682625,包,电脑包diy材料包,,,,,data/processed_data/包/images/682625.jpg,ok,224,224
+muge_685491,包,男童休闲背包,,,,,data/processed_data/包/images/685491.jpg,ok,224,224
+muge_687352,包,双肩包2020年新款容量大,,,,,data/processed_data/包/images/687352.jpg,ok,224,224
+muge_687530,包,niketanjun双肩包ba6097,,,,,data/processed_data/包/images/687530.jpg,ok,224,224
+muge_689336,包,苹果手提式电脑包,,,,,data/processed_data/包/images/689336.jpg,ok,224,224
+muge_689457,包,皮质黑金运动书包电脑双肩包,,,,,data/processed_data/包/images/689457.jpg,ok,224,224
+muge_689958,包,电脑包 牛皮,,,,,data/processed_data/包/images/689958.jpg,ok,224,224
+muge_691307,包,高三男生书包,,,,,data/processed_data/包/images/691307.jpg,ok,224,224
+muge_691910,包,熊猫小书包儿童,,,,,data/processed_data/包/images/691910.jpg,ok,224,224
+muge_692747,包,包包新款2020网红双肩包,,,,,data/processed_data/包/images/692747.jpg,ok,224,224
+muge_693479,包,成人电脑包男双肩,,,,,data/processed_data/包/images/693479.jpg,ok,224,224
+muge_693728,包,书包男士大学生,,,,,data/processed_data/包/images/693728.jpg,ok,224,224
+muge_696025,包,带皮子的书包粉色,,,,,data/processed_data/包/images/696025.jpg,ok,224,224
+muge_699742,包,外星人笔记本电脑背包,,,,,data/processed_data/包/images/699742.jpg,ok,224,224
+muge_704216,包,手拉杆书包女小学生可爱,,,,,data/processed_data/包/images/704216.jpg,ok,224,224
+muge_706640,包,书包小学生5年级女12岁,,,,,data/processed_data/包/images/706640.jpg,ok,224,224
+muge_708223,包,电脑包15寸背包,,,,,data/processed_data/包/images/708223.jpg,ok,224,224
+muge_708916,包,库里书包双肩包,,,,,data/processed_data/包/images/708916.jpg,ok,224,224
+muge_710034,包,幼儿园书包3到6岁,,,,,data/processed_data/包/images/710034.jpg,ok,224,224
+muge_713049,包,背包 时尚 丝印 帆布包 潮包,,,,,data/processed_data/包/images/713049.jpg,ok,224,224
+muge_717537,包,1到2元的书包,,,,,data/processed_data/包/images/717537.jpg,ok,224,224
+muge_719144,包,铆钉书包大,,,,,data/processed_data/包/images/719144.jpg,ok,224,224
+muge_722656,包,双肩包 男 超大容量 简约,,,,,data/processed_data/包/images/722656.jpg,ok,224,224
+muge_723549,包,国风 背包,,,,,data/processed_data/包/images/723549.jpg,ok,224,224
+muge_724054,包,书包 小学高年级,,,,,data/processed_data/包/images/724054.jpg,ok,224,224
+muge_726709,包,免洗书包,,,,,data/processed_data/包/images/726709.jpg,ok,224,224
+muge_727448,包,4一6年级书包女,,,,,data/processed_data/包/images/727448.jpg,ok,224,224
+muge_727993,包,儿童双肩包皮,,,,,data/processed_data/包/images/727993.jpg,ok,224,224
+muge_729751,包,小女孩漂亮的斜跨书包,,,,,data/processed_data/包/images/729751.jpg,ok,224,224
+muge_729807,包,书包1岁,,,,,data/processed_data/包/images/729807.jpg,ok,224,224
+muge_730033,包,幼儿园男宝书包,,,,,data/processed_data/包/images/730033.jpg,ok,224,224
+muge_730752,包,奶白色背包,,,,,data/processed_data/包/images/730752.jpg,ok,224,224
+muge_733016,包,儿童抽绳双肩包,,,,,data/processed_data/包/images/733016.jpg,ok,224,224
+muge_734160,包,高端奢侈双肩背包,,,,,data/processed_data/包/images/734160.jpg,ok,224,224
+muge_735209,包,女装轻巧背包,,,,,data/processed_data/包/images/735209.jpg,ok,224,224
+muge_735942,包,undefeated双肩包,,,,,data/processed_data/包/images/735942.jpg,ok,224,224
+muge_736050,包,大容量手提旅行包头层牛皮,,,,,data/processed_data/包/images/736050.jpg,ok,224,224
+muge_736990,包,初高中学生书包女 大容量,,,,,data/processed_data/包/images/736990.jpg,ok,224,224
+muge_737775,包,书包小时候的老款,,,,,data/processed_data/包/images/737775.jpg,ok,224,224
+muge_740921,包,女式双肩背包 真皮 百搭,,,,,data/processed_data/包/images/740921.jpg,ok,224,224
+muge_741274,包,书包女 高中生大学生,,,,,data/processed_data/包/images/741274.jpg,ok,224,224
+muge_742057,包,raf simons背包,,,,,data/processed_data/包/images/742057.jpg,ok,224,224
+muge_742709,包,军绿色帆布双肩包男,,,,,data/processed_data/包/images/742709.jpg,ok,224,224
+muge_743267,包,剪标头层牛皮双肩包,,,,,data/processed_data/包/images/743267.jpg,ok,224,224
+muge_747083,包,背包女双肩 大容量 旅行,,,,,data/processed_data/包/images/747083.jpg,ok,224,224
+muge_748212,包,学生手提袋拎书袋双肩背包,,,,,data/processed_data/包/images/748212.jpg,ok,224,224
+muge_748729,包,侧背包女 单肩,,,,,data/processed_data/包/images/748729.jpg,ok,224,224
+muge_749102,包,大容量中学生双肩包,,,,,data/processed_data/包/images/749102.jpg,ok,224,224
+muge_749579,包,中老年人背的双肩包五十岁以上,,,,,data/processed_data/包/images/749579.jpg,ok,224,224
+muge_750959,包,男童书包二年级2020年新款,,,,,data/processed_data/包/images/750959.jpg,ok,224,224
+muge_753435,包,日本双肩包2020年新款,,,,,data/processed_data/包/images/753435.jpg,ok,224,224
+muge_754312,包,鞋型书包,,,,,data/processed_data/包/images/754312.jpg,ok,224,224
+muge_755329,包,外贸男款双肩包,,,,,data/processed_data/包/images/755329.jpg,ok,224,224
+muge_755891,包,粉色旅行包,,,,,data/processed_data/包/images/755891.jpg,ok,224,224
+muge_757468,包,休闲双肩包清仓女,,,,,data/processed_data/包/images/757468.jpg,ok,224,224
+muge_758309,包,三年级书包女小学生容量大,,,,,data/processed_data/包/images/758309.jpg,ok,224,224
+muge_763636,包,女式双肩小背包花色,,,,,data/processed_data/包/images/763636.jpg,ok,224,224
+muge_763798,包,棒球 背包,,,,,data/processed_data/包/images/763798.jpg,ok,224,224
+muge_765610,包,儿童书包布料,,,,,data/processed_data/包/images/765610.jpg,ok,224,224
+muge_771052,包,男士背包单肩小号,,,,,data/processed_data/包/images/771052.jpg,ok,224,224
+muge_771783,包,斑马纹背包,,,,,data/processed_data/包/images/771783.jpg,ok,224,224
+muge_772221,包,小学男生书包防水,,,,,data/processed_data/包/images/772221.jpg,ok,224,224
+muge_772948,包,背包大学生上课女学院,,,,,data/processed_data/包/images/772948.jpg,ok,224,224
+muge_773037,包,双肩包旅行女,,,,,data/processed_data/包/images/773037.jpg,ok,224,224
+muge_778362,包,书包男初中生路飞,,,,,data/processed_data/包/images/778362.jpg,ok,224,224
+muge_778439,包,可折叠抽绳背包尼龙,,,,,data/processed_data/包/images/778439.jpg,ok,224,224
+muge_780816,包,结实书包女大学生,,,,,data/processed_data/包/images/780816.jpg,ok,224,224
+muge_785096,包,攝影背包 30l,,,,,data/processed_data/包/images/785096.jpg,ok,224,224
+muge_791829,包,零钱包手机壳苹果11 背包式,,,,,data/processed_data/包/images/791829.jpg,ok,224,224
+muge_793275,包,制服书包,,,,,data/processed_data/包/images/793275.jpg,ok,224,224
+muge_793378,包,初中生双肩背包男,,,,,data/processed_data/包/images/793378.jpg,ok,224,224
+muge_793689,包,小背包女水桶包,,,,,data/processed_data/包/images/793689.jpg,ok,224,224
+muge_794626,包,真皮女士双肩包牛皮,,,,,data/processed_data/包/images/794626.jpg,ok,224,224
+muge_795886,包,女童双肩包休闲,,,,,data/processed_data/包/images/795886.jpg,ok,224,224
+muge_795932,包,双肩包幼儿园,,,,,data/processed_data/包/images/795932.jpg,ok,224,224
+muge_796371,包,书包女中学生2021年新款反光,,,,,data/processed_data/包/images/796371.jpg,ok,224,224
+muge_799319,包,放水健身背包,,,,,data/processed_data/包/images/799319.jpg,ok,224,224
+muge_799588,包,儿童外出小背包洋气男,,,,,data/processed_data/包/images/799588.jpg,ok,224,224
+muge_800413,包,小王子背包挂件,,,,,data/processed_data/包/images/800413.jpg,ok,224,224
+muge_802240,包,屁桃书包挂件,,,,,data/processed_data/包/images/802240.jpg,ok,224,224
+muge_802384,包,双肩包书包女学生,,,,,data/processed_data/包/images/802384.jpg,ok,224,224
+muge_803299,包,笔记本电脑包手提帆布,,,,,data/processed_data/包/images/803299.jpg,ok,224,224
+muge_809419,包,男士背包旅行大容量,,,,,data/processed_data/包/images/809419.jpg,ok,224,224
+muge_809900,包,手提尼龙布旅行包男,,,,,data/processed_data/包/images/809900.jpg,ok,224,224
+muge_813114,包,拉杆猫背包,,,,,data/processed_data/包/images/813114.jpg,ok,224,224
+muge_813238,包,家政背包,,,,,data/processed_data/包/images/813238.jpg,ok,224,224
+muge_819016,包,背包肩带 银扣,,,,,data/processed_data/包/images/819016.jpg,ok,224,224
+muge_820362,包,背包男士双肩包黑色,,,,,data/processed_data/包/images/820362.jpg,ok,224,224
+muge_822983,包,书包鸭子,,,,,data/processed_data/包/images/822983.jpg,ok,224,224
+muge_824304,包,云朵双肩包,,,,,data/processed_data/包/images/824304.jpg,ok,224,224
+muge_825194,包,牛津书包中学生,,,,,data/processed_data/包/images/825194.jpg,ok,224,224
+muge_825704,包,旅行包女手提韩版短途帆布,,,,,data/processed_data/包/images/825704.jpg,ok,224,224
+muge_826302,包,苹果电脑背包女双肩,,,,,data/processed_data/包/images/826302.jpg,ok,224,224
+muge_827761,包,可爱儿童书包,,,,,data/processed_data/包/images/827761.jpg,ok,224,224
+muge_828220,包,双肩包ins女潮 嘻哈,,,,,data/processed_data/包/images/828220.jpg,ok,224,224
+muge_832244,包,gsz双肩背包,,,,,data/processed_data/包/images/832244.jpg,ok,224,224
+muge_833309,包,球鞋旅行包,,,,,data/processed_data/包/images/833309.jpg,ok,224,224
+muge_838343,包,旅游布小双肩包,,,,,data/processed_data/包/images/838343.jpg,ok,224,224
+muge_838411,包,背包女双肩墨绿色,,,,,data/processed_data/包/images/838411.jpg,ok,224,224
+muge_838503,包,电脑包 彩色,,,,,data/processed_data/包/images/838503.jpg,ok,224,224
+muge_838691,包,游泳背包浮板 儿童,,,,,data/processed_data/包/images/838691.jpg,ok,224,224
+muge_839995,包,双肩背包女士布料的,,,,,data/processed_data/包/images/839995.jpg,ok,224,224
+muge_840532,包,双肩背包运动款男,,,,,data/processed_data/包/images/840532.jpg,ok,224,224
+muge_841544,包,菱形背包男,,,,,data/processed_data/包/images/841544.jpg,ok,224,224
+muge_844271,包,真皮正品双肩包,,,,,data/processed_data/包/images/844271.jpg,ok,224,224
+muge_845604,包,肩带隐形背包,,,,,data/processed_data/包/images/845604.jpg,ok,224,224
+muge_848247,包,书包挂件龙猫,,,,,data/processed_data/包/images/848247.jpg,ok,224,224
+muge_848931,包,双肩包男 帆布,,,,,data/processed_data/包/images/848931.jpg,ok,224,224
+muge_849411,包,书包罩 防水,,,,,data/processed_data/包/images/849411.jpg,ok,224,224
+muge_850105,包,网红小背包男,,,,,data/processed_data/包/images/850105.jpg,ok,224,224
+muge_860341,包,进击的巨人双肩包,,,,,data/processed_data/包/images/860341.jpg,ok,224,224
+muge_860611,包,书包柜 实木,,,,,data/processed_data/包/images/860611.jpg,ok,224,224
+muge_870339,包,多口袋双肩包女,,,,,data/processed_data/包/images/870339.jpg,ok,224,224
+muge_870960,包,双肩包轻便 女 超轻时尚旅行,,,,,data/processed_data/包/images/870960.jpg,ok,224,224
+muge_871161,包,迷你小背包 男,,,,,data/processed_data/包/images/871161.jpg,ok,224,224
+muge_871844,包,电脑包14寸男真皮,,,,,data/processed_data/包/images/871844.jpg,ok,224,224
+muge_872102,包,女款布料大背包,,,,,data/processed_data/包/images/872102.jpg,ok,224,224
+muge_872198,包,潮牌双肩包男时尚潮流初中大学生书包旅行,,,,,data/processed_data/包/images/872198.jpg,ok,224,224
+muge_873897,包,帆布包大容量女拉链 旅行包,,,,,data/processed_data/包/images/873897.jpg,ok,224,224
+muge_874873,包,帆布背包女双肩旅行,,,,,data/processed_data/包/images/874873.jpg,ok,224,224
+muge_876282,包,真皮软皮大容量女士背包,,,,,data/processed_data/包/images/876282.jpg,ok,224,224
+muge_876601,包,2020年新款男士电脑双肩包,,,,,data/processed_data/包/images/876601.jpg,ok,224,224
+muge_881795,包,女初中生韩版小书包,,,,,data/processed_data/包/images/881795.jpg,ok,224,224
+muge_884675,包,美国户外背包,,,,,data/processed_data/包/images/884675.jpg,ok,224,224
+muge_887242,包,小背包男潮 帆布,,,,,data/processed_data/包/images/887242.jpg,ok,224,224
+muge_890332,包,平板电脑双肩包女包11寸,,,,,data/processed_data/包/images/890332.jpg,ok,224,224
+muge_897531,包,质感小背包 网红书包 小包,,,,,data/processed_data/包/images/897531.jpg,ok,224,224
+muge_898254,包,双肩包松鼠,,,,,data/processed_data/包/images/898254.jpg,ok,224,224
+muge_898848,包,redmibook14 ii锐龙版电脑包,,,,,data/processed_data/包/images/898848.jpg,ok,224,224
+muge_899459,包,双肩包包2021新款pu,,,,,data/processed_data/包/images/899459.jpg,ok,224,224
+muge_901434,包,三年级的书包 男孩,,,,,data/processed_data/包/images/901434.jpg,ok,224,224
+muge_903451,包,电脑女双肩包,,,,,data/processed_data/包/images/903451.jpg,ok,224,224
+muge_905403,包,工地背包男,,,,,data/processed_data/包/images/905403.jpg,ok,224,224
+muge_905413,包,男童出游小背包,,,,,data/processed_data/包/images/905413.jpg,ok,224,224
+muge_906341,包,mysens电脑包,,,,,data/processed_data/包/images/906341.jpg,ok,224,224
+muge_907350,包,双肩包男另类,,,,,data/processed_data/包/images/907350.jpg,ok,224,224
+muge_907503,包,彩虹书包甜甜圈,,,,,data/processed_data/包/images/907503.jpg,ok,224,224
+muge_907923,包,幼儿园大黄蜂书包,,,,,data/processed_data/包/images/907923.jpg,ok,224,224
+muge_908754,包,11岁女童书包,,,,,data/processed_data/包/images/908754.jpg,ok,224,224
+muge_909017,包,16寸电脑包 手提,,,,,data/processed_data/包/images/909017.jpg,ok,224,224
+muge_910706,包,earpearp电脑包,,,,,data/processed_data/包/images/910706.jpg,ok,224,224
+muge_911210,包,双肩背包女2021新款时尚潮流,,,,,data/processed_data/包/images/911210.jpg,ok,224,224
+muge_911298,包,篮球 双肩包,,,,,data/processed_data/包/images/911298.jpg,ok,224,224
+muge_912356,包,背包式音箱,,,,,data/processed_data/包/images/912356.jpg,ok,224,224
+muge_916900,包,小学儿童书包男,,,,,data/processed_data/包/images/916900.jpg,ok,224,224
+muge_918192,包,斜背包小老年,,,,,data/processed_data/包/images/918192.jpg,ok,224,224
+muge_922983,包,韩国吐司电脑包,,,,,data/processed_data/包/images/922983.jpg,ok,224,224
+muge_923133,包,电脑包 17.3英寸 皮,,,,,data/processed_data/包/images/923133.jpg,ok,224,224
+muge_924010,包,女孩子书包三年级,,,,,data/processed_data/包/images/924010.jpg,ok,224,224
+muge_927307,包,时尚潮流书包森系大容星,,,,,data/processed_data/包/images/927307.jpg,ok,224,224
+muge_928802,包,书包枫叶,,,,,data/processed_data/包/images/928802.jpg,ok,224,224
+muge_930178,包,双肩小背包 女,,,,,data/processed_data/包/images/930178.jpg,ok,224,224
+muge_932316,包,简易背包 双肩抽绳大,,,,,data/processed_data/包/images/932316.jpg,ok,224,224
+muge_934313,包,aj5背包,,,,,data/processed_data/包/images/934313.jpg,ok,224,224
+muge_937757,包,包包新款双肩背包,,,,,data/processed_data/包/images/937757.jpg,ok,224,224
+muge_940048,包,干湿分离背包,,,,,data/processed_data/包/images/940048.jpg,ok,224,224
+muge_941535,包,幼儿园书包布款,,,,,data/processed_data/包/images/941535.jpg,ok,224,224
+muge_942566,包,书包小学生黑色 女孩,,,,,data/processed_data/包/images/942566.jpg,ok,224,224
+muge_943064,包,商务双肩背包男皮,,,,,data/processed_data/包/images/943064.jpg,ok,224,224
+muge_944292,包,thinkpadt300 电脑包,,,,,data/processed_data/包/images/944292.jpg,ok,224,224
+muge_946317,包,女後背包,,,,,data/processed_data/包/images/946317.jpg,ok,224,224
+muge_950318,包,小学生书包，三年级,,,,,data/processed_data/包/images/950318.jpg,ok,224,224
+muge_953180,包,儿童书包五年级 男孩11岁,,,,,data/processed_data/包/images/953180.jpg,ok,224,224
+muge_954651,包,mb红异端大剑背包,,,,,data/processed_data/包/images/954651.jpg,ok,224,224
+muge_962073,包,书包女童时尚潮流,,,,,data/processed_data/包/images/962073.jpg,ok,224,224
+muge_963335,包,幼儿书包熊猫,,,,,data/processed_data/包/images/963335.jpg,ok,224,224
+muge_967444,包,编制双肩包,,,,,data/processed_data/包/images/967444.jpg,ok,224,224
+muge_969707,包,学生书包初中男个性,,,,,data/processed_data/包/images/969707.jpg,ok,224,224
+muge_969770,包,便携带式移动啤酒背包,,,,,data/processed_data/包/images/969770.jpg,ok,224,224
+muge_970094,包,中老年人背包布的背包,,,,,data/processed_data/包/images/970094.jpg,ok,224,224
+muge_970155,包,少女新春中书包,,,,,data/processed_data/包/images/970155.jpg,ok,224,224
+muge_970911,包,运动背包跑步包,,,,,data/processed_data/包/images/970911.jpg,ok,224,224
+muge_971491,包,特战背包55l,,,,,data/processed_data/包/images/971491.jpg,ok,224,224
+muge_973635,包,小型商务旅行包,,,,,data/processed_data/包/images/973635.jpg,ok,224,224
+muge_975015,包,皮面书包硬,,,,,data/processed_data/包/images/975015.jpg,ok,224,224
+muge_976002,包,girl宣传背包,,,,,data/processed_data/包/images/976002.jpg,ok,224,224
+muge_976470,包,李现同款背包,,,,,data/processed_data/包/images/976470.jpg,ok,224,224
+muge_977898,包,男女款户外运动旅行背包,,,,,data/processed_data/包/images/977898.jpg,ok,224,224
+muge_980389,包,名牌双背包2020年新款防盗,,,,,data/processed_data/包/images/980389.jpg,ok,224,224
+muge_981551,包,小爱软糖背包,,,,,data/processed_data/包/images/981551.jpg,ok,224,224
+muge_982732,包,不易撞书包,,,,,data/processed_data/包/images/982732.jpg,ok,224,224
+muge_982931,包,男童护肩护脊书包,,,,,data/processed_data/包/images/982931.jpg,ok,224,224
+muge_983244,包,hunter 双肩包,,,,,data/processed_data/包/images/983244.jpg,ok,224,224
+muge_983570,包,2岁儿童背包,,,,,data/processed_data/包/images/983570.jpg,ok,224,224
+muge_984084,包,女童三年级书包9岁,,,,,data/processed_data/包/images/984084.jpg,ok,224,224
+muge_984757,包,书包华为,,,,,data/processed_data/包/images/984757.jpg,ok,224,224
+muge_988602,包,双肩包加号,,,,,data/processed_data/包/images/988602.jpg,ok,224,224
+muge_988858,包,假软背包单肩女假软皮,,,,,data/processed_data/包/images/988858.jpg,ok,224,224
+muge_989178,包,双肩包女大,,,,,data/processed_data/包/images/989178.jpg,ok,224,224
+muge_995002,包,长方型背包,,,,,data/processed_data/包/images/995002.jpg,ok,224,224
+muge_998959,包,苏菲亚公主书包,,,,,data/processed_data/包/images/998959.jpg,ok,224,224
+muge_1000436,包,女童书包挂件,,,,,data/processed_data/包/images/1000436.jpg,ok,224,224
+muge_1000654,包,书包挂件水晶,,,,,data/processed_data/包/images/1000654.jpg,ok,224,224
+muge_1003012,包,瑞克莫蒂拼接双肩包,,,,,data/processed_data/包/images/1003012.jpg,ok,224,224
+muge_1004461,包,学生减压书包小学冶驼背,,,,,data/processed_data/包/images/1004461.jpg,ok,224,224
+muge_1006179,包,防雨双肩包女 防水,,,,,data/processed_data/包/images/1006179.jpg,ok,224,224
+muge_1008166,包,幼儿园书包女孩 卡通,,,,,data/processed_data/包/images/1008166.jpg,ok,224,224
+muge_1008377,包,牛津布书包休闲时尚旅行背包百搭,,,,,data/processed_data/包/images/1008377.jpg,ok,224,224
+muge_1008741,包,阿迪达背包男 单肩包,,,,,data/processed_data/包/images/1008741.jpg,ok,224,224
+muge_1011020,包,大学生双肩包女韩版大容量工装背包,,,,,data/processed_data/包/images/1011020.jpg,ok,224,224
+muge_1013400,包,背包女双肩皮包,,,,,data/processed_data/包/images/1013400.jpg,ok,224,224
+muge_1014832,包,男士多功能背包真皮,,,,,data/processed_data/包/images/1014832.jpg,ok,224,224
+muge_1015969,包,旅游书包男 大容量,,,,,data/processed_data/包/images/1015969.jpg,ok,224,224
+muge_1016856,包,ud越野背包,,,,,data/processed_data/包/images/1016856.jpg,ok,224,224
+muge_1019569,包,幼儿园女娃娃小天使书包,,,,,data/processed_data/包/images/1019569.jpg,ok,224,224
+muge_1019823,包,女式轻便电脑包 帆布,,,,,data/processed_data/包/images/1019823.jpg,ok,224,224
+muge_1023629,包,锂电池 背包,,,,,data/processed_data/包/images/1023629.jpg,ok,224,224
+muge_1024499,包,幼儿园小班书包 女宝宝,,,,,data/processed_data/包/images/1024499.jpg,ok,224,224
+muge_1025555,包,圆号背包,,,,,data/processed_data/包/images/1025555.jpg,ok,224,224
+muge_1026343,包,高级感包包双肩包,,,,,data/processed_data/包/images/1026343.jpg,ok,224,224
+muge_1028532,包,男士圆桶背包,,,,,data/processed_data/包/images/1028532.jpg,ok,224,224
+muge_1028897,包,书包女 双肩包 大学生黑色 简约,,,,,data/processed_data/包/images/1028897.jpg,ok,224,224
+muge_1032350,包,韩版书包男孩 小学生,,,,,data/processed_data/包/images/1032350.jpg,ok,224,224
+muge_1032638,包,啼啼兔书包,,,,,data/processed_data/包/images/1032638.jpg,ok,224,224
+muge_1034002,包,大背包卡通,,,,,data/processed_data/包/images/1034002.jpg,ok,224,224
+muge_1039753,包,酷奇男背包,,,,,data/processed_data/包/images/1039753.jpg,ok,224,224
+muge_1042146,包,男孩儿小背包,,,,,data/processed_data/包/images/1042146.jpg,ok,224,224
+muge_1044098,包,八儿岁儿童书包,,,,,data/processed_data/包/images/1044098.jpg,ok,224,224
+muge_1044493,包,徒步背包,,,,,data/processed_data/包/images/1044493.jpg,ok,224,224
+muge_1047764,包,儿童小书包 幼儿园汽车,,,,,data/processed_data/包/images/1047764.jpg,ok,224,224
+muge_1048485,包,纯牛皮男背包,,,,,data/processed_data/包/images/1048485.jpg,ok,224,224
+muge_1052624,包,儿童书包超级飞侠,,,,,data/processed_data/包/images/1052624.jpg,ok,224,224
+muge_1055152,包,电脑包高级感,,,,,data/processed_data/包/images/1055152.jpg,ok,224,224
+muge_1061299,包,超可爱书包,,,,,data/processed_data/包/images/1061299.jpg,ok,224,224
+muge_1066108,包,旅行包拉杆 出口,,,,,data/processed_data/包/images/1066108.jpg,ok,224,224
+muge_1066902,包,太空书包初中,,,,,data/processed_data/包/images/1066902.jpg,ok,224,224
+muge_1068042,包,男孩幼儿园书包汽车,,,,,data/processed_data/包/images/1068042.jpg,ok,224,224
+muge_1068123,包,锦纶双肩包,,,,,data/processed_data/包/images/1068123.jpg,ok,224,224
+muge_1069071,包,电脑包15.6寸双肩女轻便,,,,,data/processed_data/包/images/1069071.jpg,ok,224,224
+muge_1069301,包,机械师电脑背包,,,,,data/processed_data/包/images/1069301.jpg,ok,224,224
+muge_1070337,包,14寸电脑包 軍綠色,,,,,data/processed_data/包/images/1070337.jpg,ok,224,224
+muge_1072648,包,背包女斜挎包百搭时尚潮流,,,,,data/processed_data/包/images/1072648.jpg,ok,224,224
+muge_1073063,包,rrl双肩包,,,,,data/processed_data/包/images/1073063.jpg,ok,224,224
+muge_1073677,包,成熟少女书包,,,,,data/processed_data/包/images/1073677.jpg,ok,224,224
+muge_1074812,包,书包小学生公主包,,,,,data/processed_data/包/images/1074812.jpg,ok,224,224
+muge_1075351,包,电工维修小背包,,,,,data/processed_data/包/images/1075351.jpg,ok,224,224
+muge_1075815,包,军用黄书包,,,,,data/processed_data/包/images/1075815.jpg,ok,224,224
+muge_1084625,包,生日礼物男学生书包,,,,,data/processed_data/包/images/1084625.jpg,ok,224,224
+muge_1085404,包,妈咪背包双肩包 时尚,,,,,data/processed_data/包/images/1085404.jpg,ok,224,224
+muge_1085437,包,女士软皮背包羊皮大号,,,,,data/processed_data/包/images/1085437.jpg,ok,224,224
+muge_1085837,包,儿童小书包男汽车型,,,,,data/processed_data/包/images/1085837.jpg,ok,224,224
+muge_1088335,包,网红一包两用皮肤背包,,,,,data/processed_data/包/images/1088335.jpg,ok,224,224
+muge_1092080,包,古筝背包轮子,,,,,data/processed_data/包/images/1092080.jpg,ok,224,224
+muge_1095426,包,背包外挂水杯,,,,,data/processed_data/包/images/1095426.jpg,ok,224,224
+muge_1098308,包,爱回家电视剧 背包,,,,,data/processed_data/包/images/1098308.jpg,ok,224,224
+muge_1098618,包,小蜜蜂女背包,,,,,data/processed_data/包/images/1098618.jpg,ok,224,224
+muge_1102067,包,真皮双肩包女时尚简约大容量旅行,,,,,data/processed_data/包/images/1102067.jpg,ok,224,224
+muge_1102409,包,街头男士包单肩包斜挎包手提包潮流包旅行包,,,,,data/processed_data/包/images/1102409.jpg,ok,224,224
+muge_1102473,包,电脑背包女日系,,,,,data/processed_data/包/images/1102473.jpg,ok,224,224
+muge_1102781,包,旅行包  小,,,,,data/processed_data/包/images/1102781.jpg,ok,224,224
+muge_1104522,包,去污渍神器 衣物书包,,,,,data/processed_data/包/images/1104522.jpg,ok,224,224
+muge_1106839,包,透明联名款背包,,,,,data/processed_data/包/images/1106839.jpg,ok,224,224
+muge_1107933,包,女生双肩电脑包,,,,,data/processed_data/包/images/1107933.jpg,ok,224,224
+muge_1108082,包,笔记本 电脑包 双肩 女 14,,,,,data/processed_data/包/images/1108082.jpg,ok,224,224
+muge_1108729,包,儿童背包女双肩包旅游帆布,,,,,data/processed_data/包/images/1108729.jpg,ok,224,224
+muge_1109818,包,内外都是真皮白色双肩包,,,,,data/processed_data/包/images/1109818.jpg,ok,224,224
+muge_1111793,包,大容量侧背包,,,,,data/processed_data/包/images/1111793.jpg,ok,224,224
+muge_1117004,包,北尾狐书包带,,,,,data/processed_data/包/images/1117004.jpg,ok,224,224
+muge_1119515,包,骑行背包双肩,,,,,data/processed_data/包/images/1119515.jpg,ok,224,224
+muge_1123427,包,儿童背包女孩迷你,,,,,data/processed_data/包/images/1123427.jpg,ok,224,224

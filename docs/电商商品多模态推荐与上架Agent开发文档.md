@@ -80,15 +80,17 @@ FastAPI 后端
 
 ### 4.1 数据来源
 
-首选 Amazon Berkeley Objects（ABO）小规模子集，包含商品图片、商品标题、类别和元数据。课程项目只下载 1,000–5,000 个商品，并在 README 中记录许可证、下载日期和来源。也可加入自己拍摄并人工标注的商品图片作为中文测试集。
+当前实验使用 MUGE 商品数据，包含商品图片、商品标题和商品类别。正式处理数据只使用 MUGE，并按归一化后的 `product_type` 分为包、水杯和鞋三个类别。其他来源数据即使保存在 raw_data 中，也不参与当前 processed_data 生成。
 
 ### 4.2 数据字段
 
-`products.csv`：
+正式处理后的 `products.csv`：
 
 ```csv
-product_id,image_path,title,description,category,color,material,price,tags,source
+item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width
 ```
+
+`product_type` 使用较宽的商品大类，例如 `包`、`鞋`、`水杯`；具体款式和可确认特征写入 `description`。先完成字段整理、图片对应检查和质量审核，再构建中文文本检索样本和索引。
 
 `dialogues.jsonl`：
 
@@ -128,6 +130,29 @@ product_id,image_path,title,description,category,color,material,price,tags,sourc
 
 按商品 ID 划分训练集、验证集和测试集，比例为 8:1:1。相同商品的不同图片不能跨集合，以避免数据泄漏。
 
+#### 可复用数据整理和检查脚本
+
+按 `product_type` 整理商品数据：
+
+```bash
+python scripts/classify_products.py \
+  --input-file data/raw_data/MUGE_data/products.csv \
+  --output-dir data/processed_data \
+  --category-map "双肩包=包,运动鞋=鞋"
+```
+
+`--input-file` 可以换成任意商品 CSV。脚本读取 CSV 中已有的 `product_type`，复制对应图片，并将 `local_image_path` 写成相对于项目根目录的路径。它是数据分组工具，不是根据图片预测类别的机器学习分类模型。
+
+检查任意类别文件：
+
+```bash
+python scripts/check_product_fields.py \
+  --input-file data/processed_data/水杯/products.csv \
+  --report data/processed_data/水杯/field_check_report.json
+```
+
+检查器可以指定任意商品 CSV，检查必需字段、空值、重复商品 ID、绝对图片路径、缺失图片和 `image_status` 是否一致。
+
 ### 4.4 实验 1 交付物
 
 ```text
@@ -145,7 +170,20 @@ data/
         └── image_quality_report.csv
 ```
 
-每个数据集分别保存商品信息、图片和图片质量报告，暂不合并。`Amazon_data_translated/` 是 Amazon 翻译结果的暂存目录，翻译完成后还要继续整理和检查，不能直接作为训练数据。各数据集的说明集中在自己的 `README.md` 中；通过检查后的正式处理数据放入 `data/processed_data/`，不按商品类别拆分目录。
+当前原始 MUGE 数据保存在 `data/raw_data/MUGE_data/`；正式处理数据统一按 `product_type` 分类到 `data/processed_data/<product_type>/`。当前生成三个类别目录：包、水杯和鞋；原始的双肩包和运动鞋等具体特点后续写入 `description`。每个类别目录包含自己的 `products.csv`、`images/`、`image_quality_report.csv` 和字段检查报告。 具体的大模型字段补全流程见 `docs/MUGE商品属性大模型补全与描述生成方案.md`。
+
+正式处理结果示例：
+
+```text
+data/processed_data/
+├── dataset_summary.csv
+├── SHOES/
+│   ├── products.csv
+│   ├── images/
+│   ├── image_quality_report.csv
+│   └── field_check_report.json
+└── ...
+```
 
 ## 5. 模型设计与训练（实验 2）
 
@@ -281,7 +319,13 @@ ecommerce-agent/
 │   │       ├── products.csv
 │   │       ├── images/
 │   │       └── image_quality_report.csv
-│   └── processed_data/       # 后续统一处理结果，扁平存放
+│   └── processed_data/       # 按 product_type 分类的正式处理结果
+│       ├── dataset_summary.csv
+│       ├── SHOES/
+│       │   ├── products.csv
+│       │   ├── images/
+│       │   └── image_quality_report.csv
+│       └── ...
 ├── models/
 │   ├── base_model/       # 不提交大模型权重
 │   └── lora_adapter/
@@ -391,24 +435,17 @@ ecommerce-agent/
 
 ### 15.1 商品主表字段
 
-    product_id
-    image_path
-    image_paths
-    title
+    item_id
+    product_type
+    item_name
     description
-    category_lv1
-    category_lv2
     brand
     color
     material
-    style
-    usage_scene
-    feature_tags
-    price
-    stock_status
-    source
-    license
-    quality_status
+    local_image_path
+    image_status
+    image_height
+    image_width
 
 ### 15.2 商品属性记录
 
@@ -474,11 +511,11 @@ ecommerce-agent/
 
 先选择3个品类，降低标注难度：
 
-    双肩包
-    运动鞋
+    包
+    鞋
     水杯
 
-每类准备300—1000个商品。每件商品至少有一张图片、标题、价格和类别，尽量补充颜色、材质、场景和功能标签。
+每类准备300—1000个商品。每件商品至少有一张图片、标题和类别；具体款式、颜色、材质、场景和功能等特点写入 `description`。
 
 ### 16.2 图片流水线
 

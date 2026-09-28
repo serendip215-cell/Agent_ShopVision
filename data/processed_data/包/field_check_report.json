@@ -1,0 +1,40 @@
+{
+  "input_file": "D:/AI_All_Stack/Agent_ShopVision/data/processed_data/包/products.csv",
+  "repo_root": "D:/AI_All_Stack/Agent_ShopVision",
+  "row_count": 664,
+  "fields": [
+    "item_id",
+    "product_type",
+    "item_name",
+    "description",
+    "brand",
+    "color",
+    "material",
+    "local_image_path",
+    "image_status",
+    "image_height",
+    "image_width"
+  ],
+  "standard_fields": [
+    "item_id",
+    "product_type",
+    "item_name",
+    "description",
+    "brand",
+    "color",
+    "material",
+    "local_image_path",
+    "image_status",
+    "image_height",
+    "image_width"
+  ],
+  "missing_fields": [],
+  "extra_fields": [],
+  "required_empty_counts": {},
+  "duplicate_item_ids": [],
+  "absolute_image_paths": [],
+  "missing_images": [],
+  "image_status_mismatches": [],
+  "errors": [],
+  "valid": true
+}
