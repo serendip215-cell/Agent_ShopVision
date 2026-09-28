@@ -1,40 +1,21 @@
 {
-  "input_file": "D:/AI_All_Stack/Agent_ShopVision/data/processed_data/鞋/products.csv",
-  "repo_root": "D:/AI_All_Stack/Agent_ShopVision",
-  "row_count": 2295,
-  "fields": [
-    "item_id",
-    "product_type",
-    "item_name",
-    "description",
-    "brand",
-    "color",
-    "material",
-    "local_image_path",
-    "image_status",
-    "image_height",
-    "image_width"
-  ],
-  "standard_fields": [
-    "item_id",
-    "product_type",
-    "item_name",
-    "description",
-    "brand",
-    "color",
-    "material",
-    "local_image_path",
-    "image_status",
-    "image_height",
-    "image_width"
-  ],
-  "missing_fields": [],
-  "extra_fields": [],
-  "required_empty_counts": {},
+  "valid": true,
+  "category": "鞋",
+  "record_count": 2192,
   "duplicate_item_ids": [],
-  "absolute_image_paths": [],
-  "missing_images": [],
-  "image_status_mismatches": [],
-  "errors": [],
-  "valid": true
+  "missing_required_fields": {
+    "item_id": 0,
+    "product_type": 0,
+    "item_name": 0,
+    "description": 2192,
+    "brand": 2192,
+    "color": 2192,
+    "material": 2192,
+    "local_image_path": 0,
+    "image_status": 0,
+    "image_height": 0,
+    "image_width": 0
+  },
+  "missing_images": 0,
+  "generated_at": "2026-09-28T17:41:11.126441+00:00"
 }

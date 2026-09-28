@@ -1,0 +1,411 @@
+﻿item_id,source_category,item_name,local_image_path,decision,reason,evidence
+muge_2202,水杯,白色文胸 大罩杯,data/processed_data/水杯/images/2202.jpg,exclude,strong_category_conflict,"文胸,罩杯"
+muge_12409,水杯,圣以渃水杯盖,data/processed_data/水杯/images/12409.jpg,exclude,accessory_not_target_product,杯盖
+muge_16929,水杯,编织茶杯托,data/processed_data/水杯/images/16929.jpg,exclude,accessory_not_target_product,杯托
+muge_17108,水杯,世界杯奖杯 模型,data/processed_data/水杯/images/17108.jpg,exclude,strong_category_conflict,"奖杯,世界杯"
+muge_19335,水杯,杯洗小号,data/processed_data/水杯/images/19335.jpg,exclude,accessory_not_target_product,杯洗
+muge_26199,水杯,水杯盖子密封圈,data/processed_data/水杯/images/26199.jpg,exclude,accessory_not_target_product,杯盖
+muge_28021,水杯,武术比赛奖杯,data/processed_data/水杯/images/28021.jpg,exclude,strong_category_conflict,奖杯
+muge_46165,水杯,单杯奶茶打包袋,data/processed_data/水杯/images/46165.jpg,exclude,strong_category_conflict,打包袋
+muge_46718,水杯,刷牙杯子置物架免打孔,data/processed_data/水杯/images/46718.jpg,exclude,strong_category_conflict,"牙杯,置物架"
+muge_50447,水杯,吸兹牙刷杯,data/processed_data/水杯/images/50447.jpg,exclude,strong_category_conflict,牙刷
+muge_58937,水杯,茶杯架子 茶道,data/processed_data/水杯/images/58937.jpg,exclude,accessory_not_target_product,杯架
+muge_60998,水杯,水杯盖胶圈,data/processed_data/水杯/images/60998.jpg,exclude,accessory_not_target_product,杯盖
+muge_61271,水杯,陶瓷茶杯套装过滤,data/processed_data/水杯/images/61271.jpg,exclude,accessory_not_target_product,杯套
+muge_65666,水杯,防水茶杯垫,data/processed_data/水杯/images/65666.jpg,exclude,accessory_not_target_product,杯垫
+muge_66649,水杯,法国兰蒄黑钻三色口红滋润不掉色不沾杯,data/processed_data/水杯/images/66649.jpg,exclude,strong_category_conflict,"不沾杯,口红"
+muge_68000,水杯,文胸4份三杯,data/processed_data/水杯/images/68000.jpg,exclude,strong_category_conflict,文胸
+muge_70444,水杯,保温杯套和風,data/processed_data/水杯/images/70444.jpg,exclude,accessory_not_target_product,杯套
+muge_72602,水杯,水杯层架木,data/processed_data/水杯/images/72602.jpg,exclude,strong_category_conflict,层架
+muge_75716,水杯,有钢圈美背文胸全罩杯大码,data/processed_data/水杯/images/75716.jpg,exclude,strong_category_conflict,"文胸,罩杯,钢圈,美背,全罩杯"
+muge_85719,水杯,陶瓷杯 盖 勺,data/processed_data/水杯/images/85719.jpg,exclude,accessory_not_target_product,杯盖
+muge_99815,水杯,杯套 保护套 防摔,data/processed_data/水杯/images/99815.jpg,exclude,accessory_not_target_product,杯套
+muge_105342,水杯,c杯泳衣,data/processed_data/水杯/images/105342.jpg,exclude,strong_category_conflict,泳衣
+muge_112179,水杯,杯子女ins风有杯套,data/processed_data/水杯/images/112179.jpg,exclude,accessory_not_target_product,杯套
+muge_114918,水杯,宝宝洗头刷洗头杯,data/processed_data/水杯/images/114918.jpg,exclude,strong_category_conflict,洗头
+muge_117387,水杯,路人王奖杯,data/processed_data/水杯/images/117387.jpg,exclude,strong_category_conflict,奖杯
+muge_118401,水杯,漱口杯套装美式,data/processed_data/水杯/images/118401.jpg,exclude,accessory_not_target_product,杯套
+muge_119481,水杯,英式下午茶杯套装,data/processed_data/水杯/images/119481.jpg,exclude,accessory_not_target_product,杯套
+muge_125263,水杯,茶杯犬十字绣,data/processed_data/水杯/images/125263.jpg,exclude,strong_category_conflict,茶杯犬
+muge_127585,水杯,小罩杯薄软钢圈文胸,data/processed_data/水杯/images/127585.jpg,exclude,strong_category_conflict,"文胸,罩杯,钢圈"
+muge_128613,水杯,吧台杯架灯,data/processed_data/水杯/images/128613.jpg,exclude,accessory_not_target_product,杯架
+muge_133260,水杯,kitty刷牙杯,data/processed_data/水杯/images/133260.jpg,exclude,strong_category_conflict,牙杯
+muge_136173,水杯,拧紧双盖保温杯盖,data/processed_data/水杯/images/136173.jpg,exclude,accessory_not_target_product,杯盖
+muge_138188,水杯,宝贝牙刷杯,data/processed_data/水杯/images/138188.jpg,exclude,strong_category_conflict,牙刷
+muge_140975,水杯,薄款全包罩杯大无钢圈,data/processed_data/水杯/images/140975.jpg,exclude,strong_category_conflict,"罩杯,钢圈,无钢圈"
+muge_144433,水杯,大容量杯子托盘,data/processed_data/水杯/images/144433.jpg,exclude,strong_category_conflict,托盘
+muge_146726,水杯,热饮杯盖,data/processed_data/水杯/images/146726.jpg,exclude,accessory_not_target_product,杯盖
+muge_147787,水杯,金杯海狮汽车脚垫,data/processed_data/水杯/images/147787.jpg,exclude,strong_category_conflict,"汽车脚垫,脚垫"
+muge_152365,水杯,幼儿园杯架毛巾架分体柜,data/processed_data/水杯/images/152365.jpg,exclude,accessory_not_target_product,杯架
+muge_155138,水杯,70c内衣聚拢厚杯,data/processed_data/水杯/images/155138.jpg,exclude,strong_category_conflict,"内衣,聚拢"
+muge_159543,水杯,大罩杯薄款隐形文胸,data/processed_data/水杯/images/159543.jpg,exclude,strong_category_conflict,"文胸,罩杯"
+muge_162697,水杯,透明奖杯,data/processed_data/水杯/images/162697.jpg,exclude,strong_category_conflict,奖杯
+muge_169587,水杯,儿童水晶牙杯,data/processed_data/水杯/images/169587.jpg,exclude,strong_category_conflict,牙杯
+muge_172885,水杯,恐龙杯子蛋糕插件,data/processed_data/水杯/images/172885.jpg,exclude,strong_category_conflict,蛋糕
+muge_173190,水杯,d罩杯内衣无钢圈,data/processed_data/水杯/images/173190.jpg,exclude,strong_category_conflict,"内衣,罩杯,钢圈,无钢圈"
+muge_185884,水杯,牙刷架杯,data/processed_data/水杯/images/185884.jpg,exclude,strong_category_conflict,牙刷
+muge_186642,水杯,毛线 手工 编织杯套,data/processed_data/水杯/images/186642.jpg,exclude,accessory_not_target_product,杯套
+muge_189471,水杯,无钢线内衣 大罩杯,data/processed_data/水杯/images/189471.jpg,exclude,strong_category_conflict,"内衣,罩杯"
+muge_190620,水杯,茶杯盖子配件,data/processed_data/水杯/images/190620.jpg,exclude,accessory_not_target_product,杯盖
+muge_200780,水杯,大容量水杯带杯套,data/processed_data/水杯/images/200780.jpg,exclude,accessory_not_target_product,杯套
+muge_201086,水杯,公鸡杯盖子,data/processed_data/水杯/images/201086.jpg,exclude,accessory_not_target_product,杯盖
+muge_205369,水杯,纸杯蛋糕数字插牌,data/processed_data/水杯/images/205369.jpg,exclude,strong_category_conflict,蛋糕
+muge_209136,水杯,托盘家用放茶杯,data/processed_data/水杯/images/209136.jpg,exclude,strong_category_conflict,托盘
+muge_211834,水杯,水果杯杯盖,data/processed_data/水杯/images/211834.jpg,exclude,accessory_not_target_product,杯盖
+muge_215267,水杯,搪瓷杯蛋糕,data/processed_data/水杯/images/215267.jpg,exclude,strong_category_conflict,蛋糕
+muge_223340,水杯,功夫茶具茶杯垫实木杯托,data/processed_data/水杯/images/223340.jpg,exclude,accessory_not_target_product,"杯垫,杯托"
+muge_224219,水杯,牙杯北欧,data/processed_data/水杯/images/224219.jpg,exclude,strong_category_conflict,牙杯
+muge_226741,水杯,水杯套两用,data/processed_data/水杯/images/226741.jpg,exclude,accessory_not_target_product,杯套
+muge_230251,水杯,小熊杯垫加热,data/processed_data/水杯/images/230251.jpg,exclude,accessory_not_target_product,杯垫
+muge_231740,水杯,马克杯套组,data/processed_data/水杯/images/231740.jpg,exclude,accessory_not_target_product,杯套
+muge_235033,水杯,大众cc杯垫,data/processed_data/水杯/images/235033.jpg,exclude,accessory_not_target_product,杯垫
+muge_236259,水杯,杯子架置物架,data/processed_data/水杯/images/236259.jpg,exclude,strong_category_conflict,置物架
+muge_238889,水杯,墙面水杯架,data/processed_data/水杯/images/238889.jpg,exclude,accessory_not_target_product,杯架
+muge_239659,水杯,女士薄杯无钢圈内衣,data/processed_data/水杯/images/239659.jpg,exclude,strong_category_conflict,"内衣,钢圈,无钢圈"
+muge_245555,水杯,牙杯 简约 挂墙,data/processed_data/水杯/images/245555.jpg,exclude,strong_category_conflict,牙杯
+muge_247521,水杯,内衣女薄款大胸显小红色超薄杯,data/processed_data/水杯/images/247521.jpg,exclude,strong_category_conflict,内衣
+muge_249629,水杯,宾馆漱口杯垫,data/processed_data/水杯/images/249629.jpg,exclude,accessory_not_target_product,杯垫
+muge_252757,水杯,手杯吸管,data/processed_data/水杯/images/252757.jpg,exclude,accessory_not_target_product,吸管
+muge_256521,水杯,胸大内衣全罩杯超薄,data/processed_data/水杯/images/256521.jpg,exclude,strong_category_conflict,"内衣,罩杯,全罩杯"
+muge_261846,水杯,杯子消毒柜家用,data/processed_data/水杯/images/261846.jpg,exclude,strong_category_conflict,消毒柜
+muge_266151,水杯,茶杯托盘圆形双层沥水,data/processed_data/水杯/images/266151.jpg,exclude,accessory_not_target_product,杯托
+muge_266248,水杯,茶杯垫贝壳,data/processed_data/水杯/images/266248.jpg,exclude,accessory_not_target_product,杯垫
+muge_267468,水杯,配件 杯盖 通用,data/processed_data/水杯/images/267468.jpg,exclude,accessory_not_target_product,杯盖
+muge_281156,水杯,小米保温杯垫圈,data/processed_data/水杯/images/281156.jpg,exclude,accessory_not_target_product,杯垫
+muge_288216,水杯,文胸女聚拢小胸不空杯,data/processed_data/水杯/images/288216.jpg,exclude,strong_category_conflict,"文胸,聚拢"
+muge_288641,水杯,特价杯垫,data/processed_data/水杯/images/288641.jpg,exclude,accessory_not_target_product,杯垫
+muge_291589,水杯,奶冻杯子,data/processed_data/水杯/images/291589.jpg,exclude,strong_category_conflict,奶冻
+muge_292911,水杯,恒温杯垫加杯子,data/processed_data/水杯/images/292911.jpg,exclude,accessory_not_target_product,杯垫
+muge_293488,水杯,无钢圈内衣 三角杯,data/processed_data/水杯/images/293488.jpg,exclude,strong_category_conflict,"内衣,钢圈,无钢圈"
+muge_301609,水杯,牙刷杯带盖子,data/processed_data/水杯/images/301609.jpg,exclude,strong_category_conflict,牙刷
+muge_302207,水杯,针织杯垫材料包,data/processed_data/水杯/images/302207.jpg,exclude,accessory_not_target_product,杯垫
+muge_302679,水杯,绿泥紫砂杯盖,data/processed_data/水杯/images/302679.jpg,exclude,accessory_not_target_product,杯盖
+muge_303565,水杯,加大码中厚杯文胸,data/processed_data/水杯/images/303565.jpg,exclude,strong_category_conflict,文胸
+muge_303755,水杯,星空杯零食,data/processed_data/水杯/images/303755.jpg,exclude,strong_category_conflict,零食
+muge_304666,水杯,一片式无痕文胸超薄杯,data/processed_data/水杯/images/304666.jpg,exclude,strong_category_conflict,文胸
+muge_309211,水杯,大圆盘浅杯内衣,data/processed_data/水杯/images/309211.jpg,exclude,strong_category_conflict,内衣
+muge_318691,水杯,陶瓷懒人茶具喝茶杯套装,data/processed_data/水杯/images/318691.jpg,exclude,accessory_not_target_product,杯套
+muge_319514,水杯,竹子杯套,data/processed_data/水杯/images/319514.jpg,exclude,accessory_not_target_product,杯套
+muge_323770,水杯,内衣女无钢圈4分3杯,data/processed_data/水杯/images/323770.jpg,exclude,strong_category_conflict,"内衣,钢圈,无钢圈"
+muge_335336,水杯,茶杯收纳架 铜,data/processed_data/水杯/images/335336.jpg,exclude,strong_category_conflict,收纳架
+muge_336002,水杯,卡通刷牙杯 可爱,data/processed_data/水杯/images/336002.jpg,exclude,strong_category_conflict,牙杯
+muge_342014,水杯,杯垫刺绣,data/processed_data/水杯/images/342014.jpg,exclude,accessory_not_target_product,杯垫
+muge_343766,水杯,分隔杯双吸管,data/processed_data/水杯/images/343766.jpg,exclude,accessory_not_target_product,吸管
+muge_345803,水杯,大码罩杯,data/processed_data/水杯/images/345803.jpg,exclude,strong_category_conflict,罩杯
+muge_348828,水杯,全罩杯运动内衣,data/processed_data/水杯/images/348828.jpg,exclude,strong_category_conflict,"内衣,罩杯,全罩杯"
+muge_350213,水杯,保温杯垫 无线,data/processed_data/水杯/images/350213.jpg,exclude,accessory_not_target_product,杯垫
+muge_357164,水杯,杯具托盘实木,data/processed_data/水杯/images/357164.jpg,exclude,strong_category_conflict,托盘
+muge_359943,水杯,防走光文胸 上薄下厚模杯,data/processed_data/水杯/images/359943.jpg,exclude,strong_category_conflict,文胸
+muge_362159,水杯,泳装大胸d杯,data/processed_data/水杯/images/362159.jpg,exclude,strong_category_conflict,泳装
+muge_372920,水杯,杯托  茶道  实木,data/processed_data/水杯/images/372920.jpg,exclude,accessory_not_target_product,杯托
+muge_377074,水杯,土耳其杯垫,data/processed_data/水杯/images/377074.jpg,exclude,accessory_not_target_product,杯垫
+muge_381781,水杯,优秀供应商奖杯定制,data/processed_data/水杯/images/381781.jpg,exclude,strong_category_conflict,奖杯
+muge_385905,水杯,大码内衣女胖mm 性感厚杯,data/processed_data/水杯/images/385905.jpg,exclude,strong_category_conflict,内衣
+muge_390305,水杯,日系杯垫,data/processed_data/水杯/images/390305.jpg,exclude,accessory_not_target_product,杯垫
+muge_392638,水杯,奶茶纸杯盖子,data/processed_data/水杯/images/392638.jpg,exclude,accessory_not_target_product,杯盖
+muge_396171,水杯,网红陶瓷牙刷杯,data/processed_data/水杯/images/396171.jpg,exclude,strong_category_conflict,牙刷
+muge_398991,水杯,内衣女小胸三角杯,data/processed_data/水杯/images/398991.jpg,exclude,strong_category_conflict,内衣
+muge_407068,水杯,磁吸漱口杯 高档,data/processed_data/水杯/images/407068.jpg,exclude,strong_category_conflict,漱口
+muge_407076,水杯,内衣女超薄三角杯,data/processed_data/水杯/images/407076.jpg,exclude,strong_category_conflict,内衣
+muge_411890,水杯,水杯盖子硅胶小号,data/processed_data/水杯/images/411890.jpg,exclude,accessory_not_target_product,杯盖
+muge_428052,水杯,咖啡杯架子挂架北欧,data/processed_data/水杯/images/428052.jpg,exclude,accessory_not_target_product,杯架
+muge_429333,水杯,纸杯蛋糕盒子新年,data/processed_data/水杯/images/429333.jpg,exclude,strong_category_conflict,蛋糕
+muge_431770,水杯,焖烧杯杯套,data/processed_data/水杯/images/431770.jpg,exclude,accessory_not_target_product,杯套
+muge_432980,水杯,婚礼牙杯,data/processed_data/水杯/images/432980.jpg,exclude,strong_category_conflict,牙杯
+muge_439526,水杯,焖烧杯套垫,data/processed_data/水杯/images/439526.jpg,exclude,accessory_not_target_product,杯套
+muge_444173,水杯,杯盖硅胶 羊驼,data/processed_data/水杯/images/444173.jpg,exclude,accessory_not_target_product,杯盖
+muge_447378,水杯,水杯杯套可爱,data/processed_data/水杯/images/447378.jpg,exclude,accessory_not_target_product,杯套
+muge_450933,水杯,女童牙刷杯,data/processed_data/水杯/images/450933.jpg,exclude,strong_category_conflict,牙刷
+muge_451560,水杯,蛋糕紙杯,data/processed_data/水杯/images/451560.jpg,exclude,strong_category_conflict,蛋糕
+muge_452484,水杯,杯罩一体,data/processed_data/水杯/images/452484.jpg,exclude,accessory_not_target_product,杯罩
+muge_455982,水杯,七十五高亳升的水杯套,data/processed_data/水杯/images/455982.jpg,exclude,accessory_not_target_product,杯套
+muge_460709,水杯,yamaka杯盖,data/processed_data/水杯/images/460709.jpg,exclude,accessory_not_target_product,杯盖
+muge_465964,水杯,儿童水杯套 保护套 通用,data/processed_data/水杯/images/465964.jpg,exclude,accessory_not_target_product,杯套
+muge_468047,水杯,比基尼大胸大罩杯xl,data/processed_data/水杯/images/468047.jpg,exclude,strong_category_conflict,罩杯
+muge_469622,水杯,木 杯垫,data/processed_data/水杯/images/469622.jpg,exclude,accessory_not_target_product,杯垫
+muge_474057,水杯,红酒杯架摆件 时尚,data/processed_data/水杯/images/474057.jpg,exclude,accessory_not_target_product,杯架
+muge_475837,水杯,内衣女薄款无痕杯罩小,data/processed_data/水杯/images/475837.jpg,exclude,accessory_not_target_product,杯罩
+muge_478323,水杯,推車杯架,data/processed_data/水杯/images/478323.jpg,exclude,accessory_not_target_product,杯架
+muge_478508,水杯,杯子蛋糕盒子包装盒,data/processed_data/水杯/images/478508.jpg,exclude,strong_category_conflict,蛋糕
+muge_484971,水杯,双孔杯垫,data/processed_data/水杯/images/484971.jpg,exclude,accessory_not_target_product,杯垫
+muge_486079,水杯,内衣聚拢无钢圈d罩杯,data/processed_data/水杯/images/486079.jpg,exclude,strong_category_conflict,"内衣,罩杯,钢圈,聚拢,无钢圈"
+muge_492526,水杯,功夫茶杯小托盘,data/processed_data/水杯/images/492526.jpg,exclude,strong_category_conflict,托盘
+muge_503782,水杯,硅澡土 杯垫,data/processed_data/水杯/images/503782.jpg,exclude,accessory_not_target_product,杯垫
+muge_521009,水杯,漱口杯悬挂,data/processed_data/水杯/images/521009.jpg,exclude,strong_category_conflict,漱口
+muge_523139,水杯,滴胶杯垫diy,data/processed_data/水杯/images/523139.jpg,exclude,accessory_not_target_product,杯垫
+muge_527173,水杯,毛钱水杯套,data/processed_data/水杯/images/527173.jpg,exclude,accessory_not_target_product,杯套
+muge_528512,水杯,儿童漱口杯卡通防摔,data/processed_data/水杯/images/528512.jpg,exclude,strong_category_conflict,漱口
+muge_533107,水杯,烤蛋糕用的小纸杯,data/processed_data/水杯/images/533107.jpg,exclude,strong_category_conflict,蛋糕
+muge_537899,水杯,定制喜杯漱口,data/processed_data/水杯/images/537899.jpg,exclude,strong_category_conflict,漱口
+muge_539890,水杯,摆件小杯子,data/processed_data/水杯/images/539890.jpg,exclude,strong_category_conflict,摆件
+muge_543016,水杯,实木茶杯收纳架,data/processed_data/水杯/images/543016.jpg,exclude,strong_category_conflict,收纳架
+muge_549122,水杯,红色内衣套装 结婚 新娘超薄杯,data/processed_data/水杯/images/549122.jpg,exclude,strong_category_conflict,内衣
+muge_551273,水杯,杯刷彩虹,data/processed_data/水杯/images/551273.jpg,exclude,accessory_not_target_product,杯刷
+muge_552940,水杯,紫砂杯盖子配平盖 宜兴,data/processed_data/水杯/images/552940.jpg,exclude,accessory_not_target_product,杯盖
+muge_555796,水杯,水杯套毛线钩织,data/processed_data/水杯/images/555796.jpg,exclude,accessory_not_target_product,杯套
+muge_557503,水杯,纸质杯套,data/processed_data/水杯/images/557503.jpg,exclude,accessory_not_target_product,杯套
+muge_559772,水杯,夫妻牙杯,data/processed_data/水杯/images/559772.jpg,exclude,strong_category_conflict,牙杯
+muge_560024,水杯,把杯套装,data/processed_data/水杯/images/560024.jpg,exclude,accessory_not_target_product,杯套
+muge_563478,水杯,大童漱口杯,data/processed_data/水杯/images/563478.jpg,exclude,strong_category_conflict,漱口
+muge_567088,水杯,马克杯杯盖红色,data/processed_data/水杯/images/567088.jpg,exclude,accessory_not_target_product,杯盖
+muge_572587,水杯,玻璃杯杯套防摔,data/processed_data/水杯/images/572587.jpg,exclude,accessory_not_target_product,杯套
+muge_573308,水杯,水杯杯套玻璃杯,data/processed_data/水杯/images/573308.jpg,exclude,accessory_not_target_product,杯套
+muge_578325,水杯,kitty猫水壶杯套,data/processed_data/水杯/images/578325.jpg,exclude,accessory_not_target_product,杯套
+muge_580015,水杯,罩杯一体外穿吊带打底,data/processed_data/水杯/images/580015.jpg,exclude,strong_category_conflict,罩杯
+muge_580709,水杯,杯套jk,data/processed_data/水杯/images/580709.jpg,exclude,accessory_not_target_product,杯套
+muge_582182,水杯,泰福保温杯杯盖,data/processed_data/水杯/images/582182.jpg,exclude,accessory_not_target_product,杯盖
+muge_582794,水杯,无痕内衣半杯,data/processed_data/水杯/images/582794.jpg,exclude,strong_category_conflict,内衣
+muge_582851,水杯,五排扣内衣 收副乳全罩杯,data/processed_data/水杯/images/582851.jpg,exclude,strong_category_conflict,"内衣,罩杯,全罩杯"
+muge_584562,水杯,杯垫7cm,data/processed_data/水杯/images/584562.jpg,exclude,accessory_not_target_product,杯垫
+muge_587550,水杯,刷牙杯架子置物架 多功能,data/processed_data/水杯/images/587550.jpg,exclude,accessory_not_target_product,杯架
+muge_589649,水杯,小萌兔儿童保温杯盖,data/processed_data/水杯/images/589649.jpg,exclude,accessory_not_target_product,杯盖
+muge_594269,水杯,杯垫 欧式,data/processed_data/水杯/images/594269.jpg,exclude,accessory_not_target_product,杯垫
+muge_598637,水杯,茶杯托垫黑檀木茶杯垫,data/processed_data/水杯/images/598637.jpg,exclude,accessory_not_target_product,"杯垫,杯托"
+muge_611752,水杯,杯套全包,data/processed_data/水杯/images/611752.jpg,exclude,accessory_not_target_product,杯套
+muge_612029,水杯,鸟食杯挂,data/processed_data/水杯/images/612029.jpg,exclude,strong_category_conflict,鸟食
+muge_614149,水杯,杯托 汝窑,data/processed_data/水杯/images/614149.jpg,exclude,accessory_not_target_product,杯托
+muge_617438,水杯,女神杯内衣,data/processed_data/水杯/images/617438.jpg,exclude,strong_category_conflict,内衣
+muge_617527,水杯,保温杯杯套500ml 保护套,data/processed_data/水杯/images/617527.jpg,exclude,accessory_not_target_product,杯套
+muge_620604,水杯,陶瓷杯套装 祖母绿,data/processed_data/水杯/images/620604.jpg,exclude,accessory_not_target_product,杯套
+muge_622023,水杯,文胸女聚拢 性感上薄下厚模杯,data/processed_data/水杯/images/622023.jpg,exclude,strong_category_conflict,"文胸,聚拢"
+muge_641981,水杯,牛奶杯盖 硅胶,data/processed_data/水杯/images/641981.jpg,exclude,accessory_not_target_product,杯盖
+muge_642755,水杯,无钢圈大罩杯文胸,data/processed_data/水杯/images/642755.jpg,exclude,strong_category_conflict,"文胸,罩杯,钢圈,无钢圈"
+muge_644276,水杯,中国风水杯套装客厅,data/processed_data/水杯/images/644276.jpg,exclude,accessory_not_target_product,杯套
+muge_645615,水杯,金属杯垫会议,data/processed_data/水杯/images/645615.jpg,exclude,accessory_not_target_product,杯垫
+muge_647647,水杯,破壁机杯盖配件,data/processed_data/水杯/images/647647.jpg,exclude,accessory_not_target_product,杯盖
+muge_648330,水杯,一次性取杯架,data/processed_data/水杯/images/648330.jpg,exclude,accessory_not_target_product,杯架
+muge_649127,水杯,玻璃水杯托盘长方形,data/processed_data/水杯/images/649127.jpg,exclude,accessory_not_target_product,杯托
+muge_654168,水杯,edish保温杯盖,data/processed_data/水杯/images/654168.jpg,exclude,accessory_not_target_product,杯盖
+muge_660298,水杯,内衣夏季薄款 聚拢半杯2,data/processed_data/水杯/images/660298.jpg,exclude,strong_category_conflict,"内衣,聚拢"
+muge_662439,水杯,2018世界杯比赛球,data/processed_data/水杯/images/662439.jpg,exclude,strong_category_conflict,世界杯
+muge_666777,水杯,汽车杯垫 凯迪拉克,data/processed_data/水杯/images/666777.jpg,exclude,accessory_not_target_product,杯垫
+muge_673198,水杯,内衣三角杯厚,data/processed_data/水杯/images/673198.jpg,exclude,strong_category_conflict,内衣
+muge_676088,水杯,水杯托盘方形,data/processed_data/水杯/images/676088.jpg,exclude,accessory_not_target_product,杯托
+muge_677014,水杯,鸟碗鸟食杯 景德镇,data/processed_data/水杯/images/677014.jpg,exclude,strong_category_conflict,鸟食
+muge_677605,水杯,可储水杯垫 茶道,data/processed_data/水杯/images/677605.jpg,exclude,accessory_not_target_product,杯垫
+muge_680862,水杯,漱口杯贴,data/processed_data/水杯/images/680862.jpg,exclude,strong_category_conflict,漱口
+muge_681402,水杯,黑钻丰盈三色口红 不沾杯,data/processed_data/水杯/images/681402.jpg,exclude,strong_category_conflict,"不沾杯,口红"
+muge_684287,水杯,宠物出门水杯,data/processed_data/水杯/images/684287.jpg,exclude,strong_category_conflict,宠物
+muge_684912,水杯,一次性杯子杯托,data/processed_data/水杯/images/684912.jpg,exclude,accessory_not_target_product,杯托
+muge_685902,水杯,米妮漱口杯,data/processed_data/水杯/images/685902.jpg,exclude,strong_category_conflict,漱口
+muge_690859,水杯,洗漱杯套装 家用 壁挂式北欧风格,data/processed_data/水杯/images/690859.jpg,exclude,accessory_not_target_product,杯套
+muge_691046,水杯,橱柜水杯架,data/processed_data/水杯/images/691046.jpg,exclude,accessory_not_target_product,杯架
+muge_695482,水杯,内衣套装薄款女 超薄三角杯,data/processed_data/水杯/images/695482.jpg,exclude,strong_category_conflict,内衣
+muge_698277,水杯,初中生内衣女固定杯,data/processed_data/水杯/images/698277.jpg,exclude,strong_category_conflict,内衣
+muge_698754,水杯,杯垫银,data/processed_data/水杯/images/698754.jpg,exclude,accessory_not_target_product,杯垫
+muge_699682,水杯,不脏杯的口红,data/processed_data/水杯/images/699682.jpg,exclude,strong_category_conflict,口红
+muge_700279,水杯,儿童外出刷牙杯,data/processed_data/水杯/images/700279.jpg,exclude,strong_category_conflict,牙杯
+muge_702932,水杯,杯垫小 布,data/processed_data/水杯/images/702932.jpg,exclude,accessory_not_target_product,杯垫
+muge_704538,水杯,儿童保温杯套 通用,data/processed_data/水杯/images/704538.jpg,exclude,accessory_not_target_product,杯套
+muge_705077,水杯,酒杯家用啤酒杯架,data/processed_data/水杯/images/705077.jpg,exclude,accessory_not_target_product,杯架
+muge_705430,水杯,内衣二分之一杯,data/processed_data/水杯/images/705430.jpg,exclude,strong_category_conflict,内衣
+muge_705895,水杯,内衣女薄款全罩杯薄杯,data/processed_data/水杯/images/705895.jpg,exclude,strong_category_conflict,"内衣,罩杯,全罩杯"
+muge_709649,水杯,杯盖欧式,data/processed_data/水杯/images/709649.jpg,exclude,accessory_not_target_product,杯盖
+muge_713514,水杯,茶杯猫宠物 小型 迷你,data/processed_data/水杯/images/713514.jpg,exclude,strong_category_conflict,宠物
+muge_715051,水杯,硅藻泥垫杯垫,data/processed_data/水杯/images/715051.jpg,exclude,accessory_not_target_product,杯垫
+muge_715551,水杯,便携式折叠漱口杯,data/processed_data/水杯/images/715551.jpg,exclude,strong_category_conflict,漱口
+muge_721697,水杯,防水口红 不脱色 持久不沾杯,data/processed_data/水杯/images/721697.jpg,exclude,strong_category_conflict,"不沾杯,口红"
+muge_723830,水杯,文胸夏季薄款性感超薄杯,data/processed_data/水杯/images/723830.jpg,exclude,strong_category_conflict,文胸
+muge_728444,水杯,儿童牙杯牙刷,data/processed_data/水杯/images/728444.jpg,exclude,strong_category_conflict,"牙刷,牙杯"
+muge_734424,水杯,外贸全罩杯内衣大码,data/processed_data/水杯/images/734424.jpg,exclude,strong_category_conflict,"内衣,罩杯,全罩杯"
+muge_748171,水杯,杯刷无死角软毛,data/processed_data/水杯/images/748171.jpg,exclude,accessory_not_target_product,杯刷
+muge_753437,水杯,主人杯架,data/processed_data/水杯/images/753437.jpg,exclude,accessory_not_target_product,杯架
+muge_755631,水杯,功夫茶防水杯垫,data/processed_data/水杯/images/755631.jpg,exclude,accessory_not_target_product,杯垫
+muge_767075,水杯,不锈钢杯子架子置物架,data/processed_data/水杯/images/767075.jpg,exclude,strong_category_conflict,置物架
+muge_767649,水杯,来淘宝搜索，发现更多好物刷牙杯陶瓷刷牙杯,data/processed_data/水杯/images/767649.jpg,exclude,strong_category_conflict,牙杯
+muge_777698,水杯,大罩杯内衣薄款软钢圈美背,data/processed_data/水杯/images/777698.jpg,exclude,strong_category_conflict,"内衣,罩杯,钢圈,美背"
+muge_778400,水杯,斜挎带杯套保温杯,data/processed_data/水杯/images/778400.jpg,exclude,accessory_not_target_product,杯套
+muge_783122,水杯,杯刷 洗杯子神器海绵,data/processed_data/水杯/images/783122.jpg,exclude,accessory_not_target_product,杯刷
+muge_787378,水杯,小白兔保温杯套,data/processed_data/水杯/images/787378.jpg,exclude,accessory_not_target_product,杯套
+muge_788264,水杯,内衣女小胸聚拢立体杯,data/processed_data/水杯/images/788264.jpg,exclude,strong_category_conflict,"内衣,聚拢"
+muge_791824,水杯,一次性口杯托,data/processed_data/水杯/images/791824.jpg,exclude,accessory_not_target_product,杯托
+muge_794716,水杯,铝合金小蛋糕杯,data/processed_data/水杯/images/794716.jpg,exclude,strong_category_conflict,蛋糕
+muge_799347,水杯,厨房置物架放水杯,data/processed_data/水杯/images/799347.jpg,exclude,strong_category_conflict,置物架
+muge_809352,水杯,家庭水杯套装防摔欧式,data/processed_data/水杯/images/809352.jpg,exclude,accessory_not_target_product,杯套
+muge_815445,水杯,洞洞杯文胸聚拢显小,data/processed_data/水杯/images/815445.jpg,exclude,strong_category_conflict,"文胸,聚拢"
+muge_816676,水杯,内衣胸小显大厚模杯,data/processed_data/水杯/images/816676.jpg,exclude,strong_category_conflict,内衣
+muge_817777,水杯,马自达阿特兹杯垫,data/processed_data/水杯/images/817777.jpg,exclude,accessory_not_target_product,杯垫
+muge_822011,水杯,中年文胸前扣加厚杯,data/processed_data/水杯/images/822011.jpg,exclude,strong_category_conflict,文胸
+muge_822541,水杯,法式三角杯细带文胸,data/processed_data/水杯/images/822541.jpg,exclude,strong_category_conflict,文胸
+muge_823630,水杯,内衣女有钢圈大罩杯,data/processed_data/水杯/images/823630.jpg,exclude,strong_category_conflict,"内衣,罩杯,钢圈"
+muge_839058,水杯,旅行洗漱杯套装多功能,data/processed_data/水杯/images/839058.jpg,exclude,accessory_not_target_product,杯套
+muge_848267,水杯,日式酒杯套装,data/processed_data/水杯/images/848267.jpg,exclude,accessory_not_target_product,杯套
+muge_853178,水杯,12只装杯子蛋糕盒,data/processed_data/水杯/images/853178.jpg,exclude,strong_category_conflict,蛋糕
+muge_854457,水杯,妈全罩杯大码加厚文胸,data/processed_data/水杯/images/854457.jpg,exclude,strong_category_conflict,"文胸,罩杯,全罩杯"
+muge_864135,水杯,刷牙杯子壁挂双人,data/processed_data/水杯/images/864135.jpg,exclude,strong_category_conflict,牙杯
+muge_867712,水杯,内衣法式三角杯无钢圈,data/processed_data/水杯/images/867712.jpg,exclude,strong_category_conflict,"内衣,钢圈,无钢圈"
+muge_869095,水杯,儿童保暖杯吸管,data/processed_data/水杯/images/869095.jpg,exclude,accessory_not_target_product,吸管
+muge_872116,水杯,保温杯套短款,data/processed_data/水杯/images/872116.jpg,exclude,accessory_not_target_product,杯套
+muge_877647,水杯,酒杯 架子,data/processed_data/水杯/images/877647.jpg,exclude,accessory_not_target_product,杯架
+muge_883093,水杯,紫砂壶杯盖子,data/processed_data/水杯/images/883093.jpg,exclude,accessory_not_target_product,杯盖
+muge_887827,水杯,少女内衣一体杯,data/processed_data/水杯/images/887827.jpg,exclude,strong_category_conflict,内衣
+muge_888863,水杯,保温杯套儿童毛绒,data/processed_data/水杯/images/888863.jpg,exclude,accessory_not_target_product,杯套
+muge_891610,水杯,夏季哺乳内衣超薄杯,data/processed_data/水杯/images/891610.jpg,exclude,strong_category_conflict,内衣
+muge_899951,水杯,牙膏杯架子置物架 多功能,data/processed_data/水杯/images/899951.jpg,exclude,accessory_not_target_product,杯架
+muge_900079,水杯,一次性纸杯杯托高档,data/processed_data/水杯/images/900079.jpg,exclude,accessory_not_target_product,杯托
+muge_900586,水杯,大保温杯套保护套,data/processed_data/水杯/images/900586.jpg,exclude,accessory_not_target_product,杯套
+muge_909394,水杯,德国进口 杯刷,data/processed_data/水杯/images/909394.jpg,exclude,accessory_not_target_product,杯刷
+muge_911022,水杯,大水杯 盖子,data/processed_data/水杯/images/911022.jpg,exclude,accessory_not_target_product,杯盖
+muge_919967,水杯,挂红酒杯子摆件,data/processed_data/水杯/images/919967.jpg,exclude,strong_category_conflict,摆件
+muge_920690,水杯,星黛露 杯盖,data/processed_data/水杯/images/920690.jpg,exclude,accessory_not_target_product,杯盖
+muge_923376,水杯,内衣，薄罩杯,data/processed_data/水杯/images/923376.jpg,exclude,strong_category_conflict,"内衣,罩杯"
+muge_924949,水杯,茶杯垫布艺,data/processed_data/水杯/images/924949.jpg,exclude,accessory_not_target_product,杯垫
+muge_926570,水杯,武术比赛奖杯,data/processed_data/水杯/images/926570.jpg,exclude,strong_category_conflict,奖杯
+muge_937368,水杯,大水杯带杯套,data/processed_data/水杯/images/937368.jpg,exclude,accessory_not_target_product,杯套
+muge_937713,水杯,牙刷杯 日本,data/processed_data/水杯/images/937713.jpg,exclude,strong_category_conflict,牙刷
+muge_941215,水杯,内衣女小胸聚拢厚杯 加厚12,data/processed_data/水杯/images/941215.jpg,exclude,strong_category_conflict,"内衣,聚拢"
+muge_945464,水杯,车里放水杯架,data/processed_data/水杯/images/945464.jpg,exclude,accessory_not_target_product,杯架
+muge_947376,水杯,杯托 潮州,data/processed_data/水杯/images/947376.jpg,exclude,accessory_not_target_product,杯托
+muge_947723,水杯,20款迈腾水杯垫,data/processed_data/水杯/images/947723.jpg,exclude,accessory_not_target_product,杯垫
+muge_949890,水杯,多头沥水杯架,data/processed_data/水杯/images/949890.jpg,exclude,accessory_not_target_product,杯架
+muge_949913,水杯,酒杯架 北欧 创意倒挂,data/processed_data/水杯/images/949913.jpg,exclude,accessory_not_target_product,杯架
+muge_959653,水杯,梯子杯架,data/processed_data/水杯/images/959653.jpg,exclude,accessory_not_target_product,杯架
+muge_971184,水杯,带盖果冻杯,data/processed_data/水杯/images/971184.jpg,exclude,strong_category_conflict,果冻
+muge_971337,水杯,奶茶杯托胶袋,data/processed_data/水杯/images/971337.jpg,exclude,accessory_not_target_product,杯托
+muge_972763,水杯,咖啡杯架子,data/processed_data/水杯/images/972763.jpg,exclude,accessory_not_target_product,杯架
+muge_975974,水杯,保温杯盖内螺纹,data/processed_data/水杯/images/975974.jpg,exclude,accessory_not_target_product,杯盖
+muge_978381,水杯,北欧酒杯架,data/processed_data/水杯/images/978381.jpg,exclude,accessory_not_target_product,杯架
+muge_993765,水杯,灰藻泥吸水杯垫,data/processed_data/水杯/images/993765.jpg,exclude,accessory_not_target_product,杯垫
+muge_994668,水杯,酒杯架 杯子架,data/processed_data/水杯/images/994668.jpg,exclude,accessory_not_target_product,杯架
+muge_998943,水杯,轻奢 牙杯,data/processed_data/水杯/images/998943.jpg,exclude,strong_category_conflict,牙杯
+muge_999688,水杯,无钢圈胸罩薄款全罩杯,data/processed_data/水杯/images/999688.jpg,exclude,strong_category_conflict,"胸罩,罩杯,钢圈,全罩杯,无钢圈"
+muge_1004399,水杯,有钢圈全罩杯大码胸罩,data/processed_data/水杯/images/1004399.jpg,exclude,strong_category_conflict,"胸罩,罩杯,钢圈,全罩杯"
+muge_1005189,水杯,烧水壶水杯套装轻奢,data/processed_data/水杯/images/1005189.jpg,exclude,accessory_not_target_product,杯套
+muge_1007493,水杯,家庭小酒杯架,data/processed_data/水杯/images/1007493.jpg,exclude,accessory_not_target_product,杯架
+muge_1012231,水杯,牙杯女网红,data/processed_data/水杯/images/1012231.jpg,exclude,strong_category_conflict,牙杯
+muge_1013972,水杯,a罩杯聚拢,data/processed_data/水杯/images/1013972.jpg,exclude,strong_category_conflict,"罩杯,聚拢"
+muge_1014348,水杯,内衣少女日系聚拢半杯,data/processed_data/水杯/images/1014348.jpg,exclude,strong_category_conflict,"内衣,聚拢"
+muge_1019628,水杯,茶杯犬幼犬1元以下真狗,data/processed_data/水杯/images/1019628.jpg,exclude,strong_category_conflict,"茶杯犬,真狗"
+muge_1021012,水杯,哈佛h2s水杯垫,data/processed_data/水杯/images/1021012.jpg,exclude,accessory_not_target_product,杯垫
+muge_1032103,水杯,内衣三角杯法式,data/processed_data/水杯/images/1032103.jpg,exclude,strong_category_conflict,内衣
+muge_1033637,水杯,喝奶杯 儿童带刻度 带吸管,data/processed_data/水杯/images/1033637.jpg,exclude,accessory_not_target_product,吸管
+muge_1038917,水杯,演讲比赛奖杯,data/processed_data/水杯/images/1038917.jpg,exclude,strong_category_conflict,奖杯
+muge_1039556,水杯,孩子杯套,data/processed_data/水杯/images/1039556.jpg,exclude,accessory_not_target_product,杯套
+muge_1047408,水杯,壁挂牙刷杯架,data/processed_data/水杯/images/1047408.jpg,exclude,accessory_not_target_product,杯架
+muge_1052168,水杯,电动牙刷牙杯收纳盒,data/processed_data/水杯/images/1052168.jpg,exclude,strong_category_conflict,"牙刷,牙杯"
+muge_1057357,水杯,水晶舞蹈奖杯,data/processed_data/水杯/images/1057357.jpg,exclude,strong_category_conflict,奖杯
+muge_1068712,水杯,孕妇大码文胸全罩杯大胸显小,data/processed_data/水杯/images/1068712.jpg,exclude,strong_category_conflict,"文胸,罩杯,全罩杯"
+muge_1069245,水杯,茶台茶杯收纳架,data/processed_data/水杯/images/1069245.jpg,exclude,strong_category_conflict,收纳架
+muge_1081603,水杯,加厚背心式文胸厚模杯,data/processed_data/水杯/images/1081603.jpg,exclude,strong_category_conflict,文胸
+muge_1083658,水杯,纯银酒杯套装,data/processed_data/水杯/images/1083658.jpg,exclude,accessory_not_target_product,杯套
+muge_1088490,水杯,婴童刷牙杯,data/processed_data/水杯/images/1088490.jpg,exclude,strong_category_conflict,牙杯
+muge_1089280,水杯,暖杯垫无线,data/processed_data/水杯/images/1089280.jpg,exclude,accessory_not_target_product,杯垫
+muge_1089307,水杯,狗随身杯,data/processed_data/水杯/images/1089307.jpg,exclude,strong_category_conflict,狗随身杯
+muge_1100040,水杯,皮 杯垫,data/processed_data/水杯/images/1100040.jpg,exclude,accessory_not_target_product,杯垫
+muge_1102522,水杯,茶杯架竹子,data/processed_data/水杯/images/1102522.jpg,exclude,accessory_not_target_product,杯架
+muge_1103837,水杯,长条杯垫 麻,data/processed_data/水杯/images/1103837.jpg,exclude,accessory_not_target_product,杯垫
+muge_1104516,水杯,运动内衣固定罩杯一片式,data/processed_data/水杯/images/1104516.jpg,exclude,strong_category_conflict,"内衣,罩杯"
+muge_1110712,水杯,无孔水杯架 自行车,data/processed_data/水杯/images/1110712.jpg,exclude,accessory_not_target_product,杯架
+muge_1115866,水杯,12连杯方形蛋糕模,data/processed_data/水杯/images/1115866.jpg,exclude,strong_category_conflict,蛋糕
+muge_1116842,水杯,漱口杯具套装,data/processed_data/水杯/images/1116842.jpg,exclude,strong_category_conflict,漱口
+muge_1119554,水杯,牙刷杯旅行 便携式,data/processed_data/水杯/images/1119554.jpg,exclude,strong_category_conflict,牙刷
+muge_1120664,水杯,大码f罩杯,data/processed_data/水杯/images/1120664.jpg,exclude,strong_category_conflict,罩杯
+muge_1124645,水杯,美背内衣女大胸显小全罩杯,data/processed_data/水杯/images/1124645.jpg,exclude,strong_category_conflict,"内衣,罩杯,美背,全罩杯"
+muge_394602,包,nova5pro手机壳背包,data/processed_data/包/images/394602.jpg,exclude,strong_category_conflict,手机壳
+muge_411116,包,iphone7plus手机壳背包,data/processed_data/包/images/411116.jpg,exclude,strong_category_conflict,手机壳
+muge_476537,包,书包置物架落地 家用,data/processed_data/包/images/476537.jpg,exclude,strong_category_conflict,"书包置物架,置物架"
+muge_791829,包,零钱包手机壳苹果11 背包式,data/processed_data/包/images/791829.jpg,exclude,strong_category_conflict,手机壳
+muge_860611,包,书包柜 实木,data/processed_data/包/images/860611.jpg,exclude,strong_category_conflict,书包柜
+muge_25603,鞋,送礼物鞋盒,data/processed_data/鞋/images/25603.jpg,exclude,accessory_not_target_product,鞋盒
+muge_42770,鞋,轻奢鞋架带换鞋凳,data/processed_data/鞋/images/42770.jpg,exclude,accessory_not_target_product,鞋架
+muge_43146,鞋,隐形折叠换鞋凳,data/processed_data/鞋/images/43146.jpg,exclude,strong_category_conflict,鞋凳
+muge_46618,鞋,鞋店试鞋凳 个性 创意,data/processed_data/鞋/images/46618.jpg,exclude,strong_category_conflict,"鞋凳,试鞋凳"
+muge_46831,鞋,鞋垫36码女,data/processed_data/鞋/images/46831.jpg,exclude,accessory_not_target_product,鞋垫
+muge_51504,鞋,超窄换鞋凳,data/processed_data/鞋/images/51504.jpg,exclude,strong_category_conflict,鞋凳
+muge_52816,鞋,进门鞋柜轻奢风,data/processed_data/鞋/images/52816.jpg,exclude,accessory_not_target_product,鞋柜
+muge_60026,鞋,汽油小汽车鞋玩具,data/processed_data/鞋/images/60026.jpg,exclude,strong_category_conflict,"汽车鞋,鞋玩具"
+muge_62364,鞋,欧文五派大星鞋垫,data/processed_data/鞋/images/62364.jpg,exclude,accessory_not_target_product,鞋垫
+muge_63375,鞋,缅花换鞋凳,data/processed_data/鞋/images/63375.jpg,exclude,strong_category_conflict,鞋凳
+muge_72709,鞋,简易鞋柜带锁,data/processed_data/鞋/images/72709.jpg,exclude,accessory_not_target_product,鞋柜
+muge_82451,鞋,实木鞋柜 纯实木1米,data/processed_data/鞋/images/82451.jpg,exclude,accessory_not_target_product,鞋柜
+muge_115038,鞋,鞋柜带镜子的一体 落地,data/processed_data/鞋/images/115038.jpg,exclude,accessory_not_target_product,鞋柜
+muge_120446,鞋,加高加深防尘鞋柜,data/processed_data/鞋/images/120446.jpg,exclude,accessory_not_target_product,鞋柜
+muge_123698,鞋,北欧玻璃门鞋柜,data/processed_data/鞋/images/123698.jpg,exclude,accessory_not_target_product,鞋柜
+muge_126401,鞋,黑色拖鞋架高档,data/processed_data/鞋/images/126401.jpg,exclude,strong_category_conflict,鞋架
+muge_146946,鞋,鞋架医院,data/processed_data/鞋/images/146946.jpg,exclude,accessory_not_target_product,鞋架
+muge_157053,鞋,进门鞋架窄 背板,data/processed_data/鞋/images/157053.jpg,exclude,accessory_not_target_product,鞋架
+muge_157820,鞋,足底按摩鞋垫,data/processed_data/鞋/images/157820.jpg,exclude,accessory_not_target_product,鞋垫
+muge_164219,鞋,鞋刷拉丁舞,data/processed_data/鞋/images/164219.jpg,exclude,accessory_not_target_product,鞋刷
+muge_166601,鞋,鞋垫布面自己粘,data/processed_data/鞋/images/166601.jpg,exclude,accessory_not_target_product,鞋垫
+muge_170026,鞋,空军一号纯白鞋垫,data/processed_data/鞋/images/170026.jpg,exclude,accessory_not_target_product,鞋垫
+muge_171251,鞋,挂衣架鞋柜落地,data/processed_data/鞋/images/171251.jpg,exclude,accessory_not_target_product,鞋柜
+muge_176157,鞋,鞋架高90宽60,data/processed_data/鞋/images/176157.jpg,exclude,accessory_not_target_product,鞋架
+muge_178145,鞋,透气鞋柜门外 多功能,data/processed_data/鞋/images/178145.jpg,exclude,accessory_not_target_product,鞋柜
+muge_183654,鞋,玄关鞋架挂墙,data/processed_data/鞋/images/183654.jpg,exclude,accessory_not_target_product,鞋架
+muge_194194,鞋,小鞋柜儿童,data/processed_data/鞋/images/194194.jpg,exclude,accessory_not_target_product,鞋柜
+muge_208181,鞋,挂门鞋架 门后免打孔,data/processed_data/鞋/images/208181.jpg,exclude,accessory_not_target_product,鞋架
+muge_221794,鞋,不锈钢鞋架304,data/processed_data/鞋/images/221794.jpg,exclude,accessory_not_target_product,鞋架
+muge_223875,鞋,门口小型鞋架,data/processed_data/鞋/images/223875.jpg,exclude,accessory_not_target_product,鞋架
+muge_252430,鞋,滑盖式鞋盒,data/processed_data/鞋/images/252430.jpg,exclude,accessory_not_target_product,鞋盒
+muge_254203,鞋,我想搜一个鞋柜，我想搜一个挂衣架,data/processed_data/鞋/images/254203.jpg,exclude,accessory_not_target_product,鞋柜
+muge_265809,鞋,高跟鞋装饰毛球,data/processed_data/鞋/images/265809.jpg,exclude,strong_category_conflict,装饰毛球
+muge_278919,鞋,三角鞋架,data/processed_data/鞋/images/278919.jpg,exclude,accessory_not_target_product,鞋架
+muge_279163,鞋,收纳鞋架家用,data/processed_data/鞋/images/279163.jpg,exclude,accessory_not_target_product,鞋架
+muge_280794,鞋,汉堡包换鞋凳,data/processed_data/鞋/images/280794.jpg,exclude,strong_category_conflict,鞋凳
+muge_289392,鞋,十字绣成品鞋垫 纯手工,data/processed_data/鞋/images/289392.jpg,exclude,accessory_not_target_product,鞋垫
+muge_292427,鞋,115cm鞋柜,data/processed_data/鞋/images/292427.jpg,exclude,accessory_not_target_product,鞋柜
+muge_303739,鞋,工厂鞋柜 车间,data/processed_data/鞋/images/303739.jpg,exclude,accessory_not_target_product,鞋柜
+muge_312444,鞋,换鞋凳家用 门口圆形,data/processed_data/鞋/images/312444.jpg,exclude,strong_category_conflict,鞋凳
+muge_320204,鞋,换鞋凳鞋柜40cm,data/processed_data/鞋/images/320204.jpg,exclude,accessory_not_target_product,鞋柜
+muge_328083,鞋,百叶门换鞋凳,data/processed_data/鞋/images/328083.jpg,exclude,strong_category_conflict,鞋凳
+muge_339068,鞋,90公分鞋柜,data/processed_data/鞋/images/339068.jpg,exclude,accessory_not_target_product,鞋柜
+muge_342337,鞋,松木超薄鞋柜,data/processed_data/鞋/images/342337.jpg,exclude,accessory_not_target_product,鞋柜
+muge_346283,鞋,赤足跑鞋鞋垫,data/processed_data/鞋/images/346283.jpg,exclude,accessory_not_target_product,鞋垫
+muge_348933,鞋,鞋收纳架子,data/processed_data/鞋/images/348933.jpg,exclude,strong_category_conflict,收纳架
+muge_351729,鞋,防滑鞋垫老爹鞋,data/processed_data/鞋/images/351729.jpg,exclude,accessory_not_target_product,鞋垫
+muge_387342,鞋,泰迪狗防咬鞋,data/processed_data/鞋/images/387342.jpg,exclude,strong_category_conflict,狗防咬
+muge_388133,鞋,试鞋凳沙发凳圆,data/processed_data/鞋/images/388133.jpg,exclude,strong_category_conflict,"鞋凳,试鞋凳,沙发凳"
+muge_410785,鞋,入户玄关双面鞋柜,data/processed_data/鞋/images/410785.jpg,exclude,accessory_not_target_product,鞋柜
+muge_411558,鞋,鞋架储藏柜,data/processed_data/鞋/images/411558.jpg,exclude,accessory_not_target_product,鞋架
+muge_423036,鞋,鞋柜隔断双面,data/processed_data/鞋/images/423036.jpg,exclude,accessory_not_target_product,鞋柜
+muge_437589,鞋,踩小人的红鞋垫,data/processed_data/鞋/images/437589.jpg,exclude,accessory_not_target_product,鞋垫
+muge_453498,鞋,鞋柜超薄玄关家用,data/processed_data/鞋/images/453498.jpg,exclude,accessory_not_target_product,鞋柜
+muge_488356,鞋,进门鞋柜多功能坐凳,data/processed_data/鞋/images/488356.jpg,exclude,accessory_not_target_product,鞋柜
+muge_497929,鞋,洗鞋刷子 软毛,data/processed_data/鞋/images/497929.jpg,exclude,accessory_not_target_product,鞋刷
+muge_501305,鞋,坐式鞋柜 高,data/processed_data/鞋/images/501305.jpg,exclude,accessory_not_target_product,鞋柜
+muge_517473,鞋,鞋柜竹子带门,data/processed_data/鞋/images/517473.jpg,exclude,accessory_not_target_product,鞋柜
+muge_529754,鞋,卫生间做拖鞋架子,data/processed_data/鞋/images/529754.jpg,exclude,strong_category_conflict,鞋架
+muge_533128,鞋,aj鞋架防氧化,data/processed_data/鞋/images/533128.jpg,exclude,accessory_not_target_product,鞋架
+muge_538645,鞋,老爹鞋女透气鞋垫,data/processed_data/鞋/images/538645.jpg,exclude,accessory_not_target_product,鞋垫
+muge_560284,鞋,割绒鞋垫成品,data/processed_data/鞋/images/560284.jpg,exclude,accessory_not_target_product,鞋垫
+muge_561399,鞋,蝴蝶鞋垫,data/processed_data/鞋/images/561399.jpg,exclude,accessory_not_target_product,鞋垫
+muge_563834,鞋,鞋柜收纳神器省空间一体式,data/processed_data/鞋/images/563834.jpg,exclude,accessory_not_target_product,鞋柜
+muge_564925,鞋,屏风鞋柜一体 简易鞋柜,data/processed_data/鞋/images/564925.jpg,exclude,accessory_not_target_product,鞋柜
+muge_581192,鞋,鞋架鞋柜美容院专用,data/processed_data/鞋/images/581192.jpg,exclude,accessory_not_target_product,"鞋架,鞋柜"
+muge_584345,鞋,十字绣鞋垫自己绣牛年,data/processed_data/鞋/images/584345.jpg,exclude,accessory_not_target_product,鞋垫
+muge_591660,鞋,松木鞋柜全实木北欧,data/processed_data/鞋/images/591660.jpg,exclude,accessory_not_target_product,鞋柜
+muge_601121,鞋,鞋凳柜 竹,data/processed_data/鞋/images/601121.jpg,exclude,strong_category_conflict,鞋凳
+muge_640260,鞋,用什么刷鞋刷的干净,data/processed_data/鞋/images/640260.jpg,exclude,accessory_not_target_product,鞋刷
+muge_644613,鞋,鞋柜 玄关鞋柜  黑色,data/processed_data/鞋/images/644613.jpg,exclude,accessory_not_target_product,鞋柜
+muge_652767,鞋,衣帽架鞋凳合一,data/processed_data/鞋/images/652767.jpg,exclude,strong_category_conflict,鞋凳
+muge_654392,鞋,内争高鞋垫,data/processed_data/鞋/images/654392.jpg,exclude,accessory_not_target_product,鞋垫
+muge_655075,鞋,dr.matens鞋油,data/processed_data/鞋/images/655075.jpg,exclude,accessory_not_target_product,鞋油
+muge_662096,鞋,diy手工创意 鞋盒,data/processed_data/鞋/images/662096.jpg,exclude,accessory_not_target_product,鞋盒
+muge_691536,鞋,童鞋架子网红铺,data/processed_data/鞋/images/691536.jpg,exclude,accessory_not_target_product,鞋架
+muge_697066,鞋,鞋凳鞋柜一体超薄,data/processed_data/鞋/images/697066.jpg,exclude,accessory_not_target_product,鞋柜
+muge_732871,鞋,ecco鞋垫 男,data/processed_data/鞋/images/732871.jpg,exclude,accessory_not_target_product,鞋垫
+muge_751252,鞋,鞋垫京健达二代,data/processed_data/鞋/images/751252.jpg,exclude,accessory_not_target_product,鞋垫
+muge_762653,鞋,擦鞋机鞋油通用,data/processed_data/鞋/images/762653.jpg,exclude,accessory_not_target_product,鞋油
+muge_771165,鞋,母婴店展示鞋架,data/processed_data/鞋/images/771165.jpg,exclude,accessory_not_target_product,鞋架
+muge_772103,鞋,xd8鞋垫,data/processed_data/鞋/images/772103.jpg,exclude,accessory_not_target_product,鞋垫
+muge_784343,鞋,内增高鞋垫女1厘米,data/processed_data/鞋/images/784343.jpg,exclude,accessory_not_target_product,鞋垫
+muge_799479,鞋,鞋架宿舍 经济型,data/processed_data/鞋/images/799479.jpg,exclude,accessory_not_target_product,鞋架
+muge_800944,鞋,鞋柜单排,data/processed_data/鞋/images/800944.jpg,exclude,accessory_not_target_product,鞋柜
+muge_807015,鞋,实木屏风柜鞋柜,data/processed_data/鞋/images/807015.jpg,exclude,accessory_not_target_product,鞋柜
+muge_824744,鞋,塑料编织鞋垫,data/processed_data/鞋/images/824744.jpg,exclude,accessory_not_target_product,鞋垫
+muge_844094,鞋,鞋柜家用大容量白色大理石面,data/processed_data/鞋/images/844094.jpg,exclude,accessory_not_target_product,鞋柜
+muge_847280,鞋,门前小鞋柜,data/processed_data/鞋/images/847280.jpg,exclude,accessory_not_target_product,鞋柜
+muge_861698,鞋,玄关鞋柜 单开门,data/processed_data/鞋/images/861698.jpg,exclude,accessory_not_target_product,鞋柜
+muge_925716,鞋,门口小鞋架 现代简约,data/processed_data/鞋/images/925716.jpg,exclude,accessory_not_target_product,鞋架
+muge_937448,鞋,自然发热暖脚靳鞋垫,data/processed_data/鞋/images/937448.jpg,exclude,accessory_not_target_product,鞋垫
+muge_952353,鞋,两层鞋柜,data/processed_data/鞋/images/952353.jpg,exclude,accessory_not_target_product,鞋柜
+muge_989063,鞋,不锈钢矮鞋架,data/processed_data/鞋/images/989063.jpg,exclude,accessory_not_target_product,鞋架
+muge_1006078,鞋,鞋架贴门上 粘贴式,data/processed_data/鞋/images/1006078.jpg,exclude,accessory_not_target_product,鞋架
+muge_1011230,鞋,换鞋凳玄关法式,data/processed_data/鞋/images/1011230.jpg,exclude,strong_category_conflict,鞋凳
+muge_1045083,鞋,残疾人补高鞋垫,data/processed_data/鞋/images/1045083.jpg,exclude,accessory_not_target_product,鞋垫
+muge_1053311,鞋,白鞋盒长,data/processed_data/鞋/images/1053311.jpg,exclude,accessory_not_target_product,鞋盒
+muge_1092383,鞋,换鞋凳垫子 布艺,data/processed_data/鞋/images/1092383.jpg,exclude,strong_category_conflict,鞋凳
+muge_1102335,鞋,减震 防臭按摩竹炭鞋垫,data/processed_data/鞋/images/1102335.jpg,exclude,accessory_not_target_product,鞋垫
+muge_1111921,鞋,鞋垫原装万斯,data/processed_data/鞋/images/1111921.jpg,exclude,accessory_not_target_product,鞋垫
+muge_1113336,鞋,玄关凳子 换鞋凳北欧,data/processed_data/鞋/images/1113336.jpg,exclude,strong_category_conflict,鞋凳
+muge_1138845,鞋,鞋架子 家用 多层 移动,data/processed_data/鞋/images/1138845.jpg,exclude,accessory_not_target_product,鞋架

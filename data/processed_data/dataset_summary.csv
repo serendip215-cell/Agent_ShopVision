@@ -1,4 +1,4 @@
-﻿product_type,record_count,image_ok,image_missing,image_failed
-包,664,664,0,0
-水杯,1745,1745,0,0
-鞋,2295,2295,0,0
+﻿product_type,input_count,record_count,excluded_count,review_count,image_ok,image_missing,image_failed,copied_images
+水杯,1745,1443,302,398,1443,0,0,1443
+包,664,659,5,0,659,0,0,659
+鞋,2295,2192,103,0,2192,0,0,2192

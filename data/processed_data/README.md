@@ -1,77 +1,38 @@
 # processed_data
 
-本目录保存当前项目使用的 **MUGE 商品数据**。正式处理层不按数据来源建立目录，而是按 `product_type` 分类：
+本目录是对 `data/processed_data/` 的清洗后的正式数据，供人工核查。原始数据已按授权完成覆盖。
 
-```text
-processed_data/
-├── dataset_summary.csv
-├── 包/
-├── 水杯/
-└── 鞋/
-```
+生成时间：2026-09-28T17:41:06.262130+00:00
 
-每个类别目录包含：
+## 清洗范围
 
-- `products.csv`：该类别商品记录；
-- `images/`：该类别商品图片；
-- `image_quality_report.csv`：图片存在性、可读取性、尺寸、格式和 SHA-256 检查结果；
-- `field_check_report.json`：字段、路径和图片对应检查结果。
+- 当前只清洗包、水杯、鞋三个目录；不划分训练集、验证集和测试集。
+- 只剔除文本证据明确与当前类别冲突的记录。
+- 无明确类别词但没有强冲突的记录会保留，并写入 `review_candidates.csv`。
+- 所有路径使用仓库根目录相对路径。
+- 正式目录已由清洗后的记录和图片组成。
+- 原始备份暂保存在仓库外的 `../experiment/Agent_ShopVision_original_backup_20260929/`，用于必要时回溯。
 
-`products.csv` 统一使用以下字段：
+## 规则说明
 
-```text
-item_id
-product_type
-item_name
-description
-brand
-color
-material
-local_image_path
-image_status
-image_height
-image_width
-```
+水杯类别会排除文胸、内衣、罩杯、鞋、背包等明确冲突内容；包和鞋类别也会排除强冲突词。
+商品配件（例如杯垫、杯盖、鞋架、鞋盒）在没有目标商品主体词时会进入排除清单。
+规则只处理高置信度冲突，不根据标题缺少某个关键词就直接删除图片。
 
-`local_image_path` 是相对于项目根目录的路径，例如：
+## 当前统计
 
-```text
-data/processed_data/水杯/images/741.jpg
-```
+- 清洗前记录：4704 条；
+- 保留记录：4294 条；
+- 排除记录：410 条；
+- 待复核记录：398 条。
 
-## 当前数据
+每个类别目录包含 `products.csv`、`images/`、`image_quality_report.csv` 和 `field_check_report.json`。
 
-当前只处理 MUGE 数据，共 3 类、4704 条记录：
+## 核查文件
 
-- 包：664 条（原始 `双肩包` 归一化）；
-- 水杯：1745 条；
-- 鞋：2295 条（原始 `运动鞋` 归一化）。
+- `excluded_samples.csv`：已按规则排除的记录；
+- `review_candidates.csv`：没有明确类别证据、建议人工或视觉模型复核的记录；
+- `dataset_summary.csv`：清洗前后数量、图片状态和待复核数量；
+- `cleaning_report.json`：完整清洗统计和排除原因。
 
-图片有效率为 100%，具体统计查看 `dataset_summary.csv`。
-
-## 重新处理 MUGE 数据
-
-在项目根目录执行：
-
-```bash
-python scripts/classify_products.py \
-  --input-file data/raw_data/MUGE_data/products.csv \
-  --output-dir data/processed_data \
-  --category-map "双肩包=包,运动鞋=鞋"
-```
-
-脚本读取 CSV 中已有的 `product_type`，复制对应图片，并将 `local_image_path` 写成相对于项目根目录的路径。输入文件地址可以通过 `--input-file` 更换；脚本本身不限定数据来源。
-
-## 字段和路径检查
-
-```bash
-python scripts/check_product_fields.py \
-  --input-file data/processed_data/水杯/products.csv \
-  --report data/processed_data/水杯/field_check_report.json
-```
-
-检查器会检查必需字段、空值、重复商品 ID、绝对图片路径、缺失图片和 `image_status` 不一致。`valid` 为 `true` 才表示检查通过。
-
-## 说明
-
-`scripts/classify_products.py` 是按照已有 `product_type` 整理数据的工具，不会根据图片预测类别。若后续需要训练真正的图像分类模型，应把这三个类别目录作为训练数据，再编写独立的模型训练脚本。
+当前目录为清洗后的正式处理数据。
