@@ -11,7 +11,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = ROOT / "data" / "processed_data_cleaning"
-TARGET_TYPES = ("包", "水杯", "鞋")
 
 
 def resolve_source(raw_path: str) -> Path | None:
@@ -59,7 +58,8 @@ def copy_category(category: str) -> dict[str, int | str]:
 
 def main() -> int:
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    report = [copy_category(category) for category in TARGET_TYPES]
+    categories = sorted(path.parent.name for path in OUTPUT.glob("*/products.csv"))
+    report = [copy_category(category) for category in categories]
     (OUTPUT / "image_copy_report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )

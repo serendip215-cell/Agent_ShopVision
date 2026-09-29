@@ -15,13 +15,10 @@
 正式数据目录不会被覆盖。输出目录的主要结构与 data/processed_data 一致：
 
     data/processed_data_cleaning/
-    ├── 包/
+    ├── <类别1>/
     │   ├── products.csv
     │   └── images/
-    ├── 水杯/
-    │   ├── products.csv
-    │   └── images/
-    ├── 鞋/
+    ├── <类别2>/
     │   ├── products.csv
     │   └── images/
     ├── dataset_summary.csv
@@ -33,13 +30,14 @@
 
 ## 字段
 
-输出 products.csv 保留原 products.csv 的字段，并增加一个 type 字段：
+输出 products.csv 保留原 products.csv 的字段，并增加 type 和 is_cleaned 字段。分类范围不写死：默认自动读取输入目录下所有包含 products.csv 的类别文件夹，也可以用 --categories 指定。
 
-- product_type：包、水杯或鞋；
+- product_type：模型根据当前数据集类别识别的大类；
 - type：图片识别的细分类；
 - color：识别并规范后的颜色，无法确认时留空；
 - material：识别并规范后的材质，无法确认时留空；
-- description：商品大类、细分类、颜色和材质的模板描述。
+- description：商品大类、细分类、颜色和材质的模板描述；
+- is_cleaned：通过类别和置信度检查为 true，待复核、排除或失败为 false。
 
 不会生成 tpye 或其他重复字段。
 
@@ -60,6 +58,10 @@
 在仓库根目录执行：
 
     py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py
+
+指定其他数据集的类别（留空时自动发现）：
+
+    py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py --input-dir data/other_processed --categories "服装,家具,食品"
 
 提高并发时：
 

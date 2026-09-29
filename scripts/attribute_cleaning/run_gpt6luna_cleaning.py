@@ -70,7 +70,7 @@ USER_PROMPT = """请识别这条商品记录。
 原有描述：{old_description}
 要求：
 1. 先判断图片主体是否是可售商品；
-2. 若是目标商品，判断商品大类（包、水杯、鞋）和细分类；
+2. 若是目标商品，判断商品大类（{allowed_categories}）和细分类；
 3. 颜色只填图片可见的主要颜色，材质只填有依据的材质；
 4. 图片与文字冲突时以图片为主；
 5. 只返回约定 JSON。
@@ -103,6 +103,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--input-dir", type=Path, default=Path("data/processed_data"))
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed_data_cleaning"))
     parser.add_argument("--workers", type=int, default=None)
+    parser.add_argument("--categories", default="", help="逗号分隔的目标类别；留空则自动读取输入目录下的类别文件夹")
     parser.add_argument("--min-confidence", type=float, default=0.72)
     parser.add_argument("--image-detail", choices=("low", "high", "auto"), default=None)
     parser.add_argument("--force", action="store_true", help="忽略已有 audit，重新调用接口")
@@ -158,12 +159,16 @@ def normalise_product_type(value: Any) -> str:
     text = compact(value, 40).replace(" ", "")
     if not text or text.lower() in UNKNOWN_VALUES:
         return ""
+    if text in TARGET_TYPES:
+        return text
+    if any(category and category in text for category in TARGET_TYPES):
+        return next(category for category in TARGET_TYPES if category and category in text)
     if any(term in text for term in ("水杯", "保温杯", "马克杯", "杯子", "水壶", "咖啡杯")):
-        return "水杯"
+        return "水杯" if "水杯" in TARGET_TYPES else ""
     if any(term in text for term in ("运动鞋", "板鞋", "高跟鞋", "皮鞋", "凉鞋", "拖鞋", "靴", "鞋")):
-        return "鞋"
+        return "鞋" if "鞋" in TARGET_TYPES else ""
     if any(term in text for term in ("背包", "书包", "手提包", "斜挎包", "单肩包", "钱包", "包")):
-        return "包"
+        return "包" if "包" in TARGET_TYPES else ""
     if text in {"其他", "非商品", "无法判断"}:
         return text
     return ""
@@ -347,6 +352,7 @@ def make_record(row: dict[str, str], *, root: Path, env: dict[str, str],
             old_color=compact(row.get("color"), 40),
             old_material=compact(row.get("material"), 40),
             old_description=compact(row.get("description"), 160),
+            allowed_categories="、".join(TARGET_TYPES),
         )
         parsed = call_api(
             endpoint=endpoint_from_env(env),
@@ -412,6 +418,7 @@ def build_output_row(row: dict[str, str], result: dict[str, Any], fieldnames: li
     output["color"] = result.get("color", "")
     output["material"] = result.get("material", "")
     output["type"] = result.get("type", "")
+    output["is_cleaned"] = "true"
     output["description"] = description_for(output["product_type"], output["type"], output["color"], output["material"])
     return output
 
@@ -420,9 +427,10 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
                   results: dict[str, dict[str, Any]], fieldnames: list[str],
                   min_confidence: float) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
-    final_fields = list(fieldnames)
+    final_fields = [field for field in fieldnames if field not in {"tpye", "is_cleaned"}]
     if "type" not in final_fields:
         final_fields.append("type")
+    final_fields.append("is_cleaned")
     accepted: dict[str, list[dict[str, Any]]] = {category: [] for category in TARGET_TYPES}
     review_rows: list[dict[str, Any]] = []
     excluded_rows: list[dict[str, Any]] = []
@@ -444,6 +452,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
             excluded_rows.append({
                 **{field: row.get(field, "") for field in fieldnames},
                 "source_category": source_category, "exclude_reason": result.get("reason", ""),
+                "is_cleaned": "false",
             })
             counts[source_category]["excluded"] += 1
         else:
@@ -453,13 +462,14 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
                 "model_product_type": result.get("product_type", ""),
                 "model_type": result.get("type", ""), "model_color": result.get("color", ""),
                 "model_material": result.get("material", ""), "confidence": result.get("confidence", 0.0),
+                "is_cleaned": "false",
             })
             counts[source_category]["review"] += 1
     for category, category_rows in accepted.items():
         write_csv(output_dir / category / "products.csv", category_rows, final_fields)
-    review_fields = fieldnames + ["source_category", "review_reason", "model_product_type",
-                                  "model_type", "model_color", "model_material", "confidence"]
-    excluded_fields = fieldnames + ["source_category", "exclude_reason"]
+    review_fields = [field for field in fieldnames if field not in {"tpye", "is_cleaned"}] + ["source_category", "review_reason", "model_product_type",
+                                  "model_type", "model_color", "model_material", "confidence", "is_cleaned"]
+    excluded_fields = [field for field in fieldnames if field not in {"tpye", "is_cleaned"}] + ["source_category", "exclude_reason", "is_cleaned"]
     write_csv(output_dir / "review_candidates.csv", review_rows, review_fields)
     write_csv(output_dir / "excluded_samples.csv", excluded_rows, excluded_fields)
     summary_rows = [
@@ -475,6 +485,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
         "review_rows": len(review_rows), "excluded_rows": len(excluded_rows),
         "target_types": list(TARGET_TYPES), "output_fields": final_fields,
         "relative_image_paths": True,
+        "cleaned_field": {"name": "is_cleaned", "accepted_value": "true", "other_value": "false"},
         "note": "图片不重复复制，products.csv 中的 local_image_path 保留仓库根目录相对路径。",
     }
     (output_dir / "cleaning_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -488,7 +499,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
 - 待复核：{report["review_rows"]}
 - 排除：{report["excluded_rows"]}
 
-products.csv 保留原始字段，并增加一个 type 列；description 使用统一模板生成。
+products.csv 保留原始字段，并增加 type 和 is_cleaned 列；description 使用统一模板生成。is_cleaned=true 表示已通过清洗检查。
 运行 copy_output_images.py 后，图片位于各类别的 images 目录，CSV 中的路径仍为仓库根目录相对路径。
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")
@@ -505,6 +516,11 @@ def main() -> int:
     workers = args.workers or int(env_value(env, "MAX_WORKERS", "4"))
     if not env_value(env, "OPENAI_API_KEY"):
         print("警告：未读取到 OPENAI_API_KEY；若中转站不接受匿名请求，接口调用会失败。", file=sys.stderr)
+    global TARGET_TYPES, SYSTEM_PROMPT
+    requested_categories = [item.strip() for item in args.categories.replace("，", ",").split(",") if item.strip()]
+    discovered_categories = [path.parent.name for path in sorted(args.input_dir.glob("*/products.csv"))]
+    TARGET_TYPES = tuple(dict.fromkeys(requested_categories or discovered_categories or TARGET_TYPES))
+    SYSTEM_PROMPT = SYSTEM_PROMPT.replace("包|水杯|鞋", "|".join(TARGET_TYPES)).replace("包、水杯、鞋", "、".join(TARGET_TYPES))
     rows, fieldnames = load_rows(args.input_dir)
     unique_fields: list[str] = []
     for field in fieldnames:
