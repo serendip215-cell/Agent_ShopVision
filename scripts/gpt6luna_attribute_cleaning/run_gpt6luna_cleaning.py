@@ -107,6 +107,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-confidence", type=float, default=0.72)
     parser.add_argument("--image-detail", choices=("low", "high", "auto"), default=None)
     parser.add_argument("--force", action="store_true", help="忽略已有 audit，重新调用接口")
+    parser.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help="仅重试审计文件中因接口或解析失败的记录",
+    )
     return parser.parse_args()
 
 
@@ -242,6 +247,7 @@ def call_api(*, endpoint: str, api_key: str, model: str, image_url: str,
     payload = {
         "model": model,
         "temperature": 0,
+        "max_tokens": 200,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": [
@@ -251,7 +257,7 @@ def call_api(*, endpoint: str, api_key: str, model: str, image_url: str,
         ],
     }
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    headers = {"Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json", "Connection": "close"}
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
     last_error = ""
@@ -278,7 +284,7 @@ def call_api(*, endpoint: str, api_key: str, model: str, image_url: str,
             else:
                 last_error = str(exc)
             if attempt < retries:
-                time.sleep(min(2 ** attempt, 12))
+                time.sleep(min(1.5 * (2 ** attempt), 15))
     raise RuntimeError(last_error or "接口调用失败")
 
 
@@ -502,10 +508,18 @@ def main() -> int:
     args.output_dir.mkdir(parents=True, exist_ok=True)
     audit_path = args.output_dir / "model_audit.jsonl"
     completed = {} if args.force else read_audit(audit_path)
-    pending = [
-        row for row in rows
-        if record_key(row["_source_category"], (row.get("item_id") or "").strip()) not in completed
-    ]
+    pending = []
+    for row in rows:
+        key = record_key(row["_source_category"], (row.get("item_id") or "").strip())
+        previous = completed.get(key)
+        should_retry = (
+            args.retry_failed
+            and previous is not None
+            and previous.get("status") == "review"
+            and str(previous.get("reason", "")).startswith("接口或解析失败")
+        )
+        if previous is None or should_retry:
+            pending.append(row)
     print(f"输入 {len(rows)} 条，已完成 {len(rows) - len(pending)} 条，待处理 {len(pending)} 条。")
     append_mode = "a" if audit_path.exists() and not args.force else "w"
     with audit_path.open(append_mode, encoding="utf-8") as audit_handle:

@@ -25,4 +25,4 @@
 
     python scripts/gpt6luna_attribute_cleaning/run_gpt6luna_cleaning.py --workers 4 --min-confidence 0.72 --image-detail high --output-dir data/processed_data_gpt6luna
 
-重复运行时会读取 output 目录中的 model_audit.jsonl 并跳过已经完成的记录；需要重新识别时使用 --force。脚本只会重建候选输出目录，不会覆盖正式数据目录。
+重复运行时会读取 output 目录中的 model_audit.jsonl 并跳过已经有结果的记录；只重试接口失败记录时使用 --retry-failed，全部重新识别时使用 --force。脚本只会重建候选输出目录，不会覆盖正式数据目录。
