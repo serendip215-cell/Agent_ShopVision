@@ -3,7 +3,7 @@
 """调用 OpenAI 兼容视觉接口识别 MUGE 商品并生成候选清洗数据。
 
 默认只读取 data/processed_data/*/products.csv，输出到
-data/processed_data_gpt6luna，不修改正式数据。
+data/processed_data_cleaning，不修改正式数据。
 """
 
 from __future__ import annotations
@@ -99,10 +99,9 @@ def repo_root() -> Path:
 
 
 def parse_args() -> argparse.Namespace:
-    root = repo_root()
     parser = argparse.ArgumentParser(description="调用 GPT6Luna 识别商品大类、细分类、颜色和材质")
-    parser.add_argument("--input-dir", type=Path, default=root / "data" / "processed_data")
-    parser.add_argument("--output-dir", type=Path, default=root / "data" / "processed_data_gpt6luna")
+    parser.add_argument("--input-dir", type=Path, default=Path("data/processed_data"))
+    parser.add_argument("--output-dir", type=Path, default=Path("data/processed_data_cleaning"))
     parser.add_argument("--workers", type=int, default=None)
     parser.add_argument("--min-confidence", type=float, default=0.72)
     parser.add_argument("--image-detail", choices=("low", "high", "auto"), default=None)
@@ -413,7 +412,6 @@ def build_output_row(row: dict[str, str], result: dict[str, Any], fieldnames: li
     output["color"] = result.get("color", "")
     output["material"] = result.get("material", "")
     output["type"] = result.get("type", "")
-    output["tpye"] = result.get("type", "")
     output["description"] = description_for(output["product_type"], output["type"], output["color"], output["material"])
     return output
 
@@ -423,9 +421,8 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
                   min_confidence: float) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     final_fields = list(fieldnames)
-    for field in ("type", "tpye"):
-        if field not in final_fields:
-            final_fields.append(field)
+    if "type" not in final_fields:
+        final_fields.append("type")
     accepted: dict[str, list[dict[str, Any]]] = {category: [] for category in TARGET_TYPES}
     review_rows: list[dict[str, Any]] = []
     excluded_rows: list[dict[str, Any]] = []
@@ -483,7 +480,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
     (output_dir / "cleaning_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     readme = f"""# GPT6Luna 清洗候选结果
 
-本目录由 scripts/gpt6luna_attribute_cleaning/run_gpt6luna_cleaning.py 生成。
+本目录由 scripts/attribute_cleaning/run_gpt6luna_cleaning.py 生成。
 正式数据目录未被覆盖。
 
 - 输入记录：{len(rows)}
@@ -491,8 +488,8 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
 - 待复核：{report["review_rows"]}
 - 排除：{report["excluded_rows"]}
 
-products.csv 保留原始字段，并增加 type 和 tpye 两列；description 使用统一模板生成。
-所有图片路径保持仓库根目录相对路径，不复制图片文件。
+products.csv 保留原始字段，并增加一个 type 列；description 使用统一模板生成。
+运行 copy_output_images.py 后，图片位于各类别的 images 目录，CSV 中的路径仍为仓库根目录相对路径。
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")
 
@@ -500,11 +497,24 @@ products.csv 保留原始字段，并增加 type 和 tpye 两列；description �
 def main() -> int:
     args = parse_args()
     root = repo_root()
+    if not args.input_dir.is_absolute():
+        args.input_dir = root / args.input_dir
+    if not args.output_dir.is_absolute():
+        args.output_dir = root / args.output_dir
     env = load_env(Path(__file__).resolve().parent / ".env")
     workers = args.workers or int(env_value(env, "MAX_WORKERS", "4"))
     if not env_value(env, "OPENAI_API_KEY"):
         print("警告：未读取到 OPENAI_API_KEY；若中转站不接受匿名请求，接口调用会失败。", file=sys.stderr)
     rows, fieldnames = load_rows(args.input_dir)
+    unique_fields: list[str] = []
+    for field in fieldnames:
+        if field == "tpye" or field in unique_fields:
+            continue
+        unique_fields.append(field)
+    if unique_fields != fieldnames:
+        fieldnames = unique_fields
+        for row in rows:
+            row.pop("tpye", None)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     audit_path = args.output_dir / "model_audit.jsonl"
     completed = {} if args.force else read_audit(audit_path)
