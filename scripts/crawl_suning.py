@@ -3,8 +3,8 @@
 
 只抓「未登录可见」的搜索页公开字段：标题、图片、品牌|材质、卖点描述。
 遵守约定：
-  - 单线程，默认每请求间隔约 3 秒，总量硬上限 6000 条（--max-items 可调低）；
-  - 请求头在几份常见浏览器配置间轮换；代理从仓库根目录 .env 读取，一个 IP 用到失败 3 次再换；
+  - 4 个线程同时拉搜索页。代理先试一次，页面传不完就改直连；封面图直连。每批之间停约 3 秒，总量硬上限 6000 条；
+  - 请求头在几份常见浏览器配置间轮换；代理从仓库根目录 .env 读取，某个 IP 失败 3 次才换；
   - 不绕过验证码/登录：连续 3 个 IP 都失败才停止；
   - 每条记录 source_url / crawl_date；缺失字段留空，不从图片或标题臆造。
   - 价格接口已关闭（苏宁价格走 JS 单独接口，未抓包逆向），price 列留空。
@@ -21,6 +21,7 @@
 """
 import argparse
 import csv
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import http.client
 import os
@@ -91,8 +92,9 @@ FINGERPRINTS = [
         "Accept-Language": "zh-CN,zh-Hans;q=0.9",
     },
 ]
-DELAY = 3.0          # 秒/请求，别调低
-FAIL_LIMIT = 3       # 连续 3 个 IP 都失败才停止
+DELAY = 3.0          # 每批页面之间的间隔，别调低
+WORKERS = 4          # 同时使用的 IP 和线程数
+FAIL_LIMIT = 3       # 连续 3 批都失败才停止
 PAGE_RETRY = 3        # 同一个 IP 失败 3 次才换下一个
 FETCH_TIMEOUT = 45
 MAX_PAGES = 20       # 每个搜索词最多翻页
@@ -167,9 +169,25 @@ def proxy_label(proxy):
     return proxy["http"].split("@")[-1]
 
 
+# 搜索卡片不带款式 id。商品页 colorList 才把「白/黑/绿、240ml/480ml」收成一个款。
+# 这里不去请求详情页，只在判重时丢掉这些规格尾巴。入库标题仍是原文。
+_VARIANT_TOKEN = re.compile(
+    r"^(?:\d+(?:\.\d+)?(?:ml|mL|ML|l|L)|个|只|套|组|"
+    r"[A-Za-z]{2,}[-_]?[A-Za-z]?\d{2,}[A-Za-z0-9-]*|"
+    r"(?:经典)?(?:白|黑|红|蓝|绿|粉|灰|银|金|黄|紫|橙|棕|青|米白|象牙|磨砂黑|梦幻黑|雪山落日)色?)$"
+)
+
+
 def title_key(name):
-    """同一标题视为同一商品。苏宁会把一个款式拆成很多商品编号。"""
-    return re.sub(r"\s+", "", name or "")
+    """去掉空格、容量、型号和末尾颜色后再比较。同一款只留第一次见到的封面。"""
+    parts = re.sub(r"\s+", " ", (name or "").strip()).split(" ")
+    while parts and _VARIANT_TOKEN.match(parts[-1].strip("，,。/")):
+        parts.pop()
+    s = "".join(parts)
+    s = re.sub(r"\d+(?:\.\d+)?(?:ml|mL|ML|l|L)", "", s)
+    s = re.sub(r"[A-Za-z]{2,}[-_]?[A-Za-z]?\d{2,}[A-Za-z0-9-]*", "", s)
+    s = re.sub(r"(?:雪山落日|磨砂黑|梦幻黑|象牙白|米白|[白黑红蓝绿粉灰银金黄紫橙棕青]色)", "", s)
+    return re.sub(r"[()（）\[\]【】]", "", s)
 
 
 def cover_key(url):
@@ -283,22 +301,32 @@ class ProxyPool:
         return self.cur
 
     def _from_api(self):
-        req = urllib.request.Request(self.api, headers={"User-Agent": FINGERPRINTS[0]["User-Agent"]})
-        with urllib.request.urlopen(req, timeout=10) as r:
-            text = r.read().decode("utf-8", "ignore")
-        line = next((ln.strip() for ln in text.splitlines() if ln.strip()), "")
-        proxy = normalize_proxy(line)
-        if not proxy:
-            raise RuntimeError("proxy api bad line")
-        return proxy
+        """向代理池要一个 IP。接口慢或握手超时就再试，不是站点封禁。"""
+        last = None
+        for attempt in range(PAGE_RETRY):
+            try:
+                req = urllib.request.Request(
+                    self.api, headers={"User-Agent": FINGERPRINTS[0]["User-Agent"]})
+                with urllib.request.urlopen(req, timeout=20) as r:
+                    text = r.read().decode("utf-8", "ignore")
+                line = next((ln.strip() for ln in text.splitlines() if ln.strip()), "")
+                proxy = normalize_proxy(line)
+                if not proxy:
+                    raise RuntimeError("代理接口没有返回 ip:端口:用户名:密码")
+                return proxy
+            except Exception as e:
+                last = e
+                log("代理接口第 %d/%d 次没要到：%s" % (attempt + 1, PAGE_RETRY, e))
+                time.sleep(2)
+        raise last
 
 
-def fetch(url, referer=None, proxy=None, allow_partial=False):
+def fetch(url, referer=None, proxy=None, allow_partial=False, timeout=None):
     handlers = [urllib.request.ProxyHandler(proxy)] if proxy else []
     opener = urllib.request.build_opener(*handlers)
     req = urllib.request.Request(url, headers=pick_headers(referer))
     try:
-        with opener.open(req, timeout=FETCH_TIMEOUT) as r:
+        with opener.open(req, timeout=timeout or FETCH_TIMEOUT) as r:
             return r.read()
     except http.client.IncompleteRead as e:
         data = e.partial or b""
@@ -317,10 +345,51 @@ def parse_search_html(html):
     return recs
 
 
-def search_page_records(keyword, page, proxy=None):
+def search_page_records(keyword, page, proxy=None, timeout=None):
     url = SEARCH_URL.format(kw=urllib.parse.quote(keyword), page=page)
-    html = fetch(url, proxy=proxy, allow_partial=True).decode("utf-8", "ignore")
+    html = fetch(url, proxy=proxy, allow_partial=True, timeout=timeout).decode("utf-8", "ignore")
     return parse_search_html(html), url
+
+
+def load_page(proxy, keyword, page):
+    """先用分配到的 IP 拉搜索页。代理经常在商品卡出现前把连接掐断，失败就改直连。
+
+    直连实测约 1 秒能拿到整页。不再对同一个坏 IP 空等 3 次 45 秒。
+    """
+    log("第 %d 页开始 经由 %s" % (page + 1, proxy_label(proxy)))
+    if not proxy:
+        try:
+            recs, _src = search_page_records(keyword, page, None, timeout=20)
+            log("第 %d 页直连返回 %d 个商品卡" % (page + 1, len(recs)))
+            return recs, None, True
+        except Exception as e:
+            log("第 %d 页直连也失败：%s" % (page + 1, e))
+            return None, e, False
+    if proxy:
+        try:
+            recs, _src = search_page_records(keyword, page, proxy, timeout=12)
+            if recs:
+                log("第 %d 页代理返回 %d 个商品卡" % (page + 1, len(recs)))
+                return recs, None, True
+            log("第 %d 页代理没有商品卡，改直连" % (page + 1))
+        except Exception as e:
+            log("第 %d 页代理未完成（%s），改直连" % (page + 1, e))
+    try:
+        recs, _src = search_page_records(keyword, page, None, timeout=20)
+        log("第 %d 页直连返回 %d 个商品卡" % (page + 1, len(recs)))
+        return recs, None, False
+    except Exception as e:
+        log("第 %d 页直连也失败：%s" % (page + 1, e))
+        return None, e, False
+
+
+def fetch_cover(rec, img_dir):
+    """封面直连。代理下载图片时经常在大约 32KB 被掐断。"""
+    try:
+        download_image(rec, img_dir, None)
+        return rec, None
+    except Exception as e:
+        return rec, e
 
 
 def download_image(rec, img_dir, proxy=None):
@@ -418,6 +487,12 @@ def selftest():
     assert rec["_image_url"].endswith("abc.jpg_400w_400h_4e")
     assert rec["_cover_key"] == "abc"
     assert title_key("健 卡侬 跑鞋") == "健卡侬跑鞋"
+    pocket = "[官方旗舰店]小米米家保温杯口袋版 女儿童学生水杯便携大容量保冷杯子男316不锈钢壶 "
+    assert title_key(pocket + "白色") == title_key(pocket + "黑色") == title_key(pocket + "雪山落日")
+    assert title_key("铁洋 手提保温杯 1000ML 个") == title_key("铁洋 手提保温杯 800ML 个")
+    assert title_key("虎牌(TIGER)保温杯水杯MJA-B024 240ML") == title_key(
+        "虎牌(TIGER)保温杯水杯MJA-B048 480ML")
+    assert title_key("小米 米家保温杯弹盖版2 粉色") != title_key(pocket + "白色")
     assert rec["local_image_path"].endswith(".jpg")
     png = parse_card('<li docType="1" id="0000000000-2"><img src="//imgservice1.suning.cn/uimg1/b2c/image/abc.png_400w_400h_4e">')
     assert png["_image_url"].endswith("abc.png_400w_400h_4e")
@@ -478,12 +553,24 @@ def main():
     prod_csv = os.path.join(OUT_DIR, "products.csv")
     qual_csv = os.path.join(OUT_DIR, "image_quality_report.csv")
 
-    # 上次图没下完的行会占着名额，启动时删掉，下次还能再收这些商品
+    # 没下到图的行、以及同一款的颜色/容量重复，启动时只留第一条
     if os.path.exists(prod_csv):
         with open(prod_csv, encoding="utf-8-sig") as f:
             old_rows = list(csv.DictReader(f))
-        ok_rows = [r for r in old_rows if r.get("image_status") == "ok"]
-        if len(ok_rows) != len(old_rows):
+        ok_rows = []
+        seen = set()
+        dropped = []
+        for r in old_rows:
+            if r.get("image_status") != "ok":
+                dropped.append(r)
+                continue
+            k = title_key(r.get("item_name"))
+            if k in seen:
+                dropped.append(r)
+                continue
+            seen.add(k)
+            ok_rows.append(r)
+        if dropped:
             with open(prod_csv, "w", newline="", encoding="utf-8-sig") as f:
                 w = csv.DictWriter(f, fieldnames=PRODUCTS_HEADER, extrasaction="ignore")
                 w.writeheader()
@@ -496,7 +583,11 @@ def main():
                     w = csv.DictWriter(f, fieldnames=QUALITY_HEADER)
                     w.writeheader()
                     w.writerows(qrows)
-            log("去掉 %d 条没有图片的记录，重新爬时会再试" % (len(old_rows) - len(ok_rows)))
+            for r in dropped:
+                path = os.path.join(img_dir, os.path.basename(r.get("local_image_path") or ""))
+                if path and os.path.exists(path):
+                    os.remove(path)
+            log("去掉 %d 条重复或没图的记录，只留每款的第一张封面" % len(dropped))
     done_ids = set()
     seen_titles = set()
     seen_covers = set()
@@ -509,14 +600,28 @@ def main():
                 if r["product_type"] in counts:
                     counts[r["product_type"]] += 1
     log("启动 品类 %s" % "、".join(CATEGORY_QUERIES))
-    log("上限 每类 %d 条，本次最多 %d 条，间隔不少于 %.0f 秒" % (PER_CATEGORY, args.max_items, args.delay))
-    log("代理 %s" % ("读取 .env 里的代理池，一个 IP 失败 %d 次才换" % PAGE_RETRY if args.proxy_api else "未配置，直连"))
+    slots = []
+    for n in range(WORKERS):
+        try:
+            slots.append(pool.rotate())
+            time.sleep(0.5)
+        except Exception as e:
+            log("第 %d 个 IP 没要到，用已有的 %d 个继续：%s" % (n + 1, len(slots), e))
+            break
+    if not slots:
+        log("一个 IP 都没要到，改为直连")
+        slots = [None]
+    workers = len(slots)
+    log("上限 每类 %d 条，本次最多 %d 条，%d 个 IP 并发，每批间隔不少于 %.0f 秒" % (
+        PER_CATEGORY, args.max_items, workers, args.delay))
+    log("代理 %s" % ("搜索页先走代理，页面传不完就改直连" if args.proxy_api else "未配置，直连"))
     log("已有 " + " ".join("%s %d/%d" % (k, counts[k], PER_CATEGORY) for k in counts))
     log("写入 %s" % prod_csv)
 
     mode = "a" if os.path.exists(prod_csv) else "w"
     fails = 0
     saved = 0
+    ex = ThreadPoolExecutor(max_workers=workers)
     with open(prod_csv, mode, newline="", encoding="utf-8-sig") as pf, \
             open(qual_csv, mode, newline="", encoding="utf-8-sig") as qf:
         pw = csv.DictWriter(pf, fieldnames=PRODUCTS_HEADER, extrasaction="ignore")
@@ -533,79 +638,106 @@ def main():
                 page = 0
                 while (page < MAX_PAGES and counts[product_type] < PER_CATEGORY
                        and saved < args.max_items and fails < FAIL_LIMIT):
-                    recs = None
-                    err = None
-                    proxy = pool.current()
-                    log("正在爬取【%s】「%s」第 %d 页 代理 %s" % (
-                        product_type, kw, page + 1, proxy_label(proxy)))
-                    for attempt in range(PAGE_RETRY):
-                        try:
-                            recs, _src = search_page_records(kw, page, proxy)
-                            err = None
-                            break
-                        except Exception as e:
-                            err = e
-                            log("同一代理第 %d/%d 次失败 【%s】「%s」第 %d 页：%s" % (
-                                attempt + 1, PAGE_RETRY, product_type, kw, page + 1, e))
-                            time.sleep(random.uniform(1, 2))
-                    if err is not None:
+                    pages = list(range(page, min(page + workers, MAX_PAGES)))
+                    log("同时爬取【%s】「%s」第 %d-%d 页" % (
+                        product_type, kw, pages[0] + 1, pages[-1] + 1))
+                    futs = {
+                        ex.submit(load_page, slots[i], kw, p): (i, p)
+                        for i, p in enumerate(pages)
+                    }
+                    got = {}
+                    for fut in as_completed(futs):
+                        i, p = futs[fut]
+                        recs, err, proxy_ok = fut.result()
+                        got[p] = (i, recs, err)
+                        if err is not None:
+                            log("第 %d 页失败，更换该 IP：%s" % (p + 1, err))
+                            try:
+                                slots[i] = pool.rotate()
+                            except Exception as e:
+                                log("换 IP 失败，这个线程改直连：%s" % e)
+                                slots[i] = None
+                        elif not proxy_ok and slots[i] is not None:
+                            log("第 %d 页的代理传不完页面，这个线程之后改直连" % (p + 1))
+                            slots[i] = None
+                    if all(err is not None for _i, _recs, err in got.values()):
                         fails += 1
-                        log("本页作废 %d/%d，准备换 IP" % (fails, FAIL_LIMIT))
+                        log("这一批 %d 页都失败 %d/%d" % (len(pages), fails, FAIL_LIMIT))
                         if fails >= FAIL_LIMIT:
                             break
-                        pool.rotate()  # 这个 IP 已失败 3 次，才换
                         continue
                     fails = 0
-                    if not recs:
-                        log("【%s】「%s」第 %d 页没有商品卡，换下一个搜索词" % (product_type, kw, page + 1))
-                        break
-                    kept = 0
+                    todo = []
                     skipped = 0
-                    for rec in recs:
-                        if counts[product_type] >= PER_CATEGORY or saved >= args.max_items:
+                    cards = 0
+                    stop_kw = False
+                    for p in pages:
+                        _i, recs, err = got[p]
+                        if err is not None:
+                            continue
+                        cards += len(recs)
+                        if not recs:
+                            log("【%s】「%s」第 %d 页没有商品卡，换下一个搜索词" % (
+                                product_type, kw, p + 1))
+                            stop_kw = True
                             break
-                        if rec["item_id"] in done_ids or not rec.get("_image_url"):
-                            continue  # 无图或这个商品编号已经收过
-                        if not in_category(product_type, rec["item_name"]):
-                            continue
-                        tk = title_key(rec["item_name"])
-                        ck = rec.get("_cover_key") or ""
-                        # 同一标题或同一张封面只留第一条，不再下载
-                        if tk in seen_titles or (ck and ck in seen_covers):
-                            skipped += 1
-                            continue
-                        rec["product_type"] = product_type
-                        try:
-                            download_image(rec, img_dir, proxy)
-                        except Exception as e:
-                            log("图片失败，本条不计入 %s %s" % (rec["item_id"], e))
+                        for rec in recs:
+                            if (counts[product_type] + len(todo) >= PER_CATEGORY
+                                    or saved + len(todo) >= args.max_items):
+                                break
+                            if rec["item_id"] in done_ids or not rec.get("_image_url"):
+                                continue
+                            if not in_category(product_type, rec["item_name"]):
+                                continue
+                            tk = title_key(rec["item_name"])
+                            ck = rec.get("_cover_key") or ""
+                            if tk in seen_titles or (ck and ck in seen_covers):
+                                skipped += 1
+                                continue
+                            rec["product_type"] = product_type
+                            rec["_tk"] = tk
+                            seen_titles.add(tk)
+                            if ck:
+                                seen_covers.add(ck)
+                            done_ids.add(rec["item_id"])
+                            todo.append(rec)
+                    kept = 0
+                    if todo:
+                        log("本批新商品 %d 个，开始下封面" % len(todo))
+                    cover_futs = [ex.submit(fetch_cover, rec, img_dir) for rec in todo]
+                    for fut in as_completed(cover_futs):
+                        rec, err = fut.result()
+                        if err is not None:
+                            seen_titles.discard(rec.get("_tk"))
+                            if rec.get("_cover_key"):
+                                seen_covers.discard(rec["_cover_key"])
+                            done_ids.discard(rec["item_id"])
+                            log("图片失败，本条不计入 %s %s" % (rec["item_id"], err))
                             continue
                         rec["image_status"] = "ok"
-                        w, h = probe_image_size(
-                            open(os.path.join(img_dir, os.path.basename(rec["local_image_path"])), "rb").read()
-                        ) if rec["image_status"] == "ok" else ("", "")
+                        img_path = os.path.join(img_dir, os.path.basename(rec["local_image_path"]))
+                        w, h = probe_image_size(open(img_path, "rb").read())
                         rec["image_width"], rec["image_height"] = w, h
                         qw.writerow(image_quality_rows(rec, img_dir))
                         pw.writerow(rec)
                         pf.flush()
-                        done_ids.add(rec["item_id"])
-                        seen_titles.add(title_key(rec["item_name"]))
-                        if rec.get("_cover_key"):
-                            seen_covers.add(rec["_cover_key"])
                         counts[product_type] += 1
                         saved += 1
                         kept += 1
-                        log("写入【%s】%d/%d 总 %d  %s  %s  图:%s" % (
+                        log("写入【%s】%d/%d 总 %d  %s  %s  图:ok" % (
                             product_type, counts[product_type], PER_CATEGORY, saved,
-                            rec["item_id"], rec["item_name"][:36], rec["image_status"]))
-                    log("【%s】「%s」第 %d 页结束 本页卡片 %d 新写入 %d 跳过重复 %d" % (
-                        product_type, kw, page + 1, len(recs), kept, skipped))
-                    page += 1
+                            rec["item_id"], rec["item_name"][:36]))
+                    log("【%s】「%s」第 %d-%d 页结束 卡片 %d 新写入 %d 跳过重复 %d" % (
+                        product_type, kw, pages[0] + 1, pages[-1] + 1, cards, kept, skipped))
+                    if stop_kw:
+                        break
+                    page = pages[-1] + 1
                     wait = random.uniform(args.delay, args.delay + 1)
                     log("等待 %.1f 秒后继续" % wait)
                     time.sleep(wait)
             if saved >= args.max_items or fails >= FAIL_LIMIT:
                 break
+    ex.shutdown(wait=True)
     log("结束 本次新写入 %d 条 -> %s" % (saved, prod_csv))
     log("结果 " + " ".join("%s %d/%d" % (k, counts[k], PER_CATEGORY) for k in counts))
     if fails >= FAIL_LIMIT:
