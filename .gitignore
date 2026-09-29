@@ -2,3 +2,6 @@
 
 # 已弃用的 Amazon 本地 Ollama 翻译脚本，仅保留在本机供历史参考。
 /scripts/translate_amazon_products.py
+
+# 分类增量追加前生成的本地备份，不作为数据集版本提交。
+/data/processed_backups/
