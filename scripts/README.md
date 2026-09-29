@@ -11,6 +11,7 @@
 | `translate_amazon_products_deepl.py` | 使用 DeepL 翻译 Amazon 商品字段，当前入口 |
 | `translate_amazon_products.py` | 旧的 Ollama Amazon 翻译脚本，仅作历史保留 |
 | `crawl_suning.py` | 小规模采集苏宁公开商品数据，输出到 `Suning_data` |
+| `cutout_images.py` | 用开源 rembg 批量抠图，输出透明底 PNG 到 `images_cutout` |
 | `README.md` | 本目录脚本说明 |
 
 ## 1. 整理商品数据：`classify_products.py`
@@ -133,6 +134,46 @@ data/processed_data/<product_type>/
 
 为了保持 MUGE 的 11 个字段，数据集来源、记录指纹和图片指纹放入单独的合并索引文件，不直接增加到正式 `products.csv`。
 每次追加都会在输出根目录维护 `merge_index.jsonl`，用于记录数据集来源、商品指纹和图片指纹。
+
+## 5. 批量抠图：`cutout_images.py`
+
+用开源 [rembg](https://github.com/danielgatis/rembg)（MIT 协议，`isnet-general-use` 模型）把商品图批量抠成透明底 PNG。无命令行参数，在项目根目录一键运行：
+
+```powershell
+python scripts/cutout_images.py
+```
+
+运行流程分四步，终端逐步打印进度：
+
+1. **环境检查**：要求 Python 3.11+；缺任何依赖（rembg、onnxruntime 等）自动 `pip install`，装不上会给出可手动执行的命令；
+2. **准备模型**（约 170MB，三级获取，能离线就不联网）：
+   - `scripts/models/isnet-general-use.onnx` 放了文件 → 直接复制到 rembg 缓存使用；
+   - 本机已有缓存 → 直接用；
+   - 都没有 → 自动在线下载（需联网），失败会提示手动放置模型的路径；
+3. **并发抠图**：并发数自动取 `CPU 核数` 和 `可用内存÷2` 的较小值，每个推理进程限单线程（防止线程爆炸导致内存不足）；每 100 张打印一次进度和耗时；
+4. **输出结果**：透明底 PNG，打印成功/跳过/失败汇总。
+
+输入输出路径写在脚本顶部常量，改路径直接改 `SRC`、`DST`：
+
+```text
+data/raw_data/Suning_data/images/          # 输入：原图（jpg/png/webp）
+data/raw_data/Suning_data/images_cutout/   # 输出：<原名>.png 透明底
+```
+
+断点续跑：输出已存在则跳过，中断或失败后直接重跑即可接着抠；单张失败只记录文件名和原因，不中断整批；先写 `.part` 临时文件再改名，不会留下半张图。
+
+并发覆盖（内存不足或想跑更少时）：
+
+```powershell
+$env:CUTOUT_WORKERS = "4"
+python scripts/cutout_images.py
+```
+
+注意：
+
+- **模型不进 git**：单文件 170MB 超过 GitHub 的 100MB 上限，`scripts/models/*.onnx` 已加进 `.gitignore`，模型放本地目录或自行挂 Release/LFS；`images_cutout` 是派生结果，同样不入库；
+- **首次运行需联网**装 pip 依赖（模型已有本地获取路径，依赖装过一次后可离线）；
+- **已知残留**：促销文字、品牌角标可能被当成前景保留（模型无法区分装饰图形和商品）；玻璃等透明商品边缘只做到可用级。分类/检索用途够用，做干净素材建议人工复查。
 
 ## 处理顺序
 
