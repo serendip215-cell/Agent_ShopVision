@@ -137,37 +137,42 @@ data/processed_data/<product_type>/
 
 ## 5. 批量抠图：`cutout_images.py`
 
-用开源 [rembg](https://github.com/danielgatis/rembg)（MIT 协议，`isnet-general-use` 模型）把商品图批量抠成透明底 PNG。无命令行参数，在项目根目录一键运行：
+用开源 [rembg](https://github.com/danielgatis/rembg)（MIT 协议，`isnet-general-use` 模型）把商品图批量抠成透明底 PNG。支持多数据集，无命令行参数，在项目根目录一键运行：
 
 ```powershell
 python scripts/cutout_images.py
 ```
 
-运行流程分四步，终端逐步打印进度：
+运行流程分五步，终端逐步打印进度：
 
 1. **环境检查**：要求 Python 3.11+；缺任何依赖（rembg、onnxruntime 等）自动 `pip install`，装不上会给出可手动执行的命令；
-2. **准备模型**（约 170MB，三级获取，能离线就不联网）：
+2. **扫描数据集**：自动扫描 `data/raw_data/*/images/`，把有图片的目录按编号列出（如 `1) Amazon_data 1158 张`），输入编号选择要处理的数据集——`1` 单个、`1,3` 或 `1 3` 多个、`all` 全部（建议一次处理一个目录）；输入无效会重新询问；
+3. **准备模型**（约 170MB，三级获取，能离线就不联网）：
    - `scripts/models/isnet-general-use.onnx` 放了文件 → 直接复制到 rembg 缓存使用；
    - 本机已有缓存 → 直接用；
    - 都没有 → 自动在线下载（需联网），失败会提示手动放置模型的路径；
-3. **并发抠图**：并发数自动取 `CPU 核数` 和 `可用内存÷2` 的较小值，每个推理进程限单线程（防止线程爆炸导致内存不足）；每 100 张打印一次进度和耗时；
-4. **输出结果**：透明底 PNG，打印成功/跳过/失败汇总。
-
-输入输出路径写在脚本顶部常量，改路径直接改 `SRC`、`DST`：
+4. **逐目录并发抠图**：并发数自动取 `CPU 核数` 和 `可用内存÷2` 的较小值，每个推理进程限单线程（防止线程爆炸导致内存不足）；日志每条带时间戳，每抠一张打印一行结果（`ok`/`skip`/`fail: 原因` + 文件名 + 进度），每 100 张再打一行汇总：
 
 ```text
-data/raw_data/Suning_data/images/          # 输入：原图（jpg/png/webp）
-data/raw_data/Suning_data/images_cutout/   # 输出：<原名>.png 透明底
+[16:07:20]         ok     01sUPg0387L.jpg [1/1]
+[16:07:20]         进度 1/1 (ok=1 skip=0 fail=0) 已用 6s
+```
+5. **输出汇总**：每个数据集的输出放在自己的目录下，打印成功/跳过/失败统计：
+
+```text
+data/raw_data/<数据集>/images/          # 输入：原图（jpg/png/webp）
+data/raw_data/<数据集>/images_cutout/   # 输出：<原名>.png 透明底
 ```
 
 断点续跑：输出已存在则跳过，中断或失败后直接重跑即可接着抠；单张失败只记录文件名和原因，不中断整批；先写 `.part` 临时文件再改名，不会留下半张图。
 
-并发覆盖（内存不足或想跑更少时）：
+环境变量（可选）：
 
-```powershell
-$env:CUTOUT_WORKERS = "4"
-python scripts/cutout_images.py
-```
+| 变量 | 作用 |
+|---|---|
+| `CUTOUT_SELECT=1,3` | 跳过交互直接选数据集；非交互环境（管道/后台）默认处理全部 |
+| `CUTOUT_WORKERS=4` | 覆盖并发数（内存不足时调小） |
+| `CUTOUT_LIMIT=3` | 只跑前 3 张（试跑用） |
 
 注意：
 
