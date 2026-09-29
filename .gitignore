@@ -1,1 +1,17 @@
 .env
+
+# 已弃用的 Amazon 本地 Ollama 翻译脚本，仅保留在本机供历史参考。
+/scripts/translate_amazon_products.py
+
+# 分类增量追加前生成的本地备份，不作为数据集版本提交。
+/data/processed_backups/
+
+# 抠图派生结果，不作为数据集版本提交。
+/data/raw_data/*/images_cutout/
+
+# 模型文件（170MB，超过 GitHub 单文件 100MB 上限，放本地 scripts/models/ 使用）。
+/scripts/models/*.onnx
+
+# 本地缓存与崩溃转储。
+__pycache__/
+*.stackdump

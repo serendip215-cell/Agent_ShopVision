@@ -148,8 +148,10 @@ ID_RE = re.compile(r'id="(\d+)-(\d+)"')
 NAME_RE = re.compile(r'title-selling-point">\s*<a[^>]*>\s*(.*?)\s*</a>', re.S)
 DESC_RE = re.compile(r'<em\s+style="display:none"\s*>(.*?)</em>', re.S)
 # 保留 _400w_400h 这类后缀。去掉后缀会下到 200KB 以上的原图，代理经常在约 32KB 处把连接掐断。
+# 搜索卡片的 img-block 里只有这一张图，就是封面。详情页相册不打开。
 IMG_RE = re.compile(
     r'src="(//imgservice[^"]+?/b2c/image/[^"]+?\.(?:jpg|jpeg|png|webp)(?:_[^"]*)?)"', re.I)
+COVER_RE = re.compile(r'/b2c/image/([^./]+)\.', re.I)
 CONFIG_RE = re.compile(r'class="info-config" title="\s*([^"]*?)\s*"')
 
 
@@ -163,6 +165,17 @@ def proxy_label(proxy):
     if not proxy:
         return "直连"
     return proxy["http"].split("@")[-1]
+
+
+def title_key(name):
+    """同一标题视为同一商品。苏宁会把一个款式拆成很多商品编号。"""
+    return re.sub(r"\s+", "", name or "")
+
+
+def cover_key(url):
+    """封面文件名。同一张图配不同商品编号时只保留第一次。"""
+    m = COVER_RE.search(url or "")
+    return m.group(1) if m else ""
 
 
 def in_category(product_type, name):
@@ -199,6 +212,7 @@ def parse_card(card_html):
             ext = "jpg"
         rec["local_image_path"] = "data/raw_data/Suning_data/images/%s.%s" % (item_code, ext)
         rec["_image_url"] = "https:" + m.group(1)
+        rec["_cover_key"] = cover_key(rec["_image_url"])
     m = CONFIG_RE.search(card_html)
     if m:
         parts = [p.strip() for p in m.group(1).split("|") if p.strip()]
@@ -402,6 +416,8 @@ def selftest():
     assert rec["description"] == "防滑耐磨；内置镜头支架"
     # 捕获组只取到 .jpg，自动去掉 _400w_400h 缩略后缀，即原图地址
     assert rec["_image_url"].endswith("abc.jpg_400w_400h_4e")
+    assert rec["_cover_key"] == "abc"
+    assert title_key("健 卡侬 跑鞋") == "健卡侬跑鞋"
     assert rec["local_image_path"].endswith(".jpg")
     png = parse_card('<li docType="1" id="0000000000-2"><img src="//imgservice1.suning.cn/uimg1/b2c/image/abc.png_400w_400h_4e">')
     assert png["_image_url"].endswith("abc.png_400w_400h_4e")
@@ -482,11 +498,14 @@ def main():
                     w.writerows(qrows)
             log("去掉 %d 条没有图片的记录，重新爬时会再试" % (len(old_rows) - len(ok_rows)))
     done_ids = set()
+    seen_titles = set()
+    seen_covers = set()
     counts = {k: 0 for k in CATEGORY_QUERIES}
-    if os.path.exists(prod_csv):  # 断点续传：只跳过图片已经成功的商品
+    if os.path.exists(prod_csv):  # 断点续传：跳过已成功的商品，同标题也不再下
         with open(prod_csv, encoding="utf-8-sig") as f:
             for r in csv.DictReader(f):
                 done_ids.add(r["item_id"])
+                seen_titles.add(title_key(r["item_name"]))
                 if r["product_type"] in counts:
                     counts[r["product_type"]] += 1
     log("启动 品类 %s" % "、".join(CATEGORY_QUERIES))
@@ -541,12 +560,19 @@ def main():
                         log("【%s】「%s」第 %d 页没有商品卡，换下一个搜索词" % (product_type, kw, page + 1))
                         break
                     kept = 0
+                    skipped = 0
                     for rec in recs:
                         if counts[product_type] >= PER_CATEGORY or saved >= args.max_items:
                             break
                         if rec["item_id"] in done_ids or not rec.get("_image_url"):
-                            continue  # 无图或已经收过，跳过
+                            continue  # 无图或这个商品编号已经收过
                         if not in_category(product_type, rec["item_name"]):
+                            continue
+                        tk = title_key(rec["item_name"])
+                        ck = rec.get("_cover_key") or ""
+                        # 同一标题或同一张封面只留第一条，不再下载
+                        if tk in seen_titles or (ck and ck in seen_covers):
+                            skipped += 1
                             continue
                         rec["product_type"] = product_type
                         try:
@@ -563,14 +589,17 @@ def main():
                         pw.writerow(rec)
                         pf.flush()
                         done_ids.add(rec["item_id"])
+                        seen_titles.add(title_key(rec["item_name"]))
+                        if rec.get("_cover_key"):
+                            seen_covers.add(rec["_cover_key"])
                         counts[product_type] += 1
                         saved += 1
                         kept += 1
                         log("写入【%s】%d/%d 总 %d  %s  %s  图:%s" % (
                             product_type, counts[product_type], PER_CATEGORY, saved,
                             rec["item_id"], rec["item_name"][:36], rec["image_status"]))
-                    log("【%s】「%s」第 %d 页结束 本页卡片 %d 新写入 %d" % (
-                        product_type, kw, page + 1, len(recs), kept))
+                    log("【%s】「%s」第 %d 页结束 本页卡片 %d 新写入 %d 跳过重复 %d" % (
+                        product_type, kw, page + 1, len(recs), kept, skipped))
                     page += 1
                     wait = random.uniform(args.delay, args.delay + 1)
                     log("等待 %.1f 秒后继续" % wait)
