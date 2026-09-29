@@ -246,18 +246,21 @@ python scripts/crawl_suning.py --selftest   # 离线解析自检，不发请求
 
 ## 5. 批量抠图：`cutout_images.py`
 
-用开源 [rembg](https://github.com/danielgatis/rembg)（MIT，`isnet-general-use` 模型）批量抠透明底 PNG。要求 Python 3.11+；缺依赖（rembg、pillow、numpy、onnxruntime、pooch、scipy、imagehash、filetype）自动 `pip install`，装不上打印可手动执行的命令。无命令行参数，一键运行：
+用开源 [rembg](https://github.com/danielgatis/rembg)（MIT，`isnet-general-use` 模型）批量抠透明底 PNG。要求 Python 3.11+；缺依赖（rembg、pillow、numpy、onnxruntime、pooch、scipy、imagehash、filetype）自动 `pip install`，装不上打印可手动执行的命令。除 `--selftest` 自检外无命令行参数，运行后按提示交互选择：
 
 ```powershell
-python scripts/cutout_images.py
+python scripts/cutout_images.py              # 一键运行
+python scripts/cutout_images.py --selftest   # 离线自检解析逻辑，不处理图片
 ```
 
 ### 流程（终端逐步打印，日志每条带 `[HH:MM:SS]` 时间戳）
 
-1. **环境检查**：Python 版本 + 依赖探测补装；
-2. **扫描数据集**：自动扫描 `data/raw_data/*/images/`，凡含图片（`.jpg`/`.jpeg`/`.png`/`.webp`）的目录按编号列出（含张数），输入选择——`1` 单个、`1,3` 或 `1 3` 多个、`all` 全部；输入无效重新询问；管道/后台无输入默认全部；建议一次处理一个目录；
+1. **环境检查**：Python 3.11+ 校验 + 依赖探测补装；
+2. **选择数据集和并发数**（两问，输入无效都会重新询问并重述格式）：
+   - 自动扫描 `data/raw_data/*/images/`，凡含图片（`.jpg`/`.jpeg`/`.png`/`.webp`）的目录按编号列出（含张数），输入编号选择——`1` 单个、`1,3` 或 `1 3` 多个、`all` 全部；建议一次处理一个目录；
+   - 并发数（同时处理的图片张数）：提示推荐值（= `CPU 核数` 与 `可用内存÷2` 的较小值），**直接回车采用推荐值，或输入 1-128 的整数后回车**；
 3. **准备模型**（三级获取，能离线就不联网）：`scripts/models/isnet-general-use.onnx` 有文件 → 复制到 rembg 缓存使用；缓存已有 → 直接用；都没有 → 在线下载约 170MB（失败提示手动放置路径）；
-4. **逐目录并发抠图**：并发数 = `CPU 核数` 与 `可用内存÷2` 的较小值，每个推理进程限单线程；**每抠一张打印一行** `ok/skip/fail: 原因 + 文件名 + [n/总数]`，每 100 张打一行汇总（计数+耗时）；
+4. **逐目录并发抠图**：按选定并发数开多进程，每个推理进程限单线程；**每抠一张打印一行** `ok/skip/fail: 原因 + 文件名 + [n/总数]`，每 100 张打一行汇总（计数+耗时）；
 5. **输出汇总**：每类成功/跳过/失败统计 + 各输出目录。
 
 ```text
@@ -274,13 +277,13 @@ data/raw_data/<数据集>/images_cutout/   # 输出 <原名>.png 透明底
 
 断点续跑：输出已存在且非 0 字节则 `skip`；中断/失败后重跑接着抠；单张失败只记录原因不中断整批；先写 `.part` 临时文件再改名，不留半张图。
 
-### 环境变量（可选）
+### 环境变量（可选，设置后跳过对应交互）
 
 | 变量 | 作用 |
 |---|---|
-| `CUTOUT_SELECT=1,3` | 跳过交互直接选数据集 |
-| `CUTOUT_WORKERS=4` | 覆盖并发数（内存不足时调小） |
-| `CUTOUT_LIMIT=3` | 只跑前 3 张（试跑用） |
+| `CUTOUT_SELECT=1,3` | 跳过数据集选择交互（数字格式同交互输入） |
+| `CUTOUT_WORKERS=4` | 跳过并发数交互（1-128 的整数） |
+| `CUTOUT_LIMIT=3` | 只跑前 3 张（试跑用，建议 20 以内） |
 
 ### 注意
 
