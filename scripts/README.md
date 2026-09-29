@@ -180,10 +180,53 @@ data/raw_data/<数据集>/images_cutout/   # 输出：<原名>.png 透明底
 - **首次运行需联网**装 pip 依赖（模型已有本地获取路径，依赖装过一次后可离线）；
 - **已知残留**：促销文字、品牌角标可能被当成前景保留（模型无法区分装饰图形和商品）；玻璃等透明商品边缘只做到可用级。分类/检索用途够用，做干净素材建议人工复查。
 
+## 6. 采集苏宁商品数据：`crawl_suning.py`
+
+小规模限量采集苏宁「未登录可见」搜索页的公开字段：标题、图片、品牌|材质、卖点描述。价格接口未抓包逆向，`price` 列留空；每条记录带 `source_url`、`crawl_date`，缺失字段留空、不从图片或标题臆造。单线程限速，不绕过验证码/登录。用法见脚本头部注释与参数表。
+
+前置：代理从仓库根目录 `.env` 读取，或用参数传代理文件/接口：
+
+```text
+# .env
+PROXY_POOL_URL=http://你的代理池链接
+```
+
+```powershell
+python scripts/crawl_suning.py              # 采集
+python scripts/crawl_suning.py --selftest   # 离线解析自检，不发请求
+```
+
+参数说明：
+
+| 参数 | 是否必需 | 默认值或说明 |
+|---|---|---|
+| `--max-items` | 可选 | 总量硬上限，默认 6000（可调低） |
+| `--delay` | 可选 | 请求间隔秒数，默认 3，不建议低于 3 |
+| `--proxy-file` | 可选 | 代理列表文件，每行 `ip:port` 或 `http://ip:port` |
+| `--proxy-api` | 可选 | 代理池 API，默认读 `.env` 的 `PROXY_POOL_URL` |
+| `--selftest` | 可选 | 只跑离线解析自检 |
+
+采集规则：
+
+1. 品类与搜索词取自苏宁搜索页类目筛选项（2026-09-28 公开页核对）：水杯、双肩包、运动鞋、女装、男装、运动服；每类写满 1000 条即停，每个搜索词最多翻 20 页；
+2. 标题必须命中本类词（`ACCEPT` 词表），并排除配件和串类（`REJECT` 词表），标题对不上不入库；
+3. 去重：商品编号已收过、同一标题（去空白后相同）、同一张封面图，只保留第一条，不再下载；
+4. 断点续传：重跑跳过已成功的商品，同标题也不再下；
+5. 代理一个 IP 连续失败 3 次换下一个，连续 3 个 IP 都失败才停止；请求头在几份常见浏览器配置间轮换；
+6. 执行前请人工确认 https://www.suning.com/robots.txt ，仅在允许范围内收集。
+
+输出到 `data/raw_data/Suning_data/`：
+
+```text
+products.csv                 # 16 列，与现有数据集字段对齐
+image_quality_report.csv     # 与现有数据集 image_quality_report.csv 同列格式
+images/<商品编号>.<扩展名>
+```
+
 ## 处理顺序
 
 ```text
-translate_amazon_products_deepl.py → 字段统一/类别整理 → classify_products.py 或增量合并 → check_product_fields.py → 中文图文检索数据构建（待开发）
+crawl_suning.py（苏宁采集，可选）→ translate_amazon_products_deepl.py → 字段统一/类别整理 → classify_products.py 或增量合并 → check_product_fields.py → 中文图文检索数据构建（待开发）
 ```
 
 不同数据集字段不同时，先完成该数据集的字段映射，再运行整理脚本。图片能正常读取不代表图片内容与商品描述匹配；当前脚本不做语义审核。
