@@ -388,6 +388,7 @@ def make_record(row: dict[str, str], *, root: Path, env: dict[str, str],
             base["status"] = "accepted"
             base["reason"] = "通过商品类别和置信度检查"
         base.update({
+            "is_read": "true",
             "product_type": product_type, "type": fine_type, "color": color,
             "material": material, "confidence": confidence,
             "model_reason": compact(parsed.get("reason"), 240),
@@ -422,7 +423,7 @@ def build_output_row(row: dict[str, str], result: dict[str, Any], fieldnames: li
     output["color"] = result.get("color", "")
     output["material"] = result.get("material", "")
     output["type"] = result.get("type", "")
-    output["is_cleaned"] = "true"
+    output["is_read"] = "true"
     output["description"] = description_for(output["product_type"], output["type"], output["color"], output["material"])
     return output
 
@@ -431,10 +432,10 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
                   results: dict[str, dict[str, Any]], fieldnames: list[str],
                   min_confidence: float) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
-    final_fields = [field for field in fieldnames if field not in {"tpye", "is_cleaned"}]
+    final_fields = [field for field in fieldnames if field not in {"tpye", "is_read"}]
     if "type" not in final_fields:
         final_fields.append("type")
-    final_fields.append("is_cleaned")
+    final_fields.append("is_read")
     accepted: dict[str, list[dict[str, Any]]] = {category: [] for category in TARGET_TYPES}
     review_rows: list[dict[str, Any]] = []
     excluded_rows: list[dict[str, Any]] = []
@@ -445,7 +446,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
         key = record_key(source_category, (row.get("item_id") or "").strip())
         result = results.get(key) or {
             "status": "review", "reason": "尚未完成模型识别", "product_type": "",
-            "type": "", "color": "", "material": "", "confidence": 0.0,
+            "type": "", "color": "", "material": "", "confidence": 0.0, "is_read": "false",
         }
         status = result.get("status")
         if status == "accepted" and result.get("product_type") in TARGET_TYPES:
@@ -456,7 +457,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
             excluded_rows.append({
                 **{field: row.get(field, "") for field in fieldnames},
                 "source_category": source_category, "exclude_reason": result.get("reason", ""),
-                "is_cleaned": "false",
+                "is_read": result.get("is_read", "false"),
             })
             counts[source_category]["excluded"] += 1
         else:
@@ -466,14 +467,14 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
                 "model_product_type": result.get("product_type", ""),
                 "model_type": result.get("type", ""), "model_color": result.get("color", ""),
                 "model_material": result.get("material", ""), "confidence": result.get("confidence", 0.0),
-                "is_cleaned": "false",
+                "is_read": result.get("is_read", "false"),
             })
             counts[source_category]["review"] += 1
     for category, category_rows in accepted.items():
         write_csv(output_dir / category / "products.csv", category_rows, final_fields)
-    review_fields = [field for field in fieldnames if field not in {"tpye", "is_cleaned"}] + ["source_category", "review_reason", "model_product_type",
-                                  "model_type", "model_color", "model_material", "confidence", "is_cleaned"]
-    excluded_fields = [field for field in fieldnames if field not in {"tpye", "is_cleaned"}] + ["source_category", "exclude_reason", "is_cleaned"]
+    review_fields = [field for field in fieldnames if field not in {"tpye", "is_read"}] + ["source_category", "review_reason", "model_product_type",
+                                  "model_type", "model_color", "model_material", "confidence", "is_read"]
+    excluded_fields = [field for field in fieldnames if field not in {"tpye", "is_read"}] + ["source_category", "exclude_reason", "is_read"]
     write_csv(output_dir / "review_candidates.csv", review_rows, review_fields)
     write_csv(output_dir / "excluded_samples.csv", excluded_rows, excluded_fields)
     summary_rows = [
@@ -489,7 +490,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
         "review_rows": len(review_rows), "excluded_rows": len(excluded_rows),
         "target_types": list(TARGET_TYPES), "output_fields": final_fields,
         "relative_image_paths": True,
-        "cleaned_field": {"name": "is_cleaned", "accepted_value": "true", "other_value": "false"},
+        "read_field": {"name": "is_read", "processed_value": "true", "unprocessed_value": "false"},
         "note": "图片不重复复制，products.csv 中的 local_image_path 保留仓库根目录相对路径。",
     }
     (output_dir / "cleaning_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -503,7 +504,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
 - 待复核：{report["review_rows"]}
 - 排除：{report["excluded_rows"]}
 
-products.csv 保留原始字段，并增加 type 和 is_cleaned 列；description 使用统一模板生成。is_cleaned=true 表示已通过清洗检查。
+products.csv 保留原始字段，并增加 type 和 is_read 列；description 使用统一模板生成。is_read=true 表示脚本已经完成一次处理。
 运行 copy_output_images.py 后，图片位于各类别的 images 目录，CSV 中的路径仍为仓库根目录相对路径。
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")
@@ -552,7 +553,21 @@ def main() -> int:
             and previous.get("status") == "review"
             and str(previous.get("reason", "")).startswith("接口或解析失败")
         )
-        if previous is None or should_retry:
+        input_is_read = str(row.get("is_read", "")).strip().lower() in {"true", "1", "yes", "y", "是"}
+        if previous is None and input_is_read and not args.force:
+            # 输入本身已经标记为已读时，保留已有字段，不再次调用模型。
+            completed[key] = {
+                "record_key": key,
+                "status": "accepted" if (row.get("product_type") or row.get("type")) else "review",
+                "is_read": "true",
+                "product_type": row.get("product_type", row.get("_source_category", "")),
+                "type": row.get("type", ""),
+                "color": row.get("color", ""),
+                "material": row.get("material", ""),
+                "confidence": 1.0,
+                "reason": "输入记录已标记为已读",
+            }
+        elif previous is None or should_retry:
             pending.append(row)
     print(f"输入 {len(rows)} 条，已完成 {len(rows) - len(pending)} 条，待处理 {len(pending)} 条。")
     append_mode = "a" if audit_path.exists() and not args.force else "w"

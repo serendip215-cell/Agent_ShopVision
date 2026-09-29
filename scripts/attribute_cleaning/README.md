@@ -30,14 +30,14 @@
 
 ## 字段
 
-输出 products.csv 保留原 products.csv 的字段，并增加 type 和 is_cleaned 字段。分类范围不写死：默认自动读取输入目录下所有包含 products.csv 的类别文件夹，也可以用 --categories 指定；没有类别时会直接报错，不使用固定类别兜底。
+输出 products.csv 保留原 products.csv 的字段，并增加 type 和 is_read 字段。分类范围不写死：默认自动读取输入目录下所有包含 products.csv 的类别文件夹，也可以用 --categories 指定；没有类别时会直接报错，不使用固定类别兜底。
 
 - product_type：模型根据当前数据集类别识别的大类；
 - type：图片识别的细分类；
 - color：识别并规范后的颜色，无法确认时留空；
 - material：识别并规范后的材质，无法确认时留空；
 - description：商品大类、细分类、颜色和材质的模板描述；
-- is_cleaned：通过类别和置信度检查为 true，待复核、排除或失败为 false。
+- is_read：脚本成功完成一次模型处理为 true；接口失败、图片不存在或解析失败为 false。该字段不表示清洗是否通过。
 
 不会生成 tpye 或其他重复字段。
 
@@ -79,7 +79,7 @@
 
     py -3 scripts/attribute_cleaning/copy_output_images.py
 
-默认运行会读取 output 目录中的 model_audit.jsonl，跳过已有结果；retry-failed 只重试接口或解析失败的记录；force 会重新处理全部记录。
+默认运行会读取 output 目录中的 model_audit.jsonl，跳过已有结果；输入 CSV 中已有 is_read=true 的记录也会跳过模型调用；retry-failed 只重试接口或解析失败的记录；force 会重新处理全部记录。
 
 ## 清洗逻辑
 
@@ -100,7 +100,7 @@
 
        商品大类：{product_type}；细分类：{type}；颜色：{color}；材质：{material}
 
-8. `is_cleaned=true` 只表示该记录已经通过商品类别和置信度检查；`is_cleaned=false` 表示待复核、排除或处理失败。
+8. `is_read=true` 表示脚本已经完成一次模型处理，无论结果是接受、待复核还是排除；`is_read=false` 表示图片、接口或解析失败，后续可以重试。
 
 分类范围始终来自输入数据集的类别目录或 `--categories` 参数，代码不预设具体商品类别。没有发现任何类别时，脚本会停止并提示检查目录结构。
 
