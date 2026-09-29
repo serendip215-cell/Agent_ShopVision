@@ -15,6 +15,7 @@ from pathlib import Path
 STANDARD_FIELDS = [
     "item_id", "product_type", "item_name", "description", "brand", "color",
     "material", "local_image_path", "image_status", "image_height", "image_width",
+    "is_cleaned",
 ]
 DEFAULT_REQUIRED_FIELDS = ["item_id", "product_type", "item_name", "local_image_path"]
 

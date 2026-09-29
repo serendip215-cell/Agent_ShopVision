@@ -18,6 +18,7 @@
 | `translate_amazon_products_deepl.py` | 用 DeepL 翻译 Amazon 商品 CSV 的 5 个文本字段 |
 | `crawl_suning.py` | 小规模限量采集苏宁公开商品数据，输出到 `Suning_data` |
 | `cutout_images.py` | 用 rembg 批量抠图，输出透明底 PNG |
+| `attribute_cleaning/` | 商品属性识别与清洗（GPT 视觉清洗管线），自带 `README.md`，见该目录 |
 | `README.md` | 本目录脚本说明 |
 
 ## 1. 整理商品数据：`classify_products.py`
@@ -26,7 +27,7 @@
 
 ```text
 data/processed_data/<product_type>/
-├── products.csv                # 11 列正式数据
+├── products.csv                # 12 列正式数据
 ├── images/                     # 商品图片（内容去重后复用）
 └── image_quality_report.csv    # 12 列图片质检
 data/processed_data/
@@ -38,10 +39,12 @@ data/processed_data/
 
 | 文件 | 列 |
 |---|---|
-| `products.csv` | `item_id`, `product_type`, `item_name`, `description`, `brand`, `color`, `material`, `local_image_path`, `image_status`, `image_height`, `image_width` |
+| `products.csv` | `item_id`, `product_type`, `item_name`, `description`, `brand`, `color`, `material`, `local_image_path`, `image_status`, `image_height`, `image_width`, `is_cleaned` |
 | `image_quality_report.csv` | `item_id`, `product_type`, `image_path`, `source_image_path`, `decode_ok`, `actual_height`, `actual_width`, `format`, `file_size_bytes`, `sha256`, `quality_status`, `quality_reason` |
 | `dataset_summary.csv` | `product_type`, `record_count`, `image_ok`, `image_missing`, `image_failed` |
 | `merge_index.jsonl` 每行 | `dataset_id`, `item_id`, `source_key`, `category`, `record_hash`, `image_hash`, `local_image_path`, `image_copied` |
+
+`is_cleaned` 为清洗状态：输入含 `true`/`1`/`yes`/`y`（不区分大小写）记为 `true`，其余或缺失记为 `false`；由 `attribute_cleaning/` 清洗后写回，`is_cleaned=true` 表示已通过清洗检查。
 
 ### 输入要求
 
@@ -124,7 +127,7 @@ python scripts/classify_products.py `
 | `missing_images` | 图片文件不存在或大小为 0 字节 |
 | `image_status_mismatch` | 状态对不上：声明 `ok` 但文件缺失/为 0，或声明 `missing`/`failed` 但文件存在 |
 
-11 列标准字段之外的列记入 `extra_fields`，只报告、不算错误。
+12 列标准字段（含 `is_cleaned`）之外的列记入 `extra_fields`，只报告、不算错误。
 
 ### 参数
 
@@ -203,7 +206,7 @@ python scripts/translate_amazon_products_deepl.py `
 
 ## 4. 采集苏宁商品数据：`crawl_suning.py`
 
-小规模限量采集苏宁「未登录可见」搜索页的公开字段。价格接口未抓包逆向，`price` 列留空；每条记录带 `source_url`、`crawl_date`，缺失字段留空、不从图片或标题臆造。单线程限速，不绕过验证码/登录。
+小规模限量采集苏宁「未登录可见」搜索页的公开字段。价格接口未抓包逆向，`price` 列留空；每条记录带 `source_url`、`crawl_date`，缺失字段留空、不从图片或标题臆造。4 线程并发抓搜索页，每批之间停约 3 秒，不绕过验证码/登录。
 
 ### 运行条件
 
@@ -220,8 +223,8 @@ python scripts/crawl_suning.py --selftest   # 离线解析自检，不发请求
 | 参数 | 是否必需 | 默认值或说明 |
 |---|---|---|
 | `--max-items` | 可选 | 总量硬上限，默认 6000（可调低，不要调高） |
-| `--delay` | 可选 | 请求间隔秒数，默认 3.0，不建议低于 3 |
-| `--proxy-file` | 可选 | 代理列表文件，每行 `ip:port` 或 `http://ip:port` |
+| `--delay` | 可选 | 每批页面之间的间隔秒数，默认 3.0；低于 3 会被自动改回 3 |
+| `--proxy-file` | 可选 | 代理列表文件，每行 `ip:port`、`http://ip:port` 或 `ip:port:用户名:密码` |
 | `--proxy-api` | 可选 | 代理池 API，默认读 `.env` 的 `PROXY_POOL_URL` |
 | `--selftest` | 可选 | 只跑离线解析自检 |
 
@@ -230,9 +233,9 @@ python scripts/crawl_suning.py --selftest   # 离线解析自检，不发请求
 1. 品类与搜索词取自苏宁搜索页类目筛选项（2026-09-28 公开页核对），共 6 类：水杯（保温杯/塑料杯/玻璃杯/马克杯/水杯/户外水具）、双肩包（双肩背包/双肩包/书包/女士双肩包/登山包）、运动鞋（跑步鞋/运动鞋/篮球鞋/训练鞋/运动休闲鞋/羽毛球鞋/网球鞋）、女装（连衣裙/女士毛衣/女士针织衫/女士羽绒服/女装）、男装（男士衬衫/男士T恤/男士牛仔裤/男士夹克/男装）、运动服（运动套装/运动夹克/卫衣/运动T恤/休闲运动套装）；
 2. 每类写满 1000 条即停（`PER_CATEGORY`）；每个搜索词最多翻 20 页（`MAX_PAGES`）；总量硬上限 6000 条（`HARD_CAP`）；
 3. 标题过滤：必须命中本类 `ACCEPT` 词表（如水杯需含 杯/壶/水具），命中 `REJECT` 词表即丢弃（如杯垫/杯套/鞋垫/单肩包），标题对不上不入库；
-4. 去重三层：商品编号已收过跳过；同一标题（去空白后相同）只留第一条；同一张封面图（URL 中图文件名相同）只留第一条；
-5. 断点续传：重跑读取已有 `products.csv`，已成功商品和已见标题都跳过；
-6. 代理轮换：一个 IP 连续失败 3 次换下一个（`PAGE_RETRY`），连续 3 个 IP 都失败才停止（`FAIL_LIMIT`）；请求头在 6 份常见浏览器配置间轮换；请求超时 45 秒（`FETCH_TIMEOUT`）。
+4. 去重三层：商品编号已收过跳过；标题判重先剥掉末尾规格词（容量 ml/L、个/只/套/组、型号、颜色），再删掉标题里的容量/型号/颜色词后比较（`title_key`），同款不同色/容量只留第一条；同一张封面图（URL 中图文件名相同）只留第一条；
+5. 断点续传与启动清理：重跑读取已有 `products.csv`，先删掉 `image_status` 不是 `ok` 的行和同款重复行（只留每款第一条），**并删除这些行对应的本地图片文件**；已成功商品和已见标题都跳过；封面下载失败的记录不写入、回滚去重记录，重跑时再收；
+6. 并发与代理降级：启动时向代理池要 4 个 IP 各开 1 个线程（`WORKERS`），每批同时拉多页；搜索页先走分配的代理（12 秒超时），传不完或没商品卡就改直连（20 秒超时），该线程后续固定直连；封面图一律直连下载（代理下图常在约 32KB 断流，半截文件不算成功，超时 45 秒 `FETCH_TIMEOUT`）；代理接口要不到 IP 重试 3 次（`PAGE_RETRY`）；连续 3 批全部失败才停止（`FAIL_LIMIT`）；请求头在 6 份常见浏览器配置间轮换。
 
 ### 输出
 
@@ -242,7 +245,7 @@ python scripts/crawl_suning.py --selftest   # 离线解析自检，不发请求
 |---|---|
 | `products.csv` | `item_id`, `product_type`, `item_name`, `brand`, `color`, `material`, `main_image_id`, `domain_name`, `local_image_path`, `image_status`, `image_height`, `image_width`, `price`, `description`, `source_url`, `crawl_date` |
 | `image_quality_report.csv` | `dataset_id`, `source_product_id`, `image_path`, `decode_ok`, `actual_height`, `actual_width`, `declared_height`, `declared_width`, `format`, `file_size_bytes`, `sha256`, `quality_status`, `quality_reason` |
-| `images/` | `images/<商品编号>.<扩展名>`，下载失败的记录 `image_status` 标记并保留待重试 |
+| `images/` | `images/<商品编号>.<扩展名>`；封面下载失败的记录**不写入** `products.csv`（日志记「图片失败，本条不计入」），重跑时再收 |
 
 ## 5. 批量抠图：`cutout_images.py`
 
@@ -341,7 +344,7 @@ merged = merged[merged["status"] != "fail"]   # 丢掉没抠出来的
 ## 处理顺序
 
 ```text
-crawl_suning.py（苏宁采集，可选）→ translate_amazon_products_deepl.py → 字段统一/类别整理 → classify_products.py 或增量合并 → check_product_fields.py → cutout_images.py（抠图，可选）→ 中文图文检索数据构建（待开发）
+crawl_suning.py（苏宁采集，可选）→ translate_amazon_products_deepl.py → 字段统一/类别整理 → classify_products.py 或增量合并 → check_product_fields.py → attribute_cleaning/（属性识别清洗，可选）→ cutout_images.py（抠图，可选）→ 中文图文检索数据构建（待开发）
 ```
 
 不同数据集字段不同时，先完成该数据集的字段映射，再运行整理脚本。图片能正常读取不代表图片内容与商品描述匹配；当前脚本不做语义审核。
