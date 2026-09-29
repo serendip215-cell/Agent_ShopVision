@@ -26,3 +26,11 @@
     python scripts/gpt6luna_attribute_cleaning/run_gpt6luna_cleaning.py --workers 4 --min-confidence 0.72 --image-detail high --output-dir data/processed_data_gpt6luna
 
 重复运行时会读取 output 目录中的 model_audit.jsonl 并跳过已经有结果的记录；只重试接口失败记录时使用 --retry-failed，全部重新识别时使用 --force。脚本只会重建候选输出目录，不会覆盖正式数据目录。
+
+## 复制候选图片
+
+识别完成后可以执行：
+
+    py -3 scripts/gpt6luna_attribute_cleaning/copy_output_images.py
+
+该脚本会把接受记录的图片复制到各类别的 images 目录，把待复核和排除记录分别复制到 review_images 和 excluded_images，并生成带新相对路径的 products_with_images.csv、review_candidates_with_images.csv 和 excluded_samples_with_images.csv。原有 CSV 不会覆盖。
