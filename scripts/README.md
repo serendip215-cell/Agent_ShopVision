@@ -261,7 +261,7 @@ python scripts/cutout_images.py --selftest   # 离线自检解析逻辑，不处
    - 并发数（同时处理的图片张数）：提示推荐值（= `CPU 核数` 与 `可用内存÷2` 的较小值），**直接回车采用推荐值，或输入 1-128 的整数后回车**；
 3. **准备模型**（三级获取，能离线就不联网）：`scripts/models/isnet-general-use.onnx` 有文件 → 复制到 rembg 缓存使用；缓存已有 → 直接用；都没有 → 在线下载约 170MB（失败提示手动放置路径）；
 4. **逐目录并发抠图**：按选定并发数开多进程，每个推理进程限单线程；**每抠一张打印一行** `ok/skip/fail: 原因 + 文件名 + [n/总数]`，每 100 张打一行汇总（计数+耗时）；
-5. **输出汇总**：每类成功/跳过/失败统计 + 各输出目录。
+5. **输出汇总**：每个数据集生成 `cutout_map.csv` 对照表（见下节），打印成功/跳过/失败统计 + 各输出目录。
 
 ```text
 [16:07:20]         ok     01sUPg0387L.jpg [1/1]
@@ -273,6 +273,53 @@ python scripts/cutout_images.py --selftest   # 离线自检解析逻辑，不处
 ```text
 data/raw_data/<数据集>/images/          # 输入原图
 data/raw_data/<数据集>/images_cutout/   # 输出 <原名>.png 透明底
+data/raw_data/<数据集>/images_cutout/cutout_map.csv   # 输出对照表（一行一张图）
+```
+
+### 交互怎么用（完整示例）
+
+运行 `python scripts/cutout_images.py` 后有两次输入，每次都会写明输入格式，输错会重新问：
+
+```text
+[12:00:00] [2/5] 扫描到 3 个数据集:
+      1) Amazon_data                    1158 张
+      2) MUGE_data                      4704 张
+      3) Suning_data                    2571 张
+      输入编号选择要处理的数据集，如 1 或 1,3（all=全部；建议一次处理一个目录）
+      > 3                                 ← 第一问：输入编号回车（选 Suning_data）
+      输入 [3] -> 处理 1 个数据集
+      并发数（同时处理的图片张数），推荐 8。直接回车采用推荐值，或输入 1-128 的整数后回车：
+      > 4                                 ← 第二问：输入数字回车（4 并发），直接回车则用推荐值
+      并发数 = 4
+```
+
+- 第一问的输入格式：`1`（一个）/ `1,3` 或 `1 3`（多个）/ `all`（全部）；编号从 1 开始，超出范围或输字母会重新问；
+- 第二问的输入格式：直接回车（用推荐值）或 `1`-`128` 的整数；`abc`、`0`、`129` 都会重新问；
+- 不想交互：用环境变量 `CUTOUT_SELECT` / `CUTOUT_WORKERS` 跳过对应提问（见下表）。
+
+### 输出对照表 `cutout_map.csv`（不改元数据表）
+
+路径变了但**不动 `products.csv` 等元数据**——对照表单独放在输出目录里，一行对应一张图：
+
+| 列 | 含义 |
+|---|---|
+| `source_image_path` | 原图路径（仓库相对 POSIX 格式，与 `products.csv` 的 `local_image_path` **完全同格式**） |
+| `cutout_image_path` | 抠图路径（同格式；`fail` 时留空） |
+| `status` | `ok` 本轮抠出 / `skip` 已有结果未重抠 / `fail` 失败 |
+| `message` | 失败原因（成功留空） |
+
+续跑合并写入：同一张图只保留一行，新结果覆盖旧结果；唯一例外是已成功的 `ok` 不会被 `skip` 撤销。`CUTOUT_LIMIT` 试跑只更新前几张，跑全量后自动补全。
+
+和商品数据对上（`products.csv` 的 `local_image_path` 直接等于对照表的 `source_image_path`）：
+
+```python
+import pandas as pd
+
+prod = pd.read_csv("data/raw_data/Suning_data/products.csv")         # 元数据，保持不动
+cut = pd.read_csv("data/raw_data/Suning_data/images_cutout/cutout_map.csv")
+merged = prod.merge(cut, left_on="local_image_path", right_on="source_image_path")
+merged = merged[merged["status"] != "fail"]   # 丢掉没抠出来的
+# merged["cutout_image_path"] 即抠图路径
 ```
 
 断点续跑：输出已存在且非 0 字节则 `skip`；中断/失败后重跑接着抠；单张失败只记录原因不中断整批；先写 `.part` 临时文件再改名，不留半张图。
