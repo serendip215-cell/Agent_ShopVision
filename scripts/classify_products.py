@@ -52,6 +52,7 @@ FINAL_FIELDS = [
     "image_status",
     "image_height",
     "image_width",
+    "is_cleaned",
 ]
 
 QUALITY_FIELDS = [
@@ -76,6 +77,12 @@ CONTENT_FIELDS = ["product_type", "item_name", "description", "brand", "color", 
 
 def clean_text(value: object) -> str:
     return str(value or "").replace("\ufeff", "").strip()
+
+
+def normalize_cleaned_flag(value: object) -> str:
+    """返回统一的小写布尔文本；缺失或无法识别时默认为 false。"""
+
+    return "true" if clean_text(value).lower() in {"true", "1", "yes", "y"} else "false"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -263,6 +270,7 @@ def make_output_row(raw: dict[str, str], product_type: str, local_image_path: st
         "image_status": image_status,
         "image_height": height,
         "image_width": width,
+        "is_cleaned": normalize_cleaned_flag(raw.get("is_cleaned")),
     }
 
 
@@ -399,6 +407,8 @@ def prepare_dataset(
                 continue
             category = category_dir.name
             rows = read_csv(products_path)
+            for row in rows:
+                row["is_cleaned"] = normalize_cleaned_flag(row.get("is_cleaned"))
             category_rows[category].extend(rows)
             quality_path = category_dir / "image_quality_report.csv"
             if quality_path.is_file():

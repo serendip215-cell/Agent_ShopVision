@@ -24,7 +24,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Iterable
 
-TARGET_TYPES = ("包", "水杯", "鞋")
+TARGET_TYPES: tuple[str, ...] = ()
 UNKNOWN_VALUES = {"", "未知", "不确定", "无法判断", "无法识别", "不详", "none", "null", "n/a", "na"}
 COLOR_MAP = {
     "白": "白色", "白色": "白色", "黑": "黑色", "黑色": "黑色",
@@ -53,7 +53,7 @@ SYSTEM_PROMPT = """你是中文电商商品数据清洗员。你必须同时观�
 请只返回一个 JSON 对象，不要 Markdown、解释文字或代码围栏，字段必须是：
 {
   "is_product": true,
-  "product_type": "包|水杯|鞋|其他|无法判断",
+  "product_type": "目标类别列表|其他|无法判断",
   "type": "细分类名称，无法判断时为空字符串",
   "color": "主色或配色，无法确认时为空字符串",
   "material": "能从图片或标题可靠判断的主要材质，无法确认时为空字符串",
@@ -161,14 +161,11 @@ def normalise_product_type(value: Any) -> str:
         return ""
     if text in TARGET_TYPES:
         return text
-    if any(category and category in text for category in TARGET_TYPES):
-        return next(category for category in TARGET_TYPES if category and category in text)
-    if any(term in text for term in ("水杯", "保温杯", "马克杯", "杯子", "水壶", "咖啡杯")):
-        return "水杯" if "水杯" in TARGET_TYPES else ""
-    if any(term in text for term in ("运动鞋", "板鞋", "高跟鞋", "皮鞋", "凉鞋", "拖鞋", "靴", "鞋")):
-        return "鞋" if "鞋" in TARGET_TYPES else ""
-    if any(term in text for term in ("背包", "书包", "手提包", "斜挎包", "单肩包", "钱包", "包")):
-        return "包" if "包" in TARGET_TYPES else ""
+    for category in TARGET_TYPES:
+        compact_category = category.replace(" ", "")
+        category_stem = re.sub(r"(类别|品类|类)$", "", compact_category)
+        if category_stem and (category_stem in text or text in category_stem):
+            return category
     if text in {"其他", "非商品", "无法判断"}:
         return text
     return ""
@@ -296,11 +293,18 @@ def record_key(source_category: str, item_id: str) -> str:
     return hashlib.sha1(f"{source_category}\0{item_id}".encode("utf-8")).hexdigest()
 
 
+def input_csv_paths(input_dir: Path) -> list[tuple[str, Path]]:
+    """支持两种入口：类别目录本身，或包含多个类别子目录的数据集根目录。"""
+    direct_csv = input_dir / "products.csv"
+    if direct_csv.is_file():
+        return [(input_dir.name, direct_csv)]
+    return [(csv_path.parent.name, csv_path) for csv_path in sorted(input_dir.glob("*/products.csv"))]
+
+
 def load_rows(input_dir: Path) -> tuple[list[dict[str, str]], list[str]]:
     rows: list[dict[str, str]] = []
     fieldnames: list[str] = []
-    for csv_path in sorted(input_dir.glob("*/products.csv")):
-        category = csv_path.parent.name
+    for category, csv_path in input_csv_paths(input_dir):
         if category not in TARGET_TYPES:
             continue
         with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -518,9 +522,13 @@ def main() -> int:
         print("警告：未读取到 OPENAI_API_KEY；若中转站不接受匿名请求，接口调用会失败。", file=sys.stderr)
     global TARGET_TYPES, SYSTEM_PROMPT
     requested_categories = [item.strip() for item in args.categories.replace("，", ",").split(",") if item.strip()]
-    discovered_categories = [path.parent.name for path in sorted(args.input_dir.glob("*/products.csv"))]
+    discovered_categories = [category for category, _ in input_csv_paths(args.input_dir)]
     TARGET_TYPES = tuple(dict.fromkeys(requested_categories or discovered_categories or TARGET_TYPES))
-    SYSTEM_PROMPT = SYSTEM_PROMPT.replace("包|水杯|鞋", "|".join(TARGET_TYPES)).replace("包、水杯、鞋", "、".join(TARGET_TYPES))
+    if not TARGET_TYPES:
+        raise FileNotFoundError(
+            f"未发现可用类别：{args.input_dir} 下需要至少一个 <类别>/products.csv，或使用 --categories 指定类别"
+        )
+    SYSTEM_PROMPT = SYSTEM_PROMPT.replace("目标类别列表", "|".join(TARGET_TYPES))
     rows, fieldnames = load_rows(args.input_dir)
     unique_fields: list[str] = []
     for field in fieldnames:
