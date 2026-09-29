@@ -1,1 +1,4 @@
 .env
+
+# 已弃用的 Amazon 本地 Ollama 翻译脚本，仅保留在本机供历史参考。
+/scripts/translate_amazon_products.py

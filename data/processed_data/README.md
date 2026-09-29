@@ -5,6 +5,7 @@
 ```text
 processed_data/
 ├── dataset_summary.csv
+├── merge_index.jsonl（增量模式生成）
 ├── 包/
 ├── 水杯/
 └── 鞋/
@@ -49,7 +50,7 @@ data/processed_data/水杯/images/741.jpg
 
 图片有效率为 100%，具体统计查看 `dataset_summary.csv`。
 
-## 重新处理 MUGE 数据
+## 全量重新处理 MUGE 数据
 
 在项目根目录执行：
 
@@ -57,10 +58,29 @@ data/processed_data/水杯/images/741.jpg
 python scripts/classify_products.py \
   --input-file data/raw_data/MUGE_data/products.csv \
   --output-dir data/processed_data \
-  --category-map "双肩包=包,运动鞋=鞋"
+  --category-map "双肩包=包,运动鞋=鞋" \
+  --clean-output
 ```
 
-脚本读取 CSV 中已有的 `product_type`，复制对应图片，并将 `local_image_path` 写成相对于项目根目录的路径。输入文件地址可以通过 `--input-file` 更换；脚本本身不限定数据来源。
+已有输出目录时必须明确使用 `--clean-output` 全量重建，或使用 `--append` 增量追加；脚本不会默认覆盖已有结果。
+
+## 追加其他数据集
+
+先预览去重和新增数量：
+
+```bash
+python scripts/classify_products.py \
+  --input-file data/raw_data/Amazon_data_translated/products.csv \
+  --output-dir data/processed_data \
+  --append \
+  --dataset-id Amazon_data \
+  --dry-run
+```
+
+确认后去掉 `--dry-run` 执行。增量模式保留旧商品和图片，新商品追加到类别 CSV 末尾，图片按 SHA-256 复用或以哈希后缀保存，
+并在根目录维护 `merge_index.jsonl`。相同数据集重复运行不会重复追加。
+
+脚本读取 CSV 中已有的 `product_type`，复制或复用对应图片，并将 `local_image_path` 写成相对于项目根目录的路径。
 
 ## 字段和路径检查
 
