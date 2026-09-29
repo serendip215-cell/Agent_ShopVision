@@ -8,11 +8,7 @@
   [3/5] 准备模型：优先用 scripts/models/ 里放的模型（离线可用），
         没有则用本机缓存，再没有才在线下载（需联网）
   [4/5] 逐目录并发抠图，每抠一张打印一行
-  [5/5] 输出透明底 PNG 和 cutout_map.csv 对照表到各数据集的 images_cutout/，统计汇总
-
-对照表 cutout_map.csv（一行一张图，只描述对应关系，不改 products.csv 等元数据）：
-  source_image_path, cutout_image_path, status, message
-  路径为仓库相对 POSIX 风格，source_image_path 与 products.csv 的 local_image_path 同格式可直接对上。
+  [5/5] 输出透明底 PNG 到各数据集的 images_cutout/，统计汇总
 
 用法（项目根目录）：python scripts/cutout_images.py
 自检（不处理任何图片）：python scripts/cutout_images.py --selftest
@@ -22,7 +18,6 @@
   CUTOUT_LIMIT=3      只跑前 3 张（试跑建议 20 以内）
 断点续跑：输出已存在则跳过，中断/失败后直接重跑即可接着抠。
 """
-import csv
 import importlib
 import os
 import shutil
@@ -38,8 +33,6 @@ ROOT = Path(__file__).resolve().parent.parent
 SCAN_ROOT = ROOT / "data" / "raw_data"  # 扫描 */images/ 有图即数据集
 MODEL_DIR = ROOT / "scripts" / "models"  # 把 isnet-general-use.onnx 放这里即可离线使用
 IMG_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
-MAP_NAME = "cutout_map.csv"  # 输出对照表：原图 -> 抠图，一行一张
-MAP_FIELDS = ["source_image_path", "cutout_image_path", "status", "message"]
 
 # import 名 -> pip 包名，探测到缺哪个就装哪个
 REQUIRED = {
@@ -289,56 +282,6 @@ def _cut(src: Path, dst: Path) -> "tuple[str, str]":
         return "fail", str(e)
 
 
-def _repo_rel(path: Path) -> str:
-    """仓库相对 POSIX 路径，与 products.csv 的 local_image_path 同格式；越界时退回绝对路径。"""
-    try:
-        return path.resolve().relative_to(ROOT.resolve()).as_posix()
-    except ValueError:
-        return path.resolve().as_posix()
-
-
-def _map_row(src: Path, dst: Path, status: str, message: str) -> dict:
-    """对照表一行：源图、抠图（fail 留空）、状态、备注。"""
-    return {
-        "source_image_path": _repo_rel(src),
-        "cutout_image_path": "" if status == "fail" else _repo_rel(dst),
-        "status": status,
-        "message": message,
-    }
-
-
-def read_map(path: Path) -> list:
-    if not path.is_file():
-        return []
-    with path.open(encoding="utf-8-sig", newline="") as f:
-        return [dict(r) for r in csv.DictReader(f)]
-
-
-def write_map(path: Path, rows: list) -> None:
-    tmp = path.with_name(path.name + ".tmp")  # 原子写，中断不留半张表
-    with tmp.open("w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=MAP_FIELDS)
-        writer.writeheader()
-        writer.writerows(rows)
-    tmp.replace(path)
-
-
-def merge_map(existing: list, new_rows: list) -> list:
-    """按 source_image_path 合并（新覆盖旧），唯一例外：已有 ok 不被 skip 覆盖。"""
-    by_key = {r["source_image_path"]: i for i, r in enumerate(existing)}
-    for row in new_rows:
-        key = row["source_image_path"]
-        if key in by_key:
-            old = existing[by_key[key]]
-            if old.get("status") == "ok" and row["status"] == "skip":
-                continue  # skip 只说明这轮没重抠，不撤销已成功的结果
-            existing[by_key[key]] = row
-        else:
-            by_key[key] = len(existing)
-            existing.append(row)
-    return existing
-
-
 def selftest() -> None:
     """离线自检解析逻辑，不读写任何图片。"""
     assert _parse_select("1", 3) == [0]
@@ -362,19 +305,6 @@ def selftest() -> None:
     assert _parse_workers("2.5", 5) is None
     assert _parse_workers("abc", 5) is None
     assert 1 <= _auto_workers() <= (os.cpu_count() or 4)
-    # 对照表合并规则
-    ok_row = {"source_image_path": "a.jpg", "cutout_image_path": "a.png", "status": "ok", "message": ""}
-    skip_row = {"source_image_path": "a.jpg", "cutout_image_path": "a.png", "status": "skip", "message": ""}
-    fail_row = {"source_image_path": "a.jpg", "cutout_image_path": "", "status": "fail", "message": "x"}
-    assert merge_map([dict(ok_row)], [dict(skip_row)])[0]["status"] == "ok"  # ok 不被 skip 覆盖
-    assert merge_map([dict(ok_row)], [dict(fail_row)])[0]["status"] == "fail"  # fail 覆盖 ok
-    assert merge_map([dict(skip_row)], [dict(ok_row)])[0]["status"] == "ok"  # ok 覆盖 skip
-    merged = merge_map([], [dict(ok_row), dict(skip_row)])
-    assert len(merged) == 1  # 同 key 只留一行
-    merged = merge_map([dict(ok_row)], [{"source_image_path": "b.jpg", "cutout_image_path": "b.png",
-                                        "status": "ok", "message": ""}])
-    assert len(merged) == 2  # 新 key 追加
-    assert MAP_FIELDS == ["source_image_path", "cutout_image_path", "status", "message"]
     print("selftest ok")
 
 
@@ -424,7 +354,6 @@ def main() -> None:
                 dst_dir = sub[0][1].parent
                 _log(f"      {name}: {len(sub)} 张 -> {dst_dir}")
                 futures = {ex.submit(_cut, s, d): (s, d) for s, d in sub}
-                map_rows = []
                 for i, fut in enumerate(as_completed(futures), 1):
                     status, message = fut.result()
                     src, dst = futures[fut]
@@ -434,7 +363,6 @@ def main() -> None:
                         skip += 1
                     else:
                         fail += 1
-                    map_rows.append(_map_row(src, dst, status, message))
                     line = f"        {status:<6} {src.name} [{i}/{len(sub)}]"
                     if message:
                         line += f"  {message}"
@@ -445,9 +373,6 @@ def main() -> None:
                             f" (ok={ok} skip={skip} fail={fail})"
                             f" 已用 {time.monotonic() - t0:.0f}s"
                         )
-                map_path = dst_dir / MAP_NAME
-                write_map(map_path, merge_map(read_map(map_path), map_rows))
-                _log(f"      对照表已更新: {map_path}")
     except Exception as e:  # BrokenProcessPool 等，常见于内存不足
         die(
             f"多进程中断: {e}\n"

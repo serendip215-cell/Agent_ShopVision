@@ -343,7 +343,7 @@ def make_record(row: dict[str, str], *, root: Path, env: dict[str, str],
     base: dict[str, Any] = {
         "record_key": record_key(source_category, item_id),
         "item_id": item_id, "source_category": source_category, "status": "review",
-        "reason": "", "model": env_value(env, "MODEL", "gpt6luna"),
+        "reason": "", "model": env_value(env, "MODEL", "gpt6luna"), "is_read": "false",
         "product_type": "", "type": "", "color": "", "material": "", "confidence": 0.0,
     }
     if image_path is None:
@@ -504,7 +504,7 @@ def write_outputs(*, output_dir: Path, rows: list[dict[str, str]],
 - 待复核：{report["review_rows"]}
 - 排除：{report["excluded_rows"]}
 
-products.csv 保留原始字段，并增加 type 和 is_read 列；description 使用统一模板生成。is_read=true 表示脚本已经完成一次处理。
+products.csv 保留原始字段，并增加 type 和 is_read 列；description 使用统一模板生成。is_read=true 表示脚本已经完成一次处理，is_read=false 表示处理失败或尚未处理。
 运行 copy_output_images.py 后，图片位于各类别的 images 目录，CSV 中的路径仍为仓库根目录相对路径。
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")

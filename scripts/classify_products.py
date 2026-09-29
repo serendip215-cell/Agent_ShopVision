@@ -52,7 +52,7 @@ FINAL_FIELDS = [
     "image_status",
     "image_height",
     "image_width",
-    "is_cleaned",
+    "is_readed",
 ]
 
 QUALITY_FIELDS = [
@@ -79,7 +79,7 @@ def clean_text(value: object) -> str:
     return str(value or "").replace("\ufeff", "").strip()
 
 
-def normalize_cleaned_flag(value: object) -> str:
+def normalize_readed_flag(value: object) -> str:
     """返回统一的小写布尔文本；缺失或无法识别时默认为 false。"""
 
     return "true" if clean_text(value).lower() in {"true", "1", "yes", "y"} else "false"
@@ -181,6 +181,33 @@ def resolve_source_path(value: str, input_file: Path, repo_root: Path) -> Path:
     return (repo_root / source).resolve()
 
 
+def normalize_cutout_suffix(value: str) -> str:
+    """规范化抠图后缀，允许传入 png 或 .png。"""
+
+    suffix = clean_text(value).lstrip(".")
+    if not suffix or not re.fullmatch(r"[A-Za-z0-9]+", suffix):
+        raise ValueError("--cutout-suffix 必须是文件后缀，例如 png 或 jpg")
+    return suffix
+
+
+def resolve_image_path(
+    value: str,
+    input_file: Path,
+    repo_root: Path,
+    image_source: str,
+    cutout_dir_name: str,
+    cutout_suffix: str,
+) -> Path:
+    """按原图路径或同级抠图目录推导实际要读取的图片。"""
+
+    source_path = resolve_source_path(value, input_file, repo_root)
+    if image_source == "original":
+        return source_path
+    if image_source != "cutout":
+        raise ValueError("--image-source 只能是 original 或 cutout")
+    return source_path.parent.parent / cutout_dir_name / f"{source_path.stem}.{cutout_suffix}"
+
+
 def repo_relative(path: Path, repo_root: Path) -> str:
     try:
         return path.resolve().relative_to(repo_root.resolve()).as_posix()
@@ -270,7 +297,7 @@ def make_output_row(raw: dict[str, str], product_type: str, local_image_path: st
         "image_status": image_status,
         "image_height": height,
         "image_width": width,
-        "is_cleaned": normalize_cleaned_flag(raw.get("is_cleaned")),
+        "is_readed": normalize_readed_flag(raw.get("is_readed")),
     }
 
 
@@ -329,6 +356,9 @@ def prepare_dataset(
     dataset_id: str | None,
     dry_run: bool,
     backup_dir: Path | None,
+    image_source: str = "original",
+    cutout_dir_name: str = "images_cutout",
+    cutout_suffix: str = "png",
     category_map: dict[str, str] | None = None,
 ) -> None:
     if not input_file.is_file():
@@ -337,6 +367,12 @@ def prepare_dataset(
     raw_rows = read_csv(input_file)
     if not raw_rows:
         raise ValueError(f"输入 CSV 没有商品记录：{input_file}")
+    if image_source not in {"original", "cutout"}:
+        raise ValueError("--image-source 只能是 original 或 cutout")
+    cutout_dir_name = clean_text(cutout_dir_name)
+    if not cutout_dir_name or Path(cutout_dir_name).name != cutout_dir_name:
+        raise ValueError("--cutout-dir-name 必须是单层目录名")
+    cutout_suffix = normalize_cutout_suffix(cutout_suffix)
     actual_fields = set(raw_rows[0].keys())
     required = {"item_id", "product_type", "item_name", "local_image_path"}
     missing_fields = sorted(required - actual_fields)
@@ -408,7 +444,7 @@ def prepare_dataset(
             category = category_dir.name
             rows = read_csv(products_path)
             for row in rows:
-                row["is_cleaned"] = normalize_cleaned_flag(row.get("is_cleaned"))
+                row["is_readed"] = normalize_readed_flag(row.get("is_readed"))
             category_rows[category].extend(rows)
             quality_path = category_dir / "image_quality_report.csv"
             if quality_path.is_file():
@@ -467,7 +503,14 @@ def prepare_dataset(
             item_id = clean_text(raw.get("item_id"))
             current_source_key = source_key(dataset_id, item_id)
             source_value = clean_text(raw.get("local_image_path"))
-            source_path = resolve_source_path(source_value, input_file, repo_root)
+            source_path = resolve_image_path(
+                source_value,
+                input_file,
+                repo_root,
+                image_source,
+                cutout_dir_name,
+                cutout_suffix,
+            )
             image_digest = ""
             if source_path.is_file():
                 try:
@@ -588,6 +631,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--backup-dir", default=None, help="增量追加前备份旧输出的目录")
     parser.add_argument("--clean-output", action="store_true", help="删除整个输出目录后全量重建")
     parser.add_argument(
+        "--cutout",
+        action="store_true",
+        help="使用抠图图片；不指定时使用 local_image_path 原图",
+    )
+    parser.add_argument(
+        "--cutout-dir-name",
+        default="images_cutout",
+        help="抠图目录名（--cutout 时使用；默认 images_cutout）",
+    )
+    parser.add_argument(
+        "--cutout-suffix",
+        default="png",
+        help="抠图文件扩展名，不带点或带点均可（默认 png，例如 jpg）",
+    )
+    parser.add_argument(
         "--category-map",
         default="",
         help="类别归一化映射，例如：双肩包=包,运动鞋=鞋",
@@ -617,7 +675,10 @@ def main() -> None:
         args.dataset_id,
         args.dry_run,
         backup_dir.resolve() if backup_dir else None,
-        category_map,
+        image_source="cutout" if args.cutout else "original",
+        cutout_dir_name=args.cutout_dir_name,
+        cutout_suffix=args.cutout_suffix,
+        category_map=category_map,
     )
 
 

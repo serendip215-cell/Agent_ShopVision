@@ -1,4 +1,4 @@
-﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,is_cleaned
+﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,is_readed
 muge_916,鞋,女士真皮小板鞋,,,,,data/processed_data/鞋/images/916.jpg,ok,224,224,false
 muge_1104,鞋,欧货气质高跟鞋女,,,,,data/processed_data/鞋/images/1104.jpg,ok,224,224,false
 muge_1211,鞋,凉鞋细跟低跟女,,,,,data/processed_data/鞋/images/1211.jpg,ok,224,224,false
@@ -1363,7 +1363,7 @@ muge_661972,鞋,防滑登山鞋女,,,,,data/processed_data/鞋/images/661972.jpg
 muge_662096,鞋,diy手工创意 鞋盒,,,,,data/processed_data/鞋/images/662096.jpg,ok,224,224,false
 muge_662215,鞋,小孩魔术贴足球鞋大钉,,,,,data/processed_data/鞋/images/662215.jpg,ok,224,224,false
 muge_662289,鞋,夏季女士外穿增高拖鞋,,,,,data/processed_data/鞋/images/662289.jpg,ok,224,224,false
-muge_662907,鞋,棉鞋女冬 加绒居家可爱,,,,,data/processed_data/鞋/images/662907.jpg,ok,224,224,false
+muge_662907,鞋,棉鞋女冬 加绒居家可爱,,,,,data/processed_data/鞋/images/364130.jpg,ok,224,224,false
 muge_663342,鞋,宽楦软底水鑽粉色女鞋,,,,,data/processed_data/鞋/images/663342.jpg,ok,224,224,false
 muge_664345,鞋,中年女红色运动鞋小码,,,,,data/processed_data/鞋/images/664345.jpg,ok,224,224,false
 muge_666045,鞋,半包头女鞋软底,,,,,data/processed_data/鞋/images/666045.jpg,ok,224,224,false
@@ -2218,7 +2218,7 @@ muge_1088608,鞋,3520女士布鞋,,,,,data/processed_data/鞋/images/1088608.jpg
 muge_1089310,鞋,高跟鞋 纯色,,,,,data/processed_data/鞋/images/1089310.jpg,ok,224,224,false
 muge_1089864,鞋,毛球鞋 儿童,,,,,data/processed_data/鞋/images/1089864.jpg,ok,224,224,false
 muge_1090537,鞋,真皮高帮鞋女韩版百搭袜子鞋,,,,,data/processed_data/鞋/images/1090537.jpg,ok,224,224,false
-muge_1090655,鞋,香港明星同款内增高黑色老爹鞋,,,,,data/processed_data/鞋/images/1090655.jpg,ok,224,224,false
+muge_1090655,鞋,香港明星同款内增高黑色老爹鞋,,,,,data/processed_data/鞋/images/210895.jpg,ok,224,224,false
 muge_1090665,鞋,男鞋2020年新款潮夏季 休闲增高,,,,,data/processed_data/鞋/images/1090665.jpg,ok,224,224,false
 muge_1090763,鞋,ins超火百搭女情侣跑步运动厚底小白鞋,,,,,data/processed_data/鞋/images/1090763.jpg,ok,224,224,false
 muge_1090787,鞋,尧尧毽子鞋,,,,,data/processed_data/鞋/images/1090787.jpg,ok,224,224,false
@@ -2294,6 +2294,820 @@ muge_1125084,鞋,小码女鞋313233外穿拖鞋,,,,,data/processed_data/鞋/imag
 muge_1126720,鞋,厚底全黑运动鞋防滑女鞋,,,,,data/processed_data/鞋/images/1126720.jpg,ok,224,224,false
 muge_1131432,鞋,男布鞋夏季时尚,,,,,data/processed_data/鞋/images/1131432.jpg,ok,224,224,false
 muge_1138845,鞋,鞋架子 家用 多层 移动,,,,,data/processed_data/鞋/images/1138845.jpg,ok,224,224,false
+12450824169,鞋,耐克(NIKE)男鞋新款运动鞋舒适透气健身训练跑步鞋时尚户外休闲鞋HJ9198-303 ZP,轻盈缓震，持久舒适；专业设计，提升跑步表现；透气材质，保持脚部干爽；,,,,data/processed_data/鞋/images/12450824169.png,ok,400,400,false
+12450812667,鞋,耐克(NIKE)男鞋新款RUN DEFY运动鞋健身训练缓震舒适透气休闲跑步鞋HM9594-010 ZP,轻质缓震，持久舒适；透气设计，保持干爽；专为跑步设计，提升运动表现；,,,,data/processed_data/鞋/images/12450812667.png,ok,400,400,false
+12450565098,鞋,阿迪达斯(adidas)男鞋新款运动鞋厚底增高休闲鞋缓震跑步鞋IH7799 ZP,潮流百搭 厚底增高,,,,data/processed_data/鞋/images/12450565098.png,ok,400,400,false
+12450624957,鞋,阿迪达斯(adidas)运动鞋男鞋女鞋新款轻便低帮休闲防滑耐磨跑步鞋GW8336 ZP,轻盈缓震；持久舒适；透气设计；,,,,data/processed_data/鞋/images/12450624957.png,ok,400,400,false
+12453302775,鞋,361°男鞋运动鞋新款鞋子网面透气黑色跑步鞋轻便休闲跑鞋672332220,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12453302775.png,ok,400,400,false
+12453396509,鞋,飞鱼4.0丨361°男鞋运动鞋新款鞋子网面透气跑鞋轻质跑步鞋 361度白/冰河蓝 39码,轻盈缓震，每一步都如踏云端,,,,data/processed_data/鞋/images/12453396509.png,ok,400,400,false
+12451195988,鞋,彪马(PUMA)男鞋女鞋新款轻便跑步鞋缓震休闲低帮训练运动鞋311095-02 ZP,轻便透气，持久缓震；适合长时间跑步；提升运动表现；,,,,data/processed_data/鞋/images/12451195988.png,ok,400,400,false
+12452311287,鞋,361°有氧运动鞋夏季新款缓震耐磨慢跑鞋轻便网面透气跑步鞋男鞋,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452311287.png,ok,400,400,false
+12450822808,鞋,耐克(NIKE)男鞋新款air winflo 11运动鞋健身训练缓震透气休闲跑步鞋FJ9509-111 ZP,轻盈缓震；持久舒适；适合多种路面；,,,,data/processed_data/鞋/images/12450822808.png,ok,400,400,false
+12443639277,鞋,特步(XTEP)男鞋 2025春季新款五分速3.0极光运动跑鞋缓震轻便透气训练跑步鞋,缓震轻便透气训练跑步鞋,,,,data/processed_data/鞋/images/12443639277.png,ok,400,400,false
+12452310307,鞋,锋叶3.0 SE丨361°男鞋运动鞋新款舒适透气跑步鞋男672512244,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452310307.png,ok,400,400,false
+12452311523,鞋,361°男鞋运动鞋新款舒适简约跑步鞋男572522210,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452311523.png,ok,400,400,false
+12452298429,鞋,361°女鞋运动鞋新款网面透气跑鞋减震跑步鞋通勤鞋女,轻盈缓震，每一步都如踏云端,,,,data/processed_data/鞋/images/12452298429.png,ok,400,400,false
+12452311443,鞋,361°男鞋运动鞋新款网面透气跑鞋减震耐磨跑步鞋男款,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452311443.png,ok,400,400,false
+12452625434,鞋,361°女鞋运动鞋跳操鞋网面透气软底跑鞋轻便减震跑步鞋,轻盈透气，缓震回弹，持久耐磨,,,,data/processed_data/鞋/images/12452625434.png,ok,400,400,false
+12297339513,鞋,La Chessiers户外运动鞋男鞋2026旋转扣四季网面新款老爹鞋休闲减震跑步鞋子男士跑鞋男潮鞋,苏宁好品 休闲跑步鞋 运费险,,,,data/processed_data/鞋/images/12297339513.png,ok,400,400,false
+12423220180,鞋,男鞋运动鞋网面透气飞织潮男跑步鞋子,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12423220180.png,ok,400,400,false
+12451016127,鞋,361°跑步鞋男新款轻便回弹减震运动鞋专业透气跑鞋训练鞋 银白色/曜石黑 40码,轻质缓震，持久舒适；透气设计，保持脚部干爽；专为长跑设计，提升运动表现；,,,,data/processed_data/鞋/images/12451016127.png,ok,400,400,false
+12453205601,鞋,361°女鞋有氧运动鞋新款网面透气跑步鞋减震慢跑鞋女,轻盈缓震，每一步都如踩云端；透气网面，畅跑不闷热；耐磨大底，持久陪伴长距离挑战；,,,,data/processed_data/鞋/images/12453205601.png,ok,400,400,false
+12452310120,鞋,361°灵蜂 男鞋运动鞋新款网面透气跑步鞋减震回弹跑鞋男,轻盈缓震，每一步都如踏云端,,,,data/processed_data/鞋/images/12452310120.png,ok,400,400,false
+12450812606,鞋,耐克(NIKE)跑鞋男鞋新款时尚潮流户外休闲鞋缓震耐磨透气运动鞋跑步鞋FN8454-004 ZP,轻盈缓震，持久舒适；专为长跑设计，支撑力强；透气网面，保持双脚干爽；,,,,data/processed_data/鞋/images/12450812606.png,ok,400,400,false
+12434704323,鞋,Skechers斯凯奇女鞋新款休闲网面透气运动跑步鞋128270-NAT ZP,新款休闲网面透气运动跑步鞋,,,,data/processed_data/鞋/images/12434704323.png,ok,400,400,false
+12450617925,鞋,阿迪达斯(adidas)男鞋新款运动鞋复古潮流时尚老爹鞋舒适透气跑步鞋JS4487 ZP,轻盈缓震；持久舒适；适合长跑训练；,,,,data/processed_data/鞋/images/12450617925.png,ok,400,400,false
+12450822829,鞋,耐克(NIKE)男鞋新款运动鞋低帮轻便舒适RUN SWIFT 3健身训练跑步鞋DR2695-300 ZP,轻盈透气，持久缓震；适合长跑，舒适耐磨；专业设计，助力提速；,,,,data/processed_data/鞋/images/12450822829.png,ok,400,400,false
+12450826355,鞋,耐克(NIKE)女鞋新款Vomero Plus缓震耐磨运动鞋时尚休闲跑步鞋HV8154-801 ZP,轻盈缓震，持久舒适；透气设计，保持足部干爽；适合各种路面，稳定抓地；,,,,data/processed_data/鞋/images/12450826355.png,ok,400,400,false
+12440100805,鞋,361°女鞋运动鞋跳操鞋子网面透气软底跑鞋轻便减震跑步鞋,直降到底,,,,data/processed_data/鞋/images/12440100805.png,ok,400,400,false
+12422918957,鞋,赤焰3丨361°男鞋运动鞋新款网面透气跑鞋轻便减震专业跑步鞋,直降到底,,,,data/processed_data/鞋/images/12422918957.png,ok,400,400,false
+12452363183,鞋,浮光丨361°户外男运动鞋新款耐磨防滑徒步鞋复古老爹鞋减震跑步鞋男,轻盈缓震，每一步都如云般舒适,,,,data/processed_data/鞋/images/12452363183.png,ok,400,400,false
+12435317015,鞋,adidas阿迪达斯女鞋新款运动鞋轻便减震透气跑步鞋ID0352 ZP,轻便减震透气跑步鞋,,,,data/processed_data/鞋/images/12435317015.png,ok,400,400,false
+12434465632,鞋,安德玛UA女鞋新款缓震网面轻便透气运动休闲跑步鞋3027524-001 ZP,缓震网面轻便透气运动休闲跑步鞋,,,,data/processed_data/鞋/images/12434465632.png,ok,400,400,false
+12452590430,鞋,361°运动鞋女鞋新款常规跑步鞋582412219,轻盈缓震，每一步都如踏云端；透气网面，畅跑不闷热；耐磨大底，持久陪伴长距离挑战；,,,,data/processed_data/鞋/images/12452590430.png,ok,400,400,false
+12448393275,鞋,耐克(NIKE)男鞋新款AIR WINFLO 11低帮减震运动跑步鞋FQ8937-004 ZP,低帮透气减震耐磨轻便,,,,data/processed_data/鞋/images/12448393275.png,ok,400,400,false
+12435316020,鞋,Adidas阿迪达斯男鞋新款网面透气休闲缓震跑步鞋IE8794 ZP,网面透气休闲缓震跑步鞋,,,,data/processed_data/鞋/images/12435316020.png,ok,400,400,false
+12434993912,鞋,Adidas/阿迪达斯男鞋新款轻便透气低帮运动休闲跑步鞋IF6724 ZP,轻便透气低帮运动休闲跑步鞋,,,,data/processed_data/鞋/images/12434993912.png,ok,400,400,false
+12434977471,鞋,adidas阿迪达斯男鞋休闲运动清风鞋缓震轻便透气训练跑步鞋IH2289 ZP,缓震轻便透气训练跑步鞋,,,,data/processed_data/鞋/images/12434977471.png,ok,400,400,false
+12435579684,鞋,Skechers斯凯奇男鞋新款缓震透气网布轻便健步鞋训练鞋跑步鞋232005-BBK ZP,缓震透气网布轻便跑步鞋,,,,data/processed_data/鞋/images/12435579684.png,ok,400,400,false
+12448386638,鞋,耐克(NIKE)男鞋新款运动鞋VOMERO 18缓震耐磨轻便透气公路跑步鞋 HM6803-009 ZP,缓震耐磨轻便透气,,,,data/processed_data/鞋/images/12448386638.png,ok,400,400,false
+12448534812,鞋,耐克(NIKE)女鞋训练鞋新款FLEX运动鞋轻便缓震舒适休闲低帮跑步鞋DV0746-105 ZP,轻便缓震舒适休闲低帮,,,,data/processed_data/鞋/images/12448534812.png,ok,400,400,false
+12448386117,鞋,耐克(NIKE)男鞋新款VOMERO PLUS跑鞋缓震轻便运动鞋透气低帮跑步鞋HV8150-100 ZP,缓震轻便透气低帮,,,,data/processed_data/鞋/images/12448386117.png,ok,400,400,false
+12447868410,鞋,361°女鞋运动鞋新款网面透气轻便跑步鞋软底健走鞋女,直降到底,,,,data/processed_data/鞋/images/12447868410.png,ok,400,400,false
+12450625168,鞋,阿迪达斯(adidas)男鞋女鞋新款CLIMAWARM运动鞋健身训练缓震休闲跑步鞋JQ4089 ZP,轻质缓震，持久舒适；透气设计，保持干爽；适合多种地面，灵活抓地；,,,,data/processed_data/鞋/images/12450625168.png,ok,400,400,false
+12435316085,鞋,Adidas阿迪达斯男鞋新款轻便透气运动鞋跑步鞋IF9782 ZP,轻便透气运动鞋跑步鞋,,,,data/processed_data/鞋/images/12435316085.png,ok,400,400,false
+12450565113,鞋,阿迪达斯(adidas)男鞋女鞋新款运动鞋复古时尚机甲鞋老爹鞋休闲跑步鞋KK1002 ZP,轻质缓震；持久舒适；透气设计；,,,,data/processed_data/鞋/images/12450565113.png,ok,400,400,false
+12434988785,鞋,Adidas/阿迪达斯男子新款低帮轻便运动休闲跑步鞋IF6728 ZP,低帮轻便运动休闲跑步鞋,,,,data/processed_data/鞋/images/12434988785.png,ok,400,400,false
+12448577892,鞋,耐克(NIKE)跑步鞋女鞋新款户外健身时尚低帮缓震轻便舒适耐磨运动鞋FD6476-107 ZP,时尚低帮缓震轻便舒适耐磨,,,,data/processed_data/鞋/images/12448577892.png,ok,400,400,false
+12451321051,鞋,彪马(PUMA)男鞋女鞋新款网面鞋运动鞋轻便跑步鞋软底缓震休闲鞋379601-17 ZP,轻盈缓震，持久舒适；专为长跑设计，动力更强；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12451321051.png,ok,400,400,false
+12451320885,鞋,彪马(PUMA)男女鞋新款运动鞋健身训练缓震耐磨轻便透气时尚跑步鞋311972-01 ZP,轻盈缓震，持久舒适；专为长跑设计，助力每一步；透气网面，保持足部干爽；,,,,data/processed_data/鞋/images/12451320885.png,ok,400,400,false
+12435551320,鞋,Skechers斯凯奇男鞋新款款减震耐磨轻便网面透气运动休闲跑步鞋118220-BBK ZP,减震耐磨轻便网面透气跑步鞋,,,,data/processed_data/鞋/images/12435551320.png,ok,400,400,false
+12450617985,鞋,阿迪达斯(adidas)男鞋新款运动鞋竞速跑鞋缓震轻便透气户外低帮跑步鞋JR1251 ZP,轻盈缓震；持久舒适；透气设计；,,,,data/processed_data/鞋/images/12450617985.png,ok,400,400,false
+12452747857,鞋,爆沫4 SE丨361°跑步鞋新款专业缓震跑鞋网面轻便耐磨运动鞋男 羽毛白/曜石黑 39码,轻盈透气，缓震回弹，助力每一步畅跑,,,,data/processed_data/鞋/images/12452747857.png,ok,400,400,false
+12355534678,鞋,新百伦New Balance 327系列男款经典轻质舒适耐磨防滑回弹缓震低帮运动休闲鞋跑步鞋系带,海外直邮 正品保证,,,,data/processed_data/鞋/images/12355534678.png,ok,400,400,false
+12336316855,鞋,耐克nike男式运动鞋男 缓震科技 轻便耐磨 舒适透气 时尚休闲 简约百搭马拉松训练男士跑步鞋 DA7245-002,保证正品，支持鉴定，海外发货，到货时间4-5周左右！,,,,data/processed_data/鞋/images/12336316855.png,ok,400,400,false
+12357487614,鞋,新百伦New Balance女士运动鞋574系列低帮休闲 舒适耐磨 户外慢跑女士跑步鞋WL574V2-19648,海外直邮 正品保证,,,,data/processed_data/鞋/images/12357487614.png,ok,400,400,false
+12355535678,鞋,新百伦New Balance 574系列男款时尚潮流百搭耐磨缓震低帮运动休闲鞋跑步鞋,海外直邮 正品保证,,,,data/processed_data/鞋/images/12355535678.png,ok,400,400,false
+12357487785,鞋,新百伦New Balance女士运动鞋FuelCell系列低帮休闲舒适耐磨 户外慢跑女士跑步鞋WFCPZV2-35411,海外直邮 正品保证,,,,data/processed_data/鞋/images/12357487785.png,ok,400,400,false
+12363633402,鞋,ASICS亚瑟士 METARIDE 女款 经典舒适百搭透气耐磨防滑简约低帮运动休闲鞋跑步鞋 1012B070.400,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12363633402.png,ok,400,400,false
+12363635709,鞋,ASICS亚瑟士 GEL-KAYANO 26 RETRO TOKYO 系列 女鞋 时尚百搭透气缓震跑步鞋1012A654 White/Classic_Red 5;Standard,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12363635709.png,ok,400,400,false
+12363643917,鞋,ASICS亚瑟士 DYNABLAST系列 女鞋 时尚百搭透气缓震耐磨跑步鞋休闲鞋 1012A701.400,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12363643917.png,ok,400,400,false
+12363644153,鞋,ASICS亚瑟士 METARUN系列 女鞋 时尚百搭透气缓震耐磨跑步鞋休闲鞋 T798N Concrete_Grey/Shu_Red/Hazy_Whi 5;Standard,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12363644153.png,ok,400,400,false
+12363644144,鞋,ASICS亚瑟士 GT-2000 10 2A系列 女鞋 时尚百搭透气缓震耐磨跑步鞋休闲鞋休闲运动跑步鞋,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12363644144.png,ok,400,400,false
+12449272558,鞋,特步跑步鞋976419110051C,缓震耐磨时尚,,,,data/processed_data/鞋/images/12449272558.png,ok,400,400,false
+12449215247,鞋,特步 男款跑步鞋 976219110050-84/双,舒适,,,,data/processed_data/鞋/images/12449215247.png,ok,400,400,false
+12449277082,鞋,特步跑步鞋976419110009C,减震舒适时尚,,,,data/processed_data/鞋/images/12449277082.png,ok,400,400,false
+12449276166,鞋,特步跑步鞋976419110050C,减震回弹舒适,,,,data/processed_data/鞋/images/12449276166.png,ok,400,400,false
+12449308252,鞋,特步跑步鞋875219110004C,减震回弹透气,,,,data/processed_data/鞋/images/12449308252.png,ok,400,400,false
+12449796180,鞋,特步跑步鞋975318110085,耐磨减震防滑,,,,data/processed_data/鞋/images/12449796180.png,ok,400,400,false
+12450120487,鞋,特步 男款跑步鞋,舒适缓震，持久耐磨；多种颜色可选，时尚百搭；轻便设计，提升行走体验；,,,,data/processed_data/鞋/images/12450120487.png,ok,400,400,false
+12450117391,鞋,特步 轻便跑步鞋,舒适缓震，持久耐磨；多种颜色可选，时尚百搭；轻便设计，提升行走体验；,,,,data/processed_data/鞋/images/12450117391.png,ok,400,400,false
+12450260092,鞋,特步 女款跑步鞋,舒适缓震，持久耐磨；多种颜色可选，时尚百搭；轻便设计，提升行走体验；,,,,data/processed_data/鞋/images/12450260092.png,ok,400,400,false
+12450617409,鞋,阿迪达斯(adidas)男鞋新款Adizero Evo马拉松缓震轻便竞速耐磨运动跑步鞋KK2683 ZP,轻质缓震，持久舒适；透气设计，保持干爽；适合多种路面，稳定支撑。,,,,data/processed_data/鞋/images/12450617409.png,ok,400,400,false
+12450619020,鞋,阿迪达斯(adidas)男鞋新款跑步鞋ADIZERO BOSTON 13 M舒适休闲防滑耐磨运动鞋KK1427 ZP,轻盈缓震 ；持久舒适 ；透气设计 ；,,,,data/processed_data/鞋/images/12450619020.png,ok,400,400,false
+12450620764,鞋,阿迪达斯(adidas)男鞋女鞋新款运动鞋ADIZERO BOSTON 12缓震耐磨跑步鞋JS1919 ZP,缓震耐磨 缓震回弹透气,,,,data/processed_data/鞋/images/12450620764.png,ok,400,400,false
+12450621359,鞋,阿迪达斯(adidas)男鞋女鞋新款运动鞋健身训练缓震耐磨轻便透气跑步鞋IH0429 ZP,轻便透气，持久缓震；适合多种地形跑步；提升运动表现，舒适包裹脚感；,,,,data/processed_data/鞋/images/12450621359.png,ok,400,400,false
+12450621701,鞋,阿迪达斯(adidas)男鞋新款运动鞋轻质耐磨缓震清风透气休闲跑步鞋JQ4897 ZP,轻便透气，持久缓震；适合长距离跑步；提升运动表现；,,,,data/processed_data/鞋/images/12450621701.png,ok,400,400,false
+12450622482,鞋,阿迪达斯(adidas)运动鞋男鞋新款运动鞋网面透气轻便缓震休闲跑步鞋JR5851 ZP,网面透气 轻便缓震,,,,data/processed_data/鞋/images/12450622482.png,ok,400,400,false
+12450626270,鞋,阿迪达斯(adidas)男鞋新款清风鞋缓震运动鞋网面透气CLIMACOOL休闲跑步鞋JQ4947 ZP,轻盈缓震；持久舒适；透气设计；,,,,data/processed_data/鞋/images/12450626270.png,ok,400,400,false
+12450639708,鞋,阿迪达斯(adidas)女鞋新款TREADMOVE缓震运动鞋轻便透气跑步鞋JQ6404 ZP,轻便透气设计；持久缓震支撑；适合日常跑步训练；,,,,data/processed_data/鞋/images/12450639708.png,ok,400,400,false
+12450816942,鞋,耐克(NIKE)男鞋新款QUEST 6公路专业缓震运动支撑透气轻便休闲跑步鞋FD6033-001 ZP,轻盈缓震，持久舒适；专为长跑设计；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12450816942.png,ok,400,400,false
+12450822740,鞋,耐克(NIKE)男鞋新款运动鞋低帮轻便舒适健身训练缓震VOMERO 18跑步鞋IM6676-104 ZP,轻盈缓震，持久舒适；透气设计，保持干爽；适合多种路面，稳定支撑；,,,,data/processed_data/鞋/images/12450822740.png,ok,400,400,false
+12450826319,鞋,耐克(NIKE)女鞋新款运动鞋AIR ZOOM PEGASUS 41缓震耐磨透气跑步鞋IO9914-100 ZP,轻量缓震，持久舒适；适合多种路面，抓地力强；透气设计，保持足部干爽；,,,,data/processed_data/鞋/images/12450826319.png,ok,400,400,false
+12450826447,鞋,耐克(NIKE)女鞋低帮网面透气休闲鞋缓震轻便耐磨运动鞋健身跑步鞋FJ7765-116 ZP,轻便透气，持久缓震 ；适合长跑，舒适贴合 ；耐磨耐用，多种地面适应性强,,,,data/processed_data/鞋/images/12450826447.png,ok,400,400,false
+12450826392,鞋,耐克(NIKE)女鞋新款运动鞋Downshifter 14轻便透气缓震轻质跑步鞋IB1899-002 ZP,轻质缓震，持久舒适；专为跑步设计，提升运动表现；透气材质，保持足部干爽。,,,,data/processed_data/鞋/images/12450826392.png,ok,400,400,false
+12450826485,鞋,耐克(NIKE)女鞋新款户外运动鞋时尚休闲鞋防滑网面透气厚底跑步鞋FD6476-110 ZP,缓震科技，持久舒适；轻质材料，提升速度；透气设计，保持干爽；,,,,data/processed_data/鞋/images/12450826485.png,ok,400,400,false
+12450826551,鞋,耐克(NIKE)女鞋新款春季运动鞋RUN SWIFT 3健身训练缓震耐磨透气跑步鞋DR2698-110 ZP,轻盈缓震，持久舒适；专为跑步设计，提升运动表现；耐磨耐用，适合多种路面。,,,,data/processed_data/鞋/images/12450826551.png,ok,400,400,false
+12450826514,鞋,耐克(NIKE)女鞋新款运动鞋AIR WINFLO 11健身训练缓震耐磨跑步鞋IM6685-159 ZP,轻质缓震，持久舒适；灵活透气，步伐轻盈；专业设计，助力跑步表现；,,,,data/processed_data/鞋/images/12450826514.png,ok,400,400,false
+12451027430,鞋,斯凯奇 男舒适透气跑步鞋 8790360/NVY-8.5双,轻盈缓震；持久舒适；适合多种路面；,,,,data/processed_data/鞋/images/12451027430.png,ok,400,400,false
+12451074973,鞋,斯凯奇 男轻便跑步鞋8790357/BLK-8.5双,舒适,,,,data/processed_data/鞋/images/12451074973.png,ok,400,400,false
+12451077898,鞋,斯凯奇 女款缓震跑步鞋 129370/BKLP-10双,轻盈缓震，持久舒适；专为跑步设计，提升运动表现；适合各种路面，稳固抓地。,,,,data/processed_data/鞋/images/12451077898.png,ok,400,400,false
+12451076648,鞋,斯凯奇 男轻便透气跑步鞋 8790359/NVY-8.5双,轻盈缓震，持久舒适；专为跑步设计，提升运动表现；适合各种路面，稳固抓地。,,,,data/processed_data/鞋/images/12451076648.png,ok,400,400,false
+12451196861,鞋,彪马(PUMA)男鞋女鞋新款运动鞋耐磨轻便舒适透气慢跑鞋情侣跑步鞋312005-01 ZP,轻便透气，持久缓震；专业设计，提升跑感；适合多种路面，稳定抓地；,,,,data/processed_data/鞋/images/12451196861.png,ok,400,400,false
+12430252719,鞋,探路者 男式休闲徒步鞋 TFEEAM81311/双,探路者 男式休闲徒步鞋 TFEEAM81311/双,,,,data/processed_data/鞋/images/12430252719.png,ok,400,400,false
+12445619977,鞋,特步跑鞋976319110026A,轻便透气弹力,,,,data/processed_data/鞋/images/12445619977.png,ok,400,400,false
+12448307279,鞋,特步男款跑鞋 976219119012-2帆白/猫眼灰,透气轻便减震,,,,data/processed_data/鞋/images/12448307279.png,ok,400,400,false
+12448875034,鞋,特步风火27男款跑鞋977419110055,防滑减震耐磨,,,,data/processed_data/鞋/images/12448875034.png,ok,400,400,false
+12438736413,鞋,跑鞋 977319119008-6 (男) 黑,百搭、回弹、轻质,,,,data/processed_data/鞋/images/12438736413.png,ok,400,400,false
+12448881206,鞋,特步360X SE男款跑鞋976319110050,缓震防滑耐磨,,,,data/processed_data/鞋/images/12448881206.png,ok,400,400,false
+12438748192,鞋,跑鞋 976219119012(男) 帆白/猫眼灰,百搭、回弹、轻质,,,,data/processed_data/鞋/images/12438748192.png,ok,400,400,false
+12450155854,鞋,特步运动棉鞋876419370045,透气轻便防水,,,,data/processed_data/鞋/images/12450155854.png,ok,400,400,false
+12432506491,鞋,澎湃 361°男鞋运动鞋新款网面复古老爹鞋百搭休闲鞋男,直降到底,,,,data/processed_data/鞋/images/12432506491.png,ok,400,400,false
+12434818824,鞋,Skechers斯凯奇女子新款百搭轻便休闲透气运动跑鞋15641-MVE ZP,百搭轻便休闲透气运动跑鞋,,,,data/processed_data/鞋/images/12434818824.png,ok,400,400,false
+12303600556,鞋,运动鞋男飞织透气软底休闲鞋子男秋冬潮流跑步男鞋,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12303600556.png,ok,400,400,false
+12354061001,鞋,361°男鞋运动鞋2022新款季革面潮流休闲鞋老爹鞋男生,直降到底,,,,data/processed_data/鞋/images/12354061001.png,ok,400,400,false
+12450823954,鞋,耐克(NIKE)鞋子男鞋新款飞马41户外网面透气跑鞋ZOOM气垫缓震运动鞋FD2722-016 ZP,轻盈缓震，持久舒适；专为跑步设计，提升运动表现；透气材质，保持脚部干爽。,,,,data/processed_data/鞋/images/12450823954.png,ok,400,400,false
+12434493950,鞋,特步小巴斯克丨休闲鞋女鞋新款轻便运动鞋网面透气复古跑鞋876318320004 ZP,轻便运动鞋网面透气复古跑鞋,,,,data/processed_data/鞋/images/12434493950.png,ok,400,400,false
+12452313140,鞋,361°女户外运动鞋减震耐磨越野鞋防滑登山鞋轻便透气徒步鞋女,轻盈透气，久跑不累,,,,data/processed_data/鞋/images/12452313140.png,ok,400,400,false
+12429328056,鞋,探路者(TOREAD) 女式徒步运动鞋 TFAAAM82282-G01X/双,探路者(TOREAD) 女式徒步运动鞋 TFAAAM82282-G01X/双,,,,data/processed_data/鞋/images/12429328056.png,ok,400,400,false
+12452310335,鞋,云步 SE丨361°男鞋运动鞋新款轻便透气舒适跑鞋男672422210,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452310335.png,ok,400,400,false
+12429328244,鞋,探路者(TOREAD) 女式健走运动鞋 TFOOAM82590-G16J/双,探路者(TOREAD) 女式健走运动鞋 TFOOAM82590-G16J/双,,,,data/processed_data/鞋/images/12429328244.png,ok,400,400,false
+12429328463,鞋,探路者(TOREAD) 男式徒步运动鞋 TFAAAM81231-K513/双,探路者(TOREAD) 男式徒步运动鞋 TFAAAM81231-K513/双,,,,data/processed_data/鞋/images/12429328463.png,ok,400,400,false
+12429658159,鞋,探路者 户外防水徒步鞋 TFAAAM81251/双,探路者 户外防水徒步鞋 TFAAAM81251/双,,,,data/processed_data/鞋/images/12429658159.png,ok,400,400,false
+12429657041,鞋,探路者 男式运动徒步鞋 TFAAAM81212-G01X/双,探路者 男式运动徒步鞋 TFAAAM81212-G01X/双,,,,data/processed_data/鞋/images/12429657041.png,ok,400,400,false
+12429658157,鞋,探路者 户外运动徒步鞋 TFAAAM82232/双,探路者 户外运动徒步鞋 TFAAAM82232/双,,,,data/processed_data/鞋/images/12429658157.png,ok,400,400,false
+12429328605,鞋,探路者 男式徒步运动鞋 TFAAAM81213/双,探路者 男式徒步运动鞋 TFAAAM81213/双,,,,data/processed_data/鞋/images/12429328605.png,ok,400,400,false
+12430253115,鞋,探路者 女式休闲徒步鞋 TFEEAM82311/双,探路者 女式休闲徒步鞋 TFEEAM82311/双,,,,data/processed_data/鞋/images/12430253115.png,ok,400,400,false
+12430482632,鞋,探路者 女式休闲鞋 TFRRAM82582/双,探路者 女式休闲鞋 TFRRAM82582/双,,,,data/processed_data/鞋/images/12430482632.png,ok,400,400,false
+12448826331,鞋,健卡侬运动鞋 JA114,轻便 舒适 透气,,,,data/processed_data/鞋/images/12448826331.png,ok,400,400,false
+12448842002,鞋,特步风火27跑鞋977419110052,防滑耐磨减震,,,,data/processed_data/鞋/images/12448842002.png,ok,400,400,false
+12448801368,鞋,特步 女款休闲鞋 876318320004-76/双,舒适,,,,data/processed_data/鞋/images/12448801368.png,ok,400,400,false
+12448785184,鞋,特步男款运动鞋978119110115-73/双,舒适,,,,data/processed_data/鞋/images/12448785184.png,ok,400,400,false
+12448881581,鞋,特步360X SE女款跑鞋976318110061,缓震耐磨防滑,,,,data/processed_data/鞋/images/12448881581.png,ok,400,400,false
+12448884889,鞋,特步风火28代女款跑鞋976418110004,透气耐磨减震,,,,data/processed_data/鞋/images/12448884889.png,ok,400,400,false
+12448885261,鞋,特步青云 FLOW男款跑鞋975219110012,减震耐磨透气,,,,data/processed_data/鞋/images/12448885261.png,ok,400,400,false
+12448885061,鞋,特步风火28代男款跑鞋976419110055,透气耐磨减震,,,,data/processed_data/鞋/images/12448885061.png,ok,400,400,false
+12448886120,鞋,特步青云 FLOW女款跑鞋975218110013,耐磨减震防滑,,,,data/processed_data/鞋/images/12448886120.png,ok,400,400,false
+12449125651,鞋,斯凯奇女款跑步运动鞋150620/MVE-5双,健身防滑耐磨,,,,data/processed_data/鞋/images/12449125651.png,ok,400,400,false
+12449126253,鞋,斯凯奇男款休闲休闲鞋237622/OLBK-9双,健身防滑耐磨,,,,data/processed_data/鞋/images/12449126253.png,ok,400,400,false
+12449135412,鞋,斯凯奇女款跑步运动鞋128280/NTLP-5双,健身防滑耐磨,,,,data/processed_data/鞋/images/12449135412.png,ok,400,400,false
+12449126195,鞋,斯凯奇男款跑步运动鞋220884/GYNV-10双,健身防滑耐磨,,,,data/processed_data/鞋/images/12449126195.png,ok,400,400,false
+12449215027,鞋,特步 篮球鞋 876119120019-80/双,舒适,,,,data/processed_data/鞋/images/12449215027.png,ok,400,400,false
+12449215344,鞋,特步 男款休闲鞋 877219320004-85/双,舒适,,,,data/processed_data/鞋/images/12449215344.png,ok,400,400,false
+12449215365,鞋,特步 男款运动鞋 976219110048-86/双,舒适,,,,data/processed_data/鞋/images/12449215365.png,ok,400,400,false
+12449215360,鞋,特步 男款运动鞋 975219110045-87/双,舒适,,,,data/processed_data/鞋/images/12449215360.png,ok,400,400,false
+12449215472,鞋,特步 男款运动鞋 877419110070-88/双,舒适,,,,data/processed_data/鞋/images/12449215472.png,ok,400,400,false
+12449215474,鞋,特步 男款 鞋 976119110063-89/双,舒适,,,,data/processed_data/鞋/images/12449215474.png,ok,400,400,false
+12449215477,鞋,特步 男款 鞋 875219110024-90/双,舒适,,,,data/processed_data/鞋/images/12449215477.png,ok,400,400,false
+12449224285,鞋,特步 男款 鞋 876119110045-92/双,舒适,,,,data/processed_data/鞋/images/12449224285.png,ok,400,400,false
+12449215622,鞋,特步 男款 篮球鞋 876119120019-91/双,舒适,,,,data/processed_data/鞋/images/12449215622.png,ok,400,400,false
+12449224299,鞋,特步 男款 运动鞋 876119110027-93/双,舒适,,,,data/processed_data/鞋/images/12449224299.png,ok,400,400,false
+12449224421,鞋,特步 男款 运动鞋 876319110110-96/双,舒适,,,,data/processed_data/鞋/images/12449224421.png,ok,400,400,false
+12449224423,鞋,特步 男款 板鞋 877419310023-97/双,舒适,,,,data/processed_data/鞋/images/12449224423.png,ok,400,400,false
+12449224428,鞋,特步 男款 休闲鞋 875319110002-98/双,舒适,,,,data/processed_data/鞋/images/12449224428.png,ok,400,400,false
+12449224429,鞋,特步 男款 运动鞋 976419110051-94/双,舒适,,,,data/processed_data/鞋/images/12449224429.png,ok,400,400,false
+12451258495,鞋,健卡侬轻盈缓震男跑鞋透气耐磨持久回弹科技跑鞋舒适设计,轻盈缓震；持久耐磨；透气舒适；,,,,data/processed_data/鞋/images/12451258495.png,ok,400,400,false
+12451336125,鞋,特步跑鞋 977319119008A,轻便透气运动,,,,data/processed_data/鞋/images/12451336125.png,ok,400,400,false
+12451497115,鞋,特步跑鞋975319119015,轻便防滑透气,,,,data/processed_data/鞋/images/12451497115.png,ok,400,400,false
+12451681787,鞋,特步跑鞋977318119008-2,轻便弹力透气,,,,data/processed_data/鞋/images/12451681787.png,ok,400,400,false
+12452105871,鞋,特步跑鞋 977319119008C,透气轻便舒适,,,,data/processed_data/鞋/images/12452105871.png,ok,400,400,false
+12452233634,鞋,特步跑鞋975318119016,耐磨减震防滑,,,,data/processed_data/鞋/images/12452233634.png,ok,400,400,false
+12452313287,鞋,锋熠3.0丨361°女鞋运动鞋新款女常规跑鞋,轻盈缓震，每一步都如踩云端；透气网面，畅跑不闷热；耐磨大底，持久应对各种路面；,,,,data/processed_data/鞋/images/12452313287.png,ok,400,400,false
+12284253448,鞋,La Chessiers阿甘鞋男2025年春秋新款透气百搭潮流运动休闲鞋子潮鞋网面板鞋 绿色 42码,苏宁好品 经典阿甘鞋 运费险,,,,data/processed_data/鞋/images/12284253448.png,ok,400,400,false
+12286545146,鞋,La Chessiers阿甘鞋男2026新款韩版潮流男鞋百搭运动休闲板鞋革面潮鞋 黄色 41码,苏宁好品 休闲阿甘鞋 运费险,,,,data/processed_data/鞋/images/12286545146.png,ok,400,400,false
+12277326231,鞋,La Chessiers情侣阿甘鞋男2026新款春秋季透气休闲运动跑步鞋复古百搭老爹鞋潮男休闲鞋 白灰 41码,苏宁好品 潮流阿甘鞋 运费险,,,,data/processed_data/鞋/images/12277326231.png,ok,400,400,false
+12284086572,鞋,La Chessiers2025春夏新款百搭透气轻便运动休闲鞋鞋软底大码学生鞋网面大码透气跑步鞋男 白灰 41码,苏宁好品 大码运动鞋 大码48,,,,data/processed_data/鞋/images/12284086572.png,ok,400,400,false
+12443399261,鞋,男士休闲皮鞋2025年春季新款时尚潮流男式运动单鞋真皮透气跑步鞋,,,,,data/processed_data/鞋/images/12443399261.png,ok,400,400,false
+12437979562,鞋,La Chessiers男鞋运动鞋2026新款春秋季透气皮面阿甘鞋子男百搭厚底休闲老爹潮鞋,苏宁好品 老爹潮鞋 运费险,,,,data/processed_data/鞋/images/12437979562.png,ok,400,400,false
+12451041834,鞋,20265夏季新款百搭男鞋网面透气轻质软底跑步鞋学男士休闲运动潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451041834.png,ok,400,400,false
+12382042583,鞋,La Chessiers春秋季2025新款男鞋网面透气情侣款爆米花运动休闲鞋防滑耐磨韩版跑步鞋 奔驰白 41码,苏宁好品 透气休闲鞋 运费险,,,,data/processed_data/鞋/images/12382042583.png,ok,400,400,false
+12443401037,鞋,男士休闲皮鞋2025年春季新款时尚潮流男式运动单鞋真皮透气跑步鞋_1,,,,,data/processed_data/鞋/images/12443399261.png,ok,400,400,false
+12428338167,鞋,男鞋2024年新款小白鞋户外跑步鞋潮流休闲运动单鞋旅行阿甘鞋,圆头 车缝线 系带,,,,data/processed_data/鞋/images/12428338167.png,ok,400,400,false
+12434575908,鞋,男士休闲皮鞋2023年秋季新款时尚潮流男式运动单鞋真皮透气跑步鞋_4584,牛皮 圆头 透气,,,,data/processed_data/鞋/images/12434575908.png,ok,400,400,false
+12428338198,鞋,新款阿甘鞋男士休闲皮鞋潮流男鞋耐磨运动单鞋网红同款板鞋,圆头 车缝线 透气,,,,data/processed_data/鞋/images/12428338198.png,ok,400,400,false
+12434576339,鞋,2024年新款阿甘鞋男士休闲皮鞋潮流男鞋耐磨运动单鞋网红同款板鞋_24,圆头 车缝线 透气,,,,data/processed_data/鞋/images/12428338198.png,ok,400,400,false
+12441014679,鞋,牛皮溶解厚底鞋子男运动跑步鞋男款老爹鞋休闲板鞋款,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12441014679.png,ok,400,400,false
+12443399920,鞋,运动鞋男2025夏季新款飞织网面男鞋透气男士休闲网鞋跑步鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443399920.png,ok,400,400,false
+12443399526,鞋,男鞋2025新款英伦百搭真皮户外登山鞋青年旅游鞋男士休闲时尚皮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443399526.png,ok,400,400,false
+12443404812,鞋,鞋子男透气夏季男鞋运动鞋男士休闲鞋真皮小白鞋男生鞋百搭阿甘鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443404812.png,ok,400,400,false
+12443405751,鞋,头层牛皮男鞋2025春季新款透气运动跑步鞋增高休闲百搭潮流老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443405751.png,ok,400,400,false
+12443406808,鞋,高端德训鞋男款真皮透气板鞋欧美休闲复古牛筋阿甘鞋男士小白鞋潮,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443406808.png,ok,400,400,false
+12443406631,鞋,欧洲站2025新款老爹鞋男真皮休闲厚底阿甘鞋男士复古运动轻便潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443406631.png,ok,400,400,false
+12448485557,鞋,阿甘鞋子男真皮百搭透气轻底休闲跑步鞋男士高品质运动小白鞋男款,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12448485557.png,ok,400,400,false
+12448520573,鞋,ins超火潮牌老爹鞋男新款厚底跑步鞋运动休闲鞋网面透气百搭男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12448520573.png,ok,400,400,false
+12448520928,鞋,潮流男鞋新款阿甘鞋透气网面运动休闲鞋百搭韩版潮鞋小白鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12448520928.png,ok,400,400,false
+12448521066,鞋,男鞋ins潮流百搭透气板鞋运动休闲鞋软底皮鞋真皮小白鞋阿甘鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12448521066.png,ok,400,400,false
+12448521096,鞋,男鞋新款真皮阿甘鞋板鞋百搭透气皮鞋ins潮流运动休闲鞋德比鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12448521096.png,ok,400,400,false
+12450153359,鞋,潮流时尚新款四季男鞋运动鞋男网布飞织跑步鞋软厚底老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12450153359.png,ok,400,400,false
+12450471709,鞋,Nike耐克男鞋春INITIATOR黑银运动鞋复古老爹鞋跑步鞋IB4595-001 39,轻便透气，舒适贴脚；耐磨防滑，行走稳健；简约设计，百搭时尚；,,,,data/processed_data/鞋/images/12450471709.png,ok,400,400,false
+12451037947,鞋,2026新款春季时尚休闲鞋运动风透气舒适皮革休闲鞋轻便男士阿甘鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451037947.png,ok,400,400,false
+12451037919,鞋,2026新款春季时尚休闲鞋潮鞋透气舒适皮革休闲鞋防滑男士阿甘鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451037919.png,ok,400,400,false
+12452982959,鞋,男鞋秋季男士休闲鞋2026新款皮面跑步鞋防滑运动鞋男防水防滑潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452982959.png,ok,400,400,false
+12452983190,鞋,莆田男鞋秋冬季2026新款高帮鞋男士运动休闲跑步鞋子男款老爹潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452983190.png,ok,400,400,false
+12452983273,鞋,运动男鞋2026新款夏季青少年旋转纽扣软底减震超轻休闲学生跑步鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452983273.png,ok,400,400,false
+12452983534,鞋,鞋子男冬季新款皮面防水运动鞋潮流百搭休闲老爹鞋软底防滑跑步鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452983534.png,ok,400,400,false
+12452983412,鞋,运动鞋男鞋2026春季新款皮面防水超轻减震软底男士休闲跑步鞋潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452983412.png,ok,400,400,false
+12452983311,鞋,运动鞋男2026春季新款男鞋厚底防滑休闲百搭学生潮鞋子跑步鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452983311.png,ok,400,400,false
+12453029343,鞋,头层牛皮男鞋2026秋季新款复古运动休闲鞋轻便软底跑步鞋男款透气,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453029343.png,ok,400,400,false
+12453380673,鞋,男鞋2026秋季新款真皮透气耐磨高档休闲厚底百搭板鞋时尚阿甘鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453380673.png,ok,400,400,false
+12453381068,鞋,阿甘鞋男2026新款软面耐磨高档休闲皮鞋百搭板鞋时尚运动单鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453381068.png,ok,400,400,false
+12453381023,鞋,运动鞋男潮新款时尚百搭休闲鞋男士学生跑步鞋户外徒步登山鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453381023.png,ok,400,400,false
+12453381001,鞋,运动鞋男款2026新款网面透气跑步鞋潮流百搭休闲鞋子男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453381001.png,ok,400,400,false
+12452309357,鞋,361°男鞋运动鞋新款男常规跑鞋672512246F,轻盈缓震，每一步都如踏云端,,,,data/processed_data/鞋/images/12452309357.png,ok,400,400,false
+12415533255,鞋,361°女鞋休闲鞋运动鞋新款网面透气老爹鞋女百搭鞋子,直降到底,,,,data/processed_data/鞋/images/12415533255.png,ok,400,400,false
+12453302364,鞋,361°男鞋运动鞋新款男常规跑鞋672542211F 羽毛白/云峰灰 39码,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12453302364.png,ok,400,400,false
+12452426084,鞋,驭山3.0丨361°男鞋运动鞋新款户外徒步鞋减震耐磨越野跑鞋登山鞋,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452426084.png,ok,400,400,false
+12365683973,鞋,耐克NIKE男士运动鞋Zoom Rival M 9系列运动健身 避震缓冲 户外慢跑男士跑步鞋AH1020-700,海外直邮 正品保证,,,,data/processed_data/鞋/images/12365683973.png,ok,400,400,false
+12386262706,鞋,[限量]耐克Nike男士运动鞋Air Max 270系列简约百搭 轻质舒适 避震缓冲男士跑步鞋AQ9164-102,保证正品，支持鉴定，海外发货，到货时间4-6周左右！,,,,data/processed_data/鞋/images/12386262706.png,ok,400,400,false
+12386262989,鞋,[限量]耐克Nike男士运动鞋Flyknit Lunar 3系列简约百搭 轻质舒适避震缓冲男士跑步鞋726447-004,保证正品，支持鉴定，海外发货，到货时间4-6周左右！,,,,data/processed_data/鞋/images/12386262989.png,ok,400,400,false
+12434430611,鞋,XTEP特步男鞋 新款户外运动鞋缓震舒适透气时尚训练鞋跑步鞋876119110027 ZP,户外运动鞋缓震舒适透气时尚训练鞋跑步鞋,,,,data/processed_data/鞋/images/12434430611.png,ok,400,400,false
+12434430762,鞋,XTEP特步男鞋 致轻8.0 Pro24新款运动鞋低帮减震旋lite透气缓震跑步鞋876119110045 ZP,致轻8.0 Pro24新款运动鞋低帮减震旋lite透气缓震跑步鞋,,,,data/processed_data/鞋/images/12434430762.png,ok,400,400,false
+12434501201,鞋,XTEP特步男鞋新款运动鞋透气休闲跑步鞋976119110037 ZP,透气休闲跑步鞋,,,,data/processed_data/鞋/images/12434501201.png,ok,400,400,false
+12434463929,鞋,安德玛UA女鞋新款健身运动鞋透气网面鞋轻便缓震跑步鞋3026683-302 ZP,透气网面鞋轻便缓震跑步鞋,,,,data/processed_data/鞋/images/12434463929.png,ok,400,400,false
+12434684623,鞋,Skechers斯凯奇熊猫鞋女鞋新款厚底运动鞋轻便减震透气跑步鞋117365-NAT ZP,厚底运动鞋轻便减震透气跑步鞋,,,,data/processed_data/鞋/images/12434684623.png,ok,400,400,false
+12434705493,鞋,Skechers斯凯奇女鞋新款动感印花复古缓震运动跑鞋128280-BBK ZP,新款动感印花复古缓震运动跑鞋,,,,data/processed_data/鞋/images/12434705493.png,ok,400,400,false
+12434924238,鞋,Adidas阿迪达斯男鞋新款运动鞋透气休闲鞋轻便缓震跑步鞋ID0350 ZP,透气休闲鞋轻便缓震跑步鞋,,,,data/processed_data/鞋/images/12434924238.png,ok,400,400,false
+12435005300,鞋,adidas阿迪达斯男鞋新款运动鞋舒适训练跑鞋休闲鞋IF1789 ZP,舒适训练跑鞋休闲鞋,,,,data/processed_data/鞋/images/12435005300.png,ok,400,400,false
+12435546028,鞋,Skechers斯凯奇男鞋休闲鞋新款网面运动鞋透气跑鞋118000-LTGY ZP,新款网面运动鞋透气跑鞋,,,,data/processed_data/鞋/images/12435546028.png,ok,400,400,false
+12435564076,鞋,Skechers斯凯奇男鞋新款耐磨轻质运动跑鞋220036-BKBL ZP,新款耐磨轻质运动跑鞋,,,,data/processed_data/鞋/images/12435564076.png,ok,400,400,false
+12449224456,鞋,特步 女款 运动鞋876218110044-95/双,舒适,,,,data/processed_data/鞋/images/12449224456.png,ok,400,400,false
+12449279049,鞋,特步防寒运动鞋875419370017,保暖防滑耐磨,,,,data/processed_data/鞋/images/12449279049.png,ok,400,400,false
+12449306363,鞋,健卡侬运动鞋JA118/双,透气 缓震 舒适,,,,data/processed_data/鞋/images/12449306363.png,ok,400,400,false
+12449308250,鞋,特步跑鞋976219110026,减震透气耐磨,,,,data/processed_data/鞋/images/12449308250.png,ok,400,400,false
+12449359419,鞋,特步跑鞋875319110005,耐磨防滑减震,,,,data/processed_data/鞋/images/12449359419.png,ok,400,400,false
+12449445802,鞋,特步跑鞋975219110045,减震防滑透气,,,,data/processed_data/鞋/images/12449445802.png,ok,400,400,false
+12449448630,鞋,特步跑鞋975318110048,减震防滑耐磨,,,,data/processed_data/鞋/images/12449448630.png,ok,400,400,false
+12449451702,鞋,特步跑鞋975419110039,耐磨防滑防泼水,,,,data/processed_data/鞋/images/12449451702.png,ok,400,400,false
+12449459691,鞋,特步跑鞋975318110004,轻便耐磨透气,,,,data/processed_data/鞋/images/12449459691.png,ok,400,400,false
+12449460419,鞋,特步跑鞋975419110032,轻便减震防滑,,,,data/processed_data/鞋/images/12449460419.png,ok,400,400,false
+12449461178,鞋,特步跑鞋975319110084,轻便减震耐磨,,,,data/processed_data/鞋/images/12449461178.png,ok,400,400,false
+12449463844,鞋,特步跑鞋975319110002,减震轻便防滑,,,,data/processed_data/鞋/images/12449463844.png,ok,400,400,false
+12449464676,鞋,特步跑鞋976419110034,轻便防泼水防滑,,,,data/processed_data/鞋/images/12449464676.png,ok,400,400,false
+12449465506,鞋,特步跑鞋975318110020,轻便防滑透气,,,,data/processed_data/鞋/images/12449465506.png,ok,400,400,false
+12449466495,鞋,特步跑鞋975319110081,透气耐磨减震,,,,data/processed_data/鞋/images/12449466495.png,ok,400,400,false
+12449466071,鞋,特步跑鞋976319110004,轻便防滑减震,,,,data/processed_data/鞋/images/12449466071.png,ok,400,400,false
+12449469555,鞋,特步跑鞋976319110002,轻便防滑减震,,,,data/processed_data/鞋/images/12449469555.png,ok,400,400,false
+12449470609,鞋,特步跑鞋975119110020,耐磨防滑减震,,,,data/processed_data/鞋/images/12449470609.png,ok,400,400,false
+12449519902,鞋,特步跑鞋975218110046,透气轻便减震,,,,data/processed_data/鞋/images/12449519902.png,ok,400,400,false
+12449473415,鞋,特步跑鞋975219110003,防滑耐磨减震,,,,data/processed_data/鞋/images/12449473415.png,ok,400,400,false
+12449527962,鞋,特步跑鞋875318110008,耐磨轻便减震,,,,data/processed_data/鞋/images/12449527962.png,ok,400,400,false
+12449534203,鞋,特步跑鞋975219110005,透气减震防滑,,,,data/processed_data/鞋/images/12449534203.png,ok,400,400,false
+12449540694,鞋,特步跑鞋975418110024,防滑减震耐磨,,,,data/processed_data/鞋/images/12449540694.png,ok,400,400,false
+12449536909,鞋,特步跑鞋975318110061,轻便透气减震,,,,data/processed_data/鞋/images/12449536909.png,ok,400,400,false
+12449568744,鞋,特步跑鞋875318110013,轻便透气减震,,,,data/processed_data/鞋/images/12449568744.png,ok,400,400,false
+12451788302,鞋,安德玛(Under Armour)男鞋新款训练运动鞋休闲鞋透气轻便跑步鞋3024870-103 ZP,轻盈缓震，持久舒适；专业设计，提升运动表现；透气材质，保持脚部干爽；,,,,data/processed_data/鞋/images/12451788302.png,ok,400,400,false
+12451793027,鞋,安德玛(Under Armour)男鞋跑步鞋新款运动鞋子低帮耐磨休闲鞋户外健身训练鞋6009107-001 ZP,轻盈缓震；持久舒适；透气设计；,,,,data/processed_data/鞋/images/12451793027.png,ok,400,400,false
+12451791201,鞋,安德玛(Under Armour)男鞋女鞋新款运动鞋健身训练缓震耐磨轻便透气跑步鞋3028615-001 ZP,轻盈缓震，持久舒适；透气设计，保持干爽脚感；适合多种路面，稳定支撑。,,,,data/processed_data/鞋/images/12451791201.png,ok,400,400,false
+12451792671,鞋,安德玛(Under Armour)男鞋新款透气缓震回弹耐磨轻便跑步鞋运动鞋跑鞋6006717-003 ZP,轻盈缓震，持久舒适；专业设计，提升运动表现；透气材质，保持干爽脚感；,,,,data/processed_data/鞋/images/12451792671.png,ok,400,400,false
+12451793760,鞋,安德玛(Under Armour)男鞋新款运动鞋锻炼跑步鞋轻便户外透气网面休闲鞋3027177-002 ZP,轻质缓震，持久舒适；透气设计，保持干爽脚感；适合各种路面，稳定支撑。,,,,data/processed_data/鞋/images/12451793760.png,ok,400,400,false
+12451803629,鞋,安德玛(Under Armour)跑步鞋女鞋新款缓震回弹训练鞋健身训练鞋运动鞋3026124-002 ZP,轻盈缓震，持久舒适；专为长跑设计，支撑力强；透气材质，保持双脚干爽；,,,,data/processed_data/鞋/images/12451803629.png,ok,400,400,false
+12451804612,鞋,安德玛(Under Armour)女鞋跑步鞋 Project Rock强森6网面透气运动鞋3026535-002 ZP,轻盈缓震，持久舒适；专业设计，提升运动表现；透气材质，保持脚部干爽；,,,,data/processed_data/鞋/images/12451804612.png,ok,400,400,false
+12451804185,鞋,安德玛(Under Armour)UA女鞋新款运动鞋轻便透气时尚缓震耐磨跑步鞋3026507-001 ZP,轻盈缓震；持久舒适；专为跑步设计；,,,,data/processed_data/鞋/images/12451804185.png,ok,400,400,false
+12451805027,鞋,安德玛(Under Armour)女鞋新款运动鞋户外舒适透气轻便跑步鞋3027200-104 ZP,轻盈缓震，持久舒适；透气设计，保持干爽；专为跑步设计，提升运动表现；,,,,data/processed_data/鞋/images/12451805027.png,ok,400,400,false
+12451807607,鞋,安德玛(Under Armour)女鞋新款运动鞋透气休闲鞋健身训练鞋软底轻便跑步鞋3026820-100 ZP,轻盈缓震，持久舒适；专业设计，提升运动表现；透气材质，保持干爽脚感；,,,,data/processed_data/鞋/images/12451807607.png,ok,400,400,false
+12451807697,鞋,安德玛(Under Armour)女鞋新款轻便透气运动鞋时尚简约舒适缓震跑步鞋3027180-100 ZP,轻盈缓震；持久舒适；透气设计；,,,,data/processed_data/鞋/images/12451807697.png,ok,400,400,false
+12452296551,鞋,刀锋1.0丨361°女款运动鞋新款舒适透气跑步鞋682112204F,轻盈透气，缓震回弹强,,,,data/processed_data/鞋/images/12452296551.png,ok,400,400,false
+12452311397,鞋,361°有氧运动鞋新款缓震耐磨跑鞋网面透气跑步鞋男鞋,轻盈缓震，每一步都如踏云端,,,,data/processed_data/鞋/images/12452311397.png,ok,400,400,false
+12452298410,鞋,361°女鞋运动鞋新款网面透气跳绳鞋轻质跑鞋软底休闲跑步鞋女,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452298410.png,ok,400,400,false
+12452309542,鞋,361°男鞋运动鞋网面鞋子透气跑鞋减震休闲跑步鞋男生,轻盈缓震，每一步都如云般舒适,,,,data/processed_data/鞋/images/12452309542.png,ok,400,400,false
+12452312513,鞋,361°灵珑 女鞋运动鞋新款轻便休闲跑鞋软底网面透气跑步鞋,轻盈透气，缓震回弹，助力长跑不累脚,,,,data/processed_data/鞋/images/12452312513.png,ok,400,400,false
+12452314240,鞋,速湃Lite SE丨361°跑步鞋女鞋新款网面透气运动鞋轻便减震跑鞋女,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452314240.png,ok,400,400,false
+12452313429,鞋,飞鸢丨361°女鞋运动鞋新款网面透气轻便跑鞋减震跑步鞋软底跳操鞋女,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452313429.png,ok,400,400,false
+12452317278,鞋,锋刃 SE丨361°女鞋运动鞋新款女常规跑鞋682422217F,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452317278.png,ok,400,400,false
+12452313099,鞋,灵狐2.0丨361°女鞋跑步鞋新款网面透气运动鞋软底减震跑鞋女,轻盈缓震，每一步都如踩云端,,,,data/processed_data/鞋/images/12452313099.png,ok,400,400,false
+12452296502,鞋,361°女鞋运动鞋新款女复古文化鞋682226770,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452296502.png,ok,400,400,false
+12452397836,鞋,青丘3.0丨361°男运动鞋新款男休闲鞋572416707,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452397836.png,ok,400,400,false
+12452931035,鞋,361°男鞋运动鞋新款男复古文化鞋572426765 羽毛白/曜石黑 39码,轻盈缓震，久走不累,,,,data/processed_data/鞋/images/12452931035.png,ok,400,400,false
+12453198176,鞋,361°女鞋运动鞋新款复古文化鞋582416772,轻盈透气，久穿不累；防滑耐磨，户外安心；简约百搭，日常通勤更出彩；,,,,data/processed_data/鞋/images/12453198176.png,ok,400,400,false
+12442783032,鞋,361°女鞋运动鞋新款女复古文化鞋582426765,直降到底,,,,data/processed_data/鞋/images/12442783032.png,ok,400,400,false
+12452900133,鞋,361°运动鞋男新款休闲板鞋572426603 曜石黑/西米色 39码,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452900133.png,ok,400,400,false
+12445366005,鞋,三叶草(Adidas) Gazelle Indoor 运动鞋 复古休闲鞋 男鞋 女鞋 德训鞋 ZP,运动鞋 复古休闲鞋,,,,data/processed_data/鞋/images/12445366005.png,ok,400,400,false
+12450612010,鞋,阿迪达斯(adidas)男鞋新款运动鞋简约百搭低帮轻便耐磨休闲鞋IH0856 ZP,轻便舒适 ；耐磨防滑 ；时尚百搭 ；,,,,data/processed_data/鞋/images/12450612010.png,ok,400,400,false
+12452929995,鞋,361°男运动鞋新款鞋子休闲鞋小白鞋低帮百搭板鞋男款,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12452929995.png,ok,400,400,false
+12451165264,鞋,彪马(PUMA)男鞋女鞋新款运动鞋复古潮流时尚低帮休闲鞋板鞋407867-03 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12451165264.png,ok,400,400,false
+12449335413,鞋,361°加绒运动鞋秋冬季女鞋大棉鞋厚底防滑休闲鞋女士保暖老爹鞋子,直降到底,,,,data/processed_data/鞋/images/12449335413.png,ok,400,400,false
+12453202675,鞋,361°女鞋运动鞋新款厚底百搭平板鞋小白鞋女板鞋582436608,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12453202675.png,ok,400,400,false
+12451145402,鞋,彪马(PUMA)男鞋女鞋新款运动鞋低帮舒适潮流复古情侣板鞋402612-01 ZP,轻便舒适，时尚百搭；耐磨橡胶底，持久耐穿；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12451145402.png,ok,400,400,false
+12451363102,鞋,361°男鞋运动鞋新款网面透气轻便软底休闲老爹鞋跑步鞋子,轻便舒适，时尚百搭；耐磨橡胶底，持久耐穿；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12451363102.png,ok,400,400,false
+12451376523,鞋,酥饼丨361°女鞋运动鞋新款鞋子休闲鞋厚底防滑板鞋女,轻便舒适，时尚百搭，耐磨耐穿；,,,,data/processed_data/鞋/images/12451376523.png,ok,400,400,false
+12451376483,鞋,锦程4.0丨361°女鞋透气运动鞋新款休闲鞋网面鞋子板鞋女,舒适透气；轻便耐磨；时尚百搭；,,,,data/processed_data/鞋/images/12451376483.png,ok,400,400,false
+12453195109,鞋,361°高帮男鞋运动鞋休闲鞋革面百搭鞋子白色板鞋男,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453195109.png,ok,400,400,false
+12449314560,鞋,361°运动鞋女网面透气软底轻便跳绳跑步老爹休闲鞋子女鞋,直降到底,,,,data/processed_data/鞋/images/12449314560.png,ok,400,400,false
+12452899832,鞋,361°女鞋运动鞋新款女复古文化鞋582416778,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452899832.png,ok,400,400,false
+12426788885,鞋,秋季男鞋防水皮面鞋男士防滑工作鞋休闲运动鞋气垫百搭潮鞋子,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12426788885.png,ok,400,400,false
+12450625899,鞋,阿迪达斯(adidas)男鞋女鞋新款运动鞋时尚透气T头鞋健身训练鞋板鞋休闲鞋HQ3518 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12450625899.png,ok,400,400,false
+12450560615,鞋,阿迪达斯(adidas)三叶草板鞋男鞋女鞋新款SAMBA低帮缓震运动鞋休闲鞋IH4881 ZP,轻便舒适；时尚百搭；耐磨防滑；,,,,data/processed_data/鞋/images/12450560615.png,ok,400,400,false
+12452307268,鞋,水星鞋丨361°运动鞋男经典复古老爹鞋网面跑步鞋子男鞋休闲鞋,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12452307268.png,ok,400,400,false
+12448525008,鞋,耐克(Nike)女鞋新款简版空军一号滑板鞋透气防滑轻便休闲运动鞋DH3158-602 ZP,透气防滑轻便休闲运动鞋,,,,data/processed_data/鞋/images/12448525008.png,ok,400,400,false
+12453205185,鞋,饺子鞋丨361°运动鞋女新款网面厚底增高老爹鞋休闲鞋子女鞋 羽毛白/南极灰 35码,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12453205185.png,ok,400,400,false
+12452296392,鞋,361°女鞋运动鞋新款女常规跑鞋682512220F,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452296392.png,ok,400,400,false
+12451350032,鞋,琉光3丨361°运动鞋女新款网面透气老爹鞋轻便厚底增高休闲鞋子,舒适透气；时尚百搭；轻便耐磨；,,,,data/processed_data/鞋/images/12451350032.png,ok,400,400,false
+12453203380,鞋,361°女鞋运动鞋新款女复古文化鞋582426763 羽毛白/光子灰 35码,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453203380.png,ok,400,400,false
+12445479419,鞋,361°运动鞋女新款常规休闲鞋682416709FV,直降到底,,,,data/processed_data/鞋/images/12445479419.png,ok,400,400,false
+12453203564,鞋,361°女运动鞋新款女休闲鞋582436714,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453203564.png,ok,400,400,false
+12436082837,鞋,彪马(PUMA)男鞋女鞋新款运动鞋轻便耐磨低帮板鞋时尚透气情侣休闲鞋394666-01 ZP,轻便耐磨低帮板鞋,,,,data/processed_data/鞋/images/12436082837.png,ok,400,400,false
+12436048211,鞋,彪马(PUMA)男鞋女鞋新款时尚透气运动鞋健身训练低帮板鞋休闲鞋 390987-03 ZP,时尚透气运动鞋健身训练低帮板鞋,,,,data/processed_data/鞋/images/12436048211.png,ok,400,400,false
+12436087399,鞋,彪马(PUMA)男鞋女鞋新款拼接撞色面包鞋耐磨运动鞋缓震舒适休闲鞋 395084-01 ZP,耐磨运动鞋缓震舒适休闲鞋,,,,data/processed_data/鞋/images/12436087399.png,ok,400,400,false
+12436085468,鞋,彪马(PUMA)男鞋女鞋新款运动鞋耐磨透气板鞋舒适厚底面包鞋休闲鞋395022-02 ZP,耐磨透气板鞋舒适厚底面包鞋,,,,data/processed_data/鞋/images/12436085468.png,ok,400,400,false
+12436110735,鞋,彪马(PUMA)休闲鞋男女新款时尚撞色拼接运动鞋轻便户外休闲鞋 384857-01 ZP,时尚撞色拼接运动鞋,,,,data/processed_data/鞋/images/12436110735.png,ok,400,400,false
+12436120271,鞋,彪马(PUMA)运动鞋男女鞋新款网面运动鞋耐磨轻便低帮休闲鞋 395235-01 ZP,网面运动鞋耐磨轻便低帮休闲鞋,,,,data/processed_data/鞋/images/12436120271.png,ok,400,400,false
+12436120953,鞋,PUMA彪马男鞋女鞋厚底老爹鞋新款低帮运动鞋复古休闲鞋 395295-01 ZP,低帮运动鞋复古休闲鞋,,,,data/processed_data/鞋/images/12436120953.png,ok,400,400,false
+12436107393,鞋,彪马(PUMA)男鞋女鞋新款运动鞋时尚简约轻便舒适透气低帮休闲鞋373117-01 ZP,时尚简约轻便舒适透气低帮休闲鞋,,,,data/processed_data/鞋/images/12436107393.png,ok,400,400,false
+12436137021,鞋,彪马(PUMA)男鞋女鞋 新款运动鞋拼接网面情侣鞋轻便缓震休闲鞋397377-04 ZP,拼接网面情侣鞋轻便缓震休闲鞋,,,,data/processed_data/鞋/images/12436137021.png,ok,400,400,false
+12445279816,鞋,耐克(NIKE)女鞋Court Borough运动鞋aj简版经典轻便低帮耐磨休闲鞋板鞋子女 ZP,j简版经典板鞋,,,,data/processed_data/鞋/images/12445279816.png,ok,400,400,false
+12436138166,鞋,彪马(PUMA)男鞋女鞋新款 舒适透气简约复古低帮运动鞋休闲鞋397432-04 ZP,舒适透气简约复古低帮运动鞋,,,,data/processed_data/鞋/images/12436138166.png,ok,400,400,false
+12436142735,鞋,彪马(PUMA)男女鞋新款 时尚复古缓震舒适透气低帮运动鞋休闲鞋399028-01 ZP,时尚复古缓震舒适透气运动鞋,,,,data/processed_data/鞋/images/12436142735.png,ok,400,400,false
+12445366789,鞋,阿迪达斯 (adidas)三叶草系列 男女 GAZELLE INDOOR 时尚板鞋运动鞋潮流德训鞋休闲鞋,时尚板鞋运动鞋潮流德训鞋休闲鞋,,,,data/processed_data/鞋/images/12445366789.png,ok,400,400,false
+12445289187,鞋,耐克(NIKE)2025款男鞋 春季新款FULLFORCELO运动鞋复古潮流时尚低帮休闲鞋 ZP,复古潮流时尚低帮休闲鞋,,,,data/processed_data/鞋/images/12445289187.png,ok,400,400,false
+12445370780,鞋,阿迪达斯(adidas)Originals TAEKWONDO LACE W 三叶草经典休闲薄底跆拳道文化运动鞋 ZP,三叶草经典休闲薄底跆拳道文化运动鞋,,,,data/processed_data/鞋/images/12445370780.png,ok,400,400,false
+12448236545,鞋,斯凯奇 男黑色休闲运动鞋 183199/BBK-7 双,舒适,,,,data/processed_data/鞋/images/12448236545.png,ok,400,400,false
+12448263809,鞋,斯凯奇 女白色夏季运动鞋 128638/WBK-6.5 双,舒适,,,,data/processed_data/鞋/images/12448263809.png,ok,400,400,false
+12448263808,鞋,斯凯奇 女白色夏季运动鞋 117507/WHT-5 双,舒适,,,,data/processed_data/鞋/images/12448263808.png,ok,400,400,false
+12448263810,鞋,斯凯奇 男鞋时尚舒运动鞋 51715/BBK-7 双,舒适,,,,data/processed_data/鞋/images/12448263810.png,ok,400,400,false
+12448263961,鞋,斯凯奇 男夏季新款运动鞋 118300/BBK-7 双,舒适,,,,data/processed_data/鞋/images/12448263961.png,ok,400,400,false
+12448301440,鞋,耐克(NIKE)休闲鞋男鞋新款轻便舒适透气日常训练跑步运动鞋 415445-001 ZP,轻便 舒适 透气,,,,data/processed_data/鞋/images/12448301440.png,ok,400,400,false
+12448310467,鞋,耐克(NIKE)男鞋 新款运动鞋复古潮流时尚低帮轻便透气休闲鞋板鞋HF3165-102 ZP,复古潮流时尚,,,,data/processed_data/鞋/images/12448310467.png,ok,400,400,false
+12448312353,鞋,耐克(NIKE)男鞋新款INITIATOR轻便透气缓震舒适运动鞋休闲鞋394055-100 ZP,轻便透气缓震舒适,,,,data/processed_data/鞋/images/12448312353.png,ok,400,400,false
+12448319094,鞋,耐克(NIKE)男子NIKE TERRA MANTA低帮板鞋户外出行时尚潮流休闲鞋运动鞋 HQ4502-100 ZP,时尚潮流休闲鞋,,,,data/processed_data/鞋/images/12448319094.png,ok,400,400,false
+12448339114,鞋,耐克(NIKE)男鞋休闲鞋新款GATO LV8厚底轻便透气低帮板鞋运动鞋IB3566-700 ZP,厚底轻便透气低帮,,,,data/processed_data/鞋/images/12448339114.png,ok,400,400,false
+12448339211,鞋,耐克(NIKE)男鞋新款SPIRIDON CAGE 2运动鞋缓震气垫轻便透气休闲鞋CJ1288-001 ZP,缓震轻便透气,,,,data/processed_data/鞋/images/12448339211.png,ok,400,400,false
+12448340650,鞋,耐克(NIKE)男鞋新款运动鞋Air Zoom Vomero 5缓震耐磨透气跑步休闲鞋FN8361-100 ZP,缓震耐磨透气,,,,data/processed_data/鞋/images/12448340650.png,ok,400,400,false
+12448339347,鞋,耐克(NIKE)男鞋新款AIR MAX BIA气垫缓震休闲时尚潮流健身运动鞋IF2624-100 ZP,气垫缓震时尚潮流,,,,data/processed_data/鞋/images/12448339347.png,ok,400,400,false
+12448511205,鞋,耐克(NIKE)女鞋新款GAMMA FORCE运动鞋轻便低帮时尚潮流休闲鞋HF4987-100 ZP,轻便低帮时尚潮流休闲鞋,,,,data/processed_data/鞋/images/12448511205.png,ok,400,400,false
+12448540279,鞋,耐克(NIKE)女鞋新款运动鞋AIR MAX NUAXIS缓震耐磨轻便透气休闲鞋HF1233-107 ZP,缓震耐磨轻便透气,,,,data/processed_data/鞋/images/12448540279.png,ok,400,400,false
+12450634524,鞋,阿迪达斯(adidas)女鞋新款跑步健身训练运动鞋子户外时尚舒适耐磨休闲鞋IG6047 ZP,舒适透气设计；轻便耐磨底材；时尚百搭外观；,,,,data/processed_data/鞋/images/12450634524.png,ok,400,400,false
+12450634819,鞋,阿迪达斯(adidas)运动鞋女鞋新款德训鞋休闲鞋T头鞋轻便透气耐磨板鞋ID9074 ZP,轻便舒适；潮流百搭；持久耐磨；,,,,data/processed_data/鞋/images/12450634819.png,ok,400,400,false
+12450634366,鞋,阿迪达斯(adidas)三叶草休闲鞋女鞋新款运动鞋GAZELLE复古防滑轻便板鞋JI2755 ZP,复古经典 防滑轻便,,,,data/processed_data/鞋/images/12450634366.png,ok,400,400,false
+12450630677,鞋,阿迪达斯(adidas)三叶草女鞋新款运动鞋HANDBALL SPEZIAL W轻便潮流休闲鞋JR0849 ZP,轻便舒适，时尚百搭；耐磨底材，持久穿着；透气设计，保持脚部干爽；,,,,data/processed_data/鞋/images/12450630677.png,ok,400,400,false
+12450636425,鞋,阿迪达斯(adidas)三叶草女鞋新款运动鞋时尚潮流复古轻便休闲鞋JQ4775 ZP,轻便舒适 ；持久耐磨 ；时尚百搭 ；,,,,data/processed_data/鞋/images/12450636425.png,ok,400,400,false
+12450637184,鞋,阿迪达斯(adidas)女鞋新款运动鞋DROP STEP低帮舒适耐磨百搭板鞋休闲鞋JQ0079 ZP,舒适耐磨 潮流百搭,,,,data/processed_data/鞋/images/12450637184.png,ok,400,400,false
+12450637882,鞋,阿迪达斯(adidas)三叶草女鞋新款运动鞋复古潮流时尚低帮休闲鞋SAMBAE W板鞋JI1349 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12450637882.png,ok,400,400,false
+12450638374,鞋,阿迪达斯(adidas)三叶草女鞋新款时尚复古运动鞋户外潮流轻便低帮休闲鞋IE3475 ZP,时尚复古 潮流轻便,,,,data/processed_data/鞋/images/12450638374.png,ok,400,400,false
+12450638930,鞋,阿迪达斯(adidas)三叶草女鞋新款运动鞋复古时尚舒适透气休闲鞋厚底板鞋JR0915 ZP,轻便舒适，耐磨防滑；多种颜色可选；适合日常休闲穿搭；,,,,data/processed_data/鞋/images/12450638930.png,ok,400,400,false
+12450807190,鞋,耐克(NIKE)板鞋男女鞋新款Dunk Low运动鞋舒适缓震低帮轻便休闲鞋HF5441-007 ZP,轻便舒适；耐磨防滑；时尚百搭；,,,,data/processed_data/鞋/images/12450807190.png,ok,400,400,false
+12450809523,鞋,耐克(NIKE)男鞋新款运动鞋Court板鞋耐磨轻便户外时尚低帮休闲鞋HV4506-200 ZP,轻便舒适；时尚百搭；耐磨防滑；,,,,data/processed_data/鞋/images/12450809523.png,ok,400,400,false
+12450809983,鞋,耐克(NIKE)男鞋新款运动鞋BIG LOW LUX低帮板鞋耐磨轻便透气休闲鞋854166-003 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12450809983.png,ok,400,400,false
+12450807524,鞋,耐克(NIKE)男鞋新款运动鞋V2K RUN缓震耐磨轻便透气老爹鞋跑步休闲鞋BV1358-003 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12450807524.png,ok,400,400,false
+12450810783,鞋,耐克(NIKE)男鞋新款AIR FOAMPOSITE ONE时尚潮流休闲鞋透气低帮运动鞋HF2902-002 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12450810783.png,ok,400,400,false
+12451027316,鞋,斯凯奇 男款运动鞋 220034/BRN-10 双,舒适,,,,data/processed_data/鞋/images/12451027316.png,ok,400,400,false
+12450826221,鞋,耐克(NIKE)女鞋新款运动鞋COURT潮流时尚低帮板鞋舒适耐磨休闲鞋IQ9800-161 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12450826221.png,ok,400,400,false
+12450826236,鞋,耐克(NIKE)女鞋新款UPLIFT SC运动鞋复古潮流时尚厚底跑步休闲鞋IB2766-605 ZP,舒适轻便，时尚百搭；耐磨橡胶底，持久耐穿；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12450826236.png,ok,400,400,false
+12451027425,鞋,斯凯奇女款轻便运动鞋117365/BLK-5.5双,舒适,,,,data/processed_data/鞋/images/12451027425.png,ok,400,400,false
+12451073394,鞋,斯凯奇 男款跑步运动鞋232005/NVY-11.5双,舒适,,,,data/processed_data/鞋/images/12451073394.png,ok,400,400,false
+12451075004,鞋,斯凯奇 男款跑步运动鞋232014/BBK-6.5双,舒适,,,,data/processed_data/鞋/images/12451075004.png,ok,400,400,false
+12451073894,鞋,斯凯奇 男款运动鞋118332/WGY-7双,舒适,,,,data/processed_data/鞋/images/12451073894.png,ok,400,400,false
+12451076256,鞋,斯凯奇 男潮流休闲运动鞋118334/DKTP-9.5双,舒适,,,,data/processed_data/鞋/images/12451076256.png,ok,400,400,false
+12451078171,鞋,斯凯奇 女款休闲运动鞋12985/BKW-6双,舒适,,,,data/processed_data/鞋/images/12451078171.png,ok,400,400,false
+12451082262,鞋,斯凯奇女款跑步运动鞋128280/-10双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451081768,鞋,斯凯奇女款跑步运动鞋149542-6双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451082414,鞋,斯凯奇女款休闲运动鞋896156/-5.5双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451084803,鞋,斯凯奇 女款休闲运动鞋117551/NAT-10双,舒适,,,,data/processed_data/鞋/images/12451084803.png,ok,400,400,false
+12451084858,鞋,斯凯奇 女款跑步运动鞋150620/NAT-5双,舒适,,,,data/processed_data/鞋/images/12451084858.png,ok,400,400,false
+12451088379,鞋,斯凯奇 女跑步户外运动鞋 150044/NTMT-7双,舒适,,,,data/processed_data/鞋/images/12451088379.png,ok,400,400,false
+12452467064,鞋,益凤祥 板鞋男款休闲鞋轻便透气防滑耐磨运动鞋舒适软底潮流百搭设计Y06,轻盈透气，久穿不累脚；经典百搭设计，适合日常通勤与休闲出行,,,,data/processed_data/鞋/images/12452467064.png,ok,400,400,false
+12452467590,鞋,双星 男款休闲鞋透气网面轻便减震运动鞋舒适百搭潮流设计S09,轻便透气，久穿不累脚；经典百搭设计，适合日常通勤与休闲穿搭；,,,,data/processed_data/鞋/images/12452467590.png,ok,400,400,false
+12452466584,鞋,启中 板鞋男款透气轻便休闲鞋时尚百搭耐磨防滑运动鞋舒适软底潮流设计Q07,轻便透气，久穿不累脚；经典百搭设计，适合日常通勤与休闲穿搭,,,,data/processed_data/鞋/images/12452466584.png,ok,400,400,false
+12452686932,鞋,361°女运动鞋新款女复古文化鞋682426763F 羽毛白/浅烟绿 35码,轻盈透气，久穿不累；防滑耐磨，户外安心,,,,data/processed_data/鞋/images/12452686932.png,ok,400,400,false
+12452687110,鞋,苏打3.0丨361°男鞋运动鞋新款鞋子透气休闲鞋小白鞋革面百搭板鞋男 羽毛白/专业绿 39码,轻盈缓震，久走不累；透气网面，干爽舒适,,,,data/processed_data/鞋/images/12452687110.png,ok,400,400,false
+12452930966,鞋,361°女鞋运动鞋新款女休闲鞋582436712,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452930966.png,ok,400,400,false
+12452687200,鞋,361°男鞋运动鞋新款鞋子厚底百搭休闲鞋透气板鞋男 羽毛白/光子灰 39码,轻盈缓震，久穿不累；透气网面，干爽舒适,,,,data/processed_data/鞋/images/12452687200.png,ok,400,400,false
+12452687836,鞋,361°女鞋运动鞋新款鞋子厚底百搭休闲鞋透气板鞋女 羽毛白/光子灰 35码,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452687836.png,ok,400,400,false
+12453194230,鞋,361°男运动鞋新款板鞋572516611,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453194230.png,ok,400,400,false
+12453197990,鞋,361°女鞋运动鞋新款白色鞋子百搭小白鞋空军一号透气板鞋 361度白 35码,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453197990.png,ok,400,400,false
+12453197745,鞋,361°运动鞋新款女板鞋582516611,轻盈缓震，久走不累；透气网面，干爽舒适；时尚百搭，日常通勤更出彩；,,,,data/processed_data/鞋/images/12453197745.png,ok,400,400,false
+12453198883,鞋,361°女鞋运动鞋新款女板鞋682536624,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12453198883.png,ok,400,400,false
+12453198161,鞋,361°高帮女鞋运动鞋新款休闲鞋革面百搭鞋子白色板鞋女,轻盈缓震，久走不累,,,,data/processed_data/鞋/images/12453198161.png,ok,400,400,false
+12453199226,鞋,361°女鞋运动鞋新款女复古文化鞋582436763,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453199226.png,ok,400,400,false
+12453203779,鞋,361°女鞋运动鞋新款女板鞋582526608 羽毛白/蜜瓜绿 35码,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12453203779.png,ok,400,400,false
+12444265986,鞋,鑫捷登 舒适休闲运动鞋子ARGY-AD9849 1双,舒适休闲运动鞋,,,,data/processed_data/鞋/images/12444265986.png,ok,400,400,false
+12453203934,鞋,361°女运动鞋新款女板鞋582436623,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12453203934.png,ok,400,400,false
+12009978217,鞋,双星运动鞋夏季新款男士单飞线网面套脚休闲男鞋1219,2020年夏季新款,,,,data/processed_data/鞋/images/12009978217.png,ok,400,400,false
+12453203944,鞋,361°女鞋运动鞋新款减震回弹户外鞋耐磨防滑鞋子女士,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12453203944.png,ok,400,400,false
+11669265166,鞋,双星运动鞋秋季低帮女鞋网面轻便透气跑步鞋DS1182,防滑耐磨 时尚青春 轻便舒适,,,,data/processed_data/鞋/images/11669265166.png,ok,400,400,false
+11059252707,鞋,双星运动鞋男女健步鞋防滑软底休闲鞋春夏季透气面跑步鞋DS1079,防滑耐磨 舒适轻便,,,,data/processed_data/鞋/images/11059252707.png,ok,400,400,false
+10811429799,鞋,双星运动鞋夏季新款男士单飞线网面套脚休闲男凉鞋2046,防滑耐磨、国货经典,,,,data/processed_data/鞋/images/10811429799.png,ok,400,400,false
+12036803529,鞋,双星运动鞋秋季男士透气鞋飞织网布学生休闲潮鞋,飞织布面 时尚有型,,,,data/processed_data/鞋/images/12036803529.png,ok,400,400,false
+11669276644,鞋,双星运动鞋春秋男款低帮透气轻便舒适休闲鞋防滑耐磨跑步鞋A2025,轻便舒适 透气不闷脚,,,,data/processed_data/鞋/images/11669276644.png,ok,400,400,false
+12063513706,鞋,双星运动鞋男士秋款网面透气百搭运动休闲鞋耐磨跑步鞋,秋季上新 透气 轻便 舒适,,,,data/processed_data/鞋/images/12063513706.png,ok,400,400,false
+11669293570,鞋,双星运动鞋秋季低帮男款黑色缓震气垫女学生网面跑步鞋,防滑耐磨 舒适透气,,,,data/processed_data/鞋/images/11669293570.png,ok,400,400,false
+11822082961,鞋,双星运动鞋夏季男士套脚一脚蹬鞋透气轻便女休闲2036,单网透气 轻便舒适,,,,data/processed_data/鞋/images/11822082961.png,ok,400,400,false
+11822200236,鞋,双星运动鞋夏季男士单网透气一脚蹬软底休闲鞋套脚女2028通用,夏季新款 透气轻便,,,,data/processed_data/鞋/images/11822200236.png,ok,400,400,false
+12452981584,鞋,男鞋2026新款冬季网面透气百搭休闲运动鞋男士跑步厚底学生老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452981584.png,ok,400,400,false
+11669297880,鞋,双星运动鞋春秋低帮男鞋一脚蹬休闲网面情侣学生鞋DS1178,轻巧舒适 防滑耐磨,,,,data/processed_data/鞋/images/11669297880.png,ok,400,400,false
+11822147001,鞋,双星运动鞋四季男士透气轻便飞织单网懒人鞋情侣休闲鞋2038,飞织网面 轻便不累脚 一脚蹬,,,,data/processed_data/鞋/images/11822147001.png,ok,400,400,false
+12421987761,鞋,"双惠绝缘运动鞋SH99018,蓝色,功能:绝缘、防滑、耐磨,男女通款36-44码",绝缘防滑,,,,data/processed_data/鞋/images/12421987761.png,ok,400,400,false
+12421986106,鞋,"双惠绝缘运动鞋SH9901,颜色黑色,功能:绝缘、防滑、耐磨,男女通款36-44码",防滑耐磨绝缘,,,,data/processed_data/鞋/images/12421986106.png,ok,400,400,false
+12421986997,鞋,"双惠绝缘运动鞋SH9391,黑色,功能:绝缘防滑、耐磨,男女通款36-44码",绝缘透气,,,,data/processed_data/鞋/images/12421986997.png,ok,400,400,false
+12042039468,鞋,Rock Fairwhale洛克华菲男鞋2025秋季新品休闲鞋韩版运动鞋透气板鞋百搭潮流鞋子男低帮鞋户外男士板鞋黑色真皮,每一双鞋，都有一个故事！,,,,data/processed_data/鞋/images/12042039468.png,ok,400,400,false
+12439723264,鞋,Flange Bullo法兰布洛新品滑板厚底板鞋男鞋大学生小黑鞋百搭轻便休闲鞋复古经典运动鞋子街头情侣男女款F3421,时尚潮牌，百搭经典，欢迎您的惠顾！,,,,data/processed_data/鞋/images/12439723264.png,ok,400,400,false
+12441014519,鞋,春夏款男士小白鞋牛皮面舒适透气镂空板鞋轻便运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12441014519.png,ok,400,400,false
+12443308859,鞋,头层牛皮Re-Web新款老花系带休闲鞋板鞋男士情侣厚底运动鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443308859.png,ok,400,400,false
+12441017873,鞋,鳄鱼纹牛皮男鞋时尚运动风潮鞋透气爆米花软底休闲运动鞋SJ,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12441017873.png,ok,400,400,false
+12443308962,鞋,时尚软皮透气时尚男鞋软底男士板鞋白色运动鞋百搭青年休闲皮鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443308962.png,ok,400,400,false
+12443309023,鞋,欧洲站年秋季新款头层牛皮厚底青年休闲鞋韩版简约男款运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443309023.png,ok,400,400,false
+12443309443,鞋,体能训练鞋软底运动鞋男黑色2025春季透气休闲跑步通勤鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443309443.png,ok,400,400,false
+12443309909,鞋,新款低帮圆头系带男鞋猪皮板鞋英伦潮流休闲鞋百搭运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443309909.png,ok,400,400,false
+12443309292,鞋,2025春季新款户外鞋登山鞋防滑耐磨徒步鞋运动鞋休闲爬山旅旅鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443309292.png,ok,400,400,false
+12443310087,鞋,潮流百搭小白鞋2025夏季新款透气网鞋子男士休闲板鞋潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443310087.png,ok,400,400,false
+12443399036,鞋,夏季运动鞋男新款透气飞织网面鞋薄款镂空休闲鞋轻便网布男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443399036.png,ok,400,400,false
+12443310367,鞋,男鞋真皮2025春季新款休闲皮鞋男士软底一脚蹬板鞋运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443310367.png,ok,400,400,false
+12443310515,鞋,真皮男鞋春季新款户外徒步登山鞋透气男士休闲老爹鞋舒适运动鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443310515.png,ok,400,400,false
+12443398990,鞋,复古德训鞋男秋季2025新款运动鞋透气休闲板鞋ins网红男鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443398990.png,ok,400,400,false
+12443399192,鞋,欧美新款高端运动鞋男真皮透气网布板鞋潮流时尚休闲男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443399192.png,ok,400,400,false
+12443399511,鞋,男鞋2025新款网面透气户外登山鞋休闲运动鞋青年韩版鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443399511.png,ok,400,400,false
+12443399556,鞋,男鞋新款潮流韩版百搭学生跑步休闲运动鞋子男防滑青少年男士单鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443399556.png,ok,400,400,false
+12443403723,鞋,真皮板鞋男鞋小白鞋春季新款潮流休闲鞋子白色厚底男生运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443403723.png,ok,400,400,false
+12443405800,鞋,板鞋男鞋子2025春季新款透气休闲鞋真皮运动鞋潮流百搭厚底小白鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443405800.png,ok,400,400,false
+12443406032,鞋,熊猫板鞋男款春季头层牛皮鞋子运动鞋潮百搭小白鞋男士透气休闲鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443406032.png,ok,400,400,false
+12443406756,鞋,欧洲站潮鞋子秋冬男士时尚休闲小白鞋男款运动鞋低帮板鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12443406756.png,ok,400,400,false
+12451045027,鞋,男鞋20264春季新款潮流百搭休闲运动鞋男士厚底轻便透气潮鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045027.png,ok,400,400,false
+12448484648,鞋,男鞋新款潮流增高厚底透气休闲鞋男士跑步户外徒步登山运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12448484648.png,ok,400,400,false
+12451045078,鞋,男鞋20265夏季新款网面百搭跑步运动鞋网红厚底老爹潮鞋男,,,,,data/processed_data/鞋/images/12451045078.png,ok,400,400,false
+12451045087,鞋,男鞋20265春季新款低帮软底透气鞋子男拼色百搭男士潮流休闲运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045087.png,ok,400,400,false
+12451045229,鞋,男鞋新款潮流透气软底小白鞋男款韩版百搭厚底运动鞋休闲板鞋潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045229.png,ok,400,400,false
+12451045483,鞋,百搭休闲男运动鞋20264春夏季新款男士时尚阿甘鞋增高潮流男老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045483.png,ok,400,400,false
+12451045496,鞋,百搭休闲男运动鞋新款男士时尚阿甘鞋20264春夏季增高潮流男老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045496.png,ok,400,400,false
+12451045746,鞋,英伦大头皮鞋20264夏季透气休闲鞋轻便跑步运动鞋潮流百搭男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045746.png,ok,400,400,false
+12451045612,鞋,秋季男鞋新款透气鞋子男款学生潮流百搭小白鞋厚底运动鞋休闲板鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045612.png,ok,400,400,false
+12451045535,鞋,百搭轻便小白鞋男20264春夏季新款流行韩版板鞋学生休闲跑步运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045535.png,ok,400,400,false
+12451045784,鞋,超轻德训鞋男20265夏季透气阿甘鞋男士百搭休闲减震运动鞋男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045784.png,ok,400,400,false
+12451045803,鞋,轻便流行学生小白鞋男20264春夏季新款百搭韩版板鞋休闲跑步运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045803.png,ok,400,400,false
+12451045867,鞋,透气网鞋子男士潮流百搭小白鞋休闲板鞋潮鞋20265夏季新款,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045867.png,ok,400,400,false
+12451045886,鞋,透气跑步运动鞋潮流百搭休闲鞋阿甘鞋男20264春季厚底男士老爹潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045886.png,ok,400,400,false
+12451045854,鞋,透气网面运动鞋子男韩版潮流百搭厚底休闲老爹鞋潮鞋春季男鞋新款,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045854.png,ok,400,400,false
+12451045998,鞋,鞋子男新款春秋时尚休闲运动鞋单鞋透气潮流网面飞织运动男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045998.png,ok,400,400,false
+12451148937,鞋,特步男运动鞋875119110038-100/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148937.png,ok,400,400,false
+12451045959,鞋,阿甘鞋男20264春季透气跑步运动鞋潮流百搭休闲鞋厚底男士老爹潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045959.png,ok,400,400,false
+12451045946,鞋,阿甘男鞋秋季透气皮面运动鞋男士百搭休闲鞋跑步增高老爹潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451045946.png,ok,400,400,false
+12451148946,鞋,特步男运动鞋875119110038-101/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148946.png,ok,400,400,false
+12451148947,鞋,特步男运动鞋875119110038-102/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148947.png,ok,400,400,false
+12451148948,鞋,特步男运动鞋875119110081-103/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148948.png,ok,400,400,false
+12451148957,鞋,特步男运动鞋875119110081-104/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148957.png,ok,400,400,false
+12451148960,鞋,特步男运动鞋876219110043-105/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148960.png,ok,400,400,false
+12451148962,鞋,特步男运动鞋875219110030-106/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148962.png,ok,400,400,false
+12451148965,鞋,特步男运动鞋875219110030-107/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148965.png,ok,400,400,false
+12451148974,鞋,特步男运动鞋875219110030-108/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148974.png,ok,400,400,false
+12451148977,鞋,特步男运动鞋875219110030-109/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451148977.png,ok,400,400,false
+12451153107,鞋,特步女运动鞋875218110031-237/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451153107.png,ok,400,400,false
+12451153097,鞋,特步女运动鞋874118110024-235/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451153097.png,ok,400,400,false
+12451153099,鞋,特步女运动鞋876318110074-236/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451153099.png,ok,400,400,false
+12451153096,鞋,特步女运动鞋874118110024-234/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451153096.png,ok,400,400,false
+12451153109,鞋,特步女运动鞋875218110031-238/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451153109.png,ok,400,400,false
+12451184108,鞋,男鞋2026四季新款耐磨旅游鞋子工装户外登山鞋大码潮流休闲鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184108.png,ok,400,400,false
+12451153115,鞋,特步男款运动鞋875119110032-64/双,舒适透气，轻便耐磨；适合多种场合，百搭耐看；时尚设计，彰显个性魅力；,,,,data/processed_data/鞋/images/12451153115.png,ok,400,400,false
+12451184123,鞋,男鞋2026新款爆米花跑步鞋飞织透气潮流运动鞋休闲柔软气垫鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184123.png,ok,400,400,false
+12451184176,鞋,男鞋2026春季新款高品质潮流休闲运动鞋百搭中年爸爸时尚单鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184176.png,ok,400,400,false
+12451184344,鞋,运动鞋男2026新款百搭休闲鞋透气软底户外跑步男鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184344.png,ok,400,400,false
+12451184322,鞋,运动鞋2026新款小白鞋潮流时尚百搭休闲鞋男士学生户外高档男鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184322.png,ok,400,400,false
+12451184352,鞋,运动鞋男2026新款运动休闲鞋男透气飞织减震爆米花椰子鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184352.png,ok,400,400,false
+12451184367,鞋,运动鞋男2026秋冬新款透气软底跑步鞋潮流真皮男鞋休闲厚底老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451184367.png,ok,400,400,false
+12451290521,鞋,2026新款男鞋真皮厚底透气防滑休闲运动鞋潮流百搭户外登山板鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451290521.png,ok,400,400,false
+12451290536,鞋,2026新款男鞋透气运动鞋小白鞋防滑轻便休闲鞋潮流百搭德训鞋板鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451290536.png,ok,400,400,false
+12451291197,鞋,男士运动鞋2026春季新款真皮头层牛皮休闲鞋潮鞋软底轻便透气百搭,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451291197.png,ok,400,400,false
+12451291381,鞋,男生头层牛皮运动风休闲鞋男款潮鞋真皮百搭欧洲站男鞋男士运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451291381.png,ok,400,400,false
+12451291549,鞋,真皮德训鞋男2026春季新款运动鞋平底软底舒适休闲板鞋男小白鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451291549.png,ok,400,400,false
+12451291814,鞋,运动鞋男2026春季新款轻便跑步鞋软底轻便男鞋网面透气百搭休闲鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451291814.png,ok,400,400,false
+12451934217,鞋,2026夏季经典低帮潮流百搭款网布运动鞋户外休闲舒适透气款懒人鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934217.png,ok,400,400,false
+12451934325,鞋,2026春季新款休闲运动鞋潮流百搭青少男鞋老爹潮鞋防滑通勤开车鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934325.png,ok,400,400,false
+12451934294,鞋,2026春夏季新款飞织网面鞋薄款透气低帮系带运动鞋厚底老爹鞋男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934294.png,ok,400,400,false
+12451934415,鞋,大码男鞋2026新款春季时尚百搭阿甘休闲运动鞋网面透气小白鞋老爹,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934415.png,ok,400,400,false
+12451934508,鞋,溯溪鞋2026夏季薄款网布大网眼透气运动鞋低帮休闲旅游登山男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934508.png,ok,400,400,false
+12451934554,鞋,男士夏季透气网鞋2026新款一脚蹬镂空网眼薄款网面运动休闲板鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934554.png,ok,400,400,false
+12451934579,鞋,男士飞织运动鞋2026夏季纯色无系带浅口透气跑步男鞋日常休闲单鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934579.png,ok,400,400,false
+12451934751,鞋,2026夏季新款薄底德训鞋男时尚舒适百搭休闲运动鞋透气网面开车鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934751.png,ok,400,400,false
+12451934719,鞋,2026夏季上新男款网面薄款运动鞋潮流软底跑步男士轻便休闲飞织鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934719.png,ok,400,400,false
+12451934821,鞋,2026新款夏季阿甘男鞋透气镂空网面网鞋防滑防臭休闲跑步运动潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934821.png,ok,400,400,false
+12451934900,鞋,2026新款春夏季时尚板鞋男鞋轻便舒适防滑青少年小白鞋休闲运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934900.png,ok,400,400,false
+12451935008,鞋,2026新款运动鞋休闲鞋春夏季男鞋超纤网面透气男士厚底防滑老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451935008.png,ok,400,400,false
+12451934993,鞋,2026新款男鞋春夏季透气休闲板鞋时尚轻便青少年防滑厚底运动鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451934993.png,ok,400,400,false
+12451935068,鞋,2026春夏季新款男鞋男士户外个性休闲日常运动鞋百搭时尚透气潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451935068.png,ok,400,400,false
+12451935046,鞋,2026新款飞织网面运动鞋男款厚底防滑透气休闲跑步鞋时尚运动潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451935046.png,ok,400,400,false
+12452677017,鞋,耐克(NIKE)男鞋新款AIR WINFLO 12厚底减震跑步鞋网面透气运动鞋HV9272-004 ZP,轻盈缓震，每一步都如踩云端；透气网面，畅跑不闷热；稳定支撑，长距离奔跑更安心；,,,,data/processed_data/鞋/images/12452677017.png,ok,400,400,false
+12452676831,鞋,耐克(NIKE)休闲鞋男鞋新款缓震运动鞋Vapor Pro 3网球鞋FZ2161-101 ZP,轻盈缓震，久穿不累；时尚百搭，日常通勤；耐磨防滑，应对多种路况；,,,,data/processed_data/鞋/images/12452676831.png,ok,400,400,false
+12452676528,鞋,耐克(NIKE)男鞋新款AIR MAX FIRE运动鞋健身训练缓震透气跑步休闲鞋IR0819-004 ZP,轻盈缓震，久穿不累；透气网面，干爽舒适；时尚百搭，日常通勤优选；,,,,data/processed_data/鞋/images/12452676528.png,ok,400,400,false
+12452674472,鞋,NIKE耐克男鞋新款BIG NIKE复古板鞋百搭休闲运动鞋鞋355152-106 ZP,轻盈缓震，久穿不累；时尚百搭，日常通勤优选；耐磨大底，户外出行更安心；,,,,data/processed_data/鞋/images/12452674472.png,ok,400,400,false
+12452677219,鞋,耐克(NIKE)男鞋新款运动鞋REVOLUTION 8轻便透气跑步鞋HJ9198-122 ZP,轻盈缓震，每一步都如云般舒适；透气网面设计，长时间奔跑也干爽透气；,,,,data/processed_data/鞋/images/12452677219.png,ok,400,400,false
+12452677347,鞋,耐克(NIKE)男鞋 新款运动鞋DOWNSHIFTER 14 缓震舒适跑步鞋IB1895-106 ZP,轻盈缓震，每一步都如踩云端；透气网面，长时间奔跑依然干爽舒适；稳定支撑，助力提速不伤脚；,,,,data/processed_data/鞋/images/12452677347.png,ok,400,400,false
+12452677630,鞋,耐克(NIKE)男鞋新款VOMERO PLUS缓震跑步鞋透气马拉松竞速运动鞋HV8150-110 ZP,轻盈缓震，每一步都如云般柔软；透气网面，干爽舒适；稳定支撑，助力提速，减少运动损伤风险；,,,,data/processed_data/鞋/images/12452677630.png,ok,400,400,false
+12452677495,鞋,耐克(NIKE)男鞋新款运动鞋缓震舒适透气健身训练journey run跑步鞋FN0228-200 ZP,轻盈缓震，每一步都如踩云端；透气网面，畅跑不闷热；稳定支撑，长距离奔跑更安心；,,,,data/processed_data/鞋/images/12452677495.png,ok,400,400,false
+12452678309,鞋,耐克(NIKE)男鞋新款运动鞋ZOOMX VAPORFLY轻便马拉松跑步鞋HF6414-401 ZP,轻盈透气，缓震回弹，助力每一步畅跑；专业足弓支撑，稳定防滑，长距离跑步更省力；,,,,data/processed_data/鞋/images/12452678309.png,ok,400,400,false
+12452678546,鞋,耐克(NIKE)男鞋新款run swift 3运动鞋时尚休闲缓震头跑步鞋DR2695-122 ZP,轻盈缓震，每一步都如云般舒适；稳定支撑结构，助力高效提速，跑得更远更稳；,,,,data/processed_data/鞋/images/12452678546.png,ok,400,400,false
+12452678736,鞋,耐克(NIKE)男鞋新款运动鞋舒适透气轻便缓震实战篮球鞋IH1104-100 ZP,轻盈缓震，疾速回弹，助力每一次突破；高抓地力鞋底，湿滑场地也能稳如磐石；,,,,data/processed_data/鞋/images/12452678736.png,ok,400,400,false
+12452677734,鞋,耐克(NIKE)男鞋新款运动鞋ZOOM FLY 6健身训练缓震耐磨透气跑步鞋FN8454-006 ZP,轻盈缓震，每一步都如踩云端；透气网面，畅跑不闷热；稳定支撑，长距离奔跑更安心；,,,,data/processed_data/鞋/images/12452677734.png,ok,400,400,false
+12452696381,鞋,阿迪达斯(adidas)板鞋男女鞋新款运动鞋复古潮流面包鞋舒适透气休闲鞋KH9023 ZP,轻盈透气设计，久穿不累脚；经典百搭造型，日常通勤更出彩；,,,,data/processed_data/鞋/images/12452696381.png,ok,400,400,false
+12452697385,鞋,阿迪达斯(adidas)男鞋新款时尚潮流运动鞋低帮耐磨透气休闲板鞋KI1058 ZP,轻盈缓震，久穿不累；时尚百搭，日常通勤优选；耐磨防滑，应对多种路况；,,,,data/processed_data/鞋/images/12452697385.png,ok,400,400,false
+12452698879,鞋,阿迪达斯(adidas)三叶草男女鞋新款春季运动鞋时尚板鞋低耐磨休闲鞋JQ1533 ZP,轻盈透气，久穿不累；经典百搭，适合日常通勤；缓震回弹，舒适支撑每一步；,,,,data/processed_data/鞋/images/12452698879.png,ok,400,400,false
+12452698931,鞋,Adidas阿迪达斯板鞋男鞋女鞋新款时尚运动鞋轻便休闲鞋 HQ7360 ZP,轻盈缓震，久穿不累；经典百搭，日常通勤优选；耐磨防滑，应对多种路况；,,,,data/processed_data/鞋/images/12452698931.png,ok,400,400,false
+12452700628,鞋,Adidas阿迪达斯男鞋新款ADIZERO EVO SL轻便运动鞋减震跑步鞋 ZP,轻盈缓震，每一步都如云般舒适；透气网面，畅跑不闷热；稳定支撑，长距离跑步更安心；,,,,data/processed_data/鞋/images/12452700628.png,ok,400,400,false
+12452979372,鞋,2026冬季新款男鞋透气休闲运动鞋网面鞋子男款软底百搭跑步鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452979372.png,ok,400,400,false
+12452979501,鞋,2026新款秋季ins板鞋男防水运动鞋子休闲鞋低帮平底百搭透气男鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452979501.png,ok,400,400,false
+12452979854,鞋,冬季透气男鞋2026新款运动白鞋网面休闲小白老爹网鞋厚底ins潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452979854.png,ok,400,400,false
+12452979650,鞋,2026秋季男鞋新款透气小白鞋子男潮流百搭厚底运动鞋休闲板鞋潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452979650.png,ok,400,400,false
+12452979527,鞋,2026春季新款网红鞋子男ins潮百搭小众学生美式板鞋厚底运动鞋男,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452979527.png,ok,400,400,false
+12452980151,鞋,新款休闲男鞋潮流透气冬季飞织鞋子轻便百搭工作鞋网鞋男运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980151.png,ok,400,400,false
+12452980267,鞋,男鞋2026冬季新款透气网面鞋轻便跑步运动鞋男士休闲旅游鞋老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980267.png,ok,400,400,false
+12452980190,鞋,春季男鞋2026新款透气鞋子男款潮流百搭内增高运动鞋休闲老爹,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980190.png,ok,400,400,false
+12452980280,鞋,男鞋2026冬季新款韩版潮流透气运动鞋休闲潮鞋男士百搭增高小白鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980280.png,ok,400,400,false
+12452980434,鞋,男鞋2026新款夏季透气网面休闲运动鞋男士百搭厚底潮鞋增高老爹鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980434.png,ok,400,400,false
+12452980574,鞋,男鞋2026春季休闲百搭运动鞋港风高颜值老爹鞋新款增高厚底潮鞋子,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980574.png,ok,400,400,false
+12452980726,鞋,男鞋冬季2026新款纯黑厚底黑武士气垫休闲运动鞋老爹ins潮鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12452980726.png,ok,400,400,false
+12451301933,鞋,丛信哲 男女款运动鞋 2026-41 /双,时尚 减震,,,,data/processed_data/鞋/images/12451301933.png,ok,400,400,false
+12451301940,鞋,丛信哲 男女款运动鞋 2026-42 /双,时尚 减震,,,,data/processed_data/鞋/images/12451301940.png,ok,400,400,false
+12451301998,鞋,丛信哲 男女款运动鞋 2026-43 /双,时尚 减震,,,,data/processed_data/鞋/images/12451301998.png,ok,400,400,false
+12451301999,鞋,丛信哲 男女款运动鞋 2026-44/双,时尚 减震,,,,data/processed_data/鞋/images/12451301999.png,ok,400,400,false
+12451302000,鞋,丛信哲 男女款运动鞋 2026-45/双,时尚 减震,,,,data/processed_data/鞋/images/12451302000.png,ok,400,400,false
+12451302001,鞋,丛信哲 男女款运动鞋 2026-46/双,时尚 减震,,,,data/processed_data/鞋/images/12451302001.png,ok,400,400,false
+12451302028,鞋,丛信哲 男女款运动鞋 2026-48/双,时尚 减震,,,,data/processed_data/鞋/images/12451302028.png,ok,400,400,false
+12451302031,鞋,丛信哲 男女款运动鞋 2026-49/双,时尚 减震,,,,data/processed_data/鞋/images/12451302028.png,ok,400,400,false
+12451302027,鞋,丛信哲 男女款运动鞋 2026-47/双,时尚 减震,,,,data/processed_data/鞋/images/12451302027.png,ok,400,400,false
+12451302058,鞋,丛信哲 男女款运动鞋 2026-50/双,时尚 减震,,,,data/processed_data/鞋/images/12451302028.png,ok,400,400,false
+12452688670,鞋,耐克(NIKE)鞋子女鞋新款网面透气飞线运动鞋轻便舒适缓震休闲跑步鞋DR2698-020 ZP,轻盈缓震，每一步都如踏云端；透气网面，畅跑不闷热；稳定支撑，长距离奔跑更安心；,,,,data/processed_data/鞋/images/12452688670.png,ok,400,400,false
+12277177322,鞋,La Chessiers户外春夏季青少年网球鞋男款防滑耐磨专用低帮训练运动鞋轻便羽毛球鞋大码 黑绿 41码,潮流网球鞋 时尚大码 快乐运动,,,,data/processed_data/鞋/images/12277177322.png,ok,400,400,false
+12452452378,鞋,斯凯奇(Skechers)女鞋新款运动鞋GO RUN健身训练缓震耐磨轻便透气跑步鞋128651-BKW ZP,轻盈透气，缓震回弹强；贴合足型，稳定支撑久跑不累；耐磨防滑，湿滑路面也能稳速前行；,,,,data/processed_data/鞋/images/12452452378.png,ok,400,400,false
+11036737890,鞋,红蜻蜓小白鞋女春季休闲女鞋耐磨板鞋圆头校园风ins系带百搭运动鞋,【红蜻蜓正品专卖】【运费险】【享鞋类三包服务】,,,,data/processed_data/鞋/images/11036737890.png,ok,400,400,false
+12292286851,鞋,La Chessiers飞织休闲运动鞋女鞋春季新款ins百搭 透气初中学生小白鞋网鞋休闲鞋,苏宁好品 新款飞织鞋 运费险,,,,data/processed_data/鞋/images/12292286851.png,ok,400,400,false
+12423219610,鞋,女鞋新款休闲运动鞋跑步鞋平底透气飞织网面鞋韩版,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12423219610.png,ok,400,400,false
+12423219217,鞋,新款飞织网面女鞋休闲跑步运动小白鞋韩版潮流透气网鞋,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12423219217.png,ok,400,400,false
+12283843522,鞋,La Chessiers老爹鞋女春秋新款ins潮百搭时尚透气运动鞋厚底休闲鞋女鞋潮鞋 米色 37码,苏宁好品 ins潮百搭 运费险,,,,data/processed_data/鞋/images/12283843522.png,ok,400,400,false
+12390008222,鞋,Ceen Bulled老爹鞋女2022秋季新款透气百搭韩版运动鞋女ins跑步,Ceen Bulled老爹鞋女2022秋季新款透气百搭韩版运动鞋女ins跑步,,,,data/processed_data/鞋/images/12390008222.png,ok,400,400,false
+12428455706,鞋,星星阿甘鞋女24年春季新款美式BT复古德训鞋拼接运动鞋真皮休闲鞋,阿甘鞋 透气 休闲,,,,data/processed_data/鞋/images/12428455706.png,ok,400,400,false
+12423222034,鞋,春秋老布鞋女网鞋透气网面软底防滑中老年妈妈运动休闲鞋,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12423222034.png,ok,400,400,false
+12390008159,鞋,Ceen Bulledins韩版高帮老爹女鞋潮2022春季新款运动鞋女休闲鞋,Ceen Bulledins韩版高帮老爹女鞋潮2022春季新款运动鞋女休闲鞋,,,,data/processed_data/鞋/images/12390008159.png,ok,400,400,false
+12452688146,鞋,NIKE耐克女鞋新款REVOLUTION 8减震轻便跑步鞋网面透气运动鞋HJ8485-501 ZP,轻盈缓震，每一步都如踏云端；透气网面，畅跑不闷热；耐磨大底，持久抓地更安心；,,,,data/processed_data/鞋/images/12452688146.png,ok,400,400,false
+12428455570,鞋,真皮手工原创牛皮阿甘鞋女舒适百搭系带复古运动鞋圆头休闲单鞋子,阿甘鞋 防滑 透气,,,,data/processed_data/鞋/images/12428455570.png,ok,400,400,false
+12450481816,鞋,阿迪达斯 (adidas)三叶草女鞋春秋季 运动鞋日常通勤轻便板鞋低帮休闲鞋 JR0232 37,舒适轻便，时尚百搭；低帮设计，优雅展现脚踝美感；耐磨橡胶底，行走更稳；,,,,data/processed_data/鞋/images/12450481816.png,ok,400,400,false
+12450137946,鞋,增高运动鞋春秋季新款网红ins潮厚底老爹鞋女百搭透气休闲鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12450137946.png,ok,400,400,false
+12451212147,鞋,2026春夏季新款时尚百搭透气网面复古运动舒适休闲运动鞋真皮女鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451212147.png,ok,400,400,false
+12451212625,鞋,厚底老爹鞋女2026春季新款时尚水钻圆头网面透气百搭休闲运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451212625.png,ok,400,400,false
+12451212962,鞋,头层牛皮单鞋女2026春季新款厚底圆头百搭厚底舒适休闲运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451212962.png,ok,400,400,false
+12451212638,鞋,厚底老爹鞋女2026春季新款时尚水钻增高网面透气百搭休闲运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12451212638.png,ok,400,400,false
+12453387864,鞋,头层牛皮做旧擦色板鞋女26秋新款小众拼色复古真皮厚底休闲运动鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453387864.png,ok,400,400,false
+12453388392,鞋,真皮复古德训鞋女26秋季新款牛皮撞色系带休闲舒适运动鞋阿甘鞋,源头货源 低价尝鲜,,,,data/processed_data/鞋/images/12453388392.png,ok,400,400,false
+12448256988,鞋,虔羽训练运动鞋VY33 双,耐磨运动鞋,,,,data/processed_data/鞋/images/12448256988.png,ok,400,400,false
+12448687780,鞋,虔羽乒羽网比赛训练运动鞋QY68 双,专业运动鞋,,,,data/processed_data/鞋/images/12448687780.png,ok,400,400,false
+12448870991,鞋,虔羽运动鞋QY96 双,时尚运动鞋,,,,data/processed_data/鞋/images/12448870991.png,ok,400,400,false
+12446508537,鞋,丛信哲 女款运动鞋 X26/双,防滑 耐磨,,,,data/processed_data/鞋/images/12446508537.png,ok,400,400,false
+12451076647,鞋,丛信哲 男女款运动鞋 X263 /双,防滑 耐磨,,,,data/processed_data/鞋/images/12451076647.png,ok,400,400,false
+12452743406,鞋,乔丹篮球鞋QXA013262105R,耐磨 透气 防滑,,,,data/processed_data/鞋/images/12452743406.png,ok,400,400,false
+12449929296,鞋,特步篮球鞋975119120016,耐磨防滑减震,,,,data/processed_data/鞋/images/12449929296.png,ok,400,400,false
+12447550933,鞋,特步篮球鞋975219120007,防滑减震耐磨,,,,data/processed_data/鞋/images/12447550933.png,ok,400,400,false
+12447553411,鞋,特步篮球鞋975219120008,减震耐磨防滑,,,,data/processed_data/鞋/images/12447553411.png,ok,400,400,false
+12450000494,鞋,特步篮球鞋876319120009,防滑减震耐磨,,,,data/processed_data/鞋/images/12450000494.png,ok,400,400,false
+12450041981,鞋,特步篮球鞋876219120006,减震防滑耐磨,,,,data/processed_data/鞋/images/12450041981.png,ok,400,400,false
+12297344933,鞋,La Chessiers户外篮球鞋男鞋运动鞋春秋冬新款网面透气防滑耐磨高帮大码球鞋 黑青绿 41码,苏宁好品 高帮篮球鞋 运费险,,,,data/processed_data/鞋/images/12297344933.png,ok,400,400,false
+12448646004,鞋,BIG3 5.0 Quick丨361°篮球鞋男鞋新款五代专业运动鞋实战球鞋,直降到底,,,,data/processed_data/鞋/images/12448646004.png,ok,400,400,false
+12283319904,鞋,La Chessiers户外篮球鞋飞织透气运动休闲鞋板鞋青少年实战大码男鞋防滑鞋 白色 42码,苏宁好品 飞织球鞋 运费险,,,,data/processed_data/鞋/images/12283319904.png,ok,400,400,false
+12434433805,鞋,XTEP特步男鞋 新款运动鞋游云6代缓震耐磨轻便透气实战训练鞋篮球鞋876119120019 ZP,新款运动鞋游云6代缓震耐磨轻便透气实战训练鞋篮球鞋,,,,data/processed_data/鞋/images/12434433805.png,ok,400,400,false
+12277167203,鞋,La Chessiers户外篮球鞋运动鞋男2025新款潮流大码休闲透气网面初高中学生跑步鞋,苏宁好品 大码48码 小码36码,,,,data/processed_data/鞋/images/12277167203.png,ok,400,400,false
+12448431276,鞋,耐克(NIKE)男鞋新款Ja 2 EP 莫兰特2代篮球鞋耐磨减震实战比赛训练运动鞋FD7327-100 ZP,耐磨减震舒适抗扭透气,,,,data/processed_data/鞋/images/12448431276.png,ok,400,400,false
+12297364731,鞋,La Chessiers户外篮球鞋2025新款透气休闲潮鞋运动鞋男士超大码48码,苏宁好品 大码48码 运费险,,,,data/processed_data/鞋/images/12297364731.png,ok,400,400,false
+12448589425,鞋,耐克(NIKE)女鞋新款运动鞋Air Jordan 1潮流时尚场下休闲低帮篮球鞋DC0774-182 ZP,潮流时尚百搭耐磨,,,,data/processed_data/鞋/images/12448589425.png,ok,400,400,false
+12448430439,鞋,耐克(NIKE)男鞋新款JORDAN .77 PF运动鞋实战比赛训练休闲篮球鞋HF0819-102 ZP,缓震防滑耐磨经典,,,,data/processed_data/鞋/images/12448430439.png,ok,400,400,false
+12357232574,鞋,[限量]耐克AJ男士运动鞋Jordan Delta 2系列户外运动 舒适耐磨 轻质时尚男士篮球鞋CV8121-102,海外直邮 正品保证,,,,data/processed_data/鞋/images/12357232574.png,ok,400,400,false
+12358676778,鞋,[限量]耐克NIKE女士运动鞋Blazer Mid系列简约百搭 商务休闲 轻质舒适女士篮球鞋529037-400,海外直邮 正品保证,,,,data/processed_data/鞋/images/12358676778.png,ok,400,400,false
+12362342817,鞋,NIKE耐克 Kyrie Infinity 凯里 男款轻质舒适透气防滑缓震高帮篮球鞋 DM3255-200,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12362342817.png,ok,400,400,false
+12362343200,鞋,NIKE耐克 Air Zoom 男款轻质舒适防滑气垫缓震支撑回弹高帮篮球鞋 CZ9907-100,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12362343200.png,ok,400,400,false
+12446718704,鞋,健卡侬篮球鞋JX25/双,舒适,,,,data/processed_data/鞋/images/12446718704.png,ok,400,400,false
+12447093955,鞋,健卡侬 篮球鞋 J48/双,舒适透气，防滑耐磨,,,,data/processed_data/鞋/images/12447093955.png,ok,400,400,false
+12446756465,鞋,健卡侬篮球鞋大码J142/双,运动防滑,,,,data/processed_data/鞋/images/12446756465.png,ok,400,400,false
+12447093975,鞋,健卡侬 篮球鞋 J50/双,舒适透气，防滑耐磨,,,,data/processed_data/鞋/images/12447093975.png,ok,400,400,false
+12447094280,鞋,健卡侬 篮球鞋 J51/双,舒适透气，防滑耐磨,,,,data/processed_data/鞋/images/12447094280.png,ok,400,400,false
+12447184182,鞋,丛信哲 篮球鞋 L64/双,舒适,,,,data/processed_data/鞋/images/12447184182.png,ok,400,400,false
+12447184797,鞋,丛信哲 篮球鞋 L65/双,舒适,,,,data/processed_data/鞋/images/12447184797.png,ok,400,400,false
+12452578515,鞋,TDUO 篮球鞋 YY6 双,耐磨防滑，抓地力出色；贴合脚型，运动更自如；,,,,data/processed_data/鞋/images/12452578515.png,ok,400,400,false
+12451370016,鞋,健訫奕天劳保鞋LB898 双,轻盈缓震，持久耐磨；灵活抓地，赛场自如；透气设计，舒适脚感；,,,,data/processed_data/鞋/images/12451370016.png,ok,400,400,false
+12449527815,鞋,健訫奕天加厚棉鞋JHG989双,保暖防滑防水,,,,data/processed_data/鞋/images/12449527815.png,ok,400,400,false
+12447397227,鞋,虔羽防滑减震篮球训练比赛运动鞋 VY56 双,训练比赛运动篮球鞋,,,,data/processed_data/鞋/images/12447397227.png,ok,400,400,false
+12447432816,鞋,虔羽篮球运动鞋VY66 双,耐磨高弹运动篮球鞋,,,,data/processed_data/鞋/images/12447432816.png,ok,400,400,false
+12449515185,鞋,健訫奕天防护加绒鞋JHG988,防水防滑耐磨,,,,data/processed_data/鞋/images/12449515185.png,ok,400,400,false
+12445466822,鞋,BIG3 Team丨361°篮球鞋男运动鞋新款实战耐磨防滑透气学生球鞋男,直降到底,,,,data/processed_data/鞋/images/12445466822.png,ok,400,400,false
+12434448226,鞋,UA安德玛男鞋新款网面透气运动鞋健身训练鞋跑步鞋3026998-002 ZP,网面透气运动鞋健身训练鞋跑步鞋,,,,data/processed_data/鞋/images/12434448226.png,ok,400,400,false
+12450824312,鞋,耐克(NIKE)男鞋新款AIR MONARCH SE耐磨缓震透气健身训练鞋跑步鞋IB2281-700 ZP,轻盈缓震，持久舒适；透气网面，保持干爽；专为跑步设计，提升运动表现；,,,,data/processed_data/鞋/images/12450824312.png,ok,400,400,false
+12435009726,鞋,adidas阿迪达斯男子新款运动鞋轻便缓震训练鞋网面鞋健身跑步鞋ID9849 ZP,轻便缓震训练鞋网面鞋,,,,data/processed_data/鞋/images/12435009726.png,ok,400,400,false
+12434506268,鞋,XTEP特步坦程Max跑步鞋男鞋新款运动鞋低帮轻便马拉松训练鞋976119110063 ZP,低帮轻便马拉松训练鞋,,,,data/processed_data/鞋/images/12434506268.png,ok,400,400,false
+12435011013,鞋,Adidas/阿迪达斯男鞋新款训练鞋轻便运动鞋网面跑步鞋GW4138 ZP,新款训练鞋轻便运动鞋网面跑步鞋,,,,data/processed_data/鞋/images/12435011013.png,ok,400,400,false
+12450824342,鞋,耐克(NIKE)男鞋新款运动鞋downshifter 14健身训练鞋缓震透气跑步鞋IB1895-002 ZP,轻盈缓震；持久舒适；专为跑步设计；,,,,data/processed_data/鞋/images/12450824342.png,ok,400,400,false
+12450826536,鞋,耐克(NIKE)女鞋新款REVOLUTION 8运动鞋耐磨透气健身训练鞋跑步鞋HJ8485-001 ZP,轻盈缓震，持久舒适；专为跑步设计，提升运动表现；透气材质，保持双脚干爽；,,,,data/processed_data/鞋/images/12450826536.png,ok,400,400,false
+12435573379,鞋,Skechers斯凯奇男鞋新款运动休闲鞋健身训练鞋跑步鞋220541-WBKL ZP,健身训练鞋跑步鞋,,,,data/processed_data/鞋/images/12435573379.png,ok,400,400,false
+12365428164,鞋,NIKE耐克男鞋NIKE REVOLUTION 6 NN运动训练跑步鞋DC3728-003,运动训练跑步鞋,,,,data/processed_data/鞋/images/12365428164.png,ok,400,400,false
+12446749149,鞋,TDUO迷彩作训鞋L98 双,新品,,,,data/processed_data/鞋/images/12446749149.png,ok,400,400,false
+12448206802,鞋,劳拉之星0021二代硬拉鞋赤足深蹲室内健身训练鞋男女举重透气防滑,适合男女室内健身综合训练,,,,data/processed_data/鞋/images/12448206802.png,ok,400,400,false
+12446748682,鞋,TDUO迷彩作训鞋L97 双,新品,,,,data/processed_data/鞋/images/12446748682.png,ok,400,400,false
+12448045160,鞋,端固 一次性鞋套100个装 HH002 包,鞋套,,,,data/processed_data/鞋/images/12448045160.png,ok,400,400,false
+12439013493,鞋,斯凯奇 女运动休闲鞋 158590/OFWT-6 双,透气运动减震缓震,,,,data/processed_data/鞋/images/12439013493.png,ok,400,400,false
+12451149731,鞋,彪马(PUMA) 男鞋女鞋新款时尚百搭运动休闲低帮板鞋休闲鞋 401606-06 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12451149731.png,ok,400,400,false
+12435610326,鞋,Skechers斯凯奇男鞋新款复古厚底熊猫鞋轻便缓震运动休闲鞋894193-LTGY ZP,复古厚底熊猫鞋轻便缓震运动休闲鞋,,,,data/processed_data/鞋/images/12435610326.png,ok,400,400,false
+12439118166,鞋,斯凯奇女鞋老爹鞋运动休闲鞋 149238-NAT 自然色,舒适,,,,data/processed_data/鞋/images/12439118166.png,ok,400,400,false
+12446280120,鞋,斯凯奇 女运动休闲鞋 158896/ROS-10 双,舒适,,,,data/processed_data/鞋/images/12446280120.png,ok,400,400,false
+12439098880,鞋,斯凯奇 女透气运动休闲鞋 125644/LTPK-10 双,舒适,,,,data/processed_data/鞋/images/12439098880.png,ok,400,400,false
+12283785259,鞋,La Chessiers户外运动休闲鞋女春夏季新款透气网面百搭厚底小白鞋ins潮老爹鞋女,苏宁好品 四季网面 运费险,,,,data/processed_data/鞋/images/12283785259.png,ok,400,400,false
+12435587831,鞋,Skechers/斯凯奇男鞋新款厚底轻质缓震运动休闲鞋237121-BBK ZP,厚底轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12435587831.png,ok,400,400,false
+12435588075,鞋,Skechers/斯凯奇男鞋新款厚底熊猫鞋轻质缓震运动休闲鞋237151-TAN ZP,轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12435588075.png,ok,400,400,false
+12435595267,鞋,Skechers/斯凯奇男鞋新款健步鞋透气轻质缓震运动休闲鞋58362-BBK ZP,透气轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12435595267.png,ok,400,400,false
+12435604889,鞋,Skechers斯凯奇男新款熊猫鞋厚底防滑运动休闲鞋8790091-WBK ZP,厚底防滑运动休闲鞋,,,,data/processed_data/鞋/images/12435604889.png,ok,400,400,false
+12435588160,鞋,Skechers斯凯奇男鞋新款厚底老爹鞋透气减震运动休闲鞋237152-WHT ZP,厚底老爹鞋透气减震运动休闲鞋,,,,data/processed_data/鞋/images/12435588160.png,ok,400,400,false
+12434824769,鞋,Skechers斯凯奇女鞋新款透气网面镭射熊猫运动休闲鞋66666200-WHT ZP,透气网面镭射熊猫运动休闲鞋,,,,data/processed_data/鞋/images/12434824769.png,ok,400,400,false
+12435555298,鞋,Skechers/斯凯奇男鞋新款健步鞋轻质缓震透气运动休闲鞋216166-BBK ZP,轻质缓震透气运动休闲鞋,,,,data/processed_data/鞋/images/12435555298.png,ok,400,400,false
+12434686766,鞋,Skechers/斯凯奇女鞋新款复古厚底熊猫鞋轻质缓震运动休闲鞋11930-BBK ZP,复古厚底熊猫鞋轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12434686766.png,ok,400,400,false
+12415109276,鞋,男鞋夏季透气网鞋男士潮流板鞋网面跑步运动休闲鞋,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12415109276.png,ok,400,400,false
+12448346402,鞋,耐克(NIKE)男鞋新款运动休闲鞋V2K百搭潮流运动健身训练老爹鞋HJ4497-001 ZP,百搭潮流健身训练老爹鞋,,,,data/processed_data/鞋/images/12448346402.png,ok,400,400,false
+12434716170,鞋,Skechers斯凯奇女鞋新款复古熊猫鞋轻质缓震运动休闲鞋149094-TNV ZP,复古熊猫鞋轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12434716170.png,ok,400,400,false
+12435589531,鞋,Skechers斯凯奇男鞋新款系带轻便透气舒适运动休闲鞋52631-BBK ZP,轻便透气舒适运动休闲鞋,,,,data/processed_data/鞋/images/12435589531.png,ok,400,400,false
+12435613476,鞋,Skechers斯凯奇男鞋新款透气轻便减震软底休闲鞋运动老爹鞋894272-BBK ZP,透气轻便减震软底休闲鞋运动老爹鞋,,,,data/processed_data/鞋/images/12435613476.png,ok,400,400,false
+12448534908,鞋,耐克(NIKE)女鞋新款板鞋Dunk Low经典低帮轻便透气耐磨运动休闲鞋HJ5787-001 ZP,经典低帮轻便透气耐磨,,,,data/processed_data/鞋/images/12448534908.png,ok,400,400,false
+12450560303,鞋,阿迪达斯(adidas)三叶草男女鞋新款网面透气轻便耐磨老爹鞋低帮运动休闲鞋FY2023 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12450560303.png,ok,400,400,false
+12434824515,鞋,Skechers/斯凯奇女鞋新款复古熊猫鞋轻质缓震运动休闲鞋66666179-BKW ZP,复古熊猫鞋轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12434824515.png,ok,400,400,false
+12434985848,鞋,Adidas/阿迪达斯三叶草男女鞋复古百搭轻便休闲鞋运动板鞋H03472 ZP,复古百搭轻便休闲鞋运动板鞋,,,,data/processed_data/鞋/images/12434985848.png,ok,400,400,false
+12363176072,鞋,NIKE耐克 SB BLZR Court男鞋 时尚潮流百搭舒适透气支撑回弹耐磨防滑低帮运动休闲鞋板鞋CV1658-105,海外直邮 正品保证 支持鉴定 到货周期4-6周左右,,,,data/processed_data/鞋/images/12363176072.png,ok,400,400,false
+12434678831,鞋,斯凯奇女鞋新款玛丽珍单鞋蕾丝透气一脚穿运动休闲鞋100022-GRY ZP,透气一脚穿运动休闲鞋,,,,data/processed_data/鞋/images/12434678831.png,ok,400,400,false
+12434684925,鞋,Skechers/斯凯奇女鞋新款熊猫鞋轻质缓震透气运动休闲鞋117366-WBK ZP,轻质缓震透气运动休闲鞋,,,,data/processed_data/鞋/images/12434684925.png,ok,400,400,false
+12434687152,鞋,Skechers/斯凯奇女鞋新款复古厚底熊猫鞋轻质缓震运动休闲鞋11931-BBK ZP,轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12434687152.png,ok,400,400,false
+12434687916,鞋,Skechers/斯凯奇女鞋新款厚底老爹鞋轻质缓震运动休闲鞋11936-NAT ZP,轻质缓震运动休闲鞋,,,,data/processed_data/鞋/images/12434687916.png,ok,400,400,false
+12435555267,鞋,Skechers/斯凯奇男鞋新款网面透气缓震运动健步鞋休闲鞋 216065-BBK ZP,网面透气缓震运动健步鞋休闲鞋,,,,data/processed_data/鞋/images/12435555267.png,ok,400,400,false
+12447805038,鞋,斯凯奇 男运动轻便休闲鞋 118300/DKGY-10 双,舒适,,,,data/processed_data/鞋/images/12447805038.png,ok,400,400,false
+12431242772,鞋,361°女鞋运动鞋新款透气网布休闲鞋轻便百搭运动健步鞋,直降到底,,,,data/processed_data/鞋/images/12431242772.png,ok,400,400,false
+12434717150,鞋,Skechers斯凯奇女鞋新款时尚运动透气减震休闲鞋149389-BKW ZP,时尚运动透气减震休闲鞋,,,,data/processed_data/鞋/images/12434717150.png,ok,400,400,false
+12445296598,鞋,耐克(NIKE)Court Vision 男鞋时尚低帮小白鞋街头休闲鞋轻便舒适运动板鞋 ZP,街头休闲鞋轻便舒适运动板鞋,,,,data/processed_data/鞋/images/12445296598.png,ok,400,400,false
+12434448331,鞋,安德玛UA男鞋新款训练鞋运动透气低帮鞋轻便休闲鞋3027341-002 ZP,透气低帮鞋轻便休闲鞋,,,,data/processed_data/鞋/images/12434448331.png,ok,400,400,false
+12435379228,鞋,adidas阿迪达斯三叶草男女鞋新款舒适百搭运动低帮老爹鞋休闲鞋 IG1504 ZP,舒适百搭运动低帮老爹鞋休闲鞋,,,,data/processed_data/鞋/images/12435379228.png,ok,400,400,false
+12435604608,鞋,Skechers/斯凯奇熊猫鞋男鞋新款复古运动厚底老爹鞋休闲鞋666114-BKGD ZP,新款复古运动厚底老爹鞋休闲鞋,,,,data/processed_data/鞋/images/12435604608.png,ok,400,400,false
+12451092213,鞋,斯凯奇 男子轻便运动跑步训练休闲鞋 220848/NVY-8.5双,舒适,,,,data/processed_data/鞋/images/12451092213.png,ok,400,400,false
+12451092477,鞋,斯凯奇 男子轻便运动跑步训练休闲鞋 220848/TPBK-8.5双,舒适,,,,data/processed_data/鞋/images/12451092477.png,ok,400,400,false
+12451148673,鞋,彪马(PUMA)男鞋女鞋新款板鞋情侣鞋缓震耐磨休闲鞋低帮运动平底鞋397444-15 ZP,轻便舒适，时尚百搭；耐磨橡胶底，持久耐用；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12451148673.png,ok,400,400,false
+12451365696,鞋,361°女鞋运动新款女休闲鞋682516715,舒适透气，轻便耐磨；多种颜色选择，时尚百搭；适合日常多种场合穿着；,,,,data/processed_data/鞋/images/12451365696.png,ok,400,400,false
+12448300548,鞋,耐克(NIKE)男鞋新款CUPSOLE运动生活系列百搭舒适休闲鞋板鞋FQ8075-133 ZP,百搭 舒适,,,,data/processed_data/鞋/images/12448300548.png,ok,400,400,false
+12451093211,鞋,斯凯奇 男子轻便运动跑步训练休闲鞋 220848/WBK-8.5 双,舒适,,,,data/processed_data/鞋/images/12451093211.png,ok,400,400,false
+12435620815,鞋,SKECHERS斯凯奇女子新款运动时尚透气一脚蹬休闲鞋896020-BKW ZP,时尚透气一脚蹬休闲鞋,,,,data/processed_data/鞋/images/12435620815.png,ok,400,400,false
+12452687714,鞋,361°女休闲鞋新款361阿甘鞋复古运动风女鞋582426706 羽毛白/原力蓝 35码,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452687714.png,ok,400,400,false
+12435002892,鞋,Adidas阿迪达斯男鞋新款运动网面透气减震老爹鞋休闲鞋 JP5661 ZP,网面透气减震老爹鞋休闲鞋,,,,data/processed_data/鞋/images/12435002892.png,ok,400,400,false
+12450564925,鞋,阿迪达斯(adidas)Originals三叶草男女通款休闲鞋新品CAMPUS 00S 经典运动板鞋JQ4109 ZP,轻便舒适透气 时尚潮流 复古,,,,data/processed_data/鞋/images/12450564925.png,ok,400,400,false
+11818328008,鞋,双星四季男士休闲鞋舒适透气女网面运动一脚蹬懒人鞋B2033,夏季一脚蹬懒人休闲鞋,,,,data/processed_data/鞋/images/11818328008.png,ok,400,400,false
+12451197172,鞋,彪马(PUMA)女鞋新款轻便出行休闲鞋低帮缓震耐磨平底鞋运动板鞋404361-01 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12451197172.png,ok,400,400,false
+12435587449,鞋,Skechers斯凯奇男鞋新款运动鞋厚底老爹鞋复古休闲鞋轻便减震健步鞋237067-CCBK ZP,复古休闲鞋轻便减震健步鞋,,,,data/processed_data/鞋/images/12435587449.png,ok,400,400,false
+12448330043,鞋,耐克(NIKE)男鞋新款AIR MAX VERSE气垫鞋时尚低帮轻便运动鞋休闲鞋FV1302-001 ZP,时尚低帮轻便,,,,data/processed_data/鞋/images/12448330043.png,ok,400,400,false
+12060316857,鞋,双星运动鞋透气新款运动鞋女跑步鞋轻便网面休闲鞋2049,防滑耐磨 舒适透气,,,,data/processed_data/鞋/images/12060316857.png,ok,400,400,false
+12073809091,鞋,双星运动鞋秋季男透气网面跑步鞋防水飞织网鞋休闲鞋子男,防滑耐磨 舒适透气,,,,data/processed_data/鞋/images/12073809091.png,ok,400,400,false
+12452930753,鞋,361°女鞋运动鞋新款休闲鞋子小白鞋透气百搭板鞋女款 羽毛白/杏茶色 35码,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12452930753.png,ok,400,400,false
+12452298890,鞋,蝴蝶鞋丨361°运动鞋女网面透气厚底增高老爹鞋休闲鞋子女鞋,轻盈透气，久穿不累脚,,,,data/processed_data/鞋/images/12452298890.png,ok,400,400,false
+12398277521,鞋,361°板鞋运动鞋新款鞋子休闲鞋百搭小白鞋女空军一号女鞋,直降到底,,,,data/processed_data/鞋/images/12398277521.png,ok,400,400,false
+12450037956,鞋,361°女鞋运动鞋新款女加毛运动生活鞋582446627A,直降到底,,,,data/processed_data/鞋/images/12450037956.png,ok,400,400,false
+12300098970,鞋,男鞋2021新款夏季帆布潮板鞋男款潮流运动休闲懒人布鞋,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12300098970.png,ok,400,400,false
+12449313350,鞋,风禾3.0丨361°女鞋运动鞋新款鞋子休闲鞋德训鞋小白鞋女板鞋,直降到底,,,,data/processed_data/鞋/images/12449313350.png,ok,400,400,false
+12435620302,鞋,Skechers/斯凯奇女鞋厚底复古熊猫鞋轻质缓震休闲鞋 149227-OFWT ...,复古熊猫鞋轻质缓震休闲鞋,,,,data/processed_data/鞋/images/12435620302.png,ok,400,400,false
+12436108957,鞋,彪马(PUMA)男鞋女鞋新款缓震舒适低帮运动鞋复古休闲鞋 374127-01 ZP,缓震舒适低帮运动鞋复古休闲鞋,,,,data/processed_data/鞋/images/12436108957.png,ok,400,400,false
+11876299653,鞋,双星休闲鞋女款夏季薄款小白鞋透气皮面百搭平底板鞋ins潮韩版原宿B2042,此款偏小一码 建议加大一码,,,,data/processed_data/鞋/images/11876299653.png,ok,400,400,false
+12300098638,鞋,男童飞织跑步鞋潮流儿童鞋子男韩版网面透气运动鞋男休闲鞋,【618大促】满100减5元，进店购买,,,,data/processed_data/鞋/images/12300098638.png,ok,400,400,false
+12451379459,鞋,恐龙鞋丨361°女鞋运动鞋新款休闲鞋子厚底百搭平底板鞋女款,轻便舒适；耐磨耐穿；时尚百搭；,,,,data/processed_data/鞋/images/12451379459.png,ok,400,400,false
+12452363037,鞋,酥饼2.0丨361°男鞋运动鞋男网面透气复古老爹鞋潮流休闲鞋鞋子,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452363037.png,ok,400,400,false
+12435582831,鞋,Skechers斯凯奇男鞋健步鞋新款网面透气运动鞋低帮休闲鞋232106-BBK ZP,网面透气运动鞋低帮休闲鞋,,,,data/processed_data/鞋/images/12435582831.png,ok,400,400,false
+12452688205,鞋,361°女鞋运动鞋新款休闲鞋百搭厚底板鞋小白鞋女板鞋,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12452688205.png,ok,400,400,false
+12451379434,鞋,361°女鞋小白鞋透气不闷脚运动鞋网面鞋子休闲鞋板鞋,轻便舒适，时尚百搭，耐磨防滑；,,,,data/processed_data/鞋/images/12451379434.png,ok,400,400,false
+12435619467,鞋,Skechers斯凯奇女鞋新款厚底熊猫鞋减震运动鞋时尚经典休闲鞋11959-BKW ZP,减震运动鞋时尚经典休闲鞋,,,,data/processed_data/鞋/images/12435619467.png,ok,400,400,false
+12448565931,鞋,耐克(NIKE)女鞋新款AF1运动鞋轻便耐磨低帮板鞋时尚潮流休闲鞋CI0919-121 ZP,轻便耐磨时尚潮流,,,,data/processed_data/鞋/images/12448565931.png,ok,400,400,false
+12448668935,鞋,361°女鞋运动鞋新款女休闲鞋582436701,直降到底,,,,data/processed_data/鞋/images/12448668935.png,ok,400,400,false
+12450637574,鞋,阿迪达斯(adidas)女鞋新款GRAND COURT运动鞋低帮板鞋耐磨休闲鞋KJ2065 ZP,复古潮流时尚 舒适耐磨,,,,data/processed_data/鞋/images/12450637574.png,ok,400,400,false
+12448338893,鞋,耐克(NIKE)男鞋NIKE DUNK LOW RETRO轻便低帮休闲运动滑板鞋 HF5441-202 ZP,轻便低帮休闲运动滑板鞋,,,,data/processed_data/鞋/images/12448338893.png,ok,400,400,false
+12448550447,鞋,耐克(NIKE)女鞋新款运动鞋复古时尚PACIFIC低帮轻便耐磨休闲鞋HM4771-105 ZP,复古时尚轻便耐磨,,,,data/processed_data/鞋/images/12448550447.png,ok,400,400,false
+12448528382,鞋,沙丘丨361°板鞋男鞋运动鞋新款情侣鞋潮流休闲鞋百搭鞋子女,直降到底,,,,data/processed_data/鞋/images/12448528382.png,ok,400,400,false
+12451377686,鞋,361°女鞋透气运动鞋新款网面鞋子休闲鞋小白鞋百搭板鞋女,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12451377686.png,ok,400,400,false
+12451377718,鞋,鲨鱼鞋丨361°男鞋运动鞋新款鞋子休闲鞋百搭帆布鞋透气板鞋,舒适透气，轻便百搭，耐磨耐用；,,,,data/processed_data/鞋/images/12451377718.png,ok,400,400,false
+12442420148,鞋,361°女鞋运动鞋透气休闲鞋鞋子板鞋女生潮流百搭,直降到底,,,,data/processed_data/鞋/images/12442420148.png,ok,400,400,false
+12452362701,鞋,灵眸pro丨361°铁豆女鞋运动鞋防滑休闲鞋男士老爹鞋子新,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12452362701.png,ok,400,400,false
+12435298712,鞋,Adidas阿迪达斯三叶草男鞋女鞋新款舒适百搭老爹鞋休闲鞋IH3375 ZP,舒适百搭老爹鞋休闲鞋,,,,data/processed_data/鞋/images/12435298712.png,ok,400,400,false
+12450810658,鞋,耐克(NIKE)男鞋新款运动鞋健身训练缓震透气潮流时尚跑步休闲鞋IO9416-001 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12450810658.png,ok,400,400,false
+12452307100,鞋,挽风丨361°德训鞋男鞋运动鞋透气新款鞋子休闲鞋百搭板鞋男,轻盈透气，久穿不累脚,,,,data/processed_data/鞋/images/12452307100.png,ok,400,400,false
+12448318047,鞋,耐克(Nike)男鞋新款运动鞋潮流缓震低帮网面透气休闲鞋IB2765-001 ZP,潮流缓震网面透气休闲鞋,,,,data/processed_data/鞋/images/12448318047.png,ok,400,400,false
+12449124494,鞋,斯凯奇女款休闲休闲鞋117687/NAT-5.5双,舒适,,,,data/processed_data/鞋/images/12449124494.png,ok,400,400,false
+12451197210,鞋,彪马(PUMA)板鞋女鞋新款BELLA薄底鞋复古潮流时尚休闲鞋运动鞋402673-02 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12451197210.png,ok,400,400,false
+12449124933,鞋,斯凯奇女款休闲休闲鞋加绒168021/NTBK-7.5双,舒适,,,,data/processed_data/鞋/images/12449124933.png,ok,400,400,false
+12449125657,鞋,斯凯奇女款休闲休闲鞋117687/LTGY-5.5双,舒适,,,,data/processed_data/鞋/images/12449125657.png,ok,400,400,false
+12449132659,鞋,斯凯奇女款休闲休闲鞋150122/ROS-5双,舒适,,,,data/processed_data/鞋/images/12449132659.png,ok,400,400,false
+12449132668,鞋,斯凯奇女款休闲休闲鞋加绒168021/LTPK-9.5双,舒适,,,,data/processed_data/鞋/images/12449132668.png,ok,400,400,false
+12449125658,鞋,斯凯奇男款休闲休闲鞋8790230/BBK-10双,舒适,,,,data/processed_data/鞋/images/12449125658.png,ok,400,400,false
+12449138946,鞋,斯凯奇男款休闲休闲鞋237622/GYNV-10双,舒适,,,,data/processed_data/鞋/images/12449138946.png,ok,400,400,false
+12449144723,鞋,斯凯奇男款休闲休闲鞋232673/BBK-10双,舒适,,,,data/processed_data/鞋/images/12449144723.png,ok,400,400,false
+12449151966,鞋,斯凯奇男款休闲休闲鞋232225/BBK-9.5双,舒适,,,,data/processed_data/鞋/images/12449151966.png,ok,400,400,false
+12449144743,鞋,斯凯奇女款休闲休闲鞋加绒168021/WMLT-5双,舒适,,,,data/processed_data/鞋/images/12449144743.png,ok,400,400,false
+12449152356,鞋,斯凯奇女款休闲休闲鞋158590/MVE-10双,舒适,,,,data/processed_data/鞋/images/12449152356.png,ok,400,400,false
+12449155830,鞋,斯凯奇女款休闲休闲鞋加绒168015/NAT-10双,舒适,,,,data/processed_data/鞋/images/12449155830.png,ok,400,400,false
+12449200227,鞋,斯凯奇男款休闲休闲鞋118226/BBK-7双,舒适,,,,data/processed_data/鞋/images/12449200227.png,ok,400,400,false
+12449208105,鞋,斯凯奇女款休闲休闲鞋加绒168015/BBK-7.5双,舒适,,,,data/processed_data/鞋/images/12449208105.png,ok,400,400,false
+12449248252,鞋,斯凯奇女款休闲休闲鞋177387/RSGD-10双,舒适,,,,data/processed_data/鞋/images/12449248252.png,ok,400,400,false
+12449256823,鞋,斯凯奇女款休闲休闲鞋185323W/WBK-10双,舒适,,,,data/processed_data/鞋/images/12449256823.png,ok,400,400,false
+12450124054,鞋,361°女鞋运动鞋新款女休闲鞋582416716,直降到底,,,,data/processed_data/鞋/images/12450124054.png,ok,400,400,false
+12449256837,鞋,斯凯奇男款休闲休闲鞋254154W/WBK-10双,舒适,,,,data/processed_data/鞋/images/12449256837.png,ok,400,400,false
+12450565009,鞋,阿迪达斯(adidas)男鞋女鞋新款时尚经典轻便休闲鞋 BREAK START潮流透气运动鞋JQ5302 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12450565009.png,ok,400,400,false
+12450564766,鞋,阿迪达斯 (adidas) 三叶草男女鞋新款经典贝壳头板鞋休闲鞋JQ3220 ZP,舒适缓震，时尚百搭；轻便透气，持久耐穿；运动休闲，多场合适用；,,,,data/processed_data/鞋/images/12450564766.png,ok,400,400,false
+12450610803,鞋,阿迪达斯(adidas)三叶草男鞋女鞋新款跑步运动鞋时尚厚底耐磨轻便休闲鞋JI0308 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12450610803.png,ok,400,400,false
+12450611430,鞋,阿迪达斯(adidas)三叶草女鞋男鞋新款复古潮流耐磨透气运动休闲低帮板鞋BD7633 ZP,复古潮流 耐磨透气,,,,data/processed_data/鞋/images/12450611430.png,ok,400,400,false
+12450614437,鞋,阿迪达斯(adidas)三叶草板鞋男鞋女鞋新款贝壳头一脚蹬休闲鞋轻便运动鞋HQ8750 ZP,轻便舒适；耐磨防滑；时尚百搭；,,,,data/processed_data/鞋/images/12450614437.png,ok,400,400,false
+12450613747,鞋,阿迪达斯(adidas)男鞋女鞋新款户外百搭板鞋时尚潮流休闲鞋低帮厚底滑板鞋KH9021 ZP,时尚潮流 百搭,,,,data/processed_data/鞋/images/12450613747.png,ok,400,400,false
+12450614638,鞋,阿迪达斯(adidas)男鞋新款运动鞋轻便耐磨低帮复古板鞋时尚潮流休闲鞋ID6285 ZP,轻便舒适，时尚百搭，耐磨防滑；,,,,data/processed_data/鞋/images/12450614638.png,ok,400,400,false
+12450614961,鞋,阿迪达斯(adidas)三叶草男鞋女鞋新款CITY RNR运动鞋时尚厚底休闲鞋JI0836 ZP,轻便舒适 ；耐磨防滑 ；时尚百搭 ；,,,,data/processed_data/鞋/images/12450614961.png,ok,400,400,false
+12450617156,鞋,阿迪达斯(adidas)男鞋女鞋新款健身训练运动鞋低帮轻便舒适休闲鞋潮流复古板鞋IE9044 ZP,轻便舒适；耐磨防滑；时尚百搭；,,,,data/processed_data/鞋/images/12450617156.png,ok,400,400,false
+12450617311,鞋,阿迪达斯(adidas)男鞋女鞋新款运动鞋时尚潮流舒适轻便户外健身休闲网球鞋板鞋休闲鞋JR0543 ZP,时尚潮流 舒适轻便,,,,data/processed_data/鞋/images/12450617311.png,ok,400,400,false
+12450629685,鞋,阿迪达斯(adidas)三叶草女鞋新款运动鞋轻便舒适时尚潮流休闲鞋JH7300 ZP,时尚潮流 轻便舒适,,,,data/processed_data/鞋/images/12450629685.png,ok,400,400,false
+12451116201,鞋,斯凯奇 女软底轻便休闲鞋 117572/-5 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451094285,鞋,斯凯奇 女网面运动小白鞋 128607/-7.5 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451115484,鞋,斯凯奇 男轻便透气休闲鞋 216166/-10 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451115361,鞋,斯凯奇 女夏季透气休闲鞋 117509/-7 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451116252,鞋,斯凯奇 女轻便透气休闲鞋 150220/-10 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451120269,鞋,斯凯奇 浅口休闲鞋女鞋 158896/-5 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451120272,鞋,斯凯奇 男运动休闲跑步鞋 210281-8 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451118790,鞋,斯凯奇 女一脚蹬休闲鞋 117561/-10 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451120279,鞋,斯凯奇 男士运动老爹鞋 894193/-10 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147333,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-10 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147331,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-9 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147322,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-8 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147334,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-11 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147336,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-12 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147383,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-13 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147384,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-14 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147385,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-15 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147386,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-16 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147387,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-17 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147391,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-18 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147392,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-19 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147456,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-21 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147484,鞋,彪马(PUMA)男鞋女鞋新款运动鞋复古潮流时尚健身训练透气跑步休闲鞋403146-06 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12451147484.png,ok,400,400,false
+12451147407,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-20 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451147522,鞋,斯凯奇 男网面闪穿休闲鞋 118300/-22 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451154689,鞋,彪马(PUMA)男鞋女鞋新款运动鞋情侣鞋低帮板鞋时尚潮流休闲鞋395205-12 ZP,轻便舒适；时尚百搭；耐磨防滑；,,,,data/processed_data/鞋/images/12451154689.png,ok,400,400,false
+12451154954,鞋,彪马(PUMA)板鞋男鞋女鞋新款户外时尚运动鞋耐磨透气休闲鞋402647-01 ZP,轻便舒适；时尚百搭；耐磨防滑；,,,,data/processed_data/鞋/images/12451154954.png,ok,400,400,false
+12451163806,鞋,彪马(PUMA)男鞋女鞋新款运动鞋低帮舒适板鞋时尚潮流复古情侣款休闲鞋402630-01 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12451163806.png,ok,400,400,false
+12451156671,鞋,彪马(PUMA)男鞋女鞋新款运动鞋跑步健身训练鞋复古潮流时尚透气休闲鞋397432-05 ZP,轻便舒适，时尚百搭；耐磨橡胶底，持久耐用；透气网面，保持脚部干爽；,,,,data/processed_data/鞋/images/12451156671.png,ok,400,400,false
+12441684760,鞋,斯凯奇 女士休闲运动鞋 180271-LTGY 36.5 浅灰色 单位:双,"避震,轻质,轻便,耐磨",,,,data/processed_data/鞋/images/12441684760.png,ok,400,400,false
+12451165952,鞋,彪马(PUMA)板鞋男鞋女鞋新款运动鞋低帮简约鞋舒适轻便休闲鞋309668-05 ZP,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12451165952.png,ok,400,400,false
+12445317653,鞋,斯凯奇 女鞋新款一脚蹬 117572/OFWT-5 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445317653.png,ok,400,400,false
+12439119515,鞋,斯凯奇 男轻便透气跑步鞋220375/BBK-11双,舒适,,,,data/processed_data/鞋/images/12439119515.png,ok,400,400,false
+12444722816,鞋,斯凯奇 女春季厚底老爹鞋 13141-WNT7 双,舒适透气时尚百搭,,,,data/processed_data/鞋/images/12444722816.png,ok,400,400,false
+12445317935,鞋,斯凯奇 女夏季透气运动鞋 117572/WHT-10 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445317935.png,ok,400,400,false
+12445318334,鞋,斯凯奇 女春秋耐磨老爹鞋 896180/WHT-8 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445318334.png,ok,400,400,false
+12445319756,鞋,斯凯奇 女黑色潮流熊猫鞋 896180/BKW-6 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445319756.png,ok,400,400,false
+12445318501,鞋,斯凯奇 女网面透气软底鞋 117572/LAV-6 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445318501.png,ok,400,400,false
+12445318371,鞋,斯凯奇 女夏季白色老爹鞋 896180/OFWT-7 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445318371.png,ok,400,400,false
+12445176974,鞋,斯凯奇 女夏季跑步鞋 149692/OFWT-10 双,舒适,,,,data/processed_data/鞋/images/12445176974.png,ok,400,400,false
+12445320757,鞋,斯凯奇 夏季透气休闲男鞋 232262/BLK-8 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445320757.png,ok,400,400,false
+12445124338,鞋,斯凯奇 男户外徒步鞋 54450/BKCC-8.5 单位:双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445124338.png,ok,400,400,false
+12445124354,鞋,斯凯奇 男鞋减震运动鞋 118077/CCL-10 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445124354.png,ok,400,400,false
+12445124494,鞋,斯凯奇 女鞋夏季新款 150125/BLK-10 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445124494.png,ok,400,400,false
+12445125379,鞋,斯凯奇 男缓震轻便运动鞋 8790258/CCBK-9双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445125379.png,ok,400,400,false
+12445124602,鞋,斯凯奇 女闪穿轻便健步鞋 150125/LTMV-10 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445124602.png,ok,400,400,false
+12445125098,鞋,斯凯奇女款休闲熊猫鞋99999863/WNV-6双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445125098.png,ok,400,400,false
+12445125647,鞋,斯凯奇 女时尚舒适运动鞋 180147/TPE-10 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445125647.png,ok,400,400,false
+12445125860,鞋,斯凯奇 女轻便耐磨运动鞋 180147/NVCL-6 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445125860.png,ok,400,400,false
+12446079521,鞋,健卡侬乒乓球鞋 J16 双,减震 防滑,,,,data/processed_data/鞋/images/12446079521.png,ok,400,400,false
+12445125928,鞋,斯凯奇 女户外网面徒步鞋 180147/GYPK-5 双,舒适透气时尚简约,,,,data/processed_data/鞋/images/12445125928.png,ok,400,400,false
+12445478211,鞋,斯凯奇 男鞋春季跑步鞋 118227/BBK-10 双,舒适,,,,data/processed_data/鞋/images/12445478211.png,ok,400,400,false
+12445478622,鞋,斯凯奇 男休闲透气运动鞋 216258/NVY-11 双,舒适,,,,data/processed_data/鞋/images/12445478622.png,ok,400,400,false
+12445478851,鞋,斯凯奇 男春季网面跑步鞋 216258/BLK-11 双,舒适,,,,data/processed_data/鞋/images/12445478851.png,ok,400,400,false
+12445478872,鞋,斯凯奇 男灰色网面跑步鞋 216258/GRY-10 双,舒适,,,,data/processed_data/鞋/images/12445478872.png,ok,400,400,false
+12445542433,鞋,斯凯奇 女网面健步运动鞋 12615-NVPK85 双,舒适,,,,data/processed_data/鞋/images/12445542433.png,ok,400,400,false
+12445548488,鞋,斯凯奇 女新款网面健步鞋 117561/BBK-10 双,舒适,,,,data/processed_data/鞋/images/12445548488.png,ok,400,400,false
+12445548697,鞋,斯凯奇 减震耐磨运动鞋 117561/NAT-10 双,舒适,,,,data/processed_data/鞋/images/12445548697.png,ok,400,400,false
+12449094056,鞋,斯凯奇女款休闲熊猫鞋11959-WHT10双,舒适,,,,data/processed_data/鞋/images/12449094056.png,ok,400,400,false
+12445548737,鞋,斯凯奇 女一脚蹬健步鞋 117561/MVE-5 双,舒适,,,,data/processed_data/鞋/images/12445548737.png,ok,400,400,false
+12448263960,鞋,斯凯奇 女夏季透气熊猫鞋 11959-BKW9 双,舒适,,,,data/processed_data/鞋/images/12448263960.png,ok,400,400,false
+12449094391,鞋,斯凯奇男款休闲健步鞋118308/BBK-10双,舒适,,,,data/processed_data/鞋/images/12449094391.png,ok,400,400,false
+12449095082,鞋,斯凯奇女款休闲健步鞋150480/BKPR-10双,舒适,,,,data/processed_data/鞋/images/12449095082.png,ok,400,400,false
+12449095403,鞋,斯凯奇女款休闲熊猫鞋加绒167595/BURG-5.5双,舒适,,,,data/processed_data/鞋/images/12449095403.png,ok,400,400,false
+12449095585,鞋,斯凯奇女款跑步运动鞋128280W/BKPR-10双,舒适,,,,data/processed_data/鞋/images/12449095585.png,ok,400,400,false
+12449098078,鞋,斯凯奇女款跑步运动鞋149542-MVE6双,舒适,,,,data/processed_data/鞋/images/12449098078.png,ok,400,400,false
+12449098300,鞋,斯凯奇女款休闲熊猫鞋150243/TAN-5双,舒适,,,,data/processed_data/鞋/images/12449098300.png,ok,400,400,false
+12449098087,鞋,斯凯奇女款休闲熊猫鞋加绒167570/BKNT-5.5双,舒适,,,,data/processed_data/鞋/images/12449098087.png,ok,400,400,false
+12449100402,鞋,斯凯奇女款跑步运动鞋150475/NAT-10双,舒适,,,,data/processed_data/鞋/images/12449100402.png,ok,400,400,false
+12449098302,鞋,斯凯奇女款休闲熊猫鞋150243/OFWT-5.5双,舒适,,,,data/processed_data/鞋/images/12449098302.png,ok,400,400,false
+12449100407,鞋,斯凯奇女款户外徒步鞋180271/NTMT-5双,舒适,,,,data/processed_data/鞋/images/12449100407.png,ok,400,400,false
+12449113127,鞋,斯凯奇男款休闲商务皮鞋77156/BLK-7双,舒适,,,,data/processed_data/鞋/images/12449113127.png,ok,400,400,false
+12449100482,鞋,斯凯奇女款休闲熊猫鞋加绒150244/NTGR-10双,舒适,,,,data/processed_data/鞋/images/12449100482.png,ok,400,400,false
+12449100479,鞋,斯凯奇女款户外徒步鞋180271/LTGY-10双,舒适,,,,data/processed_data/鞋/images/12449100479.png,ok,400,400,false
+12449113283,鞋,斯凯奇女款休闲老爹鞋149491/BKW-5.5双,舒适,,,,data/processed_data/鞋/images/12449113283.png,ok,400,400,false
+12449113284,鞋,斯凯奇男款休闲运动鞋51715/OFWT-11.5双,舒适,,,,data/processed_data/鞋/images/12449113284.png,ok,400,400,false
+12449115298,鞋,斯凯奇男款休闲运动鞋232699/BKRD-10双,舒适,,,,data/processed_data/鞋/images/12449115298.png,ok,400,400,false
+12449114628,鞋,斯凯奇女款休闲熊猫鞋13143-GYBL55双,舒适,,,,data/processed_data/鞋/images/12449114628.png,ok,400,400,false
+12449115645,鞋,斯凯奇女款休闲熊猫鞋加绒76555/WHT-5.5双,舒适,,,,data/processed_data/鞋/images/12449115645.png,ok,400,400,false
+12449115542,鞋,斯凯奇男款休闲健步鞋118300/BLK-10双,舒适,,,,data/processed_data/鞋/images/12449115542.png,ok,400,400,false
+12449119995,鞋,斯凯奇男款跑步运动鞋232919/CCBK-6.5双,舒适,,,,data/processed_data/鞋/images/12449119995.png,ok,400,400,false
+12449120083,鞋,斯凯奇女款户外徒步鞋180149/GRN-5.5双,舒适,,,,data/processed_data/鞋/images/12449120083.png,ok,400,400,false
+12449120716,鞋,斯凯奇男款休闲熊猫鞋237152/WNVR-10双,舒适,,,,data/processed_data/鞋/images/12449120716.png,ok,400,400,false
+12451027196,鞋,斯凯奇男款休闲健步鞋54600-BKW8双,舒适,,,,data/processed_data/鞋/images/12451027196.png,ok,400,400,false
+12449120097,鞋,斯凯奇女款户外徒步鞋180149/NAT-10双,舒适,,,,data/processed_data/鞋/images/12449120097.png,ok,400,400,false
+12451027286,鞋,斯凯奇男款休闲健步鞋54600-NVGY7双,舒适,,,,data/processed_data/鞋/images/12451027286.png,ok,400,400,false
+12451027426,鞋,斯凯奇男款休闲健步鞋8790000/CHAR-7双,舒适,,,,data/processed_data/鞋/images/12451027426.png,ok,400,400,false
+12451073155,鞋,斯凯奇 男款休闲健步鞋216323/BKGY-7双,舒适,,,,data/processed_data/鞋/images/12451073155.png,ok,400,400,false
+12451073389,鞋,斯凯奇 女款休闲熊猫鞋896204/BKGD-10双,舒适,,,,data/processed_data/鞋/images/12451073389.png,ok,400,400,false
+12451073391,鞋,斯凯奇 女减震轻便健步鞋 150224/GYMT-10 双,舒适,,,,data/processed_data/鞋/images/12451073391.png,ok,400,400,false
+12451073700,鞋,斯凯奇 女款休闲熊猫鞋896121/WBK-7.5双,舒适,,,,data/processed_data/鞋/images/12451073700.png,ok,400,400,false
+12451073671,鞋,斯凯奇 女款休闲熊猫鞋150243/LAV-10双,舒适,,,,data/processed_data/鞋/images/12451073671.png,ok,400,400,false
+12451073692,鞋,斯凯奇 男缓震健步鞋54600-BBK115双,舒适,,,,data/processed_data/鞋/images/12451073692.png,ok,400,400,false
+12451073702,鞋,斯凯奇 男轻便缓震跑步鞋8790357/OFWT-8.5双,舒适,,,,data/processed_data/鞋/images/12451073702.png,ok,400,400,false
+12451073871,鞋,斯凯奇 女款休闲熊猫鞋150538/LGLV-5双,舒适,,,,data/processed_data/鞋/images/12451073871.png,ok,400,400,false
+12451073898,鞋,斯凯奇 女轻便软底健步鞋124686/TPE-6.5双,舒适,,,,data/processed_data/鞋/images/12451073898.png,ok,400,400,false
+12451074018,鞋,斯凯奇 女款休闲熊猫鞋13167/NTOL-5.5双,舒适,,,,data/processed_data/鞋/images/12451074018.png,ok,400,400,false
+12451074632,鞋,斯凯奇 女缓震耐磨跑步鞋 897963/BBK-6.5双,舒适,,,,data/processed_data/鞋/images/12451074632.png,ok,400,400,false
+12451074633,鞋,斯凯奇 女款休闲熊猫鞋88888250/BBK-6.5双,舒适,,,,data/processed_data/鞋/images/12451074633.png,ok,400,400,false
+12451075003,鞋,斯凯奇 男时尚休闲跑步鞋221141/WHT-8.5双,舒适,,,,data/processed_data/鞋/images/12451075003.png,ok,400,400,false
+12451074856,鞋,斯凯奇 男户外休闲鞋237622/TPBK-10双,舒适,,,,data/processed_data/鞋/images/12451074856.png,ok,400,400,false
+12451075183,鞋,斯凯奇 男休闲跑步鞋220854/WBK-10双,舒适,,,,data/processed_data/鞋/images/12451075183.png,ok,400,400,false
+12451075179,鞋,斯凯奇 男一脚穿健步鞋216700/TPE-10.5双,舒适,,,,data/processed_data/鞋/images/12451075179.png,ok,400,400,false
+12451075027,鞋,斯凯奇 男舒适跑步鞋232642/BKW-8.5双,舒适,,,,data/processed_data/鞋/images/12451075027.png,ok,400,400,false
+12451182919,鞋,彪马(PUMA)男鞋女鞋新款运动鞋时尚轻便网面透气耐磨户外休闲鞋400235-01 ZP,轻便舒适；时尚百搭；耐磨耐用；,,,,data/processed_data/鞋/images/12451182919.png,ok,400,400,false
+12451120281,鞋,斯凯奇 男黑色网面透气鞋 216268/-12 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451120282,鞋,斯凯奇 男黑色透气运动鞋 216258/-11 双,舒适,,,,data/processed_data/鞋/images/12451082262.png,ok,400,400,false
+12451351399,鞋,361°女鞋运动鞋新款女复古文化鞋682526764,轻便舒适，时尚百搭，耐磨耐用；,,,,data/processed_data/鞋/images/12451351399.png,ok,400,400,false
+12452296228,鞋,361°女鞋运动鞋新款女小白鞋板鞋682526610F,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452296228.png,ok,400,400,false
+12452300346,鞋,361°女鞋运动鞋新款女复古文化鞋682526776,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452300346.png,ok,400,400,false
+12451367843,鞋,361°运动鞋女新款复古轻便老爹鞋防泼水防滑休闲女鞋鞋子,轻便舒适；时尚百搭；耐磨耐穿；,,,,data/processed_data/鞋/images/12451367843.png,ok,400,400,false
+12452298870,鞋,天鹅鞋丨361°芭蕾运动鞋女网面薄底银色休闲女德训鞋子,轻盈缓震，久穿不累,,,,data/processed_data/鞋/images/12452298870.png,ok,400,400,false
+12452306387,鞋,361°女鞋运动鞋新款女复古文化鞋682516772F,轻盈透气，久穿不累,,,,data/processed_data/鞋/images/12452306387.png,ok,400,400,false
+12452306842,鞋,361°运动鞋女鞋新款女复古文化鞋582516763,轻盈缓震，久走不累,,,,data/processed_data/鞋/images/12452306842.png,ok,400,400,false
+12452306869,鞋,361°运动鞋女鞋新款女复古文化鞋582516780,轻盈透气，久穿不累；防滑耐磨，户外轻松应对；简约百搭，日常通勤更显活力；,,,,data/processed_data/鞋/images/12452306869.png,ok,400,400,false
+12452306966,鞋,361°女运动鞋新款女复古文化鞋682426776,轻盈透气，久穿不累；防滑耐磨，户外轻松应对；简约百搭，日常通勤更显时尚；,,,,data/processed_data/鞋/images/12452306966.png,ok,400,400,false
+12448048832,鞋,端固 休闲鞋迷彩解放鞋橡胶底低帮单鞋劳保鞋 HH006/双,劳保鞋,,,,data/processed_data/鞋/images/12448048832.png,ok,400,400,false
+12441448920,鞋,极星健 休闲鞋 JXJ-LSDL-Z310 双,防滑,,,,data/processed_data/鞋/images/12441448920.png,ok,400,400,false
+12452513515,鞋,极星健 休闲鞋 JX-03 双,轻盈透气、久穿不累、防滑耐磨,,,,data/processed_data/鞋/images/12452513515.png,ok,400,400,false
+12448049334,鞋,端固 羊毛防寒鞋尺码36-46 HH014 双,防寒鞋,,,,data/processed_data/鞋/images/12448049334.png,ok,400,400,false
+12448048850,鞋,端固 劳保鞋防滑工作鞋 HH007 双,劳保鞋,,,,data/processed_data/鞋/images/12448048850.png,ok,400,400,false
+12442419806,鞋,鑫捷登 男女休闲运动鞋 AGRY-at122525583-5 1双,减震防滑舒适,,,,data/processed_data/鞋/images/12442419806.png,ok,400,400,false
+12277179697,鞋,La Chessiers户外羽毛球鞋2025新款男鞋透气减震防滑耐磨超轻训练低帮运动鞋网球情侣鞋大码 白绿 42码,专业羽毛球鞋 运动动感线条 让运动更快乐,"木板地面,塑胶地面,水泥地面",,,data/processed_data/鞋/images/12277179697.png,ok,400,400,false
+12446566244,鞋,健卡侬羽毛球鞋JK26,防滑 缓震 舒适,木板地面,,,data/processed_data/鞋/images/12446566244.png,ok,400,400,false
+12278580999,鞋,La Chessiers户外羽毛球鞋男鞋新款情侣鞋女士鞋子透气防滑低帮运动鞋 黄色 41码,情侣羽毛球鞋 多色可选 运费险,木板地面,,,data/processed_data/鞋/images/12278580999.png,ok,400,400,false
+12446047510,鞋,健卡侬羽毛球鞋JX26/双,舒适,木板地面,,,data/processed_data/鞋/images/12446047510.png,ok,400,400,false
+12446725121,鞋,健卡侬羽毛球鞋男J34/双,舒适,木板地面,,,data/processed_data/鞋/images/12446725121.png,ok,400,400,false
+12446732330,鞋,健卡侬 羽毛球鞋 J25/双,舒适,木板地面,,,data/processed_data/鞋/images/12446732330.png,ok,400,400,false
+12447745592,鞋,健卡侬羽毛球鞋JA1,透气 舒适,木板地面,,,data/processed_data/鞋/images/12447745592.png,ok,400,400,false
+12374926434,鞋,La Chessiers户外网球鞋男鞋春夏透气耐磨女情侣款专业羽毛球鞋超轻减震运动大码训练鞋 蓝色 42码,苏宁好品 透气网球鞋 运费险,,,,data/processed_data/鞋/images/12374926434.png,ok,400,400,false
+12278586347,鞋,La Chessiers户外2025新款网球鞋男鞋透气减震训练球情侣鞋运动休闲鞋大码 白绿 41码,2024新款 情侣大码 专业网球鞋,,,,data/processed_data/鞋/images/12278586347.png,ok,400,400,false
 B06X9STHNG,鞋,亚马逊品牌 - 搜索。女士皮革封闭式鞋头高跟鞋，多色女士蓝色，5 UK,,find.,多彩 女款 蓝色,,data/processed_data/鞋/images/81iZlv3bjpL.jpg,ok,2560,1969,false
 B01MTEI8M6,鞋,The Fix 亚马逊品牌 女款 法式花卉刺绣 套脚乐福鞋，哈瓦那棕，6.5 B US码,,The Fix,哈瓦那棕,,data/processed_data/鞋/images/714CmIfKIYL.jpg,ok,868,1779,false
 B07J2BHRNW,鞋,Richter 儿童鞋 Bios，男女童通用拖鞋 米色（灰褐色） 42 EU,,find.,米色 灰褐色 灰褐色,,data/processed_data/鞋/images/71QExDBDozL.jpg,ok,2560,1969,false

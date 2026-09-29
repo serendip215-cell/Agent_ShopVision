@@ -7,7 +7,7 @@ raw_data/
 ├── Amazon_data/
 │   ├── products.csv
 │   ├── images/                  # 原始图片 1,158 张
-│   ├── images_cutout/           # 抠图试跑输出（5 张 PNG + cutout_map.csv）
+│   ├── images_cutout/           # 抠图试跑输出（5 张 PNG）
 │   └── image_quality_report.csv
 ├── Amazon_data_translated/
 │   ├── products.csv             # 中文翻译结果，图片路径指向 Amazon_data/images/
@@ -21,6 +21,7 @@ raw_data/
 ├── Suning_data/
 │   ├── products.csv
 │   ├── images/                  # 封面图 4,303 张
+│   ├── images_cutout/           # 抠图输出 PNG
 │   └── image_quality_report.csv
 ├── 数据集训练阶段详细规划.md      # 从原始数据到中文图文检索训练数据的处理顺序
 └── README.md
@@ -38,7 +39,7 @@ raw_data/
 差异：
 
 - Amazon_data_translated/ 不带 `images/` 和 `image_quality_report.csv`，`products.csv` 的 `local_image_path` 直接指向 `Amazon_data/images/`（图片不重复存）；
-- Amazon_data/images_cutout/ 是抠图试跑输出（含 `cutout_map.csv` 对照表），完整用法见 `scripts/README.md` 第 5 节；
+- Amazon_data/images_cutout/ 是抠图试跑输出，分类时可通过 `--cutout` 按路径规则直接使用；
 - Suning_data 在共同字段之外另含 `price`、`description`、`source_url`、`crawl_date` 列（价格接口未开放，`price` 留空）。
 
 ## `products.csv` 当前字段

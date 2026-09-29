@@ -1,4 +1,4 @@
-﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,is_cleaned
+﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,is_readed
 muge_2532,包,小背包男斜挎小号,,,,,data/processed_data/包/images/2532.jpg,ok,224,224,false
 muge_6563,包,书包密码锁 学生 防盗,,,,,data/processed_data/包/images/6563.jpg,ok,224,224,false
 muge_7298,包,妈咪电脑包,,,,,data/processed_data/包/images/7298.jpg,ok,224,224,false
@@ -224,6 +224,7 @@ muge_383323,包,书包女韩版高中潮牌 少女,,,,,data/processed_data/包/i
 muge_385373,包,牟钉双肩包双拉链,,,,,data/processed_data/包/images/385373.jpg,ok,224,224,false
 muge_386560,包,穿山甲背包,,,,,data/processed_data/包/images/386560.jpg,ok,224,224,false
 muge_388165,包,aj13书包宽31高49厚20,,,,,data/processed_data/包/images/388165.jpg,ok,224,224,false
+muge_394602,包,nova5pro手机壳背包,,,,,data/processed_data/包/images/394602.jpg,ok,224,224,false
 muge_394931,包,双肩包女夏天皮,,,,,data/processed_data/包/images/394931.jpg,ok,224,224,false
 muge_398747,包,兔迷狼舍双肩背包2021,,,,,data/processed_data/包/images/398747.jpg,ok,224,224,false
 muge_399021,包,小学上书包轻便护脊,,,,,data/processed_data/包/images/399021.jpg,ok,224,224,false
@@ -235,6 +236,7 @@ muge_404025,包,推的书包女孩子,,,,,data/processed_data/包/images/404025.
 muge_406886,包,男包双肩包个性,,,,,data/processed_data/包/images/406886.jpg,ok,224,224,false
 muge_408668,包,书包挂 龙猫,,,,,data/processed_data/包/images/408668.jpg,ok,224,224,false
 muge_409298,包,爬楼书包初中 三轮,,,,,data/processed_data/包/images/409298.jpg,ok,224,224,false
+muge_411116,包,iphone7plus手机壳背包,,,,,data/processed_data/包/images/411116.jpg,ok,224,224,false
 muge_412001,包,背包配件肩带鳄鱼,,,,,data/processed_data/包/images/412001.jpg,ok,224,224,false
 muge_412179,包,旅行包包女 短途迷你,,,,,data/processed_data/包/images/412179.jpg,ok,224,224,false
 muge_413551,包,背包女帆布小,,,,,data/processed_data/包/images/413551.jpg,ok,224,224,false
@@ -273,6 +275,7 @@ muge_468292,包,初一书包 男孩,,,,,data/processed_data/包/images/468292.jp
 muge_472436,包,书包幼儿园女蛋壳,,,,,data/processed_data/包/images/472436.jpg,ok,224,224,false
 muge_473775,包,防水尼龙布双肩包,,,,,data/processed_data/包/images/473775.jpg,ok,224,224,false
 muge_474069,包,背包燈,,,,,data/processed_data/包/images/474069.jpg,ok,224,224,false
+muge_476537,包,书包置物架落地 家用,,,,,data/processed_data/包/images/476537.jpg,ok,224,224,false
 muge_477062,包,小娜书包,,,,,data/processed_data/包/images/477062.jpg,ok,224,224,false
 muge_477564,包,代购书包女可爱轻便,,,,,data/processed_data/包/images/477564.jpg,ok,224,224,false
 muge_477764,包,电滑板车背包,,,,,data/processed_data/包/images/477764.jpg,ok,224,224,false
@@ -364,7 +367,7 @@ muge_629750,包,斜挎大包女 大容量书包,,,,,data/processed_data/包/imag
 muge_632098,包,大容量双肩包中老年女,,,,,data/processed_data/包/images/632098.jpg,ok,224,224,false
 muge_632132,包,宝宝书包北欧,,,,,data/processed_data/包/images/632132.jpg,ok,224,224,false
 muge_632453,包,网红编制背包,,,,,data/processed_data/包/images/632453.jpg,ok,224,224,false
-muge_635560,包,书包女大容量休闲,,,,,data/processed_data/包/images/635560.jpg,ok,224,224,false
+muge_635560,包,书包女大容量休闲,,,,,data/processed_data/包/images/538650.jpg,ok,224,224,false
 muge_635998,包,出旅双肩包,,,,,data/processed_data/包/images/635998.jpg,ok,224,224,false
 muge_636327,包,皮卡丘书包挂件公仔一套,,,,,data/processed_data/包/images/636327.jpg,ok,224,224,false
 muge_636557,包,亮面双肩背包,,,,,data/processed_data/包/images/636557.jpg,ok,224,224,false
@@ -468,6 +471,7 @@ muge_778362,包,书包男初中生路飞,,,,,data/processed_data/包/images/7783
 muge_778439,包,可折叠抽绳背包尼龙,,,,,data/processed_data/包/images/778439.jpg,ok,224,224,false
 muge_780816,包,结实书包女大学生,,,,,data/processed_data/包/images/780816.jpg,ok,224,224,false
 muge_785096,包,攝影背包 30l,,,,,data/processed_data/包/images/785096.jpg,ok,224,224,false
+muge_791829,包,零钱包手机壳苹果11 背包式,,,,,data/processed_data/包/images/791829.jpg,ok,224,224,false
 muge_793275,包,制服书包,,,,,data/processed_data/包/images/793275.jpg,ok,224,224,false
 muge_793378,包,初中生双肩背包男,,,,,data/processed_data/包/images/793378.jpg,ok,224,224,false
 muge_793689,包,小背包女水桶包,,,,,data/processed_data/包/images/793689.jpg,ok,224,224,false
@@ -510,6 +514,7 @@ muge_848931,包,双肩包男 帆布,,,,,data/processed_data/包/images/848931.jp
 muge_849411,包,书包罩 防水,,,,,data/processed_data/包/images/849411.jpg,ok,224,224,false
 muge_850105,包,网红小背包男,,,,,data/processed_data/包/images/850105.jpg,ok,224,224,false
 muge_860341,包,进击的巨人双肩包,,,,,data/processed_data/包/images/860341.jpg,ok,224,224,false
+muge_860611,包,书包柜 实木,,,,,data/processed_data/包/images/860611.jpg,ok,224,224,false
 muge_870339,包,多口袋双肩包女,,,,,data/processed_data/包/images/870339.jpg,ok,224,224,false
 muge_870960,包,双肩包轻便 女 超轻时尚旅行,,,,,data/processed_data/包/images/870960.jpg,ok,224,224,false
 muge_871161,包,迷你小背包 男,,,,,data/processed_data/包/images/871161.jpg,ok,224,224,false
@@ -658,3 +663,669 @@ muge_1111793,包,大容量侧背包,,,,,data/processed_data/包/images/1111793.j
 muge_1117004,包,北尾狐书包带,,,,,data/processed_data/包/images/1117004.jpg,ok,224,224,false
 muge_1119515,包,骑行背包双肩,,,,,data/processed_data/包/images/1119515.jpg,ok,224,224,false
 muge_1123427,包,儿童背包女孩迷你,,,,,data/processed_data/包/images/1123427.jpg,ok,224,224,false
+12452469352,包,权仁之巅 双肩背包 灰色 16寸 个,轻量化设计，背负舒适不压肩；,,,,data/processed_data/包/images/12452469352.png,ok,400,400,false
+12436116262,包,艾庄双肩包AZ667,时尚耐磨便捷,,,,data/processed_data/包/images/12436116262.png,ok,400,400,false
+12442517988,包,佳美良品 双肩背包 JM03/ 个,结实耐用牢固,,,,data/processed_data/包/images/12442517988.png,ok,400,400,false
+12448594111,包,耐克(NIKE)双肩包男女包新款运动包户外旅行包电脑背包初高中学生书包DD0559-010 ZP,旅行包电脑背包学生书包,,,,data/processed_data/包/images/12448594111.png,ok,400,400,false
+12443063234,包,精萱亿品 双肩背包 MG1/个,多功能收纳,,,,data/processed_data/包/images/12443063234.png,ok,400,400,false
+12443064167,包,精萱亿品 休闲双肩背包 MG2/个,时尚潮流,,,,data/processed_data/包/images/12443064167.png,ok,400,400,false
+12446102203,包,健卡侬双肩包J87/个,减压 干湿分离 透气,,,,data/processed_data/包/images/12446102203.png,ok,400,400,false
+12443065159,包,精萱亿品 时尚双肩背包 MG3/个,时尚潮流 结实耐用,,,,data/processed_data/包/images/12443065159.png,ok,400,400,false
+12445791090,包,惠铁大容量20寸旅游背包密码双肩包 B027 个,大容量20寸旅游背包密码双肩包,,,,data/processed_data/包/images/12445791090.png,ok,400,400,false
+12442784908,包,精萱亿品 80L双肩背包MY3/个,多层收纳 干湿分离,,,,data/processed_data/包/images/12442784908.png,ok,400,400,false
+12450462408,包,男女双肩包 防水出差旅行收纳包 9003/个,防水设计；大容量多隔层；舒适背负系统；,,,,data/processed_data/包/images/12450462408.png,ok,400,400,false
+12432142079,包,艾庄双肩包通勤包AZ7725 黑色,反光耐磨大容量,,,,data/processed_data/包/images/12432142079.png,ok,400,400,false
+12447173080,包,优诗提念YSTN-DNB05百搭多功能双肩包(计价单位:个)米白色,双肩包,,,,data/processed_data/包/images/12447173080.png,ok,400,400,false
+12435806685,包,Adidas阿迪达斯男女包新款背包运动包休闲包双肩包书包IP9774 ZP,新款背包运动包休闲包双肩包书包,,,,data/processed_data/包/images/12435806685.png,ok,400,400,false
+12368029034,包,COACH蔻驰男士双肩包时尚气质 迪士尼人物 日常背负男士运动双肩包C8490 COCOA,海外直邮 正品保证,,,,data/processed_data/包/images/12368029034.png,ok,400,400,false
+12447173182,包,优诗提念YSTN-DNB04双肩背包(计价单位:个)灰色,双肩背包,,,,data/processed_data/包/images/12447173182.png,ok,400,400,false
+12435798776,包,Adidas阿迪达斯男女同款新款双肩包大容量学生书包户外运动背包IX6802 ZP,新款双肩包大容量学生书包户外运动背包,,,,data/processed_data/包/images/12435798776.png,ok,400,400,false
+12435987180,包,Puma/彪马男包女包新款大容量运动休闲双肩包电脑包学生书包075487-01 ZP,休闲双肩包电脑包学生书包,,,,data/processed_data/包/images/12435987180.png,ok,400,400,false
+12448018401,包,洛安斯 背包 双肩包 Las-801 个,双肩包 Las-801,,,,data/processed_data/包/images/12448018401.png,ok,400,400,false
+12435999346,包,PUMA彪马男女包新款运动包学生书包休闲背包双肩包090803-01 ZP,学生书包休闲背包双肩包,,,,data/processed_data/包/images/12435999346.png,ok,400,400,false
+12453118273,包,权仁之巅 背包 灰色 16寸 个,轻量化设计，背负舒适不压肩；,,,,data/processed_data/包/images/12453118273.png,ok,400,400,false
+12451145662,包,健卡侬徒步背包JT41/个,防水户外亮眼,,,,data/processed_data/包/images/12451145662.png,ok,400,400,false
+12446261080,包,铁迅时尚休闲双肩包SQ2 个,新品,,,,data/processed_data/包/images/12446261080.png,ok,400,400,false
+12453232465,包,HXHX HX8665 35*26*14cm 背包(计价单位:个) 橙色,双肩背 反光条 防水功能,,,,data/processed_data/包/images/12453232465.png,ok,400,400,false
+12433682378,包,威豹 学生双肩包 2731/个,威豹 学生双肩包 2731/个,,,,data/processed_data/包/images/12433682378.png,ok,400,400,false
+12441615777,包,威豹 双肩包 39030/个,威豹 双肩包 39030/个,,,,data/processed_data/包/images/12441615777.png,ok,400,400,false
+12434568470,包,步宽 商务双肩包 H1152,步宽 商务双肩包 H1152,,,,data/processed_data/包/images/12434568470.png,ok,400,400,false
+12446157787,包,铁迅双肩包AQ41 个,新商品上架,,,,data/processed_data/包/images/12446157787.png,ok,400,400,false
+12443086859,包,威豹 14英寸电脑双肩包 29726/个,威豹 14英寸电脑双肩包 29726/个,,,,data/processed_data/包/images/12443086859.png,ok,400,400,false
+12444064562,包,围盛 双肩包 45*30*25cm 个,实用,,,,data/processed_data/包/images/12444064562.png,ok,400,400,false
+12444064040,包,围盛 背包双肩包 46*20*32cm 个,实用,,,,data/processed_data/包/images/12444064040.png,ok,400,400,false
+12444064669,包,围盛 双肩包 黑色 个,实用,,,,data/processed_data/包/images/12444064669.png,ok,400,400,false
+12446263330,包,铁迅男士双肩包SQ11 个,新品,,,,data/processed_data/包/images/12446263330.png,ok,400,400,false
+12446263452,包,铁迅超轻双肩包SQ13 个,新品,,,,data/processed_data/包/images/12446263452.png,ok,400,400,false
+12444368899,包,围盛 登山包双肩背包 52*21*35cm 个,实用,,,,data/processed_data/包/images/12444368899.png,ok,400,400,false
+12442799115,包,精萱亿品工具背包 MY6/个,耐磨,,,,data/processed_data/包/images/12442799115.png,ok,400,400,false
+12450090250,包,锐远晟 大背包 行李包 普通款 /个,大容量收纳方便,,,,data/processed_data/包/images/12450090250.png,ok,400,400,false
+12441450648,包,探路者 云野20升背包 TEBBAN80301/个,探路者 云野20升背包 TEBBAN80301/个,,,,data/processed_data/包/images/12441450648.png,ok,400,400,false
+12444369308,包,围盛 登山包双肩包 50*19*30cm 个,实用,,,,data/processed_data/包/images/12444369308.png,ok,400,400,false
+12451336045,包,健身运动收纳包女干湿分离防水收纳袋泳衣泳包游泳背包户外1085,健身运动收纳包,,,,data/processed_data/包/images/12451336045.png,ok,400,400,false
+12451596728,包,游泳包干湿分离女健身背包泳包泳衣专用防水收纳袋男海边运动1085,双肩包干湿分离女健身背包,,,,data/processed_data/包/images/12451596728.png,ok,400,400,false
+12427501537,包,稳帆甄选 时尚休闲双肩包 B8001/个,稳帆甄选 时尚休闲双肩包 B8001/个,,,,data/processed_data/包/images/12427501537.png,ok,400,400,false
+12433622056,包,威豹 17英寸电脑双肩包 29811/个,威豹 17英寸电脑双肩包 29811/个,,,,data/processed_data/包/images/12433622056.png,ok,400,400,false
+12433631970,包,威豹 15.75英寸学生双肩包 2778/个,威豹 15.75英寸学生双肩包 2778/个,,,,data/processed_data/包/images/12433631970.png,ok,400,400,false
+12433649063,包,威豹 15.6英寸电脑双肩包 29989/个,威豹 15.6英寸电脑双肩包 29989/个,,,,data/processed_data/包/images/12433649063.png,ok,400,400,false
+12433650645,包,威豹 17.3英寸电脑双肩包 29991/个,威豹 17.3英寸电脑双肩包 29991/个,,,,data/processed_data/包/images/12433650645.png,ok,400,400,false
+12434367445,包,威豹 19.2寸休闲双肩包 31593/个,威豹 19.2寸休闲双肩包 31593/个,,,,data/processed_data/包/images/12434367445.png,ok,400,400,false
+12433682239,包,威豹 学生双肩包 2730/个,威豹 学生双肩包 2730/个,,,,data/processed_data/包/images/12433682239.png,ok,400,400,false
+12434367448,包,威豹 17寸休闲双肩包 31683/个,威豹 17寸休闲双肩包 31683/个,,,,data/processed_data/包/images/12434367448.png,ok,400,400,false
+12434387990,包,步宽 商务双肩包 H1129,步宽 商务双肩包 H1129,,,,data/processed_data/包/images/12434387990.png,ok,400,400,false
+12435401332,包,步宽 15.6英寸商务双肩包 H1130/个,步宽 15.6英寸商务双肩包 H1130/个,,,,data/processed_data/包/images/12435401332.png,ok,400,400,false
+12435455653,包,步宽 15.6英寸商务双肩包 H1131/个,步宽 15.6英寸商务双肩包 H1131/个,,,,data/processed_data/包/images/12435455653.png,ok,400,400,false
+12438321853,包,威豹 21寸休闲双肩包 31365/个,威豹 21寸休闲双肩包 31365/个,,,,data/processed_data/包/images/12438321853.png,ok,400,400,false
+12440219473,包,鋆珑 双肩背包 电脑包 JL-ZP03 个,多功能双肩包 大容量 舒适提手 防水 牛津布,,,,data/processed_data/包/images/12440219473.png,ok,400,400,false
+12441803414,包,铁迅双肩背包H68 个,新商品上架,,,,data/processed_data/包/images/12441803414.png,ok,400,400,false
+12443086670,包,威豹 15英寸电脑双肩包 29148/个,威豹 15英寸电脑双肩包 29148/个,,,,data/processed_data/包/images/12443086670.png,ok,400,400,false
+12441896069,包,铁迅双肩背包 K1/个,新品,,,,data/processed_data/包/images/12441896069.png,ok,400,400,false
+12444063004,包,围盛 双肩包背包 46*32*16cm 个,实用,,,,data/processed_data/包/images/12444063004.png,ok,400,400,false
+12444063594,包,围盛 双肩包 43*12*31cm 个,实用,,,,data/processed_data/包/images/12444063594.png,ok,400,400,false
+12444063786,包,围盛 双肩包商务背包 30*45*14cm 个,实用,,,,data/processed_data/包/images/12444063786.png,ok,400,400,false
+12444063827,包,围盛 双肩包背包 17寸 个,实用,,,,data/processed_data/包/images/12444063827.png,ok,400,400,false
+12444063988,包,围盛 背包双肩包 48*17*30cm 个,实用,,,,data/processed_data/包/images/12444063988.png,ok,400,400,false
+12444064062,包,围盛 双肩包书包 42*12*30cm 个,实用,,,,data/processed_data/包/images/12444064062.png,ok,400,400,false
+12435425754,包,围盛 背包 55*31*20cm 个,便捷,,,,data/processed_data/包/images/12435425754.png,ok,400,400,false
+12444064100,包,围盛 双肩包 46*32*15cm 个,实用,,,,data/processed_data/包/images/12444064100.png,ok,400,400,false
+12444064112,包,围盛 双肩包 45*12*30cm 个,实用,,,,data/processed_data/包/images/12444064112.png,ok,400,400,false
+12435432020,包,围盛 背包 30*42*12cm 个,便捷,,,,data/processed_data/包/images/12435432020.png,ok,400,400,false
+12435432080,包,围盛 背包 46*30*18cm 个,便捷,,,,data/processed_data/包/images/12435432080.png,ok,400,400,false
+12435432678,包,围盛 背包 42*15*30cm 个,便捷,,,,data/processed_data/包/images/12435432678.png,ok,400,400,false
+12435432081,包,围盛 背包 BYA98-1 个,便捷,,,,data/processed_data/包/images/12435432081.png,ok,400,400,false
+12435432689,包,围盛 背包 黑44*13*29cm 个,便捷,,,,data/processed_data/包/images/12435432689.png,ok,400,400,false
+12435432926,包,围盛 女士背包 黑色 个,便捷,,,,data/processed_data/包/images/12435432926.png,ok,400,400,false
+12444791267,包,极星健 背包 多仓 个,多仓,,,,data/processed_data/包/images/12444791267.png,ok,400,400,false
+12447659012,包,亿洛莱 户外背包 37*20*59cm 个,亿洛莱 户外背包 37*20*59cm 个,,,,data/processed_data/包/images/12447659012.png,ok,400,400,false
+12447659391,包,亿洛莱 运动背包 36*20*61cm 个,亿洛莱 运动背包 36*20*61cm 个,,,,data/processed_data/包/images/12447659391.png,ok,400,400,false
+12447714061,包,亿洛莱 可折叠背包 26*12*38cm 个,亿洛莱 可折叠背包 26*12*38cm 个,,,,data/processed_data/包/images/12447714061.png,ok,400,400,false
+12447714068,包,亿洛莱 背包 26*12*38cm 个,亿洛莱 背包 26*12*38cm 个,,,,data/processed_data/包/images/12447714068.png,ok,400,400,false
+12448063209,包,酷美智悦 户外双肩信封包290*170*430mm KM-BH772 个,酷美智悦 户外双肩信封包290*170*430mm KM-BH772 个,,,,data/processed_data/包/images/12448063209.png,ok,400,400,false
+12449261499,包,极星健 背包 B10 个,多仓,,,,data/processed_data/包/images/12449261499.png,ok,400,400,false
+12449620844,包,极星健 背包 B6 个,多仓,,,,data/processed_data/包/images/12449620844.png,ok,400,400,false
+12449621482,包,极星健 背包 30 L 个,多仓,,,,data/processed_data/包/images/12449621482.png,ok,400,400,false
+12449621485,包,极星健 背包 X01 个,多仓,,,,data/processed_data/包/images/12449621482.png,ok,400,400,false
+12447659377,包,亿洛莱 户外登山包 36*20*61cm 个,亿洛莱 户外登山包 36*20*61cm 个,,,,data/processed_data/包/images/12447659377.png,ok,400,400,false
+12444063996,包,围盛 背包 48*16*32cm 个,实用,,,,data/processed_data/包/images/12444063996.png,ok,400,400,false
+12444064706,包,围盛 背包 42*30*14cm 个,实用,,,,data/processed_data/包/images/12444064706.png,ok,400,400,false
+12444064295,包,围盛 背包 42*13*30cm 个,实用,,,,data/processed_data/包/images/12444064295.png,ok,400,400,false
+12444064541,包,围盛 背包旅行包 42*30*12cm 个,实用,,,,data/processed_data/包/images/12444064541.png,ok,400,400,false
+12444064718,包,围盛 背包 46*16*31cm 个,实用,,,,data/processed_data/包/images/12444064718.png,ok,400,400,false
+12450297297,包,围盛 登山包旅行包 40L 个,实用,,,,data/processed_data/包/images/12450297297.png,ok,400,400,false
+12450382085,包,围盛 登山包旅行背包 33*20*53.5cm 个,实用,,,,data/processed_data/包/images/12450382085.png,ok,400,400,false
+12450382087,包,围盛 登山包运动背包 51*32*20cm 个,实用,,,,data/processed_data/包/images/12450382087.png,ok,400,400,false
+12450382266,包,围盛 运动背包登山包 45*27*14cm 个,实用,,,,data/processed_data/包/images/12450382266.png,ok,400,400,false
+12450382277,包,围盛 登山包 44*26*10cm 个,实用,,,,data/processed_data/包/images/12450382277.png,ok,400,400,false
+12450382275,包,围盛 徒步包登山包 35L 个,实用,,,,data/processed_data/包/images/12450382275.png,ok,400,400,false
+12450382287,包,围盛 折叠背包登山包 44*28*15cm 个,实用,,,,data/processed_data/包/images/12450382287.png,ok,400,400,false
+12450382367,包,围盛 登山包折叠收纳包 27*12*44.5cm 个,实用,,,,data/processed_data/包/images/12450382367.png,ok,400,400,false
+12430161160,包,围盛 登山包 40寸 个,便携,,,,data/processed_data/包/images/12430161160.png,ok,400,400,false
+12452035295,包,围盛 迷你运动背包 BYA99-9 个,实用,,,,data/processed_data/包/images/12452035295.png,ok,400,400,false
+12444372786,包,围盛 折叠登山包旅行背包 20L 个,实用,,,,data/processed_data/包/images/12444372786.png,ok,400,400,false
+12451965706,包,东升美辰 迷彩户外登山包 DS-BH817 个,东升美辰 迷彩户外登山包 DS-BH817 个,,,,data/processed_data/包/images/12451965706.png,ok,400,400,false
+12434743991,包,围盛 背包户外登山包 40L 个,便携,,,,data/processed_data/包/images/12434743991.png,ok,400,400,false
+12439922736,包,猎豹双肩包LB180/个,多功能收纳,,,,data/processed_data/包/images/12439922736.png,ok,400,400,false
+12439922522,包,猎豹 双肩背包 工具包 35*20*44cm胶底/个,高耐磨防泼水,,,,data/processed_data/包/images/12439922522.png,ok,400,400,false
+12439923713,包,猎豹 双肩包 L20/个,防泼水大容量,,,,data/processed_data/包/images/12439923713.png,ok,400,400,false
+12439922995,包,猎豹大容量双肩包防水背包35*23*48cm/个,多功能大容皇,,,,data/processed_data/包/images/12439922995.png,ok,400,400,false
+12439929679,包,猎豹 双肩包 户外运动双肩背包 篮球包 独立鞋仓 M22/个,特能装,,,,data/processed_data/包/images/12439929679.png,ok,400,400,false
+12439927342,包,猎豹 双肩包 带鞋仓登山包 大容量户外双肩背包50L LBC2/个,用途广泛,,,,data/processed_data/包/images/12439927342.png,ok,400,400,false
+12439929131,包,猎豹束口双肩包 轻便户外登山包抽绳包运动包篮球包足球包T16/个,缓解肩部压力,,,,data/processed_data/包/images/12439929131.png,ok,400,400,false
+12439929343,包,猎豹 双肩包户外运动登山包120L LB26 个,优质面料 防刮耐磨,,,,data/processed_data/包/images/12439929343.png,ok,400,400,false
+12440151343,包,猎豹 双肩包带鞋仓登山包户外双肩背包 60L 个,透气背垫,,,,data/processed_data/包/images/12440151343.png,ok,400,400,false
+12439875208,包,猎豹 双肩背包 L8/个,减压抗震透气,,,,data/processed_data/包/images/12439875208.png,ok,400,400,false
+12439929772,包,猎豹 双肩背包 工具包 LB139/个,持久耐磨,,,,data/processed_data/包/images/12439929772.png,ok,400,400,false
+12445661733,包,猎豹 户外双肩包椅双肩背折叠凳便携包LB37Z/个,经久耐用,,,,data/processed_data/包/images/12445661733.png,ok,400,400,false
+12439915118,包,猎豹 双肩包 PU双肩背包 L010/个,好面料防泼水,,,,data/processed_data/包/images/12439915118.png,ok,400,400,false
+12439915807,包,猎豹 迷你小型双肩包轻便学生书包户外运动旅行小背包SJ-10/个,迷你轻便,,,,data/processed_data/包/images/12439915807.png,ok,400,400,false
+12439925132,包,猎豹 双肩包 商务通勤双肩背包笔记本电脑包 M21/个,多层储物空间,,,,data/processed_data/包/images/12439925132.png,ok,400,400,false
+12439917041,包,猎豹 双肩包大容量户外运动登山包 LB21/个,自由收缩拓展,,,,data/processed_data/包/images/12439917041.png,ok,400,400,false
+12439925423,包,猎豹 双肩包大容量户外登山包 LB22 个,大容量,,,,data/processed_data/包/images/12439925423.png,ok,400,400,false
+12441169035,包,拓栢 双肩包可扩容双肩背包防水电脑包17寸/个,双肩包,,,,data/processed_data/包/images/12441169035.png,ok,400,400,false
+12441169522,包,拓栢 商务双肩包电脑双肩背包TB105/个,双肩包,,,,data/processed_data/包/images/12441169522.png,ok,400,400,false
+12439926936,包,猎豹 双肩背包 LB155/个,多功能主袋,,,,data/processed_data/包/images/12439926936.png,ok,400,400,false
+12441171913,包,拓栢 双肩包男士夜光书包电脑包 B49 个,双肩包,,,,data/processed_data/包/images/12441171913.png,ok,400,400,false
+12441465619,包,拓栢 商务双肩包电脑双肩背包 TB107 个,双肩包,,,,data/processed_data/包/images/12441465619.png,ok,400,400,false
+12441470904,包,拓栢 双肩包书包电脑双肩背包TB101/个,双肩包,,,,data/processed_data/包/images/12441470904.png,ok,400,400,false
+12441535533,包,拓栢 户外运动双肩包游泳包防水数码包B21/个,双肩包,,,,data/processed_data/包/images/12441535533.png,ok,400,400,false
+12432605853,包,SUISSEWIN瑞士经典时尚商务休闲多功能双肩背包SN9017 黑色,经典耐用时尚,,,,data/processed_data/包/images/12432605853.png,ok,400,400,false
+12432606925,包,SUISSEWIN瑞士网红潮流休闲时尚离家出走双肩包SN17117 黑色,网红离家出走,,,,data/processed_data/包/images/12432606925.png,ok,400,400,false
+12441288732,包,爱路达双肩包 AL-25/个,耐脏防泼水,,,,data/processed_data/包/images/12441288732.png,ok,400,400,false
+12433024736,包,SUISSEWIN瑞士经典时尚商务休闲多功能双肩包背包SN17108 深蓝色,商务休闲轻便,,,,data/processed_data/包/images/12433024736.png,ok,400,400,false
+12447146711,包,瑞世军刀经典多功能网红校园出差商务出行双肩包SN9333 黑色,瑞世军刀经典多功能网红校园出差商务出行双肩包9333,,,,data/processed_data/包/images/12447146711.png,ok,400,400,false
+12441291483,包,爱路达双肩包书包S29/个,抗压透气减负,,,,data/processed_data/包/images/12441291483.png,ok,400,400,false
+12441290622,包,爱路达 特大双肩包行李包登山包旅行包 120L/个,大容量,,,,data/processed_data/包/images/12441290622.png,ok,400,400,false
+12440812952,包,爱路达 双肩包工具包 D10/个,耐磨防水,,,,data/processed_data/包/images/12440812952.png,ok,400,400,false
+12424018969,包,CONGERT 双肩包可扩容TYR/个 黑色,CONGERT 双肩包可扩容TYR/个,,,,data/processed_data/包/images/12424018969.png,ok,400,400,false
+12424019142,包,CONGERT 双肩包 电脑包 背包 HY/个 黑色,CONGERT 双肩包 电脑包 背包 HY/个,,,,data/processed_data/包/images/12424019142.png,ok,400,400,false
+12424140613,包,CONGERT 双肩包 应急救援包 防护包 36*25*45cm/个 红色,CONGERT 双肩包 应急救援包 防护包 36*25*45cm/个,,,,data/processed_data/包/images/12424140613.png,ok,400,400,false
+12424018773,包,CONGERT 双肩包 书包 可扩容旅行包REW/个 下单请备注颜色,CONGERT 双肩包 书包 可扩容旅行包REW/个,,,,data/processed_data/包/images/12424018773.png,ok,400,400,false
+12432822092,包,SUISSEWIN瑞士新款时尚休闲潮流炫彩轻便双肩包SNK9001 蓝色,轻便炫彩休闲,,,,data/processed_data/包/images/12432822092.png,ok,400,400,false
+12439886867,包,猎豹双肩包大学生书包LB34/个,便携出行,,,,data/processed_data/包/images/12439886867.png,ok,400,400,false
+12440189308,包,心梦同行大容量双肩包 可用百评 黑色,大容量,,,,data/processed_data/包/images/12440189308.png,ok,400,400,false
+12439916756,包,猎豹 双肩包大容量背包 LB23 个,大容量防泼水,,,,data/processed_data/包/images/12439916756.png,ok,400,400,false
+12439887058,包,猎豹 小号双肩包LB136/个,大容量·轻量化·防泼水,,,,data/processed_data/包/images/12439887058.png,ok,400,400,false
+12440846867,包,爱路达 双肩包 电脑包带反光条JHY6/个 JHY6,双肩包 电脑包带反光条,,,,data/processed_data/包/images/12440846867.png,ok,400,400,false
+12440950432,包,爱路达双肩包工具包小号AL66/个,加厚双层,,,,data/processed_data/包/images/12440950432.png,ok,400,400,false
+12440847703,包,爱路达 双肩背包商务防水电脑包尼龙双肩书包 JHY7/个 JHY7,双肩背包,,,,data/processed_data/包/images/12440847703.png,ok,400,400,false
+12439923829,包,猎豹折叠双肩包 便携登山包TBT83/个,时尚多色 轻便折叠 实用空间,,,,data/processed_data/包/images/12439923829.png,ok,400,400,false
+12440950767,包,爱路达双肩包工具包中号AL66/个,加厚耐磨,,,,data/processed_data/包/images/12440950432.png,ok,400,400,false
+12440953649,包,爱路达双肩包工具包大号AL66/个,加厚耐磨,,,,data/processed_data/包/images/12440950432.png,ok,400,400,false
+12441072717,包,爱路达 商务双肩包 双肩背包 M73/个,双肩包,,,,data/processed_data/包/images/12441072717.png,ok,400,400,false
+12441074864,包,爱路达 双肩包 工具包 高度38/32/22cm/个,大容量更能装,,,,data/processed_data/包/images/12441074864.png,ok,400,400,false
+12441084664,包,爱路达户外运动双肩包M65 /个,防刮耐磨,,,,data/processed_data/包/images/12441084664.png,ok,400,400,false
+12441085000,包,爱路达双肩包S3/个,防泼水耐磨,,,,data/processed_data/包/images/12441085000.png,ok,400,400,false
+12441085365,包,爱路达 折叠 双肩包 W9/个,简约实用,,,,data/processed_data/包/images/12441085365.png,ok,400,400,false
+12441085526,包,爱路达 双肩背包 书包 N13/个,好面料防泼水,,,,data/processed_data/包/images/12441085526.png,ok,400,400,false
+12441085742,包,爱路达双肩包M75/个,科技时尚 防水耐磨 USB充电,,,,data/processed_data/包/images/12441085742.png,ok,400,400,false
+12441085998,包,爱路达 户外登山包 双肩包 30L/个,易清洁,,,,data/processed_data/包/images/12441085998.png,ok,400,400,false
+12441086059,包,爱路达 双肩背包 AL61/个,耐磨防刮,,,,data/processed_data/包/images/12441086059.png,ok,400,400,false
+12440223187,包,铁青束口袋双肩背包 W5/个,新商品上架,,,,data/processed_data/包/images/12440223187.png,ok,400,400,false
+12438745798,包,CONGERT双肩包书包E36/个,CONGERT双肩包书包E36/个,,,,data/processed_data/包/images/12438745798.png,ok,400,400,false
+12433764966,包,瑞士新款商务休闲潮流时尚多功能双肩包SN9868,潮流休闲背包,,,,data/processed_data/包/images/12433764966.png,ok,400,400,false
+12445784028,包,铁青双肩背包T32 个 黑色,新商品上架,,,,data/processed_data/包/images/12445784028.png,ok,400,400,false
+12441185524,包,铁青多功能双肩包V1 个,新商品上架,,,,data/processed_data/包/images/12441185524.png,ok,400,400,false
+12439663814,包,铁青大容量双肩包圆桶包背包Y3 个,新商品上架,,,,data/processed_data/包/images/12439663814.png,ok,400,400,false
+12440208648,包,铁青双肩包E5 个,新商品上架,,,,data/processed_data/包/images/12440208648.png,ok,400,400,false
+12440327995,包,铁青双肩背包 TQ9 个,新商品上架,,,,data/processed_data/包/images/12440327995.png,ok,400,400,false
+12446239386,包,铁青 休闲旅行双肩包背包J84 个,便携办公 简约,,,,data/processed_data/包/images/12446239386.png,ok,400,400,false
+12446239975,包,铁青 牛津布双肩包J78 个,简约便携,,,,data/processed_data/包/images/12446239975.png,ok,400,400,false
+12424140641,包,CONGERT双肩包WET/个 黑色,CONGERT双肩包WET/个,,,,data/processed_data/包/images/12424140641.png,ok,400,400,false
+12445863208,包,铁青 商务双肩包J98 个,新品,,,,data/processed_data/包/images/12445863208.png,ok,400,400,false
+12446207552,包,铁青 简约休闲旅行双肩包J90 个,便携办公 简约,,,,data/processed_data/包/images/12446207552.png,ok,400,400,false
+12446218432,包,铁青 可扩容双肩背包J88 个,可扩容 通勤,,,,data/processed_data/包/images/12446218432.png,ok,400,400,false
+12446239501,包,铁青 大容量多功能出差双肩包J83 个,商务通勤,,,,data/processed_data/包/images/12446239501.png,ok,400,400,false
+12439663527,包,铁青双肩包D7 个,新商品上架,,,,data/processed_data/包/images/12439663527.png,ok,400,400,false
+12446239603,包,铁青 简约商务双肩包J80 个,简约商务,,,,data/processed_data/包/images/12446239603.png,ok,400,400,false
+12440207761,包,铁青休闲运动双肩包D9 个,新商品上架,,,,data/processed_data/包/images/12440207761.png,ok,400,400,false
+12446226169,包,铁青 潮流双肩包J87 个,便携办公 简约,,,,data/processed_data/包/images/12446226169.png,ok,400,400,false
+12440326496,包,铁青双肩包N58,新商品上架,,,,data/processed_data/包/images/12440326496.png,ok,400,400,false
+12446240006,包,铁青 简约轻便通勤双肩包J77 个,通勤办公,,,,data/processed_data/包/images/12446240006.png,ok,400,400,false
+12446240100,包,铁青 防水牛津布双肩包J76 个,通勤办公,,,,data/processed_data/包/images/12446240100.png,ok,400,400,false
+12446240125,包,铁青 多功能双肩包J74 个,通勤办公,,,,data/processed_data/包/images/12446240125.png,ok,400,400,false
+12439658618,包,铁青篮球足球收纳包运动背包双肩包G54 个,新商品上架,,,,data/processed_data/包/images/12439658618.png,ok,400,400,false
+12439663484,包,铁青双肩包A01 个,新商品上架,,,,data/processed_data/包/images/12439663484.png,ok,400,400,false
+12439663489,包,铁青双肩包A74 个,新商品上架,,,,data/processed_data/包/images/12439663489.png,ok,400,400,false
+12439663746,包,铁青双肩包B64 个,新商品上架,,,,data/processed_data/包/images/12439663746.png,ok,400,400,false
+12439663719,包,铁青功能大容量双肩包背囊G68 个,新商品上架,,,,data/processed_data/包/images/12439663719.png,ok,400,400,false
+12446205906,包,铁洋 双肩背包 TY-双肩背包-B004 个,铁洋 双肩背包 TY-双肩背包-B004 个,,,,data/processed_data/包/images/12446205906.png,ok,400,400,false
+12446206199,包,铁洋 双肩背包 TY-双肩背包-B007 个,铁洋 双肩背包 TY-双肩背包-B007 个,,,,data/processed_data/包/images/12446206199.png,ok,400,400,false
+12446205997,包,铁洋 双肩背包 TY-双肩背包-B006 个,铁洋 双肩背包 TY-双肩背包-B006 个,,,,data/processed_data/包/images/12446205997.png,ok,400,400,false
+12446205924,包,铁洋 双肩背包 TY-双肩背包-B005 个,铁洋 双肩背包 TY-双肩背包-B005 个,,,,data/processed_data/包/images/12446205924.png,ok,400,400,false
+12446239571,包,铁青 商务双肩包背包J82 个,商务通勤,,,,data/processed_data/包/images/12446239571.png,ok,400,400,false
+12446276721,包,铁洋 双肩背包 TY-双肩背包-B010 个,铁洋 双肩背包 TY-双肩背包-B010 个,,,,data/processed_data/包/images/12446276721.png,ok,400,400,false
+12446239583,包,铁青 商务通勤双肩包J81 个,商务通勤,,,,data/processed_data/包/images/12446239583.png,ok,400,400,false
+12447147167,包,瑞士军刀校园学院风学生减负背包书包双肩包SNK17008 酒红色,瑞士军刀校园学院风学生减负背包书包双肩包17008,,,,data/processed_data/包/images/12447147167.png,ok,400,400,false
+12447542861,包,新款跨境商务背包防水防盗电脑双肩包防磨防摔扩容大容量硬壳背包,热卖中,,,,data/processed_data/包/images/12447542861.png,ok,400,400,false
+12447177670,包,铁青防水双肩包LS6 个 黑色,简约,,,,data/processed_data/包/images/12447177670.png,ok,400,400,false
+12447933554,包,蒙企智品 双肩包 LM117/个,耐磨耐用容量充足,,,,data/processed_data/包/images/12447933554.png,ok,400,400,false
+12448388237,包,铁青骑行双肩包CC15 个,简约,,,,data/processed_data/包/images/12448388237.png,ok,400,400,false
+12448622848,包,夏澜XIALAN男士双肩包15.1-16英寸防泼水青春牛津纺双层拉链暗袋百搭休闲背负缓冲棉,休闲百搭，坚固耐劳,,,,data/processed_data/包/images/12448622848.png,ok,400,400,false
+12449293936,包,SUISSEWIN瑞士军刀新款背包时尚商务轻薄双肩包SN9025 黑色,SUISSEWIN瑞士军刀新款背包时尚商务轻薄双肩包SN9025,,,,data/processed_data/包/images/12449293936.png,ok,400,400,false
+12449293591,包,SUISSEWIN瑞士军刀新款耐用商务多功能实用双肩包SN9933 黑色,SUISSEWIN瑞士军刀新款耐用商务多功能实用双肩包SN9933,,,,data/processed_data/包/images/12449293591.png,ok,400,400,false
+12449293419,包,SUISSEWIN瑞士经典时尚耐用多功能商务休闲背包双肩包SN8351 黑色,SUISSEWIN瑞士经典时尚耐用多功能商务休闲背包双肩包SN8351,,,,data/processed_data/包/images/12449293419.png,ok,400,400,false
+12449307268,包,猎豹 户外多功能双肩包旅行包登山包 TY15/ 个,多功能,,,,data/processed_data/包/images/12449307268.png,ok,400,400,false
+12449583537,包,三人居 大容量双肩包 SRJBK026/个 黑色,大容量结实耐用双肩包,,,,data/processed_data/包/images/12449583537.png,ok,400,400,false
+12449583853,包,三人居 大容量通勤双肩包(颜色备注)SRJDS802/个 黑色,大容量防泼水多隔层,,,,data/processed_data/包/images/12449583853.png,ok,400,400,false
+12449584615,包,三人居 双肩包(颜色备注) SRJDS103/个 黑色,大容量防泼水多隔层,,,,data/processed_data/包/images/12449584615.png,ok,400,400,false
+12449584908,包,三人居 通勤双肩包 SRJYY61 个 黑色,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449584908.png,ok,400,400,false
+12449587296,包,三人居 可扩容双肩包电脑包 SRJYY62 个,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449587296.png,ok,400,400,false
+12449588482,包,三人居 大容量双肩包 SRJYY70 个,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449588482.png,ok,400,400,false
+12449598065,包,三人居 双肩包 SRJYY71 个,大容量防泼水多隔层,,,,data/processed_data/包/images/12449598065.png,ok,400,400,false
+12449600131,包,三人居 多功能扩容双肩包 SRJYY68 个,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449600131.png,ok,400,400,false
+12449608446,包,三人居 可扩容双肩包 SRJYY65 个,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449608446.png,ok,400,400,false
+12449609077,包,三人居 大容量双肩包旅行背包 SRJYY64 个,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449609077.png,ok,400,400,false
+12449611001,包,三人居 多功能通勤双肩包 SRJYY63 个,时尚休闲防泼水多隔层,,,,data/processed_data/包/images/12449611001.png,ok,400,400,false
+12449611216,包,三人居双肩包多功能收纳包SRJYY67/个,大容量多隔层双肩包,,,,data/processed_data/包/images/12449611216.png,ok,400,400,false
+12452543088,包,爱路达户外折叠双肩包登山包32*15*42cm,轻量化设计，背负无负担；大容量分区，收纳井井有条；防水耐磨材质，耐用抗造；,,,,data/processed_data/包/images/12452543088.png,ok,400,400,false
+12452546497,包,爱路达户外折叠双肩包登山包27*15*44cm,轻量化设计，背负无压力；大容量分区，收纳更有序；防水耐磨面料，耐用抗造；,,,,data/processed_data/包/images/12452546497.png,ok,400,400,false
+12452547913,包,爱路达户外折叠双肩包登山包30*15*46cm,轻量化设计，背负无负担；大容量分区，收纳井井有条；防水耐磨材质，应对日常通勤与户外出行；,,,,data/processed_data/包/images/12452547913.png,ok,400,400,false
+12452550945,包,爱路达户外可折叠双肩包登山包32*15*42cm,轻量化设计，背负无负担；大容量分区，收纳更有序；防水耐磨材质，耐用抗压；,,,,data/processed_data/包/images/12452550945.png,ok,400,400,false
+12452552407,包,爱路达户外折叠双肩包登山包40升 ALD-40L,大容量分区设计，轻松收纳日常用品；轻量化材质，背负无压力；防水耐磨面料，应对多种出行场景；,,,,data/processed_data/包/images/12452552407.png,ok,400,400,false
+12452554166,包,爱路达户外双肩包登山包30*16*50cm,轻量化设计，背负无负担；大容量分区，收纳井井有条；防水耐磨面料，户外通勤皆宜；,,,,data/processed_data/包/images/12452554166.png,ok,400,400,false
+12452626715,包,猎豹 大容量牛津布双肩背包 33*24*45cm 个,牛津布双肩包,,,,data/processed_data/包/images/12452626715.png,ok,400,400,false
+12452555844,包,爱路达户外运动双肩包登山包45升 ALD-45L,大容量分区设计，轻松收纳日常用品；轻量化材质，背负无压力；防水耐磨，适合通勤与短途出行；,,,,data/processed_data/包/images/12452555844.png,ok,400,400,false
+12452919386,包,猎豹 双肩包书包电脑背包 B30 个,耐磨材质,,,,data/processed_data/包/images/12452919386.png,ok,400,400,false
+12452990014,包,猎豹 防泼水运动健身包双肩包 LLB6 个,轻量化设计,,,,data/processed_data/包/images/12452990014.png,ok,400,400,false
+12453001186,包,猎豹 商务双肩包差旅双肩背包 30*14*42cm 个,轻量化设计,,,,data/processed_data/包/images/12453001186.png,ok,400,400,false
+12453001247,包,猎豹 双肩防护包双肩包小号 28*15*38cm 个,大容量分区设计,,,,data/processed_data/包/images/12453001247.png,ok,400,400,false
+12453001256,包,猎豹 双肩防护包双肩包大号 34*18*50cm 个,大容量分区设计,,,,data/processed_data/包/images/12453001247.png,ok,400,400,false
+12453002046,包,猎豹 户外运动健身包双肩包 LLB-6 个,轻量化设计,,,,data/processed_data/包/images/12453002046.png,ok,400,400,false
+12453078029,包,秦泰(Cqint) QTBP-03 男士 双肩包 黑色,轻便耐磨,,,,data/processed_data/包/images/12453078029.png,ok,400,400,false
+12453299840,包,心梦同行 多功能双肩包电脑包旅行通勤书包 4842/个,轻便耐磨，大容量分区设计，,,,,data/processed_data/包/images/12453299840.png,ok,400,400,false
+12453349202,包,猎豹 双肩包多功能包 LB-0903 个,防水耐磨材质,,,,data/processed_data/包/images/12453349202.png,ok,400,400,false
+12453408692,包,爱路达 黑色大容量商务双肩包 ALD9923 个,大容量,,,,data/processed_data/包/images/12453408692.png,ok,400,400,false
+12453418156,包,猎豹 渐变色潮流双肩包书包电脑背包 LCC-91 个,便携轻巧，适合旅行办公随身携带,,,,data/processed_data/包/images/12453418156.png,ok,400,400,false
+12453624844,包,三极户外(TriPolar) TP2025电脑背包户外背包多层多功能包 双肩包 1 个/个卡其色(计价单位:个),轻量化设计，背负无负担；大容量分区，收纳井井有条；防水耐磨面料，户外通勤更安心；,,,,data/processed_data/包/images/12453624844.png,ok,400,400,false
+12453625665,包,三极户外(TriPolar) TP2029男士双肩商务旅行背包电脑包多功能包 双肩包 1 个/个(计价单位:个) 黑色,轻量化设计，背负无负担；大容量分区，收纳井井有条,,,,data/processed_data/包/images/12453625665.png,ok,400,400,false
+12453626367,包,三极户外(TriPolar) TP2058男女轻便尼龙电脑包双肩背包 双肩包 1 个/个(计价单位:个),轻量化设计，背负无负担；大容量分区，收纳井井有条；防水耐磨面料,,,,data/processed_data/包/images/12453626367.png,ok,400,400,false
+12453626375,包,三极户外(TriPolar) TP2085 38*20*49cm 双肩包 1 个/个(计价单位:个) 黑色,轻量化设计，背负无负担；大容量分区，收纳井井有条；防水耐磨材质，应对日常通勤与户外出行；,,,,data/processed_data/包/images/12453626375.png,ok,400,400,false
+12446789946,包,苏宁宜品&一禾亼物通勤休闲双肩包9906 (黑),苏宁宜品&amp;一禾亼物通勤休闲双肩包9906 （黑）,,,,data/processed_data/包/images/12446789946.png,ok,400,400,false
+12385885301,包,苏宁宜品&一禾亼物户外休闲双肩背包1104(黑),苏宁宜品&amp;一禾亼物户外休闲双肩背包1104（黑）,,,,data/processed_data/包/images/12385885301.png,ok,400,400,false
+12453649718,包,猎豹 双肩包 LB26929-2 个,大容量分区,,,,data/processed_data/包/images/12453649718.png,ok,400,400,false
+12442546311,包,新秀丽(samsonite) 男士商务 旅行休闲双肩包 防泼水大容量笔记本电脑包 NU4*09021 黑色,新秀丽(samsonite) 男士商务 旅行休闲双肩包 防泼水大容量笔记本电脑包 NU4*,,,,data/processed_data/包/images/12442546311.png,ok,400,400,false
+12442253909,包,苏宁宜品商务双肩包1701黑色,苏宁宜品商务双肩包1701黑色,,,,data/processed_data/包/images/12442253909.png,ok,400,400,false
+12451326182,包,大容量商务旅行出差通勤夜光防水干湿分离鞋仓扩容扩展充电脑背包 黑色,热卖中,,,,data/processed_data/包/images/12451326182.png,ok,400,400,false
+12440295107,包,铁青防水大容量商务旅行背包D5 个,新商品上架,,,,data/processed_data/包/images/12440295107.png,ok,400,400,false
+12440219599,包,铁青 背包 V8 个,新商品上架,,,,data/processed_data/包/images/12440219599.png,ok,400,400,false
+12445890214,包,铁青 大容量户外背包J100 个,新品,,,,data/processed_data/包/images/12445890214.png,ok,400,400,false
+12439658680,包,铁青背包U6 个,新商品上架,,,,data/processed_data/包/images/12439658680.png,ok,400,400,false
+12446206935,包,铁青 多功能USB迷彩背包J91 个,便携办公 简约,,,,data/processed_data/包/images/12446206935.png,ok,400,400,false
+12445783940,包,铁青工具包双肩工具背包E67 个 黑色,新商品上架,,,,data/processed_data/包/images/12445783940.png,ok,400,400,false
+12439658649,包,铁青运动背包户外野营U7 个,新商品上架,,,,data/processed_data/包/images/12439658649.png,ok,400,400,false
+12439658660,包,铁青背包T8 个,新商品上架,,,,data/processed_data/包/images/12439658660.png,ok,400,400,false
+12439658672,包,铁青多功能大容量背包J40 个,新商品上架,,,,data/processed_data/包/images/12439658672.png,ok,400,400,false
+12439664297,包,铁青双肩工具背包R23 个,新商品上架,,,,data/processed_data/包/images/12439664297.png,ok,400,400,false
+12439675560,包,铁青应急救援背包AQ6 个,新商品上架,,,,data/processed_data/包/images/12439675560.png,ok,400,400,false
+12439658610,包,铁青背包T9 个,新商品上架,,,,data/processed_data/包/images/12439658610.png,ok,400,400,false
+12434013258,包,瑞士轻便时尚休闲潮流背包SNK17002 黑色,时尚休闲潮流背包,,,,data/processed_data/包/images/12434013258.png,ok,400,400,false
+12451326132,包,手提两用电脑背包商务防水反光充电通勤休闲旅行男女双肩,热卖中,,,,data/processed_data/包/images/12451326132.png,ok,400,400,false
+12440134816,包,铁洋 背包多功能户外 HWB01TY/个,户外背包,,,,data/processed_data/包/images/12440134816.png,ok,400,400,false
+12451326136,包,大容量多功能手提充电商务电脑背包旅行通勤反光防水休闲男女双肩,热卖中,,,,data/processed_data/包/images/12451326136.png,ok,400,400,false
+12451326141,包,大容量多功能扩容扩展充电防水手提电脑背包商务休闲通勤男女双肩,热卖中,,,,data/processed_data/包/images/12451326141.png,ok,400,400,false
+12451326152,包,大容量多功能扩容扩展手提电脑背包防水商务通勤充电旅行双肩,热卖中,,,,data/processed_data/包/images/12451326152.png,ok,400,400,false
+12451326157,包,大容量多功能扩容扩展充电防水手提电脑背包商务休闲通勤男女双肩_7046,热卖中,,,,data/processed_data/包/images/12451326157.png,ok,400,400,false
+12451326162,包,手提两用电脑背包商务防水充电通勤休闲多功能旅行男女学生双肩,热卖中,,,,data/processed_data/包/images/12451326162.png,ok,400,400,false
+12451326173,包,大容量多功能扩容扩展充电防水手提电脑背包商务休闲通勤男女双肩_747775,热卖中,,,,data/processed_data/包/images/12451326173.png,ok,400,400,false
+12451326178,包,多功能防水干湿分离充电扩容扩展鞋仓鞋位商务背包旅行通勤大容量,热卖中,,,,data/processed_data/包/images/12451326178.png,ok,400,400,false
+12451326183,包,大容量多功能扩容扩展充电防水手提电脑背包商务休闲通勤男女双肩_40751,热卖中,,,,data/processed_data/包/images/12451326183.png,ok,400,400,false
+12451326188,包,大容量多功能扩容扩展手提电脑背包防水商务通勤充电旅行双肩_741585,热卖中,,,,data/processed_data/包/images/12451326152.png,ok,400,400,false
+12451326193,包,多功能防水干湿分离充电扩容扩展鞋仓鞋位商务背包旅行通勤大容量_04767,热卖中,,,,data/processed_data/包/images/12451326178.png,ok,400,400,false
+12451348822,包,猎豹 儿童卡通书包 LBPHZ-5 个,儿童卡通书包,,,,data/processed_data/包/images/12451348822.png,ok,400,400,false
+12451450789,包,猎豹 背包 LB26327-1 个,耐磨防水面料；大容量多隔层设计；商务休闲两用风格；,,,,data/processed_data/包/images/12451450789.png,ok,400,400,false
+12451965328,包,猎豹 防护包双肩工具包应急包 LBA19 个,耐磨，防泼水,,,,data/processed_data/包/images/12451965328.png,ok,400,400,false
+12452014238,包,猎豹 双肩防护包工具包 30*16*43cm 个,大容量设计，轻松装下笔记本电脑；防水面料，保护物品不受潮；多口袋设计，分类收纳更便捷；,,,,data/processed_data/包/images/12452014238.png,ok,400,400,false
+12452015362,包,猎豹书包含文具盒挂件LAD-08,大容量设计；防水耐磨材质；多功能隔层；,,,,data/processed_data/包/images/12452015362.png,ok,400,400,false
+12452015004,包,猎豹书包LAD-07,轻便耐用；大容量多隔层；商务休闲两用；,,,,data/processed_data/包/images/12452015004.png,ok,400,400,false
+12452265534,包,爱路达 双肩工具包防护包48*30*17cm/个,轻量化设计，背负无压力；大容量分区，收纳更有序；防水耐磨材质，日常通勤更安心；,,,,data/processed_data/包/images/12452265534.png,ok,400,400,false
+12452015424,包,猎豹书包含挂件LAD-09,耐磨防水面料；大容量多隔层设计；时尚商务风格；,,,,data/processed_data/包/images/12452015424.png,ok,400,400,false
+12452269644,包,泽力锐 书包 ZLR-059 个,轻量化设计，背负无压力；大容量分区，收纳井井有条；户外通勤更安心；,,,,data/processed_data/包/images/12452269644.png,ok,400,400,false
+12452390799,包,爱路达双肩电子设备收纳包摄影相机包ALB6/个,轻便耐磨，大容量分区设计，适合通勤旅行； 防水面料，抗压防刮，日常出行更安心；,,,,data/processed_data/包/images/12452390799.png,ok,400,400,false
+12448319905,包,古卡维 双肩包+玻璃杯套装YML2209A 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12448319905.png,ok,400,400,false
+12448382392,包,古卡维 双肩包+雨伞套装YML2209B 黑色,经典百搭大容量,,,,data/processed_data/包/images/12448382392.png,ok,400,400,false
+12448382416,包,古卡维 双肩包玻璃杯雨伞三件套装YML2209C 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12448382416.png,ok,400,400,false
+12448382661,包,古卡维 双肩包+不锈钢保温杯套装YML2213A 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12448382661.png,ok,400,400,false
+12448382860,包,古卡维 双肩包不锈钢保温杯雨伞三件套装YML2213C 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12448382860.png,ok,400,400,false
+12448383360,包,古卡维 双肩包不锈钢保温杯雨伞套装YML2205C 黑色,经典百搭大容量,,,,data/processed_data/包/images/12448383360.png,ok,400,400,false
+12448386774,包,古卡维 双肩包+保温杯+雨伞套装YML2107C 黑色,经典百搭大容量,,,,data/processed_data/包/images/12448386774.png,ok,400,400,false
+12448383198,包,古卡维 双肩包+保温杯套装YML2205A 黑色,经典百搭大容量,,,,data/processed_data/包/images/12448383198.png,ok,400,400,false
+12449603034,包,小仙马 双肩包 XXM-5051 个,结实耐磨,,,,data/processed_data/包/images/12449603034.png,ok,400,400,false
+12449618844,包,小仙马 健身双肩包 XXM-5060 个,"轻装大容量,可快速扩容",,,,data/processed_data/包/images/12449618844.png,ok,400,400,false
+12453504453,包,古卡维 双肩包 工具背包 KXZ8055 迷彩,经典百搭实用大容量,,,,data/processed_data/包/images/12453504453.png,ok,400,400,false
+12381299571,包,Ceba厂家直供新款电脑双肩包时尚潮流简约纯色旅行背包大容量背包,上网上街上苏宁,,,,data/processed_data/包/images/12381299571.png,ok,400,400,false
+12453505020,包,古卡维 双肩包 YSC2506 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12453505020.png,ok,400,400,false
+12381299578,包,Ceba双肩包男包时尚运动青年书包简约pu皮电脑男士背包,,,,,data/processed_data/包/images/12381299578.png,ok,400,400,false
+12381299582,包,Ceba双肩包男旅李背包大学高中学生书包女韩版商务电脑包,上网上街上苏宁,,,,data/processed_data/包/images/12381299582.png,ok,400,400,false
+12453504479,包,古卡维 双肩包 工具背包 KXZ9062 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12453504479.png,ok,400,400,false
+12381299589,包,Ceba双肩包礼品LOGO炫彩小背包男女轻便学生书包东南亚,上网上街上苏宁,,,,data/processed_data/包/images/12381299589.png,ok,400,400,false
+12381299598,包,Ceba双肩包礼品印LOGO休闲背包男女USB学生书包东南亚,上网上街上苏宁,,,,data/processed_data/包/images/12381299598.png,ok,400,400,false
+12381299649,包,Ceba新款涤纶学生书包女韩版校园学生双肩包简约男背包旅行休闲包,上网上街上苏宁,,,,data/processed_data/包/images/12381299649.png,ok,400,400,false
+12381299621,包,Ceba开学季韩版时尚潮流旅行背包男休闲户外简约电脑双肩包,上网上街上苏宁,,,,data/processed_data/包/images/12381299621.png,ok,400,400,false
+12381299612,包,Ceba学生书包男女创意休闲户外旅行防泼水背包双肩背包,上网上街上苏宁,,,,data/processed_data/包/images/12381299612.png,ok,400,400,false
+12381300668,包,Ceba厂家双肩包男女书包双肩背包实用旅行休闲包back pack,上网上街上苏宁,,,,data/processed_data/包/images/12381299649.png,ok,400,400,false
+12381303090,包,Ceba双肩包女新款休闲包大容量韩版百搭旅行包软面背包男学生书包,上网上街上苏宁,,,,data/processed_data/包/images/12381303090.png,ok,400,400,false
+12381300703,包,Ceba时尚双肩包礼品加印LOGO休闲背包男女USB学生书包商务包,上网上街上苏宁,,,,data/processed_data/包/images/12381300703.png,ok,400,400,false
+12381300691,包,Ceba户外运动双肩背包简约商务电脑包男时尚学生书包可印,上网上街上苏宁,,,,data/processed_data/包/images/12381300691.png,ok,400,400,false
+12381303095,包,Ceba双肩包男背包韩版潮流书包学院风大高初中学生旅行休闲电脑包,上网上街上苏宁,,,,data/processed_data/包/images/12381303095.png,ok,400,400,false
+12381303111,包,Ceba新款休闲时尚电脑包大容量男士中学生双肩包usb背包,上网上街上苏宁,,,,data/processed_data/包/images/12381303111.png,ok,400,400,false
+12381303122,包,Ceba新款双肩包休闲背包双肩男时尚撞色双肩包,上网上街上苏宁,,,,data/processed_data/包/images/12381303122.png,ok,400,400,false
+12381303132,包,Ceba新款防泼水双肩包男休闲户外旅行大容量背包女15寸电脑学生包,上网上街上苏宁,,,,data/processed_data/包/images/12381303132.png,ok,400,400,false
+12381303157,包,Ceba背包男士双肩包套包韩版旅行包高初中女学生包简约时尚电脑包,上网上街上苏宁,,,,data/processed_data/包/images/12381303157.png,ok,400,400,false
+12381303141,包,Ceba男士背包旅游休闲商务电脑韩版时尚潮流高中学生书包旅行双肩包,上网上街上苏宁,,,,data/processed_data/包/images/12381303141.png,ok,400,400,false
+12381306443,包,Ceba新款双肩包男商务休闲usb充电电脑背包 韩版时尚学生书包,上网上街上苏宁,,,,data/processed_data/包/images/12381306443.png,ok,400,400,false
+12381306473,包,Ceba潮流书包旅行防盗背包充电男士时尚双肩包休闲电脑包,上网上街上苏宁,,,,data/processed_data/包/images/12381306473.png,ok,400,400,false
+12381306483,包,Ceba电脑包男背包大容量户外旅行包手提双肩包休闲包,上网上街上苏宁,,,,data/processed_data/包/images/12381306483.png,ok,400,400,false
+12381306491,包,Ceba背包双肩包男女休闲背包休闲户外学生书包女电脑背包双肩背包,,,,,data/processed_data/包/images/12381306491.png,ok,400,400,false
+12386827766,包,Ceba资产双肩包时尚休闲电脑包户外背包大背包大容量,Ceba资产双肩包时尚休闲电脑包户外背包大背包大容量,,,,data/processed_data/包/images/12386827766.png,ok,400,400,false
+12390000767,包,双肩包男大容量上午电脑背包加印制logo户外旅行包中书包,双肩包男大容量上午电脑背包加印制logo户外旅行包中书包,,,,data/processed_data/包/images/12390000767.png,ok,400,400,false
+12390000771,包,电脑双肩包男户外旅行礼品背包书包加印logo大容量包包,电脑双肩包男户外旅行礼品背包书包加印logo大容量包包,,,,data/processed_data/包/images/12390000771.png,ok,400,400,false
+12396629927,包,Ceba新款双肩包大容量男士背包双肩电脑背包支持,,,,,data/processed_data/包/images/12396629927.png,ok,400,400,false
+12396629932,包,Ceba男士双肩包大容量电脑包新款韩版简约背包直发可,Ceba男士双肩包大容量电脑包新款韩版简约背包直发可,,,,data/processed_data/包/images/12396629932.png,ok,400,400,false
+12396630923,包,Ceba新款时尚大容量双肩包男笔记本电脑包直供背包,Ceba新款时尚大容量双肩包男笔记本电脑包直供背包,,,,data/processed_data/包/images/12396630923.png,ok,400,400,false
+12451326169,包,新款男士商务防水多功能usb电脑双肩包旅行学生背包,热卖中,,,,data/processed_data/包/images/12451326169.png,ok,400,400,false
+12452597766,包,泽力锐 双肩包背包 ZLR-060 个,简约撞色设计，适合出差通勤，实用又时尚。,,,,data/processed_data/包/images/12452597766.png,ok,400,400,false
+12439691615,包,心梦同行 双肩包通勤背包商务笔记本电脑包 0356/个 黑色皮膜款,防水泼,,,,data/processed_data/包/images/12439691615.png,ok,400,400,false
+12448616242,包,汐丝如XISIRU男士双肩包14-15英寸防泼水简约时尚背负缓冲棉拉链多口袋日常休闲包,双肩包有前置拉链袋、拉链 iPad 袋和内置电脑隔层，分区收纳实用,,,,data/processed_data/包/images/12448616242.png,ok,400,400,false
+12441085174,包,爱路达 双肩包登山包独立鞋仓60L/个,多层大空间,,,,data/processed_data/包/images/12441085174.png,ok,400,400,false
+12441169987,包,拓栢 双肩包笔记本电脑包TB100/个,双肩包,,,,data/processed_data/包/images/12441169987.png,ok,400,400,false
+12432603513,包,SUISSEWIN瑞士新款时尚商务休闲潮流多功能双肩包SN9510 黑色,多功能商务休闲,,,,data/processed_data/包/images/12432603513.png,ok,400,400,false
+12440142325,包,心梦同行 大容量双肩包通勤电脑包手提书包 1904/个 双肩包黑色,大容量双肩包,,,,data/processed_data/包/images/12440142325.png,ok,400,400,false
+12441219586,包,心梦同行 大容量扩容手提双肩包电脑背包 2201/个 黑色,防水泼,,,,data/processed_data/包/images/12441219586.png,ok,400,400,false
+12441721642,包,心梦同行双肩背包 通勤电脑包 出差旅行包 带侧提多功能充电书包 1905/个 黑色,心梦同行双肩背包,,,,data/processed_data/包/images/12441721642.png,ok,400,400,false
+12442249106,包,心梦同行 运动双肩包电脑包背包多功能书包 0363/个 黑色,双肩包,,,,data/processed_data/包/images/12442249106.png,ok,400,400,false
+12441608989,包,心梦同行运动双肩包 干湿分离背包 大容量运动收纳包 户外游泳健身包 0622/个 大号,干湿分离,,,,data/processed_data/包/images/12441608989.png,ok,400,400,false
+12441695455,包,心梦同行PU皮双肩包 大容量背包电脑包 通勤旅行书包USB手机充电多功能包 pu1969/个 黑灰色,防水泼,,,,data/processed_data/包/images/12441695455.png,ok,400,400,false
+12441751261,包,心梦同行 双肩包办公电脑包背包男士书包 0165/个 默认黑色—其它颜色请备注,心梦同行双肩背包,,,,data/processed_data/包/images/12441751261.png,ok,400,400,false
+12439918359,包,猎豹 双肩包 双肩背包 L9/个,不拘一格 轻便出行,,,,data/processed_data/包/images/12439918359.png,ok,400,400,false
+12439862369,包,猎豹 双肩包 带鞋仓登山包 大容量户外双肩背包60L LBC1/个,大容量,,,,data/processed_data/包/images/12439862369.png,ok,400,400,false
+12439861862,包,猎豹 户外登山包防水尼龙旅行双肩包双肩背包 L-38/个,超强耐蘑损,,,,data/processed_data/包/images/12439861862.png,ok,400,400,false
+12439874524,包,猎豹 双肩包 带鞋仓登山包 大容量户外双肩背包 80L/个,大容量,,,,data/processed_data/包/images/12439874524.png,ok,400,400,false
+12439885027,包,猎豹 双肩包商务旅行双肩背包 35*25*50cm/个,大容量多功能,,,,data/processed_data/包/images/12439885027.png,ok,400,400,false
+12439873939,包,猎豹户外多功能双肩包旅行包登山包T15/个,大容量,,,,data/processed_data/包/images/12439873939.png,ok,400,400,false
+12439885944,包,猎豹 双肩背包 28*14*44cm /个,多场合适用,,,,data/processed_data/包/images/12439885944.png,ok,400,400,false
+12439914230,包,猎豹双肩包时尚书包T17/个,时尚,,,,data/processed_data/包/images/12439914230.png,ok,400,400,false
+12439914610,包,猎豹 双肩包书包 M8 个,耐磨防泼水,,,,data/processed_data/包/images/12439914610.png,ok,400,400,false
+12447144947,包,猎豹双肩包电脑包LB66Q/个,耐用,,,,data/processed_data/包/images/12447144947.png,ok,400,400,false
+12439917461,包,猎豹 双肩包大学生书包 LB15 个,加厚手提，结实耐用，更加牢固,,,,data/processed_data/包/images/12439917461.png,ok,400,400,false
+12439917770,包,猎豹 双肩登山包户外双肩背包130L LB20 个,超大容量,,,,data/processed_data/包/images/12439917770.png,ok,400,400,false
+12439919673,包,猎豹 双肩包 牛津布双肩背包 L10/个,个性潮搭轻便出行,,,,data/processed_data/包/images/12439919673.png,ok,400,400,false
+12432573422,包,SUISSEWIN瑞士新款时尚多功能商务休闲潮流防盗双肩包SNK17003 黑色,轻便休闲防盗,,,,data/processed_data/包/images/12432573422.png,ok,400,400,false
+12447591480,包,心梦同行 双肩背包通勤电脑包书包旅行包 1901/个 黑色,心梦同行双肩背包,,,,data/processed_data/包/images/12447591480.png,ok,400,400,false
+12447591734,包,心梦同行 双肩包通勤电脑包旅行包商务书包 9902/个 黑色,心梦同行双肩背包,,,,data/processed_data/包/images/12447591734.png,ok,400,400,false
+12432574218,包,SUISSEWIN瑞士经典时尚多功能商务休闲潮流双肩包SN9938 黑色,耐磨耐用多功能,,,,data/processed_data/包/images/12432574218.png,ok,400,400,false
+12432822591,包,SUISSEWIN瑞士新款时尚商务休闲潮流双肩包SN22803 深蓝色,商务休闲双肩包,,,,data/processed_data/包/images/12432822591.png,ok,400,400,false
+12433027224,包,SUISSEWIN瑞士新款多功能商务休闲潮流双肩包背包SN99670 黑色,商务休闲潮流,,,,data/processed_data/包/images/12433027224.png,ok,400,400,false
+12433055009,包,SUISSEWIN瑞士新款时尚商务休闲潮流背包双肩包SN9861 深蓝色,休闲商务双肩包,,,,data/processed_data/包/images/12433055009.png,ok,400,400,false
+12435476254,包,瑞士奥运款耐用多功能商务时尚双肩包SN99681 黑色,奥运款耐用多功能商务时尚双肩包,,,,data/processed_data/包/images/12435476254.png,ok,400,400,false
+12438038912,包,瑞士双肩包商务时尚背包SN8868 黑色,瑞士双肩包商务时尚背包,,,,data/processed_data/包/images/12438038912.png,ok,400,400,false
+12432606466,包,SUISSEWIN瑞士时尚新款轻便简约商务休闲双肩包SA5925 黑色,轻便商务休闲,,,,data/processed_data/包/images/12432606466.png,ok,400,400,false
+12449705147,包,心梦同行 双肩背包大容量商务书包可定制 1223/个,双肩包背包,,,,data/processed_data/包/images/12449705147.png,ok,400,400,false
+12436597266,包,瑞士双肩包商务时尚多功能背包SN22808 灰色,瑞士双肩包商务时尚多功能背包,,,,data/processed_data/包/images/12436597266.png,ok,400,400,false
+12439984848,包,铁青 双肩包 V4 个,简约,,,,data/processed_data/包/images/12439984848.png,ok,400,400,false
+12451309916,包,三人居 双肩包差旅背包SRJ0011901/个,大容量设计，轻松装下15寸笔记本；耐磨防水面料，耐用持久；多功能隔层，分类收纳有序；,,,,data/processed_data/包/images/12451309916.png,ok,400,400,false
+12440337514,包,铁青双肩背包L3 个 拍下备注颜色,新品上架,,,,data/processed_data/包/images/12440337514.png,ok,400,400,false
+12432745661,包,SUISSEWIN瑞士轻便时尚网红休闲简约双肩包SNK171705 绿色,轻便时尚休闲,,,,data/processed_data/包/images/12432745661.png,ok,400,400,false
+12450628725,包,SUISSEWIN男士双肩包商务休闲耐用大容量多功能笔记本电脑包轻便防水潮流设计SN17808 浅迷彩,时尚迷彩轻便,,,,data/processed_data/包/images/12450628725.png,ok,400,400,false
+12434146430,包,瑞士新款背包时尚休闲商务出差轻便双肩包SN9450 深蓝色,时尚休闲商务出差轻便双肩包,,,,data/processed_data/包/images/12434146430.png,ok,400,400,false
+12432603974,包,SUISSEWIN瑞士经典时尚商务休闲多功能双肩包SN9610 黑色,时尚商务休闲,,,,data/processed_data/包/images/12432603974.png,ok,400,400,false
+12433055367,包,SUISSEWIN瑞士背包新款商务休闲潮流时尚双肩包SN99676 黑色,时尚休闲背包,,,,data/processed_data/包/images/12433055367.png,ok,400,400,false
+12434247392,包,瑞士多功能时尚新款潮流商务休闲双肩包SN99673 黑色,时尚新款潮流商务休闲双肩包,,,,data/processed_data/包/images/12434247392.png,ok,400,400,false
+12438155568,包,背包瑞士时尚双肩包商务SD8906 黑色,背包瑞士时尚双肩包商务,,,,data/processed_data/包/images/12438155568.png,ok,400,400,false
+12442315993,包,SUISSEWIN瑞士军刀轻便小巧女士孩童出行包双肩包SNK171701 蓝色,SUISSEWIN瑞士军刀轻便小巧女士孩童出行包双肩包171701,,,,data/processed_data/包/images/12442315993.png,ok,400,400,false
+12445642686,包,SUISSEWIN潮流时尚经典休闲背包双肩包SN17107 蓝色,SUISSEWIN潮流时尚经典休闲背包双肩包,,,,data/processed_data/包/images/12445642686.png,ok,400,400,false
+12433055514,包,SUISSEWIN瑞士双肩包商务休闲大容量背包SN9932 黑色,大容量大空间背包,,,,data/processed_data/包/images/12433055514.png,ok,400,400,false
+12439663807,包,铁青双肩包 C8/个 黑色,新商品上架,,,,data/processed_data/包/images/12439663807.png,ok,400,400,false
+12439664195,包,铁青休闲双肩背包 A2/个 下单备注颜色,新商品上架,,,,data/processed_data/包/images/12439664195.png,ok,400,400,false
+12439664199,包,铁青双肩背包多功能双肩包耐磨大号C8A 个 黑绿色,新商品上架,,,,data/processed_data/包/images/12439664199.png,ok,400,400,false
+12440166415,包,铁青超大容量出差双肩包B88 个 黑色,背负减压,,,,data/processed_data/包/images/12440166415.png,ok,400,400,false
+12449293947,包,SUISSEWIN瑞士军刀时尚潮流新款商务背包出行双肩包SN9026 黑色,SUISSEWIN瑞士军刀时尚潮流新款商务背包出行双肩包SN9026,,,,data/processed_data/包/images/12449293947.png,ok,400,400,false
+12441566624,包,拓栢 双肩包 H501 个,双肩包,,,,data/processed_data/包/images/12441566624.png,ok,400,400,false
+12450628134,包,SUISSEWIN男士双肩包商务休闲多隔层防泼水背包潮流简约大容量通勤电脑包SN17810 迷彩棕,轻便时尚迷彩背包,,,,data/processed_data/包/images/12450628134.png,ok,400,400,false
+12145429108,包,[官方旗舰店]小米极简都市双肩包 2 浅灰 可容纳15.6英寸电脑 / 耐磨防水 / 方形简约造型 / 轻巧坚固,可容纳15.6英寸电脑 / 耐磨防水 / 方形简约造型 / 轻巧坚固,,,,data/processed_data/包/images/12145429108.png,ok,400,400,false
+12146032677,包,[官方旗舰店]小米极简都市双肩包 2 深灰 可容纳15.6英寸电脑 / 耐磨防水 / 方形简约造型 / 轻巧坚固,可容纳15.6英寸电脑 / 耐磨防水 / 方形简约造型 / 轻巧坚固,,,,data/processed_data/包/images/12146032677.png,ok,400,400,false
+12449841119,包,古梵华男士大容量可扩容商务双肩包GFH24022/个,可扩展 大容量 防泼水,,,,data/processed_data/包/images/12449841119.png,ok,400,400,false
+12449841117,包,古梵华轻便双肩包GFH8395/个,大容量防泼水多隔层,,,,data/processed_data/包/images/12449841117.png,ok,400,400,false
+12442315209,包,SUISSEWIN瑞士军刀新款背包时尚商务休闲双肩包SN1926 黑色,SUISSEWIN瑞士军刀新款背包时尚商务休闲双肩包1926,,,,data/processed_data/包/images/12442315209.png,ok,400,400,false
+12449841124,包,古梵华多功能背包商务电脑包usb充电双肩背包GFH2058/个,大容量防泼水多隔层,,,,data/processed_data/包/images/12449841124.png,ok,400,400,false
+12446226788,包,铁青 简约大容量双肩包J85 个,大容量 简约,,,,data/processed_data/包/images/12446226788.png,ok,400,400,false
+12451350398,包,游泳健身包男士干湿分离双肩背包运动装备女大容量沙滩防水袋1085,游泳健身包男士干湿分离双肩背包,,,,data/processed_data/包/images/12451350398.png,ok,400,400,false
+12440293106,包,铁洋 双肩包通勤 BBS006TY/个,铁洋 双肩包,,,,data/processed_data/包/images/12440293106.png,ok,400,400,false
+12440304973,包,铁洋 双肩包企业定制结实耐用BBS003TY/个,双肩包结实耐用,,,,data/processed_data/包/images/12440304973.png,ok,400,400,false
+12440304438,包,铁洋 双肩包商务 BBS005TY/个,双肩包商务,,,,data/processed_data/包/images/12440304438.png,ok,400,400,false
+12440305638,包,铁洋 双肩包多功能BBS002TY/个,双肩包功能,,,,data/processed_data/包/images/12440305638.png,ok,400,400,false
+12440675058,包,三人居双肩包(黑色)SRJYSC2103/个,多层空间，舒适透气,,,,data/processed_data/包/images/12440675058.png,ok,400,400,false
+12441161969,包,爱路达 水袋运动双肩背包户外徒步骑行双肩包(含水袋) AL07/个,轻背负·多分层·防泼水,,,,data/processed_data/包/images/12441161969.png,ok,400,400,false
+12441170825,包,爱路达 双肩背包 书包 30*13*40cm/个,透气减压,,,,data/processed_data/包/images/12441170825.png,ok,400,400,false
+12441171134,包,爱路达 商务双肩包 通勤双肩背包 M69/个,防水耐磨,,,,data/processed_data/包/images/12441171134.png,ok,400,400,false
+12440676142,包,三人居双肩包(浅灰色)SRJ9007/个,轻盈透气，减压抗震，大容量,,,,data/processed_data/包/images/12440676142.png,ok,400,400,false
+12441171412,包,爱路达 双肩包 书包 M6/个,结实耐用,,,,data/processed_data/包/images/12441171412.png,ok,400,400,false
+12442251023,包,SUISSEWIN瑞士军刀时尚潮流新款商务休闲多功能双肩包手提包SN6902 灰色,SUISSEWIN瑞士军刀时尚潮流新款商务休闲多功能双肩包手提包6902,,,,data/processed_data/包/images/12442251023.png,ok,400,400,false
+12442315090,包,SUISSEWIN瑞士军刀商务时尚潮流双肩包背包SN1958 黑色,SUISSEWIN瑞士军刀商务时尚潮流双肩包背包1958,,,,data/processed_data/包/images/12442315090.png,ok,400,400,false
+12442315133,包,SUISSEWIN瑞世军刀双肩包时尚新款商务休闲背包SN1924 黑色,SUISSEWIN瑞世军刀双肩包时尚新款商务休闲背包1924,,,,data/processed_data/包/images/12442315133.png,ok,400,400,false
+12442421358,包,SUISSEWIN瑞世军刀新款奥运记者背包双肩包SN99681-1 黑色,SUISSEWIN瑞世军刀新款奥运记者背包双肩包,,,,data/processed_data/包/images/12442421358.png,ok,400,400,false
+12442421586,包,SUISSEWIN时尚新款奥运记者背包双肩包SN99681-3 黑色,SUISSEWIN时尚新款奥运记者背包双肩包,,,,data/processed_data/包/images/12442421586.png,ok,400,400,false
+12442923202,包,惠铁休闲轻便商务双肩包电脑包6001个,商务休闲多功能包,,,,data/processed_data/包/images/12442923202.png,ok,400,400,false
+12442421981,包,SUISSEWIN背包奥运包时尚记者包商务休闲双肩包SN99681-4 黑色,SUISSEWIN背包奥运包时尚记者包商务休闲双肩包,,,,data/processed_data/包/images/12442421981.png,ok,400,400,false
+12442934918,包,惠铁商务通勤多功能旅行双肩背包 2026 个,多功能包,,,,data/processed_data/包/images/12442934918.png,ok,400,400,false
+12444890199,包,铁洋 双肩包企业定制 BBS003TY 个,铁洋 双肩包企业定制 BBS003TY 个,,,,data/processed_data/包/images/12444890199.png,ok,400,400,false
+12445640782,包,SUISSEWIN瑞士军刀时尚经典潮流轻便耐用背包双肩包SNK2002 红色,SUISSEWIN瑞士军刀时尚经典潮流轻便耐用背包双肩包,,,,data/processed_data/包/images/12445640782.png,ok,400,400,false
+12445857940,包,铁青 大容量背包双肩包J96 个,新品,,,,data/processed_data/包/images/12445857940.png,ok,400,400,false
+12446205187,包,铁洋 双肩背包 TY-双肩背包-B001 个,铁洋 双肩背包 TY-双肩背包-B001 个,,,,data/processed_data/包/images/12446205187.png,ok,400,400,false
+12445934248,包,SUISSEWIN瑞士军刀时尚轻便商务上班休闲潮流双肩包SN99308 灰色,SUISSEWIN瑞士军刀时尚轻便商务上班休闲潮流双肩包,,,,data/processed_data/包/images/12445934248.png,ok,400,400,false
+12446205789,包,铁洋 双肩背包 TY-双肩背包-B002 个,铁洋 双肩背包 TY-双肩背包-B002 个,,,,data/processed_data/包/images/12446205789.png,ok,400,400,false
+12445866086,包,铁青 尼龙休闲双肩包J99 个,新品,,,,data/processed_data/包/images/12445866086.png,ok,400,400,false
+12446205825,包,铁洋 双肩背包 TY-双肩背包-B003 个,铁洋 双肩背包 TY-双肩背包-B003 个,,,,data/processed_data/包/images/12446205906.png,ok,400,400,false
+12451759459,包,猎豹 双肩包户外旅行背包带挂件 LB26410-2 个,轻便耐磨；大容量多隔层设计；商务休闲两用风格；,,,,data/processed_data/包/images/12451759459.png,ok,400,400,false
+12451596269,包,小米米家商务背包出差双肩包黑色大容量通勤旅行男士高端电脑笔记本包,可装15.6英寸电脑 | 防泼水面料 | 双边侧袋,,,,data/processed_data/包/images/12451596269.png,ok,400,400,false
+12451932517,包,猎豹 户外便携折叠双肩包 LB2657-1 个,轻便耐磨,,,,data/processed_data/包/images/12451932517.png,ok,400,400,false
+12451932130,包,猎豹 折叠双肩包健身包 LAD-02 个,大容量设计；休闲；耐磨防泼水面料,,,,data/processed_data/包/images/12451932130.png,ok,400,400,false
+12451965113,包,猎豹 防护包应急救援包双肩包 36*25*45cm 个,轻便耐磨；防泼水,,,,data/processed_data/包/images/12451965113.png,ok,400,400,false
+12451979088,包,猎豹 户外登山包健身双肩包LAD-48 个,轻便耐用；多口袋设计，分类收纳；商务休闲两相宜；,,,,data/processed_data/包/images/12451979088.png,ok,400,400,false
+12451979311,包,猎豹 户外折叠登山包双肩包LAD-01 个,大容量装13.1-14英寸电脑；防水牛津布料防潮；人体工学设计背负舒适；,,,,data/processed_data/包/images/12451979311.png,ok,400,400,false
+12451981245,包,猎豹双肩包网球包户外健身包LAD-03,大容量设计，轻松装下15寸笔记本；耐磨材质，持久耐用；多隔层设计，分类收纳更便捷；,,,,data/processed_data/包/images/12451981245.png,ok,400,400,false
+12451984367,包,猎豹 牛津布双肩包LAD-05 个,耐磨防水材质；大容量多隔层设计；时尚商务外观；,,,,data/processed_data/包/images/12451984367.png,ok,400,400,false
+12452070174,包,猎豹 双肩背包通勤书包 1281 个,耐磨材质,,,,data/processed_data/包/images/12452070174.png,ok,400,400,false
+12452146523,包,猎豹 防雨罩双肩背包防水书包 LB26522-1 个,轻量化设计，背负无负担，防水耐磨材质,,,,data/processed_data/包/images/12452146523.png,ok,400,400,false
+12452014772,包,猎豹双肩包健身包篮球包LAD-06,轻便耐用；大容量多隔层；商务休闲两相宜；,,,,data/processed_data/包/images/12452014772.png,ok,400,400,false
+12452249091,包,猎豹 轻量化户外登山包徒步双肩包 LB-32*18*47cm 个,轻便耐磨,,,,data/processed_data/包/images/12452249091.png,ok,400,400,false
+12452248438,包,猎豹 户外运动登山包双肩背包40升 LB-40L 个,防水耐磨面料,,,,data/processed_data/包/images/12452248438.png,ok,400,400,false
+12452249221,包,猎豹 户外运动登山包徒步双肩包 LB-25*15*42cm 个,防水耐磨材质,,,,data/processed_data/包/images/12452249221.png,ok,400,400,false
+12452257323,包,猎豹 户外运动双肩包书包 BL-23*12*38cm 个,防水耐磨,,,,data/processed_data/包/images/12452257323.png,ok,400,400,false
+12452257324,包,猎豹 户外登山包双肩包含防雨罩40L BL-40L 个,防水耐磨面料,,,,data/processed_data/包/images/12452257324.png,ok,400,400,false
+12452257332,包,猎豹 商务通勤双肩包 BL-30*45cm*18cm 个,轻松收纳日常用品；轻量化材质，背负舒适不压肩；防水耐磨面料,,,,data/processed_data/包/images/12452257332.png,ok,400,400,false
+12452257337,包,猎豹 商务通勤户外休闲运动防水双肩包 BL-32*14*47cm 个,防水面料,,,,data/processed_data/包/images/12452257337.png,ok,400,400,false
+12452475889,包,爱路达 ARLRUDAL 防水牛津布双肩包 45*37*18cm 个,大容量分区设计，轻松收纳日常用品,,,,data/processed_data/包/images/12452475889.png,ok,400,400,false
+12452530708,包,拓栢 牛津布双肩包 KY45 个,轻量化设计，背负无压力；,,,,data/processed_data/包/images/12452530708.png,ok,400,400,false
+12452524210,包,爱路达户外折叠双肩包便携登山包40*15*26cm,大容量分区设计，轻松收纳日常用品；轻量化材质，背负无压力；防水耐磨，适合通勤与户外出行；,,,,data/processed_data/包/images/12452524210.png,ok,400,400,false
+12452483839,包,铁青双肩包AQ39 个,轻量化设计，背负无负担；大容量分区，收纳井然有序；,,,,data/processed_data/包/images/12452483839.png,ok,400,400,false
+12452531222,包,爱路达户外运动双肩包登山包23L LDA-23,轻量化设计，背负无压力；大容量分区，收纳井井有条；防水耐磨材质，户外通勤皆适用；,,,,data/processed_data/包/images/12452531222.png,ok,400,400,false
+12452538999,包,爱路达户外双肩包登山包健身包 28*13*45cm,轻量化设计，背负无压力；大容量分区，收纳井井有条；防水耐磨材质，户外通勤皆适用；,,,,data/processed_data/包/images/12452538999.png,ok,400,400,false
+12441555228,包,拓栢双肩工具包YMH01/个,双肩包,,,,data/processed_data/包/images/12441555228.png,ok,400,400,false
+12444500099,包,猎豹双肩工具包LBQ68/个,经久耐用,,,,data/processed_data/包/images/12444500099.png,ok,400,400,false
+12442922517,包,惠铁多层大容量通勤双肩多功能包1904个,容量大,,,,data/processed_data/包/images/12442922517.png,ok,400,400,false
+12442922812,包,惠铁商务休闲双肩电脑背包1901个,双肩电脑背包,,,,data/processed_data/包/images/12442922812.png,ok,400,400,false
+12145401071,包,[官方旗舰店]小米小背包 10L 黄色 多场景适用|舒适不勒肩 |无惧雨水泼溅,城市休闲 / 简约设计 / 多容量选择 / 防泼水,,,,data/processed_data/包/images/12145401071.png,ok,400,400,false
+12448690228,包,心梦同行 双肩电脑包多功能通勤包可定制 3210/个,双肩电脑包,,,,data/processed_data/包/images/12449705147.png,ok,400,400,false
+12440307375,包,铁青工具背包双肩工具包多功能电梯维修大号便携安装电工专用 N7/个 均色,新商品上架,,,,data/processed_data/包/images/12440307375.png,ok,400,400,false
+12440775328,包,爱路达 工具包 双肩背工具包 D6/个,多口袋大容量,,,,data/processed_data/包/images/12440775328.png,ok,400,400,false
+12440782862,包,爱路达双肩工具包R2/个,减压背负,,,,data/processed_data/包/images/12440782862.png,ok,400,400,false
+12433145171,包,SUISSEWIN瑞士经典时尚商务休闲多功能背包SN99305 黑色,商务休闲背包,,,,data/processed_data/包/images/12433145171.png,ok,400,400,false
+12424140403,包,CONGERT 双肩工具包 防护包 应急包 RT-9个 红色,CONGERT 双肩工具包 防护包 应急包 RT-9个,,,,data/processed_data/包/images/12424140403.png,ok,400,400,false
+12440837660,包,爱路达 双肩工具包 D9/个,大容量主袋,,,,data/processed_data/包/images/12440837660.png,ok,400,400,false
+12440786757,包,爱路达 双肩工具包整胶底 A23 个,防刮耐磨,,,,data/processed_data/包/images/12440786757.png,ok,400,400,false
+12440783756,包,爱路达 胶底工具包双肩工具包 AL15/个,加厚耐磨,,,,data/processed_data/包/images/12440783756.png,ok,400,400,false
+12440838202,包,爱路达 工具包 双肩工具包 M2/个,更省力更能装,,,,data/processed_data/包/images/12440838202.png,ok,400,400,false
+12440851260,包,爱路达 双肩工具包 D5 个,大容量,,,,data/processed_data/包/images/12440851260.png,ok,400,400,false
+12440919935,包,爱路达双肩工具包A25/个,防泼水抗撕裂,,,,data/processed_data/包/images/12440919935.png,ok,400,400,false
+12441073196,包,爱路达 双肩工具包 D7/个,防水耐磨,,,,data/processed_data/包/images/12441073196.png,ok,400,400,false
+12440912928,包,爱路达 双肩工具包 M13/个,防泼水,,,,data/processed_data/包/images/12440912928.png,ok,400,400,false
+12441074350,包,爱路达双肩工具包橡胶底R3/个,加厚面料 耐磨抗撕,,,,data/processed_data/包/images/12441074350.png,ok,400,400,false
+12441077591,包,爱路达 工具包 双肩背工具包 G6/个,经久耐用,,,,data/processed_data/包/images/12441077591.png,ok,400,400,false
+12446753734,包,铁洋 儿童书包背包 大号42cm*32cm*18cm 个,铁洋 儿童书包背包 大号42cm*32cm*18cm 个,,,,data/processed_data/包/images/12446753734.png,ok,400,400,false
+12446753780,包,铁洋 儿童书包背包 小号39cm*29cm*16cm 个,铁洋 儿童书包背包 小号39cm*29cm*16cm 个,,,,data/processed_data/包/images/12446753780.png,ok,400,400,false
+12446163621,包,铁青 商务背包J94 个,便携办公 简约,,,,data/processed_data/包/images/12446163621.png,ok,400,400,false
+12446753818,包,铁洋 儿童书包背包 38cm*30cm*12cm 个,铁洋 儿童书包背包 38cm*30cm*12cm 个,,,,data/processed_data/包/images/12446753818.png,ok,400,400,false
+12451872125,包,麒霁 双肩包 可定制印字背包 HS1346 黑色,免费设计 可印字 多分层,,,,data/processed_data/包/images/12451872125.png,ok,400,400,false
+12451872132,包,麒霁 双肩包 背包 HS3433 黑色,舒适耐用,,,,data/processed_data/包/images/12451872132.png,ok,400,400,false
+12451872136,包,袋鼠威威 双肩包 背包 HS7209 黑色,舒适耐用,,,,data/processed_data/包/images/12451872136.png,ok,400,400,false
+12452204177,包,双轶 多功能双肩背包 SY-B5151 个,大容量设计；商务休闲两用；耐磨防水面料；,,,,data/processed_data/包/images/12452204177.png,ok,400,400,false
+12452204185,包,双轶 双肩包电脑包背包 SY-B5153 个,大容量设计；商务休闲两用；耐磨防水面料；,,,,data/processed_data/包/images/12452204185.png,ok,400,400,false
+12452204319,包,双轶 多功能双肩背包 18*32*50cm 个,大容量设计；商务休闲两用；耐磨防水面料；,,,,data/processed_data/包/images/12452204319.png,ok,400,400,false
+12451901481,包,袋鼠威威 双肩包 可印字定制书包 HS2174 黑色,免费设计排版 可定制可印字,,,,data/processed_data/包/images/12451901481.png,ok,400,400,false
+12452204323,包,双轶 多功能双肩包 31*20*55cm 个,大容量设计；商务休闲两用；耐磨防水面料；,,,,data/processed_data/包/images/12452204323.png,ok,400,400,false
+12452204328,包,双轶 双肩包背包 31*17*50cm 个,大容量设计；商务休闲两用；耐磨防水面料；,,,,data/processed_data/包/images/12452204328.png,ok,400,400,false
+12452204329,包,双轶 防水牛津布双肩包 49*20*38cm 个,大容量设计；商务休闲两用；耐磨防水面料；,,,,data/processed_data/包/images/12452204329.png,ok,400,400,false
+12440233408,包,徽润和 双肩包 SJB004 个,潮流,,,,data/processed_data/包/images/12440233408.png,ok,400,400,false
+12440850669,包,古卡维精品男士双肩包 背包 大容量 黑色,免费设计可定制印字大容量,,,,data/processed_data/包/images/12440850669.png,ok,400,400,false
+12441089313,包,麒霁双肩包50L电脑包文件资料包工具背包 红色,免费设计 可印字 多分层,,,,data/processed_data/包/images/12441089313.png,ok,400,400,false
+12441244696,包,麒霁 双肩包 背包 Q9456 黑色,舒适耐用,,,,data/processed_data/包/images/12441244696.png,ok,400,400,false
+12441574119,包,小仙马 折叠双肩包 XXM-B1001 个,大型收纳,,,,data/processed_data/包/images/12441574119.png,ok,400,400,false
+12441593585,包,小仙马 双肩包背包 XXM-5042 (颜色备注)个,防泼水面料,,,,data/processed_data/包/images/12441593585.png,ok,400,400,false
+12442441060,包,小仙马 背拉两用双肩包 XXM-2408 个,可放电脑,,,,data/processed_data/包/images/12442441060.png,ok,400,400,false
+12442441454,包,小仙马 防水双肩背包 XXM-527 个,分层拉链袋,,,,data/processed_data/包/images/12442441454.png,ok,400,400,false
+12443183462,包,古卡维 双肩包 背包YML2205 黑色,经典百搭大容量,,,,data/processed_data/包/images/12443183462.png,ok,400,400,false
+12448318945,包,古卡维 双肩包 背包G9456 黑色,大容量 舒适耐用,,,,data/processed_data/包/images/12448318945.png,ok,400,400,false
+12448319753,包,古卡维 双肩包+保温杯套装G9456A 黑色,大容量 舒适耐用,,,,data/processed_data/包/images/12448319753.png,ok,400,400,false
+12448319755,包,古卡维 双肩包+雨伞套装G9456B 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12448319755.png,ok,400,400,false
+12448319757,包,古卡维 双肩包不锈钢保温杯雨伞套装G9456C 黑色,经典百搭实用大容量,,,,data/processed_data/包/images/12448319757.png,ok,400,400,false
+12410421495,包,Ceba新款双肩包14寸双肩包大容量男女通款多层空间大电脑背包,Ceba新款双肩包14寸双肩包大容量男女通款多层空间大电脑背包,,,,data/processed_data/包/images/12410421495.png,ok,400,400,false
+12307130720,包,中国民族风双肩包女背包牛津布刺绣旅行包学生书包大大容量,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130720.png,ok,400,400,false
+12396629889,包,Ceba厂货通 双肩包潮流 森系简约情侣双肩背包初高中大书包大容,Ceba厂货通 双肩包潮流 森系简约情侣双肩背包初高中大书包大容,,,,data/processed_data/包/images/12396629889.png,ok,400,400,false
+12429271623,包,双肩包礼品印制LOGO炫彩小背包男女包轻便学生书包东南亚货源,,,,,data/processed_data/包/images/12429271623.png,ok,400,400,false
+12307130768,包,双肩包女背包学生书包韩版潮2021新款韩版大容量旅行包女,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130768.png,ok,400,400,false
+12307130824,包,牛津布双肩包女2021新款时尚休闲女士洋气背包帆布学生书包旅行包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130824.png,ok,400,400,false
+12307130789,包,双肩背包女士背包学生书包2021新款韩版潮时尚防水牛津帆布旅行包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130789.png,ok,400,400,false
+12307130827,包,牛津布双肩包女2021新款潮时尚休闲防水大容量旅行背包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130827.png,ok,400,400,false
+12307130874,包,象纹双肩包女背包学生书包韩版新款时尚大容量旅行包 【YP-1805】黑色,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130874.png,ok,400,400,false
+12307130881,包,2021新款韩版双肩背包女时尚大容量学生包旅行包大,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130881.png,ok,400,400,false
+12307131273,包,双肩包女新款潮学生书包旅行背包女包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307131273.png,ok,400,400,false
+12307130869,包,大象纹双肩包女背包学生书包潮韩版2021新款大容量旅行包女 【NN-8893】黑色,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130869.png,ok,400,400,false
+12307132352,包,大象纹双肩包女亮片背包学生书包2021新款韩版大容量旅行包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307132352.png,ok,400,400,false
+12390000774,包,背包双肩包男商务背户外中书包女电脑背包印logo双肩背包,背包双肩包男商务背户外中书包女电脑背包印logo双肩背包,,,,data/processed_data/包/images/12390000774.png,ok,400,400,false
+12386827322,包,JusenShayu新款大容量PU双肩女包 韩版双肩包小包女 时尚潮流背,JusenShayu新款大容量PU双肩女包 韩版双肩包小包女 时尚潮流背,,,,data/processed_data/包/images/12386827322.png,ok,400,400,false
+12307131294,包,多功能双肩包女背包2021新款学生书包手提旅行包大容量女包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307131294.png,ok,400,400,false
+12396629895,包,Ceba厂货通新款双肩包初中生大容量日系韩版书包潮流时尚背包,Ceba厂货通新款双肩包初中生大容量日系韩版书包潮流时尚背包,,,,data/processed_data/包/images/12396629895.png,ok,400,400,false
+12396629921,包,Ceba新款双肩包 初中生大容量日系韩版书包潮流时尚,Ceba新款双肩包 初中生大容量日系韩版书包潮流时尚,,,,data/processed_data/包/images/12396629921.png,ok,400,400,false
+12396663471,包,Ceba双肩包大牛津布轻便减压背负背包多功能大容量随身双肩背包,Ceba双肩包大牛津布轻便减压背负背包多功能大容量随身双肩背包,,,,data/processed_data/包/images/12396663471.png,ok,400,400,false
+12396663529,包,Ceba女士双肩包2022新款时尚绣线旅行背包大容量外出妈妈包,Ceba女士双肩包2022新款时尚绣线旅行背包大容量外出妈妈包,,,,data/processed_data/包/images/12396663529.png,ok,400,400,false
+12396662315,包,Ceba女包2022新款街头潮流双肩包牛津布户外旅行包电脑包女士背,Ceba女包2022新款街头潮流双肩包牛津布户外旅行包电脑包女士背,,,,data/processed_data/包/images/12396662315.png,ok,400,400,false
+12396663539,包,Ceba户外出行双肩背包防泼水大容量登山包商用通勤笔记本电脑双,Ceba户外出行双肩背包防泼水大容量登山包商用通勤笔记本电脑双,,,,data/processed_data/包/images/12396663539.png,ok,400,400,false
+12396663542,包,Ceba时尚简约双肩背包防水牛津布大容量随行包抗震减压书包中性,Ceba时尚简约双肩背包防水牛津布大容量随行包抗震减压书包中性,,,,data/processed_data/包/images/12396663542.png,ok,400,400,false
+12396663547,包,Ceba牛津布双肩包女2022新款街头潮流大容量简约书包户外背包,Ceba牛津布双肩包女2022新款街头潮流大容量简约书包户外背包,,,,data/processed_data/包/images/12396663547.png,ok,400,400,false
+12396664245,包,Ceba休闲大容量防盗登山包户外双肩包商务电脑包减压背负书包韩,Ceba休闲大容量防盗登山包户外双肩包商务电脑包减压背负书包韩,,,,data/processed_data/包/images/12396664245.png,ok,400,400,false
+12396664262,包,Ceba双肩背包大容量瑞士军刀背包户外出行随身包防水轻便书包中,Ceba双肩背包大容量瑞士军刀背包户外出行随身包防水轻便书包中,,,,data/processed_data/包/images/12396664262.png,ok,400,400,false
+12403561022,包,Ceba厂货通双肩包男大容量通勤百搭14寸简约可印logo初高中书包,Ceba厂货通双肩包男大容量通勤百搭14寸简约可印logo初高中书包,,,,data/processed_data/包/images/12403561022.png,ok,400,400,false
+12452491489,包,权仁之巅 双肩包 16寸 2051 个,轻便耐磨，大容量分区设计，轻松收纳笔记本与配件,,,,data/processed_data/包/images/12452491489.png,ok,400,400,false
+12396664276,包,Ceba电脑包商务大容量双肩包学院风运动背包抗震减压轻便书包,Ceba电脑包商务大容量双肩包学院风运动背包抗震减压轻便书包,,,,data/processed_data/包/images/12396664276.png,ok,400,400,false
+12448747745,包,联想(Lenovo) 拯救者多功能双肩包P4 浅灰 21L超大容量 180°全开设计 商务差旅时尚大容量背包书包双肩包,17英寸电脑适配；180°全开设计方便取物；超大21L容量商务差旅；,,,,data/processed_data/包/images/12448747745.png,ok,400,400,false
+12441266108,包,森枭SENXIAOSABER可定制双肩包SX-9731,牛津布,,,,data/processed_data/包/images/12441266108.png,ok,400,400,false
+12448690251,包,心梦同行 双肩包商务旅行背包多功能电脑包2162/个,双肩包2162,,,,data/processed_data/包/images/12448690251.png,ok,400,400,false
+12441425770,包,森枭SENXIAOSABER双肩包SX-9002,大容量,,,,data/processed_data/包/images/12441425770.png,ok,400,400,false
+12448690260,包,心梦同行跨境旅行大容量背包男牛津布出差电脑包上班商务通勤男士双肩包 2161/个,双肩包2161,,,,data/processed_data/包/images/12448690260.png,ok,400,400,false
+12448690263,包,心梦同行 双肩包商务电脑包手提大容量背包 2026/个,双肩包2026,,,,data/processed_data/包/images/12448690263.png,ok,400,400,false
+12448690256,包,心梦同行商务双肩包 通勤笔记本电脑包背包大容量背包男女通用书包 8662/个,双肩包8662,,,,data/processed_data/包/images/12448690256.png,ok,400,400,false
+12448709514,包,心梦同行 多功能电脑包大容量包商务双肩包 8666/个,旅行包,,,,data/processed_data/包/images/12448709514.png,ok,400,400,false
+12448709516,包,心梦同行跨境背包双背商务电脑包大容量男女通用双肩包 8663/个,双肩包8663,,,,data/processed_data/包/images/12448709516.png,ok,400,400,false
+12449027033,包,心梦同行多功能通勤电脑包大容量双肩包8901/个,双肩包,,,,data/processed_data/包/images/12449027033.png,ok,400,400,false
+12448742709,包,心梦同行 多功能男女双肩包商务电脑双背包 8665/个,双肩包8665,,,,data/processed_data/包/images/12448742709.png,ok,400,400,false
+12449040410,包,心梦同行大容量背包男女通用电脑包双肩包2601/个,双肩包2601,,,,data/processed_data/包/images/12449040410.png,ok,400,400,false
+12449190793,包,心梦同行 护脊学生书包儿童防水双肩背包 2183/个,护脊儿童双肩包,,,,data/processed_data/包/images/12449190793.png,ok,400,400,false
+12449190802,包,心梦同行 大容量儿童书包小学生双肩背包 2206/个,减负双肩包,,,,data/processed_data/包/images/12449190802.png,ok,400,400,false
+12449190809,包,心梦同行 小学生书包儿童护脊防水双肩背包2213/个,护脊减压双肩包,,,,data/processed_data/包/images/12449190809.png,ok,400,400,false
+12449190811,包,心梦同行 大容量双肩背包学生包儿童书包 2190/个,儿童书包,,,,data/processed_data/包/images/12449190811.png,ok,400,400,false
+12452289185,包,三极户外(TriPolar) TP1669 30*14*45cm 商务大容量多电脑包 双肩包 1 个/个(计价单位:个),轻便耐磨，多层分区设计；大容量收纳,,,,data/processed_data/包/images/12452289185.png,ok,400,400,false
+12452377442,包,三极户外(TriPolar) TP2037 42*30*12cm 多功能双肩背包手提包 电脑包 1/个(计价单位:个),轻便耐磨，多层分区设计，高效收纳；防震抗压，保护设备安全；时尚简约外观，通勤出行百搭实用。,,,,data/processed_data/包/images/12452377442.png,ok,400,400,false
+12452289188,包,三极户外(TriPolar) TP1983 31*18*46cm 大容量商务双肩包 双肩包 1 个/个(计价单位:个),轻便抗压，多层分区设计，高效收纳；防水耐磨材质，日常通勤更安心,,,,data/processed_data/包/images/12452289188.png,ok,400,400,false
+12453102197,包,巴布豆BOBDOG小学生轻薄书包撞色运动休闲背负式涤纶拉链主袋设计,护脊减负 防水耐磨,,,,data/processed_data/包/images/12453102197.png,ok,400,400,false
+12228158203,包,巴布豆书包女童小学生轻便萌趣卡通儿童背包护脊减负女童书包,护脊减负 小清新 时尚舒适,,,,data/processed_data/包/images/12228158203.png,ok,400,400,false
+12307135197,包,小学生书包男儿童背包1-3-6年级幼儿园书包女防水双肩背包7,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307135197.png,ok,400,400,false
+12307135096,包,小学生书包1-3-6年级儿童书包男幼儿园防水双肩背包女8,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307135096.png,ok,400,400,false
+10916853985,包,美旅双肩包韩版校园时尚简约男包防水面料初中及以上通用学生书包旅行背包女书包AQ9 深灰色,流畅线条 科学收纳 防泼水面料,,,,data/processed_data/包/images/10916853985.png,ok,400,400,false
+11831225925,包,巴布豆BoBdog 时尚简约学生双肩书包男女童1-6年级小学生书包,减负护脊,,,,data/processed_data/包/images/11831225925.png,ok,400,400,false
+11752558323,包,巴布豆BOBDOG 小学生书包男孩女生护脊双肩轻便减压背包,轻盈便携 卡通图案,,,,data/processed_data/包/images/11752558323.png,ok,400,400,false
+12109674221,包,巴布豆BOBDOG 书包小学生男一三六年级学生超轻便减负护脊背包,减负护脊 简约舒适 轻便时尚,,,,data/processed_data/包/images/12109674221.png,ok,400,400,false
+11752821898,包,巴布豆BOBDOG 儿童书包9902#卡通图案小学生包,防雨耐磨 U型减负 超轻透气,,,,data/processed_data/包/images/11752821898.png,ok,400,400,false
+12228125571,包,巴布豆书包新款儿童书包小学生女童一二三六年级护脊减负双肩背包,容量超大 时尚休闲 超高颜值,,,,data/processed_data/包/images/12228125571.png,ok,400,400,false
+12349140817,包,巴布豆小学生书包三到六年级减负三年级男儿童男童,耐磨防泼水 U型减负 时尚轻便,,,,data/processed_data/包/images/12349140817.png,ok,400,400,false
+11756387366,包,巴布豆BOBDOG 小学生书包女童孩一二年级减负护脊超轻儿童背书包,轻盈便携 卡通图案 防雨耐磨,,,,data/processed_data/包/images/11756387366.png,ok,400,400,false
+12231200525,包,巴布豆卡通幼儿园书包1-3岁5可爱小背包女孩公主双肩包,减负靠垫 超轻护脊 卡通可爱,,,,data/processed_data/包/images/12231200525.png,ok,400,400,false
+11752000774,包,巴布豆BOBDOG 儿童书包男童学生书包,时尚简约儿童书包,,,,data/processed_data/包/images/11752000774.png,ok,400,400,false
+11755917145,包,巴布豆BoBdog 多功能儿童背包书包90201#条纹款男包,U型减负 透气轻便 防雨耐磨,,,,data/processed_data/包/images/11755917145.png,ok,400,400,false
+11752666271,包,巴布豆BOBDOG 书包小学生男女儿童1--6年级双肩背包护脊减负背包,卡通图案 轻盈便携,,,,data/processed_data/包/images/11752666271.png,ok,400,400,false
+12349140912,包,巴布豆Bobdog书包小学生护脊一二年级轻便减负三四五六年级男女双肩书包,时尚炫彩 U型减负 简约舒适,,,,data/processed_data/包/images/12349140912.png,ok,400,400,false
+11752217653,包,巴布豆BOBDOG 儿童书包小学生女童公主女孩轻便双肩背包,轻盈便携 七彩色书包,,,,data/processed_data/包/images/11752217653.png,ok,400,400,false
+11752096211,包,巴布豆BOBDOG 儿童书包男童小学生卡通图案书包,轻盈便携 卡通图案,,,,data/processed_data/包/images/11752096211.png,ok,400,400,false
+12231350130,包,巴布豆书包女孩小学生一二三到六年级减负护脊超轻儿童双肩背包,减负护脊 时尚炫彩 简约舒适,,,,data/processed_data/包/images/12231350130.png,ok,400,400,false
+12355912887,包,巴布豆BOBDOG儿童书包幼儿园宝宝3-5岁可爱甜甜圈双肩包男孩彩虹书包,卡通可爱时尚百搭 简约舒适 超轻防泼水,,,,data/processed_data/包/images/12355912887.png,ok,400,400,false
+11774230991,包,巴布豆 小清新印花包儿童书包1513# 小学1-6年级,超轻简约 防雨耐磨,,,,data/processed_data/包/images/11774230991.png,ok,400,400,false
+11755623682,包,巴布豆BoBdog 英伦学院风学生背包书包90001#男包,U型减负 防雨耐磨 轻便透气,,,,data/processed_data/包/images/11755623682.png,ok,400,400,false
+12370960709,包,巴布豆包书包女小学生超轻轻便一年级儿童女童二三四五年级,防泼水超轻减负 U型 超轻轻便,,,,data/processed_data/包/images/12370960709.png,ok,400,400,false
+12439859389,包,猎豹 双肩包书包 D6 个,柔韧耐磨,,,,data/processed_data/包/images/12439859389.png,ok,400,400,false
+12109150658,包,巴布豆BoBdog 书包大容量男女小潮童背包小学生书包,轻如羽翼 大容量,,,,data/processed_data/包/images/12109150658.png,ok,400,400,false
+11757030869,包,巴布豆BoBdog 儿童健康护脊书包90412# 卡通可爱双肩包,U型减负 轻便透气 防雨耐磨,,,,data/processed_data/包/images/11757030869.png,ok,400,400,false
+12439861196,包,猎豹 书包双肩包 S156 个,透气散热,,,,data/processed_data/包/images/12439861196.png,ok,400,400,false
+12349140874,包,巴布豆小学生书包轻便减负粉色女儿童一到六年级新款护脊书包,时尚炫彩 超轻便捷 U型减负,,,,data/processed_data/包/images/12349140874.png,ok,400,400,false
+12396629901,包,Ceba厂货通潮牌双肩包男初中生高中大书包大容量旅行休闲电脑背,Ceba厂货通潮牌双肩包男初中生高中大书包大容量旅行休闲电脑背,,,,data/processed_data/包/images/12396629901.png,ok,400,400,false
+12381306416,包,Ceba大容量防泼水校园简约学生书包时尚撞色多口袋收纳双肩包印刷,上网上街上苏宁,,,,data/processed_data/包/images/12381306416.png,ok,400,400,false
+12434477083,包,巴布豆书包女小学生一二到六年级10岁减负护脊超轻儿童双肩背包,减负护脊 时尚炫彩 简约舒适,,,,data/processed_data/包/images/12434477083.png,ok,400,400,false
+12381297508,包,Ceba休闲双肩包男士背包旅游潮牌欧美简约书包时尚潮流电脑包旅行背包,上网上街上苏宁,,,,data/processed_data/包/images/12381297508.png,ok,400,400,false
+12381299637,包,Ceba新款时尚大容量双肩包笔记本电脑包厂家直供背包,上网上街上苏宁,,,,data/processed_data/包/images/12381299637.png,ok,400,400,false
+12434505975,包,巴布豆小清新印花包儿童书包1513# 17786#小学1-6年级书包,超轻简约 防雨耐磨,,,,data/processed_data/包/images/12434505975.png,ok,400,400,false
+12371555918,包,巴布豆书包男女童小学生新款一二三到六年级减负护脊超轻便防驼背,防泼水 U型减负,,,,data/processed_data/包/images/12371555918.png,ok,400,400,false
+12381297517,包,Ceba厂货通双肩包加印男士商务防盗背包usb双肩电脑包书包,上网上街上苏宁,,,,data/processed_data/包/images/12381297517.png,ok,400,400,false
+12433587226,包,大容量电脑双肩包男商务通勤背包休闲防水多隔层旅行学生书包,,,,,data/processed_data/包/images/12433587226.png,ok,400,400,false
+12441333012,包,柏尔盾 背包 300*130*430mm 一个黑色,电脑包 大容量,,,,data/processed_data/包/images/12441333012.png,ok,400,400,false
+12433587317,包,迷彩男孩背包潮韩版男童中大童户外旅行儿童双肩包少年学生书包,,,,,data/processed_data/包/images/12433587317.png,ok,400,400,false
+12429271735,包,新款男士商务通勤电脑双肩包简约休闲户外双肩背包大容量书包,,,,,data/processed_data/包/images/12429271735.png,ok,400,400,false
+12433587183,包,双肩包男士高级感商务通勤电脑背包男双肩包笔记本16寸大容量书包,,,,,data/processed_data/包/images/12433587183.png,ok,400,400,false
+12396664272,包,Ceba潮流背包男牛津布大容量减压抗震书包商务轻便笔记本双肩包,Ceba潮流背包男牛津布大容量减压抗震书包商务轻便笔记本双肩包,,,,data/processed_data/包/images/12396664272.png,ok,400,400,false
+12433587537,包,双肩包新款学生初中生大容量日系韩版书包潮流时尚背包双肩,,,,,data/processed_data/包/images/12433587537.png,ok,400,400,false
+11752689827,包,巴布豆BOBDOG 儿童书包9828#格纹图案小学生包,格纹,,,,data/processed_data/包/images/11752689827.png,ok,400,400,false
+12433587543,包,双肩包潮流森系简约情侣双肩背包初高中大学生书包大容量_1,,,,,data/processed_data/包/images/12396629889.png,ok,400,400,false
+12439664303,包,铁青书包E52 个,新商品上架,,,,data/processed_data/包/images/12439664303.png,ok,400,400,false
+12307135276,包,背包女2021新款潮韩版书包可爱日系简约学生双肩包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307135276.png,ok,400,400,false
+12381299700,包,Ceba韩版双肩背包休闲旅行背包涤纶双肩包旅行运动包初中高中学生书包,上网上街上苏宁,,,,data/processed_data/包/images/12381299700.png,ok,400,400,false
+12434459555,包,巴布豆书包女童小学生轻便萌趣卡通儿童背包护脊减负儿童书包,护脊减负 小清新 时尚舒适,,,,data/processed_data/包/images/12434459555.png,ok,400,400,false
+12396664250,包,Ceba双肩包男款休闲大容量旅游背包轻便减震抗压书包双肩背包小,Ceba双肩包男款休闲大容量旅游背包轻便减震抗压书包双肩背包小,,,,data/processed_data/包/images/12396664250.png,ok,400,400,false
+12429271530,包,学生书包高中生大容量韩版简约双肩包男新款日系原宿高中背包潮流,,,,,data/processed_data/包/images/12443064167.png,ok,400,400,false
+12439664360,包,铁青爱路护路宣传书包E50 个,新商品上架,,,,data/processed_data/包/images/12439664360.png,ok,400,400,false
+12381300686,包,Ceba定制时尚双肩包新款简约背包男女休闲商务电脑包东南亚,上网上街上苏宁,,,,data/processed_data/包/images/12381300686.png,ok,400,400,false
+12434479576,包,巴布豆书包男女童小学生新款一到六年级减负护脊超轻便防驼背,防泼水 U型减负,,,,data/processed_data/包/images/12371555918.png,ok,400,400,false
+12381306452,包,Ceba新款双肩包男士时尚旅行电脑包韩版青年背包书包男,上网上街上苏宁,,,,data/processed_data/包/images/12381306452.png,ok,400,400,false
+12439664345,包,铁青爱路护路书包E51 个,新商品上架,,,,data/processed_data/包/images/12439664345.png,ok,400,400,false
+12433587639,包,纯色双肩包15.6寸牛津布防泼水初高中大学生背包休闲旅行包,,,,,data/processed_data/包/images/12433587639.png,ok,400,400,false
+12433587645,包,纯色百搭双肩女包15.6寸牛津布防泼水初高中大学生背包休闲旅行包,,,,,data/processed_data/包/images/12433587645.png,ok,400,400,false
+12433909234,包,儿童1-3-4-6年级双肩7-9-12周岁书包小学生女孩韩版可爱公主背包_1,,,,,data/processed_data/包/images/12433909234.png,ok,400,400,false
+12433587659,包,轻便折叠皮肤包运动户外双肩包大容量登山骑行背包超轻多功能休闲,,,,,data/processed_data/包/images/12433587659.png,ok,400,400,false
+12434410899,包,巴布豆BOBDOG轻量护脊儿童书包9913#小学生男包大容量防泼水双肩包减压加长肩带书包背包,时尚透气 防雨耐磨,,,,data/processed_data/包/images/12434410899.png,ok,400,400,false
+12434456508,包,巴布豆BOBDOG书包小学生女童公主女孩轻便儿童护脊减负双肩包,轻便 减负,,,,data/processed_data/包/images/12434456508.png,ok,400,400,false
+12434434673,包,巴布豆BoBdog儿童健康护脊书包90412#卡通可爱儿童书包,防水耐磨,,,,data/processed_data/包/images/12434434673.png,ok,400,400,false
+12434476504,包,巴布豆可爱男女童1-5岁宝宝卡通幼儿园书包双肩包,防泼水 大容量 减负靠垫,,,,data/processed_data/包/images/12434476504.png,ok,400,400,false
+12434459510,包,巴布豆BOBDOG书包小学生男一至六年级学生超轻便减负护脊背包,减负护脊 简约舒适 轻便时尚,,,,data/processed_data/包/images/12109674221.png,ok,400,400,false
+12434479546,包,巴布豆BOBDOG包书包女小学生超轻轻便一年级儿童女童二三四五年级,防泼水超轻减负 U型 超轻轻便,,,,data/processed_data/包/images/12370960709.png,ok,400,400,false
+12445120800,包,铁青爱路护路宣传书包CF3 个,简约,,,,data/processed_data/包/images/12445120800.png,ok,400,400,false
+12445439195,包,铁青儿童书包CF7 个,简约,,,,data/processed_data/包/images/12445439195.png,ok,400,400,false
+12439654155,包,铁青可爬楼儿童两用书包PL1 个,新商品上架,,,,data/processed_data/包/images/12439654155.png,ok,400,400,false
+12445439258,包,铁青卡通书包CF8 个,简约,,,,data/processed_data/包/images/12445439258.png,ok,400,400,false
+12445439354,包,铁青书包CF9 个,简约,,,,data/processed_data/包/images/12445439354.png,ok,400,400,false
+12445547795,包,铁青爱路护路儿童书包CF13 个,简约,,,,data/processed_data/包/images/12445547795.png,ok,400,400,false
+12445548056,包,铁青爱路护路书包CF14 个,简约,,,,data/processed_data/包/images/12445548056.png,ok,400,400,false
+12445547400,包,铁青爱路护路宣传书包CF12 个,简约,,,,data/processed_data/包/images/12445547400.png,ok,400,400,false
+12445642337,包,SUISSEWIN时尚休闲多功能校园学生书包双肩包SN17111 红色,SUISSEWIN时尚休闲多功能校园学生书包双肩包,,,,data/processed_data/包/images/12445642337.png,ok,400,400,false
+12449693791,包,三人居 大容量书包 SRJ2069 个,大容量防泼水护脊,,,,data/processed_data/包/images/12449693791.png,ok,400,400,false
+12445663757,包,猎豹 防泼水书包 LB38Z 个,耐用,,,,data/processed_data/包/images/12445663757.png,ok,400,400,false
+12449694020,包,三人居 学生书包 SRJ9661 个,大容量防泼水护脊,,,,data/processed_data/包/images/12449694020.png,ok,400,400,false
+12449711399,包,三人居 书包 SRJ786 个,大容量防泼水护脊,,,,data/processed_data/包/images/12449711399.png,ok,400,400,false
+12445805270,包,袋鼠威威 学生书包 送胶囊雨伞和文具套装 XFH2332-2 紫色,送胶囊雨伞和文具套装,,,,data/processed_data/包/images/12445805270.png,ok,400,400,false
+12445805250,包,袋鼠威威 学生书包 送胶囊雨伞和文具套装 XFH2332-1 宝蓝色,送胶囊雨伞和文具套装,,,,data/processed_data/包/images/12445805250.png,ok,400,400,false
+12449713476,包,三人居 小学生书包 SRJ6902 个,大容量防泼水护脊,,,,data/processed_data/包/images/12449713476.png,ok,400,400,false
+12450926311,包,雅霖服 工具包双肩包YLFB10607 个,轻便耐用 ；大容量多隔层设计 ；时尚百搭外观；,,,,data/processed_data/包/images/12450926311.png,ok,400,400,false
+12451681377,包,雅霖服 商务双肩背包 YLF-B4092 个,轻便耐用 ；多口袋设计 ；时尚百搭,,,,data/processed_data/包/images/12451681377.png,ok,400,400,false
+12408432051,包,Ceba双肩包女2023新款时尚ins韩版潮休闲大容量旅行背包可手提单,Ceba双肩包女2023新款时尚ins韩版潮休闲大容量旅行背包可手提单,,,,data/processed_data/包/images/12408432051.png,ok,400,400,false
+12408432023,包,Ceba2023新款牛津布双肩包女春夏款简约大容量休闲小背包韩版旅,,,,,data/processed_data/包/images/12408432023.png,ok,400,400,false
+11232372997,包,新款书包女韩版原宿ulzzang15.6寸电脑背包双肩包女高中生百搭学院风,【质量品质保证》送运费险》支持七天无理由退换货】,,,,data/processed_data/包/images/11232372997.png,ok,400,400,false
+12307131272,包,双肩包女女士背包女软皮妈咪旅行大容量包学生书包 黑色款,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307131272.png,ok,400,400,false
+12307130821,包,牛津布双肩包女2021年新款潮时尚书包帆布小背包女士旅行包包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130821.png,ok,400,400,false
+12307130740,包,双肩包女2021新款牛津布书包潮韩版时尚大容量背包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130740.png,ok,400,400,false
+12396663476,包,Ceba双肩包女2022新款街头潮流时尚户外旅行背包轻便PU软皮书包,Ceba双肩包女2022新款街头潮流时尚户外旅行背包轻便PU软皮书包,,,,data/processed_data/包/images/12396663476.png,ok,400,400,false
+12307131281,包,双肩包女软皮包包大容量书包女包旅行背包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307131281.png,ok,400,400,false
+12396662282,包,Ceba2022新款街头潮流时尚大容量潮流旅行背包牛津布女士双肩包,Ceba2022新款街头潮流时尚大容量潮流旅行背包牛津布女士双肩包,,,,data/processed_data/包/images/12396662282.png,ok,400,400,false
+12307131256,包,双肩包女2021新款韩版休闲时尚背包潮两用简约旅行女包 【SM&6009】卡其色,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307131256.png,ok,400,400,false
+12396663498,包,Ceba双肩包女2022新款街头潮流时尚旅行背包大容量可放14寸电脑,Ceba双肩包女2022新款街头潮流时尚旅行背包大容量可放14寸电脑,,,,data/processed_data/包/images/12396663498.png,ok,400,400,false
+12410424034,包,Ceba双肩包女2023新款时尚韩版百搭简约大容量旅行女士背包软皮,Ceba双肩包女2023新款时尚韩版百搭简约大容量旅行女士背包软皮,,,,data/processed_data/包/images/12410424034.png,ok,400,400,false
+12417518498,包,Ceba 尼龙双肩包女2023新款街头潮流时尚旅行背包大学生书包,上网上街上苏宁,,,,data/processed_data/包/images/12417518498.png,ok,400,400,false
+12417520115,包,Ceba 女士双肩包2023女新款街头潮流简约电脑包大容量旅行双肩包,上网上街上苏宁,,,,data/processed_data/包/images/12417520115.png,ok,400,400,false
+12396663378,包,Ceba2022新款街头潮流牛津布双肩包女时尚简约大容量女士旅行包,Ceba2022新款街头潮流牛津布双肩包女时尚简约大容量女士旅行包,,,,data/processed_data/包/images/12396663378.png,ok,400,400,false
+11266698428,包,新款升级版女士包多功能大容量包包印花时尚潮女包双肩包 女,【质量品质保证！送运费险！七天无理由退换货】,,,,data/processed_data/包/images/11266698428.png,ok,400,400,false
+12307130837,包,牛津布双肩包女2021新款韩版大容量轻便背包女双肩帆布包书包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307130837.png,ok,400,400,false
+12307131646,包,牛津布双肩包女2021新款休闲大容量旅行包韩版尼龙布学生书包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12307131646.png,ok,400,400,false
+12410422346,包,Ceba新款小众双肩包女轻奢大容量背包简约软皮旅行包包女,Ceba新款小众双肩包女轻奢大容量背包简约软皮旅行包包女,,,,data/processed_data/包/images/12410422346.png,ok,400,400,false
+12410423005,包,Ceba2023新款大容量双肩背包女时尚百搭通勤旅行背包软皮简约撞,Ceba2023新款大容量双肩背包女时尚百搭通勤旅行背包软皮简约撞,,,,data/processed_data/包/images/12410423005.png,ok,400,400,false
+12410423009,包,Ceba2023新款感双肩包女时尚简约大容量休闲旅行背包,Ceba2023新款感双肩包女时尚简约大容量休闲旅行背包,,,,data/processed_data/包/images/12410423009.png,ok,400,400,false
+12439664553,包,铁青干湿分离登山包T99 个,新商品上架,,,,data/processed_data/包/images/12439664553.png,ok,400,400,false
+12439664550,包,铁青干湿分离登山包T90 个,新商品上架,,,,data/processed_data/包/images/12439664550.png,ok,400,400,false
+12439664668,包,铁青旅行登山包T95 个,新商品上架,,,,data/processed_data/包/images/12439664668.png,ok,400,400,false
+12439664488,包,铁青多功能登山包T91 个,新商品上架,,,,data/processed_data/包/images/12439664488.png,ok,400,400,false
+12439664556,包,铁青徒步登山包F10 个,新商品上架,,,,data/processed_data/包/images/12439664556.png,ok,400,400,false
+12439664493,包,铁青轻便登山包T94 个,新商品上架,,,,data/processed_data/包/images/12439664493.png,ok,400,400,false
+12439664561,包,铁青牛津布登山包T96 个,新商品上架,,,,data/processed_data/包/images/12439664561.png,ok,400,400,false
+12439664700,包,铁青户外登山包T89 个,新商品上架,,,,data/processed_data/包/images/12439664700.png,ok,400,400,false
+12439664519,包,铁青防水登山包T97 个,新商品上架,,,,data/processed_data/包/images/12439664519.png,ok,400,400,false
+12439664508,包,铁青迷彩登山包T100 个,新商品上架,,,,data/processed_data/包/images/12439664508.png,ok,400,400,false
+12396664292,包,Ceba男士双肩背包大容量耐磨轻便登山包户外双肩包书包高颜值,Ceba男士双肩背包大容量耐磨轻便登山包户外双肩包书包高颜值,,,,data/processed_data/包/images/12396664292.png,ok,400,400,false
+12439664672,包,铁青露营登山包T98 个,新商品上架,,,,data/processed_data/包/images/12439664672.png,ok,400,400,false
+12396664300,包,Ceba男士商务防水登山包户外双肩包大容量防盗双肩背包书包韩版,Ceba男士商务防水登山包户外双肩包大容量防盗双肩背包书包韩版,,,,data/processed_data/包/images/12396664300.png,ok,400,400,false
+12452466093,包,权仁之巅 背包 50*20*26cm 个,双肩背包,,,,data/processed_data/包/images/12452466093.png,ok,400,400,false
+12452358865,包,三极户外(TriPolar) TP2182 32*20*54cm 大容量背包 双肩包 1 个/个(计价单位:个),轻量化设计，背负舒适，适合长时间户外徒步； 大容量分区收,,,,data/processed_data/包/images/12452358865.png,ok,400,400,false
+12423125229,包,登山包女双肩包男旅行旅游轻便初中高中生书包防水大容量背包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12423125229.png,ok,400,400,false
+12423198825,包,旅行双肩包男大容量徒步登山背包女轻便超大户外旅李包书包,【618大促】满100减5元，进店购买,,,,data/processed_data/包/images/12423198825.png,ok,400,400,false
+12451149336,包,精萱亿品 折叠登山包背包 2026-14,结实耐用,,,,data/processed_data/包/images/12451149336.png,ok,400,400,false
+12443181400,包,精萱亿品 折叠登山包背包 XS13/个,结实耐用,,,,data/processed_data/包/images/12443181400.png,ok,400,400,false
+12451149341,包,精萱亿品 折叠登山包背包 2026-15,结实耐用,,,,data/processed_data/包/images/12451149341.png,ok,400,400,false
+12450162188,包,苏宁宜品 x外交官Diplomat 双肩背包 旅行包 电脑背包 户外包 登山包 旅行背包 商务休闲 双肩包,简约时尚设计，适合日常休闲携带；时尚出行,,,,data/processed_data/包/images/12450162188.png,ok,400,400,false
+12453199642,包,爱华仕双肩包OCB5008大容量户外运动登山包,双肩包 大容量 户外运动登山包,,,,data/processed_data/包/images/12453199642.png,ok,400,400,false
+12450160637,包,苏宁宜品 x外交官Diplomat 双肩背包 黑色翻盖磁吸电脑包 旅行包 户外包 登山包 旅行背包 商务休闲 双肩包,防水设计，保护电脑；适合所有人群；拉链开合安全便捷；,,,,data/processed_data/包/images/12450160637.png,ok,400,400,false
+12452469649,包,骆驼山如故系列30L登山包,骆驼山如故系列30L登山包,,,,data/processed_data/包/images/12452469649.png,ok,400,400,false
+12453356697,包,锐步花田梦境休闲登山包 RB240019M,锐步花田梦境休闲登山包 RB240019M,,,,data/processed_data/包/images/12453356697.png,ok,400,400,false
+12450820379,包,围盛 防水大容量登山包 75*33*25cm 个,实用,,,,data/processed_data/包/images/12450820379.png,ok,400,400,false
+12453356868,包,探险者登山包 TXHBC54009189 TXZ-HBC4024户外轻便登山包黑色(FW),探险者登山包 TXHBC54009189 TXZ-HBC4024户外轻便登山包黑色（FW）,,,,data/processed_data/包/images/12453356868.png,ok,400,400,false

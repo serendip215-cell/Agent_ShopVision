@@ -39,17 +39,18 @@ data/processed_data/
 
 | 文件 | 列 |
 |---|---|
-| `products.csv` | `item_id`, `product_type`, `item_name`, `description`, `brand`, `color`, `material`, `local_image_path`, `image_status`, `image_height`, `image_width`, `is_cleaned` |
+| `products.csv` | `item_id`, `product_type`, `item_name`, `description`, `brand`, `color`, `material`, `local_image_path`, `image_status`, `image_height`, `image_width`, `is_readed` |
 | `image_quality_report.csv` | `item_id`, `product_type`, `image_path`, `source_image_path`, `decode_ok`, `actual_height`, `actual_width`, `format`, `file_size_bytes`, `sha256`, `quality_status`, `quality_reason` |
 | `dataset_summary.csv` | `product_type`, `record_count`, `image_ok`, `image_missing`, `image_failed` |
 | `merge_index.jsonl` 每行 | `dataset_id`, `item_id`, `source_key`, `category`, `record_hash`, `image_hash`, `local_image_path`, `image_copied` |
 
-`is_cleaned` 为清洗状态：输入含 `true`/`1`/`yes`/`y`（不区分大小写）记为 `true`，其余或缺失记为 `false`；由 `attribute_cleaning/` 清洗后写回，`is_cleaned=true` 表示已通过清洗检查。
+`is_readed` 为处理状态：输入含 `true`/`1`/`yes`/`y`（不区分大小写）记为 `true`，其余或缺失记为 `false`；它表示记录是否已经完成读取或处理，不表示属性清洗是否通过。
 
 ### 输入要求
 
 - 输入 CSV 必需 4 列：`item_id`、`product_type`、`item_name`、`local_image_path`，缺一即报错退出；
 - `local_image_path` 允许相对路径，按「项目根目录相对」→「输入 CSV 所在目录相对」顺序解析；解析不到不崩溃，该条记为 `image_status=missing`；
+- 默认使用 `local_image_path` 指向的原图；加 `--cutout` 后，会按原图路径推导抠图路径：原图所在目录的上一级目录 / `--cutout-dir-name` / 原文件名主体加 `--cutout-suffix`；抠图文件不存在时记为 `missing`；
 - 空 `product_type` 归为 `UNKNOWN`；类别目录名会清洗非法字符（`<>:"/\|?*` → `_`），空名归为 `UNKNOWN`。
 
 ### 三种运行模式
@@ -90,6 +91,9 @@ data/processed_data/
 | `--dry-run` | 可选 | 预览新增/重复/冲突数量，不写文件 |
 | `--backup-dir` | 可选 | 追加前把整个输出目录备份到 `<backup-dir>/processed_data_<UTC时间戳>` |
 | `--clean-output` | 可选 | 删除整个输出目录后全量重建（先确认目录里没有要留的东西） |
+| `--cutout` | 可选 | 使用抠图；不写时使用原图 |
+| `--cutout-dir-name` | 可选 | 抠图目录名，默认 `images_cutout` |
+| `--cutout-suffix` | 可选 | 抠图文件扩展名，默认 `png`；可写 `jpg` 或 `.jpg` |
 
 ### 用法
 
@@ -100,6 +104,24 @@ python scripts/classify_products.py `
   --input-file data/raw_data/MUGE_data/products.csv `
   --category-map "双肩包=包,运动鞋=鞋"
 ```
+
+使用抠图结果（无需生成或读取路径对照 CSV）：
+
+```powershell
+python scripts/classify_products.py `
+  --input-file data/raw_data/Suning_data/products.csv `
+  --output-dir data/processed_data `
+  --cutout `
+  --cutout-dir-name images_cutout `
+  --cutout-suffix png `
+  --category-map "双肩包=包,运动鞋=鞋" `
+  --append `
+  --dataset-id Suning_data
+```
+
+例如 `local_image_path` 为 `data/raw_data/Suning_data/images/123.jpg` 时，脚本会查找 `data/raw_data/Suning_data/images_cutout/123.png`。若抠图输出为 JPG，则设置 `--cutout-suffix jpg`。目录名和后缀均可配置，脚本不依赖具体数据集名称。
+
+`--append --dataset-id Suning_data` 用于把苏宁结果加入已有的 `data/processed_data`。如果要清空整个输出目录后重新生成全部数据，改用 `--clean-output`，不要和 `--append` 同时使用。
 
 增量追加其他数据集（先预览再去掉 `--dry-run` 执行）：
 
@@ -127,7 +149,7 @@ python scripts/classify_products.py `
 | `missing_images` | 图片文件不存在或大小为 0 字节 |
 | `image_status_mismatch` | 状态对不上：声明 `ok` 但文件缺失/为 0，或声明 `missing`/`failed` 但文件存在 |
 
-12 列标准字段（含 `is_cleaned`）之外的列记入 `extra_fields`，只报告、不算错误。
+12 列标准字段（含 `is_readed`）之外的列记入 `extra_fields`，只报告、不算错误。
 
 ### 参数
 
@@ -264,7 +286,7 @@ python scripts/cutout_images.py --selftest   # 离线自检解析逻辑，不处
    - 并发数（同时处理的图片张数）：提示推荐值（= `CPU 核数` 与 `可用内存÷2` 的较小值），**直接回车采用推荐值，或输入 1-128 的整数后回车**；
 3. **准备模型**（三级获取，能离线就不联网）：`scripts/models/isnet-general-use.onnx` 有文件 → 复制到 rembg 缓存使用；缓存已有 → 直接用；都没有 → 在线下载约 170MB（失败提示手动放置路径）；
 4. **逐目录并发抠图**：按选定并发数开多进程，每个推理进程限单线程；**每抠一张打印一行** `ok/skip/fail: 原因 + 文件名 + [n/总数]`，每 100 张打一行汇总（计数+耗时）；
-5. **输出汇总**：每个数据集生成 `cutout_map.csv` 对照表（见下节），打印成功/跳过/失败统计 + 各输出目录。
+5. **输出汇总**：打印成功/跳过/失败统计 + 各输出目录；不生成路径对照 CSV。
 
 ```text
 [16:07:20]         ok     01sUPg0387L.jpg [1/1]
@@ -276,7 +298,6 @@ python scripts/cutout_images.py --selftest   # 离线自检解析逻辑，不处
 ```text
 data/raw_data/<数据集>/images/          # 输入原图
 data/raw_data/<数据集>/images_cutout/   # 输出 <原名>.png 透明底
-data/raw_data/<数据集>/images_cutout/cutout_map.csv   # 输出对照表（一行一张图）
 ```
 
 ### 交互怎么用（完整示例）
@@ -300,30 +321,7 @@ data/raw_data/<数据集>/images_cutout/cutout_map.csv   # 输出对照表（一
 - 第二问的输入格式：直接回车（用推荐值）或 `1`-`128` 的整数；`abc`、`0`、`129` 都会重新问；
 - 不想交互：用环境变量 `CUTOUT_SELECT` / `CUTOUT_WORKERS` 跳过对应提问（见下表）。
 
-### 输出对照表 `cutout_map.csv`（不改元数据表）
-
-路径变了但**不动 `products.csv` 等元数据**——对照表单独放在输出目录里，一行对应一张图：
-
-| 列 | 含义 |
-|---|---|
-| `source_image_path` | 原图路径（仓库相对 POSIX 格式，与 `products.csv` 的 `local_image_path` **完全同格式**） |
-| `cutout_image_path` | 抠图路径（同格式；`fail` 时留空） |
-| `status` | `ok` 本轮抠出 / `skip` 已有结果未重抠 / `fail` 失败 |
-| `message` | 失败原因（成功留空） |
-
-续跑合并写入：同一张图只保留一行，新结果覆盖旧结果；唯一例外是已成功的 `ok` 不会被 `skip` 撤销。`CUTOUT_LIMIT` 试跑只更新前几张，跑全量后自动补全。
-
-和商品数据对上（`products.csv` 的 `local_image_path` 直接等于对照表的 `source_image_path`）：
-
-```python
-import pandas as pd
-
-prod = pd.read_csv("data/raw_data/Suning_data/products.csv")         # 元数据，保持不动
-cut = pd.read_csv("data/raw_data/Suning_data/images_cutout/cutout_map.csv")
-merged = prod.merge(cut, left_on="local_image_path", right_on="source_image_path")
-merged = merged[merged["status"] != "fail"]   # 丢掉没抠出来的
-# merged["cutout_image_path"] 即抠图路径
-```
+分类脚本可通过 `--cutout` 直接按 `local_image_path` 推导抠图路径，不需要 `cutout_map.csv`。如果抠图文件不存在，该商品的图片状态会记录为 `missing`。
 
 断点续跑：输出已存在且非 0 字节则 `skip`；中断/失败后重跑接着抠；单张失败只记录原因不中断整批；先写 `.part` 临时文件再改名，不留半张图。
 

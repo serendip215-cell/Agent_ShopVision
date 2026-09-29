@@ -1,4 +1,4 @@
-﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,is_cleaned
+﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,is_readed
 B075DQBBJZ,家居用品,亚利桑那沙地平线照片带木架,,Rivet,,,data/processed_data/家居用品/images/91IjyKZ76qL.jpg,ok,2560,2560,false
 B07PRFQHNG,家居用品,UMI Merryfeel 超细纤维被套套装，轻盈柔软的床上用品套装（8种尺寸，12种颜色）（200x200+2x80x80厘米，粉色）,,UMI,粉色,塑料,data/processed_data/家居用品/images/51TKpL0ljxL.jpg,ok,1000,1000,false
 B07KZV51ZQ,家居用品,UMI 将鼠标悬停在图片上可放大 Essentials 全遮光隔热窗帘 时尚柔软 带扣眼 灰白色 140x260cm 2件装,,UMI,灰白色,Tela,data/processed_data/家居用品/images/616BGmMVE3L.jpg,ok,1500,1500,false
