@@ -1,16 +1,24 @@
-﻿{
+{
   "report_version": 2,
-  "generated_at": null,
-  "input_rows": 300,
-  "accepted_rows": 300,
-  "review_rows": 0,
-  "excluded_rows": 0,
+  "generated_at": "2026-09-30T05:25:26Z",
+  "input_rows": 10162,
+  "accepted_rows": 9393,
+  "review_rows": 4,
+  "excluded_rows": 765,
   "pending_rows": 0,
   "target_types": [
-    "手机壳"
+    "男装"
   ],
   "output_types": [
-    "手机壳"
+    "男装",
+    "包",
+    "厨房用品",
+    "女装",
+    "家居用品",
+    "手机壳",
+    "水杯",
+    "运动服",
+    "鞋"
   ],
   "output_fields": [
     "item_id",
@@ -27,6 +35,7 @@
     "type"
   ],
   "unprocessed_file": "unprocessed_samples.csv",
+  "model_failure_file": "<source_category>/model_failures.csv",
   "failed_images_dir": "failed_images",
   "relative_image_paths": true,
   "input_read_field": {
@@ -35,20 +44,338 @@
     "model_success_value": "true"
   },
   "note": "通过记录逐条写入类别 products.csv 和 images/；模型正常返回但规则未通过的记录写入 unprocessed_samples.csv，并将能找到的图片复制到 failed_images/；接口、解析或图片失败记录写入 model_failures.csv，等待重试且不复制到 failed_images/；中断时 pending_rows 表示尚未完成模型处理的记录。",
-  "model_failure_file": "<source_category>/model_failures.csv",
   "runs": [
     {
-      "generated_at": null,
-      "legacy": true,
-      "input_rows": 300,
-      "processed_rows": 300,
-      "accepted_rows": 300,
+      "generated_at": "2026-09-30T02:26:20Z",
+      "input_rows": 296,
+      "processed_rows": 296,
+      "accepted_rows": 279,
+      "review_rows": 0,
+      "excluded_rows": 17,
+      "pending_rows": 0,
+      "target_types": [
+        "厨房用品"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "厨房用品": {
+          "input": 296,
+          "accepted": 279,
+          "review": 0,
+          "excluded": 17
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T02:40:32Z",
+      "input_rows": 1330,
+      "processed_rows": 1330,
+      "accepted_rows": 1229,
+      "review_rows": 64,
+      "excluded_rows": 37,
+      "pending_rows": 0,
+      "target_types": [
+        "包"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "包": {
+          "input": 1330,
+          "accepted": 1229,
+          "review": 64,
+          "excluded": 37
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T02:43:21Z",
+      "input_rows": 65,
+      "processed_rows": 64,
+      "accepted_rows": 17,
+      "review_rows": 47,
+      "excluded_rows": 0,
+      "pending_rows": 1,
+      "target_types": [
+        "包"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "包": {
+          "input": 64,
+          "accepted": 17,
+          "review": 47,
+          "excluded": 0
+        }
+      },
+      "pending_by_source_category": {
+        "包": 1
+      }
+    },
+    {
+      "generated_at": "2026-09-30T02:47:22Z",
+      "input_rows": 47,
+      "processed_rows": 47,
+      "accepted_rows": 45,
+      "review_rows": 0,
+      "excluded_rows": 2,
+      "pending_rows": 0,
+      "target_types": [
+        "包"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "包": {
+          "input": 47,
+          "accepted": 45,
+          "review": 0,
+          "excluded": 2
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T02:55:03Z",
+      "input_rows": 270,
+      "processed_rows": 270,
+      "accepted_rows": 264,
+      "review_rows": 0,
+      "excluded_rows": 6,
+      "pending_rows": 0,
+      "target_types": [
+        "家居用品"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "家居用品": {
+          "input": 270,
+          "accepted": 264,
+          "review": 0,
+          "excluded": 6
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T03:14:24Z",
+      "input_rows": 361,
+      "processed_rows": 361,
+      "accepted_rows": 357,
+      "review_rows": 2,
+      "excluded_rows": 2,
+      "pending_rows": 0,
+      "target_types": [
+        "女装"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "女装": {
+          "input": 361,
+          "accepted": 357,
+          "review": 2,
+          "excluded": 2
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T03:14:34Z",
+      "input_rows": 3,
+      "processed_rows": 3,
+      "accepted_rows": 0,
+      "review_rows": 2,
+      "excluded_rows": 1,
+      "pending_rows": 0,
+      "target_types": [
+        "女装"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "女装": {
+          "input": 3,
+          "accepted": 0,
+          "review": 2,
+          "excluded": 1
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T03:21:51Z",
+      "input_rows": 1000,
+      "processed_rows": 1000,
+      "accepted_rows": 995,
+      "review_rows": 5,
+      "excluded_rows": 0,
+      "pending_rows": 0,
+      "target_types": [
+        "男装"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "男装": {
+          "input": 1000,
+          "accepted": 995,
+          "review": 5,
+          "excluded": 0
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T03:30:36Z",
+      "input_rows": 684,
+      "processed_rows": 684,
+      "accepted_rows": 666,
+      "review_rows": 2,
+      "excluded_rows": 16,
+      "pending_rows": 0,
+      "target_types": [
+        "运动服"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "运动服": {
+          "input": 684,
+          "accepted": 666,
+          "review": 2,
+          "excluded": 16
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T04:36:58Z",
+      "input_rows": 2523,
+      "processed_rows": 2523,
+      "accepted_rows": 2001,
+      "review_rows": 22,
+      "excluded_rows": 500,
+      "pending_rows": 0,
+      "target_types": [
+        "水杯"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "水杯": {
+          "input": 2523,
+          "accepted": 2001,
+          "review": 22,
+          "excluded": 500
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T05:09:48Z",
+      "input_rows": 3401,
+      "processed_rows": 3401,
+      "accepted_rows": 3184,
+      "review_rows": 35,
+      "excluded_rows": 182,
+      "pending_rows": 0,
+      "target_types": [
+        "鞋"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "鞋": {
+          "input": 3401,
+          "accepted": 3184,
+          "review": 35,
+          "excluded": 182
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T05:20:06Z",
+      "input_rows": 521,
+      "processed_rows": 521,
+      "accepted_rows": 15,
+      "review_rows": 3,
+      "excluded_rows": 503,
+      "pending_rows": 0,
+      "target_types": [
+        "水杯"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "水杯": {
+          "input": 521,
+          "accepted": 15,
+          "review": 3,
+          "excluded": 503
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T05:20:54Z",
+      "input_rows": 18,
+      "processed_rows": 18,
+      "accepted_rows": 2,
+      "review_rows": 0,
+      "excluded_rows": 16,
+      "pending_rows": 0,
+      "target_types": [
+        "运动服"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "运动服": {
+          "input": 18,
+          "accepted": 2,
+          "review": 0,
+          "excluded": 16
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T05:22:52Z",
+      "input_rows": 35,
+      "processed_rows": 35,
+      "accepted_rows": 35,
       "review_rows": 0,
       "excluded_rows": 0,
       "pending_rows": 0,
       "target_types": [
-        "手机壳"
-      ]
+        "鞋"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "鞋": {
+          "input": 35,
+          "accepted": 35,
+          "review": 0,
+          "excluded": 0
+        }
+      },
+      "pending_by_source_category": {}
+    },
+    {
+      "generated_at": "2026-09-30T05:25:26Z",
+      "input_rows": 4,
+      "processed_rows": 4,
+      "accepted_rows": 4,
+      "review_rows": 0,
+      "excluded_rows": 0,
+      "pending_rows": 0,
+      "target_types": [
+        "男装"
+      ],
+      "min_confidence": 0.72,
+      "by_source_category": {
+        "男装": {
+          "input": 4,
+          "accepted": 4,
+          "review": 0,
+          "excluded": 0
+        }
+      },
+      "pending_by_source_category": {}
     }
   ]
 }

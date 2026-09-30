@@ -96,7 +96,7 @@
     data/processed_data_cleaning/model_audit.jsonl
 
 模型成功返回并完成字段解析后，源文件 `data/processed_data/手机壳/products.csv` 中对应行的 `is_readed` 才会更新为 `true`；清洗输出 CSV 不保留 `is_readed`。接口、图片或解析失败时保持 `false`。
-处理结果采用流式写入：每完成一条记录就立即更新对应类别的 `products.csv` 并复制成功图片到该类别的 `images/`；模型正常返回但规则未通过的记录立即写入统一的 `unprocessed_samples.csv`，并将能找到的图片复制到 `failed_images/`；接口、解析或图片失败的记录不复制到 `failed_images/`，只写入失败队列等待重试。模型调用失败的记录另外写入源类别目录下的 `model_failures.csv`，包含失败原因、失败次数和最后失败时间；成功重试后会从该文件移除。CSV 中的 `local_image_path` 指向清洗输出中的图片或源图片路径。
+处理结果采用流式写入：每完成一条记录就立即更新对应类别的 `products.csv` 并复制成功图片到该类别的 `images/`；模型正常返回但规则未通过的记录立即写入统一的 `unprocessed_samples.csv`，并将能找到的图片复制到 `failed_images/`；接口、解析或图片失败的记录不写入 `unprocessed_samples.csv`，也不复制到 `failed_images/`，只写入失败队列等待重试。模型调用失败的记录写入源类别目录下的 `model_failures.csv`，包含失败原因、失败次数和最后失败时间；成功重试后会从该文件移除。CSV 中的 `local_image_path` 指向清洗输出中的图片或源图片路径。
 
 如果清洗输出目录已有结果，需要保留旧结果并继续追加：
 
@@ -139,7 +139,7 @@
 
 接口、超时或解析失败时，记录保持 `is_readed=false`，并写入源类别目录下的 `model_failures.csv`。文件中的 `attempt_count` 会累计失败次数，下一次运行会自动再次调用模型；不需要额外的 `--retry-failed` 参数。模型成功返回后，无论结果是 `accepted`、`review` 还是 `excluded`，都会把源记录改为 `is_readed=true`，并从失败队列中移除。
 
-失败重试和规则不通过要区分：接口/解析/图片失败不复制到 `failed_images/`；模型正常返回但规则判定为 `review` 或 `excluded` 时，才把能找到的图片复制到 `failed_images/`，供人工复核，这类记录不会自动再次调用模型。
+失败重试和规则不通过要区分：接口/解析/图片失败不写入 `unprocessed_samples.csv`，也不复制到 `failed_images/`，只保存在 `model_failures.csv` 中等待重试；模型正常返回但规则判定为 `review` 或 `excluded` 时，才写入 `unprocessed_samples.csv` 并把能找到的图片复制到 `failed_images/`，供人工复核，这类记录不会自动再次调用模型。接口错误仍会写入 `model_audit.jsonl` 和 `model_failures.csv`，但不会进入人工复核文件。
 
 `--append` 会保留已有类别 CSV、失败队列、未处理记录和报告历史，并按 `item_id` 增量合并；输出目录已有内容时，常规续跑应使用它。`--force` 只用于明确允许在已有输出目录上运行，模型是否调用仍由输入 CSV 的 `is_readed` 决定。`--clean-output` 会删除清洗输出后重新写出，但不会修改输入 CSV 的 `is_readed`；如果要让模型重新处理已经标记为 `true` 的记录，必须先把对应输入 CSV 的 `is_readed` 改回 `false`。输出目录已有内容时，必须明确选择 `--append`、`--force` 或 `--clean-output`。
 
@@ -159,12 +159,12 @@
 3. 模型判断图片主体是否为可售商品，并在当前数据集的候选类别中选择商品大类。
 4. 模型补充细分类 `type`、颜色 `color` 和材质 `material`。无法从图片或文字可靠判断的属性留空，不强行猜测。
 5. 对商品大类、颜色、材质和置信度进行程序校验。
-6. 通过校验的记录立即写入对应类别的 `products.csv`，图片复制到该类别 `images/`；模型正常返回但未通过规则的记录（待复核、排除）立即写入统一的 `unprocessed_samples.csv`，能找到的图片复制到 `failed_images/`。图片缺失、接口失败和解析失败只写入 `unprocessed_samples.csv` 与源类别目录的 `model_failures.csv`，不复制到 `failed_images/`，用于下一次重试；模型成功后从该失败队列移除。
+6. 通过校验的记录立即写入对应类别的 `products.csv`，图片复制到该类别 `images/`；模型正常返回但未通过规则的记录（待复核、排除）立即写入统一的 `unprocessed_samples.csv`，能找到的图片复制到 `failed_images/`。图片缺失、接口失败和解析失败不写入 `unprocessed_samples.csv`，只写入源类别目录的 `model_failures.csv`，不复制到 `failed_images/`，用于下一次重试；模型成功后从该失败队列移除。
 7. `description` 按以下模板重新生成：
 
        商品大类：{product_type}；细分类：{type}；颜色：{color}；材质：{material}
 
-8. 输入 CSV 中的 `is_readed=true` 表示模型已经成功处理过该记录，脚本会跳过模型调用；`is_readed=false` 的记录每次运行都会调用模型。模型成功返回后，无论结果是接受、待复核还是排除，源 `processed_data` CSV 对应行才更新为 `true`；图片缺失、接口失败和解析失败保持 `false`。清洗输出 CSV 不保留 `is_readed`，模型结果和错误记录保存在 `model_audit.jsonl`，未通过记录保存在 `unprocessed_samples.csv` 中。
+8. 输入 CSV 中的 `is_readed=true` 表示模型已经成功处理过该记录，脚本会跳过模型调用；`is_readed=false` 的记录每次运行都会调用模型。模型成功返回后，无论结果是接受、待复核还是排除，源 `processed_data` CSV 对应行才更新为 `true`；图片缺失、接口失败和解析失败保持 `false`。清洗输出 CSV 不保留 `is_readed`，模型结果和错误记录保存在 `model_audit.jsonl`，其中接口失败记录同时进入 `model_failures.csv`；`unprocessed_samples.csv` 只保存模型正常返回但未通过规则的记录。
 
 分类范围始终来自输入数据集的类别目录或 `--categories` 参数，代码不预设具体商品类别。没有发现任何类别时，脚本会停止并提示检查目录结构。
 

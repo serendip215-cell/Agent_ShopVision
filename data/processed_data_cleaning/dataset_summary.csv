@@ -1,2 +1,10 @@
-﻿"product_type","input_count","accepted_count","review_count","excluded_count","pending_count","min_confidence"
-"手机壳","300","300","0","0","0","0.72"
+﻿product_type,input_count,accepted_count,review_count,excluded_count,pending_count,min_confidence
+男装,1000,999,1,0,0,0.72
+包,1330,1291,0,39,0,0.72
+厨房用品,296,279,0,17,0,0.72
+女装,358,357,0,1,0,0.72
+家居用品,270,264,0,6,0,0.72
+手机壳,300,300,0,0,0,0.72
+水杯,2523,2016,3,504,0,0.72
+运动服,684,668,0,16,0,0.72
+鞋,3401,3219,0,182,0,0.72

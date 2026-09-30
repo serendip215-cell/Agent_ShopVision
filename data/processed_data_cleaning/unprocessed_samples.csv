@@ -1,1 +1,770 @@
 ﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,type,source_category,status,reason,model_product_type,model_type,model_color,model_material,confidence
+B07VTC4TG9,厨房用品,亚马逊自有品牌 – Solimo 3升即热式热水器（3000 W，ISI认证）,,亚马逊品牌——Solimo,浅小麦色 :: 青绿色 :: 白色,热塑性塑料,data/processed_data_cleaning/failed_images/B07VTC4TG9__61myHiMSxCL.jpg,ok,2537,1375,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,3升即热式热水器,白色、浅灰色、红色,塑料,0.98
+B07B43XFCK,厨房用品,AmazonBasics A21 电动吸尘器集尘袋，带除臭功能，适用于 AEG Vampyr CE,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B07B43XFCK__71nkBG0aGOL.jpg,ok,1389,1385,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,吸尘器集尘袋,白色,无纺布,0.99
+B073HDPY9M,厨房用品,AmazonBasics S11 - 适用于西门子吸尘器的除臭集尘袋（10个装）,,Amazon Basics,,,data/processed_data_cleaning/failed_images/B073HDPY9M__71CEuN0K3WL.jpg,ok,1335,1304,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,吸尘器集尘袋,白色、绿色,,0.98
+B07P65CLYY,厨房用品,AmazonBasics 带集尘袋吸尘器，1.5L，能效等级A，高效电机，附赠4包带除臭处理的G51吸尘器集尘袋,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B07P65CLYY__5151uT01PRL.jpg,ok,1001,1001,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,吸尘器,黑色,,0.99
+B012VH89LQ,厨房用品,Amazon Basics - 烧烤罩,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B012VH89LQ__714HTtvHQDL.jpg,ok,1500,1500,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,电暖器,黑色,金属,0.96
+B073HJM3L4,厨房用品,AmazonBasics H11 霍华德（Hoover）专用除臭吸尘器集尘袋（4个装）,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B073HJM3L4__71hSZKJO8bL.jpg,ok,1498,1365,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,吸尘器集尘袋,白色、绿色,,0.99
+B012VH8SH6,厨房用品,AmazonBasics - 多座长凳专用造型罩布,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B012VH8SH6__714MS1uaB5L.jpg,ok,1646,2560,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,长凳造型罩布,白色,布料,0.98
+B084HZSLLS,厨房用品,AmazonBasics 干湿两用吸尘器，强力吸力、低噪音、高能效，享1年保修（21升，钢制机身）,,AmazonBasics,多色,塑料,data/processed_data_cleaning/failed_images/B084HZSLLS__710IiE1EDZL.jpg,ok,2528,2528,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,干湿两用吸尘器,黑色,塑料,0.99
+B0862LDWFC,厨房用品,AmazonBasics 2合1无线吸尘器,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B0862LDWFC__71FGPZ4bnmL.jpg,ok,2560,2560,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,无线吸尘器,蓝色、黑色、银色,塑料,0.99
+B071X43YBB,厨房用品,Solimo 1000- 瓦特 干式 熨斗,,亚马逊品牌——Solimo,多种颜色,塑料,data/processed_data_cleaning/failed_images/B071X43YBB__71OUVFk+LdL.jpg,ok,2124,2560,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,干式熨斗,白色,塑料,0.99
+B073HBKFQV,厨房用品,AmazonBasics A11 防异味吸尘袋（适用于 AEG）- 10 只装,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B073HBKFQV__81N2jJZUNrL.jpg,ok,2556,2560,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,吸尘器集尘袋,白色,无纺布,0.98
+B0862LTCL3,厨房用品,AmazonBasics - 电动扫地机,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B0862LTCL3__71TZS0x8gPL.jpg,ok,2560,2560,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,无线手持吸尘器,蓝色、黑色、银色,塑料,0.98
+B00FZF2E90,厨房用品,亚马逊基本款木衣架,,Amazon Basic（AmazonBasics）,,,data/processed_data_cleaning/failed_images/B00FZF2E90__71Mkk-tumWL.jpg,ok,1351,2560,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,木衣架,,木材,0.99
+B001TNOK7Q,厨房用品,通用 - 白色皱纹纸卷,,通用名称 -,白色,,data/processed_data_cleaning/failed_images/B001TNOK7Q__71TNaasXwIL.jpg,ok,2000,2000,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,白色皱纹纸卷,白色,纸,0.99
+B073HBKFR6,厨房用品,AmazonBasics - M21除臭吸尘器集尘袋（适用于Miele吸尘器），4件装,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B073HBKFR6__71W9+bQJGxL.jpg,ok,1450,1345,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,吸尘器集尘袋,白色、绿色,纤维滤材,0.99
+B071VNCNLD,厨房用品,AmazonBasics - 带集尘袋的地板吸尘器，1.5升，能效等级A，高效电机,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B071VNCNLD__81jN--SwgEL.jpg,ok,2560,1758,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,卧式吸尘器,黑色,塑料,0.99
+B00OUFX0YY,厨房用品,AmazonBasics 优质防疲劳站立舒适垫，适用于家庭和办公室，20 x 36 英寸，黑色,,AmazonBasics,黑色,泡沫,data/processed_data_cleaning/failed_images/B00OUFX0YY__71o4LP3WbFL.jpg,ok,1783,1969,,厨房用品,excluded,模型判断为非目标商品或其他类别,其他,防疲劳站立垫,黑色,泡沫,0.98
+muge_6563,包,书包密码锁 学生 防盗,,,,,data/processed_data_cleaning/failed_images/muge_6563__6563.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,密码挂锁,黑色,金属,0.99
+muge_94722,包,比卡丘背包男孩,,,,,data/processed_data_cleaning/failed_images/muge_94722__94722.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒玩偶,黄色、黑色,毛绒面料,0.99
+muge_83002,包,书包枪,,,,,data/processed_data_cleaning/failed_images/muge_83002__83002.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,钥匙扣挂件,蓝色、金色、黑色,金属,0.95
+muge_210686,包,书包双肩背带,,,,,data/processed_data_cleaning/failed_images/muge_210686__210686.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,双肩包背带,黑色,织物,0.98
+muge_159293,包,北極狐背包带子,,,,,data/processed_data_cleaning/failed_images/muge_159293__159293.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包肩带,蓝色,,0.96
+muge_264470,包,背包改造肩带,,,,,data/processed_data_cleaning/failed_images/muge_264470__264470.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包替换肩带,黑色、橙色,塑料,0.97
+muge_289876,包,海德薇背包,,,,,data/processed_data_cleaning/failed_images/muge_289876__289876.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,猫头鹰毛绒玩偶,白色、灰色,毛绒布料,0.99
+muge_337517,包,背包挂件玩偶 公仔,,,,,data/processed_data_cleaning/failed_images/muge_337517__337517.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包挂件玩偶,绿色,毛绒布料,0.98
+muge_364658,包,背包小挂件老虎,,,,,data/processed_data_cleaning/failed_images/muge_364658__364658.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,虎形毛绒挂件,棕色、白色、黑色,绒毛面料,0.98
+muge_399853,包,书包挂件小狮子,,,,,data/processed_data_cleaning/failed_images/muge_399853__399853.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒挂件,黄色,毛绒,0.94
+muge_412001,包,背包配件肩带鳄鱼,,,,,data/processed_data_cleaning/failed_images/muge_412001__412001.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,包用肩带,黑色,,0.98
+muge_415495,包,书包挂件 可爱,,,,,data/processed_data_cleaning/failed_images/muge_415495__415495.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒挂件钥匙扣,白色,毛绒面料,0.98
+muge_420809,包,书包狗子挂件,,,,,data/processed_data_cleaning/failed_images/muge_420809__420809.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒狗狗挂件,棕色、灰色、白色,毛绒布料,0.98
+muge_408668,包,书包挂 龙猫,,,,,data/processed_data_cleaning/failed_images/muge_408668__408668.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,黑猫毛绒玩偶,黑色,毛绒面料,0.98
+muge_450118,包,吉祥物书包,,,,,data/processed_data_cleaning/failed_images/muge_450118__450118.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒玩具,橙色、白色、黑色,毛绒面料,0.99
+muge_476537,包,书包置物架落地 家用,,,,,data/processed_data_cleaning/failed_images/muge_476537__476537.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,落地置物架,黑色,金属,0.98
+muge_490672,包,塞尔达传说 背包,,,,,data/processed_data_cleaning/failed_images/muge_490672__490672.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,钥匙扣,棕色、蓝色,金属,0.99
+muge_530493,包,背包溢流,,,,,data/processed_data_cleaning/failed_images/muge_530493__530493.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,实验流体装置,透明、黄色,玻璃,0.98
+muge_535280,包,书包上好看的吊坠儿,,,,,data/processed_data_cleaning/failed_images/muge_535280__535280.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,包挂钥匙扣吊坠,金色、粉色,,0.93
+muge_550927,包,背包 绑带,,,,,data/processed_data_cleaning/failed_images/muge_550927__550927.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包绑带,棕色,,0.97
+muge_597406,包,书包挂坠小玩偶 日系,,,,,data/processed_data_cleaning/failed_images/muge_597406__597406.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒玩偶挂坠,粉色、米白色,毛绒面料,0.98
+muge_622791,包,调教背包,,,,,data/processed_data_cleaning/failed_images/muge_622791__622791.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,宠物训练背带,黑色、红色,,0.96
+muge_638795,包,哈雷骑士背包,,,,,data/processed_data_cleaning/failed_images/muge_638795__638795.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,摩托车靠背垫,黑色,,0.97
+muge_636327,包,皮卡丘书包挂件公仔一套,,,,,data/processed_data_cleaning/failed_images/muge_636327__636327.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,钥匙扣挂件套装,黄色、黑色,,0.98
+muge_729751,包,小女孩漂亮的斜跨书包,,,,,data/processed_data_cleaning/failed_images/muge_729751__729751.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,儿童卡通印花布艺挂饰,白色,,0.82
+muge_800413,包,小王子背包挂件,,,,,data/processed_data_cleaning/failed_images/muge_800413__800413.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包挂件,绿色、黄色、棕色,,0.98
+muge_802240,包,屁桃书包挂件,,,,,data/processed_data_cleaning/failed_images/muge_802240__802240.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒挂件,粉色、白色,,0.98
+muge_819016,包,背包肩带 银扣,,,,,data/processed_data_cleaning/failed_images/muge_819016__819016.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包肩带,白色,织物,0.98
+muge_838691,包,游泳背包浮板 儿童,,,,,data/processed_data_cleaning/failed_images/muge_838691__838691.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,儿童游泳浮板,蓝色,,0.99
+muge_860611,包,书包柜 实木,,,,,data/processed_data_cleaning/failed_images/muge_860611__860611.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,木质储物柜,棕色,实木,0.99
+muge_848247,包,书包挂件龙猫,,,,,data/processed_data_cleaning/failed_images/muge_848247__848247.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,龙猫毛绒挂件,灰色、绿色,毛绒布料,0.98
+muge_912356,包,背包式音箱,,,,,data/processed_data_cleaning/failed_images/muge_912356__912356.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,便携式音箱,黑色,,0.99
+muge_954651,包,mb红异端大剑背包,,,,,data/processed_data_cleaning/failed_images/muge_954651__954651.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,机甲模型玩具,红色、白色、黑色,,0.98
+muge_1000654,包,书包挂件水晶,,,,,data/processed_data_cleaning/failed_images/muge_1000654__1000654.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,包挂件,粉色,水晶,0.97
+muge_1000436,包,女童书包挂件,,,,,data/processed_data_cleaning/failed_images/muge_1000436__1000436.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,包挂件/钥匙扣,粉色、紫色,塑料,0.97
+muge_1061299,包,超可爱书包,,,,,data/processed_data_cleaning/failed_images/muge_1061299__1061299.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,兔子毛绒玩偶,白色、灰色,毛绒面料,0.99
+muge_1104522,包,去污渍神器 衣物书包,,,,,data/processed_data_cleaning/failed_images/muge_1104522__1104522.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,衣物去污清洁剂,蓝色,塑料,0.99
+muge_474069,包,背包燈,,,,,data/processed_data_cleaning/failed_images/muge_474069__474069.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,背包灯,红色、黄色、白色,塑料,0.98
+muge_639911,包,背包挂件批发,,,,,data/processed_data_cleaning/failed_images/muge_639911__639911.jpg,ok,224,224,,包,excluded,模型判断为非目标商品或其他类别,其他,毛绒钥匙扣挂件,绿色,毛绒面料,0.98
+B07WZSNKTW,家居用品,Eono by Amazon - 帆布画板 20厘米 x 15厘米 5片装 空白 100%纯棉,,Eono,,,data/processed_data_cleaning/failed_images/B07WZSNKTW__61Xh92ENjYL.jpg,ok,2200,2200,,家居用品,excluded,模型判断为非目标商品或其他类别,其他,帆布画板,白色,帆布,0.98
+B085GP2HHX,家居用品,AmazonBasics 可伸缩壁挂式晾衣架，4米,,AmazonBasics,白色,,data/processed_data_cleaning/failed_images/B085GP2HHX__61OnkGVhMWL.jpg,ok,1500,1500,,家居用品,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+B000ON030U,家居用品,Pinzon 锁边缝制 400支 100%埃及棉 标准枕套套装,,亚马逊旗下的Pinzon,,,data/processed_data_cleaning/failed_images/B000ON030U__71dxkG6bZPL.jpg,ok,1500,1500,,家居用品,excluded,模型判断为非目标商品或其他类别,其他,数字万用表套装,蓝色、橙色、黑色,,0.99
+B07JGCYRLP,家居用品,AmazonBasics 卫浴配件套装,,AmazonBasics,,,data/processed_data_cleaning/failed_images/B07JGCYRLP__61w4fs2ESyL.jpg,ok,1500,1500,,家居用品,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+B08CZK93N7,家居用品,[亚马逊品牌] Eono（伊奥诺） 双肩包 红色,,Eono（伊奥诺）,红色,,data/processed_data_cleaning/failed_images/B08CZK93N7__71Zfj5Aq8yL.jpg,ok,1500,1500,,家居用品,excluded,模型判断为非目标商品或其他类别,其他,双肩包,红色,,0.99
+B08C9QQWN9,家居用品,[亚马逊品牌] Eono（伊奥诺） 双筒望远镜 10x42 音乐会 日常使用满意 小型轻便 绿色,,Eono,10X42,,data/processed_data_cleaning/failed_images/B08C9QQWN9__71SXpWlxs6L.jpg,ok,1500,1500,,家居用品,excluded,模型判断为非目标商品或其他类别,其他,双筒望远镜,黑色,玻璃,0.99
+12451538009,男装,六角珠纯棉珠地polo衫男2026夏季新款全棉翻领透气休闲短袖男T恤,源头货源 低价尝鲜,,,,data/processed_data_cleaning/failed_images/12451538009__12451538009.png,ok,400,400,,男装,review,置信度 0.42 低于阈值 0.72,男装,男士内裤,黑色、白色,,0.42
+12445240006,女装,纯欲风吊带连衣裙女新款蓝色修身显瘦开叉裙子辣妹无袖包臀中长裙,,A字裙,,复古风,data/processed_data_cleaning/failed_images/12445240006__12445240006.png,ok,600,400,,女装,excluded,模型判断为非目标商品或其他类别,其他,手提包,蓝色,,0.99
+muge_741,水杯,网红冬天的第一杯奶茶,,,,,data/processed_data_cleaning/failed_images/muge_741__741.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶饮料,黑色、绿色、粉色,,0.98
+muge_5417,鞋,修雨鞋胶水,,,,,data/processed_data_cleaning/failed_images/muge_5417__5417.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用修补胶,白色、绿色,,0.99
+muge_12431,鞋,儒子牛亚麻鞋底,,,,,data/processed_data_cleaning/failed_images/muge_12431__12431.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,,棕色,纸质,0.99
+muge_18389,鞋,收纳鞋子神器 家用,,,,,data/processed_data_cleaning/failed_images/muge_18389__18389.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋子收纳盒,透明,塑料,0.98
+muge_22994,鞋,运动鞋泡沫,,,,,data/processed_data_cleaning/failed_images/muge_22994__22994.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用泡沫清洁剂,蓝色、白色,,0.99
+muge_22833,鞋,猫窝拖鞋封闭式,,,,,data/processed_data_cleaning/failed_images/muge_22833__22833.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,猫窝,灰色,绒面织物,0.98
+muge_30295,鞋,牛仔裤搭配老爹鞋,,,,,data/processed_data_cleaning/failed_images/muge_30295__30295.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,牛仔连体裤,深蓝色,牛仔布,0.99
+muge_42770,鞋,轻奢鞋架带换鞋凳,,,,,data/processed_data_cleaning/failed_images/muge_42770__42770.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜带换鞋凳,黑色,,0.99
+muge_46831,鞋,鞋垫36码女,,,,,data/processed_data_cleaning/failed_images/muge_46831__46831.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,米白色,,0.99
+muge_46618,鞋,鞋店试鞋凳 个性 创意,,,,,data/processed_data_cleaning/failed_images/muge_46618__46618.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,试鞋凳,绿色,,0.98
+muge_43146,鞋,隐形折叠换鞋凳,,,,,data/processed_data_cleaning/failed_images/muge_43146__43146.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,隐形折叠换鞋凳,红色,木质,0.99
+muge_48728,鞋,鞋 收纳 挂,,,,,data/processed_data_cleaning/failed_images/muge_48728__48728.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,悬挂式鞋子收纳袋,米色,,0.96
+muge_51504,鞋,超窄换鞋凳,,,,,data/processed_data_cleaning/failed_images/muge_51504__51504.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳鞋架,棕色,木质,0.98
+muge_52816,鞋,进门鞋柜轻奢风,,,,,data/processed_data_cleaning/failed_images/muge_52816__52816.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_60026,鞋,汽油小汽车鞋玩具,,,,,data/processed_data_cleaning/failed_images/muge_60026__60026.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,玩具越野车,黑色、白色,塑料,0.99
+muge_62364,鞋,欧文五派大星鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_62364__62364.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,米色、蓝色、黑色,,0.98
+muge_63375,鞋,缅花换鞋凳,,,,,data/processed_data_cleaning/failed_images/muge_63375__63375.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳,红色,木质,0.99
+muge_72709,鞋,简易鞋柜带锁,,,,,data/processed_data_cleaning/failed_images/muge_72709__72709.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.99
+muge_70988,鞋,气垫鞋久穿不累,,,,,data/processed_data_cleaning/failed_images/muge_70988__70988.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,白色、蓝色,,0.98
+muge_77576,鞋,跳舞鞋絲帶,,,,,data/processed_data_cleaning/failed_images/muge_77576__77576.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,舞蹈鞋丝带,粉色,,0.98
+muge_82451,鞋,实木鞋柜 纯实木1米,,,,,data/processed_data_cleaning/failed_images/muge_82451__82451.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,实木鞋柜,棕色,实木,0.99
+muge_115038,鞋,鞋柜带镜子的一体 落地,,,,,data/processed_data_cleaning/failed_images/muge_115038__115038.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,带镜子收纳柜,白色,,0.96
+muge_120446,鞋,加高加深防尘鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_120446__120446.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,棕色,,0.99
+muge_123698,鞋,北欧玻璃门鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_123698__123698.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,棕色,玻璃,0.99
+muge_146946,鞋,鞋架医院,,,,,data/processed_data_cleaning/failed_images/muge_146946__146946.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,棕色,木质,0.98
+muge_157820,鞋,足底按摩鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_157820__157820.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,足底按摩鞋垫,白色、蓝色,,0.99
+muge_157053,鞋,进门鞋架窄 背板,,,,,data/processed_data_cleaning/failed_images/muge_157053__157053.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,棕色,木质,0.98
+muge_161429,鞋,鞋锉,,,,,data/processed_data_cleaning/failed_images/muge_161429__161429.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋锉,黑色、银色,金属,0.99
+muge_164219,鞋,鞋刷拉丁舞,,,,,data/processed_data_cleaning/failed_images/muge_164219__164219.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋刷,棕色、黑色,木质,0.99
+muge_171563,鞋,鞋楦 木,,,,,data/processed_data_cleaning/failed_images/muge_171563__171563.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,木制鞋楦,棕色,木材,0.99
+muge_171251,鞋,挂衣架鞋柜落地,,,,,data/processed_data_cleaning/failed_images/muge_171251__171251.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,落地挂衣架鞋柜,棕色,木质,0.99
+muge_174500,鞋,皮鞋 扁鞋带,,,,,data/processed_data_cleaning/failed_images/muge_174500__174500.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,黑色,,0.98
+muge_178145,鞋,透气鞋柜门外 多功能,,,,,data/processed_data_cleaning/failed_images/muge_178145__178145.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_179003,鞋,鞋带0.5cm,,,,,data/processed_data_cleaning/failed_images/muge_179003__179003.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,白色,,0.99
+muge_176157,鞋,鞋架高90宽60,,,,,data/processed_data_cleaning/failed_images/muge_176157__176157.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,棕色、白色,,0.99
+muge_183654,鞋,玄关鞋架挂墙,,,,,data/processed_data_cleaning/failed_images/muge_183654__183654.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,挂墙鞋架,白色,金属,0.98
+muge_183747,鞋,球鞋收纳柜,,,,,data/processed_data_cleaning/failed_images/muge_183747__183747.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,球鞋收纳柜,透明,塑料,0.98
+muge_189913,鞋,干洗店用烘鞋机,,,,,data/processed_data_cleaning/failed_images/muge_189913__189913.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,烘鞋机,绿色,金属,0.99
+muge_194194,鞋,小鞋柜儿童,,,,,data/processed_data_cleaning/failed_images/muge_194194__194194.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_192369,鞋,df拖鞋海钓,,,,,data/processed_data_cleaning/failed_images/muge_192369__192369.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,海钓鱼饵/钓鱼配件,橙色,塑料,0.96
+muge_197106,鞋,船袜小皮鞋,,,,,data/processed_data_cleaning/failed_images/muge_197106__197106.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,船袜,黑色,,0.98
+muge_208181,鞋,挂门鞋架 门后免打孔,,,,,data/processed_data_cleaning/failed_images/muge_208181__208181.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,门后挂鞋架,浅灰色,金属,0.99
+muge_206049,鞋,鞋箱旅行,,,,,data/processed_data_cleaning/failed_images/muge_206049__206049.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋袋/鞋子收纳包,灰色,布料,0.98
+muge_221794,鞋,不锈钢鞋架304,,,,,data/processed_data_cleaning/failed_images/muge_221794__221794.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,灰色,不锈钢,0.99
+muge_223875,鞋,门口小型鞋架,,,,,data/processed_data_cleaning/failed_images/muge_223875__223875.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,棕色,木质,0.98
+muge_233915,鞋,鞋带丝,,,,,data/processed_data_cleaning/failed_images/muge_233915__233915.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,蝴蝶结装饰,绿色,丝质,0.96
+muge_252430,鞋,滑盖式鞋盒,,,,,data/processed_data_cleaning/failed_images/muge_252430__252430.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,滑盖式鞋盒,白色,塑料,0.99
+muge_254203,鞋,我想搜一个鞋柜，我想搜一个挂衣架,,,,,data/processed_data_cleaning/failed_images/muge_254203__254203.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,玄关衣帽收纳柜,棕色,木质,0.98
+muge_265809,鞋,高跟鞋装饰毛球,,,,,data/processed_data_cleaning/failed_images/muge_265809__265809.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋饰毛球,米色、深蓝色、红色,毛绒,0.98
+muge_278919,鞋,三角鞋架,,,,,data/processed_data_cleaning/failed_images/muge_278919__278919.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,白色,,0.98
+muge_279163,鞋,收纳鞋架家用,,,,,data/processed_data_cleaning/failed_images/muge_279163__279163.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,收纳鞋架,灰色,金属,0.98
+muge_280794,鞋,汉堡包换鞋凳,,,,,data/processed_data_cleaning/failed_images/muge_280794__280794.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳,黄色、棕色、绿色,,0.99
+muge_289392,鞋,十字绣成品鞋垫 纯手工,,,,,data/processed_data_cleaning/failed_images/muge_289392__289392.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,十字绣鞋垫,蓝色、红色、白色,,0.98
+muge_293769,鞋,鞋拔子长柄牛角,,,,,data/processed_data_cleaning/failed_images/muge_293769__293769.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋拔子,黑色,牛角,0.98
+muge_292427,鞋,115cm鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_292427__292427.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,木质,0.99
+muge_298919,鞋,史迪仔挂鞋带,,,,,data/processed_data_cleaning/failed_images/muge_298919__298919.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带挂件,蓝色、紫色、白色,毛绒面料,0.98
+muge_302660,鞋,lolita蝴蝶结鞋夹,,,,,data/processed_data_cleaning/failed_images/muge_302660__302660.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,蝴蝶结鞋夹,蓝色、米白色、黄色,,0.98
+muge_303739,鞋,工厂鞋柜 车间,,,,,data/processed_data_cleaning/failed_images/muge_303739__303739.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,金属鞋柜/储物柜,灰色,金属,0.99
+muge_306360,鞋,锁婚鞋的盒子,,,,,data/processed_data_cleaning/failed_images/muge_306360__306360.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,婚鞋盒,白色,,0.98
+muge_308227,鞋,鞋套白色定制logo,,,,,data/processed_data_cleaning/failed_images/muge_308227__308227.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋套,蓝色,,0.96
+muge_312444,鞋,换鞋凳家用 门口圆形,,,,,data/processed_data_cleaning/failed_images/muge_312444__312444.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,圆形换鞋凳,,,0.99
+muge_320204,鞋,换鞋凳鞋柜40cm,,,,,data/processed_data_cleaning/failed_images/muge_320204__320204.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,棕色、橙色,,0.98
+muge_328083,鞋,百叶门换鞋凳,,,,,data/processed_data_cleaning/failed_images/muge_328083__328083.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳,棕色、绿色,木质,0.99
+muge_339068,鞋,90公分鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_339068__339068.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_342337,鞋,松木超薄鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_342337__342337.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,,松木,0.99
+muge_346283,鞋,赤足跑鞋鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_346283__346283.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,黑色、绿色,,0.98
+muge_348933,鞋,鞋收纳架子,,,,,data/processed_data_cleaning/failed_images/muge_348933__348933.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋收纳架,黑色,金属,0.99
+muge_351729,鞋,防滑鞋垫老爹鞋,,,,,data/processed_data_cleaning/failed_images/muge_351729__351729.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,黑色、蓝色,,0.98
+muge_366935,鞋,鞋撑空军一号,,,,,data/processed_data_cleaning/failed_images/muge_366935__366935.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋撑/鞋头防皱撑,白色,,0.98
+muge_376057,鞋,休闲皮鞋带,,,,,data/processed_data_cleaning/failed_images/muge_376057__376057.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,绳索,棕色,,0.98
+muge_379177,鞋,鞋衣架服装店,,,,,data/processed_data_cleaning/failed_images/muge_379177__379177.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋衣架,银色,金属和木材,0.98
+muge_382750,鞋,手工鞋材料毛领,,,,,data/processed_data_cleaning/failed_images/muge_382750__382750.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,毛绒装饰条,红色,毛绒,0.98
+muge_388133,鞋,试鞋凳沙发凳圆,,,,,data/processed_data_cleaning/failed_images/muge_388133__388133.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,圆形试鞋凳,白色,,0.99
+muge_394787,鞋,布鞋底千层底 布底,,,,,data/processed_data_cleaning/failed_images/muge_394787__394787.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,布鞋底/千层底鞋底,浅灰色,布料,0.98
+muge_391329,鞋,补胶鞋专用胶,,,,,data/processed_data_cleaning/failed_images/muge_391329__391329.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,补鞋胶,白色,,0.99
+muge_396172,鞋,芭蕾舞鞋鎖匙扣,,,,,data/processed_data_cleaning/failed_images/muge_396172__396172.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,芭蕾舞鞋造型钥匙扣,粉色,,0.99
+muge_398005,鞋,全城9鞋带,,,,,data/processed_data_cleaning/failed_images/muge_398005__398005.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,多色,,0.98
+muge_410785,鞋,入户玄关双面鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_410785__410785.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,入户玄关鞋柜,黑色、灰色,,0.99
+muge_409889,鞋,门后挂鞋袋白色,,,,,data/processed_data_cleaning/failed_images/muge_409889__409889.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,门后挂鞋袋,白色、棕色,,0.99
+muge_411558,鞋,鞋架储藏柜,,,,,data/processed_data_cleaning/failed_images/muge_411558__411558.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜/储藏柜,灰色,木质,0.98
+muge_415539,鞋,鞋分层架,,,,,data/processed_data_cleaning/failed_images/muge_415539__415539.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用挂架,绿色,塑料,0.98
+muge_415202,鞋,鞋子收纳旅行,,,,,data/processed_data_cleaning/failed_images/muge_415202__415202.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋子收纳袋,白色、透明,塑料,0.86
+muge_423036,鞋,鞋柜隔断双面,,,,,data/processed_data_cleaning/failed_images/muge_423036__423036.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,木质,0.99
+muge_437589,鞋,踩小人的红鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_437589__437589.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,红色,,0.98
+muge_453498,鞋,鞋柜超薄玄关家用,,,,,data/processed_data_cleaning/failed_images/muge_453498__453498.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,黑色,,0.99
+muge_466539,鞋,aj1鞋带金属头,,,,,data/processed_data_cleaning/failed_images/muge_466539__466539.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带金属头配件,黑色、橙色,金属,0.98
+muge_488356,鞋,进门鞋柜多功能坐凳,,,,,data/processed_data_cleaning/failed_images/muge_488356__488356.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜坐凳,白色,,0.99
+muge_497929,鞋,洗鞋刷子 软毛,,,,,data/processed_data_cleaning/failed_images/muge_497929__497929.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,洗鞋刷,白色、灰色,塑料,0.99
+muge_501305,鞋,坐式鞋柜 高,,,,,data/processed_data_cleaning/failed_images/muge_501305__501305.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_511515,鞋,足球鞋专用鞋带 刺客,,,,,data/processed_data_cleaning/failed_images/muge_511515__511515.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,白色,,0.99
+muge_517473,鞋,鞋柜竹子带门,,,,,data/processed_data_cleaning/failed_images/muge_517473__517473.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,棕色,竹子,0.99
+muge_531035,鞋,鞋收纳盒抽屉式,,,,,data/processed_data_cleaning/failed_images/muge_531035__531035.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,抽屉式鞋子收纳盒,白色,塑料,0.99
+muge_533128,鞋,aj鞋架防氧化,,,,,data/processed_data_cleaning/failed_images/muge_533128__533128.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,深灰色,金属,0.96
+muge_529754,鞋,卫生间做拖鞋架子,,,,,data/processed_data_cleaning/failed_images/muge_529754__529754.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,卫生间拖鞋收纳架,灰色,金属,0.98
+muge_538645,鞋,老爹鞋女透气鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_538645__538645.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,粉色、白色,,0.98
+muge_535245,鞋,鞋标贴,,,,,data/processed_data_cleaning/failed_images/muge_535245__535245.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,贴纸,多色,,0.99
+muge_544688,鞋,鞋子防尘收纳套,,,,,data/processed_data_cleaning/failed_images/muge_544688__544688.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋子防尘收纳袋,白色、红色,塑料,0.98
+muge_560284,鞋,割绒鞋垫成品,,,,,data/processed_data_cleaning/failed_images/muge_560284__560284.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,红色、绿色、蓝色,割绒纺织物,0.98
+muge_564925,鞋,屏风鞋柜一体 简易鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_564925__564925.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,屏风鞋柜一体,白色,,0.99
+muge_561399,鞋,蝴蝶鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_561399__561399.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,白色、浅蓝色、红色,,0.99
+muge_563834,鞋,鞋柜收纳神器省空间一体式,,,,,data/processed_data_cleaning/failed_images/muge_563834__563834.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.99
+muge_581192,鞋,鞋架鞋柜美容院专用,,,,,data/processed_data_cleaning/failed_images/muge_581192__581192.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_584345,鞋,十字绣鞋垫自己绣牛年,,,,,data/processed_data_cleaning/failed_images/muge_584345__584345.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,红色,,0.98
+muge_591660,鞋,松木鞋柜全实木北欧,,,,,data/processed_data_cleaning/failed_images/muge_591660__591660.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,,松木实木,0.99
+muge_600296,鞋,意大利皮鞋带,,,,,data/processed_data_cleaning/failed_images/muge_600296__600296.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,红色,皮革,0.98
+muge_601121,鞋,鞋凳柜 竹,,,,,data/processed_data_cleaning/failed_images/muge_601121__601121.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋凳柜,棕色,竹,0.98
+muge_637235,鞋,宝宝虎头鞋鞋样,,,,,data/processed_data_cleaning/failed_images/muge_637235__637235.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,婴儿虎头鞋纸样,白色,纸,0.94
+muge_640260,鞋,用什么刷鞋刷的干净,,,,,data/processed_data_cleaning/failed_images/muge_640260__640260.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋类清洁剂,白色,,0.99
+muge_644613,鞋,鞋柜 玄关鞋柜  黑色,,,,,data/processed_data_cleaning/failed_images/muge_644613__644613.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,黑色,,0.99
+muge_652767,鞋,衣帽架鞋凳合一,,,,,data/processed_data_cleaning/failed_images/muge_652767__652767.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,木质,0.98
+muge_655075,鞋,dr.matens鞋油,,,,,data/processed_data_cleaning/failed_images/muge_655075__655075.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋油,黑色,金属罐,0.99
+muge_654392,鞋,内争高鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_654392__654392.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,增高鞋垫,粉色,,0.98
+muge_662096,鞋,diy手工创意 鞋盒,,,,,data/processed_data_cleaning/failed_images/muge_662096__662096.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,DIY手工立体水族场景模型,蓝色、绿色、多色,纸板,0.97
+muge_670580,鞋,打鞋眼机器,,,,,data/processed_data_cleaning/failed_images/muge_670580__670580.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,打鞋眼机,绿色,金属,0.99
+muge_676789,鞋,帆布鞋补色笔,,,,,data/processed_data_cleaning/failed_images/muge_676789__676789.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋类补色剂,黑色,液体,0.98
+muge_683377,鞋,毛线鞋纸,,,,,data/processed_data_cleaning/failed_images/muge_683377__683377.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋底,黑色、白色,橡胶,0.96
+muge_691536,鞋,童鞋架子网红铺,,,,,data/processed_data_cleaning/failed_images/muge_691536__691536.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,展示架/货架,棕色,,0.96
+muge_697943,鞋,newbalance997鞋带,,,,,data/processed_data_cleaning/failed_images/muge_697943__697943.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,白色,,0.99
+muge_697066,鞋,鞋凳鞋柜一体超薄,,,,,data/processed_data_cleaning/failed_images/muge_697066__697066.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜鞋凳一体,红色,,0.98
+muge_702624,鞋,装鞋的收纳盒上翻盖,,,,,data/processed_data_cleaning/failed_images/muge_702624__702624.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋子收纳盒,白色,塑料,0.98
+muge_732871,鞋,ecco鞋垫 男,,,,,data/processed_data_cleaning/failed_images/muge_732871__732871.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,米色、黑色,,0.98
+muge_751252,鞋,鞋垫京健达二代,,,,,data/processed_data_cleaning/failed_images/muge_751252__751252.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,黑色、橙色、蓝色,,0.98
+muge_751180,鞋,多功能擦鞋机油盒,,,,,data/processed_data_cleaning/failed_images/muge_751180__751180.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,擦鞋机油盒,黑色,,0.98
+muge_762653,鞋,擦鞋机鞋油通用,,,,,data/processed_data_cleaning/failed_images/muge_762653__762653.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,擦鞋机鞋油,白色、红色,塑料,0.98
+muge_765921,鞋,牛仔裙搭配什么鞋子,,,,,data/processed_data_cleaning/failed_images/muge_765921__765921.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,牛仔连衣裙,蓝色,牛仔布,0.99
+muge_771165,鞋,母婴店展示鞋架,,,,,data/processed_data_cleaning/failed_images/muge_771165__771165.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋类展示架,白色,木质,0.99
+muge_772103,鞋,xd8鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_772103__772103.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,黄色、黑色、蓝色,,0.98
+muge_776877,鞋,配马丁裤的鞋,,,,,data/processed_data_cleaning/failed_images/muge_776877__776877.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,裤子,棕色,,0.99
+muge_784343,鞋,内增高鞋垫女1厘米,,,,,data/processed_data_cleaning/failed_images/muge_784343__784343.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,内增高鞋垫,米色,,0.98
+muge_791114,鞋,一次性鞋模机,,,,,data/processed_data_cleaning/failed_images/muge_791114__791114.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,一次性鞋套机,金色、黑色,,0.97
+muge_799479,鞋,鞋架宿舍 经济型,,,,,data/processed_data_cleaning/failed_images/muge_799479__799479.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,黑色,,0.99
+muge_800944,鞋,鞋柜单排,,,,,data/processed_data_cleaning/failed_images/muge_800944__800944.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,白色,金属,0.98
+muge_807015,鞋,实木屏风柜鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_807015__807015.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,实木屏风柜,棕色,实木,0.99
+muge_807498,鞋,树脂胶粘鞋,,,,,data/processed_data_cleaning/failed_images/muge_807498__807498.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用树脂胶,白色、黑色,树脂胶,0.99
+muge_810285,鞋,男款运动鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_810285__810285.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,蓝色、黑色,,0.99
+muge_821803,鞋,鞋迷,,,,,data/processed_data_cleaning/failed_images/muge_821803__821803.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋类清洁喷雾,白色、银色,塑料,0.98
+muge_826487,鞋,拉丁舞鞋钢刷,,,,,data/processed_data_cleaning/failed_images/muge_826487__826487.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋刷,黑色,木质,0.98
+muge_824744,鞋,塑料编织鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_824744__824744.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,绿色、蓝色,塑料,0.98
+muge_837207,鞋,高跟鞋毛毛鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_837207__837207.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,棕色,毛绒材质,0.97
+muge_840605,鞋,水洗牛仔鞋带,,,,,data/processed_data_cleaning/failed_images/muge_840605__840605.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,耳饰,蓝色、银色,,0.9
+muge_844094,鞋,鞋柜家用大容量白色大理石面,,,,,data/processed_data_cleaning/failed_images/muge_844094__844094.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色、黑色,,0.98
+muge_847280,鞋,门前小鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_847280__847280.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,白色,,0.98
+muge_862473,鞋,nw锁鞋公路,,,,,data/processed_data_cleaning/failed_images/muge_862473__862473.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,自行车骑行头盔,白色、黑色,,0.99
+muge_861698,鞋,玄关鞋柜 单开门,,,,,data/processed_data_cleaning/failed_images/muge_861698__861698.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋柜,灰色,无法确认,0.98
+muge_866934,鞋,擦篮球鞋神器,,,,,data/processed_data_cleaning/failed_images/muge_866934__866934.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋类清洁工具套装,黑色,塑料,0.98
+muge_880618,鞋,轴承速滑鞋,,,,,data/processed_data_cleaning/failed_images/muge_880618__880618.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,轮滑鞋轴承,黑色、银色,金属,0.96
+muge_892356,鞋,电擦鞋神器,,,,,data/processed_data_cleaning/failed_images/muge_892356__892356.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,电动擦鞋刷,白色,塑料,0.99
+muge_896012,鞋,旅游鞋保养油,,,,,data/processed_data_cleaning/failed_images/muge_896012__896012.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用保养油喷雾,红色,,0.99
+muge_925614,鞋,修鞋机器 手摇,,,,,data/processed_data_cleaning/failed_images/muge_925614__925614.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,手摇修鞋机器,黑色,金属,0.99
+muge_921234,鞋,高跟鞋尖头海绵垫,,,,,data/processed_data_cleaning/failed_images/muge_921234__921234.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,高跟鞋尖头海绵垫,黑色、黄色,海绵,0.98
+muge_925716,鞋,门口小鞋架 现代简约,,,,,data/processed_data_cleaning/failed_images/muge_925716__925716.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,黄色,木质,0.99
+muge_929719,鞋,鞋套一次性 加厚 抽取式,,,,,data/processed_data_cleaning/failed_images/muge_929719__929719.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,一次性鞋套,蓝色,,0.98
+muge_929301,鞋,换鞋区地垫,,,,,data/processed_data_cleaning/failed_images/muge_929301__929301.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,地垫,白色、灰色、黑色,,0.96
+muge_935806,鞋,飞马37鞋带,,,,,data/processed_data_cleaning/failed_images/muge_935806__935806.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋带,黑色、白色、多色,,0.98
+muge_937448,鞋,自然发热暖脚靳鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_937448__937448.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,黑色,,0.98
+muge_940039,鞋,打黑色翻皮鞋油,,,,,data/processed_data_cleaning/failed_images/muge_940039__940039.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋油喷雾,黑色,,0.98
+muge_952353,鞋,两层鞋柜,,,,,data/processed_data_cleaning/failed_images/muge_952353__952353.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,两层鞋柜,白色,,0.99
+muge_980033,鞋,香鞋喷雾,,,,,data/processed_data_cleaning/failed_images/muge_980033__980033.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用除臭喷雾,蓝色、银色,金属罐,0.99
+muge_989063,鞋,不锈钢矮鞋架,,,,,data/processed_data_cleaning/failed_images/muge_989063__989063.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,木质鞋柜凳,棕色,木材,0.98
+muge_990115,鞋,收脚裤男搭配什么鞋子,,,,,data/processed_data_cleaning/failed_images/muge_990115__990115.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,男士休闲裤,蓝色,,0.98
+muge_993338,鞋,长筒鞋套布,,,,,data/processed_data_cleaning/failed_images/muge_993338__993338.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,长筒鞋套,黑色,布料,0.98
+muge_996930,鞋,擦鞋机专用油,,,,,data/processed_data_cleaning/failed_images/muge_996930__996930.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,擦鞋机专用油,白色、红色、绿色,塑料,0.99
+muge_997385,鞋,入门鞋帽架,,,,,data/processed_data_cleaning/failed_images/muge_997385__997385.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋帽架,黑色,金属,0.99
+muge_1002280,鞋,搭老爹鞋薄袜子,,,,,data/processed_data_cleaning/failed_images/muge_1002280__1002280.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,袜子,白色,,0.99
+muge_1006078,鞋,鞋架贴门上 粘贴式,,,,,data/processed_data_cleaning/failed_images/muge_1006078__1006078.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,门后鞋架,白色,金属,0.98
+muge_1011230,鞋,换鞋凳玄关法式,,,,,data/processed_data_cleaning/failed_images/muge_1011230__1011230.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳,绿色,,0.99
+muge_1018545,鞋,带收纳换鞋皮凳皮,,,,,data/processed_data_cleaning/failed_images/muge_1018545__1018545.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,带收纳功能的换鞋凳,米白色、红色、灰色,皮革,0.99
+muge_1024459,鞋,靴子鞋上面的装饰i的吊坠,,,,,data/processed_data_cleaning/failed_images/muge_1024459__1024459.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋饰吊坠,黑色,金属,0.98
+muge_1039656,鞋,百德鞋胶,,,,,data/processed_data_cleaning/failed_images/muge_1039656__1039656.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋胶,黑色,塑料,0.99
+muge_1045083,鞋,残疾人补高鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_1045083__1045083.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,增高鞋垫,米色、灰色、黑色,,0.98
+muge_1053311,鞋,白鞋盒长,,,,,data/processed_data_cleaning/failed_images/muge_1053311__1053311.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,,棕色,纸板,0.99
+muge_1060783,鞋,轻奢换鞋,,,,,data/processed_data_cleaning/failed_images/muge_1060783__1060783.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,软包换鞋凳,蓝色,软包材质,0.98
+muge_1066463,鞋,鞋子撑条,,,,,data/processed_data_cleaning/failed_images/muge_1066463__1066463.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+muge_1070987,鞋,鞋除菌,,,,,data/processed_data_cleaning/failed_images/muge_1070987__1070987.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋用除臭消毒喷雾,白色,,0.99
+muge_1092383,鞋,换鞋凳垫子 布艺,,,,,data/processed_data_cleaning/failed_images/muge_1092383__1092383.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳垫,浅蓝色,布艺,0.98
+muge_1102335,鞋,减震 防臭按摩竹炭鞋垫,,,,,data/processed_data_cleaning/failed_images/muge_1102335__1102335.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,棕色,竹炭,0.98
+muge_1115954,鞋,芭蕾舞足尖鞋硅胶套,,,,,data/processed_data_cleaning/failed_images/muge_1115954__1115954.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,芭蕾舞足尖鞋硅胶套,粉色,硅胶,0.99
+muge_1113336,鞋,玄关凳子 换鞋凳北欧,,,,,data/processed_data_cleaning/failed_images/muge_1113336__1113336.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,换鞋凳,米色,,0.99
+muge_1118651,鞋,鞋标志卡扣cd,,,,,data/processed_data_cleaning/failed_images/muge_1118651__1118651.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋饰鞋扣,银色、白色,,0.96
+muge_1111921,鞋,鞋垫原装万斯,,,,,data/processed_data_cleaning/failed_images/muge_1111921__1111921.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋垫,米色,,0.98
+muge_1138845,鞋,鞋架子 家用 多层 移动,,,,,data/processed_data_cleaning/failed_images/muge_1138845__1138845.jpg,ok,224,224,,鞋,excluded,模型判断为非目标商品或其他类别,其他,鞋架,白色、浅灰色,,0.99
+12448045160,鞋,端固 一次性鞋套100个装 HH002 包,鞋套,,,,data/processed_data_cleaning/failed_images/12448045160__12448045160.png,ok,400,400,,鞋,excluded,模型判断为非目标商品或其他类别,其他,一次性鞋套,蓝色,,0.98
+12450614437,鞋,阿迪达斯(adidas)三叶草板鞋男鞋女鞋新款贝壳头一脚蹬休闲鞋轻便运动鞋HQ8750 ZP,轻便舒适；耐磨防滑；时尚百搭；,,,,data/processed_data_cleaning/failed_images/12450614437__12450614437.png,ok,400,400,,鞋,excluded,模型判断为非目标商品或其他类别,其他,袜子,白色、黑色,,0.98
+muge_2202,水杯,白色文胸 大罩杯,,,,,data/processed_data_cleaning/failed_images/muge_2202__2202.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,白色,,0.99
+muge_4685,水杯,茶杯橱,,,,,data/processed_data_cleaning/failed_images/muge_4685__4685.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,壁挂式木质展示柜,棕色,木材,0.98
+muge_8282,水杯,白酒量杯分酒器,,,,,data/processed_data_cleaning/failed_images/muge_8282__8282.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,白酒量杯分酒器,透明,玻璃,0.98
+muge_16929,水杯,编织茶杯托,,,,,data/processed_data_cleaning/failed_images/muge_16929__16929.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,编织托盘,棕色,编织植物纤维,0.99
+muge_17108,水杯,世界杯奖杯 模型,,,,,data/processed_data_cleaning/failed_images/muge_17108__17108.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,世界杯奖杯模型,金色、绿色,,0.99
+muge_18625,水杯,杯子記號 蝴蝶,,,,,data/processed_data_cleaning/failed_images/muge_18625__18625.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蝴蝶杯子标记,多色,,0.96
+muge_24907,水杯,拉花杯可加热,,,,,data/processed_data_cleaning/failed_images/muge_24907__24907.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,拉花杯,透明,玻璃,0.98
+muge_26199,水杯,水杯盖子密封圈,,,,,data/processed_data_cleaning/failed_images/muge_26199__26199.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯盖密封圈,白色,,0.98
+muge_28021,水杯,武术比赛奖杯,,,,,data/processed_data_cleaning/failed_images/muge_28021__28021.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奖杯,金色、黑色,,0.99
+muge_42280,水杯,猫瓜杯,,,,,data/processed_data_cleaning/failed_images/muge_42280__42280.jpg,ok,224,224,,水杯,review,置信度 0.68 低于阈值 0.72,水杯,玻璃杯,粉色、紫色,玻璃,0.68
+muge_46165,水杯,单杯奶茶打包袋,,,,,data/processed_data_cleaning/failed_images/muge_46165__46165.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶打包袋,白色,塑料,0.99
+muge_46718,水杯,刷牙杯子置物架免打孔,,,,,data/processed_data_cleaning/failed_images/muge_46718__46718.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,浴室免打孔壁挂置物架,黑色,金属,0.98
+muge_47814,水杯,科艾元素艾灸杯,,,,,data/processed_data_cleaning/failed_images/muge_47814__47814.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,艾灸杯,白色、黑色、灰色,,0.97
+muge_51650,水杯,霜山红酒杯,,,,,data/processed_data_cleaning/failed_images/muge_51650__51650.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯挂架,白色,,0.98
+muge_54382,水杯,玻璃杯蜡烛台翻沿杯华夏杯,,,,,data/processed_data_cleaning/failed_images/muge_54382__54382.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃蜡烛台,透明、红色,玻璃,0.98
+muge_54491,水杯,麻布垫杯,,,,,data/processed_data_cleaning/failed_images/muge_54491__54491.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,棕色,麻,0.99
+muge_57559,水杯,便携式茶具一壶四杯紫砂,,,,,data/processed_data_cleaning/failed_images/muge_57559__57559.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,便携式茶具套装,棕色、黑色,紫砂,0.98
+muge_58937,水杯,茶杯架子 茶道,,,,,data/processed_data_cleaning/failed_images/muge_58937__58937.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯架,棕色,木材,0.96
+muge_60998,水杯,水杯盖胶圈,,,,,data/processed_data_cleaning/failed_images/muge_60998__60998.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯盖密封胶圈,白色,,0.98
+muge_65666,水杯,防水茶杯垫,,,,,data/processed_data_cleaning/failed_images/muge_65666__65666.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,棕色,软木,0.98
+muge_66649,水杯,法国兰蒄黑钻三色口红滋润不掉色不沾杯,,,,,data/processed_data_cleaning/failed_images/muge_66649__66649.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,口红,红色、白色,,0.99
+muge_68000,水杯,文胸4份三杯,,,,,data/processed_data_cleaning/failed_images/muge_68000__68000.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,紫色,,0.99
+muge_69259,水杯,圆盘杯,,,,,data/processed_data_cleaning/failed_images/muge_69259__69259.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,浅灰色,蕾丝面料,0.99
+muge_70426,水杯,迷你锡纸杯,,,,,data/processed_data_cleaning/failed_images/muge_70426__70426.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,迷你铝箔杯,银色,铝箔,0.96
+muge_70444,水杯,保温杯套和風,,,,,data/processed_data_cleaning/failed_images/muge_70444__70444.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯套,红色,无法确认,0.98
+muge_72602,水杯,水杯层架木,,,,,data/processed_data_cleaning/failed_images/muge_72602__72602.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木制置物架,棕色,木材,0.99
+muge_75716,水杯,有钢圈美背文胸全罩杯大码,,,,,data/processed_data_cleaning/failed_images/muge_75716__75716.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸内裤套装,绿色,,0.99
+muge_77511,水杯,杯子制冷,,,,,data/processed_data_cleaning/failed_images/muge_77511__77511.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,饮料罐制冷器,白色、银色,,0.96
+muge_84003,水杯,水杯贴纸pvc防水,,,,,data/processed_data_cleaning/failed_images/muge_84003__84003.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,贴纸,多色,PVC,0.99
+muge_91395,水杯,香港公仔杯面迷你,,,,,data/processed_data_cleaning/failed_images/muge_91395__91395.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯面,红色,,0.99
+muge_91746,水杯,红豆杉原木水杯,,,,,data/processed_data_cleaning/failed_images/muge_91746__91746.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,原木木棍,棕色,木材,0.99
+muge_99685,水杯,湯造型杯,,,,,data/processed_data_cleaning/failed_images/muge_99685__99685.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,碗勺餐具套装,白色、红色,陶瓷,0.96
+muge_99769,水杯,刻度酵母杯,,,,,data/processed_data_cleaning/failed_images/muge_99769__99769.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,刻度量杯,橙色,塑料,0.94
+muge_99815,水杯,杯套 保护套 防摔,,,,,data/processed_data_cleaning/failed_images/muge_99815__99815.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯保护套,粉色,,0.98
+muge_105342,水杯,c杯泳衣,,,,,data/processed_data_cleaning/failed_images/muge_105342__105342.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,连体泳衣,白色,,0.99
+muge_112026,水杯,玻璃杯化妆刷,,,,,data/processed_data_cleaning/failed_images/muge_112026__112026.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃化妆刷收纳杯,透明,玻璃,0.98
+muge_117387,水杯,路人王奖杯,,,,,data/processed_data_cleaning/failed_images/muge_117387__117387.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奖杯,金色、黑色、红色,,0.99
+muge_123056,水杯,小学生装雨伞水杯的帆布袋,,,,,data/processed_data_cleaning/failed_images/muge_123056__123056.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,帆布手提袋,黄色、白色,帆布,0.99
+muge_124471,水杯,手提保温杯袋子,,,,,data/processed_data_cleaning/failed_images/muge_124471__124471.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,手提保温杯袋,红色、深蓝色,,0.98
+muge_125263,水杯,茶杯犬十字绣,,,,,data/processed_data_cleaning/failed_images/muge_125263__125263.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,十字绣装饰画,白色、蓝色,,0.98
+muge_127585,水杯,小罩杯薄软钢圈文胸,,,,,data/processed_data_cleaning/failed_images/muge_127585__127585.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,绿色,,0.99
+muge_128613,水杯,吧台杯架灯,,,,,data/processed_data_cleaning/failed_images/muge_128613__128613.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,吧台杯架灯,黑色,金属,0.99
+muge_131440,水杯,瓷陶带嘴茶大杯,,,,,data/processed_data_cleaning/failed_images/muge_131440__131440.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃茶壶茶具套装,透明、棕色,玻璃,0.98
+muge_133927,水杯,美国队长马芬纸杯,,,,,data/processed_data_cleaning/failed_images/muge_133927__133927.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,马芬纸杯,蓝色、红色、白色,纸,0.98
+muge_136173,水杯,拧紧双盖保温杯盖,,,,,data/processed_data_cleaning/failed_images/muge_136173__136173.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯杯盖,黑色、棕色,,0.98
+muge_136943,水杯,广州蒙牛三色杯,,,,,data/processed_data_cleaning/failed_images/muge_136943__136943.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,冰淇淋食品,黄色,塑料,0.99
+muge_140975,水杯,薄款全包罩杯大无钢圈,,,,,data/processed_data_cleaning/failed_images/muge_140975__140975.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无钢圈文胸,红色,蕾丝,0.99
+muge_141941,水杯,水杯里胶垫,,,,,data/processed_data_cleaning/failed_images/muge_141941__141941.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯内置胶垫,绿色,橡胶,0.97
+muge_144433,水杯,大容量杯子托盘,,,,,data/processed_data_cleaning/failed_images/muge_144433__144433.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,托盘,米白色,,0.98
+muge_146726,水杯,热饮杯盖,,,,,data/processed_data_cleaning/failed_images/muge_146726__146726.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,热饮杯盖,黑色、白色,塑料,0.99
+muge_147787,水杯,金杯海狮汽车脚垫,,,,,data/processed_data_cleaning/failed_images/muge_147787__147787.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,汽车脚垫,红色,,0.99
+muge_150245,水杯,水杯太空可爱,,,,,data/processed_data_cleaning/failed_images/muge_150245__150245.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃茶壶,透明、蓝色,玻璃,0.96
+muge_150395,水杯,杯子存放柜,,,,,data/processed_data_cleaning/failed_images/muge_150395__150395.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃杯子存放柜,透明,玻璃,0.97
+muge_150690,水杯,浆果杯,,,,,data/processed_data_cleaning/failed_images/muge_150690__150690.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰餐盘,白色、红色,陶瓷,0.99
+muge_151510,水杯,迷你高压煮粥杯,,,,,data/processed_data_cleaning/failed_images/muge_151510__151510.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,焖烧杯,粉色,金属,0.96
+muge_152365,水杯,幼儿园杯架毛巾架分体柜,,,,,data/processed_data_cleaning/failed_images/muge_152365__152365.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,幼儿园杯架毛巾架,,木材,0.99
+muge_155138,水杯,70c内衣聚拢厚杯,,,,,data/processed_data_cleaning/failed_images/muge_155138__155138.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米白色,,0.99
+muge_159543,水杯,大罩杯薄款隐形文胸,,,,,data/processed_data_cleaning/failed_images/muge_159543__159543.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,隐形文胸,,,0.99
+muge_161390,水杯,马克杯打印机,,,,,data/processed_data_cleaning/failed_images/muge_161390__161390.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,马克杯打印机,黑色,,0.99
+muge_162448,水杯,纺车轮 浅线杯,,,,,data/processed_data_cleaning/failed_images/muge_162448__162448.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纺车轮,黑色、红色、银色,,0.99
+muge_162697,水杯,透明奖杯,,,,,data/processed_data_cleaning/failed_images/muge_162697__162697.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奖杯,透明、黑色,,0.99
+muge_172885,水杯,恐龙杯子蛋糕插件,,,,,data/processed_data_cleaning/failed_images/muge_172885__172885.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蛋糕装饰插件,绿色、白色、棕色,,0.99
+muge_173190,水杯,d罩杯内衣无钢圈,,,,,data/processed_data_cleaning/failed_images/muge_173190__173190.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无钢圈蕾丝文胸,白色,蕾丝,0.99
+muge_176796,水杯,不锈钢保温杯密封圈,,,,,data/processed_data_cleaning/failed_images/muge_176796__176796.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯密封圈,黑色、蓝色,,0.98
+muge_177504,水杯,干杯乐热带水果味,,,,,data/processed_data_cleaning/failed_images/muge_177504__177504.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,棒棒糖,黑色、黄色、粉色,,0.99
+muge_179578,水杯,样本采集杯,,,,,data/processed_data_cleaning/failed_images/muge_179578__179578.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,样本采集杯,白色,塑料,0.99
+muge_185884,水杯,牙刷架杯,,,,,data/processed_data_cleaning/failed_images/muge_185884__185884.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,牙刷架杯套装,粉色、白色,,0.98
+muge_185945,水杯,40杯暗胶链,,,,,data/processed_data_cleaning/failed_images/muge_185945__185945.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,柜门铰链,银色,金属,0.99
+muge_186642,水杯,毛线 手工 编织杯套,,,,,data/processed_data_cleaning/failed_images/muge_186642__186642.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,毛线编织杯套,红色,毛线,0.98
+muge_189471,水杯,无钢线内衣 大罩杯,,,,,data/processed_data_cleaning/failed_images/muge_189471__189471.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无钢线文胸,黑色、米色、粉色,,0.99
+muge_190620,水杯,茶杯盖子配件,,,,,data/processed_data_cleaning/failed_images/muge_190620__190620.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯盖配件,白色,陶瓷,0.98
+muge_193656,水杯,监控杯麻将,,,,,data/processed_data_cleaning/failed_images/muge_193656__193656.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,麻将机遥控器,黑色,,0.93
+muge_198219,水杯,高颜值咖啡杯长碟子,,,,,data/processed_data_cleaning/failed_images/muge_198219__198219.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰盘,白色、蓝色、红色,陶瓷,0.98
+muge_199736,水杯,奶嘴悬浮杯,,,,,data/processed_data_cleaning/failed_images/muge_199736__199736.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,胶水,绿色、蓝色、黄色,,0.98
+muge_201086,水杯,公鸡杯盖子,,,,,data/processed_data_cleaning/failed_images/muge_201086__201086.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯盖,金色,金属,0.96
+muge_204556,水杯,茶杯置物,,,,,data/processed_data_cleaning/failed_images/muge_204556__204556.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯置物架,棕色,木质,0.98
+muge_205369,水杯,纸杯蛋糕数字插牌,,,,,data/processed_data_cleaning/failed_images/muge_205369__205369.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纸杯蛋糕数字插牌,黑色、金色、白色,,0.99
+muge_209110,水杯,滤杯手冲壶,,,,,data/processed_data_cleaning/failed_images/muge_209110__209110.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,手冲咖啡滤杯套装,白色、透明、黑色,玻璃,0.98
+muge_209136,水杯,托盘家用放茶杯,,,,,data/processed_data_cleaning/failed_images/muge_209136__209136.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,托盘,白色,,0.98
+muge_211834,水杯,水果杯杯盖,,,,,data/processed_data_cleaning/failed_images/muge_211834__211834.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯杯盖,黑色、白色、灰色,,0.98
+muge_218520,水杯,蜂蜜瓶1斤装玻璃杯,,,,,data/processed_data_cleaning/failed_images/muge_218520__218520.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蜂蜜玻璃罐,黄色,玻璃,0.99
+muge_222970,水杯,厨房酒杯挂架,,,,,data/processed_data_cleaning/failed_images/muge_222970__222970.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,厨房酒杯挂架,金色,金属,0.99
+muge_223340,水杯,功夫茶具茶杯垫实木杯托,,,,,data/processed_data_cleaning/failed_images/muge_223340__223340.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,实木茶杯垫（杯托）,棕色,木材,0.99
+muge_226741,水杯,水杯套两用,,,,,data/processed_data_cleaning/failed_images/muge_226741__226741.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯套,多色,,0.9
+muge_229645,水杯,美乐滤杯,,,,,data/processed_data_cleaning/failed_images/muge_229645__229645.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡滤杯,红色,,0.98
+muge_230251,水杯,小熊杯垫加热,,,,,data/processed_data_cleaning/failed_images/muge_230251__230251.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,加热杯垫,白色,,0.98
+muge_235033,水杯,大众cc杯垫,,,,,data/processed_data_cleaning/failed_images/muge_235033__235033.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,白色、粉色、黄色,,0.98
+muge_236259,水杯,杯子架置物架,,,,,data/processed_data_cleaning/failed_images/muge_236259__236259.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯子架置物架,黑色,金属和木材,0.98
+muge_236421,水杯,保温杯班护套,,,,,data/processed_data_cleaning/failed_images/muge_236421__236421.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯保护套,粉色,布料,0.98
+muge_238889,水杯,墙面水杯架,,,,,data/processed_data_cleaning/failed_images/muge_238889__238889.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,墙面水杯架,黑色、白色、绿色,,0.98
+muge_238927,水杯,茶杯两个装,,,,,data/processed_data_cleaning/failed_images/muge_238927__238927.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,,棕色、米白色,纸质包装,0.98
+muge_239659,水杯,女士薄杯无钢圈内衣,,,,,data/processed_data_cleaning/failed_images/muge_239659__239659.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士无钢圈文胸,粉色,蕾丝面料,0.99
+muge_245249,水杯,电动车水杯袋,,,,,data/processed_data_cleaning/failed_images/muge_245249__245249.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电动车水杯袋,黑色,,0.98
+muge_246659,水杯,茶杯 小礼盒,,,,,data/processed_data_cleaning/failed_images/muge_246659__246659.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,礼盒包装,蓝色、灰色、红色,,0.96
+muge_247521,水杯,内衣女薄款大胸显小红色超薄杯,,,,,data/processed_data_cleaning/failed_images/muge_247521__247521.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士内衣套装,灰色,,0.99
+muge_249629,水杯,宾馆漱口杯垫,,,,,data/processed_data_cleaning/failed_images/muge_249629__249629.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,漱口杯垫,白色,,0.96
+muge_252529,水杯,牛奶杯加热器,,,,,data/processed_data_cleaning/failed_images/muge_252529__252529.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,牛奶杯加热器,白色、银色,,0.99
+muge_255732,水杯,喇叭花慕斯杯200 ml20只,,,,,data/processed_data_cleaning/failed_images/muge_255732__255732.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,慕斯杯,透明,塑料,0.95
+muge_255818,水杯,金杯新海狮x30l大包围钢板,,,,,data/processed_data_cleaning/failed_images/muge_255818__255818.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,汽车货厢地板钢板,银色,钢板,0.98
+muge_256521,水杯,胸大内衣全罩杯超薄,,,,,data/processed_data_cleaning/failed_images/muge_256521__256521.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,粉色,,0.99
+muge_258362,水杯,大口保温杯可加热,,,,,data/processed_data_cleaning/failed_images/muge_258362__258362.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,可加热保温饭盒,深蓝色,,0.94
+muge_258568,水杯,大水杯背带绳 斜挎,,,,,data/processed_data_cleaning/failed_images/muge_258568__258568.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯背带绳,,,0.95
+muge_261846,水杯,杯子消毒柜家用,,,,,data/processed_data_cleaning/failed_images/muge_261846__261846.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,家用杯子消毒柜,灰色,塑料,0.99
+muge_263476,水杯,一壶四杯布袋,,,,,data/processed_data_cleaning/failed_images/muge_263476__263476.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶具套装收纳袋,米色、红色、白色,麻,0.94
+muge_266151,水杯,茶杯托盘圆形双层沥水,,,,,data/processed_data_cleaning/failed_images/muge_266151__266151.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯托盘,白色,,0.98
+muge_266248,水杯,茶杯垫贝壳,,,,,data/processed_data_cleaning/failed_images/muge_266248__266248.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯垫,黑色,贝壳,0.98
+muge_267468,水杯,配件 杯盖 通用,,,,,data/processed_data_cleaning/failed_images/muge_267468__267468.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯杯盖,红色,,0.98
+muge_271510,水杯,青紫砂壶杯,,,,,data/processed_data_cleaning/failed_images/muge_271510__271510.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶壶,绿色,紫砂,0.98
+muge_281156,水杯,小米保温杯垫圈,,,,,data/processed_data_cleaning/failed_images/muge_281156__281156.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯垫圈,白色,,0.98
+muge_285908,水杯,榆木杯子架,,,,,data/processed_data_cleaning/failed_images/muge_285908__285908.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,榆木杯子架,棕色,榆木,0.99
+muge_288216,水杯,文胸女聚拢小胸不空杯,,,,,data/processed_data_cleaning/failed_images/muge_288216__288216.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸内衣,黑色,,0.99
+muge_288641,水杯,特价杯垫,,,,,data/processed_data_cleaning/failed_images/muge_288641__288641.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,棕色,,0.98
+muge_291589,水杯,奶冻杯子,,,,,data/processed_data_cleaning/failed_images/muge_291589__291589.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,甜品食品杯,透明、白色,塑料,0.98
+muge_292534,水杯,百志福一杯芝士,,,,,data/processed_data_cleaning/failed_images/muge_292534__292534.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,芝士食品杯,白色,,0.98
+muge_293488,水杯,无钢圈内衣 三角杯,,,,,data/processed_data_cleaning/failed_images/muge_293488__293488.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无钢圈三角文胸,黑色,,0.99
+muge_302207,水杯,针织杯垫材料包,,,,,data/processed_data_cleaning/failed_images/muge_302207__302207.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,针织杯垫材料包,,纱线,0.98
+muge_302679,水杯,绿泥紫砂杯盖,,,,,data/processed_data_cleaning/failed_images/muge_302679__302679.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,紫砂茶壶,绿色,紫砂,0.98
+muge_303470,水杯,锡箔杯,,,,,data/processed_data_cleaning/failed_images/muge_303470__303470.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,锡箔烘焙模具,银色,铝箔,0.98
+muge_303565,水杯,加大码中厚杯文胸,,,,,data/processed_data_cleaning/failed_images/muge_303565__303565.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,绿色,,0.99
+muge_303755,水杯,星空杯零食,,,,,data/processed_data_cleaning/failed_images/muge_303755__303755.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,甜品零食,棕色、白色,,0.99
+muge_304666,水杯,一片式无痕文胸超薄杯,,,,,data/processed_data_cleaning/failed_images/muge_304666__304666.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米色,,0.99
+muge_309211,水杯,大圆盘浅杯内衣,,,,,data/processed_data_cleaning/failed_images/muge_309211__309211.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,紫色,,0.99
+muge_314233,水杯,法式复古杯子茶壶,,,,,data/processed_data_cleaning/failed_images/muge_314233__314233.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶壶套装,橙色,玻璃,0.98
+muge_323770,水杯,内衣女无钢圈4分3杯,,,,,data/processed_data_cleaning/failed_images/muge_323770__323770.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,蓝色,蕾丝,0.99
+muge_327220,水杯,滤杯铜,,,,,data/processed_data_cleaning/failed_images/muge_327220__327220.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡滤杯,,铜,0.98
+muge_334717,水杯,替换灯杯,,,,,data/processed_data_cleaning/failed_images/muge_334717__334717.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,LED灯杯,透明、银色、黄色,,0.99
+muge_335336,水杯,茶杯收纳架 铜,,,,,data/processed_data_cleaning/failed_images/muge_335336__335336.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯收纳架,金色,铜,0.98
+muge_340225,水杯,茶杯毛衣链,,,,,data/processed_data_cleaning/failed_images/muge_340225__340225.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,毛衣链/项链（茶壶吊坠）,金色、蓝色、红色,,0.99
+muge_342014,水杯,杯垫刺绣,,,,,data/processed_data_cleaning/failed_images/muge_342014__342014.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,刺绣杯垫,多色,布艺,0.98
+muge_345803,水杯,大码罩杯,,,,,data/processed_data_cleaning/failed_images/muge_345803__345803.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,深蓝色,蕾丝,0.99
+muge_348828,水杯,全罩杯运动内衣,,,,,data/processed_data_cleaning/failed_images/muge_348828__348828.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,运动内衣,紫色,,0.99
+muge_350213,水杯,保温杯垫 无线,,,,,data/processed_data_cleaning/failed_images/muge_350213__350213.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无线保温杯垫,棕色,,0.98
+muge_353302,水杯,蓝宝石葡萄苗营养杯,,,,,data/processed_data_cleaning/failed_images/muge_353302__353302.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,葡萄,绿色,,0.99
+muge_355738,水杯,三杯鸡的九层塔,,,,,data/processed_data_cleaning/failed_images/muge_355738__355738.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,瓶装饮品,红色,玻璃,0.99
+muge_357164,水杯,杯具托盘实木,,,,,data/processed_data_cleaning/failed_images/muge_357164__357164.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木质杯具托盘,棕色,实木,0.99
+muge_359943,水杯,防走光文胸 上薄下厚模杯,,,,,data/processed_data_cleaning/failed_images/muge_359943__359943.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米色,,0.99
+muge_362159,水杯,泳装大胸d杯,,,,,data/processed_data_cleaning/failed_images/muge_362159__362159.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,连体式比基尼泳装,蓝色,,0.99
+muge_362212,水杯,青蛙莲子杯,,,,,data/processed_data_cleaning/failed_images/muge_362212__362212.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶壶,黄色、红色、黑色,陶瓷,0.98
+muge_364449,水杯,薄胸衣薄模杯,,,,,data/processed_data_cleaning/failed_images/muge_364449__364449.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,薄模杯文胸,,,0.99
+muge_365147,水杯,jonny walker杯,,,,,data/processed_data_cleaning/failed_images/muge_365147__365147.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,威士忌酒礼盒,金色、白色,玻璃,0.99
+muge_374805,水杯,小酒杯一口杯 陶瓷,,,,,data/processed_data_cleaning/failed_images/muge_374805__374805.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯架,银色,金属,0.97
+muge_374892,水杯,挂杯白酒,,,,,data/processed_data_cleaning/failed_images/muge_374892__374892.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,白酒,棕色、红色,,0.99
+muge_375685,水杯,战术导轨水杯,,,,,data/processed_data_cleaning/failed_images/muge_375685__375685.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,战术导轨护板,黑色,,0.98
+muge_377074,水杯,土耳其杯垫,,,,,data/processed_data_cleaning/failed_images/muge_377074__377074.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,多色,陶瓷,0.98
+muge_378840,水杯,冰瞳滤杯玻璃,,,,,data/processed_data_cleaning/failed_images/muge_378840__378840.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃咖啡滤杯,透明,玻璃,0.98
+muge_381688,水杯,丝瓜络杯茶垫,,,,,data/processed_data_cleaning/failed_images/muge_381688__381688.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,丝瓜络杯垫,棕色,丝瓜络,0.99
+muge_381781,水杯,优秀供应商奖杯定制,,,,,data/processed_data_cleaning/failed_images/muge_381781__381781.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奖杯,银色、黑色,,0.99
+muge_385905,水杯,大码内衣女胖mm 性感厚杯,,,,,data/processed_data_cleaning/failed_images/muge_385905__385905.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,灰色,,0.99
+muge_390272,水杯,一次性杯筒,,,,,data/processed_data_cleaning/failed_images/muge_390272__390272.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性杯筒,白色、银色,,0.95
+muge_390305,水杯,日系杯垫,,,,,data/processed_data_cleaning/failed_images/muge_390305__390305.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,棕色,藤编,0.98
+muge_390684,水杯,洗漱杯子家用,,,,,data/processed_data_cleaning/failed_images/muge_390684__390684.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,壁挂式牙刷收纳架,白色、灰色,塑料,0.96
+muge_391847,水杯,雪佛兰茶杯,,,,,data/processed_data_cleaning/failed_images/muge_391847__391847.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,汽车内饰装饰贴片,黑色,,0.96
+muge_392638,水杯,奶茶纸杯盖子,,,,,data/processed_data_cleaning/failed_images/muge_392638__392638.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶杯盖,黑色,塑料,0.98
+muge_396171,水杯,网红陶瓷牙刷杯,,,,,data/processed_data_cleaning/failed_images/muge_396171__396171.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,陶瓷卫浴洗漱用品套装,白色,陶瓷,0.98
+muge_397762,水杯,重量杯,,,,,data/processed_data_cleaning/failed_images/muge_397762__397762.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,量杯,透明,玻璃,0.98
+muge_398991,水杯,内衣女小胸三角杯,,,,,data/processed_data_cleaning/failed_images/muge_398991__398991.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士内衣套装,灰色,,0.99
+muge_399851,水杯,牛奶杯皮圈,,,,,data/processed_data_cleaning/failed_images/muge_399851__399851.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯杯盖配件,透明、粉色、绿色,塑料,0.96
+muge_400854,水杯,方形慕斯杯正方形,,,,,data/processed_data_cleaning/failed_images/muge_400854__400854.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,方形慕斯杯,透明,,0.93
+muge_401167,水杯,不锈钢小马克杯,,,,,data/processed_data_cleaning/failed_images/muge_401167__401167.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,不锈钢勺子,银色,不锈钢,0.99
+muge_402171,水杯,自喷漆金杯白,,,,,data/processed_data_cleaning/failed_images/muge_402171__402171.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,自喷漆,白色,金属,0.99
+muge_402559,水杯,杯漏网通用,,,,,data/processed_data_cleaning/failed_images/muge_402559__402559.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水槽漏网,银色,不锈钢,0.98
+muge_403313,水杯,老榆木杯子收纳格子,,,,,data/processed_data_cleaning/failed_images/muge_403313__403313.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木质杯子收纳架,棕色,老榆木,0.99
+muge_407076,水杯,内衣女超薄三角杯,,,,,data/processed_data_cleaning/failed_images/muge_407076__407076.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女式三角文胸,黑色,,0.99
+muge_411890,水杯,水杯盖子硅胶小号,,,,,data/processed_data_cleaning/failed_images/muge_411890__411890.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯盖,黑色,硅胶,0.98
+muge_417607,水杯,酒杯收纳,,,,,data/processed_data_cleaning/failed_images/muge_417607__417607.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯收纳架,棕色,塑料,0.98
+muge_423500,水杯,酒杯十字绣,,,,,data/processed_data_cleaning/failed_images/muge_423500__423500.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯十字绣,紫色、白色、橙色,,0.98
+muge_428052,水杯,咖啡杯架子挂架北欧,,,,,data/processed_data_cleaning/failed_images/muge_428052__428052.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯架挂架,棕色,木材,0.99
+muge_429333,水杯,纸杯蛋糕盒子新年,,,,,data/processed_data_cleaning/failed_images/muge_429333__429333.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纸杯蛋糕盒,红色、白色,纸,0.96
+muge_431770,水杯,焖烧杯杯套,,,,,data/processed_data_cleaning/failed_images/muge_431770__431770.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,焖烧杯杯套,多色,,0.96
+muge_439526,水杯,焖烧杯套垫,,,,,data/processed_data_cleaning/failed_images/muge_439526__439526.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,焖烧杯套垫,白色、红色,,0.93
+muge_441354,水杯,无牙仔杯子,,,,,data/processed_data_cleaning/failed_images/muge_441354__441354.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,龙形摆件,黑色,,0.97
+muge_444173,水杯,杯盖硅胶 羊驼,,,,,data/processed_data_cleaning/failed_images/muge_444173__444173.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯盖,粉色、红色,硅胶,0.98
+muge_445472,水杯,1号足球美洲杯,,,,,data/processed_data_cleaning/failed_images/muge_445472__445472.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,足球,红色、蓝色,,0.99
+muge_447378,水杯,水杯杯套可爱,,,,,data/processed_data_cleaning/failed_images/muge_447378__447378.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯杯套,粉色、白色、绿色,毛绒布料,0.98
+muge_448393,水杯,烤杯机机器设备,,,,,data/processed_data_cleaning/failed_images/muge_448393__448393.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,烤杯机设备,黑色、红色、银色,,0.99
+muge_449938,水杯,月经杯消毒,,,,,data/processed_data_cleaning/failed_images/muge_449938__449938.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,月经杯清洁消毒液,白色,塑料,0.98
+muge_451560,水杯,蛋糕紙杯,,,,,data/processed_data_cleaning/failed_images/muge_451560__451560.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蛋糕纸杯,多色,纸,0.99
+muge_452484,水杯,杯罩一体,,,,,data/processed_data_cleaning/failed_images/muge_452484__452484.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,短袖T恤,深蓝色、白色、红色,,0.99
+muge_452519,水杯,米勺量杯,,,,,data/processed_data_cleaning/failed_images/muge_452519__452519.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,量米杯,透明,,0.98
+muge_455982,水杯,七十五高亳升的水杯套,,,,,data/processed_data_cleaning/failed_images/muge_455982__455982.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯套,白色,针织纺织材料,0.99
+muge_458310,水杯,一杯美酒 女中音,,,,,data/processed_data_cleaning/failed_images/muge_458310__458310.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,乐谱,白色、黑色、红色,,0.99
+muge_464835,水杯,tumbler保温杯,,,,,data/processed_data_cleaning/failed_images/muge_464835__464835.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,收纳盒,白色,塑料,0.93
+muge_465964,水杯,儿童水杯套 保护套 通用,,,,,data/processed_data_cleaning/failed_images/muge_465964__465964.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,儿童水杯保护套,红色、黄色、绿色,布料,0.98
+muge_468047,水杯,比基尼大胸大罩杯xl,,,,,data/processed_data_cleaning/failed_images/muge_468047__468047.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,比基尼泳装,蓝色,,0.99
+muge_469622,水杯,木 杯垫,,,,,data/processed_data_cleaning/failed_images/muge_469622__469622.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木制杯垫,棕色,木材,0.99
+muge_474057,水杯,红酒杯架摆件 时尚,,,,,data/processed_data_cleaning/failed_images/muge_474057__474057.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,红酒杯架/酒架,棕色,,0.98
+muge_475837,水杯,内衣女薄款无痕杯罩小,,,,,data/processed_data_cleaning/failed_images/muge_475837__475837.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士内衣文胸,黑色,,0.98
+muge_476118,水杯,金杯软电线,,,,,data/processed_data_cleaning/failed_images/muge_476118__476118.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电线,红色、蓝色,,0.99
+muge_478323,水杯,推車杯架,,,,,data/processed_data_cleaning/failed_images/muge_478323__478323.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,婴儿车挂钩,白色,,0.98
+muge_478508,水杯,杯子蛋糕盒子包装盒,,,,,data/processed_data_cleaning/failed_images/muge_478508__478508.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蛋糕包装盒,白色,,0.98
+muge_478901,水杯,儿童矮水杯袋,,,,,data/processed_data_cleaning/failed_images/muge_478901__478901.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯袋,蓝色,纺织物,0.98
+muge_480628,水杯,自动取杯器 家用,,,,,data/processed_data_cleaning/failed_images/muge_480628__480628.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,自动取杯器,白色,塑料,0.98
+muge_484971,水杯,双孔杯垫,,,,,data/processed_data_cleaning/failed_images/muge_484971__484971.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,双孔杯垫,黑色,,0.96
+muge_485444,水杯,泰国的金杯油,,,,,data/processed_data_cleaning/failed_images/muge_485444__485444.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,金杯油（外用油）,黄色、红色,,0.99
+muge_486079,水杯,内衣聚拢无钢圈d罩杯,,,,,data/processed_data_cleaning/failed_images/muge_486079__486079.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸/内衣,米色、白色,,0.99
+muge_487241,水杯,大明公鸡杯陶瓷,,,,,data/processed_data_cleaning/failed_images/muge_487241__487241.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,陶瓷碗,白色、红色,陶瓷,0.96
+muge_488535,水杯,焖烧杯外套袋,,,,,data/processed_data_cleaning/failed_images/muge_488535__488535.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,焖烧杯外套袋,黑色、红色、蓝色,布料,0.98
+muge_488750,水杯,露营滤杯,,,,,data/processed_data_cleaning/failed_images/muge_488750__488750.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡滤杯,灰色,金属,0.96
+muge_492526,水杯,功夫茶杯小托盘,,,,,data/processed_data_cleaning/failed_images/muge_492526__492526.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,功夫茶托盘,绿色,陶瓷,0.98
+muge_494763,水杯,放水杯子盘,,,,,data/processed_data_cleaning/failed_images/muge_494763__494763.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰托盘,银色,玻璃,0.98
+muge_495142,水杯,纹绣海绵戒指杯色料杯,,,,,data/processed_data_cleaning/failed_images/muge_495142__495142.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纹绣色料戒指杯,黑色、透明,,0.99
+muge_503782,水杯,硅澡土 杯垫,,,,,data/processed_data_cleaning/failed_images/muge_503782__503782.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,灰色,硅藻土,0.99
+muge_511519,水杯,方便面迷你杯,,,,,data/processed_data_cleaning/failed_images/muge_511519__511519.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,方便面杯面,橙色、红色,,0.99
+muge_519690,水杯,保温杯子可爱,,,,,data/processed_data_cleaning/failed_images/muge_519690__519690.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,毛绒双肩包,蓝色、白色,毛绒布料,0.96
+muge_523139,水杯,滴胶杯垫diy,,,,,data/processed_data_cleaning/failed_images/muge_523139__523139.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,滴胶杯垫,橙色、黄色,滴胶树脂,0.97
+muge_527173,水杯,毛钱水杯套,,,,,data/processed_data_cleaning/failed_images/muge_527173__527173.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,毛线水杯套,米白色,毛线,0.96
+muge_528362,水杯,科丽曼大水杯面膜,,,,,data/processed_data_cleaning/failed_images/muge_528362__528362.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,面膜,蓝色,,0.99
+muge_533107,水杯,烤蛋糕用的小纸杯,,,,,data/processed_data_cleaning/failed_images/muge_533107__533107.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,烘焙蛋糕纸杯,白色,纸,0.99
+muge_536853,水杯,杯子垫手工编织,,,,,data/processed_data_cleaning/failed_images/muge_536853__536853.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,蓝色、米色、白色,编织纱线,0.99
+muge_540000,水杯,短臂铰链 超短40杯头,,,,,data/processed_data_cleaning/failed_images/muge_540000__540000.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,短臂铰链,银色,金属,0.99
+muge_543016,水杯,实木茶杯收纳架,,,,,data/processed_data_cleaning/failed_images/muge_543016__543016.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯收纳架,棕色,实木,0.98
+muge_547210,水杯,珍珠宝干杯乐,,,,,data/processed_data_cleaning/failed_images/muge_547210__547210.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,棒棒糖,多色,,0.99
+muge_549122,水杯,红色内衣套装 结婚 新娘超薄杯,,,,,data/processed_data_cleaning/failed_images/muge_549122__549122.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,内衣套装,红色,蕾丝面料,0.99
+muge_551273,水杯,杯刷彩虹,,,,,data/processed_data_cleaning/failed_images/muge_551273__551273.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯刷,,塑料,0.99
+muge_552940,水杯,紫砂杯盖子配平盖 宜兴,,,,,data/processed_data_cleaning/failed_images/muge_552940__552940.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,紫砂杯盖,红色,紫砂,0.98
+muge_555796,水杯,水杯套毛线钩织,,,,,data/processed_data_cleaning/failed_images/muge_555796__555796.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯套,黑色、白色、绿色,,0.98
+muge_557503,水杯,纸质杯套,,,,,data/processed_data_cleaning/failed_images/muge_557503__557503.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纸质杯套,多色,纸,0.98
+muge_559772,水杯,夫妻牙杯,,,,,data/processed_data_cleaning/failed_images/muge_559772__559772.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,牙刷牙膏收纳架套装,白色,塑料,0.98
+muge_559937,水杯,奶茶杯装加珍珠,,,,,data/processed_data_cleaning/failed_images/muge_559937__559937.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶饮料,白色、粉色、黑色,塑料,0.97
+muge_561823,水杯,鸟笼杯把镶头,,,,,data/processed_data_cleaning/failed_images/muge_561823__561823.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木制杯把镶头配件,棕色,木质,0.93
+muge_567088,水杯,马克杯杯盖红色,,,,,data/processed_data_cleaning/failed_images/muge_567088__567088.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯盖,红色,,0.98
+muge_572587,水杯,玻璃杯杯套防摔,,,,,data/processed_data_cleaning/failed_images/muge_572587__572587.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃杯杯套,粉色,,0.96
+muge_572713,水杯,小牛us水杯,,,,,data/processed_data_cleaning/failed_images/muge_572713__572713.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,饮料瓶,黄色,塑料,0.97
+muge_578325,水杯,kitty猫水壶杯套,,,,,data/processed_data_cleaning/failed_images/muge_578325__578325.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水壶杯套,粉色,,0.98
+muge_578476,水杯,马芬杯盒子,,,,,data/processed_data_cleaning/failed_images/muge_578476__578476.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纸质包装盒,棕色,纸板,0.99
+muge_579516,水杯,纸杯创意,,,,,data/processed_data_cleaning/failed_images/muge_579516__579516.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,纸杯创意手工玩具,多色,纸,0.96
+muge_579697,水杯,星黛露 保温杯,,,,,data/processed_data_cleaning/failed_images/muge_579697__579697.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,毛绒玩偶,紫色、粉色、棕色,毛绒布料,0.98
+muge_580015,水杯,罩杯一体外穿吊带打底,,,,,data/processed_data_cleaning/failed_images/muge_580015__580015.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,吊带打底衫,绿色,,0.99
+muge_582182,水杯,泰福保温杯杯盖,,,,,data/processed_data_cleaning/failed_images/muge_582182__582182.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯杯盖,多色,,0.94
+muge_582301,水杯,古代酒壶酒杯,,,,,data/processed_data_cleaning/failed_images/muge_582301__582301.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,古典酒壶酒杯套装,银色,金属,0.98
+muge_582794,水杯,无痕内衣半杯,,,,,data/processed_data_cleaning/failed_images/muge_582794__582794.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,半杯文胸,紫色,,0.99
+muge_582851,水杯,五排扣内衣 收副乳全罩杯,,,,,data/processed_data_cleaning/failed_images/muge_582851__582851.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,灰色,蕾丝面料,0.99
+muge_584033,水杯,hellokitty杯一套,,,,,data/processed_data_cleaning/failed_images/muge_584033__584033.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,收纳置物柜,白色,,0.97
+muge_584562,水杯,杯垫7cm,,,,,data/processed_data_cleaning/failed_images/muge_584562__584562.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,绿色、黑色,,0.99
+muge_586540,水杯,甜品布丁杯,,,,,data/processed_data_cleaning/failed_images/muge_586540__586540.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,甜品布丁杯,红色,玻璃,0.96
+muge_587482,水杯,圣杯战争手办,,,,,data/processed_data_cleaning/failed_images/muge_587482__587482.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,动漫角色手办,蓝色、白色,,0.99
+muge_587550,水杯,刷牙杯架子置物架 多功能,,,,,data/processed_data_cleaning/failed_images/muge_587550__587550.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,牙刷杯架置物架,白色,塑料,0.98
+muge_589649,水杯,小萌兔儿童保温杯盖,,,,,data/processed_data_cleaning/failed_images/muge_589649__589649.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,儿童保温杯盖,白色,,0.88
+muge_594269,水杯,杯垫 欧式,,,,,data/processed_data_cleaning/failed_images/muge_594269__594269.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,,木材,0.99
+muge_595876,水杯,調酒杯,,,,,data/processed_data_cleaning/failed_images/muge_595876__595876.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,调酒器,银色,金属,0.98
+muge_596912,水杯,弹性杯子套,,,,,data/processed_data_cleaning/failed_images/muge_596912__596912.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,弹性杯套,黑色,,0.97
+muge_598637,水杯,茶杯托垫黑檀木茶杯垫,,,,,data/processed_data_cleaning/failed_images/muge_598637__598637.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯垫,棕色,黑檀木,0.98
+muge_605713,水杯,比重杯500mi,,,,,data/processed_data_cleaning/failed_images/muge_605713__605713.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,比重杯,白色,金属,0.96
+muge_611591,水杯,魔术球杯,,,,,data/processed_data_cleaning/failed_images/muge_611591__611591.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,魔术球杯,蓝色、黄色、红色,,0.98
+muge_611752,水杯,杯套全包,,,,,data/processed_data_cleaning/failed_images/muge_611752__611752.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯杯套,米白色、绿色、黄色,布料,0.98
+muge_612029,水杯,鸟食杯挂,,,,,data/processed_data_cleaning/failed_images/muge_612029__612029.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,鸟食杯挂,银色,金属,0.98
+muge_614149,水杯,杯托 汝窑,,,,,data/processed_data_cleaning/failed_images/muge_614149__614149.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯托,白色、金色,陶瓷,0.98
+muge_614998,水杯,茶具自动大号杯,,,,,data/processed_data_cleaning/failed_images/muge_614998__614998.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶具套装,白色,,0.98
+muge_617438,水杯,女神杯内衣,,,,,data/processed_data_cleaning/failed_images/muge_617438__617438.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,黑色,蕾丝面料,0.99
+muge_617527,水杯,保温杯杯套500ml 保护套,,,,,data/processed_data_cleaning/failed_images/muge_617527__617527.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯杯套,白色,,0.98
+muge_618581,水杯,电瓶车杯子,,,,,data/processed_data_cleaning/failed_images/muge_618581__618581.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电动车水杯支架,黑色,,0.98
+muge_619710,水杯,日系风格杯子,,,,,data/processed_data_cleaning/failed_images/muge_619710__619710.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木质圆形托盘,,木材,0.98
+muge_620667,水杯,茶杯单个高端,,,,,data/processed_data_cleaning/failed_images/muge_620667__620667.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,陶瓷碗,深蓝色,陶瓷,0.98
+muge_622023,水杯,文胸女聚拢 性感上薄下厚模杯,,,,,data/processed_data_cleaning/failed_images/muge_622023__622023.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,粉色,,0.99
+muge_622239,水杯,兰格格优滋杯,,,,,data/processed_data_cleaning/failed_images/muge_622239__622239.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酸奶,白色,,0.99
+muge_625765,水杯,粘杯子的专用胶水,,,,,data/processed_data_cleaning/failed_images/muge_625765__625765.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,胶水,透明、黄色,胶水,0.99
+muge_627547,水杯,鸟笼杯把,,,,,data/processed_data_cleaning/failed_images/muge_627547__627547.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯把,黄色,木材,0.96
+muge_630448,水杯,圣代纸杯,,,,,data/processed_data_cleaning/failed_images/muge_630448__630448.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,圣代纸杯,白色,纸,0.97
+muge_635581,水杯,咖啡杯底托,,,,,data/processed_data_cleaning/failed_images/muge_635581__635581.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木质杯垫,,木材,0.98
+muge_636150,水杯,茶吧机家用推杯出水款,,,,,data/processed_data_cleaning/failed_images/muge_636150__636150.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶吧机/饮水机,白色、黑色,,0.99
+muge_642755,水杯,无钢圈大罩杯文胸,,,,,data/processed_data_cleaning/failed_images/muge_642755__642755.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,粉色,蕾丝,0.99
+muge_645615,水杯,金属杯垫会议,,,,,data/processed_data_cleaning/failed_images/muge_645615__645615.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,棕色,木质,0.98
+muge_645798,水杯,杯子红酒,,,,,data/processed_data_cleaning/failed_images/muge_645798__645798.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,红酒杯及醒酒器套装,透明、红色、黑色,玻璃,0.98
+muge_646407,水杯,一人食餐具套装咖啡杯,,,,,data/processed_data_cleaning/failed_images/muge_646407__646407.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,陶瓷餐具套装,白色、蓝色、红色,陶瓷,0.94
+muge_647647,水杯,破壁机杯盖配件,,,,,data/processed_data_cleaning/failed_images/muge_647647__647647.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,破壁机杯盖配件,黑色,,0.98
+muge_648330,水杯,一次性取杯架,,,,,data/processed_data_cleaning/failed_images/muge_648330__648330.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性杯取杯架,白色,,0.98
+muge_649069,水杯,潮汕结婚双喜茶杯红色盘,,,,,data/processed_data_cleaning/failed_images/muge_649069__649069.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶壶,红色,陶瓷,0.98
+muge_649127,水杯,玻璃水杯托盘长方形,,,,,data/processed_data_cleaning/failed_images/muge_649127__649127.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,长方形托盘,黑色,,0.98
+muge_649772,水杯,lili滤杯2.0,,,,,data/processed_data_cleaning/failed_images/muge_649772__649772.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡滤杯,浅灰色,,0.98
+muge_651474,水杯,水杯 带子5672,,,,,data/processed_data_cleaning/failed_images/muge_651474__651474.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯带子,红色、紫色、粉色,织物,0.97
+muge_654168,水杯,edish保温杯盖,,,,,data/processed_data_cleaning/failed_images/muge_654168__654168.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯盖,红色,,0.98
+muge_657224,水杯,奶瓶水杯大人塑料,,,,,data/processed_data_cleaning/failed_images/muge_657224__657224.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶瓶,白色,塑料,0.88
+muge_659383,水杯,v60滤杯 switch,,,,,data/processed_data_cleaning/failed_images/muge_659383__659383.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡滤杯,黑色,玻璃,0.98
+muge_660298,水杯,内衣夏季薄款 聚拢半杯2,,,,,data/processed_data_cleaning/failed_images/muge_660298__660298.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,绿色,蕾丝,0.99
+muge_662439,水杯,2018世界杯比赛球,,,,,data/processed_data_cleaning/failed_images/muge_662439__662439.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,足球,白色、黑色、红色,,0.99
+muge_663059,水杯,皮革杯子垫,,,,,data/processed_data_cleaning/failed_images/muge_663059__663059.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,餐垫,深蓝色,皮革,0.98
+muge_664041,水杯,全刚保温玻璃杯,,,,,data/processed_data_cleaning/failed_images/muge_664041__664041.jpg,ok,224,224,,水杯,review,置信度 0.70 低于阈值 0.72,水杯,保温杯,黑色,玻璃,0.7
+muge_664584,水杯,杯贴纸 防水,,,,,data/processed_data_cleaning/failed_images/muge_664584__664584.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,防水贴纸,多色,,0.98
+muge_665613,水杯,供佛酒杯铜,,,,,data/processed_data_cleaning/failed_images/muge_665613__665613.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,供佛长方形托盘,金色,铜,0.97
+muge_666400,水杯,手绘浮雕杯,,,,,data/processed_data_cleaning/failed_images/muge_666400__666400.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰碗,白色、棕色、粉色,,0.88
+muge_666777,水杯,汽车杯垫 凯迪拉克,,,,,data/processed_data_cleaning/failed_images/muge_666777__666777.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,汽车脚垫套装,黑色,,0.99
+muge_671518,水杯,洗漱杯子 创意 简约,,,,,data/processed_data_cleaning/failed_images/muge_671518__671518.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,洗漱用品收纳架,金色,金属,0.93
+muge_672797,水杯,咖啡机烧杯,,,,,data/processed_data_cleaning/failed_images/muge_672797__672797.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡虹吸壶,透明、黑色、红色,玻璃,0.98
+muge_673198,水杯,内衣三角杯厚,,,,,data/processed_data_cleaning/failed_images/muge_673198__673198.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,内衣套装,绿色,蕾丝面料,0.99
+muge_676088,水杯,水杯托盘方形,,,,,data/processed_data_cleaning/failed_images/muge_676088__676088.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,方形水杯托盘,黑色,,0.99
+muge_677014,水杯,鸟碗鸟食杯 景德镇,,,,,data/processed_data_cleaning/failed_images/muge_677014__677014.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,鸟食杯/鸟碗,白色,陶瓷,0.98
+muge_677605,水杯,可储水杯垫 茶道,,,,,data/processed_data_cleaning/failed_images/muge_677605__677605.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶盘,棕色,,0.98
+muge_681402,水杯,黑钻丰盈三色口红 不沾杯,,,,,data/processed_data_cleaning/failed_images/muge_681402__681402.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,口红,白色、红色,,0.99
+muge_683532,水杯,医用烧杯,,,,,data/processed_data_cleaning/failed_images/muge_683532__683532.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,实验室烧杯,透明,玻璃,0.98
+muge_684556,水杯,水杯包 链条,,,,,data/processed_data_cleaning/failed_images/muge_684556__684556.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,手提斜挎包,棕色,皮革,0.99
+muge_684912,水杯,一次性杯子杯托,,,,,data/processed_data_cleaning/failed_images/muge_684912__684912.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性杯子杯托,白色,,0.96
+muge_690186,水杯,奶香燕麦杯,,,,,data/processed_data_cleaning/failed_images/muge_690186__690186.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,,多色,,0.99
+muge_690859,水杯,洗漱杯套装 家用 壁挂式北欧风格,,,,,data/processed_data_cleaning/failed_images/muge_690859__690859.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,壁挂式洗漱收纳架套装,白色、黑色,,0.96
+muge_691046,水杯,橱柜水杯架,,,,,data/processed_data_cleaning/failed_images/muge_691046__691046.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,橱柜挂杯架,棕色,金属,0.98
+muge_695482,水杯,内衣套装薄款女 超薄三角杯,,,,,data/processed_data_cleaning/failed_images/muge_695482__695482.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,灰色,蕾丝,0.99
+muge_698268,水杯,篮球杯子nba,,,,,data/processed_data_cleaning/failed_images/muge_698268__698268.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,篮球主题毛巾,蓝色、黄色、白色,,0.94
+muge_698277,水杯,初中生内衣女固定杯,,,,,data/processed_data_cleaning/failed_images/muge_698277__698277.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女式内衣文胸,灰色、米白色,,0.99
+muge_698754,水杯,杯垫银,,,,,data/processed_data_cleaning/failed_images/muge_698754__698754.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,金属杯垫,银色,金属,0.98
+muge_699682,水杯,不脏杯的口红,,,,,data/processed_data_cleaning/failed_images/muge_699682__699682.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,口红,红色、黑色、银色,,0.99
+muge_702932,水杯,杯垫小 布,,,,,data/processed_data_cleaning/failed_images/muge_702932__702932.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,布艺杯垫,米白色、绿色,布料,0.98
+muge_704538,水杯,儿童保温杯套 通用,,,,,data/processed_data_cleaning/failed_images/muge_704538__704538.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯套,蓝色、红色,,0.98
+muge_705430,水杯,内衣二分之一杯,,,,,data/processed_data_cleaning/failed_images/muge_705430__705430.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米色、白色、红色,,0.99
+muge_705895,水杯,内衣女薄款全罩杯薄杯,,,,,data/processed_data_cleaning/failed_images/muge_705895__705895.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,粉色,,0.99
+muge_709649,水杯,杯盖欧式,,,,,data/processed_data_cleaning/failed_images/muge_709649__709649.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,欧式杯盖,透明、蓝色、红色,,0.86
+muge_713514,水杯,茶杯猫宠物 小型 迷你,,,,,data/processed_data_cleaning/failed_images/muge_713514__713514.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,宠物猫,白色,,0.99
+muge_715051,水杯,硅藻泥垫杯垫,,,,,data/processed_data_cleaning/failed_images/muge_715051__715051.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,白色、红色,硅藻泥,0.98
+muge_715178,水杯,史莱姆胖胖杯,,,,,data/processed_data_cleaning/failed_images/muge_715178__715178.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,史莱姆玩具,粉色、橙色、红色,塑料,0.97
+muge_717802,水杯,广告水杯,,,,,data/processed_data_cleaning/failed_images/muge_717802__717802.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,便携挤压软管,白色、黑色、红色,塑料,0.93
+muge_718033,水杯,勺子水杯,,,,,data/processed_data_cleaning/failed_images/muge_718033__718033.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,勺子餐具,金色,,0.97
+muge_719971,水杯,封杯膜纸塑通用,,,,,data/processed_data_cleaning/failed_images/muge_719971__719971.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,封杯膜,白色,纸塑复合材料,0.98
+muge_721697,水杯,防水口红 不脱色 持久不沾杯,,,,,data/processed_data_cleaning/failed_images/muge_721697__721697.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,口红,橙色,,0.99
+muge_723830,水杯,文胸夏季薄款性感超薄杯,,,,,data/processed_data_cleaning/failed_images/muge_723830__723830.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸内衣套装,绿色,蕾丝,0.99
+muge_730705,水杯,8杯水手霜,,,,,data/processed_data_cleaning/failed_images/muge_730705__730705.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,护手霜,蓝色、白色,,0.98
+muge_733253,水杯,獎杯 運動,,,,,data/processed_data_cleaning/failed_images/muge_733253__733253.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奖杯,金色、黑色,金属,0.99
+muge_734424,水杯,外贸全罩杯内衣大码,,,,,data/processed_data_cleaning/failed_images/muge_734424__734424.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,黑色,,0.99
+muge_735814,水杯,纯银大号泡茶壶加四千纯银杯,,,,,data/processed_data_cleaning/failed_images/muge_735814__735814.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,泡茶壶与茶杯套装,灰色,纯银,0.97
+muge_736734,水杯,装爆米花杯,,,,,data/processed_data_cleaning/failed_images/muge_736734__736734.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,爆米花杯,黄色、白色,纸,0.99
+muge_740398,水杯,水杯位包,,,,,data/processed_data_cleaning/failed_images/muge_740398__740398.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,手提包,黑色,,0.99
+muge_741947,水杯,北欧 陶瓷冷水杯,,,,,data/processed_data_cleaning/failed_images/muge_741947__741947.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,陶瓷冷水壶,白色,陶瓷,0.96
+muge_745952,水杯,格罗咪咪吸管杯配件重力球,,,,,data/processed_data_cleaning/failed_images/muge_745952__745952.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,吸管杯重力球配件,白色、透明,,0.98
+muge_748171,水杯,杯刷无死角软毛,,,,,data/processed_data_cleaning/failed_images/muge_748171__748171.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯刷,白色、透明,,0.93
+muge_750416,水杯,新球杯,,,,,data/processed_data_cleaning/failed_images/muge_750416__750416.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,食品包装/零食,蓝色、棕色,无法确认,0.99
+muge_753437,水杯,主人杯架,,,,,data/processed_data_cleaning/failed_images/muge_753437__753437.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯架/置物架,,木材,0.99
+muge_755631,水杯,功夫茶防水杯垫,,,,,data/processed_data_cleaning/failed_images/muge_755631__755631.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,棕色,,0.98
+muge_755704,水杯,大号洗茶杯碗,,,,,data/processed_data_cleaning/failed_images/muge_755704__755704.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,洗茶杯碗,棕色,,0.98
+muge_756876,水杯,炖杯两人用,,,,,data/processed_data_cleaning/failed_images/muge_756876__756876.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电炖杯,粉色,,0.91
+muge_758375,水杯,保温杯配件杯塞,,,,,data/processed_data_cleaning/failed_images/muge_758375__758375.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯杯塞配件,米色、棕色、蓝色,,0.94
+muge_761613,水杯,进口洋酒杯子,,,,,data/processed_data_cleaning/failed_images/muge_761613__761613.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,红酒杯套装,透明,玻璃,0.98
+muge_767075,水杯,不锈钢杯子架子置物架,,,,,data/processed_data_cleaning/failed_images/muge_767075__767075.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯子架/置物架,黑色,不锈钢,0.99
+muge_767488,水杯,外卖汤杯,,,,,data/processed_data_cleaning/failed_images/muge_767488__767488.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性汤杯,白色,塑料,0.98
+muge_773484,水杯,货车水杯支架,,,,,data/processed_data_cleaning/failed_images/muge_773484__773484.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,车载水杯支架/手机支架,白色,塑料,0.98
+muge_776852,水杯,锡纸杯带盖,,,,,data/processed_data_cleaning/failed_images/muge_776852__776852.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,,,,0.98
+muge_777698,水杯,大罩杯内衣薄款软钢圈美背,,,,,data/processed_data_cleaning/failed_images/muge_777698__777698.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸/内衣,黑色,,0.99
+muge_778179,水杯,茶杯小干泡,,,,,data/processed_data_cleaning/failed_images/muge_778179__778179.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,干泡茶盘,黑色、棕色,,0.94
+muge_783122,水杯,杯刷 洗杯子神器海绵,,,,,data/processed_data_cleaning/failed_images/muge_783122__783122.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯刷,绿色、黄色,塑料,0.99
+muge_783358,水杯,金钗石斛孵化苗杯苗,,,,,data/processed_data_cleaning/failed_images/muge_783358__783358.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,金钗石斛盆栽苗,绿色、棕色,,0.99
+muge_786564,水杯,六齿纸杯玫瑰小号裱花嘴,,,,,data/processed_data_cleaning/failed_images/muge_786564__786564.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,裱花嘴套装,银色,金属,0.99
+muge_787378,水杯,小白兔保温杯套,,,,,data/processed_data_cleaning/failed_images/muge_787378__787378.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯套,粉色、蓝色,纺织布料,0.98
+muge_788264,水杯,内衣女小胸聚拢立体杯,,,,,data/processed_data_cleaning/failed_images/muge_788264__788264.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士内衣套装,棕色,,0.99
+muge_791824,水杯,一次性口杯托,,,,,data/processed_data_cleaning/failed_images/muge_791824__791824.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性口杯托,粉色、紫色、绿色,塑料,0.96
+muge_794716,水杯,铝合金小蛋糕杯,,,,,data/processed_data_cleaning/failed_images/muge_794716__794716.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,铝合金蛋糕模具杯,银色,铝合金,0.98
+muge_795714,水杯,水杯袋套 网 户外,,,,,data/processed_data_cleaning/failed_images/muge_795714__795714.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯袋套,绿色,纺织面料,0.97
+muge_797734,水杯,方形杯子叠,,,,,data/processed_data_cleaning/failed_images/muge_797734__797734.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,方形花卉托盘,白色,,0.98
+muge_799347,水杯,厨房置物架放水杯,,,,,data/processed_data_cleaning/failed_images/muge_799347__799347.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,厨房置物架,白色,,0.99
+muge_799883,水杯,櫻花木杯,,,,,data/processed_data_cleaning/failed_images/muge_799883__799883.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木质盘子,棕色,木材,0.99
+muge_802055,水杯,红酒杯挂架木,,,,,data/processed_data_cleaning/failed_images/muge_802055__802055.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,红酒杯挂架,白色,木材,0.98
+muge_807370,水杯,酒杯钻石绣,,,,,data/processed_data_cleaning/failed_images/muge_807370__807370.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰画（钻石绣）,黑色、蓝色,,0.95
+muge_807905,水杯,龙纹木茶杯,,,,,data/processed_data_cleaning/failed_images/muge_807905__807905.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰盘,米色、棕色、多色,陶瓷,0.98
+muge_808907,水杯,美白淡斑面膜8杯水,,,,,data/processed_data_cleaning/failed_images/muge_808907__808907.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,面膜,黄色,,0.99
+muge_809767,水杯,防弹奶茶 杯装,,,,,data/processed_data_cleaning/failed_images/muge_809767__809767.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶饮料包装袋,白色,塑料,0.98
+muge_810320,水杯,2020欧洲杯意大利球衣,,,,,data/processed_data_cleaning/failed_images/muge_810320__810320.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,球衣,蓝色,,0.99
+muge_810902,水杯,金色餐盘子杯子,,,,,data/processed_data_cleaning/failed_images/muge_810902__810902.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,餐盘,金色,,0.99
+muge_811374,水杯,奶茶店四杯袋,,,,,data/processed_data_cleaning/failed_images/muge_811374__811374.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶四杯袋,灰色,塑料,0.98
+muge_813604,水杯,刷杯子的刷子,,,,,data/processed_data_cleaning/failed_images/muge_813604__813604.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯刷,灰色、米白色,,0.99
+muge_813812,水杯,墨墨线杯 阿布,,,,,data/processed_data_cleaning/failed_images/muge_813812__813812.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,钓鱼渔轮线杯,紫色、蓝色、黑色,,0.98
+muge_815445,水杯,洞洞杯文胸聚拢显小,,,,,data/processed_data_cleaning/failed_images/muge_815445__815445.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,紫色,,0.99
+muge_816676,水杯,内衣胸小显大厚模杯,,,,,data/processed_data_cleaning/failed_images/muge_816676__816676.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米色,蕾丝,0.99
+muge_817777,水杯,马自达阿特兹杯垫,,,,,data/processed_data_cleaning/failed_images/muge_817777__817777.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,灰色,,0.99
+muge_818270,水杯,木慷杯盒,,,,,data/processed_data_cleaning/failed_images/muge_818270__818270.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,甜品食品,黄色、透明,,0.98
+muge_820897,水杯,铁板鸭肠装的杯子,,,,,data/processed_data_cleaning/failed_images/muge_820897__820897.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性食品包装杯,红色,,0.98
+muge_822011,水杯,中年文胸前扣加厚杯,,,,,data/processed_data_cleaning/failed_images/muge_822011__822011.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米白色,,0.99
+muge_822541,水杯,法式三角杯细带文胸,,,,,data/processed_data_cleaning/failed_images/muge_822541__822541.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,黑色,,0.98
+muge_823630,水杯,内衣女有钢圈大罩杯,,,,,data/processed_data_cleaning/failed_images/muge_823630__823630.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士有钢圈文胸,浅灰色,蕾丝,0.99
+muge_824112,水杯,建盏装洗茶杯碗,,,,,data/processed_data_cleaning/failed_images/muge_824112__824112.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,建盏茶洗碗,黑色,陶瓷,0.96
+muge_825296,水杯,手持杯式面粉筛,,,,,data/processed_data_cleaning/failed_images/muge_825296__825296.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,手持杯式面粉筛,黑色,塑料,0.99
+muge_825985,水杯,水晶晶瓷画酒杯,,,,,data/processed_data_cleaning/failed_images/muge_825985__825985.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰画,绿色、白色、灰色,,0.98
+muge_839058,水杯,旅行洗漱杯套装多功能,,,,,data/processed_data_cleaning/failed_images/muge_839058__839058.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,旅行洗漱用品套装,粉色,塑料,0.95
+muge_841992,水杯,九杯水面霜,,,,,data/processed_data_cleaning/failed_images/muge_841992__841992.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,护肤品套装,白色、蓝色,,0.99
+muge_843047,水杯,茶杯滤网过滤网配件,,,,,data/processed_data_cleaning/failed_images/muge_843047__843047.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯滤网过滤网配件,银色,不锈钢,0.99
+muge_848062,水杯,鱼嘴杯配件,,,,,data/processed_data_cleaning/failed_images/muge_848062__848062.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯配件,黑色、白色,,0.97
+muge_853178,水杯,12只装杯子蛋糕盒,,,,,data/processed_data_cleaning/failed_images/muge_853178__853178.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯子蛋糕盒,黑色、白色,纸板,0.99
+muge_854457,水杯,妈全罩杯大码加厚文胸,,,,,data/processed_data_cleaning/failed_images/muge_854457__854457.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,粉色,,0.99
+muge_857349,水杯,杯测工具,,,,,data/processed_data_cleaning/failed_images/muge_857349__857349.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,勺子,黑色,,0.99
+muge_859632,水杯,小孩子用的杯子,,,,,data/processed_data_cleaning/failed_images/muge_859632__859632.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,儿童斜挎包,红色,,0.98
+muge_865906,水杯,雪山仙女杯老桩,,,,,data/processed_data_cleaning/failed_images/muge_865906__865906.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,多肉植物,蓝色,植物,0.98
+muge_867712,水杯,内衣法式三角杯无钢圈,,,,,data/processed_data_cleaning/failed_images/muge_867712__867712.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无钢圈三角文胸,粉色,,0.99
+muge_867979,水杯,伊斯卡尔鸭嘴杯替换装,,,,,data/processed_data_cleaning/failed_images/muge_867979__867979.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯替换配件,透明、白色,,0.98
+muge_872116,水杯,保温杯套短款,,,,,data/processed_data_cleaning/failed_images/muge_872116__872116.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯套,黑色,,0.98
+muge_876134,水杯,高脚玻璃杯干果盘,,,,,data/processed_data_cleaning/failed_images/muge_876134__876134.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,高脚玻璃果盘,透明,玻璃,0.98
+muge_877647,水杯,酒杯 架子,,,,,data/processed_data_cleaning/failed_images/muge_877647__877647.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯架,白色,塑料,0.98
+muge_881999,水杯,凤凰圣杯,,,,,data/processed_data_cleaning/failed_images/muge_881999__881999.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,啤酒瓶和酒杯,棕色、透明,玻璃,0.98
+muge_883093,水杯,紫砂壶杯盖子,,,,,data/processed_data_cleaning/failed_images/muge_883093__552940.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,紫砂壶盖,红色,紫砂,0.96
+muge_883104,水杯,米老鼠水杯情侣,,,,,data/processed_data_cleaning/failed_images/muge_883104__883104.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,圆盘,白色、黑色,,0.98
+muge_885458,水杯,凉白开水杯带龙头,,,,,data/processed_data_cleaning/failed_images/muge_885458__885458.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,带龙头陶瓷饮水罐,白色,陶瓷,0.98
+muge_887827,水杯,少女内衣一体杯,,,,,data/processed_data_cleaning/failed_images/muge_887827__887827.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士内衣套装,白色,蕾丝面料,0.99
+muge_888863,水杯,保温杯套儿童毛绒,,,,,data/processed_data_cleaning/failed_images/muge_888863__888863.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,儿童毛绒保温杯套,蓝色、粉色,毛绒布料,0.98
+muge_890535,水杯,蜂蜜杯子挤压,,,,,data/processed_data_cleaning/failed_images/muge_890535__890535.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蜂蜜挤压瓶,透明、黄色,塑料,0.98
+muge_891610,水杯,夏季哺乳内衣超薄杯,,,,,data/processed_data_cleaning/failed_images/muge_891610__891610.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,哺乳内衣,粉色,蕾丝面料,0.99
+muge_895601,水杯,馬芬杯淋油紙托,,,,,data/processed_data_cleaning/failed_images/muge_895601__895601.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,马芬纸杯托,多色,纸,0.99
+muge_896576,水杯,茶杯夹子木制,,,,,data/processed_data_cleaning/failed_images/muge_896576__896576.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木制茶杯夹,棕色,木,0.98
+muge_899782,水杯,可以放保温杯的饭盒袋子,,,,,data/processed_data_cleaning/failed_images/muge_899782__899782.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,饭盒袋,黄色,,0.98
+muge_899951,水杯,牙膏杯架子置物架 多功能,,,,,data/processed_data_cleaning/failed_images/muge_899951__899951.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,浴室壁挂置物架,白色,塑料,0.98
+muge_900586,水杯,大保温杯套保护套,,,,,data/processed_data_cleaning/failed_images/muge_900586__900586.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯保护套,蓝色,,0.98
+muge_901134,水杯,日本儿童杯面,,,,,data/processed_data_cleaning/failed_images/muge_901134__901134.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,儿童杯面,红色,,0.98
+muge_905433,水杯,樱花雨油烟机油杯,,,,,data/processed_data_cleaning/failed_images/muge_905433__905433.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,油烟机油杯/防护网,黑色、银色,金属,0.97
+muge_906709,水杯,日本复古咖啡滤杯,,,,,data/processed_data_cleaning/failed_images/muge_906709__906709.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡滤杯,银色、棕色,金属,0.96
+muge_908511,水杯,蠟燭杯,,,,,data/processed_data_cleaning/failed_images/muge_908511__908511.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,香薰蜡烛杯,白色、透明,玻璃,0.98
+muge_908626,水杯,液压缸油杯,,,,,data/processed_data_cleaning/failed_images/muge_908626__908626.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,液压油杯,金色,金属,0.99
+muge_908706,水杯,建盏礼盒空盒一壶六杯,,,,,data/processed_data_cleaning/failed_images/muge_908706__908706.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,建盏礼盒空盒,,,0.98
+muge_909394,水杯,德国进口 杯刷,,,,,data/processed_data_cleaning/failed_images/muge_909394__909394.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯刷,米白色,木质,0.99
+muge_909757,水杯,路亚纺车轮浅线杯,,,,,data/processed_data_cleaning/failed_images/muge_909757__909757.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,路亚纺车轮,黑色、银色,,0.99
+muge_911022,水杯,大水杯 盖子,,,,,data/processed_data_cleaning/failed_images/muge_911022__911022.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯盖,透明,塑料,0.99
+muge_913237,水杯,折叠杯子便携式 旅行水杯 日本,,,,,data/processed_data_cleaning/failed_images/muge_913237__913237.jpg,ok,224,224,,水杯,review,置信度 0.62 低于阈值 0.72,水杯,折叠杯,,,0.62
+muge_919967,水杯,挂红酒杯子摆件,,,,,data/processed_data_cleaning/failed_images/muge_919967__919967.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,红酒杯挂架,黑色,金属,0.97
+muge_920690,水杯,星黛露 杯盖,,,,,data/processed_data_cleaning/failed_images/muge_920690__920690.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯盖,粉色,,0.93
+muge_922724,水杯,平杯内六角螺丝,,,,,data/processed_data_cleaning/failed_images/muge_922724__922724.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,内六角平杯螺丝,黑色,金属,0.99
+muge_923376,水杯,内衣，薄罩杯,,,,,data/processed_data_cleaning/failed_images/muge_923376__923376.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸/内衣,紫色,,0.99
+muge_924949,水杯,茶杯垫布艺,,,,,data/processed_data_cleaning/failed_images/muge_924949__924949.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯垫,多色,布艺,0.99
+muge_926570,水杯,武术比赛奖杯,,,,,data/processed_data_cleaning/failed_images/muge_926570__926570.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,武术比赛奖杯,金色、红色、黑色,,0.99
+muge_930815,水杯,功夫茶具 洗杯夹,,,,,data/processed_data_cleaning/failed_images/muge_930815__930815.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,功夫茶具洗杯夹,银色,,0.98
+muge_933584,水杯,剃须刀送马克杯,,,,,data/processed_data_cleaning/failed_images/muge_933584__933584.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,,黑色,,0.98
+muge_937368,水杯,大水杯带杯套,,,,,data/processed_data_cleaning/failed_images/muge_937368__937368.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯袋/杯套,蓝色,布料,0.96
+muge_940780,水杯,甜品杯大口径,,,,,data/processed_data_cleaning/failed_images/muge_940780__940780.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,甜品杯,透明,玻璃,0.98
+muge_941215,水杯,内衣女小胸聚拢厚杯 加厚12,,,,,data/processed_data_cleaning/failed_images/muge_941215__941215.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,女士内衣套装,蓝色,,0.99
+muge_941958,水杯,枕头水杯,,,,,data/processed_data_cleaning/failed_images/muge_941958__941958.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,枕头/靠垫,蓝色,,0.98
+muge_945464,水杯,车里放水杯架,,,,,data/processed_data_cleaning/failed_images/muge_945464__945464.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,车载水杯架,黑色,塑料,0.98
+muge_946551,水杯,白酒杯收纳,,,,,data/processed_data_cleaning/failed_images/muge_946551__946551.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,白酒杯收纳架,,木材,0.98
+muge_947376,水杯,杯托 潮州,,,,,data/processed_data_cleaning/failed_images/muge_947376__947376.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯托,棕色,金属,0.92
+muge_947723,水杯,20款迈腾水杯垫,,,,,data/processed_data_cleaning/failed_images/muge_947723__947723.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,汽车水杯垫,黑色、红色,,0.98
+muge_949890,水杯,多头沥水杯架,,,,,data/processed_data_cleaning/failed_images/muge_949890__949890.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,沥水杯架,银色,金属,0.99
+muge_949913,水杯,酒杯架 北欧 创意倒挂,,,,,data/processed_data_cleaning/failed_images/muge_949913__949913.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯架,金色,金属,0.98
+muge_954589,水杯,杯子情侣款,,,,,data/processed_data_cleaning/failed_images/muge_954589__954589.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,兔子造型摆件,白色、红色、蓝色,,0.96
+muge_956624,水杯,贡茶双杯袋子,,,,,data/processed_data_cleaning/failed_images/muge_956624__956624.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,饮料双杯手提袋,白色,塑料,0.98
+muge_959331,水杯,做三杯鸡的米酒,,,,,data/processed_data_cleaning/failed_images/muge_959331__959331.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,米酒/料酒,棕色、橙色、红色,玻璃,0.99
+muge_959653,水杯,梯子杯架,,,,,data/processed_data_cleaning/failed_images/muge_959653__959653.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,梯子杯架,棕色,木质,0.98
+muge_968469,水杯,茶具过滤器茶漏小杯,,,,,data/processed_data_cleaning/failed_images/muge_968469__968469.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶漏/茶具过滤器,黑色,,0.99
+muge_970729,水杯,公道杯 段泥,,,,,data/processed_data_cleaning/failed_images/muge_970729__970729.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶壶,棕色,段泥,0.98
+muge_971184,水杯,带盖果冻杯,,,,,data/processed_data_cleaning/failed_images/muge_971184__971184.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,带盖果冻杯,黄色,塑料,0.98
+muge_971337,水杯,奶茶杯托胶袋,,,,,data/processed_data_cleaning/failed_images/muge_971337__971337.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,奶茶杯托胶袋,透明、白色,塑料,0.98
+muge_972763,水杯,咖啡杯架子,,,,,data/processed_data_cleaning/failed_images/muge_972763__972763.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡杯架,金色,金属,0.98
+muge_973672,水杯,保温杯保护套 细长,,,,,data/processed_data_cleaning/failed_images/muge_973672__973672.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯保护套,黑色,,0.96
+muge_975043,水杯,豆浆机迷你小型轻食杯,,,,,data/processed_data_cleaning/failed_images/muge_975043__975043.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,迷你豆浆机,粉色,,0.98
+muge_975974,水杯,保温杯盖内螺纹,,,,,data/processed_data_cleaning/failed_images/muge_975974__975974.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯盖,黑色,,0.98
+muge_978381,水杯,北欧酒杯架,,,,,data/processed_data_cleaning/failed_images/muge_978381__978381.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯架,黑色,金属,0.99
+muge_979674,水杯,慕斯杯塑料 一次性,,,,,data/processed_data_cleaning/failed_images/muge_979674__979674.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,一次性塑料慕斯杯,透明,塑料,0.93
+muge_980412,水杯,功夫茶杯收纳盒 有盖,,,,,data/processed_data_cleaning/failed_images/muge_980412__980412.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,功夫茶杯收纳盒,白色,,0.98
+muge_982970,水杯,杯子套装 瓷器,,,,,data/processed_data_cleaning/failed_images/muge_982970__982970.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,陶瓷茶具套装,白色、浅蓝色、棕色,陶瓷,0.98
+muge_985446,水杯,口杯犬 迷你,,,,,data/processed_data_cleaning/failed_images/muge_985446__985446.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,毛绒玩偶,白色,毛绒面料,0.98
+muge_987798,水杯,捷豹2000双线杯,,,,,data/processed_data_cleaning/failed_images/muge_987798__987798.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,渔线轮,黑色、银色,金属,0.99
+muge_991837,水杯,杯子条纹,,,,,data/processed_data_cleaning/failed_images/muge_991837__991837.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,盘子,白色,,0.98
+muge_993272,水杯,咖啡杯挂件,,,,,data/processed_data_cleaning/failed_images/muge_993272__993272.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,瓶子挂件,绿色,,0.94
+muge_993765,水杯,灰藻泥吸水杯垫,,,,,data/processed_data_cleaning/failed_images/muge_993765__993765.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,吸水杯垫,红色,藻泥,0.99
+muge_994668,水杯,酒杯架 杯子架,,,,,data/processed_data_cleaning/failed_images/muge_994668__994668.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯架,银色、透明、蓝色,玻璃,0.98
+muge_995617,水杯,小袋鼠巴布吸管杯配件鸭嘴,,,,,data/processed_data_cleaning/failed_images/muge_995617__995617.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,吸管杯鸭嘴配件,透明,,0.98
+muge_996733,水杯,手冲滤杯草莓,,,,,data/processed_data_cleaning/failed_images/muge_996733__996733.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,手冲咖啡滤杯,透明,玻璃,0.98
+muge_999688,水杯,无钢圈胸罩薄款全罩杯,,,,,data/processed_data_cleaning/failed_images/muge_999688__999688.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无钢圈文胸套装,黑色,,0.99
+muge_1003739,水杯,放杯子的盘子 家用 客厅,,,,,data/processed_data_cleaning/failed_images/muge_1003739__1003739.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,放杯子的盘子/托盘,白色,,0.98
+muge_1004399,水杯,有钢圈全罩杯大码胸罩,,,,,data/processed_data_cleaning/failed_images/muge_1004399__1004399.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,,,0.99
+muge_1005189,水杯,烧水壶水杯套装轻奢,,,,,data/processed_data_cleaning/failed_images/muge_1005189__1005189.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电热水壶,白色,,0.98
+muge_1013972,水杯,a罩杯聚拢,,,,,data/processed_data_cleaning/failed_images/muge_1013972__1013972.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,米白色,蕾丝面料,0.99
+muge_1014348,水杯,内衣少女日系聚拢半杯,,,,,data/processed_data_cleaning/failed_images/muge_1014348__1014348.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,内衣套装,绿色,蕾丝及纺织面料,0.99
+muge_1017010,水杯,茶杯底托,,,,,data/processed_data_cleaning/failed_images/muge_1017010__1017010.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯底托,白色,,0.98
+muge_1019628,水杯,茶杯犬幼犬1元以下真狗,,,,,data/processed_data_cleaning/failed_images/muge_1019628__1019628.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,幼犬宠物狗,白色,,0.99
+muge_1021012,水杯,哈佛h2s水杯垫,,,,,data/processed_data_cleaning/failed_images/muge_1021012__1021012.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯垫,灰色,,0.99
+muge_1031001,水杯,杯子刷子 清洁刷,,,,,data/processed_data_cleaning/failed_images/muge_1031001__1031001.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯子清洁刷,蓝色、黄色,塑料,0.99
+muge_1032103,水杯,内衣三角杯法式,,,,,data/processed_data_cleaning/failed_images/muge_1032103__1032103.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,蕾丝三角文胸,米白色,蕾丝面料,0.99
+muge_1033620,水杯,水杯儿童套,,,,,data/processed_data_cleaning/failed_images/muge_1033620__1033620.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯套,红色,布料,0.96
+muge_1038917,水杯,演讲比赛奖杯,,,,,data/processed_data_cleaning/failed_images/muge_1038917__1038917.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,演讲比赛奖杯,金色、黑色、银色,,0.99
+muge_1039556,水杯,孩子杯套,,,,,data/processed_data_cleaning/failed_images/muge_1039556__1039556.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,儿童水杯杯套,粉色、蓝色、红色,布料,0.98
+muge_1045822,水杯,杯子装饰贴纸,,,,,data/processed_data_cleaning/failed_images/muge_1045822__1045822.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,装饰贴纸,多色,无法确认,0.98
+muge_1047408,水杯,壁挂牙刷杯架,,,,,data/processed_data_cleaning/failed_images/muge_1047408__1047408.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,壁挂牙刷杯架,白色,塑料,0.98
+muge_1047903,水杯,量杯食品级加厚,,,,,data/processed_data_cleaning/failed_images/muge_1047903__1047903.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,量杯,粉色,塑料,0.98
+muge_1052040,水杯,其利尔吸管杯配件,,,,,data/processed_data_cleaning/failed_images/muge_1052040__1052040.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯吸管盖及把手配件,粉色,,0.96
+muge_1052168,水杯,电动牙刷牙杯收纳盒,,,,,data/processed_data_cleaning/failed_images/muge_1052168__1052168.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电动牙刷收纳盒,蓝色,,0.98
+muge_1057357,水杯,水晶舞蹈奖杯,,,,,data/processed_data_cleaning/failed_images/muge_1057357__1057357.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,舞蹈奖杯,金色、黑色,,0.99
+muge_1059837,水杯,可调温度加热杯,,,,,data/processed_data_cleaning/failed_images/muge_1059837__1059837.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,电热杯垫/加热底座,黑色,,0.98
+muge_1061119,水杯,挎包可放水杯,,,,,data/processed_data_cleaning/failed_images/muge_1061119__1061119.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,斜挎包,深蓝色,,0.99
+muge_1064223,水杯,原矿民国绿泥杯,,,,,data/processed_data_cleaning/failed_images/muge_1064223__1064223.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶壶,深蓝色,泥料,0.98
+muge_1066579,水杯,新款水果圣代杯,,,,,data/processed_data_cleaning/failed_images/muge_1066579__1066579.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,圣代杯,透明,,0.93
+muge_1068712,水杯,孕妇大码文胸全罩杯大胸显小,,,,,data/processed_data_cleaning/failed_images/muge_1068712__1068712.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,孕妇文胸,黑色,,0.99
+muge_1069245,水杯,茶台茶杯收纳架,,,,,data/processed_data_cleaning/failed_images/muge_1069245__1069245.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯收纳架,棕色,木质,0.98
+muge_1070056,水杯,进口咖啡分享杯,,,,,data/processed_data_cleaning/failed_images/muge_1070056__1070056.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,咖啡分享壶,透明、棕色,玻璃,0.98
+muge_1071871,水杯,仓鼠滚轮水杯,,,,,data/processed_data_cleaning/failed_images/muge_1071871__1071871.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,仓鼠饮水器,粉色、黄色、蓝色,塑料,0.97
+muge_1072792,水杯,玫瑰玻璃杯,,,,,data/processed_data_cleaning/failed_images/muge_1072792__1072792.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,玻璃花瓶,透明,玻璃,0.92
+muge_1072900,水杯,保温杯里的过滤网,,,,,data/processed_data_cleaning/failed_images/muge_1072900__1072900.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,保温杯过滤网,银色,金属,0.98
+muge_1076158,水杯,250ml白酒裙边高脚杯,,,,,data/processed_data_cleaning/failed_images/muge_1076158__1076158.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,白酒高脚杯,透明,玻璃,0.98
+muge_1076496,水杯,日式蒸蛋杯,,,,,data/processed_data_cleaning/failed_images/muge_1076496__1076496.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,日式蒸蛋杯,白色,陶瓷,0.96
+muge_1081603,水杯,加厚背心式文胸厚模杯,,,,,data/processed_data_cleaning/failed_images/muge_1081603__1081603.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,粉色,,0.99
+muge_1083658,水杯,纯银酒杯套装,,,,,data/processed_data_cleaning/failed_images/muge_1083658__1083658.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,银质酒壶,银色,纯银,0.97
+muge_1086172,水杯,国足亚洲杯,,,,,data/processed_data_cleaning/failed_images/muge_1086172__1086172.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,足球球衣,白色,,0.99
+muge_1089280,水杯,暖杯垫无线,,,,,data/processed_data_cleaning/failed_images/muge_1089280__1089280.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,无线暖杯垫,白色,,0.98
+muge_1093771,水杯,水杯过滤网弹簧,,,,,data/processed_data_cleaning/failed_images/muge_1093771__1093771.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,水杯过滤网弹簧,银色,金属,0.98
+muge_1098764,水杯,车杯ipad架,,,,,data/processed_data_cleaning/failed_images/muge_1098764__1098764.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,车载平板支架,黑色,塑料,0.99
+muge_1100040,水杯,皮 杯垫,,,,,data/processed_data_cleaning/failed_images/muge_1100040__1100040.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,皮质杯垫,棕色,皮革,0.98
+muge_1102522,水杯,茶杯架竹子,,,,,data/processed_data_cleaning/failed_images/muge_1102522__1102522.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯架,棕色,竹子,0.98
+muge_1102658,水杯,烤面包纸杯长方,,,,,data/processed_data_cleaning/failed_images/muge_1102658__1102658.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,长方形烘焙纸托,白色,纸,0.98
+muge_1102858,水杯,装咖啡杯的纸盒子,,,,,data/processed_data_cleaning/failed_images/muge_1102858__1102858.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,包装盒,黑色,纸板,0.98
+muge_1103464,水杯,杯沥水架,,,,,data/processed_data_cleaning/failed_images/muge_1103464__1103464.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,杯沥水架,绿色、棕色、白色,,0.98
+muge_1103837,水杯,长条杯垫 麻,,,,,data/processed_data_cleaning/failed_images/muge_1103837__1103837.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,长条杯垫,红色,麻,0.98
+muge_1104516,水杯,运动内衣固定罩杯一片式,,,,,data/processed_data_cleaning/failed_images/muge_1104516__1104516.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,运动内衣,黑色,,0.99
+muge_1104865,水杯,玻璃杯硅膠蓋,,,,,data/processed_data_cleaning/failed_images/muge_1104865__1104865.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,硅胶杯盖,白色,硅胶,0.92
+muge_1107954,水杯,放茶杯的茶缸,,,,,data/processed_data_cleaning/failed_images/muge_1107954__1107954.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,茶杯收纳缸,棕色,陶瓷,0.96
+muge_1109650,水杯,油盅杯,,,,,data/processed_data_cleaning/failed_images/muge_1109650__1109650.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,金属机械配件,黑色,金属,0.98
+muge_1110712,水杯,无孔水杯架 自行车,,,,,data/processed_data_cleaning/failed_images/muge_1110712__1110712.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,自行车水杯架,黑色,,0.99
+muge_1115866,水杯,12连杯方形蛋糕模,,,,,data/processed_data_cleaning/failed_images/muge_1115866__1115866.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,12连杯方形蛋糕模,灰色,金属,0.99
+muge_1116547,水杯,北邦 搪瓷杯,,,,,data/processed_data_cleaning/failed_images/muge_1116547__1116547.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,搪瓷盘,黑色、红色,搪瓷,0.98
+muge_1117512,水杯,杯子 刷,,,,,data/processed_data_cleaning/failed_images/muge_1117512__1117512.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,清洁刷/杯刷,黄色、绿色、多色,,0.98
+muge_1120664,水杯,大码f罩杯,,,,,data/processed_data_cleaning/failed_images/muge_1120664__1120664.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,运动文胸,白色,,0.98
+muge_1124058,水杯,吊带背心女固定杯,,,,,data/processed_data_cleaning/failed_images/muge_1124058__1124058.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,吊带背心,粉色,,0.99
+muge_1124645,水杯,美背内衣女大胸显小全罩杯,,,,,data/processed_data_cleaning/failed_images/muge_1124645__1124645.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,文胸,黑色,,0.99
+12448690210,水杯,心梦同行304触摸显温保温杯热水杯充电宝礼盒套装,304触摸显温保温杯热水杯充电宝,,,,data/processed_data_cleaning/failed_images/12448690210__12448690210.png,ok,400,400,,水杯,excluded,模型判断为非目标商品或其他类别,其他,充电宝,蓝色,,0.97
+12453144970,水杯,"保温杯定制款,详情联系客服",长效保温保冷；轻巧便携，防漏设计，随身出行无忧；食品级304不锈钢，安全健康，耐用抗摔；,,,,data/processed_data_cleaning/failed_images/12453144970__12453144970.png,ok,400,400,,水杯,excluded,模型判断为非目标商品或其他类别,其他,,,,0.98
+muge_372920,水杯,杯托  茶道  实木,,,,,data/processed_data_cleaning/failed_images/muge_372920__372920.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,木质杯托收纳架,棕色,实木,0.99
+muge_937713,水杯,牙刷杯 日本,,,,,data/processed_data_cleaning/failed_images/muge_937713__937713.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,牙刷杯,绿色、米色、白色,陶瓷,0.97
+muge_335383,水杯,派对杯标記,,,,,data/processed_data_cleaning/failed_images/muge_335383__335383.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,酒杯标记环/杯口装饰配件,多色,,0.95
+muge_560438,水杯,黄花梨苗木带土杯,,,,,data/processed_data_cleaning/failed_images/muge_560438__560438.jpg,ok,224,224,,水杯,excluded,模型判断为非目标商品或其他类别,其他,盆栽苗木,绿色、白色,,0.99
+12451160586,运动服,特步Xtep新款男女同款速干休闲运动套装轻便透气科技面料时尚百搭运动休闲穿搭,舒适透气面料；自由伸展设计；适合多种场合穿搭；,,,,data/processed_data_cleaning/failed_images/12451160586__12451160586.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,运动鞋,白色、绿色,橡胶,0.99
+12438266612,运动服,信柏合保暖内衣套装BH2/套,保暖弹性大,,,,data/processed_data_cleaning/failed_images/12438266612__12438266612.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,口罩,黑色,,0.95
+12451534595,运动服,[定制专用链接]运动夹克1,轻便保暖；弹性面料舒适贴身；适合多种户外活动；,,,,data/processed_data_cleaning/failed_images/12451534595__12451534595.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+12451535054,运动服,[定制专用链接]运动夹克5,轻盈透气；防风保暖；适合多场景运动；,,,,data/processed_data_cleaning/failed_images/12451535054__12451534595.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+12451535050,运动服,[定制专用链接]运动夹克4,保暖透气；弹性袖口设计；适合多种户外活动；,,,,data/processed_data_cleaning/failed_images/12451535050__12451534595.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+12436051180,运动服,秋装新款女装潮韩版宽松大码连帽长袖T恤卫衣女中长款打底衫,,,,,data/processed_data_cleaning/failed_images/12436051180__12436051180.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,拼接长袖连衣裙,黄色,,0.98
+12452171329,运动服,健訫奕天夹克衫S678,吸湿排汗透气,,,,data/processed_data_cleaning/failed_images/12452171329__12452171329.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,长袖衬衫,浅蓝色,,0.98
+12436048392,运动服,不规则纯色连帽卫衣女秋季新款洋气长袖T恤女打底衫上衣ins潮,,,,,data/processed_data_cleaning/failed_images/12436048392__12436048392.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,拉链,银色,金属,0.98
+12436050841,运动服,复古字母刺绣翻领小众夹克衬衫外套女新款秋冬学生开衫上衣潮,,,,,data/processed_data_cleaning/failed_images/12436050841__12436050841.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,格纹夹克外套,白色,,0.96
+12451535066,运动服,[定制专用链接]运动T恤2,透气速干，舒适运动；弹性面料，自由伸展；时尚设计，百搭潮流；,通用,,社会范,data/processed_data_cleaning/failed_images/12451535066__12451535066.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,,,,0.99
+12451883865,运动服,套装男士夏季新款冰丝短袖衬衫男休闲痞帅扎染百搭潮牌翻领两件套,源头货源 低价尝鲜,,,,data/processed_data_cleaning/failed_images/12451883865__12451883865.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,男士短袖衬衫短裤套装,白色,冰丝,0.96
+12451884189,运动服,男装夏季新款休闲百搭潮流男装夏威夷短袖衬衫衬衣套装两件套,源头货源 低价尝鲜,,,,data/processed_data_cleaning/failed_images/12451884189__12451884189.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,短袖衬衫短裤两件套,白色,,0.98
+12451883847,运动服,夏季新款衬衫套装男ins痞帅潮牌港风短袖宽松夏威夷衬衣男两件套,源头货源 低价尝鲜,,,,data/processed_data_cleaning/failed_images/12451883847__12451883847.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,短袖衬衫短裤套装,白色,,0.98
+12451883930,运动服,套装男夏季小马印花衬衫宽松翻领潮牌情侣开衫时尚短袖短裤两件套,源头货源 低价尝鲜,,,,data/processed_data_cleaning/failed_images/12451883930__12451883930.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,短袖衬衫短裤两件套,白色,,0.98
+12451883945,运动服,套装男夏季新中式拼接短袖衬衫男潮牌国风男装宽松休闲衬衣两件套,源头货源 低价尝鲜,,,,data/processed_data_cleaning/failed_images/12451883945__12451883945.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,短袖衬衫,黑色,,0.94
+12440039053,运动服,Tduo合唱演出服套装三件套 D03 套 白色短袖长裤 短衬衫+领结+长裤,新商品上架,,,,data/processed_data_cleaning/failed_images/12440039053__12440039053.png,ok,400,400,,运动服,excluded,模型判断为非目标商品或其他类别,其他,合唱演出服三件套,白色、红色,,0.98

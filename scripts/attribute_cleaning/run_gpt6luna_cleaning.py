@@ -336,14 +336,35 @@ def read_audit(path: Path) -> dict[str, dict[str, Any]]:
     results: dict[str, dict[str, Any]] = {}
     if not path.exists():
         return results
-    with path.open("r", encoding="utf-8") as handle:
+    invalid_encoding_lines = 0
+    malformed_lines = 0
+    # Historical audit files may contain a BOM or a small number of malformed
+    # bytes written by an older/concurrent process.  Keep all valid JSONL
+    # records readable instead of aborting the whole cleaning run.
+    with path.open("r", encoding="utf-8-sig", errors="replace") as handle:
         for line in handle:
+            if not line.strip():
+                continue
+            if "\ufffd" in line:
+                invalid_encoding_lines += 1
             try:
                 item = json.loads(line)
             except json.JSONDecodeError:
+                malformed_lines += 1
                 continue
             if item.get("record_key"):
                 results[str(item["record_key"])] = item
+    if invalid_encoding_lines:
+        print(
+            f"警告：{path} 有 {invalid_encoding_lines} 行包含非法 UTF-8 字节，"
+            "已使用替换字符读取。",
+            file=sys.stderr,
+        )
+    if malformed_lines:
+        print(
+            f"警告：{path} 有 {malformed_lines} 行不是有效 JSON，已跳过。",
+            file=sys.stderr,
+        )
     return results
 
 
@@ -634,6 +655,11 @@ class StreamingOutputWriter:
 
         def add_unprocessed(rows: Iterable[dict[str, Any]], default_status: str) -> None:
             for row in rows:
+                # 接口、解析和图片失败不属于模型正常判定结果，不应留在人工复核文件。
+                # 这类记录只保存在按类别的 model_failures.csv 中等待重试。
+                reason = str(row.get("reason") or row.get("failure_reason") or "")
+                if reason.startswith(("接口或解析失败", "图片文件不存在")):
+                    continue
                 item_id = (row.get("item_id") or "").strip()
                 if item_id and item_id in seen_ids:
                     continue
@@ -825,6 +851,12 @@ class StreamingOutputWriter:
             self.accepted_rows.setdefault(category, []).append(accepted)
             self._rewrite_accepted(category)
             return
+        # 接口、解析或图片失败不写入 unprocessed_samples.csv，只进入失败队列等待重试。
+        # 只有模型正常返回、但规则结果为 review/excluded 时，才进入人工复核文件。
+        if not result_is_readed:
+            self._record_failure(row, result, row.get("local_image_path", ""))
+            return
+
         unprocessed = {field: row.get(field, "") for field in self.clean_fields}
         unprocessed.update({
             "source_category": row.get("_source_category", ""),
@@ -836,18 +868,12 @@ class StreamingOutputWriter:
             "model_material": result.get("material", ""),
             "confidence": result.get("confidence", 0.0),
         })
-        if result_is_readed:
-            # 模型正常返回但规则结果未通过，复制图片供人工复核。
-            unprocessed["local_image_path"] = copy_output_image(
-                row, self.output_dir / "failed_images", root=self.root
-            )
-        else:
-            # 接口、解析或图片失败不复制到 failed_images，只进入失败队列重试。
-            unprocessed["local_image_path"] = row.get("local_image_path", "")
+        # 模型正常返回但规则结果未通过，复制图片供人工复核。
+        unprocessed["local_image_path"] = copy_output_image(
+            row, self.output_dir / "failed_images", root=self.root
+        )
         self.unprocessed_rows.append(unprocessed)
         self._rewrite_unprocessed()
-        if not result_is_readed:
-            self._record_failure(row, result, unprocessed["local_image_path"])
 
     def finalize(
         self,

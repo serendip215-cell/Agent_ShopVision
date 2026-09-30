@@ -1,0 +1,280 @@
+﻿item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width,type
+B07STVBSGZ,厨房用品,Umi. Essentials 制冰机，含冰铲，2种冰块尺寸，24小时产冰12公斤，不锈钢材质，2.2升水箱,商品大类：厨房用品；细分类：制冰机；颜色：银色；材质：不锈钢,UMI,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07STVBSGZ__21i+hZteqAL.jpg,ok,199,195,制冰机
+B07ZTGZZMQ,厨房用品,2只装双层卡布奇诺玻璃杯 550 毫升 …,商品大类：厨房用品；细分类：双层玻璃卡布奇诺杯；颜色：透明；材质：玻璃,UMI,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B07ZTGZZMQ__21UakZYmH-L.jpg,ok,223,238,双层玻璃卡布奇诺杯
+B083M42HY1,厨房用品,(焕新版) AmazonBasics 圆边不锈钢餐勺，12支装,商品大类：厨房用品；细分类：餐勺；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B083M42HY1__51mzy9qnSsL.jpg,ok,1000,1000,餐勺
+B08BR8WRN2,厨房用品,"(翻新) 亚马逊自有品牌 - Solimo 2件装铜制水壶 (锤纹款, 700毫升)",商品大类：厨房用品；细分类：铜制水壶；颜色：未识别；材质：铜,亚马逊品牌——Solimo,,铜,data/processed_data_cleaning/厨房用品/images/B08BR8WRN2__51ITFJjFAxL.jpg,ok,1000,1000,铜制水壶
+B0727RGZF2,厨房用品,AmazonBasics 不锈钢打蛋器套装（3件装）,商品大类：厨房用品；细分类：打蛋器套装；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0727RGZF2__71Ing0BGWuL.jpg,ok,1500,1237,打蛋器套装
+B000BUOQ8Q,厨房用品,Strathwood 重型烧烤架罩，5B,商品大类：厨房用品；细分类：烧烤架罩；颜色：黑色；材质：未识别,亚马逊旗下Strathwood品牌,黑色,,data/processed_data_cleaning/厨房用品/images/B000BUOQ8Q__416858J1H1L.jpg,ok,400,500,烧烤架罩
+B07WYFK2MX,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 2件装不锈钢炖锅套装,商品大类：厨房用品；细分类：不锈钢炖锅套装；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07WYFK2MX__51mfT8rpYGL.jpg,ok,1000,1000,不锈钢炖锅套装
+B07ZFKMVL3,厨房用品,AmazonBasics – 双层数字食品蒸锅 – 黑色和不锈钢，3层，12.5夸脱，1,商品大类：厨房用品；细分类：电蒸锅；颜色：黑色、白色；材质：不锈钢,Amazon Basics,黑色、白色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07ZFKMVL3__6150g21u-NL.jpg,ok,1832,1832,电蒸锅
+B081BLS5M2,厨房用品,AmazonBasics 带饮水口的不锈钢保温杯 – 567 克，白色,商品大类：厨房用品；细分类：带饮水口保温杯；颜色：白色；材质：不锈钢,AmazonBasics,白色,不锈钢,data/processed_data_cleaning/厨房用品/images/B081BLS5M2__61dls6dsXTL.jpg,ok,2560,2560,带饮水口保温杯
+B07WCHQKS1,厨房用品,(焕新版) 亚马逊自有品牌 - Solimo 不锈钢外盖压力锅（5L，适用于电磁炉和燃气灶）,商品大类：厨房用品；细分类：压力锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07WCHQKS1__51riZzUkyhL.jpg,ok,1000,1000,压力锅
+B08CGSSCB8,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 不粘卡代锅 (24厘米，木纹饰面，4层涂层),商品大类：厨房用品；细分类：不粘炒锅；颜色：棕色；材质：铝,亚马逊品牌——Solimo,棕色,铝,data/processed_data_cleaning/厨房用品/images/B08CGSSCB8__51hf8Dvkh8L.jpg,ok,437,1000,不粘炒锅
+B0848Q9NGZ,厨房用品,(焕新版) AmazonBasics 18件装厨房餐具套装，盘子、碗，6人份，Sketch,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B0848Q9NGZ__61QcIPrEHGL.jpg,ok,1000,1000,餐具套装
+B06XQZXQ2B,厨房用品,AmazonBasics Blend and Go 备用瓶，600 毫升,商品大类：厨房用品；细分类：搅拌机备用杯；颜色：绿色；材质：塑料,AmazonBasics,绿色,塑料,data/processed_data_cleaning/厨房用品/images/B06XQZXQ2B__51yyB3KNOKL.jpg,ok,1000,1000,搅拌机备用杯
+B07PYRZPSN,厨房用品,亚马逊自有品牌 - Solimo 优质不锈钢 24 厘米带盖荷兰锅,商品大类：厨房用品；细分类：带盖汤锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PYRZPSN__71EwHmQe2cL.jpg,ok,2242,2242,带盖汤锅
+B08BXNDPYR,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 不粘阿帕姆煎饼锅 (12个凹槽，双层涂层),商品大类：厨房用品；细分类：多孔煎饼锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B08BXNDPYR__513JIHW7s0L.jpg,ok,454,1000,多孔煎饼锅
+B07Y3L4LMM,厨房用品,"AmazonBasics 不锈钢煎锅，10""",商品大类：厨房用品；细分类：煎锅；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07Y3L4LMM__71w16tEmLNL.jpg,ok,2560,2560,煎锅
+B082FLTBVT,厨房用品,AmazonBasics 1升（500瓦）电饭煲 栗色,商品大类：厨房用品；细分类：电饭煲；颜色：白色；材质：塑料,AmazonBasics,白色,塑料,data/processed_data_cleaning/厨房用品/images/B082FLTBVT__61wTvEfU-JL.jpg,ok,1548,1548,电饭煲
+B07W6RW3G4,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 铝制外盖压力锅 (5L，ISI认证，适用于燃气灶),商品大类：厨房用品；细分类：压力锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07W6RW3G4__51Mcgjj6jxL.jpg,ok,1000,1000,压力锅
+B07W13Q86F,厨房用品,AmazonBasics 尼龙土豆压泥器，人体工学手柄，灰色和绿色,商品大类：厨房用品；细分类：土豆压泥器；颜色：绿色；材质：尼龙,AmazonBasics,绿色,尼龙,data/processed_data_cleaning/厨房用品/images/B07W13Q86F__71Q3lbQO6bL.jpg,ok,2560,2560,土豆压泥器
+B07PBBWYKX,厨房用品,亚马逊自有品牌 - Solimo 不锈钢研钵和研杵/Khalbatta,商品大类：厨房用品；细分类：不锈钢研钵和研杵；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PBBWYKX__71nYE7puCFL.jpg,ok,2560,1816,不锈钢研钵和研杵
+B01MEEBCHA,厨房用品,AmazonBasics 18-piece 餐具套装服务适用于6和 Rubbermaid 防滑 silverware 记事本餐具托盘大号黑色1.9 x 11.9 X 37.75厘米套装,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：陶瓷,AmazonBasics,白色,陶瓷,data/processed_data_cleaning/厨房用品/images/B01MEEBCHA__41rDStJXY8L.jpg,ok,500,500,餐具套装
+B088RMGZQR,厨房用品,AmazonBasics 2件装削皮器套装，软握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：削皮器；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B088RMGZQR__71kXj0gj9BL.jpg,ok,2560,2560,削皮器
+B081TGCNF3,厨房用品,AmazonBasics - 8件装不粘锅套装（不含电磁炉底）,商品大类：厨房用品；细分类：不粘锅套装；颜色：黑色；材质：铝,AmazonBasics,黑色,铝,data/processed_data_cleaning/厨房用品/images/B081TGCNF3__81-sJRhEapL.jpg,ok,2560,2560,不粘锅套装
+B07PB5FWCX,厨房用品,Amazon Brand - Solimo 不粘卡达伊锅（24厘米，木纹饰面，4层涂层）,商品大类：厨房用品；细分类：不粘卡达伊锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07PB5FWCX__710cRA4VoyL.jpg,ok,1118,2560,不粘卡达伊锅
+B07VXVZWS3,厨房用品,AmazonBasics - 3件装不锈钢厨房用具套装,商品大类：厨房用品；细分类：厨房用具套装；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07VXVZWS3__71Z3N22lppL.jpg,ok,2560,2560,厨房用具套装
+B000M4YEDS,厨房用品,不锈钢鱼铲,商品大类：厨房用品；细分类：鱼铲；颜色：银色；材质：不锈钢,Mr Bar B Q,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000M4YEDS__31sIy54trGL.jpg,ok,228,500,鱼铲
+B07P6R6R3F,厨房用品,亚马逊自有品牌 - Solimo 硬质阳极氧化炊具套装（1 个带玻璃盖的卡达伊锅、1 个塔瓦锅、1 个塔德卡锅）,商品大类：厨房用品；细分类：炊具套装；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P6R6R3F__719SnQKwhzL.jpg,ok,1439,2560,炊具套装
+B01L28G6X8,厨房用品,AmazonBasics 酸奶机，带定时器，附7个罐子,商品大类：厨房用品；细分类：酸奶机；颜色：银色、白色；材质：不锈钢,AmazonBasics,银色、白色,不锈钢,data/processed_data_cleaning/厨房用品/images/B01L28G6X8__71XT4twmZNL.jpg,ok,1196,1500,酸奶机
+B07VF6MJXD,厨房用品,AmazonBasics 65件装不锈钢厨具套装 Couronne 20件装,商品大类：厨房用品；细分类：不锈钢餐具套装；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07VF6MJXD__71IHD2nTl1L.jpg,ok,2120,2120,不锈钢餐具套装
+B08813XFKY,厨房用品,AmazonBasics 手动柑橘皮刨和擦丝器，配不锈钢刀片，软胶握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：柑橘皮刨和擦丝器；颜色：黑色、绿色、银色；材质：不锈钢,AmazonBasics,黑色、绿色、银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08813XFKY__71fh2ad0UaL.jpg,ok,2560,2560,柑橘皮刨和擦丝器
+B07P6R7BD4,厨房用品,亚马逊自有品牌 – Solimo 不粘卡达伊锅（24 厘米，花岗岩纹理，5 层涂层，适用于电磁炉和燃气灶）,商品大类：厨房用品；细分类：不粘卡达伊锅；颜色：红色；材质：铝,亚马逊品牌——Solimo,红色,铝,data/processed_data_cleaning/厨房用品/images/B07P6R7BD4__713WVZcGsTL.jpg,ok,1136,2507,不粘卡达伊锅
+B08HKTC1KV,厨房用品,AmazonBasics 1.5夸脱自动自制冰淇淋机（翻新机）,商品大类：厨房用品；细分类：冰淇淋机；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B08HKTC1KV__71vjZPrn9TL.jpg,ok,2560,2560,冰淇淋机
+B073Q9GT4N,厨房用品,AmazonBasics 预售季铸铁5件套厨房炊具套装，锅具及煎锅,商品大类：厨房用品；细分类：铸铁锅具套装；颜色：黑色；材质：铸铁,AmazonBasics,黑色,铸铁,data/processed_data_cleaning/厨房用品/images/B073Q9GT4N__81w6X1n93-L.jpg,ok,1473,2560,铸铁锅具套装
+B07Q5BSSKP,厨房用品,AmazonBasics 电动奶泡器兼加热器，银色,商品大类：厨房用品；细分类：电动奶泡器兼加热器；颜色：黑色；材质：塑料,AmazonBasics 授权,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07Q5BSSKP__71PEWoG2bmL.jpg,ok,2549,2549,电动奶泡器兼加热器
+B07FS68L6N,厨房用品,Umi 红酒杯 无铅 15盎司 配透明长水晶钻石杯脚——生日、周年纪念或婚礼礼物,商品大类：厨房用品；细分类：红酒杯；颜色：透明、银色；材质：玻璃,UMI,透明、银色,玻璃,data/processed_data_cleaning/厨房用品/images/B07FS68L6N__51Zosnww+BL.jpg,ok,1001,1001,红酒杯
+B07NMKV9DK,厨房用品,亚马逊自有品牌 - Solimo 优质不锈钢 16 厘米带盖炖锅,商品大类：厨房用品；细分类：带盖炖锅；颜色：未识别；材质：不锈钢,亚马逊品牌——Solimo,,不锈钢,data/processed_data_cleaning/厨房用品/images/B07NMKV9DK__71q8VBeWn9L.jpg,ok,2235,2235,带盖炖锅
+B000UCZFSU,厨房用品,Pinzon – 8杯装金属红咖啡壶,商品大类：厨房用品；细分类：法式咖啡壶；颜色：黑色；材质：玻璃,亚马逊旗下的Pinzon,黑色,玻璃,data/processed_data_cleaning/厨房用品/images/B000UCZFSU__819LQ3GfDrS.jpg,ok,2500,1747,法式咖啡壶
+B000WJKN5G,厨房用品,Pinzon – 8件装切肉刀套装，附木质收纳盒 [亚马逊易开包装]，不锈钢手柄,商品大类：厨房用品；细分类：切肉刀套装；颜色：黑色；材质：不锈钢,亚马逊旗下的Pinzon,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000WJKN5G__81ALKqYr-hS.jpg,ok,2500,2271,切肉刀套装
+B07VXW1P2V,厨房用品,AmazonBasics – 鳉鱼套装，软握柄，灰色/绿色，3件套,商品大类：厨房用品；细分类：削皮器套装；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07VXW1P2V__71arz0qwi7L.jpg,ok,2489,2489,削皮器套装
+B081TKVGTD,厨房用品,AmazonBasics 电饭煲 1.8 L (700 W),商品大类：厨房用品；细分类：电饭煲；颜色：白色；材质：塑料,AmazonBasics,白色,塑料,data/processed_data_cleaning/厨房用品/images/B081TKVGTD__71nRFpKeksL.jpg,ok,1952,1952,电饭煲
+B07P6R6JYP,厨房用品,亚马逊自有品牌 – Solimo 硬质阳极氧化深型卡代锅（1 升）,商品大类：厨房用品；细分类：深型双耳炒锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P6R6JYP__61k+SYhe5BL.jpg,ok,1306,2560,深型双耳炒锅
+B071K5ZLL7,厨房用品,亚马逊自有品牌 - Solimo 750瓦弹出式烤面包机（白色）,商品大类：厨房用品；细分类：弹出式烤面包机；颜色：白色；材质：塑料,亚马逊品牌——Solimo,白色,塑料,data/processed_data_cleaning/厨房用品/images/B071K5ZLL7__71CxUHc-4iL.jpg,ok,1711,2096,弹出式烤面包机
+B07Z5BV41Y,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 硅胶烘焙手套套装，2件装，橙色,商品大类：厨房用品；细分类：硅胶烘焙隔热手套；颜色：橙色；材质：硅胶,亚马逊品牌——Solimo,橙色,硅胶,data/processed_data_cleaning/厨房用品/images/B07Z5BV41Y__51bgtxUhrFL.jpg,ok,1000,1000,硅胶烘焙隔热手套
+B07WJB7L47,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 铝制外盖压力锅 (3L，ISI认证，适用于燃气灶),商品大类：厨房用品；细分类：压力锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07WJB7L47__61kEPHXpugL.jpg,ok,1000,1000,压力锅
+B0863B23NC,厨房用品,亚马逊自有品牌 - Solimo 三件套不粘锅套装（不含电磁炉底座）,商品大类：厨房用品；细分类：不粘锅三件套；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B0863B23NC__71iBVh5YO5L.jpg,ok,1172,2560,不粘锅三件套
+B07Y1RV1PX,厨房用品,AmazonBasics K-Cup 咖啡机,商品大类：厨房用品；细分类：K-Cup胶囊咖啡机；颜色：白色；材质：塑料,AmazonBasics,白色,塑料,data/processed_data_cleaning/厨房用品/images/B07Y1RV1PX__712aPQwcEaL.jpg,ok,2560,2560,K-Cup胶囊咖啡机
+B08989SL2Z,厨房用品,AmazonBasics 12件装美耐皿餐具套装——4人份，黄色釉裂纹款,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：美耐皿,AmazonBasics,白色,美耐皿,data/processed_data_cleaning/厨房用品/images/B08989SL2Z__91uQDR-+s8L.jpg,ok,2560,2560,餐具套装
+B07ZQVJTWJ,厨房用品,AmazonBasics - 一次性便当盒，扇贝造型，可转化为生态堆肥且可生物降解，15 x 23 x 8 厘米，100 个装,商品大类：厨房用品；细分类：一次性餐盒；颜色：白色；材质：纸浆,AmazonBasics,白色,纸浆,data/processed_data_cleaning/厨房用品/images/B07ZQVJTWJ__71nu4j7HpLL.jpg,ok,2331,2560,一次性餐盒
+B07P7W7RVR,厨房用品,亚马逊自有品牌 - Solimo 硬阳极氧化深型卡达伊锅，带电磁炉适用锅底和玻璃锅盖（22厘米，2.5升）,商品大类：厨房用品；细分类：深型炒锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P7W7RVR__714zueDOYAL.jpg,ok,1412,2560,深型炒锅
+B06XYGW6DF,厨房用品,AmazonBasics 净水器滤芯（适用于 AmazonBasics 和 Brita 滤水壶）- 6 件装,商品大类：厨房用品；细分类：净水器滤芯；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B06XYGW6DF__61ozDuUsn1L.jpg,ok,924,2560,净水器滤芯
+B07P913VF3,厨房用品,亚马逊自有品牌 – Solimo 不粘卡代锅（带玻璃盖，26 厘米，锤纹表面，三层涂层，厚度 2.9 毫米）,商品大类：厨房用品；细分类：带盖不粘炒锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P913VF3__81MzgBfzUhL.jpg,ok,1394,2560,带盖不粘炒锅
+B07YCB2T1V,厨房用品,AmazonBasics 1300瓦电磁炉,商品大类：厨房用品；细分类：电磁炉；颜色：黑色；材质：玻璃,AmazonBasics,黑色,玻璃,data/processed_data_cleaning/厨房用品/images/B07YCB2T1V__814Nn3Qa98L.jpg,ok,2560,2560,电磁炉
+B08B7XRSS1,厨房用品,AmazonBasics 课程用手动擦丝器，配不锈钢刀片，软胶握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：手动擦丝器；颜色：银色、黑色；材质：不锈钢,AmazonBasics,银色、黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08B7XRSS1__718cImIEe0L.jpg,ok,2560,2560,手动擦丝器
+B072WW22SX,厨房用品,"亚马逊品牌 - Solimo 耐热不锈钢 塑料, 500 毫升",商品大类：厨房用品；细分类：保温瓶；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B072WW22SX__91GC9BBfBfL.jpg,ok,2560,1692,保温瓶
+B07PBBW455,厨房用品,亚马逊自有品牌 – Solimo 烘焙套装（4件装：刮刀、刷子、打蛋器、蛋糕模具）,商品大类：厨房用品；细分类：烘焙工具套装；颜色：红色、透明、银色；材质：不锈钢,亚马逊品牌——Solimo,红色、透明、银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PBBW455__71sO0qRyXDL.jpg,ok,2560,2560,烘焙工具套装
+B08988PX7K,厨房用品,AmazonBasics - 美耐皿餐具套装（12件，4人份），餐具，蓝色搪瓷配乡村风边饰，10 1/2英寸、8 9/16英寸、6英寸、1,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：美耐皿,Amazon Basics,白色,美耐皿,data/processed_data_cleaning/厨房用品/images/B08988PX7K__91vaE2Bl5dL.jpg,ok,2560,2560,餐具套装
+B08989CZS2,厨房用品,AmazonBasics 12件装美耐皿餐具套装 - 4人份，托斯卡纳风格,商品大类：厨房用品；细分类：餐具套装；颜色：白色、红色；材质：美耐皿,AmazonBasics,白色、红色,美耐皿,data/processed_data_cleaning/厨房用品/images/B08989CZS2__A1UkZv+NZ4L.jpg,ok,2559,2560,餐具套装
+B072MZB1LX,厨房用品,亚马逊自有品牌 - Solimo 亚马逊自有品牌不粘烤盘三明治机（750 瓦，银色和黑色）,商品大类：厨房用品；细分类：三明治机；颜色：黑色；材质：塑料,亚马逊品牌——Solimo,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B072MZB1LX__91UwtqMLgjL.jpg,ok,1473,2500,三明治机
+B07PXN93J3,厨房用品,亚马逊自有品牌 - Solimo 高级不粘煎锅（24厘米，红色）,商品大类：厨房用品；细分类：不粘煎锅；颜色：黑色、银色；材质：不锈钢,亚马逊品牌——Solimo,黑色、银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PXN93J3__71Q6+ic7dcL.jpg,ok,2177,2177,不粘煎锅
+B001JAH4YK,厨房用品,pinzon 带锡箔切割器的开瓶器,商品大类：厨房用品；细分类：带锡箔切割器的葡萄酒开瓶器；颜色：黑色；材质：塑料,亚马逊旗下的Pinzon,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B001JAH4YK__71pfwudfVlS.jpg,ok,1929,2500,带锡箔切割器的葡萄酒开瓶器
+B07VG9M6ZB,厨房用品,AmazonBasics 单格餐食准备容器碗 - 不含BPA，适用于微波炉/洗碗机/冷冻室，42盎司，20件装,商品大类：厨房用品；细分类：带盖餐食准备容器；颜色：黑色；材质：塑料,AmazonBasics 授权,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07VG9M6ZB__71h8+6X7t7L.jpg,ok,2263,2263,带盖餐食准备容器
+B07W34Y7G4,厨房用品,AmazonBasics 7件装不锈钢厨房用具套装，带旋转支架，软胶手柄，灰色和绿色,商品大类：厨房用品；细分类：厨房用具套装；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07W34Y7G4__810yOGYAyXL.jpg,ok,2560,2560,厨房用具套装
+B000M50300,厨房用品,Strathwood 烟囱用木炭点火器,商品大类：厨房用品；细分类：木炭烟囱点火器；颜色：黑色；材质：金属和木材,亚马逊旗下Strathwood品牌,黑色,金属和木材,data/processed_data_cleaning/厨房用品/images/B000M50300__81hJTxxjZ4L.jpg,ok,2500,2005,木炭烟囱点火器
+B0845CMD43,厨房用品,AmazonBasics 3升电动炸锅,商品大类：厨房用品；细分类：电炸锅；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0845CMD43__81-mXdImYzL.jpg,ok,2560,2560,电炸锅
+B07K8P8VL4,厨房用品,AmazonBasics 18件装厨房餐具套装，包括盘子、碟子、碗，6人份,商品大类：厨房用品；细分类：盘碗餐具套装；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B07K8P8VL4__91PLoX-Cu4L.jpg,ok,2560,2560,盘碗餐具套装
+B07ZR32Y3Z,厨房用品,Umi. 儿童便当盒，防漏四格餐盒，不含BPA，分装正餐和零食，坚固耐用，非常适合上学、野餐、露营和旅行，1.2升——蓝色,商品大类：厨房用品；细分类：分格便当盒；颜色：蓝色；材质：未识别,UMI,蓝色,,data/processed_data_cleaning/厨房用品/images/B07ZR32Y3Z__61osgIlMkQL.jpg,ok,1269,2560,分格便当盒
+B07P7W8PXQ,厨房用品,亚马逊自有品牌 - Solimo 压铸铝不粘平底锅（30厘米，5层涂层）,商品大类：厨房用品；细分类：平底锅；颜色：深灰色、黑色；材质：铝,亚马逊品牌——Solimo,深灰色、黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P7W8PXQ__818b05caUdL.jpg,ok,1010,2560,平底锅
+B01E5FI7NW,厨房用品,亚马逊自有品牌 - Solimo Sparkle 保温炖锅套装（含罗蒂篮），3件装，黄色,商品大类：厨房用品；细分类：保温炖锅套装；颜色：白色；材质：塑料,亚马逊品牌——Solimo,白色,塑料,data/processed_data_cleaning/厨房用品/images/B01E5FI7NW__71CpT91YywL.jpg,ok,1411,2560,保温炖锅套装
+B07PBBV3D2,厨房用品,亚马逊自有品牌 – Solimo 15件装餐具套装（蓝色花卉图案）,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：未识别,亚马逊品牌——Solimo,白色,,data/processed_data_cleaning/厨房用品/images/B07PBBV3D2__91Bf11G3DEL.jpg,ok,2442,2560,餐具套装
+B07H2XZ2J1,厨房用品,亚马逊自有品牌 - Solimo 铜制水壶（锤纹款，900毫升）,商品大类：厨房用品；细分类：水壶；颜色：未识别；材质：铜,亚马逊品牌——Solimo,,铜,data/processed_data_cleaning/厨房用品/images/B07H2XZ2J1__61uLPpa11VL.jpg,ok,1500,1500,水壶
+B07MRDS4TG,厨房用品,亚马逊自有品牌 - Solimo 铜制水瓶和水壶套装（素面款）,商品大类：厨房用品；细分类：铜制水瓶和水壶套装；颜色：未识别；材质：铜,亚马逊品牌——Solimo,,铜,data/processed_data_cleaning/厨房用品/images/B07MRDS4TG__61YIn-R7R4L.jpg,ok,1421,1538,铜制水瓶和水壶套装
+B07ZQR2Z96,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 不锈钢三件套锅具组（无盖）,商品大类：厨房用品；细分类：不锈钢锅具三件套；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07ZQR2Z96__61D0dSBecsL.jpg,ok,1000,1000,不锈钢锅具三件套
+B0844421VQ,厨房用品,AmazonBasics 硅胶圆形蛋糕模具，23 厘米，红色,商品大类：厨房用品；细分类：圆形蛋糕模具；颜色：红色；材质：硅胶,AmazonBasics,红色,硅胶,data/processed_data_cleaning/厨房用品/images/B0844421VQ__61nF0955hFL.jpg,ok,1000,2124,圆形蛋糕模具
+B077XTPWZ5,厨房用品,AmazonBasics - 硅胶瑜伽垫，3件装,商品大类：厨房用品；细分类：硅胶烘焙垫；颜色：黑色；材质：硅胶,AmazonBasics,黑色,硅胶,data/processed_data_cleaning/厨房用品/images/B077XTPWZ5__917QGDA96pL.jpg,ok,1907,2560,硅胶烘焙垫
+B088214N73,厨房用品,AmazonBasics 电动咖啡豆研磨机，黑色（翻新）,商品大类：厨房用品；细分类：电动咖啡豆研磨机；颜色：黑色；材质：未识别,AmazonBasics,黑色,,data/processed_data_cleaning/厨房用品/images/B088214N73__61W3W6mDmLL.jpg,ok,1641,1641,电动咖啡豆研磨机
+B07P6R6MQ5,厨房用品,亚马逊自有品牌 – Solimo 硬质阳极氧化深煎锅（30 厘米，3 毫米厚）,商品大类：厨房用品；细分类：深煎锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P6R6MQ5__61V4sgHVC7L.jpg,ok,1305,2560,深煎锅
+B08BCPTXZZ,厨房用品,AmazonBasics 四面不锈钢盒式刨丝器（带收纳盒），9英寸（翻新）,商品大类：厨房用品；细分类：四面盒式刨丝器；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08BCPTXZZ__71On9OXlcrL.jpg,ok,2478,2478,四面盒式刨丝器
+B000G22BTA,厨房用品,Pinzon 4件装碗套装,商品大类：厨房用品；细分类：玻璃碗套装；颜色：透明；材质：玻璃,亚马逊旗下的Pinzon,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B000G22BTA__81zzfLBnOIS.jpg,ok,2166,2342,玻璃碗套装
+B000WIE4C0,厨房用品,Strathwood 玉米篮烧烤套装,商品大类：厨房用品；细分类：烧烤玉米篮套装；颜色：棕色；材质：金属,Strathwood by Amazon.com,棕色,金属,data/processed_data_cleaning/厨房用品/images/B000WIE4C0__81mUmzQetiS.jpg,ok,1785,2500,烧烤玉米篮套装
+B07K2DB2QV,厨房用品,AmazonBasics 9件装不锈钢电磁炉锅具套装，带锅盖,商品大类：厨房用品；细分类：锅具套装；颜色：银色、黑色；材质：不锈钢,AmazonBasics,银色、黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07K2DB2QV__81OYbbH+dLL.jpg,ok,2560,2560,锅具套装
+B072WX4NBZ,厨房用品,亚马逊自有品牌 - Solimo 三件套不锈钢炖锅套装,商品大类：厨房用品；细分类：不锈钢炖锅套装；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B072WX4NBZ__71EmR4tH00L.jpg,ok,1242,2560,不锈钢炖锅套装
+B089ZWX4FH,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 18升烤箱式烤面包机（黑色）,商品大类：厨房用品；细分类：烤箱式烤面包机；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B089ZWX4FH__51itiguDQGL.jpg,ok,701,1000,烤箱式烤面包机
+B07P6X4FBN,厨房用品,亚马逊自有品牌 - Solimo 铝制压力锅，银色 (SOPK15),商品大类：厨房用品；细分类：压力锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P6X4FBN__71BMw3qAnmL.jpg,ok,1564,2460,压力锅
+B07Y5B28W9,厨房用品,AmazonBasics 陶瓷不粘双件煎锅套装，9.5英寸和11英寸，绿松石色,商品大类：厨房用品；细分类：双件煎锅套装；颜色：蓝色；材质：陶瓷,AmazonBasics,蓝色,陶瓷,data/processed_data_cleaning/厨房用品/images/B07Y5B28W9__71gSBm5ZJAL.jpg,ok,2560,2560,双件煎锅套装
+B07HJ4DPFT,厨房用品,亚马逊自有品牌 – Solimo 12件装餐具套装（线条设计）,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：未识别,亚马逊品牌——Solimo,白色,,data/processed_data_cleaning/厨房用品/images/B07HJ4DPFT__81Joa47HVrL.jpg,ok,2560,2560,餐具套装
+B0821M1JVZ,厨房用品,AmazonBasics 慢炖锅，3档温度调节，带保温功能,商品大类：厨房用品；细分类：慢炖锅；颜色：黑色；材质：未识别,AmazonBasics,黑色,,data/processed_data_cleaning/厨房用品/images/B0821M1JVZ__71eMkLqdUwL.jpg,ok,2339,2339,慢炖锅
+B07HJ5LH4Y,厨房用品,亚马逊自有品牌——Solimo Alaska 塑料水瓶套装，三件套，600 毫升，青绿色,商品大类：厨房用品；细分类：塑料水瓶；颜色：绿色；材质：塑料,亚马逊品牌——Solimo,绿色,塑料,data/processed_data_cleaning/厨房用品/images/B07HJ5LH4Y__81w13EQ2A2L.jpg,ok,2307,2560,塑料水瓶
+B081K26FWR,厨房用品,Eono 饮品杯垫，吸水石质杯垫套装（软木底座），家居装饰乔迁礼物，灰色 6 件套,商品大类：厨房用品；细分类：杯垫；颜色：白色；材质：未识别,Eono,白色,,data/processed_data_cleaning/厨房用品/images/B081K26FWR__61SiXePzXfL.jpg,ok,1000,1000,杯垫
+B07GXNZ3KM,厨房用品,亚马逊品牌 - Solimo 无石榴石不锈钢酱汁锅（12 厘米），标准，白色,商品大类：厨房用品；细分类：酱汁锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07GXNZ3KM__51xyO6ZcwAL.jpg,ok,1500,1500,酱汁锅
+B088WF9V3G,厨房用品,AmazonBasics 三件装 Y 形削皮器套装，软握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：Y形削皮器套装；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B088WF9V3G__71myrEZwE3L.jpg,ok,2560,2560,Y形削皮器套装
+B07VB3TJF3,厨房用品,"AmazonBasics 亚马逊倍思 抗疲劳站立舒适垫 适用于家庭厨房和办公室 - 20 x 30 英寸(约 50.8 x 76.2 厘米),蓝绿色图案",商品大类：厨房用品；细分类：抗疲劳站立垫；颜色：蓝色、白色；材质：泡沫,AmazonBasics,蓝色、白色,泡沫,data/processed_data_cleaning/厨房用品/images/B07VB3TJF3__91ju2QsMA2L.jpg,ok,2481,2481,抗疲劳站立垫
+B07T5DDMXQ,厨房用品,亚马逊品牌：Umi. Essentials 真空保温水壶及保温瓶 - 500毫升，保温12小时/保冷24小时，双层18/8不锈钢，附清洁刷，橙色,商品大类：厨房用品；细分类：保温水壶；颜色：橙色；材质：不锈钢,UMI,橙色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07T5DDMXQ__41wPQJiyr6L.jpg,ok,1000,1000,保温水壶
+B07P82LZWZ,厨房用品,亚马逊品牌 - Solimo 无石纹牛排煎锅/ 烤架 / 烤架 / 多功能烤箱,商品大类：厨房用品；细分类：曲奇挤压器；颜色：黑色；材质：塑料,亚马逊品牌——Solimo,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07P82LZWZ__71XZyRPY5GL.jpg,ok,2412,2560,曲奇挤压器
+B07ZVKK1K1,厨房用品,AmazonBasics 带搅拌球的摇摇杯 – 20盎司，2件装，灰色,商品大类：厨房用品；细分类：摇摇杯；颜色：灰色；材质：塑料,AmazonBasics,灰色,塑料,data/processed_data_cleaning/厨房用品/images/B07ZVKK1K1__81QJiKHWDYL.jpg,ok,2431,2431,摇摇杯
+B07P82MMQ6,厨房用品,亚马逊自有品牌 – Solimo 16件装瓷质餐具套装（蓝色花卉图案）,商品大类：厨房用品；细分类：瓷质餐具套装；颜色：白色；材质：瓷质,亚马逊品牌——Solimo,白色,瓷质,data/processed_data_cleaning/厨房用品/images/B07P82MMQ6__91t9DPWaW0L.jpg,ok,2242,2560,瓷质餐具套装
+B0813Y9XRT,厨房用品,AmazonBasics 珐琅铸铁炖锅,商品大类：厨房用品；细分类：珐琅铸铁炖锅；颜色：蓝色；材质：铸铁,AmazonBasics,蓝色,铸铁,data/processed_data_cleaning/厨房用品/images/B0813Y9XRT__81rJQXcJ68L.jpg,ok,2477,2477,珐琅铸铁炖锅
+B085NXLFLD,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 塑料便当盒套装，3件装，蓝色,商品大类：厨房用品；细分类：塑料便当盒套装；颜色：白色；材质：塑料,亚马逊品牌——Solimo,白色,塑料,data/processed_data_cleaning/厨房用品/images/B085NXLFLD__51rITl1O-JL.jpg,ok,1000,1000,塑料便当盒套装
+B072WWWNZQ,厨房用品,亚马逊自有品牌 - Solimo 不锈钢两件套汤锅套装（无盖）,商品大类：厨房用品；细分类：不锈钢汤锅套装；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B072WWWNZQ__81+ZK21En-L.jpg,ok,1209,2560,不锈钢汤锅套装
+B072WWMTVB,厨房用品,亚马逊自有品牌 - Solimo 不锈钢三件套汤锅套装（无盖）,商品大类：厨房用品；细分类：不锈钢汤锅套装；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B072WWMTVB__81I30FT1jFL.jpg,ok,1486,2560,不锈钢汤锅套装
+B07PVJXKFW,厨房用品,亚马逊自有品牌 - Solimo 优质不锈钢 18 厘米带盖炖锅,商品大类：厨房用品；细分类：带盖炖锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PVJXKFW__71uWFp79i3L.jpg,ok,2233,2233,带盖炖锅
+B013R5UV30,厨房用品,AmazonBasics - 自动烤面包机，1400 W，4片装，颜色：白色,商品大类：厨房用品；细分类：四片式烤面包机；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B013R5UV30__31TUfkPvDuL.jpg,ok,295,500,四片式烤面包机
+B0721K4444,厨房用品,亚马逊自有品牌 - Solimo Maxima 750瓦搅拌研磨机，配3个不锈钢容器,商品大类：厨房用品；细分类：搅拌研磨机；颜色：白色；材质：不锈钢,亚马逊品牌——Solimo,白色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0721K4444__81oLv3GsLyL.jpg,ok,2397,2560,搅拌研磨机
+B07SH1HWZ6,厨房用品,AmazonBasics 不锈钢多功能刮刀和切碎器（翻新）,商品大类：厨房用品；细分类：厨房刮刀和面团切割器；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07SH1HWZ6__716qCfcA6DL.jpg,ok,2054,2560,厨房刮刀和面团切割器
+B07ZQWLTSX,厨房用品,AmazonBasics - 一次性餐盒，扇贝造型，带铰链，可转化为生态堆肥且可生物降解，3格设计，22 x 22 x 8 厘米，25个装,商品大类：厨房用品；细分类：一次性三格餐盒；颜色：白色；材质：模塑纸浆纤维,AmazonBasics,白色,模塑纸浆纤维,data/processed_data_cleaning/厨房用品/images/B07ZQWLTSX__71hVsRrvKKL.jpg,ok,2560,2560,一次性三格餐盒
+B07VT9KDPH,厨房用品,亚马逊自有品牌 – Solimo 1500 W 浸入式电热水棒（ISI认证）,商品大类：厨房用品；细分类：浸入式电热水棒；颜色：蓝色、白色、黑色；材质：塑料,亚马逊品牌——Solimo,蓝色、白色、黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07VT9KDPH__61pK4XSFyfL.jpg,ok,1500,891,浸入式电热水棒
+B085NLBFF5,厨房用品,AmazonBasics 手动果皮刨丝器，配宽不锈钢刀片和软胶握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：手动刨丝器；颜色：银色、黑色；材质：不锈钢,AmazonBasics,银色、黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B085NLBFF5__81YJROzi03L.jpg,ok,2560,2560,手动刨丝器
+B07VVQNL1V,厨房用品,AmazonBasics 不锈钢厨房钳，配黑色防滑手柄，22.86 厘米,商品大类：厨房用品；细分类：厨房夹；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07VVQNL1V__61AvVR6bs7L.jpg,ok,1527,1527,厨房夹
+B07VM19MD8,厨房用品,AmazonBasics 三格餐食准备容器,商品大类：厨房用品；细分类：三格餐食准备容器；颜色：黑色；材质：塑料,AmazonBasics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07VM19MD8__711Tbm3jZUL.jpg,ok,2081,2081,三格餐食准备容器
+B07W4BL3VZ,厨房用品,AmazonBasics 意式浓缩咖啡机及奶泡器,商品大类：厨房用品；细分类：意式浓缩咖啡机；颜色：黑色；材质：未识别,AmazonBasics,黑色,,data/processed_data_cleaning/厨房用品/images/B07W4BL3VZ__81NZTQPkhoL.jpg,ok,2560,2560,意式浓缩咖啡机
+B0898B96KB,厨房用品,AmazonBasics 大号 13.8 英寸三聚氰胺沙拉碗及餐具套装 - 相思木哑光纹理,商品大类：厨房用品；细分类：沙拉碗及餐具套装；颜色：棕色；材质：三聚氰胺,AmazonBasics,棕色,三聚氰胺,data/processed_data_cleaning/厨房用品/images/B0898B96KB__81p8kFYN8+L.jpg,ok,2560,2560,沙拉碗及餐具套装
+B0898B7FQS,厨房用品,AmazonBasics 12件装石质餐具套装——4人份，蓝色玫瑰花园款,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：石质,AmazonBasics,白色,石质,data/processed_data_cleaning/厨房用品/images/B0898B7FQS__915QnhBsyYL.jpg,ok,2560,2560,餐具套装
+B08BVHQX1H,厨房用品,亚马逊自有品牌 - Solimo 三层不锈钢电磁炉适用酱汁锅，带钢制锅盖（22厘米，4.2升）,商品大类：厨房用品；细分类：汤锅；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08BVHQX1H__71bmA3OwUyL.jpg,ok,1751,2560,汤锅
+B013R5UH2U,厨房用品,AmazonBasics 1.5升拉丝不锈钢电水壶,商品大类：厨房用品；细分类：电热水壶；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B013R5UH2U__912aH9G1+TL.jpg,ok,2560,2355,电热水壶
+B07P6R6K1N,厨房用品,亚马逊自有品牌 – Solimo 不粘阿帕切蒂锅/带盖炒锅（22 厘米，双层涂层）,商品大类：厨房用品；细分类：带盖炒锅；颜色：红色、黑色；材质：铝,亚马逊品牌——Solimo,红色、黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P6R6K1N__710cl5DUfmL.jpg,ok,1116,2505,带盖炒锅
+B081582L4D,厨房用品,AmazonBasics Solo 微波炉，台式，20 升，700 瓦，白色,商品大类：厨房用品；细分类：微波炉；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B081582L4D__71vsiC9OsvL.jpg,ok,2271,2271,微波炉
+B08989DBZ4,厨房用品,AmazonBasics 12件装美耐皿餐具套装——4人份，传统蓝白款,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：美耐皿,AmazonBasics,白色,美耐皿,data/processed_data_cleaning/厨房用品/images/B08989DBZ4__9137WlNDUbL.jpg,ok,2560,2560,餐具套装
+B07Y5BDJV1,厨房用品,AmazonBasics 硬阳极氧化不粘 12 件套炊具套装，黑色 - 锅、平底锅和厨具,商品大类：厨房用品；细分类：炊具套装；颜色：黑色；材质：未识别,AmazonBasics,黑色,,data/processed_data_cleaning/厨房用品/images/B07Y5BDJV1__71pXe8-52FL.jpg,ok,2213,2213,炊具套装
+B07ZVK94XL,厨房用品,AmazonBasics Tritan 带滤茶器水瓶 – 25盎司，2件装，蓝色,商品大类：厨房用品；细分类：带滤茶器水瓶；颜色：蓝色；材质：塑料,AmazonBasics,蓝色,塑料,data/processed_data_cleaning/厨房用品/images/B07ZVK94XL__81yNcqkI4IL.jpg,ok,2560,2560,带滤茶器水瓶
+B07QLFTX18,厨房用品,Stone & Beam - 传统炖锅（波纹款）1夸脱 硬阳极氧化不粘铝锅,商品大类：厨房用品；细分类：炖锅；颜色：灰色；材质：铝,Stone & Beam,灰色,铝,data/processed_data_cleaning/厨房用品/images/B07QLFTX18__81rahVQQqgL.jpg,ok,2560,2560,炖锅
+B08CHJ6ZZK,厨房用品,(焕新款) 亚马逊自有品牌 - Solimo 不粘阿帕切蒂锅/炒锅（带盖，22厘米，双层涂层）,商品大类：厨房用品；细分类：不粘炒锅（带盖）；颜色：红色、黑色、银色；材质：铝,亚马逊品牌——Solimo,红色、黑色、银色,铝,data/processed_data_cleaning/厨房用品/images/B08CHJ6ZZK__41maeujxy0L.jpg,ok,446,1000,不粘炒锅（带盖）
+B087RZBP2R,厨房用品,亚马逊自有品牌 - Solimo 硼硅酸盐玻璃水瓶，1升,商品大类：厨房用品；细分类：玻璃水瓶；颜色：银色；材质：玻璃,亚马逊品牌——Solimo,银色,玻璃,data/processed_data_cleaning/厨房用品/images/B087RZBP2R__61+vVuWFZgL.jpg,ok,2560,704,玻璃水瓶
+B08971XMGZ,厨房用品,AmazonBasics 双槽烤面包机，拉丝银色（翻新机）,商品大类：厨房用品；细分类：双槽烤面包机；颜色：银色；材质：未识别,AmazonBasics,银色,,data/processed_data_cleaning/厨房用品/images/B08971XMGZ__71LvH6SnBzL.jpg,ok,2343,2343,双槽烤面包机
+B0813ZQ6VD,厨房用品,AmazonBasics SX-33QTH 珐琅铸铁带盖炖锅 - 3.1 升，灰色，直径：31.5 厘米，长度：38.2 厘米，高度：12.7 厘米，容量：3.1 升,商品大类：厨房用品；细分类：带盖珐琅铸铁炖锅；颜色：灰色；材质：珐琅铸铁,AmazonBasics,灰色,珐琅铸铁,data/processed_data_cleaning/厨房用品/images/B0813ZQ6VD__81gXCbEYdwL.jpg,ok,2560,2560,带盖珐琅铸铁炖锅
+B088JV451X,厨房用品,AmazonBasics 不锈钢电动咖啡豆研磨机（翻新机）,商品大类：厨房用品；细分类：电动咖啡豆研磨机；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B088JV451X__61ll1EmDp+L.jpg,ok,1532,1532,电动咖啡豆研磨机
+B07GWWF9MF,厨房用品,亚马逊品牌 - Solimo 无石榴石不锈钢炖锅，12 厘米，白色（小号，1 升）,商品大类：厨房用品；细分类：单柄炖锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07GWWF9MF__7102K-CixfL.jpg,ok,1710,2560,单柄炖锅
+B07P7W8NK1,厨房用品,亚马逊自有品牌 - Solimo 不粘煎锅（24 厘米，双层涂层，厚度 2 毫米）,商品大类：厨房用品；细分类：不粘煎锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P7W8NK1__71ocx+NrzDL.jpg,ok,1380,2560,不粘煎锅
+B07YCC2VTH,厨房用品,AmazonBasics 带触控面板的电磁炉 - 2000 瓦,商品大类：厨房用品；细分类：电磁炉；颜色：黑色；材质：玻璃,AmazonBasics,黑色,玻璃,data/processed_data_cleaning/厨房用品/images/B07YCC2VTH__71LhdPSKijL.jpg,ok,2560,2560,电磁炉
+B07VXVYZQB,厨房用品,AmazonBasics 亚马逊倍思 软手柄 灰色和绿色,商品大类：厨房用品；细分类：厨房铲勺套装；颜色：黑色；材质：塑料,AmazonBasics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07VXVYZQB__81Oz9J09rUL.jpg,ok,2560,2560,厨房铲勺套装
+B07YCCX789,厨房用品,AmazonBasics 1900瓦电磁炉,商品大类：厨房用品；细分类：电磁炉；颜色：黑色；材质：玻璃,AmazonBasics,黑色,玻璃,data/processed_data_cleaning/厨房用品/images/B07YCCX789__81FyDeDJ-qL.jpg,ok,2560,2560,电磁炉
+B07WS7YWCF,厨房用品,Stone & Beam 6件装反应釉餐碗,商品大类：厨房用品；细分类：餐盘；颜色：白色；材质：未识别,Stone & Beam,白色,,data/processed_data_cleaning/厨房用品/images/B07WS7YWCF__71swD+YSgxL.jpg,ok,2096,2560,餐盘
+B07ZXM1B7M,厨房用品,(焕新版) AmazonBasics 18件装餐具套装 - 柔美线条,商品大类：厨房用品；细分类：餐具套装；颜色：白色、蓝色、黑色；材质：未识别,AmazonBasics,白色、蓝色、黑色,,data/processed_data_cleaning/厨房用品/images/B07ZXM1B7M__51bZ4xREiBL.jpg,ok,1000,1000,餐具套装
+B000GHVNAS,厨房用品,Pinzon 5件装碗具套装,商品大类：厨房用品；细分类：玻璃碗具套装；颜色：透明；材质：玻璃,未知,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B000GHVNAS__414HN6M09SL.jpg,ok,469,500,玻璃碗具套装
+B07BL7HHRP,厨房用品,Stone & Beam 传统炊具，带盖，不锈钢,商品大类：厨房用品；细分类：带盖炖锅；颜色：银色；材质：不锈钢,Stone & Beam,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07BL7HHRP__71gya6WcZOL.jpg,ok,2560,2560,带盖炖锅
+B08BK5CZHH,厨房用品,AmazonBasics 尼龙土豆压泥器，软握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：土豆压泥器；颜色：绿色；材质：尼龙,AmazonBasics,绿色,尼龙,data/processed_data_cleaning/厨房用品/images/B08BK5CZHH__71nTUUC6WRL.jpg,ok,2560,2560,土豆压泥器
+B08B5JV8M5,厨房用品,(翻新) AmazonBasics 不锈钢餐叉（边缘呈珍珠纹），12支装,商品大类：厨房用品；细分类：餐叉；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08B5JV8M5__51fYnR0JHhL.jpg,ok,978,1000,餐叉
+B07HKF2V17,厨房用品,Eono by Amazon 不锈钢小号电磁炉专用炖锅，配有钢化玻璃盖，适用于各种炉灶、烤箱和洗碗机，非常适合加热牛奶，16 厘米，1.5 升，NG-1610,商品大类：厨房用品；细分类：炖锅；颜色：银色；材质：不锈钢,Eono,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07HKF2V17__61TjH7YeksL.jpg,ok,1500,1500,炖锅
+B079YFGSXQ,厨房用品,亚马逊自有品牌 – Solimo 优质高碳不锈钢三德刀，黑色,商品大类：厨房用品；细分类：三德刀；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B079YFGSXQ__71ZCT-sFxVL.jpg,ok,2560,1707,三德刀
+B07SYTRPSG,厨房用品,"AmazonBasics 亚马逊倍思 电动咖啡豆研磨机, 亮灰色",商品大类：厨房用品；细分类：电动咖啡豆研磨机；颜色：黑色；材质：塑料,AmazonBasics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07SYTRPSG__611JVbDD6xL.jpg,ok,1532,1532,电动咖啡豆研磨机
+B07Y3KFY5Q,厨房用品,AmazonBasics - 1.5升不锈钢锅，带盖,商品大类：厨房用品；细分类：不锈钢汤锅；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07Y3KFY5Q__71bEMn5wU-L.jpg,ok,2450,2560,不锈钢汤锅
+B013R5URG6,厨房用品,AmazonBasics 烤面包机，功率：850 W，拉丝不锈钢 不锈钢烤面包机,商品大类：厨房用品；细分类：烤面包机；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B013R5URG6__61msK1hpo5L.jpg,ok,1261,1500,烤面包机
+B0825FKPXQ,厨房用品,AmazonBasics – 电热水壶,商品大类：厨房用品；细分类：电热水壶；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0825FKPXQ__71v7CsWU8GL.jpg,ok,2166,2166,电热水壶
+B000G1Y8LK,厨房用品,Pinzon Bloody Mary 套装,商品大类：厨房用品；细分类：鸡尾酒玻璃酒具套装；颜色：透明；材质：玻璃,亚马逊旗下的Pinzon,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B000G1Y8LK__511N0HPZJQL.jpg,ok,476,500,鸡尾酒玻璃酒具套装
+B07XP35FPL,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 铜壶（素面款，1750毫升）,商品大类：厨房用品；细分类：带盖铜壶；颜色：未识别；材质：铜,亚马逊品牌——Solimo,,铜,data/processed_data_cleaning/厨房用品/images/B07XP35FPL__51Xe6w8XMfL.jpg,ok,1000,1000,带盖铜壶
+B086DQSY9J,厨房用品,AmazonBasics - 保护套，软握柄，灰色和绿色（翻新），锯齿削皮器，1,商品大类：厨房用品；细分类：锯齿削皮器；颜色：黑色；材质：塑料,Amazon Basics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B086DQSY9J__61vURvpRB-L.jpg,ok,1856,1856,锯齿削皮器
+B081575QDG,厨房用品,AmazonBasics Solo 台式微波炉，20升，700瓦 - 白色,商品大类：厨房用品；细分类：台式微波炉；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B081575QDG__711Dw-jemRL.jpg,ok,2271,2271,台式微波炉
+B07P5SWTBX,厨房用品,亚马逊自有品牌 – Solimo 硬质阳极氧化炖锅（配贝克莱特手柄）（14 厘米，900 毫升）,商品大类：厨房用品；细分类：炖锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P5SWTBX__61HKSetCtzL.jpg,ok,1150,1928,炖锅
+B07YT18P21,厨房用品,AmazonBasics - 带过滤器的水壶（10杯容量）,商品大类：厨房用品；细分类：滤水壶；颜色：白色；材质：塑料,AmazonBasics,白色,塑料,data/processed_data_cleaning/厨房用品/images/B07YT18P21__71oxAUe02WL.jpg,ok,2560,1996,滤水壶
+B07Z4Y63MT,厨房用品,AmazonBasics - 双层金属丝水果篮,商品大类：厨房用品；细分类：双层金属水果篮；颜色：银色；材质：金属,AmazonBasics,银色,金属,data/processed_data_cleaning/厨房用品/images/B07Z4Y63MT__81Y0rL2a5WL.jpg,ok,2560,2560,双层金属水果篮
+B07GX6LYZP,厨房用品,"亚马逊品牌 - Solimo 无柄小号不锈钢 酱汁锅 (15.5 cm, 1.1 L)，标准款，白色",商品大类：厨房用品；细分类：酱汁锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07GX6LYZP__51tKlFNiPfL.jpg,ok,1500,1500,酱汁锅
+B000UD4ZGC,厨房用品,Pinzon – 量勺套装,商品大类：厨房用品；细分类：量勺套装；颜色：黑色；材质：不锈钢,亚马逊旗下的Pinzon,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000UD4ZGC__911XuNn0WfS.jpg,ok,2262,2326,量勺套装
+B07TMHKV74,厨房用品,AmazonBasics – 不锈钢雪铲套装，灰色，3件装,商品大类：厨房用品；细分类：手动打蛋器套装；颜色：灰色；材质：塑料,AmazonBasics,灰色,塑料,data/processed_data_cleaning/厨房用品/images/B07TMHKV74__81QiauSTQzL.jpg,ok,2560,2560,手动打蛋器套装
+B07P7W7P45,厨房用品,亚马逊自有品牌 - Solimo 蜂窝纹不粘平底锅 (28厘米，4层涂层),商品大类：厨房用品；细分类：不粘平底锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P7W7P45__81GEI20kOML.jpg,ok,1028,2560,不粘平底锅
+B083ZKB7VZ,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 优质高碳不锈钢小号可拆卸厨房剪刀套装，2件装，银色,商品大类：厨房用品；细分类：厨房剪刀；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B083ZKB7VZ__61EUNyTRkOL.jpg,ok,1000,1000,厨房剪刀
+B07ZQP2H2Z,厨房用品,(翻新) AmazonBasics 18件装餐具套装 - 白色瓷器带镶边,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：瓷器,AmazonBasics,白色,瓷器,data/processed_data_cleaning/厨房用品/images/B07ZQP2H2Z__51zNeZ0r5sL.jpg,ok,1000,1000,餐具套装
+B07LFT4L2B,厨房用品,AmazonBasics 塑料带锁食品保鲜盒，24件套,商品大类：厨房用品；细分类：食品保鲜盒套装；颜色：蓝色；材质：塑料,Amazon Basics,蓝色,塑料,data/processed_data_cleaning/厨房用品/images/B07LFT4L2B__81ELZwryvZL.jpg,ok,2560,2560,食品保鲜盒套装
+B07ZR4GWYK,厨房用品,Umi. 沙拉碗 防漏便当盒，带大容量沙拉搅拌碗、三格便当式托盘、调味料盒、可重复使用餐具，不含BPA，1700毫升（粉蓝色）,商品大类：厨房用品；细分类：沙拉便当盒；颜色：蓝色；材质：塑料,UMI,蓝色,塑料,data/processed_data_cleaning/厨房用品/images/B07ZR4GWYK__51Bp3iXSE0L.jpg,ok,1000,1200,沙拉便当盒
+B07PC7D78B,厨房用品,亚马逊自有品牌 – Solimo 硬质阳极氧化塔德卡平底锅（11 厘米）,商品大类：厨房用品；细分类：平底锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07PC7D78B__61AeQFqXIXL.jpg,ok,1040,2560,平底锅
+B07BLCDMJJ,厨房用品,亚马逊品牌 - Stone & Beam 三层不锈钢汤锅，12 夸脱,商品大类：厨房用品；细分类：汤锅；颜色：银色；材质：不锈钢,Stone & Beam,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07BLCDMJJ__81Mw1ky7NgL.jpg,ok,2560,2560,汤锅
+B07PCD6GDM,厨房用品,亚马逊品牌 - Solimo 可拆卸式蔬菜切片器 (ABS+ 不锈钢),商品大类：厨房用品；细分类：蔬菜切片器；颜色：绿色、银色、黑色；材质：不锈钢,亚马逊品牌——Solimo,绿色、银色、黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PCD6GDM__717QX9HlRiL.jpg,ok,2560,1049,蔬菜切片器
+B000K8H8YI,厨房用品,Pinzon Garden 系列餐桌餐盘,商品大类：厨房用品；细分类：餐盘；颜色：白色；材质：陶瓷,未知,白色,陶瓷,data/processed_data_cleaning/厨房用品/images/B000K8H8YI__51vfQu0ic9L.jpg,ok,500,500,餐盘
+B01FGT3PRO,厨房用品,AmazonBasics 三件套竹制砧板套装,商品大类：厨房用品；细分类：竹制砧板套装；颜色：未识别；材质：竹子,AmazonBasics,,竹子,data/processed_data_cleaning/厨房用品/images/B01FGT3PRO__91fpVsCu+OL.jpg,ok,2560,2194,竹制砧板套装
+B07W35GP6C,厨房用品,AmazonBasics 不锈钢刀片，软胶握柄，灰色和绿色,商品大类：厨房用品；细分类：刨丝器；颜色：黑色、银色；材质：不锈钢,AmazonBasics,黑色、银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07W35GP6C__714m3A30kzL.jpg,ok,2560,2560,刨丝器
+B07Z65HQG8,厨房用品,AmazonBasics 不锈钢便携式快速电热水壶，适用于冲泡茶和咖啡,商品大类：厨房用品；细分类：电热水壶；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07Z65HQG8__71VtYAoa5mL.jpg,ok,2528,2528,电热水壶
+B082FLN1JJ,厨房用品,AmazonBasics 电饭煲 1 L (500 W) 灰色,商品大类：厨房用品；细分类：电饭煲；颜色：白色；材质：塑料,AmazonBasics,白色,塑料,data/processed_data_cleaning/厨房用品/images/B082FLN1JJ__51QPu1sV7HL.jpg,ok,1400,1400,电饭煲
+B001CGJ0OS,厨房用品,Pinzon 白色浴室地垫 陶瓷黄油罐 [亚马逊无忧包装],商品大类：厨房用品；细分类：陶瓷黄油罐；颜色：白色；材质：陶瓷,亚马逊旗下的Pinzon,白色,陶瓷,data/processed_data_cleaning/厨房用品/images/B001CGJ0OS__81UIRkNjWsS.jpg,ok,1714,1964,陶瓷黄油罐
+B07R6P6N5Y,厨房用品,AmazonBasics 带锁玻璃食品储存盒,商品大类：厨房用品；细分类：玻璃食品储存盒；颜色：蓝色；材质：玻璃,AmazonBasics,蓝色,玻璃,data/processed_data_cleaning/厨房用品/images/B07R6P6N5Y__81SYWl+N1qL.jpg,ok,1352,2560,玻璃食品储存盒
+B07FRW4XTV,厨房用品,Umi 红酒杯 无铅 15盎司 2只装 透明长水晶菱形杯脚 - 生日、周年纪念或婚礼礼物,商品大类：厨房用品；细分类：红酒杯；颜色：透明；材质：玻璃,UMI,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B07FRW4XTV__61WIz2zgEhL.jpg,ok,1001,1001,红酒杯
+B08BVNDMCP,厨房用品,亚马逊自有品牌 - Solimo 餐具套装，14件装,商品大类：厨房用品；细分类：餐具套装；颜色：白色、黑色；材质：陶瓷,亚马逊旗下品牌 Solimo,白色、黑色,陶瓷,data/processed_data_cleaning/厨房用品/images/B08BVNDMCP__91MauGEQKUL.jpg,ok,1655,2560,餐具套装
+B07VYYVQ63,厨房用品,AmazonBasics - 直刀式削皮器，带保护盖和柔软手柄，灰色和绿色,商品大类：厨房用品；细分类：直刀式削皮器；颜色：绿色；材质：塑料,AmazonBasics,绿色,塑料,data/processed_data_cleaning/厨房用品/images/B07VYYVQ63__71OfIZg3jnL.jpg,ok,2309,2309,直刀式削皮器
+B07ZVK5GW1,厨房用品,AmazonBasics 不锈钢保温水壶（带饮水口壶盖）——20盎司，青绿色,商品大类：厨房用品；细分类：不锈钢保温水壶；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07ZVK5GW1__71UZhoi1MpL.jpg,ok,2560,2560,不锈钢保温水壶
+B07WLZVX45,厨房用品,Stone & Beam 三层不锈钢厨具套装，锅具和煎锅，12件装（翻新），不锈钢，1.5夸脱，3夸脱，8英寸，10英寸，8夸脱，1,商品大类：厨房用品；细分类：锅具套装；颜色：银色；材质：不锈钢,Stone & Beam,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07WLZVX45__71pIVgMbJZL.jpg,ok,2560,2560,锅具套装
+B07P8ZW53N,厨房用品,亚马逊自有品牌 – Solimo 硬质阳极氧化烤肉平底锅，配 Bakelite 线材手柄（25 厘米，4 毫米厚）,商品大类：厨房用品；细分类：烤肉平底锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P8ZW53N__71kpJpTlqTL.jpg,ok,1548,2560,烤肉平底锅
+B0725GYNG6,厨房用品,AmazonBasics - 硅胶烤盘垫，2件套,商品大类：厨房用品；细分类：硅胶烤盘垫；颜色：灰色；材质：硅胶,AmazonBasics,灰色,硅胶,data/processed_data_cleaning/厨房用品/images/B0725GYNG6__81IC5+bWDgL.jpg,ok,1117,1500,硅胶烤盘垫
+B001D8RP6K,厨房用品,Pinzon 圆形竹制砧板，带半月形切菜槽,商品大类：厨房用品；细分类：圆形砧板；颜色：未识别；材质：竹,亚马逊旗下的Pinzon,,竹,data/processed_data_cleaning/厨房用品/images/B001D8RP6K__91agtlceTlS.jpg,ok,2113,2500,圆形砧板
+B085T18FGM,厨房用品,(焕新版) AmazonBasics 18件装餐具套装 - 现代横梁系列,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B085T18FGM__51DdgynrtnL.jpg,ok,1000,1000,餐具套装
+B08622SG76,厨房用品,UMI. by Amazon 带2层玻璃搁板的酒吧推车，带脚轮的耐用饮品服务推车，适用于厨房、俱乐部、客厅，仿古金色饰面（77x44x80 厘米）,商品大类：厨房用品；细分类：酒水服务推车；颜色：金色；材质：玻璃,UMI,金色,玻璃,data/processed_data_cleaning/厨房用品/images/B08622SG76__61zzA4xRwHL.jpg,ok,1500,1266,酒水服务推车
+B08BXPQQHT,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 不粘迷你烤盘,商品大类：厨房用品；细分类：迷你烤盘；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B08BXPQQHT__51STUp0peaL.jpg,ok,535,1000,迷你烤盘
+B0736V2XS2,厨房用品,AmazonBasics 圆边不锈钢餐刀，12 把装,商品大类：厨房用品；细分类：餐刀；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0736V2XS2__71aSQjqG5FL.jpg,ok,2387,2560,餐刀
+B07HCJPP17,厨房用品,亚马逊自有品牌 – Solimo 带翻盖塑料水瓶套装（3件装，1升，圆形图案）,商品大类：厨房用品；细分类：塑料水瓶套装；颜色：黄色、黑色、蓝色；材质：塑料,亚马逊品牌——Solimo,黄色、黑色、蓝色,塑料,data/processed_data_cleaning/厨房用品/images/B07HCJPP17__919LbYYLuQL.jpg,ok,2560,2521,塑料水瓶套装
+B000K8HHXA,厨房用品,Pinzon 做旧系列 餐盘,商品大类：厨房用品；细分类：餐盘；颜色：棕色；材质：未识别,亚马逊旗下的Pinzon,棕色,,data/processed_data_cleaning/厨房用品/images/B000K8HHXA__51ipfSnJ-KL.jpg,ok,499,500,餐盘
+B07PWGVHYB,厨房用品,亚马逊自有品牌 - Solimo 优质不锈钢 20 厘米带盖荷兰锅,商品大类：厨房用品；细分类：带盖荷兰锅；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07PWGVHYB__71L7uQ1BHDL.jpg,ok,1947,1947,带盖荷兰锅
+B07VVQMGL5,厨房用品,AmazonBasics - 17件套工具及小工具套装，黑色,商品大类：厨房用品；细分类：厨房工具套装；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07VVQMGL5__81wZhVClE0L.jpg,ok,2560,2560,厨房工具套装
+B07P5SYL2M,厨房用品,亚马逊自有品牌 – Solimo 不粘煎锅（28 厘米，双层涂层，厚度 2 毫米）,商品大类：厨房用品；细分类：不粘煎锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P5SYL2M__71ywJ7iUD0L.jpg,ok,1636,2560,不粘煎锅
+B08B523DP2,厨房用品,AmazonBasics 直刃Y型削皮器，带保护盖，软胶握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：Y型削皮器；颜色：黑色、绿色；材质：塑料,AmazonBasics,黑色、绿色,塑料,data/processed_data_cleaning/厨房用品/images/B08B523DP2__71F9RsMDeEL.jpg,ok,2309,2309,Y型削皮器
+B0885XLQKH,厨房用品,AmazonBasics 三件套削皮器套装，软握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：削皮器套装；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0885XLQKH__71HcdfV2xgL.jpg,ok,2489,2489,削皮器套装
+B000FUM4Z4,厨房用品,strathwood 锻造不锈钢和 bakelite 3件套烧烤工具套装,商品大类：厨房用品；细分类：烧烤工具套装；颜色：黑色；材质：不锈钢,Strathwood by Amazon.com,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000FUM4Z4__41WAwgTe5uL.jpg,ok,443,500,烧烤工具套装
+B07W35Q968,厨房用品,AmazonBasics 四面不锈钢盒式刨丝器（带收纳盒），9英寸,商品大类：厨房用品；细分类：四面盒式刨丝器；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07W35Q968__71kv4vnzwRL.jpg,ok,2478,2478,四面盒式刨丝器
+B07ZQWLXLW,厨房用品,AmazonBasics 一次性餐盘，环保可堆肥且可生物降解，25 x 13 厘米，250 片装,商品大类：厨房用品；细分类：一次性餐盘；颜色：白色；材质：可堆肥生物降解材料,AmazonBasics,白色,可堆肥生物降解材料,data/processed_data_cleaning/厨房用品/images/B07ZQWLXLW__6156Wdjk3uL.jpg,ok,2140,2140,一次性餐盘
+B000FUIYXA,厨房用品,Strathwood 锻造不锈钢 4 件装烧烤工具套装,商品大类：厨房用品；细分类：烧烤工具套装；颜色：银色；材质：不锈钢,Strathwood by Amazon.com,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000FUIYXA__41JhwN4MT5L.jpg,ok,398,500,烧烤工具套装
+B089DTY7YM,厨房用品,(翻新) AmazonBasics 炊具手柄,商品大类：厨房用品；细分类：炊具手柄；颜色：黑色；材质：塑料,AmazonBasics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B089DTY7YM__51vieiO6pmL.jpg,ok,1000,1000,炊具手柄
+B000WI9CTA,厨房用品,falksson 闪粉派对蛋糕架 25 厘米,商品大类：厨房用品；细分类：带把手烤盘；颜色：红色；材质：金属,Strathwood by Amazon.com,红色,金属,data/processed_data_cleaning/厨房用品/images/B000WI9CTA__814m33YFSQS.jpg,ok,1992,2500,带把手烤盘
+B0898BY79B,厨房用品,AmazonBasics 12件装美耐皿餐具套装——4人份，水彩花卉图案,商品大类：厨房用品；细分类：美耐皿餐具套装；颜色：白色、红色、绿色；材质：美耐皿,AmazonBasics,白色、红色、绿色,美耐皿,data/processed_data_cleaning/厨房用品/images/B0898BY79B__91U2HbsmVIL.jpg,ok,2560,2560,美耐皿餐具套装
+B07DBLVYTH,厨房用品,EONO 软质保温冷藏包，保温旅行冷藏包,商品大类：厨房用品；细分类：保温冷藏包；颜色：棕色、多色；材质：纺织布料,Eono,棕色、多色,纺织布料,data/processed_data_cleaning/厨房用品/images/B07DBLVYTH__81cUbvavDwL.jpg,ok,1500,1500,保温冷藏包
+B07RTC91RJ,厨房用品,Luby HAG102 - 电动烤架（大号）,商品大类：厨房用品；细分类：电动烤架；颜色：黑色；材质：未识别,LUBY,黑色,,data/processed_data_cleaning/厨房用品/images/B07RTC91RJ__51gU8vvnALL.jpg,ok,802,1321,电动烤架
+B07FSLLJXV,厨房用品,Eono 2卷保鲜膜，专业级坚固封口膜卷，尺寸20x500厘米，适用于所有需冷藏的熟食，兼容真空烹饪机/保鲜膜封口机/真空封口机,商品大类：厨房用品；细分类：真空封口袋卷；颜色：白色；材质：塑料,Eono,白色,塑料,data/processed_data_cleaning/厨房用品/images/B07FSLLJXV__81lEB1wlCvL.jpg,ok,1296,1482,真空封口袋卷
+B001CGMKA4,厨房用品,Pinzon 5-9-Inch 意面机,商品大类：厨房用品；细分类：手动意面机；颜色：银色、棕色；材质：未识别,亚马逊旗下的Pinzon,银色、棕色,,data/processed_data_cleaning/厨房用品/images/B001CGMKA4__91ojbFRSroL.jpg,ok,2144,2506,手动意面机
+B07VQP8PN3,厨房用品,AmazonBasics 1200瓦多档台式搅拌机，50盎司,商品大类：厨房用品；细分类：台式搅拌机；颜色：黑色、银色、透明；材质：塑料,AmazonBasics,黑色、银色、透明,塑料,data/processed_data_cleaning/厨房用品/images/B07VQP8PN3__71nPwsBixRL.jpg,ok,2560,2560,台式搅拌机
+B07FY8MBGG,厨房用品,亚马逊自有品牌 - Solimo 倒油器（700毫升），蓝色,商品大类：厨房用品；细分类：倒油器；颜色：蓝色；材质：塑料,亚马逊品牌——Solimo,蓝色,塑料,data/processed_data_cleaning/厨房用品/images/B07FY8MBGG__71h3dI0zSAL.jpg,ok,2560,1108,倒油器
+B07P6R7KWT,厨房用品,亚马逊品牌 Solimo - 防滑防滑鞋垫 (16 厘米，2 片，2 毫米厚),商品大类：厨房用品；细分类：平底锅；颜色：黑色；材质：金属,亚马逊品牌——Solimo,黑色,金属,data/processed_data_cleaning/厨房用品/images/B07P6R7KWT__71trQqMkV2L.jpg,ok,2374,2560,平底锅
+B07ZTFRVTT,厨房用品,威士忌杯（340 毫升）（6 只装）……,商品大类：厨房用品；细分类：威士忌杯；颜色：透明；材质：玻璃,UMI,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B07ZTFRVTT__01sUPg0387L.jpg,ok,111,111,威士忌杯
+B07VYYT1MM,厨房用品,AmazonBasics - 不锈钢厨具套装，2件装，1,商品大类：厨房用品；细分类：厨房夹；颜色：黑色；材质：不锈钢,Amazon Basics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07VYYT1MM__61VM4dPiioL.jpg,ok,1768,1768,厨房夹
+B07ZQW9YF5,厨房用品,AmazonBasics 一次性食品样品杯，环保可堆肥且可生物降解，59 毫升，500 个装,商品大类：厨房用品；细分类：一次性食品样品杯；颜色：白色；材质：可堆肥纸浆材质,AmazonBasics,白色,可堆肥纸浆材质,data/processed_data_cleaning/厨房用品/images/B07ZQW9YF5__51q-8lsWjXL.jpg,ok,946,1167,一次性食品样品杯
+B081B2DY7C,厨房用品,AmazonBasics 3升电动深炸锅，不锈钢材质,商品大类：厨房用品；细分类：电动深炸锅；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B081B2DY7C__81LszvSQsfL.jpg,ok,2560,2560,电动深炸锅
+B07SVY4C5M,厨房用品,Umi. Essentials 冰淇淋机、冰淇淋制作机、冰淇淋制作器、酸奶机、冷冻冰淇淋制作机，150W / 1.5L / 不锈钢 / LCD 显示屏 / 定时器,商品大类：厨房用品；细分类：冰淇淋机；颜色：黑色；材质：不锈钢,UMI,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07SVY4C5M__611sBTjTQPL.jpg,ok,1200,1200,冰淇淋机
+B0813Z3YPJ,厨房用品,AmazonBasics – 凿纹铸铁炖锅 SX-33QTSL，带盖，容量 3.1 升，直径 31.4 厘米，长 38 厘米，高 12.7 厘米，海军蓝,商品大类：厨房用品；细分类：铸铁炖锅；颜色：蓝色；材质：铸铁,AmazonBasics,蓝色,铸铁,data/processed_data_cleaning/厨房用品/images/B0813Z3YPJ__710YAzgAwBL.jpg,ok,2472,2472,铸铁炖锅
+B0813ZYMK5,厨房用品,AmazonBasics 珐琅铸铁带盖平底锅 - 3 L，浅粉色,商品大类：厨房用品；细分类：带盖平底锅；颜色：粉色；材质：珐琅铸铁,Amazon Basics,粉色,珐琅铸铁,data/processed_data_cleaning/厨房用品/images/B0813ZYMK5__71v433F5SFL.jpg,ok,2560,2560,带盖平底锅
+B08BVJZRT2,厨房用品,亚马逊自有品牌 - Solimo 晚餐盘套装，4件装,商品大类：厨房用品；细分类：餐盘套装；颜色：白色；材质：陶瓷,亚马逊旗下品牌 Solimo,白色,陶瓷,data/processed_data_cleaning/厨房用品/images/B08BVJZRT2__71btJeRz+NL.jpg,ok,2560,2213,餐盘套装
+B07Y2W6F66,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 塑料收纳盒套装，300毫升，3件装，多色款,商品大类：厨房用品；细分类：塑料收纳盒套装；颜色：黄色、红色、蓝色；材质：塑料,亚马逊品牌——Solimo,黄色、红色、蓝色,塑料,data/processed_data_cleaning/厨房用品/images/B07Y2W6F66__51CdCze53sL.jpg,ok,1000,1000,塑料收纳盒套装
+B08C5JZR8J,厨房用品,AmazonBasics 带保护盖的Y型切丝削皮器，软胶握柄，灰色和绿色（翻新商品）,商品大类：厨房用品；细分类：削皮器；颜色：黑色、绿色；材质：塑料,AmazonBasics,黑色、绿色,塑料,data/processed_data_cleaning/厨房用品/images/B08C5JZR8J__71h9xUZmKIL.jpg,ok,2335,2335,削皮器
+B08989KYNV,厨房用品,AmazonBasics 大号 19 英寸带手柄餐盘 - 刺槐木哑光纹理,商品大类：厨房用品；细分类：带手柄木质餐盘；颜色：棕色；材质：刺槐木,AmazonBasics,棕色,刺槐木,data/processed_data_cleaning/厨房用品/images/B08989KYNV__817LWMJb6fL.jpg,ok,2560,2560,带手柄木质餐盘
+B01BHNJYUK,厨房用品,亚马逊自有品牌 - Solimo 亚马逊自有品牌不锈钢保温杯，500毫升，银色,商品大类：厨房用品；细分类：不锈钢保温杯；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B01BHNJYUK__81e2eWBgYuL.jpg,ok,2374,1782,不锈钢保温杯
+B07ZPKCTVL,厨房用品,Stone & Beam 三层不锈钢汤锅，12夸脱（翻新）,商品大类：厨房用品；细分类：汤锅；颜色：银色；材质：不锈钢,Stone & Beam,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07ZPKCTVL__71w9KCJezYL.jpg,ok,2560,2560,汤锅
+B07RJMVB17,厨房用品,传统石制梁形炖锅（翻新）。3-Quart 不锈钢,商品大类：厨房用品；细分类：带盖炖锅；颜色：银色；材质：不锈钢,Stone & Beam,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07RJMVB17__71b96ZCNTuL.jpg,ok,2560,2560,带盖炖锅
+B0736TYSVN,厨房用品,AmazonBasics – 不锈钢餐刀，锯齿刃，银色，1,商品大类：厨房用品；细分类：餐刀；颜色：银色；材质：不锈钢,Amazon Basics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0736TYSVN__71HvaoH1-rL.jpg,ok,2175,2560,餐刀
+B07QKP8PCR,厨房用品,AmazonBasics 沥水垫 - 41 x 48 厘米 - 米色，4件装,商品大类：厨房用品；细分类：沥水垫；颜色：米色；材质：未识别,AmazonBasics,米色,,data/processed_data_cleaning/厨房用品/images/B07QKP8PCR__71tjWAJ8k4L.jpg,ok,2560,2560,沥水垫
+B000M556W0,厨房用品,Strathwood – 盐罐和胡椒罐,商品大类：厨房用品；细分类：盐胡椒罐；颜色：银色；材质：不锈钢,Strathwood by Amazon.com,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000M556W0__311A+e7-GcL.jpg,ok,266,500,盐胡椒罐
+B08BG91C98,厨房用品,(焕新版) AmazonBasics 方形边缘不锈钢餐勺，12支装,商品大类：厨房用品；细分类：餐勺；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08BG91C98__41WiRs16EiL.jpg,ok,638,1000,餐勺
+B08FJFV1SR,厨房用品,(焕新版) AmazonBasics Elite 750W 搅拌机，附3个不锈钢搅拌杯+1个榨汁杯,商品大类：厨房用品；细分类：搅拌机；颜色：白色、银色、黑色；材质：不锈钢,AmazonBasics,白色、银色、黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08FJFV1SR__51W9bUMqKTL.jpg,ok,975,1000,搅拌机
+B01ABXUNQQ,厨房用品,亚马逊自有品牌 - Solimo 不粘锅两件套；平底锅（25厘米）和卡达伊锅（24厘米/2升） - 适用于电磁炉和燃气灶,商品大类：厨房用品；细分类：不粘锅具套装；颜色：黑色；材质：玻璃,亚马逊品牌——Solimo,黑色,玻璃,data/processed_data_cleaning/厨房用品/images/B01ABXUNQQ__71faJH8FcWL.jpg,ok,1604,2560,不粘锅具套装
+B0899GGD98,厨房用品,(焕新版) AmazonBasics 18件装石质餐具套装 - 薄荷绿，6人份,商品大类：厨房用品；细分类：餐具套装；颜色：绿色；材质：石质,AmazonBasics,绿色,石质,data/processed_data_cleaning/厨房用品/images/B0899GGD98__51eyMwYgcHL.jpg,ok,1000,1000,餐具套装
+B08F37941Q,厨房用品,AmazonBasics 带保护盖锯齿形Y型削皮器，软胶握柄，灰色和绿色（翻新）,商品大类：厨房用品；细分类：Y型削皮器；颜色：黑色；材质：塑料,AmazonBasics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B08F37941Q__71jorSHpFhL.jpg,ok,2216,2216,Y型削皮器
+B01NAFTXS0,厨房用品,AmazonBasics 2.3升过滤水壶，附4支过滤芯套装（3支+1支赠品），兼容Brita Maxtra®水壶（不兼容Maxtra+®）,商品大类：厨房用品；细分类：过滤水壶；颜色：透明、黑色；材质：塑料,AmazonBasics,透明、黑色,塑料,data/processed_data_cleaning/厨房用品/images/B01NAFTXS0__31ndOROyJmL.jpg,ok,500,500,过滤水壶
+B07H2XZ2J2,厨房用品,亚马逊自有品牌 – Solimo 铜制水壶（锤纹款，700 毫升）,商品大类：厨房用品；细分类：铜制水壶；颜色：未识别；材质：铜,亚马逊品牌——Solimo,,铜,data/processed_data_cleaning/厨房用品/images/B07H2XZ2J2__71C8SJKlxhL.jpg,ok,2000,2000,铜制水壶
+B07Y4TSKLW,厨房用品,AmazonBasics 塑料晾衣架（带晾衣垫）,商品大类：厨房用品；细分类：沥水架和晾碗垫套装；颜色：黑色；材质：塑料,AmazonBasics,黑色,塑料,data/processed_data_cleaning/厨房用品/images/B07Y4TSKLW__81WTGB6TbTL.jpg,ok,2560,2560,沥水架和晾碗垫套装
+B074817DK1,厨房用品,AmazonBasics – 带防粘涂层的烹饪锅具套装 8件装,商品大类：厨房用品；细分类：不粘锅具套装；颜色：黑色；材质：带防粘涂层,AmazonBasics,黑色,带防粘涂层,data/processed_data_cleaning/厨房用品/images/B074817DK1__715qOOqdKNL.jpg,ok,1107,1500,不粘锅具套装
+B07HJ2L3NV,厨房用品,亚马逊自有品牌 – Solimo 16件装餐具套装（线条设计）,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：未识别,亚马逊品牌——Solimo,白色,,data/processed_data_cleaning/厨房用品/images/B07HJ2L3NV__812acfppQ2L.jpg,ok,2027,2560,餐具套装
+B07Z4XPDYM,厨房用品,AmazonBasics 金属丝水果篮。,商品大类：厨房用品；细分类：水果篮；颜色：银色；材质：金属,AmazonBasics,银色,金属,data/processed_data_cleaning/厨房用品/images/B07Z4XPDYM__71uWG7wj6FL.jpg,ok,2256,2256,水果篮
+B082FZYT9V,厨房用品,(翻新) AmazonBrand - Solimo 塑料便当盒套装，290 毫升，3 件装，蓝色,商品大类：厨房用品；细分类：塑料便当盒套装；颜色：白色；材质：塑料,亚马逊品牌——Solimo,白色,塑料,data/processed_data_cleaning/厨房用品/images/B082FZYT9V__61juRt4x7HL.jpg,ok,1000,1000,塑料便当盒套装
+B08989DBYJ,厨房用品,AmazonBasics - 美耐皿餐具套装（12件，4人份），餐具，做旧灰色裂纹纹理，10 1/2英寸，8 9/16英寸，6英寸，1,商品大类：厨房用品；细分类：餐具套装；颜色：灰色、白色、金色；材质：美耐皿,Amazon Basics,灰色、白色、金色,美耐皿,data/processed_data_cleaning/厨房用品/images/B08989DBYJ__91EtOhDrs3L.jpg,ok,2560,2560,餐具套装
+B01ABXUNPC,厨房用品,亚马逊自有品牌 - Solimo 不粘锅 2 件套；平底锅（25 厘米）和煎锅（24 厘米/1.7 升） - 适用于电磁炉和燃气灶,商品大类：厨房用品；细分类：不粘锅套装；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B01ABXUNPC__81xHpkV0sNL.jpg,ok,1630,2560,不粘锅套装
+B000UD4LES,厨房用品,Pike Street 17-工具及配件套装,商品大类：厨房用品；细分类：厨房工具套装；颜色：银色、红色；材质：不锈钢,亚马逊旗下的Pinzon,银色、红色,不锈钢,data/processed_data_cleaning/厨房用品/images/B000UD4LES__81iCQy4lGzS.jpg,ok,2071,2500,厨房工具套装
+B076HS68WW,厨房用品,AmazonBasics 12件装不锈钢炊具套装,商品大类：厨房用品；细分类：不锈钢炊具套装；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B076HS68WW__81BApxvF9iL.jpg,ok,2030,2560,不锈钢炊具套装
+B07JVNJL2J,厨房用品,亚马逊自有品牌 – Solimo Nia 高脚杯套装，325 毫升，6 件装，透明款,商品大类：厨房用品；细分类：玻璃直筒水杯套装；颜色：透明；材质：玻璃,亚马逊品牌——Solimo,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B07JVNJL2J__817A3Do0cvL.jpg,ok,2560,2507,玻璃直筒水杯套装
+B07ZQW3YK7,厨房用品,AmazonBasics 一次性带铰链盖外带餐盒 环保 可堆肥且可生物降解 3格 23 x 23 x 8 厘米 100个装,商品大类：厨房用品；细分类：一次性带盖分格餐盒；颜色：白色；材质：模塑纸浆纤维,AmazonBasics,白色,模塑纸浆纤维,data/processed_data_cleaning/厨房用品/images/B07ZQW3YK7__71AdLEX+sbL.jpg,ok,2560,2534,一次性带盖分格餐盒
+B08BVK156S,厨房用品,亚马逊自有品牌 - Solimo 餐具套装，18件装,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：陶瓷,亚马逊旗下品牌 Solimo,白色,陶瓷,data/processed_data_cleaning/厨房用品/images/B08BVK156S__71psG0cRgxL.jpg,ok,1593,2560,餐具套装
+B07QHJT8LV,厨房用品,Rivet Modern 反应釉石器 6 件装餐碗套装，天蓝色水彩款,商品大类：厨房用品；细分类：餐盘套装；颜色：蓝色、白色；材质：石器,Rivet,蓝色、白色,石器,data/processed_data_cleaning/厨房用品/images/B07QHJT8LV__81ZjgN72uKL.jpg,ok,1812,2560,餐盘套装
+B013R5TUZU,厨房用品,AmazonBasics 850 瓦自动双片吐司机，拉丝不锈钢款,商品大类：厨房用品；细分类：双片吐司机；颜色：黑色；材质：不锈钢,AmazonBasics,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B013R5TUZU__81mM6tAFGeL.jpg,ok,2152,2560,双片吐司机
+B017DBGQGU,厨房用品,AmazonBasics 10件装不粘锅套装,商品大类：厨房用品；细分类：不粘锅套装；颜色：黑色；材质：玻璃,Amazon Basic（AmazonBasics）,黑色,玻璃,data/processed_data_cleaning/厨房用品/images/B017DBGQGU__71tCP-ZfZPL.jpg,ok,1099,1500,不粘锅套装
+B08989DL8J,厨房用品,AmazonBasics 12件装三聚氰胺餐具套装——4人份，青绿色釉面，带乡村风格边缘,商品大类：厨房用品；细分类：三聚氰胺餐具套装；颜色：绿色；材质：三聚氰胺,AmazonBasics,绿色,三聚氰胺,data/processed_data_cleaning/厨房用品/images/B08989DL8J__91Ntp0RcFFL.jpg,ok,2560,2560,三聚氰胺餐具套装
+B0898B96K5,厨房用品,AmazonBasics - 美耐皿餐具套装（12件，4人份），餐具，蓝绿色（Teal Swirl），11英寸、9英寸、7 1/2英寸、1,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：美耐皿,Amazon Basics,白色,美耐皿,data/processed_data_cleaning/厨房用品/images/B0898B96K5__81mFzvk-0NL.jpg,ok,2560,2560,餐具套装
+B0736T53G6,厨房用品,AmazonBasics 5件装不锈钢餐具套装,商品大类：厨房用品；细分类：不锈钢餐具套装；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0736T53G6__71CaLbeeYCL.jpg,ok,2003,2560,不锈钢餐具套装
+B000UCZFVW,厨房用品,Pike Street 16盎司玻璃杯，2件装,商品大类：厨房用品；细分类：随行杯；颜色：紫色、橙色、黑色；材质：未识别,亚马逊旗下的Pinzon,紫色、橙色、黑色,,data/processed_data_cleaning/厨房用品/images/B000UCZFVW__81qP031g5lS.jpg,ok,2500,2437,随行杯
+B001DXZHVA,厨房用品,pinzon 哑光 chrome-plated 开瓶器和 foil CUTTER 套装,商品大类：厨房用品；细分类：葡萄酒开瓶器及锡箔切割器套装；颜色：黑色；材质：镀铬合金,亚马逊旗下的Pinzon,黑色,镀铬合金,data/processed_data_cleaning/厨房用品/images/B001DXZHVA__81K8pnSypYS.jpg,ok,2488,2500,葡萄酒开瓶器及锡箔切割器套装
+B08989DL93,厨房用品,AmazonBasics 12件装美耐皿餐具套装——4人份，传统蓝黄配色,商品大类：厨房用品；细分类：餐具套装；颜色：白色、蓝色、黄色；材质：美耐皿,AmazonBasics,白色、蓝色、黄色,美耐皿,data/processed_data_cleaning/厨房用品/images/B08989DL93__91I1Q-ub7pL.jpg,ok,2560,2559,餐具套装
+B07ZTHPKM6,厨房用品,带盖玻璃水壶 冰茶壶 冷热水壶 果汁壶 (1.5L) …,商品大类：厨房用品；细分类：玻璃水壶；颜色：透明、银色；材质：玻璃,UMI,透明、银色,玻璃,data/processed_data_cleaning/厨房用品/images/B07ZTHPKM6__31ej421YXQL.jpg,ok,395,240,玻璃水壶
+B08BVMXRZL,厨房用品,亚马逊自有品牌 - Solimo 三层不锈钢电磁炉专用炖锅，带钢制锅盖（1.6升）,商品大类：厨房用品；细分类：炖锅；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B08BVMXRZL__71N0nZ6wFmL.jpg,ok,1840,2560,炖锅
+B089J23LMD,厨房用品,AmazonBasics - 10件装带盖搅拌碗套装，防滑底座，红色玫瑰图案设计,商品大类：厨房用品；细分类：带盖搅拌碗套装；颜色：白色、粉色、橙色；材质：塑料,Amazon Basics,白色、粉色、橙色,塑料,data/processed_data_cleaning/厨房用品/images/B089J23LMD__915Sfl8PYuL.jpg,ok,2560,2560,带盖搅拌碗套装
+B07BLBXY9Y,厨房用品,Stone & Beam 传统炊具，带盖，不锈钢,商品大类：厨房用品；细分类：带盖汤锅；颜色：银色；材质：不锈钢,Stone & Beam,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07BLBXY9Y__71zgrwvl2mL.jpg,ok,2560,2560,带盖汤锅
+B07Y3L59BD,厨房用品,AmazonBasics 带盖炖锅，不锈钢，2.8升,商品大类：厨房用品；细分类：带盖炖锅；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07Y3L59BD__71xyuLFJnCL.jpg,ok,2560,2560,带盖炖锅
+B0898CVN62,厨房用品,AmazonBasics - 美耐皿餐具套装（12件，4人份），餐具，做旧裂纹蓝，10 1/2英寸，8 9/16英寸，6英寸，1,商品大类：厨房用品；细分类：美耐皿餐具套装；颜色：蓝色、白色、金色；材质：美耐皿,Amazon Basics,蓝色、白色、金色,美耐皿,data/processed_data_cleaning/厨房用品/images/B0898CVN62__91b3lj3IdPL.jpg,ok,2545,2545,美耐皿餐具套装
+B075NYHXMF,厨房用品,AmazonBasics 10-cup 水壶带过滤器和 AmazonBasics 替换滤水器适用于 AmazonBasics & Brita pitchers – 3只装,商品大类：厨房用品；细分类：滤水壶及替换滤芯套装；颜色：透明、白色；材质：塑料,AmazonBasics,透明、白色,塑料,data/processed_data_cleaning/厨房用品/images/B075NYHXMF__51hkunjoCML.jpg,ok,1001,1001,滤水壶及替换滤芯套装
+B001D8PK2G,厨房用品,Pinzon - 可扩展竹制托盘,商品大类：厨房用品；细分类：可扩展竹制托盘；颜色：未识别；材质：竹子,亚马逊旗下的Pinzon,,竹子,data/processed_data_cleaning/厨房用品/images/B001D8PK2G__81HE+GyMJVS.jpg,ok,1484,2500,可扩展竹制托盘
+B010RLCH2U,厨房用品,AmazonBasics 奈斯派索胶囊收纳抽屉 - 50 粒容量,商品大类：厨房用品；细分类：咖啡胶囊收纳抽屉；颜色：黑色；材质：未识别,AmazonBasics,黑色,,data/processed_data_cleaning/厨房用品/images/B010RLCH2U__41MnbIZ2rrL.jpg,ok,316,500,咖啡胶囊收纳抽屉
+B07J2V25FZ,厨房用品,(翻新) 亚马逊自有品牌 - Solimo 优质高碳不锈钢多功能刀套装，2件装，银色,商品大类：厨房用品；细分类：厨房刀具套装；颜色：黑色；材质：不锈钢,亚马逊品牌——Solimo,黑色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07J2V25FZ__51zfojE6sWL.jpg,ok,1000,1000,厨房刀具套装
+B0736T6DCC,厨房用品,AmazonBasics 方形刀刃不锈钢餐刀，12把装,商品大类：厨房用品；细分类：餐刀；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0736T6DCC__71Vlf4JAVzL.jpg,ok,1946,2560,餐刀
+B07QK7NQSK,厨房用品,AmazonBasics 晾衣垫 - 40.64 x 45.72 厘米 - 亚麻，亚麻，2件装,商品大类：厨房用品；细分类：厨房沥水垫；颜色：米白色；材质：麻,AmazonBasics,米白色,麻,data/processed_data_cleaning/厨房用品/images/B07QK7NQSK__71k5Rn7WVOL.jpg,ok,2560,2560,厨房沥水垫
+B072WVVDXS,厨房用品,亚马逊自有品牌 - Solimo 不锈钢两件套锅具套装（含一个不锈钢锅盖）,商品大类：厨房用品；细分类：不锈钢锅具套装；颜色：银色；材质：不锈钢,亚马逊品牌——Solimo,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B072WVVDXS__81hcX0KpWZL.jpg,ok,1203,2560,不锈钢锅具套装
+B0814HS5ZW,厨房用品,Umi. by Amazon - 不锈钢水壶，750毫升保温杯，不含BPA，双层真空隔热，冷热两用，可重复使用，适合儿童、上学、运动、骑行（绿色）,商品大类：厨房用品；细分类：不锈钢保温水壶；颜色：绿色；材质：不锈钢,UMI,绿色,不锈钢,data/processed_data_cleaning/厨房用品/images/B0814HS5ZW__61BH38RqoJL.jpg,ok,1000,1000,不锈钢保温水壶
+B000UD63SA,厨房用品,Pike Street 16盎司软握杯和17盎司水瓶,商品大类：厨房用品；细分类：随行杯和水瓶套装；颜色：紫色、红色、黑色；材质：塑料,亚马逊旗下的Pinzon,紫色、红色、黑色,塑料,data/processed_data_cleaning/厨房用品/images/B000UD63SA__81n8fAxHWtS.jpg,ok,2500,2438,随行杯和水瓶套装
+B07P7W6DLS,厨房用品,亚马逊自有品牌 - Solimo 蜂窝纹不粘卡达伊锅（24厘米，4层涂层）,商品大类：厨房用品；细分类：不粘炒锅（卡达伊锅）；颜色：蓝色、黑色；材质：铝,亚马逊品牌——Solimo,蓝色、黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P7W6DLS__813jeQrch4L.jpg,ok,958,2560,不粘炒锅（卡达伊锅）
+B00XBC3O8Y,厨房用品,AmazonBasics 6件装烘焙器具套装,商品大类：厨房用品；细分类：烘焙模具套装；颜色：黑色；材质：碳钢,AmazonBasics,黑色,碳钢,data/processed_data_cleaning/厨房用品/images/B00XBC3O8Y__81HBCeu7q2L.jpg,ok,1563,2235,烘焙模具套装
+B07FY38FW1,厨房用品,亚马逊自有品牌 - Solimo 油壶（700毫升），白色,商品大类：厨房用品；细分类：调味料撒料瓶；颜色：白色、透明；材质：塑料,亚马逊品牌——Solimo,白色、透明,塑料,data/processed_data_cleaning/厨房用品/images/B07FY38FW1__71vA-ExqmTL.jpg,ok,2560,1109,调味料撒料瓶
+B01E5FI8G8,厨房用品,亚马逊自有品牌 - Solimo Regal 保温炖锅套装（含罗蒂篮），3件装，粉色,商品大类：厨房用品；细分类：保温炖锅套装；颜色：粉色；材质：塑料,亚马逊品牌——Solimo,粉色,塑料,data/processed_data_cleaning/厨房用品/images/B01E5FI8G8__71MDTNv2wYL.jpg,ok,1336,2560,保温炖锅套装
+B07P7W7RX2,厨房用品,亚马逊自有品牌 - Solimo 压铸铝不粘炖锅（20厘米，5层涂层）,商品大类：厨房用品；细分类：不粘炖锅；颜色：白色；材质：铝,亚马逊品牌——Solimo,白色,铝,data/processed_data_cleaning/厨房用品/images/B07P7W7RX2__91kiZhh2RcL.jpg,ok,1588,2560,不粘炖锅
+B07P8ZW575,厨房用品,亚马逊自有品牌 – Solimo 不粘锅（带不锈钢锅盖，4.25 L，锤纹饰面，三层涂层，2.9 mm 厚度）,商品大类：厨房用品；细分类：不粘锅；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P8ZW575__91+e3+6vRJL.jpg,ok,1858,2560,不粘锅
+B07FSGHKW7,厨房用品,Umi 香槟杯 红葡萄酒杯 无铅 8盎司 2只装，配透明长水晶钻石杯脚——生日、周年纪念或婚礼礼物,商品大类：厨房用品；细分类：香槟杯；颜色：透明；材质：玻璃,UMI,透明,玻璃,data/processed_data_cleaning/厨房用品/images/B07FSGHKW7__51UeT-WSAZL.jpg,ok,1001,1001,香槟杯
+B07Y3L5L94,厨房用品,AmazonBasics 不锈钢煎锅，8英寸,商品大类：厨房用品；细分类：不锈钢煎锅；颜色：银色；材质：不锈钢,AmazonBasics,银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07Y3L5L94__71IPmsdlX5L.jpg,ok,2560,2560,不锈钢煎锅
+B07P5YTKV2,厨房用品,亚马逊自有品牌 - Solimo 内胆压力锅密封圈（适用于5升压力锅）,商品大类：厨房用品；细分类：压力锅密封圈；颜色：黑色；材质：橡胶,亚马逊品牌——Solimo,黑色,橡胶,data/processed_data_cleaning/厨房用品/images/B07P5YTKV2__51+xBawfv1L.jpg,ok,1088,1090,压力锅密封圈
+B07P82LW3B,厨房用品,亚马逊品牌 - Solimo 无缝不锈钢餐具 皮尔,商品大类：厨房用品；细分类：锯齿削皮器；颜色：橙色；材质：不锈钢,亚马逊品牌——Solimo,橙色,不锈钢,data/processed_data_cleaning/厨房用品/images/B07P82LW3B__710+cMxKbZL.jpg,ok,2426,2426,锯齿削皮器
+B07LFMDSDL,厨房用品,AmazonBasics 塑料密封食品储物盒 38件装,商品大类：厨房用品；细分类：塑料密封食品储物盒套装；颜色：绿色；材质：塑料,AmazonBasics,绿色,塑料,data/processed_data_cleaning/厨房用品/images/B07LFMDSDL__81WsW2DNtsL.jpg,ok,2560,2560,塑料密封食品储物盒套装
+B08637F7W2,厨房用品,亚马逊自有品牌 - Solimo 三件套不粘锅套装（适用于电磁炉和燃气灶）,商品大类：厨房用品；细分类：不粘锅三件套；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B08637F7W2__71bwxsfTaeL.jpg,ok,1275,2560,不粘锅三件套
+B07Y58XQ3Z,厨房用品,AmazonBasics – 带不粘涂层的炊具套装，硬质阳极氧化处理，包括锅、平底锅及配件，12件套，灰色,商品大类：厨房用品；细分类：炊具套装；颜色：深灰色；材质：未识别,AmazonBasics,深灰色,,data/processed_data_cleaning/厨房用品/images/B07Y58XQ3Z__71wS98WrptL.jpg,ok,2457,2457,炊具套装
+B01MSLC9M3,厨房用品,AmazonBasics 尊享版 18 件装刀具架套装,商品大类：厨房用品；细分类：刀具架套装；颜色：黑色、银色；材质：不锈钢,AmazonBasics,黑色、银色,不锈钢,data/processed_data_cleaning/厨房用品/images/B01MSLC9M3__71amfnZYgEL.jpg,ok,1500,956,刀具架套装
+B08335DW9J,厨房用品,(翻新) AmazonBasics 18件套餐具套装 - Warm Beams，6人份,商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：未识别,AmazonBasics,白色,,data/processed_data_cleaning/厨房用品/images/B08335DW9J__613N0aDsF8L.jpg,ok,1000,1000,餐具套装
+B07P6R7BD9,厨房用品,亚马逊自有品牌 – Solimo 不粘迷你烤架风扇,商品大类：厨房用品；细分类：不粘煎烤盘；颜色：黑色；材质：铝,亚马逊品牌——Solimo,黑色,铝,data/processed_data_cleaning/厨房用品/images/B07P6R7BD9__71sK6GQpk+L.jpg,ok,1369,2560,不粘煎烤盘
+B07B4PZBB1,厨房用品,AmazonBasics 真空封口机专用袋套装,商品大类：厨房用品；细分类：真空封口袋卷；颜色：白色；材质：塑料,AmazonBasics,白色,塑料,data/processed_data_cleaning/厨房用品/images/B07B4PZBB1__71DvlQ0glOL.jpg,ok,1500,1357,真空封口袋卷
+B07DCCJ1FX,厨房用品,Stone & Beam 汤锅带盖，硬质阳极氧化不粘铝,商品大类：厨房用品；细分类：汤锅；颜色：灰色；材质：硬质阳极氧化铝,Stone & Beam,灰色,硬质阳极氧化铝,data/processed_data_cleaning/厨房用品/images/B07DCCJ1FX__81Vk2qN10RL.jpg,ok,2560,2560,汤锅
+B081B21KGS,厨房用品,AmazonBasics - 电动炸锅（2升），黑色,商品大类：厨房用品；细分类：电动炸锅；颜色：黑色；材质：未识别,Amazon Basics,黑色,,data/processed_data_cleaning/厨房用品/images/B081B21KGS__81mJmlF1JXL.jpg,ok,2560,2560,电动炸锅
+B075VXYJ6C,厨房用品,AmazonBasics 2片式烤面包机，黑色,商品大类：厨房用品；细分类：烤面包机；颜色：黑色；材质：未识别,AmazonBasics,黑色,,data/processed_data_cleaning/厨房用品/images/B075VXYJ6C__81hl73oL0cL.jpg,ok,1972,2560,烤面包机
