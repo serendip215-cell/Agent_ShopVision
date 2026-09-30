@@ -57,6 +57,17 @@
 - 并发：4；
 - 图片路径：仓库根目录相对路径。
 
+`.env` 中可调整以下运行参数：
+
+| 变量 | 默认值 | 作用 |
+|---|---:|---|
+| `REQUEST_TIMEOUT` | `120` | 单次接口请求的超时时间（秒）；每次重试都会重新计时 |
+| `MAX_RETRIES` | `3` | 单条记录接口失败后的重试次数；加上第一次调用，最多调用 4 次 |
+| `MAX_WORKERS` | `4` | 并发处理记录数 |
+| `IMAGE_DETAIL` | `high` | 发给视觉接口的图片细节级别 |
+
+`MAX_RETRIES` 适用于网络错误、HTTP 错误、超时、返回 JSON 无法解析等接口调用失败。它是单条记录的一轮调用内重试次数，不是整个数据集的重跑次数。
+
 ## 使用
 
 在仓库根目录执行：
@@ -101,11 +112,18 @@
 
 提高并发时：
 
-    py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py --workers 20 --image-detail low
+    py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py --append --workers 20 --image-detail low
 
-中断后继续：
+中断后继续，或重试上一次接口失败的记录：
 
-    py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py --workers 20 --image-detail low
+如果输出目录已经存在，必须明确使用 `--append`（推荐用于续跑）：
+
+    py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
+      --input-dir data/processed_data/手机壳 `
+      --output-dir data/processed_data_cleaning `
+      --append `
+      --workers 20 `
+      --image-detail low
 
 追加新数据并保留已有清洗结果：
 
@@ -115,7 +133,17 @@
 
     py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py --clean-output
 
-是否调用模型只看输入 CSV 的 `is_readed`：`false` 就调用，`true` 就跳过。`model_audit.jsonl` 只保存模型结果和错误记录，不参与是否调用模型的判断。接口失败或解析失败会保持 `is_readed=false`，下一次普通运行会自动重试，不再需要 `--retry-failed`。append 会保留已有类别 CSV 并按 `item_id` 增量合并；force 只允许覆盖已有输出，不改变 `is_readed` 判断；clean-output 会删除已有清洗输出后全量重建。输出目录已有内容时，必须明确使用 append、force 或 clean-output。模型审计先写入并 flush，再写入结果 CSV；程序中断时，已经完成的记录仍会保留在输出中。
+`--clean-output` 只清空清洗输出目录，不会把输入 CSV 的 `is_readed` 自动改回 `false`。如果目标是让模型重新调用全部记录，应先重置输入 CSV 中对应行的 `is_readed`，再执行该命令；如果只是接着处理中断或失败记录，使用上面的 `--append` 命令。
+
+是否调用模型只看输入 CSV 的 `is_readed`：`false` 就调用，`true` 就跳过。`model_audit.jsonl` 只保存模型结果和错误记录，不参与是否调用模型的判断。
+
+接口、超时或解析失败时，记录保持 `is_readed=false`，并写入源类别目录下的 `model_failures.csv`。文件中的 `attempt_count` 会累计失败次数，下一次运行会自动再次调用模型；不需要额外的 `--retry-failed` 参数。模型成功返回后，无论结果是 `accepted`、`review` 还是 `excluded`，都会把源记录改为 `is_readed=true`，并从失败队列中移除。
+
+失败重试和规则不通过要区分：接口/解析/图片失败不复制到 `failed_images/`；模型正常返回但规则判定为 `review` 或 `excluded` 时，才把能找到的图片复制到 `failed_images/`，供人工复核，这类记录不会自动再次调用模型。
+
+`--append` 会保留已有类别 CSV、失败队列、未处理记录和报告历史，并按 `item_id` 增量合并；输出目录已有内容时，常规续跑应使用它。`--force` 只用于明确允许在已有输出目录上运行，模型是否调用仍由输入 CSV 的 `is_readed` 决定。`--clean-output` 会删除清洗输出后重新写出，但不会修改输入 CSV 的 `is_readed`；如果要让模型重新处理已经标记为 `true` 的记录，必须先把对应输入 CSV 的 `is_readed` 改回 `false`。输出目录已有内容时，必须明确选择 `--append`、`--force` 或 `--clean-output`。
+
+模型审计先写入并 flush，再写入结果 CSV；程序收到 Ctrl+C 时会保存检查点，已经处理并落盘的记录会保留，下一次使用 `--append` 继续。直接关闭进程或强制结束 Python 时无法保证最后一批任务有检查点。
 
 ## 清洗逻辑
 
