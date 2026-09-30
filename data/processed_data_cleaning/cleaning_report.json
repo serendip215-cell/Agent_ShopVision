@@ -1,0 +1,54 @@
+﻿{
+  "report_version": 2,
+  "generated_at": null,
+  "input_rows": 300,
+  "accepted_rows": 300,
+  "review_rows": 0,
+  "excluded_rows": 0,
+  "pending_rows": 0,
+  "target_types": [
+    "手机壳"
+  ],
+  "output_types": [
+    "手机壳"
+  ],
+  "output_fields": [
+    "item_id",
+    "product_type",
+    "item_name",
+    "description",
+    "brand",
+    "color",
+    "material",
+    "local_image_path",
+    "image_status",
+    "image_height",
+    "image_width",
+    "type"
+  ],
+  "unprocessed_file": "unprocessed_samples.csv",
+  "failed_images_dir": "failed_images",
+  "relative_image_paths": true,
+  "input_read_field": {
+    "name": "is_readed",
+    "pending_value": "false",
+    "model_success_value": "true"
+  },
+  "note": "通过记录逐条写入类别 products.csv 和 images/；模型正常返回但规则未通过的记录写入 unprocessed_samples.csv，并将能找到的图片复制到 failed_images/；接口、解析或图片失败记录写入 model_failures.csv，等待重试且不复制到 failed_images/；中断时 pending_rows 表示尚未完成模型处理的记录。",
+  "model_failure_file": "<source_category>/model_failures.csv",
+  "runs": [
+    {
+      "generated_at": null,
+      "legacy": true,
+      "input_rows": 300,
+      "processed_rows": 300,
+      "accepted_rows": 300,
+      "review_rows": 0,
+      "excluded_rows": 0,
+      "pending_rows": 0,
+      "target_types": [
+        "手机壳"
+      ]
+    }
+  ]
+}
