@@ -53,7 +53,7 @@
 | 检索基线 / 模型训练 | ⏳ 未开始 | 实验 2 |
 | 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
 
-课程对应关系见 [`docs/电商商品多模态推荐与上架Agent开发文档.md`](docs/电商商品多模态推荐与上架Agent开发文档.md)。该文档里「正式数据只有 MUGE」的说法已过时，以本页和 [`data/raw_data/README.md`](data/raw_data/README.md) 为准。
+当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。`docs/` 里的方案和指南是预留给后续步骤读的，不代表仓库已经做到那一步。
 
 ## 📦 数据
 
@@ -182,16 +182,20 @@ py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
 
 ## 📖 文档
 
-| 文档 | 内容 |
+说明当前仓库的，是下面三份数据说明和 `scripts/README.md`。方案类文档按写作时的设计原样保留，给后面的检索、本地模型和 Agent 用，不要把里面的目录和步骤当成已经做完。
+
+| 文档 | 性质 |
 |---|---|
-| [`scripts/README.md`](scripts/README.md) | 脚本参数和当前处理顺序 |
-| [`data/raw_data/README.md`](data/raw_data/README.md) | 三份原始数据的字段和规模 |
-| [`docs/电商商品多模态推荐与上架Agent开发文档.md`](docs/电商商品多模态推荐与上架Agent开发文档.md) | 实验 1–5 的总体设计 |
-| [`docs/Chinese-CLIP介绍与使用指南.md`](docs/Chinese-CLIP介绍与使用指南.md) | 检索模型原理、数据格式、基线流程与分工安排 |
-| [`docs/MUGE商品属性大模型补全与描述生成方案.md`](docs/MUGE商品属性大模型补全与描述生成方案.md) | 属性补全方案 |
-| [`docs/亚马逊数据中文化处理方案.md`](docs/亚马逊数据中文化处理方案.md) | Amazon 翻译方案 |
-| [`docs/Qwen2.5-VL-Ollama安装配置.md`](docs/Qwen2.5-VL-Ollama安装配置.md) | 本地视觉模型安装 |
-| [`data/raw_data/数据集训练阶段详细规划.md`](data/raw_data/数据集训练阶段详细规划.md) | 早期阶段规划，仍写着只有 MUGE 三类，尚未改到现在的九类 |
+| [`scripts/README.md`](scripts/README.md) | 当前脚本说明 |
+| [`data/raw_data/README.md`](data/raw_data/README.md) | 当前原始数据说明 |
+| [`data/raw_data/MUGE_data/README.md`](data/raw_data/MUGE_data/README.md) | 当前 MUGE 原始表说明 |
+| [`data/raw_data/Amazon_data_translated/README.md`](data/raw_data/Amazon_data_translated/README.md) | 当前 Amazon 译文说明 |
+| [`docs/Chinese-CLIP介绍与使用指南.md`](docs/Chinese-CLIP介绍与使用指南.md) | 预留。检索阶段再读 |
+| [`docs/电商商品多模态推荐与上架Agent开发文档.md`](docs/电商商品多模态推荐与上架Agent开发文档.md) | 预留。实验 1–5 的总体设计 |
+| [`docs/MUGE商品属性大模型补全与描述生成方案.md`](docs/MUGE商品属性大模型补全与描述生成方案.md) | 预留。早期属性补全方案 |
+| [`docs/亚马逊数据中文化处理方案.md`](docs/亚马逊数据中文化处理方案.md) | 预留。Amazon 中文化方案 |
+| [`docs/Qwen2.5-VL-Ollama安装配置.md`](docs/Qwen2.5-VL-Ollama安装配置.md) | 预留。本地 Qwen 安装 |
+| [`data/raw_data/数据集训练阶段详细规划.md`](data/raw_data/数据集训练阶段详细规划.md) | 预留。早期阶段规划，正文仍是当时的 MUGE 三类 |
 
 `docs/` 里还有实验 1 任务书和开课 PDF，以及实验报告模板。
 

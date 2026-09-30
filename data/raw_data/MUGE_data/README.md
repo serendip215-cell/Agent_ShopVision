@@ -18,30 +18,16 @@ brand
 color
 material
 main_image_id
-local_image_path
-image_height
-image_width
-```
-
-缺失的品牌、颜色和材质等字段保持为空，不根据图片或标题推断。
-
-这里列出的字段是原始 MUGE 表的字段。正式处理后的 MUGE 数据统一整理为 11 个字段，并增加经过确认的 `description`。正式处理时，`product_type` 使用较宽的大类，例如 `包`、`鞋`、`水杯`：
-
-```text
-item_id
-product_type
-item_name
-description
-brand
-color
-material
+domain_name
 local_image_path
 image_status
 image_height
 image_width
 ```
 
-正式处理阶段先完成字段整理、图片对应检查和质量审核，再进入中文文本检索样本构建。
+缺失的品牌、颜色和材质保持为空，不根据图片或标题推断。
+
+上面是本目录原始表的 12 列。正式表在 `data/processed_data/`，是另一套 12 列：去掉 `main_image_id` 和 `domain_name`，加上 `description` 和 `is_readed`。MUGE 进入正式表时，`双肩包` 归为 `包`，`运动鞋` 归为 `鞋`。正式表已经和其他来源合并，中文检索样本还没生成。模型改写的描述在 `data/processed_data_cleaning/`，不在本目录。
 
 ## `image_quality_report.csv` 字段
 

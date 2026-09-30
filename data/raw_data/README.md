@@ -1,6 +1,6 @@
 # raw_data 数据说明
 
-本目录保存当前使用的原始数据集，以及 Amazon 中文翻译暂存数据。每个数据集单独存放，暂不合并。
+本目录按来源分开保存原始数据和 Amazon 中文翻译暂存。这里不合并。合并结果在 `data/processed_data/`。
 
 ```text
 raw_data/
@@ -27,7 +27,7 @@ raw_data/
 └── README.md
 ```
 
-`Amazon_data/` 是原始 Amazon 数据；`Amazon_data_translated/` 是翻译结果的暂存位置，暂时与原始数据放在同一层级。翻译暂存数据完成后还要继续整理和检查，不能直接作为正式训练数据。通过检查后再放入 `data/processed_data/`。
+`Amazon_data/` 是英文原表。`Amazon_data_translated/` 只存中文译文和审计，图片仍指向 `Amazon_data/images/`。这 1,158 条已经并入 `data/processed_data/`。翻译目录本身不是训练集。
 
 ## 各数据集的共同文件
 
@@ -96,4 +96,4 @@ quality_reason
 
 - Amazon_data 的 5 条 `review`：3 条 `low_resolution`、1 条 `extreme_aspect_ratio`、1 条两者兼有，无 `failed`；
 - Suning_data 每类上限 1,000 条，除男装外各类未收满即停（搜索词翻页到顶或去重）；
-- 各数据集分别处理、分别维护质量报告。后续合并、检索训练流程见 `数据集训练阶段详细规划.md`。
+- 原始目录仍分开维护质量报告。正式合并表在 `data/processed_data/`，清洗结果在 `data/processed_data_cleaning/`。阶段说明见 `数据集训练阶段详细规划.md`。
