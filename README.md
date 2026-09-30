@@ -163,6 +163,7 @@ py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
 | [`scripts/README.md`](scripts/README.md) | 脚本参数和当前处理顺序 |
 | [`data/raw_data/README.md`](data/raw_data/README.md) | 三份原始数据的字段和规模 |
 | [`docs/电商商品多模态推荐与上架Agent开发文档.md`](docs/电商商品多模态推荐与上架Agent开发文档.md) | 实验 1–5 的总体设计 |
+| [`docs/Chinese-CLIP介绍与使用指南.md`](docs/Chinese-CLIP介绍与使用指南.md) | 检索模型原理、数据格式、基线流程与分工安排 |
 | [`docs/MUGE商品属性大模型补全与描述生成方案.md`](docs/MUGE商品属性大模型补全与描述生成方案.md) | 属性补全方案 |
 | [`docs/亚马逊数据中文化处理方案.md`](docs/亚马逊数据中文化处理方案.md) | Amazon 翻译方案 |
 | [`docs/Qwen2.5-VL-Ollama安装配置.md`](docs/Qwen2.5-VL-Ollama安装配置.md) | 本地视觉模型安装 |

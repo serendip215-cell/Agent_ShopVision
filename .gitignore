@@ -15,3 +15,8 @@
 # 本地缓存与崩溃转储。
 __pycache__/
 *.stackdump
+
+# 检索流水线大文件（权重、LMDB、训练产出），本地由脚本/下载器重新生成。
+/data/processed_data_retrieval/pretrained_weights/
+/data/processed_data_retrieval/datasets/
+/data/processed_data_retrieval/experiments/
