@@ -44,7 +44,7 @@ data/processed_data/
 | `dataset_summary.csv` | `product_type`, `record_count`, `image_ok`, `image_missing`, `image_failed` |
 | `merge_index.jsonl` 每行 | `dataset_id`, `item_id`, `source_key`, `category`, `record_hash`, `image_hash`, `local_image_path`, `image_copied` |
 
-`is_readed` 为处理状态：输入含 `true`/`1`/`yes`/`y`（不区分大小写）记为 `true`，其余或缺失记为 `false`；它表示记录是否已经完成读取或处理，不表示属性清洗是否通过。
+`is_readed` 为属性清洗的模型成功处理标记：分类脚本保留输入值，缺失时默认为 `false`；属性清洗脚本只有在模型成功返回并完成字段解析后才回写为 `true`，无论结果是通过、待复核还是排除。图片缺失、接口失败或解析失败时保持 `false`，下一次运行会按 `is_readed=false` 自动重试。该字段不表示清洗结果类别。
 
 ### 输入要求
 
