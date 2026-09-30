@@ -11,6 +11,30 @@
   <img alt="sources" src="https://img.shields.io/badge/数据源-MUGE_%7C_Amazon_%7C_苏宁-6E40C9?style=flat-square&logo=datacamp&logoColor=white">
 </p>
 
+<h2 align="center">拉取项目后，先把下面这段发给 AI</h2>
+
+<p align="center">
+  克隆或 <code>git pull</code> 之后，不要先改代码。<br>
+  整段复制到对话框，让 AI 自己读 git 和仓库，再告诉你项目是什么、进度到哪、现在该做什么。
+</p>
+
+```text
+你在 Agent_ShopVision 仓库里工作。先不要改代码，也不要提交或推送。
+
+请先自己查清现状，再回答：
+1. 读 git 记录：当前分支、是否和远端一致、工作区有没有未提交改动、最近提交各自做了什么。
+2. 扫仓库目录，读根 README、data/raw_data/README.md、scripts/README.md，以及 data/processed_data 和 data/processed_data_cleaning 里的汇总文件。
+3. 文档和 git 记录、实际数据对不上时，以 git 记录和实际文件为准，并指出哪份文档过时。
+
+然后用中文说明四件事：
+- 这个项目是做什么的
+- 现在进度到哪一步，哪些已经完成，哪些还没开始
+- 我们现在应该做什么
+- 仓库里大致有什么：数据、脚本、文档
+
+只汇报，等我确认后再动手。
+```
+
 <p align="center">
   读取本地商品图片和结构化字段，做属性识别、检索推荐、标题描述生成。<br>
   当前停在实验 1：三源数据已并进正式表，视觉属性清洗已跑完。检索、训练、前后端和 Agent 还没开始。
