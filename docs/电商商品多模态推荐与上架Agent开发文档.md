@@ -80,7 +80,7 @@ FastAPI 后端
 
 ### 4.1 数据来源
 
-当前实验使用 MUGE 商品数据，包含商品图片、商品标题和商品类别。正式处理数据只使用 MUGE，并按归一化后的 `product_type` 分为包、水杯和鞋三个类别。其他来源数据即使保存在 raw_data 中，也不参与当前 processed_data 生成。
+当前实验使用 MUGE 商品数据，包含商品图片、商品标题和商品类别。当前 `data/processed_data/` 已按数据集中的类别目录组织，现有类别包括包、厨房用品、女装、家居用品、手机壳、水杯、男装、运动服和鞋。分类范围由输入目录自动发现，不在脚本中固定写死。其他来源数据即使保存在 raw_data 中，也不参与当前 processed_data 生成，除非按相同目录和字段规范单独接入。
 
 ### 4.2 数据字段
 
@@ -90,7 +90,7 @@ FastAPI 后端
 item_id,product_type,item_name,description,brand,color,material,local_image_path,image_status,image_height,image_width
 ```
 
-`product_type` 使用较宽的商品大类，例如 `包`、`鞋`、`水杯`；具体款式和可确认特征写入 `description`。先完成字段整理、图片对应检查和质量审核，再构建中文文本检索样本和索引。
+`product_type` 使用数据集目录对应的商品大类；具体款式和可确认特征写入 `description`。`is_readed` 只表示模型是否已经成功处理过源记录：模型正常返回并完成解析后为 `true`，图片、接口或解析失败时保持 `false`。清洗输出 CSV 不保留该状态字段。先完成字段整理、图片对应检查和质量审核，再构建中文文本检索样本和索引。
 
 `dialogues.jsonl`：
 
@@ -170,7 +170,7 @@ data/
         └── image_quality_report.csv
 ```
 
-当前原始 MUGE 数据保存在 `data/raw_data/MUGE_data/`；正式处理数据统一按 `product_type` 分类到 `data/processed_data/<product_type>/`。当前生成三个类别目录：包、水杯和鞋；原始的双肩包和运动鞋等具体特点后续写入 `description`。每个类别目录包含自己的 `products.csv`、`images/`、`image_quality_report.csv` 和字段检查报告。 具体的大模型字段补全流程见 `docs/MUGE商品属性大模型补全与描述生成方案.md`。
+当前原始 MUGE 数据保存在 `data/raw_data/MUGE_data/`；正式处理数据统一按 `product_type` 分类到 `data/processed_data/<product_type>/`。当前正式数据包含多个类别目录；原始数据中的具体款式和可确认属性写入 `description`。每个类别目录包含自己的 `products.csv`、`images/`、`image_quality_report.csv` 和字段检查报告。 具体的大模型字段补全流程见 `docs/MUGE商品属性大模型补全与描述生成方案.md`。
 
 正式处理结果示例：
 
@@ -184,6 +184,103 @@ data/processed_data/
 │   └── field_check_report.json
 └── ...
 ```
+
+### 4.5 清洗结果审核与最终数据冻结
+
+本节属于实验 1。`data/processed_data_cleaning/` 是可重新生成的清洗中间结果，不是最终训练数据；人工审核后生成不可覆盖的 `final_dataset_v1/`，后续训练和建索引只读取冻结版本。
+
+#### 4.5.1 阶段一：源数据和清洗输入
+
+源数据目录为：
+
+    data/processed_data/<类别>/products.csv
+
+每个类别目录包含一个 `products.csv`，图片路径使用相对于仓库根目录的路径。脚本支持两种入口：
+
+- 指定数据集根目录，自动扫描所有 `<类别>/products.csv`；
+- 指定单个类别目录，自动使用目录名作为候选大类。
+
+分类范围由目录名或 `--categories` 参数提供，脚本不预设具体商品类别。`item_id` 是跨阶段关联记录的主键，后续结果、向量和索引映射都必须保留它。
+
+#### 4.5.2 阶段二：视觉模型属性清洗
+
+使用 `scripts/attribute_cleaning/run_gpt6luna_cleaning.py` 读取图片、标题、原有颜色、原有材质和描述，调用 OpenAI 兼容的 GPT6Luna 视觉接口，完成以下判断：
+
+1. 图片主体是否为可售商品；
+2. 商品属于当前数据集中的哪个大类；
+3. 图片中的细分类 `type`；
+4. 可以从图片或文字可靠确认的颜色 `color`；
+5. 可以从图片或文字可靠确认的材质 `material`；
+6. 置信度和简短判断理由。
+
+成功返回并完成字段解析后，无论结果是接受、待复核还是排除，源 `products.csv` 的 `is_readed` 都更新为 `true`。接口失败、图片不存在或 JSON 解析失败时保持 `false`，并写入对应类别的 `model_failures.csv`，后续运行自动重试。
+
+模型正常返回但规则未通过的记录写入 `data/processed_data_cleaning/unprocessed_samples.csv`，可找到的图片复制到 `failed_images/`，用于人工复核。通过类别和置信度检查的记录写入对应类别的清洗结果 `products.csv` 和 `images/`。清洗输出不覆盖源数据，也不保留 `is_readed` 字段。
+
+运行示例：
+
+    py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py \
+      --input-dir data/processed_data/包 \
+      --output-dir data/processed_data_cleaning \
+      --append \
+      --workers 20
+
+清洗输出中的 `cleaning_report.json`、`dataset_summary.csv`、`model_audit.jsonl` 和各类别 `model_failures.csv` 用于记录数量、状态、错误和断点。它们只服务于清洗阶段，不能直接作为最终训练或检索数据。审核时不能只看 `is_readed`，还要检查通过记录、未处理记录和失败记录的实际内容。
+
+#### 4.5.3 阶段三：人工审核和最终数据冻结
+
+模型输出不能直接视为最终事实。人工审核需要确认：
+
+- 商品是否属于当前类别；
+- 是否存在果冻、书架、食品、包装盒等非目标商品；
+- `product_type` 和 `type` 是否对应；
+- 颜色和材质是否有图片或原始文本依据；
+- `description` 是否只描述已确认属性；
+- 图片与 `item_id` 是否对应；
+- CSV 中是否存在重复 ID、重复图片和绝对路径。
+
+审核通过后生成一个不可覆盖的版本目录，例如：
+
+    data/final_dataset_v1/
+    ├── 包/
+    │   ├── products.csv
+    │   └── images/
+    ├── 水杯/
+    │   ├── products.csv
+    │   └── images/
+    ├── 鞋/
+    │   ├── products.csv
+    │   └── images/
+    └── dataset_manifest.json
+
+最终训练或检索数据只从该版本目录读取。`unprocessed_samples.csv`、`model_failures.csv` 和 `failed_images/` 不进入正式索引，但需要保留以便追溯和重新审核。
+
+
+### 4.6 数据分层与版本规则
+
+每个阶段只写自己的产物，保证数据处理解耦：
+
+每个阶段只写自己的产物：
+
+- `processed_data`：源数据和处理状态；
+- `processed_data_cleaning`：属性清洗中间结果，可重新生成；
+- `final_dataset_v1`：人工审核后的冻结版本，作为训练和建索引的唯一输入；
+- `index_data/<类别>`：向量和 FAISS 索引；
+- Agent：只读取索引和元数据，不直接修改原始 CSV。
+
+每个阶段都应记录：
+
+    item_id
+    source_dataset
+    source_hash
+    model_name
+    model_version
+    pipeline_version
+    processed_at
+
+数据内容发生变化、模型版本变化或提示词变化时，应重新生成受影响类别的结果和索引。只要输入记录和处理版本未变化，就可以跳过已经完成的记录。
+
+
 
 ## 5. 模型设计与训练（实验 2）
 
@@ -218,6 +315,102 @@ data/processed_data/
 - 工具调用成功率和参数准确率；
 - 多轮任务成功率；
 - 人工评价：相关性、事实一致性、可读性。
+
+### 5.5 Chinese-CLIP 基线、FAISS 索引与图文检索
+
+本节属于实验 2。先使用 Chinese-CLIP 建立不训练的检索基线，再决定是否微调自己的图文模型。
+
+#### 5.5.1 阶段四：按类别建立图文检索索引
+
+考虑到后续会加入新的商品集，采用按类别分区的索引结构，不建立一个必须反复重建的单一大索引：
+
+    data/index_data/
+    ├── index_registry.json
+    ├── 包/
+    │   ├── items.csv
+    │   ├── image_index.faiss
+    │   └── text_index.faiss
+    ├── 水杯/
+    │   ├── items.csv
+    │   ├── image_index.faiss
+    │   └── text_index.faiss
+    └── 鞋/
+        ├── items.csv
+        ├── image_index.faiss
+        └── text_index.faiss
+
+每个类别的 `items.csv` 只保存建立索引和返回结果所需的字段：
+
+    item_id
+    product_type
+    type
+    item_name
+    description
+    color
+    material
+    local_image_path
+
+`item_id` 必须全局唯一。FAISS 只保存向量编号，因此必须保存向量编号到 `item_id` 的映射。`index_registry.json` 记录类别、索引文件、记录数量、模型版本、向量维度和生成时间。
+
+Chinese-CLIP 建索引的离线流程为：
+
+    审核通过的 products.csv
+        ↓
+    生成统一商品文本
+        ↓
+    读取商品图片
+        ↓
+    Chinese-CLIP 提取图片向量和文本向量
+        ↓
+    向量归一化
+        ↓
+    按类别写入 FAISS 索引
+        ↓
+    保存 items.csv 和向量编号映射
+
+商品文本建议由标题和可靠属性组成，例如：
+
+    商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品名称：白色透气运动鞋
+
+用户输入中文搜索词时，使用同一个 Chinese-CLIP 提取文本向量，再查询对应类别的 `image_index.faiss`。如果用户没有明确商品类别，则查询多个类别索引，合并各类别的 Top-K 结果，再进行属性和价格过滤。
+
+新增一个商品类别时，只需建立该类别的 `items.csv` 和 FAISS 索引，并更新 `index_registry.json`。已有类别新增商品时，只重建该类别索引，不重新处理其他类别。
+
+#### 5.5.2 阶段五：检索基线和评测
+
+先使用 Chinese-CLIP 建立不训练的检索基线，准备固定测试查询，例如：
+
+- 白色运动鞋；
+- 黑色通勤包；
+- 不锈钢保温杯；
+- 女款短袖上衣；
+- 适合厨房使用的收纳用品。
+
+至少记录以下指标：
+
+    Recall@1
+    Recall@5
+    Recall@10
+    MRR
+    NDCG@K
+    Attribute Match Rate
+    Price Constraint Pass Rate
+
+同时记录索引类别、模型版本、向量维度、索引构建时间和单次查询延迟。基线结果用于判断数据质量和检索任务难度。
+
+#### 5.5.3 阶段六：训练自己的图文模型
+
+只有在清洗结果和 Chinese-CLIP 基线确认后，再决定是否微调自己的图文模型。训练数据按商品 `item_id` 划分，不能让同一商品的不同图片跨越训练集、验证集和测试集。建议比例为 8:1:1。
+
+训练样本包括：
+
+- 图片—商品标题；
+- 图片—属性描述；
+- 图片—商品大类和细分类；
+- 正样本与同类别不同商品的难负样本。
+
+模型更换或微调后，必须使用新模型重新提取全部相关类别向量并重建对应 FAISS 索引，同时在 `index_registry.json` 中更新模型版本。不能混用不同模型生成的向量。
+
 
 ## 6. 算法优化（实验 3）
 
@@ -296,6 +489,31 @@ export_listing(draft, format) -> FilePath
 ### 8.3 端到端报告
 
 报告应包含成功率、平均响应时间、工具调用准确率、推荐 Recall@K、标题合规率、错误类型、显存/内存使用和人工评价。展示微调前后、量化前后的对比。
+
+### 8.4 检索 Agent 的类别路由流程
+
+本节属于实验 5。检索模型和类别索引稳定后，再由 Agent 负责理解用户请求、选择索引并组织结果。
+
+#### 8.4.1 阶段七：Agent 接入
+
+检索系统稳定后，再由 Agent 负责流程编排：
+
+    用户中文请求
+        ↓
+    提取类别、颜色、材质、价格和场景
+        ↓
+    路由到对应类别 FAISS 索引
+        ↓
+    返回候选 item_id
+        ↓
+    读取 items.csv 和商品元数据
+        ↓
+    按结构化条件过滤和重排
+        ↓
+    返回图片、属性、价格和匹配理由
+
+类别不明确时，Agent 可以查询多个类别索引。检索模型负责相似度计算，结构化字段负责价格和属性约束，大模型负责语言理解与结果解释。
+
 
 ## 9. 硬件与软件
 
