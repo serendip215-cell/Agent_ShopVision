@@ -20,3 +20,8 @@ __pycache__/
 /data/processed_data_retrieval/pretrained_weights/
 /data/processed_data_retrieval/datasets/
 /data/processed_data_retrieval/experiments/
+
+# Chinese-CLIP 权重和图文检索派生索引。
+/models/chinese_clip/
+/data/index_data/
+

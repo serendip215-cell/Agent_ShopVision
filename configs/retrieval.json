@@ -1,0 +1,27 @@
+{
+  "build": {
+    "input_dir": "data/processed_data_cleaning",
+    "output_dir": "data/index_data",
+    "categories": "",
+    "model_name": "ViT-B-16",
+    "model_download_root": "models/chinese_clip",
+    "batch_size": 16,
+    "device": "auto",
+    "use_modelscope": false,
+    "overwrite": false
+  },
+  "search": {
+    "index_dir": "data/index_data",
+    "category": "",
+    "top_k": 5,
+    "candidate_k": 0,
+    "product_type": "",
+    "sub_type": "",
+    "color": "",
+    "material": "",
+    "model_name": "",
+    "model_download_root": "",
+    "device": "auto",
+    "use_modelscope": false
+  }
+}

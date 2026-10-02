@@ -49,8 +49,8 @@
 | 字段统一与分类合并 | ✅ 完成 | `data/processed_data/`，9 个大类 |
 | 图片技术质检 | ✅ 完成 | 正式表 `image_status` 全部为 `ok` |
 | 视觉属性清洗 | ✅ 完成 | `data/processed_data_cleaning/`，无待处理、无接口失败 |
-| 中文图文检索样本 | ⏳ 未开始 | 脚本还没写 |
-| 检索基线 / 模型训练 | ⏳ 未开始 | 实验 2 |
+| 中文图文检索基线 | ✅ 已实现 | `scripts/retrieval/`，输入 `data/processed_data_cleaning/`，输出 `data/index_data/` |
+| Chinese-CLIP 微调 / 模型训练 | ⏳ 未开始 | 实验 2 后续 |
 | 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。`docs/` 里的方案和指南是预留给后续步骤读的，不代表仓库已经做到那一步。
@@ -126,14 +126,17 @@ Agent_ShopVision/
 │   │   ├── Amazon_data_translated/
 │   │   └── Suning_data/
 │   ├── processed_data/            # 正式合并表，9 个类别
-│   └── processed_data_cleaning/   # 视觉清洗结果、审计、未通过样本
-├── scripts/                       # 采集、翻译、整理、质检、抠图、清洗
-│   └── attribute_cleaning/
+│   ├── processed_data_cleaning/   # 视觉清洗结果和人工审核数据
+│   └── index_data/                # 图文向量和 FAISS 派生索引
+├── configs/                       # 检索配置和使用说明
+├── scripts/                       # 采集、翻译、整理、质检、抠图、清洗、检索
+│   ├── attribute_cleaning/
+│   └── retrieval/
 ├── docs/                          # 方案、安装说明、实验材料
 └── README.md
 ```
 
-不入库的本地文件：`.env`、`scripts/models/*.onnx`、`data/raw_data/*/images_cutout/`、`data/processed_backups/`。
+不入库的本地文件：`.env`、`scripts/models/*.onnx`、`models/chinese_clip/`、`data/index_data/`、`data/raw_data/*/images_cutout/`、`data/processed_backups/`。
 
 ## 🧰 脚本
 
@@ -150,7 +153,11 @@ attribute_cleaning/run_gpt6luna_cleaning.py
         ↓
 cutout_images.py          （可选，抠图不入库）
         ↓
-中文图文检索数据           （待写）
+scripts/retrieval/build_category_index.py
+        ↓
+data/index_data/<类别>/
+        ↓
+scripts/retrieval/search_category_index.py
 ```
 
 | 脚本 | 作用 |
@@ -161,8 +168,10 @@ cutout_images.py          （可选，抠图不入库）
 | `scripts/check_product_fields.py` | 检查字段、重复 ID、图片路径和状态 |
 | `scripts/cutout_images.py` | rembg 批量抠透明底 PNG，需要 Python 3.11+ |
 | `scripts/attribute_cleaning/run_gpt6luna_cleaning.py` | 视觉模型补类别、颜色、材质和描述 |
+| `scripts/retrieval/build_category_index.py` | 使用 Chinese-CLIP 和 FAISS 建立类别索引 |
+| `scripts/retrieval/search_category_index.py` | 使用中文查询词搜索商品图片 |
 
-参数、断点续跑和字段规则见 [`scripts/README.md`](scripts/README.md)。清洗脚本见 [`scripts/attribute_cleaning/README.md`](scripts/attribute_cleaning/README.md)。
+参数、断点续跑和字段规则见 [`scripts/README.md`](scripts/README.md)。清洗脚本见 [`scripts/attribute_cleaning/README.md`](scripts/attribute_cleaning/README.md)。检索配置见 [`configs/retrieval.md`](configs/retrieval.md)。
 
 常用命令（在仓库根目录执行）：
 
@@ -206,4 +215,5 @@ py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
 - FastAPI / React
 - Agent 工具调用和端到端评测
 
-下一件该做的事是：用清洗通过的 9,393 条生成中文图文检索数据。正式表里的 `color` / `material` / `description` 仍多半是来源原文，检索文本应读 `processed_data_cleaning/`。
+下一步是安装 Chinese-CLIP 和 FAISS，先按类别构建零样本检索索引，再用人工查询集评估 Recall@K；检索文本应读取人工审核后的 `processed_data_cleaning/`。
+

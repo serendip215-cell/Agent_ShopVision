@@ -126,8 +126,8 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 # 方式一：从 PyPI 安装
 pip install cn_clip
 
-# 方式二：从本地源码安装（H:\gitclone\Chinese-CLIP）
-cd H:\gitclone\Chinese-CLIP
+# 方式二：从本地源码安装（<Chinese-CLIP源码目录>）
+cd <Chinese-CLIP源码目录>
 pip install -e .
 ```
 
@@ -154,7 +154,26 @@ python -c "import cn_clip.clip as clip; print(clip.available_models())"
 
 > 国内网络建议用 ModelScope；代码里 `use_modelscope=True` 走魔搭下载通道（需 `pip install modelscope`），否则走 Hugging Face。
 
-### 5.5 目录放哪：对齐本项目架构
+### 5.5 当前仓库的检索基线（已实现）
+
+当前可直接运行的基线脚本位于 `scripts/retrieval/`，以人工审核后的
+`data/processed_data_cleaning/` 为输入，按类别生成 `data/index_data/`。这一步不需要
+先把数据转成训练集，也不会修改审核源数据。完整的参数、依赖、目录和验收步骤见
+[`configs/retrieval.md`](../configs/retrieval.md)；脚本使用方式如下：
+
+```powershell
+cd <项目根目录>
+py -3 -m pip install -r scripts\retrieval\requirements.txt
+py -3 scripts\retrieval\build_category_index.py --categories "鞋" --overwrite
+py -3 scripts\retrieval\search_category_index.py "白色运动鞋" --category "鞋" --top-k 5
+```
+
+索引输出结构为 `data/index_data/<类别>/items.csv`、图片和文本向量文件、两个 FAISS
+索引以及 `build_report.json`；`index_registry.json` 负责记录各类别的相对路径。下面的
+“检索流水线工作区”描述的是后续微调 Chinese-CLIP 时才需要的训练数据和权重目录，
+不影响上述零样本检索基线。
+
+### 5.5.1 目录放哪：后续训练工作区
 
 新增的东西全部收进 `data/processed_data_retrieval/`——命名跟随已有的 `processed_data` → `processed_data_cleaning` 递进习惯，含义是"检索流水线的工作区"。完整看一遍 `data/`：
 
@@ -190,7 +209,7 @@ Agent_ShopVision/
 - 下文命令中的 `${DATAPATH}` 一律指 `data\processed_data_retrieval`，PowerShell 里这样定义：
 
 ```powershell
-cd H:\gitclone\Agent_ShopVision
+cd <项目根目录>
 $DATAPATH = "data\processed_data_retrieval"
 ```
 
@@ -353,7 +372,7 @@ numeric_id,item_id,product_type,split
 tsv/jsonl 准备好后，一条命令打包：
 
 ```powershell
-python H:\gitclone\Chinese-CLIP\cn_clip\preprocess\build_lmdb_dataset.py `
+python <Chinese-CLIP源码目录>\cn_clip\preprocess\build_lmdb_dataset.py `
     --data_dir "$DATAPATH\datasets\ShopVision" `
     --splits train,valid,test
 ```
@@ -410,17 +429,17 @@ python H:\gitclone\Chinese-CLIP\cn_clip\preprocess\build_lmdb_dataset.py `
 ### 第 ③ 步：抽取图文特征
 
 ```powershell
-cd H:\gitclone\Chinese-CLIP
-$env:PYTHONPATH = "$env:PYTHONPATH;H:\gitclone\Chinese-CLIP\cn_clip"
+cd <Chinese-CLIP源码目录>
+$env:PYTHONPATH = "$env:PYTHONPATH;<Chinese-CLIP源码目录>\cn_clip"
 
 $split = "valid"   # 先跑验证集试流程，再换 test / train
-$resume = "H:\gitclone\Agent_ShopVision\$DATAPATH\pretrained_weights\clip_cn_vit-b-16.pt"
+$resume = "<项目根目录>\$DATAPATH\pretrained_weights\clip_cn_vit-b-16.pt"
 
 python -u cn_clip\eval\extract_features.py `
     --extract-image-feats `
     --extract-text-feats `
-    --image-data="H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\lmdb\$split\imgs" `
-    --text-data="H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\${split}_texts.jsonl" `
+    --image-data="<项目根目录>\$DATAPATH\datasets\ShopVision\lmdb\$split\imgs" `
+    --text-data="<项目根目录>\$DATAPATH\datasets\ShopVision\${split}_texts.jsonl" `
     --img-batch-size=32 `
     --text-batch-size=32 `
     --context-length=52 `
@@ -442,19 +461,19 @@ python -u cn_clip\eval\extract_features.py `
 
 ```powershell
 python -u cn_clip\eval\make_topk_predictions.py `
-    --image-feats="H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\${split}_imgs.img_feat.jsonl" `
-    --text-feats="H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\${split}_texts.txt_feat.jsonl" `
+    --image-feats="<项目根目录>\$DATAPATH\datasets\ShopVision\${split}_imgs.img_feat.jsonl" `
+    --text-feats="<项目根目录>\$DATAPATH\datasets\ShopVision\${split}_texts.txt_feat.jsonl" `
     --top-k=10 `
     --eval-batch-size=32768 `
-    --output="H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\${split}_predictions.jsonl"
+    --output="<项目根目录>\$DATAPATH\datasets\ShopVision\${split}_predictions.jsonl"
 ```
 
 **算分：**
 
 ```powershell
 python cn_clip\eval\evaluation.py `
-    "H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\${split}_texts.jsonl" `
-    "H:\gitclone\Agent_ShopVision\$DATAPATH\datasets\ShopVision\${split}_predictions.jsonl" `
+    "<项目根目录>\$DATAPATH\datasets\ShopVision\${split}_texts.jsonl" `
+    "<项目根目录>\$DATAPATH\datasets\ShopVision\${split}_predictions.jsonl" `
     output.json
 cat output.json
 ```
@@ -477,7 +496,7 @@ cat output.json
 
 ```bash
 # 注意：训练脚本是 bash，需在 Git Bash / WSL2 / Linux 下运行
-cd H:/gitclone/Chinese-CLIP
+cd <Chinese-CLIP源码目录>
 bash run_scripts/muge_finetune_vit-b-16_rbt-base.sh ${DATAPATH}
 ```
 
@@ -646,10 +665,13 @@ Chinese-CLIP 的 API 也合入了 Hugging Face transformers（`ChineseCLIPModel`
 | 模型下载（Hugging Face） | <https://huggingface.co/OFA-Sys/chinese-clip-vit-base-patch16> |
 | 模型下载（魔搭） | <https://www.modelscope.cn/models/AI-ModelScope/chinese-clip-vit-base-patch16> |
 | 在线体验 Demo | <https://www.modelscope.cn/studios/damo/chinese_clip_applications/summary> |
-| 本地源码（我们机器上已有） | `H:\gitclone\Chinese-CLIP` |
+| 本地源码（我们机器上已有） | `<Chinese-CLIP源码目录>` |
 | 部署（ONNX/TensorRT） | 仓库内 `deployment.md` |
 | 全流程笔记本（MUGE 检索示例） | 仓库内 `Chinese-CLIP-on-MUGE-Retrieval.ipynb` |
 
 ---
 
-*本文档对应 Agent_ShopVision 进度表中的「中文图文检索样本」与「检索基线 / 模型训练」两步。检索流水线的全部产出收在 `data/processed_data_retrieval/`，脚本在 `scripts/build_retrieval_dataset.py`。*
+*本文档的当前零样本检索基线产出在 `data/index_data/`，脚本位于 `scripts/retrieval/`；后文的 `data/processed_data_retrieval/` 和训练样本转换脚本属于后续 Chinese-CLIP 微调与评测规划，不是当前基线的必需目录。*
+
+
+

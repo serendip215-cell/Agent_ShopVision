@@ -1,4 +1,4 @@
-﻿# 电商商品多模态推荐与上架 Agent 开发文档
+# 电商商品多模态推荐与上架 Agent 开发文档
 
 ## 1. 项目概述
 
@@ -187,7 +187,7 @@ data/processed_data/
 
 ### 4.5 清洗结果审核与最终数据冻结
 
-本节属于实验 1。`data/processed_data_cleaning/` 是可重新生成的清洗中间结果，不是最终训练数据；人工审核后生成不可覆盖的 `final_dataset_v1/`，后续训练和建索引只读取冻结版本。
+本节属于实验 1。`data/processed_data_cleaning/` 是清洗输出目录。人工审核完成后，当前检索基线直接把该目录作为审核数据输入；如果需要不可覆盖的版本，再复制为 `final_dataset_v1/` 并通过 `--input-dir` 指定。
 
 #### 4.5.1 阶段一：源数据和清洗输入
 
@@ -260,11 +260,9 @@ data/processed_data/
 
 每个阶段只写自己的产物，保证数据处理解耦：
 
-每个阶段只写自己的产物：
-
 - `processed_data`：源数据和处理状态；
-- `processed_data_cleaning`：属性清洗中间结果，可重新生成；
-- `final_dataset_v1`：人工审核后的冻结版本，作为训练和建索引的唯一输入；
+- `processed_data_cleaning`：属性清洗结果和人工审核输入；
+- `final_dataset_v1`：可选的人工审核冻结副本；
 - `index_data/<类别>`：向量和 FAISS 索引；
 - Agent：只读取索引和元数据，不直接修改原始 CSV。
 
@@ -370,7 +368,7 @@ Chinese-CLIP 建索引的离线流程为：
 
 商品文本建议由标题和可靠属性组成，例如：
 
-    商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品名称：白色透气运动鞋
+    商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品标题：白色透气运动鞋；商品描述：白色透气运动鞋
 
 用户输入中文搜索词时，使用同一个 Chinese-CLIP 提取文本向量，再查询对应类别的 `image_index.faiss`。如果用户没有明确商品类别，则查询多个类别索引，合并各类别的 Top-K 结果，再进行属性和价格过滤。
 
@@ -378,10 +376,12 @@ Chinese-CLIP 建索引的离线流程为：
 
 ### 5.5.1.1 实现前的输入约定
 
-索引脚本只读取人工审核后的冻结目录，不直接读取正在清洗的中间目录：
+当前脚本以已经人工审核的 `data/processed_data_cleaning/` 作为输入；每个类别目录包含一个 `products.csv` 和图片目录。脚本不会修改输入目录：
 
-    data/final_dataset_v1/<类别>/products.csv
-    data/final_dataset_v1/<类别>/images/
+    data/processed_data_cleaning/<类别>/products.csv
+    data/processed_data_cleaning/<类别>/images/
+
+当前仓库不要求先复制到新的冻结目录；如果后续需要版本冻结，可以复制审核结果后再把 `--input-dir` 指向该版本目录。
 
 每条记录至少需要以下字段：
 
@@ -394,12 +394,12 @@ Chinese-CLIP 建索引的离线流程为：
     material
     local_image_path
 
-`item_id` 是商品的稳定主键。索引脚本遇到缺失图片、重复 `item_id` 或重复向量记录时，应写入错误报告并跳过该条记录，不能用空向量占位。
+`item_id` 是商品的稳定主键。索引脚本遇到缺失图片、重复 `item_id` 或重复向量记录时，会写入类别目录的 `errors.csv` 并跳过该条记录，不能用空向量占位。输出的 `items.csv` 保留源 CSV 字段，并额外加入 `vector_id` 和统一检索文本 `text`。
 
-建议新增以下两个脚本：
+当前实现的脚本为：
 
-    scripts/build_category_index.py   # 离线提取向量并建立类别索引
-    scripts/search_category_index.py  # 加载索引并执行中文搜索
+    scripts/retrieval/build_category_index.py   # 离线提取向量并建立类别索引
+    scripts/retrieval/search_category_index.py  # 加载索引并执行中文搜索
 
 ### 5.5.1.2 环境安装
 
@@ -413,7 +413,7 @@ Windows 下可以在项目环境中执行：
 ```powershell
 py -3 -m venv .venv
 .venv\\Scripts\\activate
-py -3 -m pip install torch torchvision pillow pandas numpy faiss-cpu
+py -3 -m pip install -r scripts\retrieval\requirements.txt
 py -3 -m pip install cn_clip
 ```
 
@@ -438,7 +438,7 @@ def build_product_text(row: dict[str, str]) -> str:
 例如输出：
 
 ```text
-商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品名称：白色透气运动鞋
+商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品标题：白色透气运动鞋；商品描述：白色透气运动鞋
 ```
 
 无法确认的属性留空，不要生成“未知”“可能是”等会影响检索的猜测文本。
@@ -643,7 +643,7 @@ similarity
 - 商品文本模板发生变化；
 - 图片预处理方式发生变化。
 
-索引报告应记录 `source_hash`、`model_version`、`prompt_version` 和 `pipeline_version`，避免把不同版本的向量混在同一个索引中。
+当前脚本的 `build_report.json` 记录输入 CSV、输入目录、类别、模型名称、设备、向量维度、归一化状态、有效数量、跳过数量和生成时间。更换模型、商品文本模板、图片预处理或商品数据后，应重新构建受影响类别；如需更严格的版本审计，可在报告中继续增加源文件哈希和流水线版本。
 
 ### 5.5.1.9 最小验收流程
 
@@ -1343,5 +1343,11 @@ ecommerce-agent/
 14. 精度、延迟、显存对比报告；
 15. 演示视频；
 16. 五次实验报告。
+
+
+
+
+
+
 
 
