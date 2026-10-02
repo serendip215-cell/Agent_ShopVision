@@ -376,6 +376,288 @@ Chinese-CLIP 建索引的离线流程为：
 
 新增一个商品类别时，只需建立该类别的 `items.csv` 和 FAISS 索引，并更新 `index_registry.json`。已有类别新增商品时，只重建该类别索引，不重新处理其他类别。
 
+### 5.5.1.1 实现前的输入约定
+
+索引脚本只读取人工审核后的冻结目录，不直接读取正在清洗的中间目录：
+
+    data/final_dataset_v1/<类别>/products.csv
+    data/final_dataset_v1/<类别>/images/
+
+每条记录至少需要以下字段：
+
+    item_id
+    product_type
+    type
+    item_name
+    description
+    color
+    material
+    local_image_path
+
+`item_id` 是商品的稳定主键。索引脚本遇到缺失图片、重复 `item_id` 或重复向量记录时，应写入错误报告并跳过该条记录，不能用空向量占位。
+
+建议新增以下两个脚本：
+
+    scripts/build_category_index.py   # 离线提取向量并建立类别索引
+    scripts/search_category_index.py  # 加载索引并执行中文搜索
+
+### 5.5.1.2 环境安装
+
+Chinese-CLIP 官方项目提供 `load_from_name`、`encode_image` 和 `encode_text` 接口，并要求将图文特征归一化后用于下游相似度计算。安装和模型名称以官方项目说明为准：
+
+- https://github.com/OFA-Sys/Chinese-CLIP
+- https://github.com/facebookresearch/faiss/wiki/Getting-started
+
+Windows 下可以在项目环境中执行：
+
+```powershell
+py -3 -m venv .venv
+.venv\\Scripts\\activate
+py -3 -m pip install torch torchvision pillow pandas numpy faiss-cpu
+py -3 -m pip install cn_clip
+```
+
+如果使用 GPU，应根据 CUDA 版本安装对应的 PyTorch；如果 `faiss-cpu` 在当前环境不可用，应使用 Conda 安装 FAISS，并保持 Python、PyTorch 和 FAISS 的架构一致。
+
+### 5.5.1.3 构造商品文本
+
+图片向量和文本向量必须使用同一个 Chinese-CLIP 模型。商品文本不能只使用一个可能为空的字段，建议把可靠字段组合成固定模板：
+
+```python
+def build_product_text(row: dict[str, str]) -> str:
+    parts = [
+        f"商品大类：{row.get('product_type', '').strip()}",
+        f"细分类：{row.get('type', '').strip()}",
+        f"颜色：{row.get('color', '').strip()}",
+        f"材质：{row.get('material', '').strip()}",
+        f"商品名称：{row.get('item_name', '').strip()}",
+    ]
+    return "；".join(part for part in parts if part.split("：", 1)[1])
+```
+
+例如输出：
+
+```text
+商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品名称：白色透气运动鞋
+```
+
+无法确认的属性留空，不要生成“未知”“可能是”等会影响检索的猜测文本。
+
+### 5.5.1.4 提取图片和文本向量
+
+索引脚本首先加载模型和图片预处理器：
+
+```python
+import torch
+import cn_clip.clip as clip
+from cn_clip.clip import load_from_name
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+MODEL_NAME = "ViT-B-16"
+
+model, preprocess = load_from_name(
+    MODEL_NAME,
+    device=DEVICE,
+    download_root="models/chinese_clip",
+    use_modelscope=True,
+)
+model.eval()
+```
+
+提取图片向量：
+
+```python
+from PIL import Image
+
+image = preprocess(
+    Image.open(image_path).convert("RGB")
+).unsqueeze(0).to(DEVICE)
+
+with torch.no_grad():
+    vector = model.encode_image(image)
+    vector = vector / vector.norm(dim=-1, keepdim=True)
+
+image_vector = vector.cpu().numpy().astype("float32")[0]
+```
+
+提取文本向量：
+
+```python
+text_tokens = clip.tokenize([product_text]).to(DEVICE)
+
+with torch.no_grad():
+    vector = model.encode_text(text_tokens)
+    vector = vector / vector.norm(dim=-1, keepdim=True)
+
+text_vector = vector.cpu().numpy().astype("float32")[0]
+```
+
+正式处理时应按批次提取向量，避免一次性把所有图片加载到内存。每处理一批就写入临时向量文件或检查点，程序中断后可以从未完成的 `item_id` 继续。
+
+### 5.5.1.5 建立类别 FAISS 索引
+
+对中文文本搜索商品图片，第一版主要建立商品图片向量索引。文本向量可以另存，用于文本相似度检索或混合排序。
+
+```python
+import faiss
+import numpy as np
+
+vectors = np.asarray(image_vectors, dtype="float32")
+vector_dimension = vectors.shape[1]
+
+# 由于向量已经归一化，内积等价于余弦相似度。
+index = faiss.IndexFlatIP(vector_dimension)
+index.add(vectors)
+
+faiss.write_index(
+    index,
+    "data/index_data/鞋/image_index.faiss",
+)
+```
+
+FAISS 返回的是向量编号，不是商品 ID。因此 `items.csv` 必须按照相同顺序写入 `vector_id`：
+
+```python
+items["vector_id"] = range(len(items))
+items.to_csv(
+    "data/index_data/鞋/items.csv",
+    index=False,
+    encoding="utf-8-sig",
+)
+```
+
+建议另外保存：
+
+```text
+data/index_data/鞋/image_embeddings.npy
+data/index_data/鞋/text_embeddings.npy
+data/index_data/鞋/items.csv
+data/index_data/鞋/image_index.faiss
+data/index_data/鞋/build_report.json
+```
+
+`build_report.json` 至少记录类别、输入行数、成功建索引数量、跳过数量、向量维度、模型名称、模型版本和生成时间。
+
+### 5.5.1.6 在线文本检索
+
+查询脚本接收用户输入的中文文本和可选过滤条件：
+
+```python
+query = "白色透气运动鞋"
+query_tokens = clip.tokenize([query]).to(DEVICE)
+
+with torch.no_grad():
+    query_vector = model.encode_text(query_tokens)
+    query_vector = query_vector / query_vector.norm(dim=-1, keepdim=True)
+
+query_vector = query_vector.cpu().numpy().astype("float32")
+scores, vector_ids = index.search(query_vector, 20)
+```
+
+查询结果通过 `vector_id` 找回商品：
+
+```python
+results = []
+for score, vector_id in zip(scores[0], vector_ids[0]):
+    if vector_id < 0:
+        continue
+    row = items.iloc[int(vector_id)].to_dict()
+    row["similarity"] = float(score)
+    results.append(row)
+```
+
+FAISS 只负责相似度召回，类别、颜色、材质、价格等条件由结构化字段过滤：
+
+```python
+def match_filters(row, filters):
+    if filters.get("product_type") and row["product_type"] != filters["product_type"]:
+        return False
+    if filters.get("type") and row["type"] != filters["type"]:
+        return False
+    if filters.get("color") and filters["color"] not in row["color"]:
+        return False
+    if filters.get("material") and filters["material"] not in row["material"]:
+        return False
+    return True
+```
+
+推荐先召回 Top-20 或 Top-50，再过滤和重排，最后返回 Top-5。最终结果至少包含：
+
+```text
+item_id
+product_type
+type
+item_name
+description
+color
+material
+local_image_path
+similarity
+```
+
+### 5.5.1.7 多类别查询和索引路由
+
+当用户明确输入“运动鞋”时，查询 `data/index_data/鞋/image_index.faiss`。当用户没有提供类别时，查询索引登记文件中的多个类别，再合并结果：
+
+```text
+用户查询
+  ↓
+识别类别（规则、Agent 或大模型）
+  ↓
+选择一个或多个类别索引
+  ↓
+分别召回 Top-K
+  ↓
+合并并按 similarity 排序
+  ↓
+使用颜色、材质、价格等字段过滤
+  ↓
+返回最终商品
+```
+
+`index_registry.json` 示例：
+
+```json
+{
+  "鞋": {
+    "items_file": "鞋/items.csv",
+    "image_index": "鞋/image_index.faiss",
+    "vector_dimension": 512,
+    "count": 3219,
+    "model_name": "Chinese-CLIP",
+    "model_version": "ViT-B-16",
+    "normalized": true
+  }
+}
+```
+
+### 5.5.1.8 新增数据和版本更新
+
+新增一个类别时，只创建该类别的目录和索引，然后更新 `index_registry.json`。已有类别新增商品时，只重新构建该类别索引。
+
+如果出现以下任一变化，必须重新提取受影响类别的向量：
+
+- 商品图片发生变化；
+- 商品标题、属性或描述发生变化；
+- Chinese-CLIP 模型发生变化；
+- 商品文本模板发生变化；
+- 图片预处理方式发生变化。
+
+索引报告应记录 `source_hash`、`model_version`、`prompt_version` 和 `pipeline_version`，避免把不同版本的向量混在同一个索引中。
+
+### 5.5.1.9 最小验收流程
+
+第一轮只处理一个类别，例如“鞋”：
+
+1. 读取审核通过的鞋类 `products.csv`；
+2. 成功生成 `items.csv`；
+3. 图片向量数量与 `items.csv` 行数一致；
+4. FAISS `ntotal` 与向量数量一致；
+5. 随机抽查 10 条 `vector_id → item_id → 图片` 映射；
+6. 使用“白色运动鞋”“黑色皮鞋”等查询测试 Top-5；
+7. 记录查询耗时和人工相关性；
+8. 确认流程正确后，再批量处理其他类别。
+
 #### 5.5.2 阶段五：检索基线和评测
 
 先使用 Chinese-CLIP 建立不训练的检索基线，准备固定测试查询，例如：
