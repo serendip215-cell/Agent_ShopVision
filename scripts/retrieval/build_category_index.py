@@ -200,8 +200,12 @@ def build_category(
     image_index.add(np.ascontiguousarray(image_vectors, dtype="float32"))
     text_index = faiss.IndexFlatIP(text_vectors.shape[1])
     text_index.add(np.ascontiguousarray(text_vectors, dtype="float32"))
-    faiss.write_index(image_index, str(category_output / "image_index.faiss"))
-    faiss.write_index(text_index, str(category_output / "text_index.faiss"))
+    # Use Python file handles instead of FAISS' native path API. The latter
+    # can fail on Windows when category directories contain Chinese names.
+    with (category_output / "image_index.faiss").open("wb") as handle:
+        handle.write(faiss.serialize_index(image_index).tobytes())
+    with (category_output / "text_index.faiss").open("wb") as handle:
+        handle.write(faiss.serialize_index(text_index).tobytes())
     np.save(category_output / "image_embeddings.npy", image_vectors)
     np.save(category_output / "text_embeddings.npy", text_vectors)
 

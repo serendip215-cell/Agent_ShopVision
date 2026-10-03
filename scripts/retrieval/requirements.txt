@@ -7,3 +7,6 @@ faiss-cpu
 timm
 lmdb>=2.3.0
 # cn_clip==1.6.0 请按文档单独使用 pip install cn_clip --no-deps 安装，避免旧版 lmdb 构建失败。
+huggingface_hub
+safetensors
+

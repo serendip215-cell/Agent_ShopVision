@@ -82,13 +82,15 @@ def main() -> int:
 
     try:
         import faiss
+        import numpy as np
     except ImportError as exc:
         raise RuntimeError("缺少 faiss，请先安装 requirements.txt。") from exc
 
     results: list[dict[str, Any]] = []
     for category in selected:
         entry = categories[category]
-        image_index = faiss.read_index(str(index_dir / entry["image_index"]))
+        with (index_dir / entry["image_index"]).open("rb") as handle:
+            image_index = faiss.deserialize_index(np.frombuffer(handle.read(), dtype="uint8"))
         distances, ids = image_index.search(query_vector, min(candidate_k, image_index.ntotal))
         items = load_items(index_dir / entry["items_csv"])
         for similarity, vector_id in zip(distances[0], ids[0]):

@@ -37,7 +37,7 @@
 
 <p align="center">
   读取本地商品图片和结构化字段，做属性识别、检索推荐、标题描述生成。<br>
-  当前停在实验 1：三源数据已并进正式表，视觉属性清洗已跑完。检索、训练、前后端和 Agent 还没开始。
+  当前已完成实验 1 数据清洗和中文图文检索基线脚本；索引构建、模型训练、前后端和 Agent 仍待继续验证。
 </p>
 
 ## ✨ 当前进度
@@ -50,6 +50,7 @@
 | 图片技术质检 | ✅ 完成 | 正式表 `image_status` 全部为 `ok` |
 | 视觉属性清洗 | ✅ 完成 | `data/processed_data_cleaning/`，无待处理、无接口失败 |
 | 中文图文检索基线 | ✅ 已实现 | `scripts/retrieval/`，输入 `data/processed_data_cleaning/`，输出 `data/index_data/` |
+| 检索 JSON 配置 | ✅ 已完成 | `configs/retrieval.json`，构建和查询脚本默认读取 |
 | Chinese-CLIP 微调 / 模型训练 | ⏳ 未开始 | 实验 2 后续 |
 | 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
 
@@ -171,7 +172,7 @@ scripts/retrieval/search_category_index.py
 | `scripts/retrieval/build_category_index.py` | 使用 Chinese-CLIP 和 FAISS 建立类别索引 |
 | `scripts/retrieval/search_category_index.py` | 使用中文查询词搜索商品图片 |
 
-参数、断点续跑和字段规则见 [`scripts/README.md`](scripts/README.md)。清洗脚本见 [`scripts/attribute_cleaning/README.md`](scripts/attribute_cleaning/README.md)。检索配置见 [`configs/retrieval.md`](configs/retrieval.md)。
+参数、断点续跑和字段规则见 [`scripts/README.md`](scripts/README.md)。清洗脚本见 [`scripts/attribute_cleaning/README.md`](scripts/attribute_cleaning/README.md)。检索配置见 [`configs/retrieval.md`](configs/retrieval.md)，默认 JSON 配置见 [`configs/retrieval.json`](configs/retrieval.json)。
 
 常用命令（在仓库根目录执行）：
 
@@ -185,6 +186,13 @@ python scripts/check_product_fields.py `
 
 py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
   --input-dir data/processed_data/包
+
+python scripts/retrieval/build_category_index.py \
+  --config configs/retrieval.json \
+  --categories "鞋" --overwrite
+
+python scripts/retrieval/search_category_index.py "白色运动鞋" \
+  --config configs/retrieval.json --category "鞋" --top-k 5
 ```
 
 清洗脚本只使用 Python 标准库。密钥放在 `scripts/attribute_cleaning/.env`（由 `.env.example` 复制），不要提交。
@@ -196,6 +204,8 @@ py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
 | 文档 | 性质 |
 |---|---|
 | [`scripts/README.md`](scripts/README.md) | 当前脚本说明 |
+| [`configs/retrieval.json`](configs/retrieval.json) | 检索脚本默认 JSON 配置 |
+| [`configs/retrieval.md`](configs/retrieval.md) | 检索环境、参数和运行流程 |
 | [`data/raw_data/README.md`](data/raw_data/README.md) | 当前原始数据说明 |
 | [`data/raw_data/MUGE_data/README.md`](data/raw_data/MUGE_data/README.md) | 当前 MUGE 原始表说明 |
 | [`data/raw_data/Amazon_data_translated/README.md`](data/raw_data/Amazon_data_translated/README.md) | 当前 Amazon 译文说明 |
@@ -210,10 +220,10 @@ py -3 scripts/attribute_cleaning/run_gpt6luna_cleaning.py `
 
 ## 🚧 还没做
 
-- 中文图文检索样本和检索基线
+- 检索基线的实际索引构建和人工查询评估
 - 模型训练、量化与剪枝
 - FastAPI / React
 - Agent 工具调用和端到端评测
 
-下一步是安装 Chinese-CLIP 和 FAISS，先按类别构建零样本检索索引，再用人工查询集评估 Recall@K；检索文本应读取人工审核后的 `processed_data_cleaning/`。
+下一步是使用已配置的 PyTorch 环境安装依赖，按类别构建零样本检索索引，再用人工查询集评估 Recall@K；检索文本应读取人工审核后的 `processed_data_cleaning/`。
 

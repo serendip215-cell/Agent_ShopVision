@@ -107,6 +107,7 @@ py -3 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 py -3 -m pip install -r scripts\retrieval\requirements.txt
 py -3 -m pip install cn_clip --no-deps
+py -3 -m pip install huggingface_hub safetensors
 ```
 
 脚本需要 Python 3.10 或更高版本。`cn_clip` 1.6.0 的旧依赖会锁定 `lmdb==1.3.0`，
@@ -115,7 +116,7 @@ py -3 -m pip install cn_clip --no-deps
 Conda 环境中执行 `conda install -c conda-forge faiss-cpu lmdb`，再安装 `timm` 和
 `cn_clip`。模型缓存目录和索引目录不需要提交到仓库。
 
-Chinese-CLIP 首次运行会下载模型并缓存到 `models/chinese_clip/`。这个目录可以加入
+Chinese-CLIP 首次运行需要 `huggingface_hub` 和 `safetensors`，并会下载模型缓存到 `models/chinese_clip/`。这个目录可以加入
 `.gitignore`，不要把模型权重提交到仓库。没有 GPU 时使用 CPU 也可以运行，但建立全量
 索引会更慢。
 
@@ -201,6 +202,8 @@ py -3 scripts\retrieval\search_category_index.py "白色鞋子" --category "鞋"
 3. `errors.csv` 中的图片缺失和重复记录已人工确认。
 4. 随机输入 3 至 5 条中文查询，返回结果的类别、图片和 `item_id` 能对应。
 5. 重新构建同一类别后，查询脚本仍能根据注册表正常读取。
+
+
 
 
 
