@@ -1,0 +1,21 @@
+# Diagram
+
+```mermaid
+flowchart TD
+
+  raw["MUGE / Amazon / 苏宁原始数据（CSV+图片）"]
+  translate["Amazon 英文字段 DeepL 中文翻译（断点续译+审计）"]
+  merge["字段统一与九类归并 classify_products.py（SHA-256 图片去重）"]
+  qc["图片技术质检 check_product_fields.py（image_status）"]
+  cutout["商品抠图 cutout_images.py（ISNet 背景移除）"]
+  clean["视觉属性清洗 run_gpt6luna_cleaning.py（置信度 0.72）"]
+  dataset["标准化数据集 processed_data / cleaning（九类目）"]
+
+  raw-->translate
+  translate-->merge
+  merge-->qc
+  qc-->cutout
+  cutout-->clean
+  clean-->dataset
+
+```

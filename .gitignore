@@ -25,3 +25,7 @@ __pycache__/
 /models/chinese_clip/
 /data/index_data/
 
+# Typst 编译器（build_typ.sh 按系统自动下载）与编译产物 PDF。
+/docs/typst/
+/docs/build/
+

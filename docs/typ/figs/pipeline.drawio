@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" agent="Claude MCP Server" version="1.0.0" pages="1">
+  <diagram name="diagram" id="diagram-1">
+    <mxGraphModel dx="1426" dy="840" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2339" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="root-parent" parent="0" />
+        <mxCell id="1" value="MUGE / Amazon / 苏宁原始数据（CSV+图片）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="50" y="50" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="2" value="Amazon 英文字段 DeepL 中文翻译（断点续译+审计）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="302" y="50" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="字段统一与九类归并 classify_products.py（SHA-256 图片去重）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="50" y="194" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="图片技术质检 check_product_fields.py（image_status）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="302" y="194" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="商品抠图 cutout_images.py（ISNet 背景移除）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="50" y="338" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="视觉属性清洗 run_gpt6luna_cleaning.py（置信度 0.72）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="302" y="338" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="标准化数据集 processed_data / cleaning（九类目）" style="shape=rect;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=8;fillColor=#F8FAFC;strokeColor=#333333;strokeWidth=2;fontColor=#111827;fontSize=20" parent="root-parent" vertex="1">
+          <mxGeometry x="50" y="482" width="180" height="72" as="geometry" />
+        </mxCell>        <mxCell id="8" style="html=1;rounded=0;endFill=0;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="root-parent" source="1" target="2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="sourcePoint" />
+            <mxPoint x="0" y="0" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9" style="html=1;rounded=0;endFill=0;fontSize=9;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" parent="root-parent" source="2" target="3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="sourcePoint" />
+            <mxPoint x="0" y="0" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="10" style="html=1;rounded=0;endFill=0;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="root-parent" source="3" target="4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="sourcePoint" />
+            <mxPoint x="0" y="0" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="11" style="html=1;rounded=0;endFill=0;fontSize=9;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" parent="root-parent" source="4" target="5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="sourcePoint" />
+            <mxPoint x="0" y="0" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12" style="html=1;rounded=0;endFill=0;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="root-parent" source="5" target="6" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="sourcePoint" />
+            <mxPoint x="0" y="0" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="13" style="html=1;rounded=0;endFill=0;fontSize=9;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" parent="root-parent" source="6" target="7" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="sourcePoint" />
+            <mxPoint x="0" y="0" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

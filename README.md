@@ -51,6 +51,7 @@
 | 视觉属性清洗 | ✅ 完成 | `data/processed_data_cleaning/`，无待处理、无接口失败 |
 | 中文图文检索基线 | ✅ 已实现 | `scripts/retrieval/`，输入 `data/processed_data_cleaning/`，输出 `data/index_data/` |
 | 检索 JSON 配置 | ✅ 已完成 | `configs/retrieval.json`，构建和查询脚本默认读取 |
+| 实验 1 报告 | ✅ 完成 | `docs/typ/实验一.typ`，编译方法见下文「实验报告编译」 |
 | Chinese-CLIP 微调 / 模型训练 | ⏳ 未开始 | 实验 2 后续 |
 | 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
 
@@ -133,11 +134,15 @@ Agent_ShopVision/
 ├── scripts/                       # 采集、翻译、整理、质检、抠图、清洗、检索
 │   ├── attribute_cleaning/
 │   └── retrieval/
-├── docs/                          # 方案、安装说明、实验材料
+├── docs/
+│   ├── typ/                       # 实验报告 Typst 源：.typ、refs.bib、figures/、figs/
+│   ├── scripts/                   # 报告编译脚本 build_typ.sh/.cmd、gen_figures.py
+│   ├── typst/                     # Typst 编译器，首次运行自动下载
+│   └── build/                     # 编译出的带时间戳 PDF
 └── README.md
 ```
 
-不入库的本地文件：`.env`、`scripts/models/*.onnx`、`models/chinese_clip/`、`data/index_data/`、`data/raw_data/*/images_cutout/`、`data/processed_backups/`。
+不入库的本地文件：`.env`、`scripts/models/*.onnx`、`models/chinese_clip/`、`data/index_data/`、`data/raw_data/*/images_cutout/`、`data/processed_backups/`、`docs/typst/`、`docs/build/`。
 
 ## 🧰 脚本
 
@@ -197,6 +202,44 @@ python scripts/retrieval/search_category_index.py "白色运动鞋" \
 
 清洗脚本只使用 Python 标准库。密钥放在 `scripts/attribute_cleaning/.env`（由 `.env.example` 复制），不要提交。
 
+## 📝 实验报告编译
+
+实验报告用 Typst 写，源文件放 `docs/typ/`，一条命令编译成带时间戳的 PDF。Windows、macOS、Linux 通用。
+
+| 路径 | 作用 |
+|---|---|
+| `docs/typ/实验一.typ` | 实验一报告源，排版按 `docs/` 里的实验报告模板（正文小四宋体 + Times New Roman、行距 20 磅、图表五号） |
+| `docs/typ/refs.bib` | 参考文献库（已逐条溯源），正文用 `@引用键` 交叉引用 |
+| `docs/typ/figures/` | CeTZ 插图源与编译出的 SVG（如流水线图） |
+| `docs/typ/figs/` | matplotlib 数据图和 drawio / mermaid 图源 |
+| `docs/scripts/build_typ.sh` | Mac / Linux / Git Bash 编译入口 |
+| `docs/scripts/build_typ.cmd` | Windows 入口，双击即可运行 |
+| `docs/scripts/gen_figures.py` | 重新生成数据图（图 2–图 4） |
+
+**Windows**：双击 `docs\scripts\build_typ.cmd`；或在 cmd / PowerShell 里：
+
+```powershell
+docs\scripts\build_typ.cmd           # 列出 docs\typ\*.typ，输入编号回车编译
+docs\scripts\build_typ.cmd 实验一     # 跳过交互，按编号或文件名关键字直接编译
+```
+
+**Mac / Linux**（Windows 也可用 Git Bash）：
+
+```bash
+bash docs/scripts/build_typ.sh
+bash docs/scripts/build_typ.sh 2
+```
+
+编译结果写到 `docs/build/<名称>-<年月日-时分秒>.pdf`，不入 git。`docs/typst/` 里的 Typst 编译器首次运行会自动按当前系统下载，不入 git；Windows 入口依赖 Git Bash（装 Git for Windows 自带，脚本会从 `git.exe` 位置自动找到它）。
+
+**新增实验**：把 `实验二.typ` 放进 `docs/typ/`，重跑编译脚本即可自动识别；文献加进 `refs.bib`，正文 `@引用键` 即可交叉引用。
+
+**插图更新**：数据图改 `docs/scripts/gen_figures.py` 后运行 `python docs/scripts/gen_figures.py`；流水线图改 `docs/typ/figures/pipeline.typ` 后重新编译为 SVG（Mac 把 `typst.exe` 换成 `typst`）：
+
+```bash
+docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ/figures/pipeline.svg
+```
+
 ## 📖 文档
 
 说明当前仓库的，是下面三份数据说明和 `scripts/README.md`。方案类文档按写作时的设计原样保留，给后面的检索、本地模型和 Agent 用，不要把里面的目录和步骤当成已经做完。
@@ -216,7 +259,7 @@ python scripts/retrieval/search_category_index.py "白色运动鞋" \
 | [`docs/Qwen2.5-VL-Ollama安装配置.md`](docs/Qwen2.5-VL-Ollama安装配置.md) | 预留。本地 Qwen 安装 |
 | [`data/raw_data/数据集训练阶段详细规划.md`](data/raw_data/数据集训练阶段详细规划.md) | 预留。早期阶段规划，正文仍是当时的 MUGE 三类 |
 
-`docs/` 里还有实验 1 任务书和开课 PDF，以及实验报告模板。
+`docs/` 里还有实验 1 任务书和开课 PDF、实验报告模板，以及已写好的实验一报告源（`docs/typ/实验一.typ`，编译方法见上文「实验报告编译」）。
 
 ## 🚧 还没做
 
