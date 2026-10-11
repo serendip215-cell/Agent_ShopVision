@@ -116,9 +116,16 @@ py -3 -m pip install huggingface_hub safetensors
 Conda 环境中执行 `conda install -c conda-forge faiss-cpu lmdb`，再安装 `timm` 和
 `cn_clip`。模型缓存目录和索引目录不需要提交到仓库。
 
-Chinese-CLIP 首次运行需要 `huggingface_hub` 和 `safetensors`，并会下载模型缓存到 `models/chinese_clip/`。这个目录可以加入
+Chinese-CLIP 首次运行需要 `huggingface_hub` 和 `safetensors`。索引脚本会通过
+`load_from_name` 自动下载 `ViT-B-16`，并将模型缓存到项目根目录下的
+`models/chinese_clip/`；本地已有缓存时直接复用，不需要再次手动下载。这个目录可以加入
 `.gitignore`，不要把模型权重提交到仓库。没有 GPU 时使用 CPU 也可以运行，但建立全量
-索引会更慢。
+索引会更慢。若 Hugging Face 下载不稳定，可安装 `modelscope` 并在构建、查询命令中加入
+`--use-modelscope`。
+
+索引构建和后续微调默认使用同一份预训练权重：
+`models/chinese_clip/clip_cn_vit-b-16.pt`。微调产生的新权重应另存到独立目录，不能与旧
+权重生成的向量混用；换权重后必须重新提取向量并重建索引。
 
 ## 6. 建立索引
 
@@ -176,6 +183,25 @@ py -3 scripts\retrieval\search_category_index.py "白色运动鞋" --category "�
 ```powershell
 py -3 scripts\retrieval\search_category_index.py "适合通勤的黑色包" --top-k 10
 ```
+
+查询时会用同一个中文查询词分别检索图片索引和商品文本索引，然后进行加权融合：
+
+```text
+最终分数 = image_weight × 文本-图片相似度
+         + text_weight × 文本-商品描述相似度
+```
+
+默认配置为 `image_weight = 0.7`、`text_weight = 0.3`。两个权重会在运行时自动归一化，
+只要非负且总和大于 0 即可调整。例如：
+
+```powershell
+py -3 scripts\retrieval\search_category_index.py "白色运动鞋" `
+  --category "鞋" --top-k 10 --image-weight 0.5 --text-weight 0.5
+```
+
+也可以在 `configs/retrieval.json` 的 `search` 对象中修改 `image_weight` 和
+`text_weight`。返回结果中的 `similarity` 是融合分数，同时保留 `image_similarity` 和
+`text_similarity` 便于验收和调参。两个权重都为 0 或出现负数会直接报错。
 
 可以叠加元数据过滤，过滤发生在候选召回之后：
 

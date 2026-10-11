@@ -1,4 +1,4 @@
-"""Search reviewed products with a category image index."""
+"""Search reviewed products with fused image/text indexes."""
 
 from __future__ import annotations
 
@@ -21,12 +21,14 @@ from configuration import parse_configured_args
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="使用中文文本查询商品图片索引。")
+    parser = argparse.ArgumentParser(description="使用中文文本融合查询商品图片和商品描述索引。")
     parser.add_argument("query", help="中文搜索词。")
     parser.add_argument("--index-dir", default="data/index_data", help="索引目录（相对项目根目录）。")
     parser.add_argument("--category", default="", help="限定类别；留空时搜索注册表中的全部类别。")
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--candidate-k", type=int, default=0, help="每个类别先取多少候选，默认 max(20, top-k*5)。")
+    parser.add_argument("--image-weight", type=float, default=0.7, help="文本-图片相似度权重，默认 0.7。")
+    parser.add_argument("--text-weight", type=float, default=0.3, help="文本-商品描述相似度权重，默认 0.3。")
     parser.add_argument("--product-type", default="")
     parser.add_argument("--type", dest="sub_type", default="")
     parser.add_argument("--color", default="")
@@ -62,6 +64,15 @@ def main() -> int:
     args = parse_args()
     if args.top_k < 1:
         raise ValueError("--top-k 必须大于 0。")
+    if args.candidate_k < 0:
+        raise ValueError("--candidate-k 不能为负数。")
+    if args.image_weight < 0 or args.text_weight < 0:
+        raise ValueError("--image-weight 和 --text-weight 不能为负数。")
+    weight_total = args.image_weight + args.text_weight
+    if weight_total <= 0:
+        raise ValueError("--image-weight 和 --text-weight 至少有一个大于 0。")
+    image_weight = args.image_weight / weight_total
+    text_weight = args.text_weight / weight_total
     index_dir = resolve_path(args.index_dir)
     registry = load_registry(index_dir / "index_registry.json")
     categories = registry.get("categories", {})
@@ -91,26 +102,54 @@ def main() -> int:
         entry = categories[category]
         with (index_dir / entry["image_index"]).open("rb") as handle:
             image_index = faiss.deserialize_index(np.frombuffer(handle.read(), dtype="uint8"))
-        distances, ids = image_index.search(query_vector, min(candidate_k, image_index.ntotal))
+        image_distances, image_ids = image_index.search(query_vector, min(candidate_k, image_index.ntotal))
+        text_index_path = index_dir / entry.get("text_index", "")
+        if not text_index_path.exists():
+            raise FileNotFoundError(
+                f"类别 {category} 缺少文本索引：{text_index_path}，请重新构建该类别索引。"
+            )
+        with text_index_path.open("rb") as handle:
+            text_index = faiss.deserialize_index(np.frombuffer(handle.read(), dtype="uint8"))
+        text_distances, text_ids = text_index.search(query_vector, min(candidate_k, text_index.ntotal))
         items = load_items(index_dir / entry["items_csv"])
-        for similarity, vector_id in zip(distances[0], ids[0]):
-            if vector_id < 0 or vector_id not in items:
+        image_scores = {
+            int(vector_id): float(similarity)
+            for similarity, vector_id in zip(image_distances[0], image_ids[0])
+            if vector_id >= 0
+        }
+        text_scores = {
+            int(vector_id): float(similarity)
+            for similarity, vector_id in zip(text_distances[0], text_ids[0])
+            if vector_id >= 0
+        }
+        candidate_ids = set(image_scores) | set(text_scores)
+        for vector_id in candidate_ids:
+            if vector_id not in items:
                 continue
             row = items[vector_id]
             if not matches(row, args):
                 continue
+            image_similarity = image_scores.get(vector_id, 0.0)
+            text_similarity = text_scores.get(vector_id, 0.0)
+            similarity = image_weight * image_similarity + text_weight * text_similarity
             result = {
                 key: value for key, value in row.items()
                 if key not in {"vector_id", "text"}
             }
             result["category"] = category
             result["similarity"] = round(float(similarity), 6)
+            result["image_similarity"] = round(image_similarity, 6)
+            result["text_similarity"] = round(text_similarity, 6)
             results.append(result)
     results.sort(key=lambda item: item["similarity"], reverse=True)
     payload = {
         "query": args.query,
         "categories": selected,
         "top_k": args.top_k,
+        "weights": {
+            "image": round(image_weight, 6),
+            "text": round(text_weight, 6),
+        },
         "results": results[: args.top_k],
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))

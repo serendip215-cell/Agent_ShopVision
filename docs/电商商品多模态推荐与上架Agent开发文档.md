@@ -370,7 +370,14 @@ Chinese-CLIP 建索引的离线流程为：
 
     商品大类：鞋；细分类：运动鞋；颜色：白色；材质：网面；商品标题：白色透气运动鞋；商品描述：白色透气运动鞋
 
-用户输入中文搜索词时，使用同一个 Chinese-CLIP 提取文本向量，再查询对应类别的 `image_index.faiss`。如果用户没有明确商品类别，则查询多个类别索引，合并各类别的 Top-K 结果，再进行属性和价格过滤。
+用户输入中文搜索词时，使用同一个 Chinese-CLIP 提取查询文本向量，分别查询对应类别的
+`image_index.faiss` 和 `text_index.faiss`，再按可配置权重融合：
+
+    final_score = image_weight * text_image_score
+                + text_weight * text_description_score
+
+默认 `image_weight=0.7`、`text_weight=0.3`，两个权重可在 `configs/retrieval.json` 或命令行
+参数中调整。如果用户没有明确商品类别，则对多个类别执行同样的双路召回，合并结果后再进行属性和价格过滤。
 
 新增一个商品类别时，只需建立该类别的 `items.csv` 和 FAISS 索引，并更新 `index_registry.json`。已有类别新增商品时，只重建该类别索引，不重新处理其他类别。
 
@@ -496,7 +503,8 @@ text_vector = vector.cpu().numpy().astype("float32")[0]
 
 ### 5.5.1.5 建立类别 FAISS 索引
 
-对中文文本搜索商品图片，第一版主要建立商品图片向量索引。文本向量可以另存，用于文本相似度检索或混合排序。
+对中文文本搜索商品图片，同时建立商品图片向量索引和商品描述文本向量索引。两路索引使用
+同一个查询文本向量检索，得到文本-图片相似度和文本-描述相似度，再按配置权重融合排序。
 
 ```python
 import faiss
@@ -606,9 +614,9 @@ similarity
   ↓
 选择一个或多个类别索引
   ↓
-分别召回 Top-K
+分别召回图片索引和文本索引 Top-K
   ↓
-合并并按 similarity 排序
+按 image_weight/text_weight 融合并排序
   ↓
 使用颜色、材质、价格等字段过滤
   ↓
@@ -622,6 +630,7 @@ similarity
   "鞋": {
     "items_file": "鞋/items.csv",
     "image_index": "鞋/image_index.faiss",
+    "text_index": "鞋/text_index.faiss",
     "vector_dimension": 512,
     "count": 3219,
     "model_name": "Chinese-CLIP",

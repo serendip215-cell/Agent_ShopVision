@@ -15,6 +15,8 @@
     "category": "",
     "top_k": 5,
     "candidate_k": 0,
+    "image_weight": 0.7,
+    "text_weight": 0.3,
     "product_type": "",
     "sub_type": "",
     "color": "",

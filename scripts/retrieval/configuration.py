@@ -34,6 +34,9 @@ def parse_configured_args(parser: argparse.ArgumentParser, section: str, root: P
             elif action.type is int:
                 if type(value) is not int or value < 0:
                     raise ValueError(f"{section}.{key} 必须是非负整数")
+            elif action.type is float:
+                if isinstance(value, bool) or not isinstance(value, (int, float)):
+                    raise ValueError(f"{section}.{key} 必须是数字")
             elif not isinstance(value, str):
                 raise ValueError(f"{section}.{key} 必须是字符串")
             if action.choices and value not in action.choices:

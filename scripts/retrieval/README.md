@@ -25,12 +25,19 @@
 ```powershell
 py -3 -m pip install -r scripts\retrieval\requirements.txt
 py -3 -m pip install cn_clip --no-deps
+py -3 -m pip install huggingface_hub safetensors
 py -3 scripts\retrieval\build_category_index.py --categories "鞋" --overwrite
 py -3 scripts\retrieval\search_category_index.py "白色运动鞋" --category "鞋" --top-k 5
 ```
 
-第一次运行会下载 `ViT-B-16` 权重到 `models/chinese_clip/`。也可以省略
+第一次运行会自动下载 `ViT-B-16` 权重到 `models/chinese_clip/`，本地已有缓存时直接复用。
+如果使用 ModelScope，先执行 `py -3 -m pip install modelscope`，再在构建和查询命令中加入
+`--use-modelscope`。也可以省略
 `--categories`，让脚本自动处理所有包含 `products.csv` 的类别目录。
+
+`models/chinese_clip/` 是索引构建和后续模型微调共用的预训练权重目录。微调完成后应将
+新检查点放到独立目录，并使用新检查点重新提取全部向量、重建 FAISS 索引，不能混用不同
+模型权重生成的向量。
 
 ## 输入要求
 
@@ -56,8 +63,16 @@ CSV 中的 JSON 图片路径列表也可以被读取。缺少图片、重复主�
 商品大类：{product_type}；细分类：{type}；颜色：{color}；材质：{material}；商品标题：{item_name}；商品描述：{description}
 ```
 
-图像和文本向量均做 L2 归一化，图像索引使用 FAISS `IndexFlatIP`。查询时将中文查询
-编码后搜索一个或多个类别的图像索引，再按相似度合并排序，最后应用可选的类别、颜色、
+图像和文本向量均做 L2 归一化，索引使用 FAISS `IndexFlatIP`。查询时将中文查询分别
+编码后搜索图片索引和商品文本索引，再按下面的公式融合排序：
+
+```text
+最终分数 = image_weight × 文本-图片相似度
+         + text_weight × 文本-商品描述相似度
+```
+
+默认权重为 `0.7/0.3`，可通过配置文件或 `--image-weight`、`--text-weight` 调整。
+返回结果会同时给出融合分数、图片相似度和文本相似度，最后应用可选的类别、颜色、
 材质和细分类过滤。若描述字段已经是四属性模板，脚本会避免重复追加。
 
 详细参数、目录结构、重建规则和验收清单见项目根目录的 [`configs/retrieval.md`](../../configs/retrieval.md)。

@@ -144,15 +144,15 @@ python -c "import cn_clip.clip as clip; print(clip.available_models())"
 
 | 用途 | 文件 | 怎么拿 |
 |---|---|---|
-| 调 API 抽特征（第 6 节） | 自动下载 | 代码里 `load_from_name(...)` 会自动下载到指定目录 |
-| 训练 / 评测脚本（第 8 节） | `clip_cn_vit-b-16.pt`（约 750MB） | 手动下载，放入 `data\processed_data_retrieval\pretrained_weights\` |
+| 调 API 抽特征、建立索引（第 5.5、6 节） | 自动下载 | 代码里 `load_from_name(...)` 自动下载到 `models/chinese_clip/`，本地已有则直接复用 |
+| 训练 / 评测脚本（第 8 节） | `clip_cn_vit-b-16.pt`（约 750MB） | 使用同一份预训练权重，路径为 `models/chinese_clip/clip_cn_vit-b-16.pt`；也可先自动下载后再作为 `--resume` 输入 |
 
 手动下载地址（下载其中的 `.pt` 文件即可）：
 
 - Hugging Face: <https://huggingface.co/OFA-Sys/chinese-clip-vit-base-patch16>
 - 魔搭 ModelScope: <https://www.modelscope.cn/models/AI-ModelScope/chinese-clip-vit-base-patch16>
 
-> 国内网络建议用 ModelScope；代码里 `use_modelscope=True` 走魔搭下载通道（需 `pip install modelscope`），否则走 Hugging Face。
+> 国内网络建议用 ModelScope；代码里 `use_modelscope=True` 走魔搭下载通道（需 `pip install modelscope`），否则走 Hugging Face。首次自动下载前还需要安装 `huggingface_hub` 和 `safetensors`。
 
 ### 5.5 当前仓库的检索基线（已实现）
 
@@ -193,8 +193,6 @@ Agent_ShopVision/
 │       │       ├── test_imgs.tsv
 │       │       ├── test_texts.jsonl
 │       │       └── lmdb/             # build_lmdb_dataset.py 的产出
-│       ├── pretrained_weights/
-│       │   └── clip_cn_vit-b-16.pt   # 预训练权重（约 750MB）
 │       ├── experiments/              # finetune 的日志与 ckpt
 │       └── id_mapping.csv            # item_id ↔ 数字 id 映射表
 ├── scripts/
@@ -205,7 +203,7 @@ Agent_ShopVision/
 
 约定：
 
-- **权重、LMDB、训练产出都是大文件，不入库**，已在 `.gitignore` 里排除；`id_mapping.csv` 和脚本入库。
+- **模型权重、LMDB、训练产出都是大文件，不入库**，已在 `.gitignore` 里排除；预训练权重统一放在项目根目录的 `models/chinese_clip/`，`id_mapping.csv` 和脚本入库。
 - 下文命令中的 `${DATAPATH}` 一律指 `data\processed_data_retrieval`，PowerShell 里这样定义：
 
 ```powershell
@@ -232,7 +230,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # 首次运行自动下载权重；本地已有则直接加载
 model, preprocess = load_from_name(
     "ViT-B-16", device=device,
-    download_root="data/processed_data_retrieval/pretrained_weights",
+    download_root="models/chinese_clip",
 )
 model.eval()
 
@@ -433,7 +431,7 @@ cd <Chinese-CLIP源码目录>
 $env:PYTHONPATH = "$env:PYTHONPATH;<Chinese-CLIP源码目录>\cn_clip"
 
 $split = "valid"   # 先跑验证集试流程，再换 test / train
-$resume = "<项目根目录>\$DATAPATH\pretrained_weights\clip_cn_vit-b-16.pt"
+$resume = "<项目根目录>\models\chinese_clip\clip_cn_vit-b-16.pt"
 
 python -u cn_clip\eval\extract_features.py `
     --extract-image-feats `
@@ -506,7 +504,7 @@ bash run_scripts/muge_finetune_vit-b-16_rbt-base.sh ${DATAPATH}
 |---|---|
 | `WORKER_CNT` / `GPUS_PER_NODE` | 机器数 / 每台 GPU 数（单机单卡就 1 和 1） |
 | `--train-data` / `--val-data` | 我们的 LMDB 路径 |
-| `--resume` | `clip_cn_vit-b-16.pt` 的路径 |
+| `--resume` | 预训练权重路径，默认使用 `<项目根目录>\models\chinese_clip\clip_cn_vit-b-16.pt` |
 | `--name` | 输出名，如 `shopvision_finetune_vit-b-16` |
 
 微调注意事项：
