@@ -12,8 +12,10 @@
 # 模型文件（170MB，超过 GitHub 单文件 100MB 上限，放本地 scripts/models/ 使用）。
 /scripts/models/*.onnx
 
-# 本地缓存与崩溃转储。
+# 本地缓存、虚拟环境、系统文件与崩溃转储。
 __pycache__/
+/.venv/
+.DS_Store
 *.stackdump
 
 # 检索流水线大文件（权重、LMDB、训练产出），本地由脚本/下载器重新生成。

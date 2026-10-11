@@ -1,0 +1,13 @@
+{
+  "category": "家居用品",
+  "source_csv": "data/processed_data_cleaning/家居用品/products.csv",
+  "source_dir": "data/processed_data_cleaning/家居用品",
+  "output_dir": "data/index_data/家居用品",
+  "model_name": "ViT-B-16",
+  "device": "cpu",
+  "dimension": 512,
+  "normalized": true,
+  "items": 264,
+  "errors": 0,
+  "generated_at": "2026-10-11T08:55:57Z"
+}

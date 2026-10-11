@@ -1,0 +1,13 @@
+{
+  "category": "包",
+  "source_csv": "data/processed_data_cleaning/包/products.csv",
+  "source_dir": "data/processed_data_cleaning/包",
+  "output_dir": "data/index_data/包",
+  "model_name": "ViT-B-16",
+  "device": "cpu",
+  "dimension": 512,
+  "normalized": true,
+  "items": 1291,
+  "errors": 0,
+  "generated_at": "2026-10-11T08:55:31Z"
+}
