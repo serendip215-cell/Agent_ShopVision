@@ -35,35 +35,14 @@
 #let fillline(w) = box(width: w, height: 0.85em, stroke: (bottom: 0.5pt))
 
 // ============================== 封面 ==============================
-#v(24pt)
-#align(center)[#text(size: 26pt, weight: "bold")[西 安 邮 电 大 学]]
-#v(40pt)
-#align(center)[#text(size: 26pt, weight: "bold", font: ("Times New Roman", "SimHei"))[AI 全栈开发实验]]
-#v(50pt)
-#align(left)[#h(3em)#text(size: 20pt)[题目：]#text(size: 22pt)[#box(stroke: (bottom: 0.5pt), inset: (x: 2pt, y: 1pt))[#h(1em)数据采集与预处理#h(4em)]]]
-#v(70pt)
-#align(left)[#h(3em)#text(size: 14pt, weight: "bold")[组#h(2em)号：#fillline(14em)]]
-#v(8pt)
-#align(left)[#h(3em)#text(size: 14pt, weight: "bold")[组员信息：]]
-#v(4pt)
+// 封面采用用户提供的 Word 模板渲染图，确保版式、组号、学号、成员分工和日期与模板一致。
+#set page(margin: 0pt)
 #align(center)[
-  #text(size: 14pt, weight: "bold")[
-    #table(
-      columns: (14em, 10em, 12em),
-      align: center + horizon,
-      table.header([学号], [姓名], [分工]),
-      [#v(0.9em)], [], [],
-      [#v(0.9em)], [], [],
-      [#v(0.9em)], [], [],
-      [#v(0.9em)], [], [],
-      [#v(0.9em)], [], [],
-    )
-  ]
+  #image("figs/cover_template.png", width: 100%, height: 100%, fit: "contain")
 ]
-#v(10pt)
-#align(left)[#h(3em)#text(size: 14pt, weight: "bold")[时#h(2em)间：#fillline(14em)]]
-
 #pagebreak()
+#set page(margin: 2.5cm)
+
 
 // ============================== 一、实验目的 ==============================
 #h1[一.#h(0.8em)实验目的]
