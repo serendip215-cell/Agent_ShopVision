@@ -184,6 +184,19 @@ py -3 scripts\retrieval\search_category_index.py "白色运动鞋" --category "�
 py -3 scripts\retrieval\search_category_index.py "适合通勤的黑色包" --top-k 10
 ```
 
+也可以输入一张商品图片进行以图搜图。图片路径可以是绝对路径，也可以是相对于项目根目录的路径：
+
+```powershell
+py -3 scripts\retrieval\search_category_index.py `
+  --image "examples/query_shoe.jpg" `
+  --category "鞋" `
+  --top-k 10
+```
+
+图片查询只使用 `image_index.faiss`，返回的 `similarity` 是查询图片与商品图片的相似度，
+不需要重新训练模型或重新构建索引。不指定 `--category` 时，会查询注册表中的全部类别。
+图片和文字也可以同时输入进行三路融合检索，详见下方的多模态查询说明。
+
 查询时会用同一个中文查询词分别检索图片索引和商品文本索引，然后进行加权融合：
 
 ```text
@@ -202,6 +215,23 @@ py -3 scripts\retrieval\search_category_index.py "白色运动鞋" `
 也可以在 `configs/retrieval.json` 的 `search` 对象中修改 `image_weight` 和
 `text_weight`。返回结果中的 `similarity` 是融合分数，同时保留 `image_similarity` 和
 `text_similarity` 便于验收和调参。两个权重都为 0 或出现负数会直接报错。
+
+图片与文字同时输入时，使用三路相似度：
+
+```text
+最终分数 = image_to_image_weight × 图片-图片相似度
+         + text_to_image_weight × 文本-图片相似度
+         + text_to_description_weight × 文本-商品描述相似度
+```
+
+默认权重为 `0.5/0.3/0.2`，可通过配置文件或命令行参数调整：
+
+```powershell
+py -3 scripts\retrieval\search_category_index.py "白色运动鞋" `
+  --image "examples/query_shoe.jpg" --category "鞋" --top-k 10 `
+  --image-to-image-weight 0.5 --text-to-image-weight 0.3 `
+  --text-to-description-weight 0.2
+```
 
 可以叠加元数据过滤，过滤发生在候选召回之后：
 

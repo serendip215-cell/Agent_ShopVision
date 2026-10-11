@@ -75,6 +75,37 @@ CSV 中的 JSON 图片路径列表也可以被读取。缺少图片、重复主�
 返回结果会同时给出融合分数、图片相似度和文本相似度，最后应用可选的类别、颜色、
 材质和细分类过滤。若描述字段已经是四属性模板，脚本会避免重复追加。
 
+### 以图搜图
+
+当前脚本也支持直接输入商品图片：
+
+```powershell
+py -3 scripts\retrieval\search_category_index.py `
+  --image "examples/query_shoe.jpg" `
+  --category "鞋" `
+  --top-k 10
+```
+
+脚本使用与建索引时相同的 Chinese-CLIP 图片预处理和图片编码器，查询对应的
+`image_index.faiss`，再根据 `vector_id` 找回商品信息。省略 `--category` 时会查询所有
+注册类别。图片查询也可以和文字同时提供，执行三路融合检索：
+
+```powershell
+py -3 scripts\retrieval\search_category_index.py "白色运动鞋" `
+  --image "examples/query_shoe.jpg" --category "鞋" --top-k 10
+```
+
+默认分数为：
+
+```text
+0.5 × 图片-图片相似度
++ 0.3 × 文本-图片相似度
++ 0.2 × 文本-商品描述相似度
+```
+
+可通过 `--image-to-image-weight`、`--text-to-image-weight` 和
+`--text-to-description-weight` 调整。
+
 详细参数、目录结构、重建规则和验收清单见项目根目录的 [`configs/retrieval.md`](../../configs/retrieval.md)。
 
 
