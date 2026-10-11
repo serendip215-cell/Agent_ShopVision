@@ -1,0 +1,13 @@
+{
+  "category": "运动服",
+  "source_csv": "data/processed_data_cleaning/运动服/products.csv",
+  "source_dir": "data/processed_data_cleaning/运动服",
+  "output_dir": "data/index_data/运动服",
+  "model_name": "ViT-B-16",
+  "device": "cuda",
+  "dimension": 512,
+  "normalized": true,
+  "items": 668,
+  "errors": 0,
+  "generated_at": "2026-10-11T08:45:26Z"
+}

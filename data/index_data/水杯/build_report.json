@@ -1,0 +1,13 @@
+{
+  "category": "水杯",
+  "source_csv": "data/processed_data_cleaning/水杯/products.csv",
+  "source_dir": "data/processed_data_cleaning/水杯",
+  "output_dir": "data/index_data/水杯",
+  "model_name": "ViT-B-16",
+  "device": "cuda",
+  "dimension": 512,
+  "normalized": true,
+  "items": 2016,
+  "errors": 0,
+  "generated_at": "2026-10-11T08:45:40Z"
+}

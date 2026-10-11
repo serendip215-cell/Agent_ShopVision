@@ -1,0 +1,13 @@
+{
+  "category": "鞋",
+  "source_csv": "data/processed_data_cleaning/鞋/products.csv",
+  "source_dir": "data/processed_data_cleaning/鞋",
+  "output_dir": "data/index_data/鞋",
+  "model_name": "ViT-B-16",
+  "device": "cuda",
+  "dimension": 512,
+  "normalized": true,
+  "items": 3219,
+  "errors": 0,
+  "generated_at": "2026-10-03T05:04:54Z"
+}
