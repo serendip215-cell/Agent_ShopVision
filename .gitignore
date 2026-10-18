@@ -30,3 +30,6 @@ __pycache__/
 /docs/typst/
 /docs/build/
 
+# Chinese-CLIP 官方仓库克隆，只读使用，不纳入版本管理。
+/Chinese-CLIP/
+
