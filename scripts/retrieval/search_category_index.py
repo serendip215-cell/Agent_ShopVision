@@ -38,6 +38,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--material", default="")
     parser.add_argument("--model-name", default="", help="默认读取索引注册表中的模型名称。")
     parser.add_argument("--model-download-root", default="", help="模型缓存目录；留空时读取索引注册表。")
+    parser.add_argument("--checkpoint", default="", help="权重文件；留空时读取索引注册表记录的权重（推荐，保证与建索引一致）。")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--use-modelscope", action="store_true", help="通过 ModelScope 下载模型权重。")
     return parse_configured_args(parser, "search", REPO_ROOT)
@@ -104,10 +105,24 @@ def main() -> int:
         selected = sorted(categories)
     if not selected:
         raise RuntimeError("索引注册表中没有可用类别，请先运行 build_category_index.py。")
-    model_name = args.model_name or registry.get("model", {}).get("name", "ViT-B-16")
-    model_root_value = args.model_download_root or registry.get("model", {}).get("download_root", "models/chinese_clip")
-    use_modelscope = args.use_modelscope or bool(registry.get("model", {}).get("use_modelscope", False))
-    encoder = ChineseClipEncoder(model_name, resolve_path(model_root_value), args.device, use_modelscope)
+    model_config = registry.get("model", {})
+    model_name = args.model_name or model_config.get("name", "ViT-B-16")
+    model_root_value = args.model_download_root or model_config.get("download_root", "models/chinese_clip")
+    use_modelscope = args.use_modelscope or bool(model_config.get("use_modelscope", False))
+    checkpoint_value = args.checkpoint or model_config.get("checkpoint", "")
+    checkpoint = resolve_path(checkpoint_value) if checkpoint_value.strip() else None
+    if checkpoint is not None and not checkpoint.is_file():
+        raise FileNotFoundError(
+            f"索引记录/指定的权重文件不存在：{checkpoint}；"
+            "请重新用 build_category_index.py 建立索引。"
+        )
+    encoder = ChineseClipEncoder(
+        model_name,
+        resolve_path(model_root_value),
+        args.device,
+        use_modelscope,
+        checkpoint=checkpoint,
+    )
     text_query_vector = None
     image_query_vector = None
     if has_text_query:
@@ -227,6 +242,7 @@ def main() -> int:
         "query_type": "multimodal" if has_text_query and has_image_query else ("text" if has_text_query else "image"),
         "categories": selected,
         "top_k": args.top_k,
+        "model": encoder.model_tag,
         "results": results[: args.top_k],
     }
     if has_text_query and not has_image_query:

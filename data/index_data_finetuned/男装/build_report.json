@@ -1,0 +1,14 @@
+{
+  "category": "男装",
+  "source_csv": "data/processed_data_cleaning/男装/products.csv",
+  "source_dir": "data/processed_data_cleaning/男装",
+  "output_dir": "data/index_data_finetuned/男装",
+  "model_name": "ViT-B-16",
+  "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+  "device": "cuda",
+  "dimension": 512,
+  "normalized": true,
+  "items": 999,
+  "errors": 0,
+  "generated_at": "2026-10-18T13:53:08Z"
+}

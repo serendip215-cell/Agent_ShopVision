@@ -54,6 +54,7 @@
 | 检索 JSON 配置 | ✅ 已完成 | `configs/retrieval.json`，构建和查询脚本默认读取 |
 | 实验 1 报告 | ✅ 完成 | `docs/typ/实验一.typ`，编译方法见下文「实验报告编译」 |
 | Chinese-CLIP 微调 | ✅ 完成 | 3 轮 / 705 步，test R@1 37.37→58.67、R@5 70.77→89.08；记录见 [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) |
+| 微调权重接入检索 | ✅ 完成 | `data/index_data_finetuned/`，9 类 9,393 条，由 `epoch3.pt` 编码；旧索引 `data/index_data/` 保留作基线 |
 | 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
@@ -130,14 +131,19 @@ Agent_ShopVision/
 │   │   └── Suning_data/
 │   ├── processed_data/            # 正式合并表，9 个类别
 │   ├── processed_data_cleaning/   # 视觉清洗结果和人工审核数据
-│   └── index_data/                # 图文向量和 FAISS 派生索引
+│   ├── processed_data_retrieval/  # 微调数据、实验权重与评测结果（不入库）
+│   ├── index_data/                # 预训练权重生成的图文向量和 FAISS 索引
+│   └── index_data_finetuned/      # 微调权重（epoch3.pt）生成的索引
 ├── configs/                       # 检索配置和使用说明
-├── scripts/                       # 采集、翻译、整理、质检、抠图、清洗、检索
+├── scripts/                       # 采集、翻译、整理、质检、抠图、清洗、检索、微调
 │   ├── attribute_cleaning/
-│   └── retrieval/
+│   ├── retrieval/
+│   └── finetune/
+├── models/chinese_clip/           # 预训练权重（不入库）
 ├── docs/
 │   ├── typ/                       # 实验报告 Typst 源：.typ、refs.bib、figures/、figs/
 │   ├── scripts/                   # 报告编译脚本 build_typ.sh/.cmd、gen_figures.py
+│   ├── finetune/                  # 微调数据/训练/结果/补丁说明与入库凭证
 │   ├── typst/                     # Typst 编译器，首次运行自动下载
 │   └── build/                     # 编译出的带时间戳 PDF
 └── README.md
@@ -274,12 +280,10 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 
 ## 🚧 还没做
 
-- **微调模型接入检索链路**：`scripts/retrieval/encoder.py` 只支持 `load_from_name()`，加载不了 `epoch3.pt`；
-  现有 FAISS 索引仍由预训练权重生成
 - 检索融合权重调优（pilot 验证集已就绪，对比实验尚未做）
 - 量化与剪枝
 - FastAPI / React
 - Agent 工具调用和端到端评测
 
-下一步是给 `encoder.py` 增加 `--checkpoint` 参数，用微调权重重建 `data/index_data/`，再用同一套查询集对比新旧索引的端到端召回。
+微调权重的索引已建好（`data/index_data_finetuned/`，9 类 9,393 条）。下一步是用同一套查询集对比新旧索引的端到端召回，再据此调整融合权重。
 

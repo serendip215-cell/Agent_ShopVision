@@ -127,6 +127,38 @@ Chinese-CLIP 首次运行需要 `huggingface_hub` 和 `safetensors`。索引脚�
 `models/chinese_clip/clip_cn_vit-b-16.pt`。微调产生的新权重应另存到独立目录，不能与旧
 权重生成的向量混用；换权重后必须重新提取向量并重建索引。
 
+### 用微调权重建索引
+
+`--checkpoint` 指定一个本地权重文件（如微调产出的 `epoch3.pt`），此时不再加载官方预训练
+权重，而是用该文件的 `state_dict` 编码。编码器会自行 `torch.load(..., weights_only=False)`
+再用官方 `create_model()` 构建模型，后者会自动剥离 DDP 训练留下的 `module.` 前缀，因此微调
+权重可直接使用，无需转换。
+
+> 为什么不直接用官方 `load_from_name()` 传权重路径：它内部的 `torch.load` 没有传
+> `weights_only`，而 torch 2.6+ 默认 `True`，遇到 checkpoint 里优化器状态携带的 numpy 标量会
+> 报 `Weights only load failed`。自己加载可以显式关闭该检查。
+
+```powershell
+py -3 scripts\retrieval\build_category_index.py `
+  --categories "鞋" `
+  --checkpoint data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt `
+  --output-dir data/index_data_finetuned `
+  --overwrite
+```
+
+要点：
+
+- **必须换一个 `--output-dir`**（如 `data/index_data_finetuned/`）。同一目录下混入两种权重的
+  向量会让检索结果完全错乱；脚本会检查注册表里记录的权重，不一致时直接报错。
+- 查询时**不要手动传 `--checkpoint`**：`search_category_index.py` 会从索引注册表读取，
+  自动使用与建索引相同的权重，避免"建索引用 A、查询用 B"的静默错配。
+- 建索引和查询的权重、文本模板必须完全一致，否则向量不在同一空间。
+
+本仓库已用该方式生成了微调索引：`data/index_data_finetuned/`，9 类共 9,393 条，
+权重为 `experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt`（见该目录下的
+`index_registry.json`）。预训练权重的 `data/index_data/` 保留作基线，两套并存。
+构建记录见 [`docs/finetune/03-微调结果.md`](../docs/finetune/03-微调结果.md) 第 11 节。
+
 ## 6. 建立索引
 
 先进入仓库根目录：
@@ -156,6 +188,7 @@ py -3 scripts\retrieval\build_category_index.py --categories "鞋" --overwrite
 | `--categories` | 自动发现 | 类别名，多个类别用逗号分隔 |
 | `--model-name` | `ViT-B-16` | Chinese-CLIP 模型 |
 | `--model-download-root` | `models/chinese_clip` | 模型缓存目录 |
+| `--checkpoint` | 空 | 本地权重文件（如微调后的 `epoch3.pt`）；留空表示用官方预训练权重。详见第 5 节「用微调权重建索引」 |
 | `--batch-size` | `16` | 编码批大小 |
 | `--device` | `auto` | `auto`、`cpu` 或 `cuda` |
 | `--use-modelscope` | 关闭 | 使用 ModelScope 下载模型权重 |

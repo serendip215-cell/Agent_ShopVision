@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "categories": {
+    "鞋": {
+      "items": 3219,
+      "dimension": 512,
+      "items_csv": "鞋/items.csv",
+      "image_index": "鞋/image_index.faiss",
+      "text_index": "鞋/text_index.faiss",
+      "report": "鞋/build_report.json"
+    },
+    "水杯": {
+      "items": 2016,
+      "dimension": 512,
+      "items_csv": "水杯/items.csv",
+      "image_index": "水杯/image_index.faiss",
+      "text_index": "水杯/text_index.faiss",
+      "report": "水杯/build_report.json"
+    },
+    "包": {
+      "items": 1291,
+      "dimension": 512,
+      "items_csv": "包/items.csv",
+      "image_index": "包/image_index.faiss",
+      "text_index": "包/text_index.faiss",
+      "report": "包/build_report.json"
+    },
+    "男装": {
+      "items": 999,
+      "dimension": 512,
+      "items_csv": "男装/items.csv",
+      "image_index": "男装/image_index.faiss",
+      "text_index": "男装/text_index.faiss",
+      "report": "男装/build_report.json"
+    },
+    "运动服": {
+      "items": 668,
+      "dimension": 512,
+      "items_csv": "运动服/items.csv",
+      "image_index": "运动服/image_index.faiss",
+      "text_index": "运动服/text_index.faiss",
+      "report": "运动服/build_report.json"
+    },
+    "女装": {
+      "items": 357,
+      "dimension": 512,
+      "items_csv": "女装/items.csv",
+      "image_index": "女装/image_index.faiss",
+      "text_index": "女装/text_index.faiss",
+      "report": "女装/build_report.json"
+    },
+    "手机壳": {
+      "items": 300,
+      "dimension": 512,
+      "items_csv": "手机壳/items.csv",
+      "image_index": "手机壳/image_index.faiss",
+      "text_index": "手机壳/text_index.faiss",
+      "report": "手机壳/build_report.json"
+    },
+    "厨房用品": {
+      "items": 279,
+      "dimension": 512,
+      "items_csv": "厨房用品/items.csv",
+      "image_index": "厨房用品/image_index.faiss",
+      "text_index": "厨房用品/text_index.faiss",
+      "report": "厨房用品/build_report.json"
+    },
+    "家居用品": {
+      "items": 264,
+      "dimension": 512,
+      "items_csv": "家居用品/items.csv",
+      "image_index": "家居用品/image_index.faiss",
+      "text_index": "家居用品/text_index.faiss",
+      "report": "家居用品/build_report.json"
+    }
+  },
+  "updated_at": "2026-10-18T13:50:44Z",
+  "model": {
+    "name": "ViT-B-16",
+    "download_root": "models/chinese_clip",
+    "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+    "normalized": true,
+    "use_modelscope": false
+  }
+}

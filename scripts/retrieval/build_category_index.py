@@ -32,6 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--categories", default="", help="逗号分隔的类别；留空时自动发现所有包含 products.csv 的目录。")
     parser.add_argument("--model-name", default="ViT-B-16", help="Chinese-CLIP 模型名称。")
     parser.add_argument("--model-download-root", default="models/chinese_clip", help="模型缓存目录（相对项目根目录）。")
+    parser.add_argument("--checkpoint", default="", help="可选：本地权重文件（如微调后的 epoch3.pt）；留空表示使用官方预训练权重。")
     parser.add_argument("--batch-size", type=int, default=16, help="图片和文本编码批大小。")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--use-modelscope", action="store_true", help="通过 ModelScope 下载模型权重。")
@@ -234,6 +235,7 @@ def build_category(
         "source_dir": relative_path(category_dir, REPO_ROOT),
         "output_dir": relative_path(final_output, REPO_ROOT),
         "model_name": encoder.model_name,
+        "checkpoint": relative_path(Path(encoder.checkpoint), REPO_ROOT) if encoder.checkpoint else "",
         "device": str(encoder.device),
         "dimension": int(image_vectors.shape[1]),
         "normalized": True,
@@ -265,19 +267,40 @@ def main() -> int:
     if not categories:
         raise RuntimeError(f"{input_dir} 下没有发现包含 products.csv 的类别目录。")
     print(f"待处理类别：{', '.join(categories)}", flush=True)
+    checkpoint = resolve_path(args.checkpoint) if args.checkpoint.strip() else None
+    if checkpoint is not None and not checkpoint.is_file():
+        raise FileNotFoundError(f"权重文件不存在：{checkpoint}")
+    checkpoint_rel = relative_path(checkpoint, REPO_ROOT) if checkpoint else ""
     registry_path = output_dir / "index_registry.json"
     registry = load_registry(registry_path)
-    existing_model = registry.get("model", {}).get("name")
-    if registry.get("categories") and existing_model and existing_model != args.model_name:
-        raise RuntimeError(
-            f"已有索引使用模型 {existing_model}，不能与 {args.model_name} 混用；"
-            "请使用新的 --output-dir，或删除旧索引后重新构建。"
-        )
-    encoder = ChineseClipEncoder(args.model_name, model_root, args.device, args.use_modelscope)
+    registry_model = registry.get("model", {})
+    existing_model = registry_model.get("name")
+    existing_checkpoint = registry_model.get("checkpoint", "")
+    if registry.get("categories"):
+        if existing_model and existing_model != args.model_name:
+            raise RuntimeError(
+                f"已有索引使用模型 {existing_model}，不能与 {args.model_name} 混用；"
+                "请使用新的 --output-dir，或删除旧索引后重新构建。"
+            )
+        if existing_checkpoint != checkpoint_rel:
+            raise RuntimeError(
+                f"已有索引用权重 {existing_checkpoint or '官方预训练权重'}，与本次 "
+                f"{checkpoint_rel or '官方预训练权重'} 不同；不同权重的向量不能混用，"
+                "请使用新的 --output-dir，或删除旧索引后重新构建全部类别。"
+            )
+    encoder = ChineseClipEncoder(
+        args.model_name,
+        model_root,
+        args.device,
+        args.use_modelscope,
+        checkpoint=checkpoint,
+    )
+    print(f"编码模型：{encoder.model_tag}", flush=True)
     registry["updated_at"] = utc_now()
     registry["model"] = {
         "name": args.model_name,
         "download_root": relative_path(model_root, REPO_ROOT),
+        "checkpoint": checkpoint_rel,
         "normalized": True,
         "use_modelscope": args.use_modelscope,
     }

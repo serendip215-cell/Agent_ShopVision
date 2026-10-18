@@ -5,6 +5,7 @@
     "categories": "",
     "model_name": "ViT-B-16",
     "model_download_root": "models/chinese_clip",
+    "checkpoint": "",
     "batch_size": 16,
     "device": "auto",
     "use_modelscope": false,
@@ -26,6 +27,7 @@
     "material": "",
     "model_name": "",
     "model_download_root": "",
+    "checkpoint": "",
     "device": "auto",
     "use_modelscope": false
   }

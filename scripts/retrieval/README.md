@@ -11,7 +11,7 @@
 | `build_category_index.py` | 自动发现类别，编码图片和模板文本，生成 FAISS 索引和元数据表 |
 | `search_category_index.py` | 用中文查询词召回商品图片，并返回 JSON 结果 |
 | `text_builder.py` | 统一生成属性、商品标题和商品描述文本模板 |
-| `encoder.py` | 延迟加载 Chinese-CLIP，提供图片和文本批量编码 |
+| `encoder.py` | 延迟加载 Chinese-CLIP，提供图片和文本批量编码；支持用 `--checkpoint` 加载本地权重（如微调后的 `epoch3.pt`） |
 | `registry.py` | 读写 `index_registry.json`，保存类别索引位置 |
 | `requirements.txt` | 本模块的 Python 依赖 |
 
@@ -38,6 +38,33 @@ py -3 scripts\retrieval\search_category_index.py "白色运动鞋" --category "�
 `models/chinese_clip/` 是索引构建和后续模型微调共用的预训练权重目录。微调完成后应将
 新检查点放到独立目录，并使用新检查点重新提取全部向量、重建 FAISS 索引，不能混用不同
 模型权重生成的向量。
+
+### 用微调权重建索引
+
+`build_category_index.py` 支持 `--checkpoint` 指定本地权重文件；`search_category_index.py`
+和 `evaluation/retrieval/code/evaluate_retrieval.py` 会**从索引注册表自动读取**该权重，
+不需要手动传，从而保证"建索引"和"查询"用的是同一份权重。
+
+```powershell
+py -3 scripts\retrieval\build_category_index.py `
+  --categories "鞋" `
+  --checkpoint data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt `
+  --output-dir data/index_data_finetuned `
+  --overwrite
+```
+
+注意两点：
+
+- **必须换 `--output-dir`**（如 `data/index_data_finetuned/`）。脚本会检查注册表里记录的权重
+  路径，与本次不一致时直接报错，避免两种权重的向量混在同一套索引里；
+- 权重路径会写进 `index_registry.json` 和各类别的 `build_report.json`，可追溯。
+
+详细说明见 [`configs/retrieval.md`](../../configs/retrieval.md) 第 5 节。
+
+本仓库已用该方式生成 `data/index_data_finetuned/`（9 类 9,393 条，权重
+`experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt`），与预训练权重的
+`data/index_data/` 并存。查询时用 `--index-dir data/index_data_finetuned` 即可，
+权重会自动跟随注册表。
 
 ## 输入要求
 
