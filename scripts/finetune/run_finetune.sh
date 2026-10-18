@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
-# ShopVision 中文商品检索 - Chinese-CLIP 微调训练脚本
+# ⚠️ 已废弃，请勿使用 —— 保留仅作官方模板的参数对照。
+#
+# 本脚本走 torch.distributed.launch + DDP，在 WSL2 + RTX 5060 Ti 环境下
+# NCCL 的 all_reduce 会永久挂死（init_process_group 正常，第一次集合通信卡住）。
+# 实际可用入口是 scripts/finetune/run_train_single_gpu.sh。
+# 详见 scripts/finetune/README.md 与 docs/finetune/03-微调结果.md 第 7 节。
+#
+# 下面注释保留原始说明，其中的 out.log / epoch_K.pt 命名与实际不符：
+#   - 日志实际是 out_<UTC时间戳>.log
+#   - 权重实际是 epoch1.pt / epoch2.pt / epoch3.pt / epoch_latest.pt
+#   - 输出目录统一为 experiments/<RUN_ID>/，例如 2026-10-18_bs32_lr1e-5
+#
+# ShopVision 中文商品检索 - Chinese-CLIP 微调训练脚本（历史版）
 #
 # 基于官方模板 run_scripts/muge_finetune_vit-b-16_rbt-base.sh 修改。
 # 单机单卡 GPU 即可运行（数据集仅 7,520 条）。
@@ -13,9 +25,9 @@
 #   3. LMDB 数据集已生成在 data/processed_data_retrieval/datasets/ShopVision/lmdb/
 #      (本地运行 scripts/build_retrieval_dataset.py 后再用官方脚本打包)
 #
-# 输出:
-#   data/processed_data_retrieval/experiments/shopvision_finetune_vit-b-16/
-#   ├── checkpoints/epoch_K.pt   <- 微调后的权重,训练完下载这个
+# 输出（与现状不符，见上）:
+#   data/processed_data_retrieval/experiments/<RUN_ID>/
+#   ├── checkpoints/epoch_K.pt   <- 微调后的权重
 #   └── out.log                  <- 训练日志
 
 set -e

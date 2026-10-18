@@ -37,7 +37,8 @@
 
 <p align="center">
   读取本地商品图片和结构化字段，做属性识别、检索推荐、标题描述生成。<br>
-  当前已完成实验 1 数据清洗和中文图文检索基线脚本；索引构建、模型训练、前后端和 Agent 仍待继续验证。
+  当前已完成实验 1 数据清洗、中文图文检索基线（含 FAISS 索引）和 Chinese-CLIP 微调（test R@1 37.4→58.7）；<br>
+  量化剪枝、前后端和 Agent 仍待继续。
 </p>
 
 ## ✨ 当前进度
@@ -52,10 +53,10 @@
 | 中文图文检索基线 | ✅ 已实现 | `scripts/retrieval/`，输入 `data/processed_data_cleaning/`，输出 `data/index_data/` |
 | 检索 JSON 配置 | ✅ 已完成 | `configs/retrieval.json`，构建和查询脚本默认读取 |
 | 实验 1 报告 | ✅ 完成 | `docs/typ/实验一.typ`，编译方法见下文「实验报告编译」 |
-| Chinese-CLIP 微调 / 模型训练 | ⏳ 未开始 | 实验 2 后续 |
+| Chinese-CLIP 微调 | ✅ 完成 | 3 轮 / 705 步，test R@1 37.37→58.67、R@5 70.77→89.08；记录见 [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) |
 | 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
 
-当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。`docs/` 里的方案和指南是预留给后续步骤读的，不代表仓库已经做到那一步。
+当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
 
 ## 📦 数据
 
@@ -142,7 +143,9 @@ Agent_ShopVision/
 └── README.md
 ```
 
-不入库的本地文件：`.env`、`scripts/models/*.onnx`、`models/chinese_clip/`、`data/index_data/`、`data/raw_data/*/images_cutout/`、`data/processed_backups/`、`docs/typst/`、`docs/build/`。
+不入库的本地文件：`.env`、`scripts/models/*.onnx`、`models/chinese_clip/`、`data/raw_data/*/images_cutout/`、`data/processed_backups/`、`docs/typst/`、`docs/build/`。
+
+`data/index_data/`（FAISS 索引与商品向量，约 40–80MB）**纳入版本管理**，队友 clone 后即可直接检索。它是派生数据：换模型权重（含微调）后必须重新提取向量并重建，见 [`configs/retrieval.md`](configs/retrieval.md) 第 5 节。
 
 ## 🧰 脚本
 
@@ -176,6 +179,9 @@ scripts/retrieval/search_category_index.py
 | `scripts/attribute_cleaning/run_gpt6luna_cleaning.py` | 视觉模型补类别、颜色、材质和描述 |
 | `scripts/retrieval/build_category_index.py` | 使用 Chinese-CLIP 和 FAISS 建立类别索引 |
 | `scripts/retrieval/search_category_index.py` | 使用中文查询词搜索商品图片 |
+| `scripts/build_retrieval_dataset.py` | 把清洗数据转成微调用的 tsv/jsonl，按 `item_id` 哈希 8:1:1 切分 |
+| `scripts/finetune/run_train_single_gpu.sh` | 单卡微调训练（本机唯一可用入口），产出 `epoch*.pt` |
+| `scripts/finetune/run_test_eval.sh` | test 集最终评测（预训练基线 vs 微调权重） |
 
 参数、断点续跑和字段规则见 [`scripts/README.md`](scripts/README.md)。清洗脚本见 [`scripts/attribute_cleaning/README.md`](scripts/attribute_cleaning/README.md)。检索配置见 [`configs/retrieval.md`](configs/retrieval.md)，默认 JSON 配置见 [`configs/retrieval.json`](configs/retrieval.json)。
 
@@ -249,6 +255,11 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 | [`scripts/README.md`](scripts/README.md) | 当前脚本说明 |
 | [`configs/retrieval.json`](configs/retrieval.json) | 检索脚本默认 JSON 配置 |
 | [`configs/retrieval.md`](configs/retrieval.md) | 检索环境、参数和运行流程 |
+| [`scripts/finetune/README.md`](scripts/finetune/README.md) | 微调入口、目录约定、本机 NCCL 问题与解决 |
+| [`docs/finetune/01-数据转换脚本说明.md`](docs/finetune/01-数据转换脚本说明.md) | 微调第 1 步：数据转换脚本 |
+| [`docs/finetune/02-微调训练.md`](docs/finetune/02-微调训练.md) | 微调第 2 步：训练环境与参数（含现状更正） |
+| [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) | **本次微调实验结果**：超参、valid 曲线、test 前后对比 |
+| [`docs/finetune/04-Chinese-CLIP补丁说明.md`](docs/finetune/04-Chinese-CLIP补丁说明.md) | 对官方 `Chinese-CLIP/` 的 3 处改动（含改前改后代码、重新施加步骤） |
 | [`data/raw_data/README.md`](data/raw_data/README.md) | 当前原始数据说明 |
 | [`data/raw_data/MUGE_data/README.md`](data/raw_data/MUGE_data/README.md) | 当前 MUGE 原始表说明 |
 | [`data/raw_data/Amazon_data_translated/README.md`](data/raw_data/Amazon_data_translated/README.md) | 当前 Amazon 译文说明 |
@@ -263,10 +274,12 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 
 ## 🚧 还没做
 
-- 检索基线的实际索引构建和人工查询评估
-- 模型训练、量化与剪枝
+- **微调模型接入检索链路**：`scripts/retrieval/encoder.py` 只支持 `load_from_name()`，加载不了 `epoch3.pt`；
+  现有 FAISS 索引仍由预训练权重生成
+- 检索融合权重调优（pilot 验证集已就绪，对比实验尚未做）
+- 量化与剪枝
 - FastAPI / React
 - Agent 工具调用和端到端评测
 
-下一步是使用已配置的 PyTorch 环境安装依赖，按类别构建零样本检索索引，再用人工查询集评估 Recall@K；检索文本应读取人工审核后的 `processed_data_cleaning/`。
+下一步是给 `encoder.py` 增加 `--checkpoint` 参数，用微调权重重建 `data/index_data/`，再用同一套查询集对比新旧索引的端到端召回。
 

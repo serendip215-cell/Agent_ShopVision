@@ -1,0 +1,5 @@
+# 脚本统一用 LF 换行。
+# 原因：Windows 上若 checkout 成 CRLF，WSL / Docker 容器里的 bash 会因 \r 报错
+# （典型报错：$'\r': command not found）。Python 同理会在 shebang 后带 \r。
+*.sh text eol=lf
+*.py text eol=lf

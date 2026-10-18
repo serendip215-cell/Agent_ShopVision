@@ -1,6 +1,6 @@
 # 数据处理脚本
 
-当前先处理字段和图片路径，再构建中文图文检索数据。检索数据生成和模型训练脚本尚未编写。
+当前先处理字段和图片路径，再构建中文图文检索数据。检索数据生成、模型微调和评测脚本均已就位，见下表和 [`finetune/README.md`](finetune/README.md)。
 
 通用约定：
 
@@ -20,6 +20,9 @@
 | `crawl_suning.py` | 小规模限量采集苏宁公开商品数据，输出到 `Suning_data` |
 | `cutout_images.py` | 用 rembg 批量抠图，输出透明底 PNG |
 | `attribute_cleaning/` | 商品属性识别与清洗（GPT 视觉清洗管线），自带 `README.md`，见该目录 |
+| `build_retrieval_dataset.py` | 清洗数据 → 微调用的 tsv/jsonl，按 `item_id` 哈希 8:1:1 切分 |
+| `retrieval/` | Chinese-CLIP + FAISS 建索引与查询，自带 `README.md`，见该目录 |
+| `finetune/` | 微调训练与 test 评测入口，自带 `README.md`，见该目录 |
 | `README.md` | 本目录脚本说明 |
 
 ## 1. 整理商品数据：`classify_products.py`
