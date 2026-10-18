@@ -131,6 +131,9 @@ def main() -> int:
         with (index_dir / entry["image_index"]).open("rb") as handle:
             image_index = faiss.deserialize_index(np.frombuffer(handle.read(), dtype="uint8"))
         items = load_items(index_dir / entry["items_csv"])
+        category_dir = (index_dir / entry["items_csv"]).parent
+        image_embeddings = np.load(category_dir / "image_embeddings.npy", mmap_mode="r")
+        text_embeddings = None
         image_to_image_scores: dict[int, float] = {}
         text_to_image_scores: dict[int, float] = {}
         text_to_description_scores: dict[int, float] = {}
@@ -160,6 +163,7 @@ def main() -> int:
                 )
             with text_index_path.open("rb") as handle:
                 text_index = faiss.deserialize_index(np.frombuffer(handle.read(), dtype="uint8"))
+            text_embeddings = np.load(category_dir / "text_embeddings.npy", mmap_mode="r")
             text_distances, text_ids = text_index.search(
                 text_query_vector, min(candidate_k, text_index.ntotal)
             )
@@ -179,9 +183,21 @@ def main() -> int:
             row = items[vector_id]
             if not matches(row, args):
                 continue
-            image_to_image_similarity = image_to_image_scores.get(vector_id, 0.0)
-            text_to_image_similarity = text_to_image_scores.get(vector_id, 0.0)
-            text_to_description_similarity = text_to_description_scores.get(vector_id, 0.0)
+            # FAISS Top-K is only used to form the candidate union. Recompute every
+            # active channel for every candidate so a missing Top-K membership is
+            # not incorrectly treated as a true zero similarity.
+            image_to_image_similarity = (
+                float(image_embeddings[vector_id] @ image_query_vector[0])
+                if image_query_vector is not None else 0.0
+            )
+            text_to_image_similarity = (
+                float(image_embeddings[vector_id] @ text_query_vector[0])
+                if text_query_vector is not None else 0.0
+            )
+            text_to_description_similarity = (
+                float(text_embeddings[vector_id] @ text_query_vector[0])
+                if text_embeddings is not None and text_query_vector is not None else 0.0
+            )
             if has_image_query and has_text_query:
                 similarity = (
                     image_to_image_weight * image_to_image_similarity

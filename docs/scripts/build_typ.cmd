@@ -14,7 +14,7 @@ if exist "%BASH_EXE%" goto :run
 set "BASH_EXE=%LocalAppData%\Programs\Git\bin\bash.exe"
 if exist "%BASH_EXE%" goto :run
 
-rem 2) 从 PATH 里的 git.exe 推导（如本机 Git 装在 D:\Git）
+rem 2) 从 PATH 里的 git.exe 推导 Git for Windows 的 bash.exe 位置
 set "GIT_EXE="
 for /f "delims=" %%i in ('where git 2^>nul') do (
   set "GIT_EXE=%%i"

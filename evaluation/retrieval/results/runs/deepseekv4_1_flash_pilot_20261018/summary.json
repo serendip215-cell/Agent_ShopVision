@@ -1,0 +1,272 @@
+{
+  "query_count": 132,
+  "top_k": 10,
+  "relevance_threshold": 2,
+  "metrics_by_mode": {
+    "text": {
+      "query_count": 44,
+      "queries_with_relevant_qrels": 44,
+      "precision@1": 0.818182,
+      "precision@5": 0.409091,
+      "precision@10": 0.3,
+      "ndcg@10": 0.868321,
+      "mrr@10": 0.864583,
+      "recall@1": 0.373575,
+      "recall@5": 0.724441,
+      "recall@10": 0.940657
+    },
+    "image": {
+      "query_count": 45,
+      "queries_with_relevant_qrels": 42,
+      "precision@1": 0.733333,
+      "precision@5": 0.488889,
+      "precision@10": 0.391111,
+      "ndcg@10": 0.873988,
+      "mrr@10": 0.803519,
+      "recall@1": 0.233655,
+      "recall@5": 0.658428,
+      "recall@10": 1.0
+    },
+    "multimodal": {
+      "query_count": 43,
+      "queries_with_relevant_qrels": 35,
+      "precision@1": 0.55814,
+      "precision@5": 0.372093,
+      "precision@10": 0.262791,
+      "ndcg@10": 0.862072,
+      "mrr@10": 0.650775,
+      "recall@1": 0.303367,
+      "recall@5": 0.782755,
+      "recall@10": 1.0
+    }
+  },
+  "metrics_by_category_mode": {
+    "包/text": {
+      "query_count": 4,
+      "precision@10": 0.45,
+      "ndcg@10": 0.915601,
+      "mrr@10": 1.0,
+      "queries_with_relevant_qrels": 4
+    },
+    "包/image": {
+      "query_count": 5,
+      "precision@10": 0.44,
+      "ndcg@10": 0.817483,
+      "mrr@10": 0.566667,
+      "queries_with_relevant_qrels": 4
+    },
+    "包/multimodal": {
+      "query_count": 4,
+      "precision@10": 0.45,
+      "ndcg@10": 0.860096,
+      "mrr@10": 0.875,
+      "queries_with_relevant_qrels": 4
+    },
+    "厨房用品/text": {
+      "query_count": 5,
+      "precision@10": 0.3,
+      "ndcg@10": 0.953634,
+      "mrr@10": 1.0,
+      "queries_with_relevant_qrels": 5
+    },
+    "厨房用品/image": {
+      "query_count": 5,
+      "precision@10": 0.32,
+      "ndcg@10": 0.881705,
+      "mrr@10": 0.866667,
+      "queries_with_relevant_qrels": 5
+    },
+    "厨房用品/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.2,
+      "ndcg@10": 0.924908,
+      "mrr@10": 0.7,
+      "queries_with_relevant_qrels": 4
+    },
+    "女装/text": {
+      "query_count": 5,
+      "precision@10": 0.32,
+      "ndcg@10": 0.903603,
+      "mrr@10": 1.0,
+      "queries_with_relevant_qrels": 5
+    },
+    "女装/image": {
+      "query_count": 5,
+      "precision@10": 0.44,
+      "ndcg@10": 0.873476,
+      "mrr@10": 0.84,
+      "queries_with_relevant_qrels": 5
+    },
+    "女装/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.22,
+      "ndcg@10": 0.901349,
+      "mrr@10": 0.84,
+      "queries_with_relevant_qrels": 5
+    },
+    "家居用品/text": {
+      "query_count": 5,
+      "precision@10": 0.12,
+      "ndcg@10": 0.985159,
+      "mrr@10": 1.0,
+      "queries_with_relevant_qrels": 5
+    },
+    "家居用品/image": {
+      "query_count": 5,
+      "precision@10": 0.08,
+      "ndcg@10": 0.88482,
+      "mrr@10": 0.6,
+      "queries_with_relevant_qrels": 3
+    },
+    "家居用品/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.06,
+      "ndcg@10": 0.707703,
+      "mrr@10": 0.266667,
+      "queries_with_relevant_qrels": 2
+    },
+    "手机壳/text": {
+      "query_count": 5,
+      "precision@10": 0.06,
+      "ndcg@10": 0.547905,
+      "mrr@10": 0.175,
+      "queries_with_relevant_qrels": 5
+    },
+    "手机壳/image": {
+      "query_count": 5,
+      "precision@10": 0.26,
+      "ndcg@10": 0.908217,
+      "mrr@10": 0.825,
+      "queries_with_relevant_qrels": 5
+    },
+    "手机壳/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.12,
+      "ndcg@10": 0.865983,
+      "mrr@10": 0.44,
+      "queries_with_relevant_qrels": 3
+    },
+    "水杯/text": {
+      "query_count": 5,
+      "precision@10": 0.32,
+      "ndcg@10": 0.842171,
+      "mrr@10": 0.9,
+      "queries_with_relevant_qrels": 5
+    },
+    "水杯/image": {
+      "query_count": 5,
+      "precision@10": 0.46,
+      "ndcg@10": 0.878046,
+      "mrr@10": 0.8,
+      "queries_with_relevant_qrels": 5
+    },
+    "水杯/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.34,
+      "ndcg@10": 0.821407,
+      "mrr@10": 0.45,
+      "queries_with_relevant_qrels": 4
+    },
+    "男装/text": {
+      "query_count": 5,
+      "precision@10": 0.26,
+      "ndcg@10": 0.821751,
+      "mrr@10": 0.833333,
+      "queries_with_relevant_qrels": 5
+    },
+    "男装/image": {
+      "query_count": 5,
+      "precision@10": 0.38,
+      "ndcg@10": 0.8516,
+      "mrr@10": 0.833333,
+      "queries_with_relevant_qrels": 5
+    },
+    "男装/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.36,
+      "ndcg@10": 0.857278,
+      "mrr@10": 0.85,
+      "queries_with_relevant_qrels": 5
+    },
+    "运动服/text": {
+      "query_count": 5,
+      "precision@10": 0.56,
+      "ndcg@10": 0.941187,
+      "mrr@10": 1.0,
+      "queries_with_relevant_qrels": 5
+    },
+    "运动服/image": {
+      "query_count": 5,
+      "precision@10": 0.54,
+      "ndcg@10": 0.932256,
+      "mrr@10": 1.0,
+      "queries_with_relevant_qrels": 5
+    },
+    "运动服/multimodal": {
+      "query_count": 4,
+      "precision@10": 0.4,
+      "ndcg@10": 0.843832,
+      "mrr@10": 0.6875,
+      "queries_with_relevant_qrels": 4
+    },
+    "鞋/text": {
+      "query_count": 5,
+      "precision@10": 0.34,
+      "ndcg@10": 0.913333,
+      "mrr@10": 0.9,
+      "queries_with_relevant_qrels": 5
+    },
+    "鞋/image": {
+      "query_count": 5,
+      "precision@10": 0.6,
+      "ndcg@10": 0.840451,
+      "mrr@10": 0.9,
+      "queries_with_relevant_qrels": 5
+    },
+    "鞋/multimodal": {
+      "query_count": 5,
+      "precision@10": 0.28,
+      "ndcg@10": 0.941172,
+      "mrr@10": 0.8,
+      "queries_with_relevant_qrels": 4
+    }
+  },
+  "recall_note": "图片/图文相关性主要基于 Top-10 候选池，Recall 受候选池截断影响，仅作诊断，不代表完整召回率。",
+  "run_id": "deepseekv4_1_flash_pilot_20261018",
+  "generated_query_count": 135,
+  "qrels_count": 1325,
+  "ranked_result_count": 1320,
+  "index_categories": [
+    "包",
+    "厨房用品",
+    "女装",
+    "家居用品",
+    "手机壳",
+    "水杯",
+    "男装",
+    "运动服",
+    "鞋"
+  ],
+  "candidate_k_per_channel": 50,
+  "weights": {
+    "image": 0.7,
+    "text": 0.3,
+    "image_to_image": 0.5,
+    "text_to_image": 0.3,
+    "text_to_description": 0.2
+  },
+  "evaluation_label_source": "AI 生成并复核查询；AI 评审检索候选；文字查询保留源商品锚点",
+  "ai_review": {
+    "included_queries": 132,
+    "excluded_queries": 3,
+    "rubric": "0 不相关；1 弱相关；2 相关替代；3 高度符合。AI 按商品视觉/类别意图和查询明确约束评分；文字查询源商品为确定性相关锚点。",
+    "adjusted_candidate_labels": 2
+  },
+  "tuning_role": "pilot_validation",
+  "interpretation": "本轮由 AI 生成查询并复核查询有效性和候选相关度；文字查询保留由源商品构造的确定性相关锚点。结果可用于初步调参，但不作为独立最终测试集或人工真值。",
+  "ai_judge_model": "group/auto-deepseek-v4-1-flash",
+  "ai_reviewed_query_count": 135,
+  "included_query_count": 132,
+  "excluded_query_count": 3,
+  "relevance_rubric": "0 不相关；1 弱相关；2 相关替代；3 高度符合。AI 按商品视觉/类别意图和查询明确约束评分；文字查询源商品为确定性相关锚点。"
+}

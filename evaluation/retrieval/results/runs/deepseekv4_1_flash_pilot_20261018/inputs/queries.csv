@@ -1,0 +1,133 @@
+﻿query_id,mode,query_text,query_image,category,exclude_item_id
+pilot_text_c01_i01,text,红黑色汽车图案儿童书包,,包,
+pilot_image_c01_i01,image,,data/processed_data_cleaning/包/images/muge_350548__350548.jpg,包,muge_350548
+pilot_multimodal_c01_i01,multimodal,红黑色汽车图案儿童书包,data/processed_data_cleaning/包/images/muge_350548__350548.jpg,包,muge_350548
+pilot_text_c01_i02,text,黑色大容量单肩侧背包,,包,
+pilot_image_c01_i02,image,,data/processed_data_cleaning/包/images/muge_1111793__1111793.jpg,包,muge_1111793
+pilot_multimodal_c01_i02,multimodal,黑色大容量单肩侧背包,data/processed_data_cleaning/包/images/muge_1111793__1111793.jpg,包,muge_1111793
+pilot_text_c01_i03,text,深蓝色保温外卖背包,,包,
+pilot_image_c01_i03,image,,data/processed_data_cleaning/包/images/muge_533032__533032.jpg,包,muge_533032
+pilot_multimodal_c01_i03,multimodal,深蓝色保温外卖背包,data/processed_data_cleaning/包/images/muge_533032__533032.jpg,包,muge_533032
+pilot_image_c01_i04,image,,data/processed_data_cleaning/包/images/muge_799319__799319.jpg,包,muge_799319
+pilot_text_c01_i05,text,灰黑白健身运动包,,包,
+pilot_image_c01_i05,image,,data/processed_data_cleaning/包/images/muge_60810__60810.jpg,包,muge_60810
+pilot_multimodal_c01_i05,multimodal,灰黑白健身运动包,data/processed_data_cleaning/包/images/muge_60810__60810.jpg,包,muge_60810
+pilot_text_c02_i01,text,白色塑料K-Cup胶囊咖啡机,,厨房用品,
+pilot_image_c02_i01,image,,data/processed_data_cleaning/厨房用品/images/B07Y1RV1PX__712aPQwcEaL.jpg,厨房用品,B07Y1RV1PX
+pilot_multimodal_c02_i01,multimodal,白色塑料K-Cup胶囊咖啡机,data/processed_data_cleaning/厨房用品/images/B07Y1RV1PX__712aPQwcEaL.jpg,厨房用品,B07Y1RV1PX
+pilot_text_c02_i02,text,黑色绿色塑料Y型削皮器带保护盖,,厨房用品,
+pilot_image_c02_i02,image,,data/processed_data_cleaning/厨房用品/images/B08B523DP2__71F9RsMDeEL.jpg,厨房用品,B08B523DP2
+pilot_multimodal_c02_i02,multimodal,黑色绿色塑料Y型削皮器带保护盖,data/processed_data_cleaning/厨房用品/images/B08B523DP2__71F9RsMDeEL.jpg,厨房用品,B08B523DP2
+pilot_text_c02_i03,text,黑色不锈钢Y形削皮器三件套,,厨房用品,
+pilot_image_c02_i03,image,,data/processed_data_cleaning/厨房用品/images/B088WF9V3G__71myrEZwE3L.jpg,厨房用品,B088WF9V3G
+pilot_multimodal_c02_i03,multimodal,黑色不锈钢Y形削皮器三件套,data/processed_data_cleaning/厨房用品/images/B088WF9V3G__71myrEZwE3L.jpg,厨房用品,B088WF9V3G
+pilot_text_c02_i04,text,白色三格一次性餐盒25个装,,厨房用品,
+pilot_image_c02_i04,image,,data/processed_data_cleaning/厨房用品/images/B07ZQWLTSX__71hVsRrvKKL.jpg,厨房用品,B07ZQWLTSX
+pilot_multimodal_c02_i04,multimodal,白色三格一次性餐盒25个装,data/processed_data_cleaning/厨房用品/images/B07ZQWLTSX__71hVsRrvKKL.jpg,厨房用品,B07ZQWLTSX
+pilot_text_c02_i05,text,白色带盖三格一次性外带餐盒,,厨房用品,
+pilot_image_c02_i05,image,,data/processed_data_cleaning/厨房用品/images/B07ZQW3YK7__71AdLEX+sbL.jpg,厨房用品,B07ZQW3YK7
+pilot_multimodal_c02_i05,multimodal,白色带盖三格一次性外带餐盒,data/processed_data_cleaning/厨房用品/images/B07ZQW3YK7__71AdLEX+sbL.jpg,厨房用品,B07ZQW3YK7
+pilot_text_c03_i01,text,粉色Polo领短袖连衣裙女夏季收腰,,女装,
+pilot_image_c03_i01,image,,data/processed_data_cleaning/女装/images/12445237125__12445237125.png,女装,12445237125
+pilot_multimodal_c03_i01,multimodal,粉色Polo领短袖连衣裙女夏季收腰,data/processed_data_cleaning/女装/images/12445237125__12445237125.png,女装,12445237125
+pilot_text_c03_i02,text,黑色宽松T恤连衣裙中长款,,女装,
+pilot_image_c03_i02,image,,data/processed_data_cleaning/女装/images/12445240170__12445240170.png,女装,12445240170
+pilot_multimodal_c03_i02,multimodal,黑色宽松T恤连衣裙中长款,data/processed_data_cleaning/女装/images/12445240170__12445240170.png,女装,12445240170
+pilot_text_c03_i03,text,米色V领修身针织衫女打底,,女装,
+pilot_image_c03_i03,image,,data/processed_data_cleaning/女装/images/12437762322__12437762322.png,女装,12437762322
+pilot_multimodal_c03_i03,multimodal,米色V领修身针织衫女打底,data/processed_data_cleaning/女装/images/12437762322__12437762322.png,女装,12437762322
+pilot_text_c03_i04,text,白色V领修身长袖T恤女显瘦,,女装,
+pilot_image_c03_i04,image,,data/processed_data_cleaning/女装/images/12436050340__12436050340.png,女装,12436050340
+pilot_multimodal_c03_i04,multimodal,白色V领修身长袖T恤女显瘦,data/processed_data_cleaning/女装/images/12436050340__12436050340.png,女装,12436050340
+pilot_text_c03_i05,text,白色V领拼接长袖针织开衫女,,女装,
+pilot_image_c03_i05,image,,data/processed_data_cleaning/女装/images/12437762408__12437762408.png,女装,12437762408
+pilot_multimodal_c03_i05,multimodal,白色V领拼接长袖针织开衫女,data/processed_data_cleaning/女装/images/12437762408__12437762408.png,女装,12437762408
+pilot_text_c04_i01,text,灰色三层滚动收纳推车,,家居用品,
+pilot_image_c04_i01,image,,data/processed_data_cleaning/家居用品/images/B07V126F2D__81nUwuCkj7L.jpg,家居用品,B07V126F2D
+pilot_multimodal_c04_i01,multimodal,灰色三层滚动收纳推车,data/processed_data_cleaning/家居用品/images/B07V126F2D__81nUwuCkj7L.jpg,家居用品,B07V126F2D
+pilot_text_c04_i02,text,黑色不粘煎锅,,家居用品,
+pilot_image_c04_i02,image,,data/processed_data_cleaning/家居用品/images/B082BGGBR1__71cPNFZG41L.jpg,家居用品,B082BGGBR1
+pilot_multimodal_c04_i02,multimodal,黑色不粘煎锅,data/processed_data_cleaning/家居用品/images/B082BGGBR1__71cPNFZG41L.jpg,家居用品,B082BGGBR1
+pilot_text_c04_i03,text,银色不锈钢餐具套装,,家居用品,
+pilot_image_c04_i03,image,,data/processed_data_cleaning/家居用品/images/B07WFF9B6W__71CO3+8aiIL.jpg,家居用品,B07WFF9B6W
+pilot_multimodal_c04_i03,multimodal,银色不锈钢餐具套装,data/processed_data_cleaning/家居用品/images/B07WFF9B6W__71CO3+8aiIL.jpg,家居用品,B07WFF9B6W
+pilot_text_c04_i04,text,黑色塑料个人取暖器,,家居用品,
+pilot_image_c04_i04,image,,data/processed_data_cleaning/家居用品/images/B07V6M4MSN__81B6Aeux91L.jpg,家居用品,B07V6M4MSN
+pilot_multimodal_c04_i04,multimodal,黑色塑料个人取暖器,data/processed_data_cleaning/家居用品/images/B07V6M4MSN__81B6Aeux91L.jpg,家居用品,B07V6M4MSN
+pilot_text_c04_i05,text,黑色便携式保温午餐袋,,家居用品,
+pilot_image_c04_i05,image,,data/processed_data_cleaning/家居用品/images/B07DBLQYQ7__81Dsf1NuPYL.jpg,家居用品,B07DBLQYQ7
+pilot_multimodal_c04_i05,multimodal,黑色便携式保温午餐袋,data/processed_data_cleaning/家居用品/images/B07DBLQYQ7__81Dsf1NuPYL.jpg,家居用品,B07DBLQYQ7
+pilot_text_c05_i01,text,三星Galaxy E7 3D印花硬壳手机壳,,手机壳,
+pilot_image_c05_i01,image,,data/processed_data_cleaning/手机壳/images/B07SZYZB5T__61Mjw24XNkL.jpg,手机壳,B07SZYZB5T
+pilot_multimodal_c05_i01,multimodal,三星Galaxy E7 3D印花硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07SZYZB5T__61Mjw24XNkL.jpg,手机壳,B07SZYZB5T
+pilot_text_c05_i02,text,魅族M2白色3D打印硬壳手机壳,,手机壳,
+pilot_image_c05_i02,image,,data/processed_data_cleaning/手机壳/images/B07T6V3TFK__81F5hFnK+DL.jpg,手机壳,B07T6V3TFK
+pilot_multimodal_c05_i02,multimodal,魅族M2白色3D打印硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07T6V3TFK__81F5hFnK+DL.jpg,手机壳,B07T6V3TFK
+pilot_text_c05_i03,text,OPPO F1s 3D图案塑料硬壳保护壳,,手机壳,
+pilot_image_c05_i03,image,,data/processed_data_cleaning/手机壳/images/B07THBQQH8__71SczZmlJxL.jpg,手机壳,B07THBQQH8
+pilot_multimodal_c05_i03,multimodal,OPPO F1s 3D图案塑料硬壳保护壳,data/processed_data_cleaning/手机壳/images/B07THBQQH8__71SczZmlJxL.jpg,手机壳,B07THBQQH8
+pilot_text_c05_i04,text,诺基亚5.1 Plus 3D打印图案硬壳手机壳,,手机壳,
+pilot_image_c05_i04,image,,data/processed_data_cleaning/手机壳/images/B07QRL5RRG__614ZNvIHTtL.jpg,手机壳,B07QRL5RRG
+pilot_multimodal_c05_i04,multimodal,诺基亚5.1 Plus 3D打印图案硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07QRL5RRG__614ZNvIHTtL.jpg,手机壳,B07QRL5RRG
+pilot_text_c05_i05,text,Vivo Y53 深蓝色3D打印硬壳手机壳,,手机壳,
+pilot_image_c05_i05,image,,data/processed_data_cleaning/手机壳/images/B07TH3CC7S__81+Gb-OCJxL.jpg,手机壳,B07TH3CC7S
+pilot_multimodal_c05_i05,multimodal,Vivo Y53 深蓝色3D打印硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07TH3CC7S__81+Gb-OCJxL.jpg,手机壳,B07TH3CC7S
+pilot_text_c06_i01,text,PPSU吸管杯 孕产妇可用 黄色透明水杯,,水杯,
+pilot_image_c06_i01,image,,data/processed_data_cleaning/水杯/images/12451499960__12451499960.png,水杯,12451499960
+pilot_multimodal_c06_i01,multimodal,PPSU吸管杯 孕产妇可用 黄色透明水杯,data/processed_data_cleaning/水杯/images/12451499960__12451499960.png,水杯,12451499960
+pilot_text_c06_i02,text,Tritan吸管运动水杯 大容量便携 白色粉色黑色,,水杯,
+pilot_image_c06_i02,image,,data/processed_data_cleaning/水杯/images/12452226901__12452226901.png,水杯,12452226901
+pilot_multimodal_c06_i02,multimodal,Tritan吸管运动水杯 大容量便携 白色粉色黑色,data/processed_data_cleaning/水杯/images/12452226901__12452226901.png,水杯,12452226901
+pilot_text_c06_i03,text,透明玻璃U型杯,,水杯,
+pilot_image_c06_i03,image,,data/processed_data_cleaning/水杯/images/muge_993887__993887.jpg,水杯,muge_993887
+pilot_multimodal_c06_i03,multimodal,透明玻璃U型杯,data/processed_data_cleaning/水杯/images/muge_993887__993887.jpg,水杯,muge_993887
+pilot_text_c06_i04,text,绿色塑料U形奶茶杯 90口径,,水杯,
+pilot_image_c06_i04,image,,data/processed_data_cleaning/水杯/images/muge_569263__569263.jpg,水杯,muge_569263
+pilot_multimodal_c06_i04,multimodal,绿色塑料U形奶茶杯 90口径,data/processed_data_cleaning/水杯/images/muge_569263__569263.jpg,水杯,muge_569263
+pilot_text_c06_i05,text,黑色纸质一次性串串杯,,水杯,
+pilot_image_c06_i05,image,,data/processed_data_cleaning/水杯/images/muge_323535__323535.jpg,水杯,muge_323535
+pilot_multimodal_c06_i05,multimodal,黑色纸质一次性串串杯,data/processed_data_cleaning/水杯/images/muge_323535__323535.jpg,水杯,muge_323535
+pilot_text_c07_i01,text,男士冰丝POLO衫 藏青色夏季短袖,,男装,
+pilot_image_c07_i01,image,,data/processed_data_cleaning/男装/images/12452021240__12452021240.png,男装,12452021240
+pilot_multimodal_c07_i01,multimodal,男士冰丝POLO衫 藏青色夏季短袖,data/processed_data_cleaning/男装/images/12452021240__12452021240.png,男装,12452021240
+pilot_text_c07_i02,text,男士棕色PU皮夹克 机车风外套,,男装,
+pilot_image_c07_i02,image,,data/processed_data_cleaning/男装/images/12453049909__12453049909.png,男装,12453049909
+pilot_multimodal_c07_i02,multimodal,男士棕色PU皮夹克 机车风外套,data/processed_data_cleaning/男装/images/12453049909__12453049909.png,男装,12453049909
+pilot_text_c07_i03,text,浅蓝色棉质男士Polo衫短袖,,男装,
+pilot_image_c07_i03,image,,data/processed_data_cleaning/男装/images/12451537714__12451537714.png,男装,12451537714
+pilot_multimodal_c07_i03,multimodal,浅蓝色棉质男士Polo衫短袖,data/processed_data_cleaning/男装/images/12451537714__12451537714.png,男装,12451537714
+pilot_text_c07_i04,text,男士深灰色冰丝七分裤 夏季休闲,,男装,
+pilot_image_c07_i04,image,,data/processed_data_cleaning/男装/images/12451772136__12451772136.png,男装,12451772136
+pilot_multimodal_c07_i04,multimodal,男士深灰色冰丝七分裤 夏季休闲,data/processed_data_cleaning/男装/images/12451772136__12451772136.png,男装,12451772136
+pilot_text_c07_i05,text,男士黑色中长款大衣,,男装,
+pilot_image_c07_i05,image,,data/processed_data_cleaning/男装/images/12440135413__12440135413.png,男装,12440135413
+pilot_multimodal_c07_i05,multimodal,男士黑色中长款大衣,data/processed_data_cleaning/男装/images/12440135413__12440135413.png,男装,12440135413
+pilot_text_c08_i01,text,黑色POLO短裤运动套装男,,运动服,
+pilot_image_c08_i01,image,,data/processed_data_cleaning/运动服/images/12451792886__12451792886.png,运动服,12451792886
+pilot_multimodal_c08_i01,multimodal,黑色POLO短裤运动套装男,data/processed_data_cleaning/运动服/images/12451792886__12451792886.png,运动服,12451792886
+pilot_text_c08_i02,text,红色绿色浅蓝色POLO衫运动服,,运动服,
+pilot_image_c08_i02,image,,data/processed_data_cleaning/运动服/images/12445119280__12445119280.png,运动服,12445119280
+pilot_multimodal_c08_i02,multimodal,红色绿色浅蓝色POLO衫运动服,data/processed_data_cleaning/运动服/images/12445119280__12445119280.png,运动服,12445119280
+pilot_text_c08_i03,text,绿色黑色米白色运动T恤,,运动服,
+pilot_image_c08_i03,image,,data/processed_data_cleaning/运动服/images/12444783339__12444783339.png,运动服,12444783339
+pilot_multimodal_c08_i03,multimodal,绿色黑色米白色运动T恤,data/processed_data_cleaning/运动服/images/12444783339__12444783339.png,运动服,12444783339
+pilot_text_c08_i04,text,白色三件套休闲运动套装,,运动服,
+pilot_image_c08_i04,image,,data/processed_data_cleaning/运动服/images/12441005119__12441005119.png,运动服,12441005119
+pilot_text_c08_i05,text,红色三合一冲锋夹克户外运动外套,,运动服,
+pilot_image_c08_i05,image,,data/processed_data_cleaning/运动服/images/12439605042__12439605042.png,运动服,12439605042
+pilot_multimodal_c08_i05,multimodal,红色三合一冲锋夹克户外运动外套,data/processed_data_cleaning/运动服/images/12439605042__12439605042.png,运动服,12439605042
+pilot_text_c09_i01,text,透明米白一字带坡跟凉鞋,,鞋,
+pilot_image_c09_i01,image,,data/processed_data_cleaning/鞋/images/muge_727166__727166.jpg,鞋,muge_727166
+pilot_multimodal_c09_i01,multimodal,透明米白一字带坡跟凉鞋,data/processed_data_cleaning/鞋/images/muge_727166__727166.jpg,鞋,muge_727166
+pilot_text_c09_i02,text,白色一字带松糕鞋女,,鞋,
+pilot_image_c09_i02,image,,data/processed_data_cleaning/鞋/images/muge_375189__375189.jpg,鞋,muge_375189
+pilot_multimodal_c09_i02,multimodal,白色一字带松糕鞋女,data/processed_data_cleaning/鞋/images/muge_375189__375189.jpg,鞋,muge_375189
+pilot_text_c09_i03,text,红色一字带粗跟单鞋,,鞋,
+pilot_image_c09_i03,image,,data/processed_data_cleaning/鞋/images/muge_284491__284491.jpg,鞋,muge_284491
+pilot_multimodal_c09_i03,multimodal,红色一字带粗跟单鞋,data/processed_data_cleaning/鞋/images/muge_284491__284491.jpg,鞋,muge_284491
+pilot_text_c09_i04,text,米色一字带细跟凉鞋女,,鞋,
+pilot_image_c09_i04,image,,data/processed_data_cleaning/鞋/images/muge_455109__455109.jpg,鞋,muge_455109
+pilot_multimodal_c09_i04,multimodal,米色一字带细跟凉鞋女,data/processed_data_cleaning/鞋/images/muge_455109__455109.jpg,鞋,muge_455109
+pilot_text_c09_i05,text,粉色一字带高跟凉鞋,,鞋,
+pilot_image_c09_i05,image,,data/processed_data_cleaning/鞋/images/muge_610649__610649.jpg,鞋,muge_610649
+pilot_multimodal_c09_i05,multimodal,粉色一字带高跟凉鞋,data/processed_data_cleaning/鞋/images/muge_610649__610649.jpg,鞋,muge_610649

@@ -1,0 +1,136 @@
+﻿query_id,mode,category,source_item_id,query_text,ai_query_valid,evaluation_status,ai_review_reason
+pilot_text_c01_i01,text,包,muge_350548,红黑色汽车图案儿童书包,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c01_i01,image,包,muge_350548,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c01_i01,multimodal,包,muge_350548,红黑色汽车图案儿童书包,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c01_i02,text,包,muge_1111793,黑色大容量单肩侧背包,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c01_i02,image,包,muge_1111793,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c01_i02,multimodal,包,muge_1111793,黑色大容量单肩侧背包,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c01_i03,text,包,muge_533032,深蓝色保温外卖背包,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c01_i03,image,包,muge_533032,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c01_i03,multimodal,包,muge_533032,深蓝色保温外卖背包,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c01_i04,text,包,muge_799319,黑色健身背包 放水,false,excluded,查询含明显错字“放水”，应修订为“防水”后重新检索。
+pilot_image_c01_i04,image,包,muge_799319,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c01_i04,multimodal,包,muge_799319,黑色健身背包 放水,false,excluded,图文查询沿用“放水”错字，应修订后重新检索。
+pilot_text_c01_i05,text,包,muge_60810,灰黑白健身运动包,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c01_i05,image,包,muge_60810,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c01_i05,multimodal,包,muge_60810,灰黑白健身运动包,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c02_i01,text,厨房用品,B07Y1RV1PX,白色塑料K-Cup胶囊咖啡机,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c02_i01,image,厨房用品,B07Y1RV1PX,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c02_i01,multimodal,厨房用品,B07Y1RV1PX,白色塑料K-Cup胶囊咖啡机,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c02_i02,text,厨房用品,B08B523DP2,黑色绿色塑料Y型削皮器带保护盖,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c02_i02,image,厨房用品,B08B523DP2,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c02_i02,multimodal,厨房用品,B08B523DP2,黑色绿色塑料Y型削皮器带保护盖,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c02_i03,text,厨房用品,B088WF9V3G,黑色不锈钢Y形削皮器三件套,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c02_i03,image,厨房用品,B088WF9V3G,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c02_i03,multimodal,厨房用品,B088WF9V3G,黑色不锈钢Y形削皮器三件套,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c02_i04,text,厨房用品,B07ZQWLTSX,白色三格一次性餐盒25个装,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c02_i04,image,厨房用品,B07ZQWLTSX,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c02_i04,multimodal,厨房用品,B07ZQWLTSX,白色三格一次性餐盒25个装,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c02_i05,text,厨房用品,B07ZQW3YK7,白色带盖三格一次性外带餐盒,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c02_i05,image,厨房用品,B07ZQW3YK7,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c02_i05,multimodal,厨房用品,B07ZQW3YK7,白色带盖三格一次性外带餐盒,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c03_i01,text,女装,12445237125,粉色Polo领短袖连衣裙女夏季收腰,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c03_i01,image,女装,12445237125,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c03_i01,multimodal,女装,12445237125,粉色Polo领短袖连衣裙女夏季收腰,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c03_i02,text,女装,12445240170,黑色宽松T恤连衣裙中长款,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c03_i02,image,女装,12445240170,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c03_i02,multimodal,女装,12445240170,黑色宽松T恤连衣裙中长款,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c03_i03,text,女装,12437762322,米色V领修身针织衫女打底,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c03_i03,image,女装,12437762322,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c03_i03,multimodal,女装,12437762322,米色V领修身针织衫女打底,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c03_i04,text,女装,12436050340,白色V领修身长袖T恤女显瘦,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c03_i04,image,女装,12436050340,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c03_i04,multimodal,女装,12436050340,白色V领修身长袖T恤女显瘦,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c03_i05,text,女装,12437762408,白色V领拼接长袖针织开衫女,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c03_i05,image,女装,12437762408,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c03_i05,multimodal,女装,12437762408,白色V领拼接长袖针织开衫女,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c04_i01,text,家居用品,B07V126F2D,灰色三层滚动收纳推车,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c04_i01,image,家居用品,B07V126F2D,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c04_i01,multimodal,家居用品,B07V126F2D,灰色三层滚动收纳推车,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c04_i02,text,家居用品,B082BGGBR1,黑色不粘煎锅,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c04_i02,image,家居用品,B082BGGBR1,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c04_i02,multimodal,家居用品,B082BGGBR1,黑色不粘煎锅,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c04_i03,text,家居用品,B07WFF9B6W,银色不锈钢餐具套装,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c04_i03,image,家居用品,B07WFF9B6W,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c04_i03,multimodal,家居用品,B07WFF9B6W,银色不锈钢餐具套装,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c04_i04,text,家居用品,B07V6M4MSN,黑色塑料个人取暖器,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c04_i04,image,家居用品,B07V6M4MSN,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c04_i04,multimodal,家居用品,B07V6M4MSN,黑色塑料个人取暖器,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c04_i05,text,家居用品,B07DBLQYQ7,黑色便携式保温午餐袋,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c04_i05,image,家居用品,B07DBLQYQ7,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c04_i05,multimodal,家居用品,B07DBLQYQ7,黑色便携式保温午餐袋,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c05_i01,text,手机壳,B07SZYZB5T,三星Galaxy E7 3D印花硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c05_i01,image,手机壳,B07SZYZB5T,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c05_i01,multimodal,手机壳,B07SZYZB5T,三星Galaxy E7 3D印花硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c05_i02,text,手机壳,B07T6V3TFK,魅族M2白色3D打印硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c05_i02,image,手机壳,B07T6V3TFK,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c05_i02,multimodal,手机壳,B07T6V3TFK,魅族M2白色3D打印硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c05_i03,text,手机壳,B07THBQQH8,OPPO F1s 3D图案塑料硬壳保护壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c05_i03,image,手机壳,B07THBQQH8,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c05_i03,multimodal,手机壳,B07THBQQH8,OPPO F1s 3D图案塑料硬壳保护壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c05_i04,text,手机壳,B07QRL5RRG,诺基亚5.1 Plus 3D打印图案硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c05_i04,image,手机壳,B07QRL5RRG,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c05_i04,multimodal,手机壳,B07QRL5RRG,诺基亚5.1 Plus 3D打印图案硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c05_i05,text,手机壳,B07TH3CC7S,Vivo Y53 深蓝色3D打印硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c05_i05,image,手机壳,B07TH3CC7S,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c05_i05,multimodal,手机壳,B07TH3CC7S,Vivo Y53 深蓝色3D打印硬壳手机壳,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c06_i01,text,水杯,12451499960,PPSU吸管杯 孕产妇可用 黄色透明水杯,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c06_i01,image,水杯,12451499960,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c06_i01,multimodal,水杯,12451499960,PPSU吸管杯 孕产妇可用 黄色透明水杯,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c06_i02,text,水杯,12452226901,Tritan吸管运动水杯 大容量便携 白色粉色黑色,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c06_i02,image,水杯,12452226901,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c06_i02,multimodal,水杯,12452226901,Tritan吸管运动水杯 大容量便携 白色粉色黑色,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c06_i03,text,水杯,muge_993887,透明玻璃U型杯,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c06_i03,image,水杯,muge_993887,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c06_i03,multimodal,水杯,muge_993887,透明玻璃U型杯,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c06_i04,text,水杯,muge_569263,绿色塑料U形奶茶杯 90口径,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c06_i04,image,水杯,muge_569263,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c06_i04,multimodal,水杯,muge_569263,绿色塑料U形奶茶杯 90口径,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c06_i05,text,水杯,muge_323535,黑色纸质一次性串串杯,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c06_i05,image,水杯,muge_323535,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c06_i05,multimodal,水杯,muge_323535,黑色纸质一次性串串杯,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c07_i01,text,男装,12452021240,男士冰丝POLO衫 藏青色夏季短袖,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c07_i01,image,男装,12452021240,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c07_i01,multimodal,男装,12452021240,男士冰丝POLO衫 藏青色夏季短袖,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c07_i02,text,男装,12453049909,男士棕色PU皮夹克 机车风外套,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c07_i02,image,男装,12453049909,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c07_i02,multimodal,男装,12453049909,男士棕色PU皮夹克 机车风外套,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c07_i03,text,男装,12451537714,浅蓝色棉质男士Polo衫短袖,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c07_i03,image,男装,12451537714,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c07_i03,multimodal,男装,12451537714,浅蓝色棉质男士Polo衫短袖,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c07_i04,text,男装,12451772136,男士深灰色冰丝七分裤 夏季休闲,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c07_i04,image,男装,12451772136,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c07_i04,multimodal,男装,12451772136,男士深灰色冰丝七分裤 夏季休闲,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c07_i05,text,男装,12440135413,男士黑色中长款大衣,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c07_i05,image,男装,12440135413,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c07_i05,multimodal,男装,12440135413,男士黑色中长款大衣,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c08_i01,text,运动服,12451792886,黑色POLO短裤运动套装男,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c08_i01,image,运动服,12451792886,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c08_i01,multimodal,运动服,12451792886,黑色POLO短裤运动套装男,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c08_i02,text,运动服,12445119280,红色绿色浅蓝色POLO衫运动服,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c08_i02,image,运动服,12445119280,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c08_i02,multimodal,运动服,12445119280,红色绿色浅蓝色POLO衫运动服,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c08_i03,text,运动服,12444783339,绿色黑色米白色运动T恤,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c08_i03,image,运动服,12444783339,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c08_i03,multimodal,运动服,12444783339,绿色黑色米白色运动T恤,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c08_i04,text,运动服,12441005119,白色三件套休闲运动套装,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c08_i04,image,运动服,12441005119,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c08_i04,multimodal,运动服,12441005119,白色三件套休闲运动套装,false,excluded,文字要求白色套装，但查询图片是黑色套装，图文意图冲突。
+pilot_text_c08_i05,text,运动服,12439605042,红色三合一冲锋夹克户外运动外套,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c08_i05,image,运动服,12439605042,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c08_i05,multimodal,运动服,12439605042,红色三合一冲锋夹克户外运动外套,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c09_i01,text,鞋,muge_727166,透明米白一字带坡跟凉鞋,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c09_i01,image,鞋,muge_727166,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c09_i01,multimodal,鞋,muge_727166,透明米白一字带坡跟凉鞋,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c09_i02,text,鞋,muge_375189,白色一字带松糕鞋女,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c09_i02,image,鞋,muge_375189,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c09_i02,multimodal,鞋,muge_375189,白色一字带松糕鞋女,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c09_i03,text,鞋,muge_284491,红色一字带粗跟单鞋,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c09_i03,image,鞋,muge_284491,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c09_i03,multimodal,鞋,muge_284491,红色一字带粗跟单鞋,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c09_i04,text,鞋,muge_455109,米色一字带细跟凉鞋女,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c09_i04,image,鞋,muge_455109,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c09_i04,multimodal,鞋,muge_455109,米色一字带细跟凉鞋女,true,included,查询图文与源商品未见明显矛盾。
+pilot_text_c09_i05,text,鞋,muge_610649,粉色一字带高跟凉鞋,true,included,查询图文与源商品未见明显矛盾。
+pilot_image_c09_i05,image,鞋,muge_610649,,true,included,查询图文与源商品未见明显矛盾。
+pilot_multimodal_c09_i05,multimodal,鞋,muge_610649,粉色一字带高跟凉鞋,true,included,查询图文与源商品未见明显矛盾。

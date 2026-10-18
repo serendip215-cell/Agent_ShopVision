@@ -1,0 +1,136 @@
+﻿query_id,mode,category,source_item_id,query_text,query_image,generation_source
+pilot_text_c01_i01,text,包,muge_350548,红黑色汽车图案儿童书包,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c01_i01,image,包,muge_350548,,data/processed_data_cleaning/包/images/muge_350548__350548.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c01_i01,multimodal,包,muge_350548,红黑色汽车图案儿童书包,data/processed_data_cleaning/包/images/muge_350548__350548.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c01_i02,text,包,muge_1111793,黑色大容量单肩侧背包,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c01_i02,image,包,muge_1111793,,data/processed_data_cleaning/包/images/muge_1111793__1111793.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c01_i02,multimodal,包,muge_1111793,黑色大容量单肩侧背包,data/processed_data_cleaning/包/images/muge_1111793__1111793.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c01_i03,text,包,muge_533032,深蓝色保温外卖背包,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c01_i03,image,包,muge_533032,,data/processed_data_cleaning/包/images/muge_533032__533032.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c01_i03,multimodal,包,muge_533032,深蓝色保温外卖背包,data/processed_data_cleaning/包/images/muge_533032__533032.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c01_i04,text,包,muge_799319,黑色健身背包 放水,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c01_i04,image,包,muge_799319,,data/processed_data_cleaning/包/images/muge_799319__799319.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c01_i04,multimodal,包,muge_799319,黑色健身背包 放水,data/processed_data_cleaning/包/images/muge_799319__799319.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c01_i05,text,包,muge_60810,灰黑白健身运动包,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c01_i05,image,包,muge_60810,,data/processed_data_cleaning/包/images/muge_60810__60810.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c01_i05,multimodal,包,muge_60810,灰黑白健身运动包,data/processed_data_cleaning/包/images/muge_60810__60810.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c02_i01,text,厨房用品,B07Y1RV1PX,白色塑料K-Cup胶囊咖啡机,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c02_i01,image,厨房用品,B07Y1RV1PX,,data/processed_data_cleaning/厨房用品/images/B07Y1RV1PX__712aPQwcEaL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c02_i01,multimodal,厨房用品,B07Y1RV1PX,白色塑料K-Cup胶囊咖啡机,data/processed_data_cleaning/厨房用品/images/B07Y1RV1PX__712aPQwcEaL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c02_i02,text,厨房用品,B08B523DP2,黑色绿色塑料Y型削皮器带保护盖,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c02_i02,image,厨房用品,B08B523DP2,,data/processed_data_cleaning/厨房用品/images/B08B523DP2__71F9RsMDeEL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c02_i02,multimodal,厨房用品,B08B523DP2,黑色绿色塑料Y型削皮器带保护盖,data/processed_data_cleaning/厨房用品/images/B08B523DP2__71F9RsMDeEL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c02_i03,text,厨房用品,B088WF9V3G,黑色不锈钢Y形削皮器三件套,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c02_i03,image,厨房用品,B088WF9V3G,,data/processed_data_cleaning/厨房用品/images/B088WF9V3G__71myrEZwE3L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c02_i03,multimodal,厨房用品,B088WF9V3G,黑色不锈钢Y形削皮器三件套,data/processed_data_cleaning/厨房用品/images/B088WF9V3G__71myrEZwE3L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c02_i04,text,厨房用品,B07ZQWLTSX,白色三格一次性餐盒25个装,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c02_i04,image,厨房用品,B07ZQWLTSX,,data/processed_data_cleaning/厨房用品/images/B07ZQWLTSX__71hVsRrvKKL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c02_i04,multimodal,厨房用品,B07ZQWLTSX,白色三格一次性餐盒25个装,data/processed_data_cleaning/厨房用品/images/B07ZQWLTSX__71hVsRrvKKL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c02_i05,text,厨房用品,B07ZQW3YK7,白色带盖三格一次性外带餐盒,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c02_i05,image,厨房用品,B07ZQW3YK7,,data/processed_data_cleaning/厨房用品/images/B07ZQW3YK7__71AdLEX+sbL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c02_i05,multimodal,厨房用品,B07ZQW3YK7,白色带盖三格一次性外带餐盒,data/processed_data_cleaning/厨房用品/images/B07ZQW3YK7__71AdLEX+sbL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c03_i01,text,女装,12445237125,粉色Polo领短袖连衣裙女夏季收腰,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c03_i01,image,女装,12445237125,,data/processed_data_cleaning/女装/images/12445237125__12445237125.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c03_i01,multimodal,女装,12445237125,粉色Polo领短袖连衣裙女夏季收腰,data/processed_data_cleaning/女装/images/12445237125__12445237125.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c03_i02,text,女装,12445240170,黑色宽松T恤连衣裙中长款,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c03_i02,image,女装,12445240170,,data/processed_data_cleaning/女装/images/12445240170__12445240170.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c03_i02,multimodal,女装,12445240170,黑色宽松T恤连衣裙中长款,data/processed_data_cleaning/女装/images/12445240170__12445240170.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c03_i03,text,女装,12437762322,米色V领修身针织衫女打底,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c03_i03,image,女装,12437762322,,data/processed_data_cleaning/女装/images/12437762322__12437762322.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c03_i03,multimodal,女装,12437762322,米色V领修身针织衫女打底,data/processed_data_cleaning/女装/images/12437762322__12437762322.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c03_i04,text,女装,12436050340,白色V领修身长袖T恤女显瘦,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c03_i04,image,女装,12436050340,,data/processed_data_cleaning/女装/images/12436050340__12436050340.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c03_i04,multimodal,女装,12436050340,白色V领修身长袖T恤女显瘦,data/processed_data_cleaning/女装/images/12436050340__12436050340.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c03_i05,text,女装,12437762408,白色V领拼接长袖针织开衫女,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c03_i05,image,女装,12437762408,,data/processed_data_cleaning/女装/images/12437762408__12437762408.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c03_i05,multimodal,女装,12437762408,白色V领拼接长袖针织开衫女,data/processed_data_cleaning/女装/images/12437762408__12437762408.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c04_i01,text,家居用品,B07V126F2D,灰色三层滚动收纳推车,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c04_i01,image,家居用品,B07V126F2D,,data/processed_data_cleaning/家居用品/images/B07V126F2D__81nUwuCkj7L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c04_i01,multimodal,家居用品,B07V126F2D,灰色三层滚动收纳推车,data/processed_data_cleaning/家居用品/images/B07V126F2D__81nUwuCkj7L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c04_i02,text,家居用品,B082BGGBR1,黑色不粘煎锅,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c04_i02,image,家居用品,B082BGGBR1,,data/processed_data_cleaning/家居用品/images/B082BGGBR1__71cPNFZG41L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c04_i02,multimodal,家居用品,B082BGGBR1,黑色不粘煎锅,data/processed_data_cleaning/家居用品/images/B082BGGBR1__71cPNFZG41L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c04_i03,text,家居用品,B07WFF9B6W,银色不锈钢餐具套装,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c04_i03,image,家居用品,B07WFF9B6W,,data/processed_data_cleaning/家居用品/images/B07WFF9B6W__71CO3+8aiIL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c04_i03,multimodal,家居用品,B07WFF9B6W,银色不锈钢餐具套装,data/processed_data_cleaning/家居用品/images/B07WFF9B6W__71CO3+8aiIL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c04_i04,text,家居用品,B07V6M4MSN,黑色塑料个人取暖器,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c04_i04,image,家居用品,B07V6M4MSN,,data/processed_data_cleaning/家居用品/images/B07V6M4MSN__81B6Aeux91L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c04_i04,multimodal,家居用品,B07V6M4MSN,黑色塑料个人取暖器,data/processed_data_cleaning/家居用品/images/B07V6M4MSN__81B6Aeux91L.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c04_i05,text,家居用品,B07DBLQYQ7,黑色便携式保温午餐袋,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c04_i05,image,家居用品,B07DBLQYQ7,,data/processed_data_cleaning/家居用品/images/B07DBLQYQ7__81Dsf1NuPYL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c04_i05,multimodal,家居用品,B07DBLQYQ7,黑色便携式保温午餐袋,data/processed_data_cleaning/家居用品/images/B07DBLQYQ7__81Dsf1NuPYL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c05_i01,text,手机壳,B07SZYZB5T,三星Galaxy E7 3D印花硬壳手机壳,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c05_i01,image,手机壳,B07SZYZB5T,,data/processed_data_cleaning/手机壳/images/B07SZYZB5T__61Mjw24XNkL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c05_i01,multimodal,手机壳,B07SZYZB5T,三星Galaxy E7 3D印花硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07SZYZB5T__61Mjw24XNkL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c05_i02,text,手机壳,B07T6V3TFK,魅族M2白色3D打印硬壳手机壳,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c05_i02,image,手机壳,B07T6V3TFK,,data/processed_data_cleaning/手机壳/images/B07T6V3TFK__81F5hFnK+DL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c05_i02,multimodal,手机壳,B07T6V3TFK,魅族M2白色3D打印硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07T6V3TFK__81F5hFnK+DL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c05_i03,text,手机壳,B07THBQQH8,OPPO F1s 3D图案塑料硬壳保护壳,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c05_i03,image,手机壳,B07THBQQH8,,data/processed_data_cleaning/手机壳/images/B07THBQQH8__71SczZmlJxL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c05_i03,multimodal,手机壳,B07THBQQH8,OPPO F1s 3D图案塑料硬壳保护壳,data/processed_data_cleaning/手机壳/images/B07THBQQH8__71SczZmlJxL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c05_i04,text,手机壳,B07QRL5RRG,诺基亚5.1 Plus 3D打印图案硬壳手机壳,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c05_i04,image,手机壳,B07QRL5RRG,,data/processed_data_cleaning/手机壳/images/B07QRL5RRG__614ZNvIHTtL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c05_i04,multimodal,手机壳,B07QRL5RRG,诺基亚5.1 Plus 3D打印图案硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07QRL5RRG__614ZNvIHTtL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c05_i05,text,手机壳,B07TH3CC7S,Vivo Y53 深蓝色3D打印硬壳手机壳,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c05_i05,image,手机壳,B07TH3CC7S,,data/processed_data_cleaning/手机壳/images/B07TH3CC7S__81+Gb-OCJxL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c05_i05,multimodal,手机壳,B07TH3CC7S,Vivo Y53 深蓝色3D打印硬壳手机壳,data/processed_data_cleaning/手机壳/images/B07TH3CC7S__81+Gb-OCJxL.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c06_i01,text,水杯,12451499960,PPSU吸管杯 孕产妇可用 黄色透明水杯,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c06_i01,image,水杯,12451499960,,data/processed_data_cleaning/水杯/images/12451499960__12451499960.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c06_i01,multimodal,水杯,12451499960,PPSU吸管杯 孕产妇可用 黄色透明水杯,data/processed_data_cleaning/水杯/images/12451499960__12451499960.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c06_i02,text,水杯,12452226901,Tritan吸管运动水杯 大容量便携 白色粉色黑色,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c06_i02,image,水杯,12452226901,,data/processed_data_cleaning/水杯/images/12452226901__12452226901.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c06_i02,multimodal,水杯,12452226901,Tritan吸管运动水杯 大容量便携 白色粉色黑色,data/processed_data_cleaning/水杯/images/12452226901__12452226901.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c06_i03,text,水杯,muge_993887,透明玻璃U型杯,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c06_i03,image,水杯,muge_993887,,data/processed_data_cleaning/水杯/images/muge_993887__993887.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c06_i03,multimodal,水杯,muge_993887,透明玻璃U型杯,data/processed_data_cleaning/水杯/images/muge_993887__993887.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c06_i04,text,水杯,muge_569263,绿色塑料U形奶茶杯 90口径,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c06_i04,image,水杯,muge_569263,,data/processed_data_cleaning/水杯/images/muge_569263__569263.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c06_i04,multimodal,水杯,muge_569263,绿色塑料U形奶茶杯 90口径,data/processed_data_cleaning/水杯/images/muge_569263__569263.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c06_i05,text,水杯,muge_323535,黑色纸质一次性串串杯,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c06_i05,image,水杯,muge_323535,,data/processed_data_cleaning/水杯/images/muge_323535__323535.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c06_i05,multimodal,水杯,muge_323535,黑色纸质一次性串串杯,data/processed_data_cleaning/水杯/images/muge_323535__323535.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c07_i01,text,男装,12452021240,男士冰丝POLO衫 藏青色夏季短袖,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c07_i01,image,男装,12452021240,,data/processed_data_cleaning/男装/images/12452021240__12452021240.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c07_i01,multimodal,男装,12452021240,男士冰丝POLO衫 藏青色夏季短袖,data/processed_data_cleaning/男装/images/12452021240__12452021240.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c07_i02,text,男装,12453049909,男士棕色PU皮夹克 机车风外套,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c07_i02,image,男装,12453049909,,data/processed_data_cleaning/男装/images/12453049909__12453049909.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c07_i02,multimodal,男装,12453049909,男士棕色PU皮夹克 机车风外套,data/processed_data_cleaning/男装/images/12453049909__12453049909.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c07_i03,text,男装,12451537714,浅蓝色棉质男士Polo衫短袖,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c07_i03,image,男装,12451537714,,data/processed_data_cleaning/男装/images/12451537714__12451537714.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c07_i03,multimodal,男装,12451537714,浅蓝色棉质男士Polo衫短袖,data/processed_data_cleaning/男装/images/12451537714__12451537714.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c07_i04,text,男装,12451772136,男士深灰色冰丝七分裤 夏季休闲,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c07_i04,image,男装,12451772136,,data/processed_data_cleaning/男装/images/12451772136__12451772136.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c07_i04,multimodal,男装,12451772136,男士深灰色冰丝七分裤 夏季休闲,data/processed_data_cleaning/男装/images/12451772136__12451772136.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c07_i05,text,男装,12440135413,男士黑色中长款大衣,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c07_i05,image,男装,12440135413,,data/processed_data_cleaning/男装/images/12440135413__12440135413.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c07_i05,multimodal,男装,12440135413,男士黑色中长款大衣,data/processed_data_cleaning/男装/images/12440135413__12440135413.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c08_i01,text,运动服,12451792886,黑色POLO短裤运动套装男,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c08_i01,image,运动服,12451792886,,data/processed_data_cleaning/运动服/images/12451792886__12451792886.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c08_i01,multimodal,运动服,12451792886,黑色POLO短裤运动套装男,data/processed_data_cleaning/运动服/images/12451792886__12451792886.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c08_i02,text,运动服,12445119280,红色绿色浅蓝色POLO衫运动服,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c08_i02,image,运动服,12445119280,,data/processed_data_cleaning/运动服/images/12445119280__12445119280.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c08_i02,multimodal,运动服,12445119280,红色绿色浅蓝色POLO衫运动服,data/processed_data_cleaning/运动服/images/12445119280__12445119280.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c08_i03,text,运动服,12444783339,绿色黑色米白色运动T恤,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c08_i03,image,运动服,12444783339,,data/processed_data_cleaning/运动服/images/12444783339__12444783339.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c08_i03,multimodal,运动服,12444783339,绿色黑色米白色运动T恤,data/processed_data_cleaning/运动服/images/12444783339__12444783339.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c08_i04,text,运动服,12441005119,白色三件套休闲运动套装,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c08_i04,image,运动服,12441005119,,data/processed_data_cleaning/运动服/images/12441005119__12441005119.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c08_i04,multimodal,运动服,12441005119,白色三件套休闲运动套装,data/processed_data_cleaning/运动服/images/12441005119__12441005119.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c08_i05,text,运动服,12439605042,红色三合一冲锋夹克户外运动外套,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c08_i05,image,运动服,12439605042,,data/processed_data_cleaning/运动服/images/12439605042__12439605042.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c08_i05,multimodal,运动服,12439605042,红色三合一冲锋夹克户外运动外套,data/processed_data_cleaning/运动服/images/12439605042__12439605042.png,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c09_i01,text,鞋,muge_727166,透明米白一字带坡跟凉鞋,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c09_i01,image,鞋,muge_727166,,data/processed_data_cleaning/鞋/images/muge_727166__727166.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c09_i01,multimodal,鞋,muge_727166,透明米白一字带坡跟凉鞋,data/processed_data_cleaning/鞋/images/muge_727166__727166.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c09_i02,text,鞋,muge_375189,白色一字带松糕鞋女,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c09_i02,image,鞋,muge_375189,,data/processed_data_cleaning/鞋/images/muge_375189__375189.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c09_i02,multimodal,鞋,muge_375189,白色一字带松糕鞋女,data/processed_data_cleaning/鞋/images/muge_375189__375189.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c09_i03,text,鞋,muge_284491,红色一字带粗跟单鞋,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c09_i03,image,鞋,muge_284491,,data/processed_data_cleaning/鞋/images/muge_284491__284491.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c09_i03,multimodal,鞋,muge_284491,红色一字带粗跟单鞋,data/processed_data_cleaning/鞋/images/muge_284491__284491.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c09_i04,text,鞋,muge_455109,米色一字带细跟凉鞋女,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c09_i04,image,鞋,muge_455109,,data/processed_data_cleaning/鞋/images/muge_455109__455109.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c09_i04,multimodal,鞋,muge_455109,米色一字带细跟凉鞋女,data/processed_data_cleaning/鞋/images/muge_455109__455109.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_text_c09_i05,text,鞋,muge_610649,粉色一字带高跟凉鞋,,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_image_c09_i05,image,鞋,muge_610649,,data/processed_data_cleaning/鞋/images/muge_610649__610649.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields
+pilot_multimodal_c09_i05,multimodal,鞋,muge_610649,粉色一字带高跟凉鞋,data/processed_data_cleaning/鞋/images/muge_610649__610649.jpg,group/auto-deepseek-v4-1-flash based on indexed product fields

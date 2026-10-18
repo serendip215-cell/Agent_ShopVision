@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import sys
 from collections import Counter
 from pathlib import Path
@@ -40,6 +41,11 @@ def resolve_path(value: str, input_file: Path, repo_root: Path) -> Path:
         if candidate.is_file():
             return candidate.resolve()
     return (repo_root / path).resolve()
+
+
+def display_path(path: Path, repo_root: Path) -> str:
+    """Store paths in portable reports relative to the project root."""
+    return Path(os.path.relpath(path.resolve(), repo_root.resolve())).as_posix()
 
 
 def check_file(input_file: Path, repo_root: Path, required_fields: list[str], check_images: bool) -> dict[str, object]:
@@ -85,7 +91,7 @@ def check_file(input_file: Path, repo_root: Path, required_fields: list[str], ch
     if missing_images: errors.append("missing_images")
     if status_mismatches: errors.append("image_status_mismatch")
     return {
-        "input_file": input_file.as_posix(), "repo_root": repo_root.as_posix(), "row_count": len(rows),
+        "input_file": display_path(input_file, repo_root), "repo_root": ".", "row_count": len(rows),
         "fields": fields, "standard_fields": STANDARD_FIELDS, "missing_fields": missing_fields,
         "extra_fields": extra_fields, "required_empty_counts": dict(empty_counts),
         "duplicate_item_ids": duplicate_ids, "absolute_image_paths": absolute_paths,

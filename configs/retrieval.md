@@ -259,6 +259,27 @@ py -3 scripts\retrieval\search_category_index.py "白色鞋子" --category "鞋"
 4. 随机输入 3 至 5 条中文查询，返回结果的类别、图片和 `item_id` 能对应。
 5. 重新构建同一类别后，查询脚本仍能根据注册表正常读取。
 
+## 10. 离线评测与可视化
+
+评测代码、运行脚本、测试数据和结果统一位于 `evaluation/retrieval/`，分别保存在
+`code/`、`scripts/`、`test_data/` 和 `results/`。先用演示查询验证环境和流程：
+
+```powershell
+.\evaluation\retrieval\scripts\run_smoke_test.ps1 -Python python -Device cuda
+```
+
+运行前请先激活安装了检索依赖的 Python 或 Conda 环境。`-Python python` 使用当前激活环境中的解释器，不要填写某台开发机专属的绝对安装路径。
+
+正式评测时复制 `evaluation/retrieval/test_data/queries_template.csv`、`qrels_template.csv`，
+填入真实查询和人工相关性，再调用 `evaluation/retrieval/code/evaluate_retrieval.py` 指定输入。
+结果写入 `evaluation/retrieval/results/`，包含 Top-K 排名 CSV、逐查询指标、JSON 汇总和 PNG 图表。
+指标包括 Recall@K、Precision@K、nDCG@10、MRR@10。
+
+演示数据把库内商品自身设为相关结果，仅用于确认编码、候选召回、向量映射、指标计算和绘图流程，
+不能据此宣称真实推荐效果。正式结论必须使用独立编写的查询、人工判断相关性的商品，并将查询集分成
+权重调整用验证集和最终报告用测试集。更多字段说明见
+[`evaluation/retrieval/README.md`](../evaluation/retrieval/README.md)。
+
 
 
 

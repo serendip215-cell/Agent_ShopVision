@@ -101,7 +101,9 @@ MAX_PAGES = 20       # 每个搜索词最多翻页
 PER_CATEGORY = 1000  # 每类最多 1000，实验 1 建议区间是 300–1000
 HARD_CAP = 6000       # 6 个品类 × 1000。可调低，但不要高于这个数
 SEARCH_URL = "https://search.suning.com/{kw}/&iy=0&isNoResult=0&cp={page}"
-OUT_DIR = os.path.join("data", "raw_data", "Suning_data")
+# Keep generated files in the repository even when the script is launched from
+# another working directory. CSV image paths remain repository-relative.
+OUT_DIR = os.path.join(ROOT, "data", "raw_data", "Suning_data")
 
 # 搜索词来自苏宁搜索页左侧/顶部类目筛选项（2026-09-28 公开页核对），不是自造类目。
 # 水杯: 保温杯、塑料杯、玻璃杯、马克杯、水具、户外水具
@@ -534,7 +536,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-items", type=int, default=HARD_CAP, help="硬上限 6000，可调低")
     ap.add_argument("--delay", type=float, default=DELAY, help="请求间隔秒，不建议低于 3")
-    ap.add_argument("--proxy-file", default="", help="代理列表，每行 ip:port 或 http://ip:port")
+    ap.add_argument(
+        "--proxy-file",
+        default="",
+        help="代理列表文件；相对路径按项目根目录解析，每行 ip:port 或 http://ip:port",
+    )
     ap.add_argument("--proxy-api", default=os.environ.get("PROXY_POOL_URL", ""),
                     help="代理接口，默认读仓库根目录 .env 的 PROXY_POOL_URL")
     ap.add_argument("--selftest", action="store_true")
@@ -546,7 +552,10 @@ def main():
         args.delay = DELAY
     if args.max_items > HARD_CAP:
         args.max_items = HARD_CAP
-    pool = ProxyPool(args.proxy_api, args.proxy_file)
+    proxy_file = args.proxy_file
+    if proxy_file and not os.path.isabs(proxy_file):
+        proxy_file = os.path.join(ROOT, proxy_file)
+    pool = ProxyPool(args.proxy_api, proxy_file)
 
     img_dir = os.path.join(OUT_DIR, "images")
     os.makedirs(img_dir, exist_ok=True)

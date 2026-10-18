@@ -1,0 +1,14 @@
+{
+  "model": "group/auto-deepseek-v4-1-flash",
+  "base_url": "http://127.0.0.1:3425/v1",
+  "calls_this_process": 105,
+  "tokens_this_process": {
+    "prompt_tokens": 212858,
+    "completion_tokens": 51806
+  },
+  "resumed": true,
+  "prior_query_generation_calls_estimate": 9,
+  "note": "恢复运行前的模型查询与部分标注 token 用量未持久化；此处 token 数仅统计本次恢复进程。",
+  "finalization_reused_checkpoints": true,
+  "finalization_api_calls": 0
+}

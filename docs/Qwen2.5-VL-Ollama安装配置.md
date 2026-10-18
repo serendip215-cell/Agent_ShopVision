@@ -25,8 +25,8 @@ ollama --version
 
 3. Ollama 安装后自动作为后台服务运行，API 监听 `http://localhost:11434`。
 
-> 磁盘提示：模型默认存放在 `C:\Users\<用户名>\.ollama`。C 盘空间紧张时，
-> 先设置环境变量 `OLLAMA_MODELS` 指到大容量盘（如 `D:\ollama-models`）再拉模型。
+> 磁盘提示：Ollama 按当前操作系统的用户配置管理模型缓存。空间不足时，可按 Ollama 的安装说明
+> 将环境变量 `OLLAMA_MODELS` 指向本机的其他存储位置。该缓存位于项目仓库之外，不应写入项目配置或提交到版本库。
 
 ## 3. 拉取模型
 

@@ -1,0 +1,4 @@
+query_id,mode,query_text,query_image,category,exclude_item_id
+shoe_text,text,女士真皮小板鞋,,鞋,
+shoe_image,image,,data/processed_data_cleaning/鞋/images/muge_916__916.jpg,鞋,
+shoe_multimodal,multimodal,女士真皮小板鞋,data/processed_data_cleaning/鞋/images/muge_916__916.jpg,鞋,
