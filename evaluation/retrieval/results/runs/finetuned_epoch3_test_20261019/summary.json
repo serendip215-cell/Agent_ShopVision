@@ -1,0 +1,34 @@
+{
+  "run_id": "finetuned_epoch3_test_20261019",
+  "evaluation_type": "checkpoint_text_to_image_retrieval",
+  "source_run_id": "2026-10-18_bs32_lr1e-5",
+  "source_evaluation_date": "2026-10-18",
+  "organized_date": "2026-10-19",
+  "test_text_count": 934,
+  "candidate_pool_size": 934,
+  "top_k": 10,
+  "baseline": {
+    "r1": 37.3661670235546,
+    "r5": 70.77087794432548,
+    "r10": 82.44111349036403,
+    "mean_recall": 63.5260528194147
+  },
+  "finetuned_epoch3": {
+    "r1": 58.67237687366167,
+    "r5": 89.07922912205566,
+    "r10": 96.8950749464668,
+    "mean_recall": 81.54889364739472
+  },
+  "absolute_gain_percentage_points": {
+    "r1": 21.30620985010707,
+    "r5": 18.30835117773018,
+    "r10": 14.45396145610277,
+    "mean_recall": 18.02284082798002
+  },
+  "fresh_inference_rerun_during_organization": false,
+  "limitations": [
+    "Candidate pool contains only 934 test samples and is not directly comparable to official MUGE scale results.",
+    "Test text uses the training attribute-template distribution; free-form query performance may differ.",
+    "This checkpoint-level benchmark is distinct from AI-reviewed end-to-end catalog retrieval evaluation."
+  ]
+}
