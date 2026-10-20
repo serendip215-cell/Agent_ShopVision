@@ -346,7 +346,7 @@ data/raw_data/<数据集>/images_cutout/   # 输出 <原名>.png 透明底
 ## 处理顺序
 
 ```text
-crawl_suning.py（苏宁采集，可选）→ translate_amazon_products_deepl.py → 字段统一/类别整理 → classify_products.py 或增量合并 → check_product_fields.py → attribute_cleaning/（属性识别清洗，可选）→ cutout_images.py（抠图，可选）→ 中文图文检索数据构建（待开发）
+crawl_suning.py（苏宁采集，可选）→ translate_amazon_products_deepl.py → 字段统一/类别整理 → classify_products.py 或增量合并 → check_product_fields.py → attribute_cleaning/（属性识别清洗，可选）→ cutout_images.py（抠图，可选）→ build_retrieval_dataset.py（微调数据）→ finetune/（微调，可选）→ retrieval/build_category_index.py → retrieval/search_category_index.py
 ```
 
 不同数据集字段不同时，先完成该数据集的字段映射，再运行整理脚本。图片能正常读取不代表图片内容与商品描述匹配；当前脚本不做语义审核。

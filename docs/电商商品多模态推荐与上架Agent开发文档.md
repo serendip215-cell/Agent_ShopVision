@@ -162,7 +162,7 @@ data/
     │   ├── products.csv
     │   ├── images/
     │   └── image_quality_report.csv
-    ├── Amazon_data_translated/  # Amazon 中文翻译暂存，尚未进入正式处理数据
+    ├── Amazon_data_translated/  # Amazon 中文翻译暂存，译文已并入 data/processed_data/
     │   └── README.md
     └── MUGE_data/
         ├── products.csv

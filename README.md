@@ -4,7 +4,7 @@
 
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white">
-  <img alt="stage" src="https://img.shields.io/badge/阶段-实验1_·_数据清洗-2EA44F?style=flat-square&logo=checkmarx&logoColor=white">
+  <img alt="stage" src="https://img.shields.io/badge/阶段-检索与微调已完成-2EA44F?style=flat-square&logo=checkmarx&logoColor=white">
   <img alt="records" src="https://img.shields.io/badge/正式商品-10%2C165-1F6FEB?style=flat-square&logo=databricks&logoColor=white">
   <img alt="categories" src="https://img.shields.io/badge/类别-9-F0883E?style=flat-square&logo=stackshare&logoColor=white">
   <img alt="accepted" src="https://img.shields.io/badge/清洗通过-9%2C393-3FB950?style=flat-square&logo=githubactions&logoColor=white">
