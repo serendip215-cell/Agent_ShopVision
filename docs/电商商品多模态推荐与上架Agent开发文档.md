@@ -694,6 +694,17 @@ similarity
 
 同时记录索引类别、模型版本、向量维度、索引构建时间和单次查询延迟。基线结果用于判断数据质量和检索任务难度。
 
+**已完成的模型级测试评估（2026-10-18）**：使用 Chinese-CLIP 官方 `cn_clip/eval/` 流程，对预训练权重和 `epoch3.pt` 进行文本检索图片（Text-to-Image）对照。固定测试集为 934 条图文样本，候选池为 934。
+
+| 指标 | 预训练基线 | 微调 Epoch 3 | 绝对提升 |
+|---|---:|---:|---:|
+| R@1 | 37.37% | 58.67% | +21.31 个百分点 |
+| R@5 | 70.77% | 89.08% | +18.31 个百分点 |
+| R@10 | 82.44% | 96.90% | +14.45 个百分点 |
+| Mean Recall | 63.53% | 81.55% | +18.02 个百分点 |
+
+该结果是 checkpoint 级图文检索评估，不等同于基于商品 FAISS 索引、AI 复核查询和 qrels 的端到端检索评估。测试文本采用属性模板，且候选池只有 934，不能与官方 MUGE 十万级候选池直接比较；该测试集已用于最终评估，后续调参应使用验证集。逐项限制、分数文件及 9 张图表见 `evaluation/retrieval/results/runs/finetuned_epoch3_test_20261019/测试结果说明.md`。
+
 #### 5.5.3 阶段六：训练自己的图文模型
 
 只有在清洗结果和 Chinese-CLIP 基线确认后，再决定是否微调自己的图文模型。训练数据按商品 `item_id` 划分，不能让同一商品的不同图片跨越训练集、验证集和测试集。建议比例为 8:1:1。
@@ -856,6 +867,24 @@ ecommerce-agent/
 ├── README.md
 └── requirements.txt
 ```
+
+### 当前检索评测归档
+
+```text
+evaluation/retrieval/results/runs/
+├── <AI 复核端到端评测 run-id>/   # inputs/queries.csv、qrels.csv、AI 审核、排名和查询指标
+└── finetuned_epoch3_test_20261019/ # checkpoint 级测试结果，不与上类指标混算
+    ├── inputs/                     # 参数快照及输入数据说明
+    ├── baseline_test_score.json
+    ├── finetuned_epoch3_test_score.json
+    ├── run_manifest.json
+    ├── summary.json
+    ├── 00_contact_sheet.png ... 08_evaluation_dashboard.png
+    ├── render_eval_charts.py
+    └── 测试结果说明.md
+```
+
+本轮模型级评测的输入是 held-out 测试文本 JSONL 和图像 LMDB，位置与样本数记录在 `run_manifest.json`；大型原始测试文件不随结果归档。截图中的 `queries.csv`、`qrels.csv`、`queries_generated.csv`、`query_manifest.csv`、`retrieval_config.json` 属于 AI 复核的端到端检索评测，不能复制到模型级 run。模型训练凭证（参数、训练日志和原始评测分数）保存在 `docs/finetune/runs/2026-10-18_bs32_lr1e-5/`。
 
 ## 11. 里程碑
 
