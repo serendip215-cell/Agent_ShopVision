@@ -31,9 +31,9 @@
 #show heading: it => {
   let sz = if it.level == 1 { 14pt } else { 12pt }
   let wt = if it.level == 2 { "bold" } else { "regular" }
-  v(if it.level == 1 { 10pt } else { 6pt })
+  v(if it.level == 1 { 13pt } else { 8pt })
   par(first-line-indent: 0pt, text(size: sz, weight: wt, font: ("Times New Roman", "SimSun"), it.body))
-  v(if it.level == 1 { 4pt } else { 2pt })
+  v(if it.level == 1 { 6pt } else { 3pt })
 }
 #let t5(body) = {
   set text(size: 10.5pt)
@@ -111,7 +111,11 @@
   )
 ]
 #pagebreak()
-#set page(margin: (x: 2.6cm, y: 2.54cm))
+#set page(
+  margin: (x: 2.6cm, y: 2.54cm),
+  footer: context align(center)[#text(size: 10.5pt, font: ("Times New Roman", "SimSun"))[#counter(page).display()]],
+)
+#counter(page).update(1)
 
 
 // ============================== 一、实验目的 ==============================
