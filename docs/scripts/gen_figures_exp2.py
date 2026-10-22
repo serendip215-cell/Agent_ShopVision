@@ -21,6 +21,7 @@ plt.rcParams.update({
 
 BLUE = "#2a78d6"        # categorical slot 1（已验证）
 ORANGE = "#eb6834"      # categorical slot 2（已验证）
+GREEN = "#5b8d62"       # categorical slot 3（对照组用）
 GRID = "#e1e0d9"
 BASE = "#c3c2b7"
 MUTED = "#898781"
@@ -28,7 +29,10 @@ INK = "#0b0b0b"
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "typ" / "figs"
-EVAL_DIR = ROOT / "evaluation" / "retrieval" / "results" / "runs" / "finetuned_epoch3_test_20261019"
+# 主实验：检索评测归档（含 summary.json 与 9 张图）
+RUN_DIR = ROOT / "evaluation" / "retrieval" / "results" / "runs" / "finetuned_epoch3_test_20261019"
+# 对照组：入库凭证目录
+CTRL_DIR = ROOT / "docs" / "finetune" / "runs" / "2026-10-20_uncleaned_bs32_lr1e-5"
 PILOT_DIR = ROOT / "evaluation" / "retrieval" / "results" / "runs" / "deepseekv4_1_flash_pilot_20261018"
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -44,28 +48,30 @@ def style(ax):
     ax.tick_params(colors=MUTED, labelsize=10, length=0)
 
 
-# 图1 Recall@K 对比：预训练基线 vs 微调 epoch3（test 934 条，候选池 934）
+# 图1 Recall@K 对比：预训练基线 / 未清洗直训 / 清洗微调（test 934 条，候选池 934）
 def fig_recall():
     labels = ["R@1", "R@5", "R@10"]
     baseline = [37.37, 70.77, 82.44]
+    control = [50.96, 84.48, 93.04]
     finetuned = [58.67, 89.08, 96.90]
     x = range(len(labels))
-    w = 0.32
-    fig, ax = plt.subplots(figsize=(6.2, 3.0), dpi=200)
+    w = 0.26
+    fig, ax = plt.subplots(figsize=(6.6, 3.0), dpi=200)
     fig.patch.set_facecolor("#fcfcfb")
-    b1 = ax.bar([i - w / 2 - 0.01 for i in x], baseline, width=w, color=BLUE, zorder=3, label="预训练基线")
-    b2 = ax.bar([i + w / 2 + 0.01 for i in x], finetuned, width=w, color=ORANGE, zorder=3, label="微调 epoch3")
+    b1 = ax.bar([i - w for i in x], baseline, width=w, color=BLUE, zorder=3, label="预训练基线")
+    b2 = ax.bar(list(x), control, width=w, color=ORANGE, zorder=3, label="未清洗数据直训")
+    b3 = ax.bar([i + w for i in x], finetuned, width=w, color=GREEN, zorder=3, label="清洗数据微调")
     style(ax)
     ax.set_ylim(0, 112)
     ax.set_ylabel("Recall@K（%）", color=MUTED, fontsize=10)
     ax.set_xticks(list(x))
     ax.set_xticklabels(labels)
-    for bars in (b1, b2):
+    for bars in (b1, b2, b3):
         for b in bars:
             v = b.get_height()
-            ax.text(b.get_x() + b.get_width() / 2, v + 1.5, f"{v:.1f}",
-                    ha="center", va="bottom", fontsize=9, color=INK)
-    ax.legend(frameon=False, fontsize=9, loc="upper left", labelcolor=INK)
+            ax.text(b.get_x() + b.get_width() / 2, v + 1.2, f"{v:.1f}",
+                    ha="center", va="bottom", fontsize=7.5, color=INK)
+    ax.legend(frameon=False, fontsize=8, loc="upper left", labelcolor=INK, ncol=3)
     fig.tight_layout()
     fig.savefig(OUT / "fig_recall.png", facecolor="#fcfcfb")
     plt.close(fig)
@@ -107,9 +113,11 @@ def fig_curves():
 
 
 def read_scores():
-    baseline = json.loads((EVAL_DIR / "baseline_test_score.json").read_text(encoding="utf-8"))
-    tuned = json.loads((EVAL_DIR / "finetuned_epoch3_test_score.json").read_text(encoding="utf-8"))
-    return baseline["scoreJson"], tuned["scoreJson"]
+    """返回 (预训练基线, 未清洗直训, 清洗微调) 三组分数。"""
+    baseline = json.loads((RUN_DIR / "baseline_test_score.json").read_text(encoding="utf-8"))
+    tuned = json.loads((RUN_DIR / "finetuned_epoch3_test_score.json").read_text(encoding="utf-8"))
+    control = json.loads((CTRL_DIR / "finetuned_epoch3_test_score.json").read_text(encoding="utf-8"))
+    return baseline["scoreJson"], control["scoreJson"], tuned["scoreJson"]
 
 
 def read_validation_log():
@@ -119,7 +127,7 @@ def read_validation_log():
         r"Text2Image Acc:\s*([0-9.]+)"
     )
     rows = []
-    log_path = EVAL_DIR / "out_2026-10-18-12-27-38.log"
+    log_path = RUN_DIR / "out_2026-10-18-12-27-38.log"
     for line in log_path.read_text(encoding="utf-8").splitlines():
         match = pattern.search(line)
         if match:
@@ -138,7 +146,7 @@ def read_validation_log():
 
 # 图3：测试指标、验证损失和批内准确率合为一张中文证据图。
 def fig_evidence():
-    baseline, tuned = read_scores()
+    baseline, control, tuned = read_scores()
     validation = read_validation_log()
     steps = [row["step"] for row in validation]
 
@@ -149,23 +157,25 @@ def fig_evidence():
     labels = ["R@1", "R@5", "R@10"]
     keys = ["r1", "r5", "r10"]
     x = range(len(keys))
-    width = 0.32
+    width = 0.26
     ax = axes[0]
     style(ax)
-    bars_a = ax.bar([i - width / 2 for i in x], [baseline[k] for k in keys],
+    bars_a = ax.bar([i - width for i in x], [baseline[k] for k in keys],
                     width=width, color=BLUE, zorder=3, label="预训练基线")
-    bars_b = ax.bar([i + width / 2 for i in x], [tuned[k] for k in keys],
-                    width=width, color=ORANGE, zorder=3, label="微调第3轮")
+    bars_b = ax.bar(list(x), [control[k] for k in keys],
+                    width=width, color=ORANGE, zorder=3, label="未清洗直训")
+    bars_c = ax.bar([i + width for i in x], [tuned[k] for k in keys],
+                    width=width, color=GREEN, zorder=3, label="清洗微调")
     ax.set_title("测试集 Recall@K", color=INK, fontsize=11)
     ax.set_ylim(0, 108)
     ax.set_xticks(list(x), labels)
     ax.set_ylabel("召回率（%）", color=MUTED, fontsize=9)
-    for bars in (bars_a, bars_b):
+    for bars in (bars_a, bars_b, bars_c):
         for bar in bars:
             value = bar.get_height()
-            ax.text(bar.get_x() + bar.get_width() / 2, value + 1.5, f"{value:.1f}",
-                    ha="center", va="bottom", fontsize=8, color=INK)
-    ax.legend(frameon=False, fontsize=8, loc="upper left", labelcolor=INK)
+            ax.text(bar.get_x() + bar.get_width() / 2, value + 1.2, f"{value:.0f}",
+                    ha="center", va="bottom", fontsize=7, color=INK)
+    ax.legend(frameon=False, fontsize=7, loc="upper left", labelcolor=INK)
 
     ax = axes[1]
     style(ax)

@@ -6,14 +6,19 @@
 #   2) 加 --skip-aggregate + NoDDP 包装 —— world_size == 1 时不需要任何集合通信；
 #   3) 加 --grad-checkpointing —— 8GB 显存必需。
 #
-# 用法（WSL 宿主机）：
-#   docker exec -it shopvision bash -c "tr -d '\r' < /workspace/scripts/finetune/run_train_single_gpu.sh > /tmp/run.sh && bash /tmp/run.sh"
+# 输入 / 输出：
+#   输入数据  data/processed_data_retrieval/datasets/<DATASET>/lmdb/{train,valid}
+#   输出目录  data/processed_data_retrieval/experiments/<RUN_ID>/
+#             ├── checkpoints/epoch1.pt epoch2.pt epoch3.pt epoch_latest.pt
+#             ├── out_<UTC时间戳>.log
+#             └── params_<UTC时间戳>.txt
 #
-# 产物（一个实验一个目录，全部内聚）：
-#   data/processed_data_retrieval/experiments/<RUN_ID>/
-#   ├── checkpoints/epoch1.pt epoch2.pt epoch3.pt epoch_latest.pt
-#   ├── out_<UTC时间戳>.log
-#   └── params_<UTC时间戳>.txt
+# 可用环境变量覆盖（默认值 = 清洗数据那次实验，行为与之前完全一致）：
+#   RUN_ID    实验名，同时决定输出目录；experiments/ 与 docs/finetune/runs/ 同名
+#   DATASET   数据集目录名，决定读哪份 lmdb
+#
+# 例：用未清洗数据（data/processed_data 转换而来）跑对照组，其余超参不动
+#   RUN_ID=2026-10-20_uncleaned_bs32_lr1e-5 DATASET=ShopVision_uncleaned bash run_train_single_gpu.sh
 set -euo pipefail
 
 cd /workspace
@@ -28,11 +33,32 @@ export WORLD_SIZE=1
 export LOCAL_RANK=0
 
 D=/workspace/data/processed_data_retrieval
-RUN_ID=2026-10-18_bs32_lr1e-5          # 一次实验一个 ID，experiments/ 与 docs/finetune/runs/ 同名
+RUN_ID=${RUN_ID:-2026-10-18_bs32_lr1e-5}
+DATASET=${DATASET:-ShopVision}
+LMDB=$D/datasets/$DATASET/lmdb
+OUT=$D/experiments/$RUN_ID
+
+# 先确认输入齐全，别训练跑到一半才发现路径错
+for split in train valid; do
+  if [ ! -d "$LMDB/$split" ]; then
+    echo "找不到训练数据：$LMDB/$split" >&2
+    echo "先跑 build_retrieval_dataset.py 和 build_lmdb_dataset.py 生成 $DATASET" >&2
+    exit 1
+  fi
+done
+
+if [ -e "$OUT/checkpoints/epoch_latest.pt" ]; then
+  echo "警告：$OUT 里已有 checkpoint，本次训练会覆盖它。" >&2
+  echo "      如需保留旧结果，请换一个 RUN_ID。" >&2
+fi
+
+echo "数据集：$DATASET  ($LMDB)"
+echo "输出：  $OUT"
+echo ""
 
 python -u Chinese-CLIP/cn_clip/training/main.py \
-  --train-data=$D/datasets/ShopVision/lmdb/train \
-  --val-data=$D/datasets/ShopVision/lmdb/valid \
+  --train-data=$LMDB/train \
+  --val-data=$LMDB/valid \
   --resume=/workspace/models/chinese_clip/clip_cn_vit-b-16.pt \
   --reset-data-offset \
   --reset-optimizer \
