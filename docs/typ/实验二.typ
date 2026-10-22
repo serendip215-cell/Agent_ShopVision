@@ -42,7 +42,10 @@
 }
 
 // ============================== 封面 ==============================
-// 版式指标逐项对齐 figs/cover_template.png（实验一封面 = Word 模板渲染图），仅题目与分工内容不同。
+// 版式沿用 Word 模板渲染图（figs/cover_template.png）的字号规格：校名/实验名 26pt 粗体
+// （"AI" Times New Roman、"全栈开发实验"黑体，校名字间 13.2pt）；"题目：" 20pt、题目内容
+// 22pt 粗体；组号/组员信息/时间 14pt 粗体；组员表 14pt（表头粗体、学号 Times New Roman
+// 粗体）全网格 0.5pt，列宽 112/99/198.5pt。表单与表格同宽对齐：左 92.6pt、宽 410pt。
 #set page(paper: "a4", margin: 0pt)
 
 #v(86pt)
@@ -54,31 +57,34 @@
   #text(size: 26pt, font: ("Times New Roman", "SimHei"), weight: "bold")[#text(font: "Times New Roman")[AI] 全栈开发实验]
 ]
 #v(62.7pt)
-#grid(
-  columns: (189pt, 252pt, 1fr),
-  align: (right + horizon, left + horizon, left),
-  [#text(size: 20pt, weight: "bold")[题目：]],
-  [#h(-9pt)#box(width: 252pt, height: 1.4em, stroke: (bottom: 0.5pt), inset: (x: 2pt, bottom: 2pt))[#align(left + horizon)[#text(size: 22pt, font: ("Times New Roman", "SimHei"), weight: "bold")[模型设计与训练实验]]]],
-  [],
-)
+#pad(left: 92.6pt)[
+  #grid(
+    columns: (75pt, 335pt),
+    align: (right + horizon, left + horizon),
+    [#text(size: 20pt, weight: "bold")[题目：]],
+    [#box(width: 335pt, height: 1.4em, stroke: (bottom: 0.5pt), inset: (x: 4pt, bottom: 2pt))[#align(left + horizon)[#text(size: 22pt, font: ("Times New Roman", "SimHei"), weight: "bold")[模型设计与训练实验]]]],
+  )
+]
 #v(103pt)
-#grid(
-  columns: (189pt, 234pt, 1fr),
-  align: (right + horizon, left + horizon, left),
-  [#text(size: 14pt, weight: "bold")[组#h(28.8pt)号：]],
-  [#box(width: 234pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[23]]]],
-  [],
-)
+#pad(left: 92.6pt)[
+  #grid(
+    columns: (75pt, 335pt),
+    align: (right + horizon, left + horizon),
+    [#text(size: 14pt, weight: "bold")[组#h(28.8pt)号：]],
+    [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[23]]]],
+  )
+]
 #v(39.3pt)
-#grid(
-  columns: (189pt, 234pt, 1fr),
-  align: (right + horizon, left + horizon, left),
-  [#text(size: 14pt, weight: "bold")[组员信息：]],
-  [],
-  [],
-)
+#pad(left: 92.6pt)[
+  #grid(
+    columns: (75pt, 335pt),
+    align: (right + horizon, left + horizon),
+    [#text(size: 14pt, weight: "bold")[组员信息：]],
+    [],
+  )
+]
 #v(2pt)
-#pad(left: 84.5pt)[
+#pad(left: 92.6pt)[
   #set text(size: 14pt)
   #set par(leading: 4pt, spacing: 4pt)
   #table(
@@ -96,13 +102,14 @@
   )
 ]
 #v(15pt)
-#grid(
-  columns: (189pt, 234pt, 1fr),
-  align: (right + horizon, left + horizon, left),
-  [#text(size: 14pt, weight: "bold")[时#h(28.8pt)间：]],
-  [#box(width: 234pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[2026.10.20]]]],
-  [],
-)
+#pad(left: 92.6pt)[
+  #grid(
+    columns: (75pt, 335pt),
+    align: (right + horizon, left + horizon),
+    [#text(size: 14pt, weight: "bold")[时#h(28.8pt)间：]],
+    [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[2026.10.20]]]],
+  )
+]
 #pagebreak()
 #set page(margin: (x: 2.6cm, y: 2.54cm))
 
