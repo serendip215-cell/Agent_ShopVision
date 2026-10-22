@@ -62,10 +62,10 @@
     columns: (75pt, 335pt),
     align: (right + horizon, left + horizon),
     [#text(size: 20pt, weight: "bold")[题目：]],
-    [#box(width: 335pt, height: 1.4em, stroke: (bottom: 0.5pt), inset: (x: 4pt, bottom: 2pt))[#align(left + horizon)[#text(size: 22pt, font: ("Times New Roman", "SimHei"), weight: "bold")[模型设计与训练实验]]]],
+    [#box(width: 335pt, height: 1.4em, stroke: (bottom: 0.5pt), inset: (x: 4pt, bottom: 2pt))[#align(center + horizon)[#text(size: 22pt, font: ("Times New Roman", "SimHei"), weight: "bold")[模型设计与训练实验]]]],
   )
 ]
-#v(103pt)
+#v(52pt)
 #pad(left: 92.6pt)[
   #grid(
     columns: (75pt, 335pt),
@@ -74,7 +74,7 @@
     [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[23]]]],
   )
 ]
-#v(39.3pt)
+#v(30pt)
 #pad(left: 92.6pt)[
   #grid(
     columns: (75pt, 335pt),
@@ -101,7 +101,7 @@
     [#text(weight: "bold")[2610321168]], [秦鑫洋], [实验报告校对与图表整理],
   )
 ]
-#v(15pt)
+#v(18pt)
 #pad(left: 92.6pt)[
   #grid(
     columns: (75pt, 335pt),
