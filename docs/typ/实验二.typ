@@ -104,7 +104,7 @@
   [],
 )
 #pagebreak()
-#set page(margin: 2.5cm)
+#set page(margin: (x: 3.17cm, y: 2.54cm))
 
 
 // ============================== 一、实验目的 ==============================
@@ -123,12 +123,12 @@
 
 == 软硬件环境
 
-- 硬件：NVIDIA GeForce RTX 5060 Ti（8GB 显存，compute capability 12.0）单卡工作站；
-- 操作系统/容器：Windows 11 宿主机，训练在 WSL2 内的 Docker 容器中完成，镜像为 `pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel`；
-- 软件：容器内 Python 3.11（conda 环境）与 torch 2.7.1+cu128 构成主要开发栈，主机端使用 PyCharm 与 Git；
-- 核心库：numpy 1.26.4、timm 1.0.30、lmdb 1.3.0（源码编译）、faiss@faiss，以及施加了本地 NoDDP 补丁的 Chinese-CLIP 官方实现@chinese-clip；
-- 模型：Chinese-CLIP ViT-B-16 预训练权重 `clip_cn_vit-b-16.pt`（719MB）；
-- 数据：实验一产出的 9 类 9,393 条图文对（LMDB 打包约 1.2GB），由 `scripts/build_retrieval_dataset.py` 转换为检索训练数据集并按 8:1:1 划分。
++ 硬件：NVIDIA GeForce RTX 5060 Ti（8GB 显存，compute capability 12.0）单卡工作站；
++ 操作系统/容器：Windows 11 宿主机，训练在 WSL2 内的 Docker 容器中完成，镜像为 `pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel`；
++ 软件：容器内 Python 3.11（conda 环境）与 torch 2.7.1+cu128 构成主要开发栈，主机端使用 PyCharm 与 Git；
++ 核心库：numpy 1.26.4、timm 1.0.30、lmdb 1.3.0（源码编译）、faiss@faiss，以及施加了本地 NoDDP 补丁的 Chinese-CLIP 官方实现@chinese-clip；
++ 模型：Chinese-CLIP ViT-B-16 预训练权重 `clip_cn_vit-b-16.pt`（719MB）；
++ 数据：实验一产出的 9 类 9,393 条图文对（LMDB 打包约 1.2GB），由 `scripts/build_retrieval_dataset.py` 转换为检索训练数据集并按 8:1:1 划分。
 
 // ============================== 三、实验内容与步骤 ==============================
 = 三、实验内容与步骤
@@ -169,10 +169,10 @@
 
 数据侧与训练侧的主要设计决策如下：
 
-- 属性模板文本统一文本分布：商品大类、细分类、颜色、材质与标题五段式属性模板与构建 FAISS 索引共用同一文本生成函数，使文本塔学到结构化属性表达，同时顺带适配非标标题；
-- MD5（item_id）哈希划分 8:1:1：同一商品永远落在同一划分，杜绝图文泄漏；
-- 全参微调而非冻结或 LoRA@lora：样本虽少但域差异大，双塔全参 3 轮即可收敛，且验证曲线未见过拟合；
-- NoDDP 单卡化改造：针对 WSL2 下 NCCL 集合通信挂死的问题，以 NoDDP 包装器保留 `module.` 前缀，兼容官方特征导出脚本，训练代码零侵入降级。
++ 属性模板文本统一文本分布：商品大类、细分类、颜色、材质与标题五段式属性模板与构建 FAISS 索引共用同一文本生成函数，使文本塔学到结构化属性表达，同时顺带适配非标标题；
++ MD5（item_id）哈希划分 8:1:1：同一商品永远落在同一划分，杜绝图文泄漏；
++ 全参微调而非冻结或 LoRA@lora：样本虽少但域差异大，双塔全参 3 轮即可收敛，且验证曲线未见过拟合；
++ NoDDP 单卡化改造：针对 WSL2 下 NCCL 集合通信挂死的问题，以 NoDDP 包装器保留 `module.` 前缀，兼容官方特征导出脚本，训练代码零侵入降级。
 
 = 3．代码实现
 
@@ -244,10 +244,10 @@ def split_by_hash(item_id: str, train_ratio: float, valid_ratio: float) -> str:
 
 测试与优化工作集中在四个方面：
 
-- NCCL 挂死定位：WSL2 下 `init_process_group` 正常但首次集合通信永久卡死，多种 NCCL 环境变量无效，最终以 NoDDP 单卡改造绕过，并验证检查点的 `module.` 前缀可被官方 `extract_features.py` 直接加载（已实测）；
-- 显存溢出处置：开启 amp 与梯度检查点后，8GB 显存可稳定跑 batch 32；
-- 工具链冲突：torchrun 2.6 起 `--logs-specs` 与官方脚本的 `--logs` 前缀冲突，改用 `python` 直接启动并手动注入 `RANK/WORLD_SIZE` 等环境变量；
-- 评测复现：`run_test_eval.sh` 自动把分数、参数快照与训练日志同步到 `docs/finetune/runs/`，`run_manifest.json` 记录权重路径与字节数，确保评测结果可复算。单卡 3 轮训练约 6 分钟、test 评测约 3 分钟，可支撑快速迭代。
++ NCCL 挂死定位：WSL2 下 `init_process_group` 正常但首次集合通信永久卡死，多种 NCCL 环境变量无效，最终以 NoDDP 单卡改造绕过，并验证检查点的 `module.` 前缀可被官方 `extract_features.py` 直接加载（已实测）；
++ 显存溢出处置：开启 amp 与梯度检查点后，8GB 显存可稳定跑 batch 32；
++ 工具链冲突：torchrun 2.6 起 `--logs-specs` 与官方脚本的 `--logs` 前缀冲突，改用 `python` 直接启动并手动注入 `RANK/WORLD_SIZE` 等环境变量；
++ 评测复现：`run_test_eval.sh` 自动把分数、参数快照与训练日志同步到 `docs/finetune/runs/`，`run_manifest.json` 记录权重路径与字节数，确保评测结果可复算。单卡 3 轮训练约 6 分钟、test 评测约 3 分钟，可支撑快速迭代。
 
 // ============================== 四、实验关键技术与难点 ==============================
 = 四、实验关键技术与难点
