@@ -11,30 +11,15 @@
 
 ## 为什么不用官方模板
 
-官方 `Chinese-CLIP/run_scripts/muge_finetune_vit-b-16_rbt-base.sh` 走 `torch.distributed.launch` + DDP。
-在 WSL2 + RTX 5060 Ti 环境下，NCCL 的 `all_reduce` 会**永久挂死**：`init_process_group` 正常返回，
-第一次集合通信就卡住，GPU 利用率 0%，显存却已加载。已尝试且**无效**的开关：
-
-```
-NCCL_P2P_DISABLE=1
-NCCL_SHM_DISABLE=1
-NCCL_CUMEM_ENABLE=0
-```
-
-因此单卡训练改用 `NoDDP` 包装 + `--skip-aggregate`，完全不产生集合通信。相关改动位于
-`Chinese-CLIP/cn_clip/training/`（该目录不入库，换机器需重新打补丁）：新增 `no_ddp.py`，
-并在 `main.py` 只在 `world_size > 1` 时构造 DDP、在 `train.py` 给验证阶段的 `all_reduce` 加多卡判断。
-
-`NoDDP` 保存的 ckpt 仍带 `module.` 前缀，官方 `extract_features.py`（第 157 行自动剥离）可直接加载，已实测。
-
-**3 处改动的完整说明**（含改前/改后代码、为什么保留 `module.` 前缀、换机器如何重新施加）见
-[`docs/finetune/04-Chinese-CLIP补丁说明.md`](../../docs/finetune/04-Chinese-CLIP补丁说明.md)。
-
-补丁本体已入库在 [`patches/`](patches/)，重新 clone 官方代码后一条命令即可施加：
+官方模板走 `torch.distributed.launch` + DDP，本机 NCCL 的 `all_reduce` 会永久挂死（GPU 0%，
+日志不动）。现改用 `NoDDP` + `--skip-aggregate`，完全不产生集合通信。补丁在 [`patches/`](patches/)：
 
 ```bash
 bash scripts/finetune/patches/apply.sh
 ```
+
+原因、3 处改动的改前改后代码、`apply.sh` 失效时怎么手工处理，见
+[`docs/finetune/04-Chinese-CLIP补丁说明.md`](../../docs/finetune/04-Chinese-CLIP补丁说明.md)。
 
 ## 目录约定
 
@@ -42,19 +27,21 @@ bash scripts/finetune/patches/apply.sh
 
 ```
 data/processed_data_retrieval/            ← 全部 gitignore，可重建
-├── datasets/ShopVision/                  数据：tsv / jsonl / id_mapping / lmdb
+├── datasets/<DATASET>/                    tsv / jsonl / id_mapping / lmdb
+│     ShopVision        = 清洗数据 9,393 条（主实验）
+│     ShopVision_uncleaned = 未清洗数据 10,165 条（对照组）
 └── experiments/<RUN_ID>/
     ├── checkpoints/epoch{1,2,3}.pt, epoch_latest.pt
     ├── out_<UTC时间戳>.log               训练日志（注意不是 out.log）
     ├── params_<UTC时间戳>.txt            超参快照
     └── eval/                             评测产物（约 40MB，可重算）
         ├── baseline/{test_score.json, test_*.jsonl}
-        ├── finetuned_epoch3/{test_score.json, test_*.jsonl}
+        ├── finetuned_<CKPT>/{test_score.json, test_*.jsonl}   ← 如 finetuned_epoch3
         └── run_manifest.json
 
 docs/finetune/runs/<RUN_ID>/               ← 入库的凭证（KB 级）
 ├── baseline_test_score.json
-├── finetuned_epoch3_test_score.json
+├── finetuned_<CKPT>_test_score.json       ← 如 finetuned_epoch3_test_score.json
 ├── run_manifest.json
 ├── out_<UTC时间戳>.log
 └── params_<UTC时间戳>.txt
@@ -74,10 +61,51 @@ docker exec -it shopvision bash -c "tr -d '\r' < /workspace/scripts/finetune/run
 
 `tr -d '\r'` 用于清掉 Windows 换行符，避免 `\r` 报错。
 
+## 用环境变量切换实验（不复制脚本）
+
+两个脚本的默认值就是「清洗数据 · 3 轮」那次实验，不加变量时行为与之前完全一致。
+需要跑别的组合时用环境变量覆盖：
+
+| 变量 | 脚本 | 作用 | 默认值 |
+|---|---|---|---|
+| `RUN_ID` | 两个都要 | 实验名；决定读哪个 `experiments/<RUN_ID>/`、凭证写到哪里 | `2026-10-18_bs32_lr1e-5` |
+| `DATASET` | 仅训练 | 读哪份 lmdb：`datasets/<DATASET>/lmdb/{train,valid}` | `ShopVision` |
+| `CKPT_NAME` | 仅评测 | 用哪个权重 | `epoch3.pt` |
+
+**评测集不可切换**：`run_test_eval.sh` 固定用 `datasets/ShopVision` 的 test（934 条）。
+不同训练数据来源的模型必须考同一批题，否则数字不可比。
+
+### 例：未清洗数据直训对照组（已跑过，2026-10-20）
+
+```bash
+# 1) 用「预处理前」的正式表建数据集（必须显式指定 --output-dir，否则会覆盖清洗数据集）
+python scripts/build_retrieval_dataset.py \
+  --input-dir data/processed_data \
+  --output-dir data/processed_data_retrieval/datasets/ShopVision_uncleaned
+
+# 2) 打包 LMDB
+python Chinese-CLIP/cn_clip/preprocess/build_lmdb_dataset.py \
+  --data_dir=/workspace/data/processed_data_retrieval/datasets/ShopVision_uncleaned \
+  --splits=train,valid,test
+
+# 3) 同一配方训练（只换数据，超参/种子/轮数全同）
+RUN_ID=2026-10-20_uncleaned_bs32_lr1e-5 DATASET=ShopVision_uncleaned \
+  bash scripts/finetune/run_train_single_gpu.sh
+
+# 4) 评测（评测集仍是清洗数据的 test）
+RUN_ID=2026-10-20_uncleaned_bs32_lr1e-5 bash scripts/finetune/run_test_eval.sh
+```
+
+结果：test R@1 = 50.96（预训练基线 37.37，清洗数据微调 58.67）。记录见
+[`docs/finetune/05-未清洗数据对照组.md`](../../docs/finetune/05-未清洗数据对照组.md)。
+
+目录约定：一次实验 = 一个 `RUN_ID`，`experiments/<RUN_ID>/` 放权重与评测产物，
+`docs/finetune/runs/<RUN_ID>/` 放入库凭证，两者同名。
+
 ## 新增一次实验
 
-1. 复制 `run_train_single_gpu.sh`，改 `RUN_ID`（例如 `2026-10-19_bs32_5ep`）和要变的超参；
-2. 训练完，把 `run_test_eval.sh` 里的 `RUN_ID` 改成同一个值再跑评测；
+1. 用环境变量指定新的 `RUN_ID`（如 `2026-10-19_bs32_5ep`），不要复制脚本；
+2. 训练完用同一个 `RUN_ID` 跑评测；
 3. 结果写进新的 `docs/finetune/` 记录文件，不要覆盖已有记录。
 
 ## 注意

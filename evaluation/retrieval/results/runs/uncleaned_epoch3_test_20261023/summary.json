@@ -1,0 +1,35 @@
+{
+  "run_id": "uncleaned_epoch3_test_20261023",
+  "status": "reproduced_from_committed_evaluation_artifacts",
+  "evaluation_date": "2026-10-23",
+  "test_count": 934,
+  "candidate_pool": 934,
+  "models": {
+    "预训练基线": {
+      "score": 63.5260528194147,
+      "mean_recall": 63.5260528194147,
+      "r1": 37.3661670235546,
+      "r5": 70.77087794432548,
+      "r10": 82.44111349036403
+    },
+    "未清洗数据训练": {
+      "score": 76.15988579586009,
+      "mean_recall": 76.15988579586009,
+      "r1": 50.96359743040685,
+      "r5": 84.47537473233405,
+      "r10": 93.04068522483941
+    },
+    "清洗数据训练": {
+      "score": 81.54889364739472,
+      "mean_recall": 81.54889364739472,
+      "r1": 58.67237687366167,
+      "r5": 89.07922912205566,
+      "r10": 96.8950749464668
+    }
+  },
+  "provenance": {
+    "uncleaned_run": "docs/finetune/runs/2026-10-20_uncleaned_bs32_lr1e-5/",
+    "cleaned_run": "evaluation/retrieval/results/runs/finetuned_epoch3_test_20261019/",
+    "note": "本轮未重新执行模型推理；Docker 引擎未运行且仓库不含大体积测试文件和训练权重，图表由已提交的评测凭证重新计算生成。"
+  }
+}

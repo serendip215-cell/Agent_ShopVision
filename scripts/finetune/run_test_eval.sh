@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
-# test 集最终评测：预训练基线 vs 微调权重
+# test 集最终评测：预训练基线 vs 本次实验的权重
 #
-# test 划分（934 条）在训练中从未使用，这里只用一次。
-# 产物分两档：
-#   大产物（可重算，gitignore）  data/processed_data_retrieval/experiments/<RUN_ID>/eval/
-#   凭证（KB 级，入 git）        docs/finetune/runs/<RUN_ID>/
+# 评测集**固定**为清洗数据的 test 划分（934 条）：
+#   不同训练数据来源（原始 / 清洗）的模型必须考同一批题，否则数字不可比。
+#   因此这里不提供切换 test 集的开关。
+#
+# 输入 / 输出：
+#   权重     data/processed_data_retrieval/experiments/<RUN_ID>/checkpoints/<CKPT_NAME>
+#   大产物   data/processed_data_retrieval/experiments/<RUN_ID>/eval/
+#              ├── baseline/                 预训练权重
+#              └── finetuned_<CKPT>/         本次实验权重
+#   凭证     docs/finetune/runs/<RUN_ID>/   （入 git，KB 级）
+#
+# 可用环境变量覆盖：
+#   RUN_ID     实验名，决定读哪个 experiment 目录、凭证写到哪里
+#   CKPT_NAME  用哪个权重，默认 epoch3.pt（5 轮实验则是 epoch5.pt）
 #
 # 用法（容器内）：bash /tmp/eval.sh
 set -euo pipefail
@@ -14,22 +24,37 @@ export PYTHONPATH=/workspace/Chinese-CLIP
 export TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
 
 D=/workspace/data/processed_data_retrieval
-RUN_ID=2026-10-18_bs32_lr1e-5
+RUN_ID=${RUN_ID:-2026-10-18_bs32_lr1e-5}
+CKPT_NAME=${CKPT_NAME:-epoch3.pt}
+TAG=${CKPT_NAME%.pt}                 # epoch3 / epoch5
+SUBDIR=finetuned_$TAG                # eval 子目录名，凭证文件名也用这个前缀
+
+# 评测集固定：清洗数据的 test（934 条）。故意不做成参数，避免两组模型考不同的题。
 DS=$D/datasets/ShopVision
+
 EXP=$D/experiments/$RUN_ID
 EVAL=$EXP/eval
 DOCS=/workspace/docs/finetune/runs/$RUN_ID
 
 PT=/workspace/models/chinese_clip/clip_cn_vit-b-16.pt
-FT=$EXP/checkpoints/epoch3.pt
+FT=$EXP/checkpoints/$CKPT_NAME
 
 if [ ! -f "$FT" ]; then
-  echo "找不到微调权重: $FT" >&2
-  echo "先跑 run_train_single_gpu.sh，或检查 RUN_ID 是否正确。" >&2
+  echo "找不到权重文件: $FT" >&2
+  echo "先跑 run_train_single_gpu.sh，或检查 RUN_ID / CKPT_NAME。" >&2
+  exit 1
+fi
+if [ ! -f "$DS/test_texts.jsonl" ]; then
+  echo "找不到评测集: $DS/test_texts.jsonl" >&2
   exit 1
 fi
 
-mkdir -p "$EVAL/baseline" "$EVAL/finetuned_epoch3" "$DOCS"
+echo "实验：    $RUN_ID"
+echo "权重：    $CKPT_NAME"
+echo "评测集：  $DS (test，固定)"
+echo ""
+
+mkdir -p "$EVAL/baseline" "$EVAL/$SUBDIR" "$DOCS"
 
 run_one () {
   local tag="$1" ckpt="$2" dir="$3"
@@ -61,35 +86,38 @@ run_one () {
     "$dir/test_score.json"
 }
 
-run_one baseline         "$PT" "$EVAL/baseline"
-run_one finetuned_epoch3 "$FT" "$EVAL/finetuned_epoch3"
+run_one baseline "$PT" "$EVAL/baseline"
+run_one "$SUBDIR" "$FT" "$EVAL/$SUBDIR"
 
 # 写评测清单：权重路径+字节数、数据条数、参数、两套分数
-python - <<'PY'
-import glob, json, os, time
+python - "$RUN_ID" "$CKPT_NAME" "$SUBDIR" <<'PY'
+import json, os, sys, time
+
+RUN_ID, CKPT_NAME, SUBDIR = sys.argv[1], sys.argv[2], sys.argv[3]
 
 D = "/workspace/data/processed_data_retrieval"
-RUN_ID = "2026-10-18_bs32_lr1e-5"
 DS = os.path.join(D, "datasets/ShopVision")
 EXP = os.path.join(D, "experiments", RUN_ID)
 EVAL = os.path.join(EXP, "eval")
 
 checkpoints = {
     "baseline_pretrained": "/workspace/models/chinese_clip/clip_cn_vit-b-16.pt",
-    "finetuned_epoch3": os.path.join(EXP, "checkpoints/epoch3.pt"),
+    "finetuned": os.path.join(EXP, "checkpoints", CKPT_NAME),
 }
 scores = {}
-for tag, sub in (("baseline", "baseline"), ("finetuned_epoch3", "finetuned_epoch3")):
-    with open(os.path.join(EVAL, sub, "test_score.json"), encoding="utf-8") as f:
+for tag in ("baseline", SUBDIR):
+    with open(os.path.join(EVAL, tag, "test_score.json"), encoding="utf-8") as f:
         scores[tag] = json.load(f)
 
 manifest = {
     "run_id": RUN_ID,
+    "checkpoint_name": CKPT_NAME,
     "created_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     "test_split": {
         "texts": os.path.join(DS, "test_texts.jsonl"),
         "images_lmdb": os.path.join(DS, "lmdb/test/imgs"),
         "text_count": sum(1 for _ in open(os.path.join(DS, "test_texts.jsonl"), encoding="utf-8")),
+        "note": "评测集固定为清洗数据的 test（934 条）；不同训练数据来源的模型都考这一套。",
     },
     "params": {"top_k": 10, "eval_batch_size": 32768,
                "img_batch_size": 32, "text_batch_size": 32, "context_length": 52},
@@ -109,9 +137,9 @@ PY
 
 # 把凭证同步到入库目录（KB 级）：分数、清单、最新一次训练日志与参数快照
 LATEST_LOG=$(ls -t "$EXP"/out_*.log 2>/dev/null | head -1 || true)
-cp "$EVAL/baseline/test_score.json"          "$DOCS/baseline_test_score.json"
-cp "$EVAL/finetuned_epoch3/test_score.json"  "$DOCS/finetuned_epoch3_test_score.json"
-cp "$EVAL/run_manifest.json"                 "$DOCS/run_manifest.json"
+cp "$EVAL/baseline/test_score.json" "$DOCS/baseline_test_score.json"
+cp "$EVAL/$SUBDIR/test_score.json"  "$DOCS/${SUBDIR}_test_score.json"
+cp "$EVAL/run_manifest.json"        "$DOCS/run_manifest.json"
 [ -n "$LATEST_LOG" ] && cp "$LATEST_LOG" "$DOCS/"
 ls -t "$EXP"/params_*.txt 2>/dev/null | head -1 | xargs -r -I{} cp {} "$DOCS/"
 
@@ -119,8 +147,8 @@ echo ""
 echo "===================== 结果对比 ====================="
 echo "--- baseline（预训练 ViT-B-16）---"
 cat "$EVAL/baseline/test_score.json"; echo
-echo "--- finetuned_epoch3（微调 3 轮）---"
-cat "$EVAL/finetuned_epoch3/test_score.json"; echo
+echo "--- $SUBDIR（实验 $RUN_ID）---"
+cat "$EVAL/$SUBDIR/test_score.json"; echo
 echo "==================================================="
 echo ""
 echo "大产物（不进 git）: $EVAL"
