@@ -1,0 +1,26 @@
+实验二下载链接（第23组）
+========================================
+
+1. Chinese-CLIP 预训练权重 clip_cn_vit-b-16.pt（约 719MB）
+   训练起点，放到 models/chinese_clip/clip_cn_vit-b-16.pt
+   - Hugging Face:  https://huggingface.co/OFA-Sys/chinese-clip-vit-base-patch16
+   - 魔搭 ModelScope（国内推荐）:  https://www.modelscope.cn/models/AI-ModelScope/chinese-clip-vit-base-patch16
+   （下载其中的 .pt 文件即可）
+
+2. Chinese-CLIP 官方代码仓库（训练依赖，需另施加 3 处本地补丁）
+   https://github.com/OFA-Sys/Chinese-CLIP
+
+3. 微调权重 epoch3.pt（约 2.2GB，共两份）
+   - 清洗数据微调组（test R@1 58.67）：〈网盘链接待填〉
+   - 未清洗对照组（test R@1 50.96）：〈网盘链接待填〉
+   （也可按交付 README「怎么用」第 5 步约 6 分钟重新训练得到，不下载不影响复现）
+
+4. 训练数据（LMDB 约 1.2GB）
+   不需要下载：按交付 README「怎么用」第 4 步由实验一清洗数据一键重建。
+
+5. 实验一数据集（如需从头重建清洗链路）
+   MUGE 原始数据：https://clip-cn-beijing.oss-cn-beijing.aliyuncs.com/datasets/MUGE.zip
+   其余数据说明见实验一交付材料。
+
+6. 项目仓库（全部代码、报告源与训练凭证）
+   https://github.com/serendip215-cell/Agent_ShopVision

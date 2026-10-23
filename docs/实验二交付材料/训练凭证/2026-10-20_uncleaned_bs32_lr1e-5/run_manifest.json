@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-10-20_uncleaned_bs32_lr1e-5",
+  "checkpoint_name": "epoch3.pt",
+  "created_at": "2026-10-22T12:44:09+0000",
+  "test_split": {
+    "texts": "/workspace/data/processed_data_retrieval/datasets/ShopVision/test_texts.jsonl",
+    "images_lmdb": "/workspace/data/processed_data_retrieval/datasets/ShopVision/lmdb/test/imgs",
+    "text_count": 934,
+    "note": "评测集固定为清洗数据的 test（934 条）；不同训练数据来源的模型都考这一套。"
+  },
+  "params": {
+    "top_k": 10,
+    "eval_batch_size": 32768,
+    "img_batch_size": 32,
+    "text_batch_size": 32,
+    "context_length": 52
+  },
+  "checkpoints": {
+    "baseline_pretrained": {
+      "path": "/workspace/models/chinese_clip/clip_cn_vit-b-16.pt",
+      "bytes": 753196934
+    },
+    "finetuned": {
+      "path": "/workspace/data/processed_data_retrieval/experiments/2026-10-20_uncleaned_bs32_lr1e-5/checkpoints/epoch3.pt",
+      "bytes": 2202896993
+    }
+  },
+  "scores": {
+    "baseline": {
+      "success": true,
+      "score": 63.5260528194147,
+      "scoreJson": {
+        "score": 63.5260528194147,
+        "mean_recall": 63.5260528194147,
+        "r1": 37.3661670235546,
+        "r5": 70.77087794432548,
+        "r10": 82.44111349036403
+      }
+    },
+    "finetuned_epoch3": {
+      "success": true,
+      "score": 76.15988579586009,
+      "scoreJson": {
+        "score": 76.15988579586009,
+        "mean_recall": 76.15988579586009,
+        "r1": 50.96359743040685,
+        "r5": 84.47537473233405,
+        "r10": 93.04068522483941
+      }
+    }
+  },
+  "notes": [
+    "test 划分仅用于最终评测，不参与训练。",
+    "候选池为本 test 的 934 条，不可与官方 MUGE 十万级候选池的 R@K 横比。",
+    "R@10 已接近饱和，比较模型时优先看 R@1 或 mean_recall。"
+  ]
+}
