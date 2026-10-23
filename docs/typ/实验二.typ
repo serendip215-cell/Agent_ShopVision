@@ -9,8 +9,9 @@
 //   章标题 14pt 宋体常规，二级标题 12pt 粗体；
 //   图表中标题和文字字号均为五号（10.5pt），正文数据表为三线表。
 // 章节结构对应 docs/AI全栈开发实验报告模板-2026-2.doc（题目：模型设计与训练实验）：
-//   章标题「一、～七、」；三、实验内容与步骤下先列 2.1～2.4 内容主题小节，
-//   再以与章同级的「1．需求分析 / 2．设计思路 / 3．代码实现 / 4. 测试优化」展开。
+//   章标题「一、～七、」；三、实验内容与步骤下先列 3.1～3.4 内容主题小节
+//   （模板原写 2.1～2.4，系任务书编号，与章号脱节，已统一为章内编号），
+//   再以与章同级的「1．需求分析 / 2．设计思路 / 3．代码实现 / 4．测试优化」展开。
 // 文献引用使用 refs.bib，GB/T 7714-2015 顺序编码制，正文 @key 上标交叉引用；
 // 图、表、代码分别独立编号，正文均以交叉引用（@fig/@tbl/@lst）指示。
 
@@ -27,12 +28,13 @@
 #show raw.where(block: true): it => block(stroke: 0.4pt, inset: 8pt, width: 100%, radius: 2pt, it)
 #show cite: it => super(it)
 
-// 标题：真实 heading（生成 PDF 书签大纲）；编号写在标题文本内（一、／1．／2.1）。
+// 标题：真实 heading（生成 PDF 书签大纲）；编号写在标题文本内（一、／1．／3.1）。
 #show heading: it => {
   let sz = if it.level == 1 { 14pt } else { 12pt }
   let wt = if it.level == 2 { "bold" } else { "regular" }
+  let fnt = if it.level == 1 { "SimHei" } else { "SimSun" }
   v(if it.level == 1 { 13pt } else { 8pt })
-  par(first-line-indent: 0pt, text(size: sz, weight: wt, font: ("Times New Roman", "SimSun"), it.body))
+  par(first-line-indent: 0pt, text(size: sz, weight: wt, font: ("Times New Roman", fnt), it.body))
   v(if it.level == 1 { 6pt } else { 3pt })
 }
 #let t5(body) = {
@@ -112,7 +114,7 @@
 ]
 #pagebreak()
 #set page(
-  margin: (x: 2.6cm, y: 2.54cm),
+  margin: 2.5cm,
   footer: context align(center)[#text(size: 10.5pt, font: ("Times New Roman", "SimSun"))[#counter(page).display()]],
 )
 #counter(page).update(1)
@@ -146,12 +148,12 @@
 
 本实验内容涵盖任务书的四个部分（第四部分为选做），需要至少覆盖前三部分：
 
-== 2.1 环境部署：深度学习框架安装、开发工具与环境
-== 2.2 模型选型：计算机视觉模型、自然语言处理模型、多模态/多任务模型
-== 2.3 训练优化方法：计算效率优化、梯度控制方法、训练过程控制
-== 2.4 模型适配策略：解决小样本/非标数据的泛化问题（选做）
+== 3.1 环境部署：深度学习框架安装、开发工具与环境
+== 3.2 模型选型：计算机视觉模型、自然语言处理模型、多模态/多任务模型
+== 3.3 训练优化方法：计算效率优化、梯度控制方法、训练过程控制
+== 3.4 模型适配策略：解决小样本/非标数据的泛化问题（选做）
 
-以下按 1．需求分析、2．设计思路、3．代码实现、4. 测试优化四个方面展开。
+以下按 1．需求分析、2．设计思路、3．代码实现、4．测试优化四个方面展开。
 
 = 1．需求分析
 
@@ -187,7 +189,7 @@
 
 = 3．代码实现
 
-== 2.1 环境部署
+== 环境部署
 
 Docker 容器内配置 CUDA 版 PyTorch 后，克隆 Chinese-CLIP 官方代码并施加 3 处本地补丁，分别是新增 `no_ddp.py`、将 `main.py` 的建组条件化、使 `train.py` 验证阶段的 `all_reduce` 仅在多卡时执行；lmdb 在镜像内源码编译（无预编译 wheel）。训练与评测入口如@lst-cmd 所示，单卡训练约 6 分钟，评测约 3 分钟。
 
@@ -204,15 +206,15 @@ bash scripts/finetune/run_test_eval.sh
 ```
 ] <lst-cmd>
 
-== 2.2 模型选型
+== 模型选型
 
 模型选型从计算机视觉、自然语言处理与多模态三个角度比较。视觉塔选 ViT-B-16@vit 而非 CNN（ResNet50），因其与官方中文 CLIP 预训练权重严格对齐，且全局注意力对商品整体形态与配件构成的建模更稳定；文本塔选 RoBERTa-wwm-ext-base-chinese@roberta-wwm，全词掩码预训练对"双肩包/保温杯"这类属性词更敏感，且是 Chinese-CLIP 的官方文本塔；多模态框架选 CLIP 对比学习@clip 的中文实现 Chinese-CLIP@chinese-clip，备选的检测/分类模型只能输出类别标签、无法提供可检索的嵌入，纯文本检索则丢失图像模态，而双塔对比学习得到的图文嵌入空间天然支持文搜图与图搜图，与本课题检索任务对口。
 
-== 2.3 训练优化方法
+== 训练优化方法
 
 训练优化沿计算效率、梯度控制与过程控制三条线展开。计算效率上启用 amp 混合精度训练，并以梯度检查点（grad checkpointing）用时间换显存。这是 8GB 显存稳定运行 batch 32 的前提；同时以 `--skip-aggregate` 跳过多卡聚合。梯度控制上，学习率 1e-5、权重衰减 0.001、warmup 100 步后线性衰减，与官方 MUGE 微调脚本@chinese-clip 对齐，防止小样本下大步长破坏预训练表征。过程控制上每 150 步执行一次验证、每个 epoch 保存一次检查点、固定随机种子 123，并监控 valid loss 与 batch 内两路准确率，出现过拟合即早停（实测未出现）。其余超参数为 batch 32、valid batch 32、最大训练轮数 3、上下文长度 52、累计步数 1、数据加载线程 2，完整快照由训练脚本自动写出 `params_*.txt`。
 
-== 2.4 模型适配策略
+== 模型适配策略
 
 针对小样本与非标数据的泛化问题，适配策略包含迁移学习、文本分布对齐、防泄漏划分与数据纯度兜底。迁移学习以中文图文预训练权重为起点，仅用 7,520 条训练样本、3 轮 705 步即达到目标指标。文本分布对齐把非标商品标题经属性模板重写为五段式结构化文本（见@lst-text），将自由文本的长尾写法收敛到可控分布。防泄漏划分由 `split_by_hash` 以 MD5（item_id）决定划分，重复商品不会跨集合（见@lst-split）。数据纯度兜底依赖实验一的视觉清洗（置信度 0.72），预先排除 765 条脏样本。小样本场景下"少而纯"优于"多而杂"。图像几何/光学增强（`--use-augment`）因 timm 1.0 API 兼容性未验证而关闭，先保证训练链路稳定，留待后续启用。
 
@@ -251,7 +253,7 @@ def split_by_hash(item_id: str, train_ratio: float, valid_ratio: float) -> str:
 ```
 ] <lst-split>
 
-= 4\. 测试优化
+= 4．测试优化
 
 测试与优化工作集中在四个方面：
 
@@ -479,13 +481,13 @@ test 与训练同分布（均出自属性模板）是实验一文本描述生成
       table.hline(stroke: 0.8pt),
       table.header([路径], [作用], [报告对应内容]),
       table.hline(stroke: 0.5pt),
-      [`scripts/build_retrieval_dataset.py`], [清洗数据转 TSV/JSONL，并按 item_id 的 MD5 哈希做 8:1:1 划分。], [三（三）、五（一）、五（四）],
-      [`scripts/retrieval/text_builder.py`], [生成与 FAISS 建索引一致的属性模板文本。], [二、三（二）、五（二）],
-      [`scripts/retrieval/build_category_index.py`], [用 Chinese-CLIP 编码图片/文本并生成分类 FAISS 索引。], [三（二）、六],
+      [`scripts/build_retrieval_dataset.py`], [清洗数据转 TSV/JSONL，并按 item_id 的 MD5 哈希做 8:1:1 划分。], [3．代码实现、五（一）、五（四）],
+      [`scripts/retrieval/text_builder.py`], [生成与 FAISS 建索引一致的属性模板文本。], [二、2．设计思路、五（二）],
+      [`scripts/retrieval/build_category_index.py`], [用 Chinese-CLIP 编码图片/文本并生成分类 FAISS 索引。], [2．设计思路、六],
       [`scripts/retrieval/search_category_index.py`], [执行文字、图片和图文三路融合检索。], [五（六）、六],
-      [`scripts/finetune/run_train_single_gpu.sh`], [单卡 3 轮微调入口，启用 AMP、梯度检查点和 NoDDP。], [三（一）、三（三）、四],
+      [`scripts/finetune/run_train_single_gpu.sh`], [单卡 3 轮微调入口，启用 AMP、梯度检查点和 NoDDP。], [1．需求分析、3．代码实现、四],
       [`scripts/finetune/run_test_eval.sh`], [一次性生成预训练基线与微调 checkpoint 的 test 分数。], [五（二）、五（三）],
-      [`scripts/finetune/patches/no_ddp.py`], [单卡 DDP 替身，保留 module 前缀以兼容官方导出脚本。], [三（一）、四],
+      [`scripts/finetune/patches/no_ddp.py`], [单卡 DDP 替身，保留 module 前缀以兼容官方导出脚本。], [1．需求分析、四],
       [`evaluation/retrieval/code/evaluate_retrieval.py`], [固定查询/qrels 后计算 Recall、Precision、nDCG、MRR。], [五（六）],
       [`evaluation/retrieval/code/run_gpt61sol_pilot.py`], [生成查询、AI 复核候选并归档试点评测。], [五（六）],
       table.hline(stroke: 0.8pt),
