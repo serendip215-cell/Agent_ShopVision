@@ -522,12 +522,14 @@ def main() -> int:
     model_config = registry.get("model", {})
     checkpoint_value = model_config.get("checkpoint", "")
     checkpoint = resolve_path(checkpoint_value) if checkpoint_value.strip() else None
+    quant = (model_config.get("quant", "none") or "none").strip().lower()
     encoder = ChineseClipEncoder(
         model_config.get("name", "ViT-B-16"),
         resolve_path(model_config.get("download_root", "models/chinese_clip")),
         args.device,
         args.use_modelscope or bool(model_config.get("use_modelscope", False)),
         checkpoint=checkpoint,
+        quant=quant,
     )
     text_vectors, image_vectors = encode_queries(queries, encoder)
     rankings = rank_queries(queries, categories, text_vectors, image_vectors, args.top_k, candidate_k, weights)

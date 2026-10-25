@@ -39,6 +39,38 @@ def _resolve_input_resolution(clip_module, model_name: str) -> int:
     return int(json.loads(config.read_text(encoding="utf-8"))["image_resolution"])
 
 
+def _replace_dynamic_linear(model, predicate, per_channel: bool = False) -> int:
+    """按名字过滤，把符合条件的 nn.Linear 换成动态量化版本，返回替换个数。
+
+    官方 `quantize_dynamic()` 只能按“模块类型”整棵树替换，不能按名字挑层；
+    实验三要分别量化文本塔/图像塔，所以这里手工做。
+
+    注意：`Linear.from_float()` 依赖模块自带的 qconfig，未设置会原样返回，故先赋 qconfig。
+    """
+    import torch
+    from torch.ao.nn.quantized.dynamic import Linear as DynLinear
+    from torch.ao.quantization import (
+        default_dynamic_qconfig,
+        per_channel_dynamic_qconfig,
+    )
+
+    qconfig = per_channel_dynamic_qconfig if per_channel else default_dynamic_qconfig
+    targets = [
+        (name, module)
+        for name, module in model.named_modules()
+        if type(module) is torch.nn.Linear and predicate(name)
+    ]
+    for name, module in targets:
+        module.qconfig = qconfig
+        quantized = DynLinear.from_float(module)
+        parts = name.split(".")
+        parent = model
+        for part in parts[:-1]:
+            parent = getattr(parent, part)
+        setattr(parent, parts[-1], quantized)
+    return len(targets)
+
+
 class ChineseClipEncoder:
     def __init__(
         self,
@@ -48,6 +80,7 @@ class ChineseClipEncoder:
         use_modelscope: bool = False,
         checkpoint: str | Path | None = None,
         text_model_name: str = DEFAULT_TEXT_MODEL,
+        quant: str = "none",
     ) -> None:
         try:
             import torch
@@ -67,6 +100,7 @@ class ChineseClipEncoder:
         self.device = torch.device(device)
         self.model_name = model_name
         self.text_model_name = text_model_name
+        self.quant = (quant or "none").strip().lower()
         self.download_root = str(download_root)
 
         if checkpoint:
@@ -106,14 +140,71 @@ class ChineseClipEncoder:
             self.model, self.preprocess = load_from_name(model_name, **load_kwargs)
 
         self.model.eval()
+        self._apply_quant()
         self.dimension: int | None = None
+
+    def _apply_quant(self) -> None:
+        """按需调整数值精度（实验三）。
+
+        三档口径：
+          none —— 官方默认。注意 create_model() 会把权重转成 FP16，所以实际是 FP16；
+          fp32 —— 显式 float()，真正的 FP32（仅作精度参照）；
+          fp16 —— 半精度，只在 CUDA 上有意义；
+          int8 —— 动态量化，只作用于 nn.Linear，是 CPU 路径。
+
+        注意本方法不落盘：同一份权重加 --quant 就能按不同精度运行。
+        要量「模型大小」请用 scripts/optimize/quantize.py。
+        """
+        if self.quant in ("", "none"):
+            return
+        if self.quant == "fp32":
+            self.model.float()
+            return
+        if self.quant in ("int8-text", "int8-visual"):
+            if self.device.type == "cuda":
+                raise RuntimeError("INT8 动态量化是 CPU 路径，请加 --device cpu。")
+            # 文本塔是 HF 的 BertModel，挂在 `bert.` 下；图像塔在 `visual.` 下。
+            prefix = "bert." if self.quant == "int8-text" else "visual."
+            replaced = _replace_dynamic_linear(self.model, lambda name: name.startswith(prefix))
+            print(f"[quant] {self.quant}：量化 {replaced} 个 Linear（前缀 {prefix}）", flush=True)
+            if replaced == 0:
+                raise RuntimeError(f"没有匹配到可量化的层（前缀 {prefix}）")
+            return
+        if self.quant in ("int8", "int8-pc"):
+            if self.device.type == "cuda":
+                raise RuntimeError(
+                    "INT8 动态量化是 CPU 路径，请加 --device cpu（或改用 --quant fp16）。"
+                )
+            from torch.ao.quantization import quantize_dynamic
+
+            if self.quant == "int8-pc":
+                # 按输出通道量化（per-channel）：缩放系数更细，Transformer 通常明显更稳。
+                from torch.ao.quantization import per_channel_dynamic_qconfig
+
+                qspec = {self.torch.nn.Linear: per_channel_dynamic_qconfig}
+            else:
+                # 默认：整层一个缩放系数（per-tensor）。
+                qspec = {self.torch.nn.Linear}
+            self.model = quantize_dynamic(self.model, qspec, dtype=self.torch.qint8)
+            return
+        if self.quant == "fp16":
+            if self.device.type != "cuda":
+                raise RuntimeError("FP16 推理需要在 CUDA 上运行，请加 --device cuda（或改用 --quant int8）。")
+            self.model.half()
+            return
+        raise ValueError(
+            f"不支持的 quant：{self.quant}（可选 none / fp32 / fp16 / int8 / int8-pc）"
+        )
 
     @property
     def model_tag(self) -> str:
         """便于人读的模型标识，用于日志和注册表。"""
-        if not self.checkpoint:
-            return self.model_name
-        return f"{self.model_name}+{Path(self.checkpoint).name}"
+        base = (
+            self.model_name
+            if not self.checkpoint
+            else f"{self.model_name}+{Path(self.checkpoint).name}"
+        )
+        return base if self.quant == "none" else f"{base}@{self.quant}"
 
     @staticmethod
     def _normalise(features):

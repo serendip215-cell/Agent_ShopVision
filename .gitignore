@@ -26,6 +26,9 @@ __pycache__/
 # Chinese-CLIP 权重；图文检索索引需要纳入数据版本管理。
 /models/chinese_clip/
 
+# 实验三产物（量化权重、ONNX、bench 结果），体积大且可由脚本重建。
+/data/optimize/
+
 # Typst 编译器（build_typ.sh 按系统自动下载）与编译产物 PDF。
 /docs/typst/
 /docs/build/

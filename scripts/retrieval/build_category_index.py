@@ -33,6 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-name", default="ViT-B-16", help="Chinese-CLIP 模型名称。")
     parser.add_argument("--model-download-root", default="models/chinese_clip", help="模型缓存目录（相对项目根目录）。")
     parser.add_argument("--checkpoint", default="", help="可选：本地权重文件（如微调后的 epoch3.pt）；留空表示使用官方预训练权重。")
+    parser.add_argument("--quant", choices=["none", "fp16", "int8", "int8-pc", "int8-text", "int8-visual"], default="none", help="可选：降低数值精度（实验三）。int8 系列为 CPU 动态量化，fp16 需 cuda。")
     parser.add_argument("--batch-size", type=int, default=16, help="图片和文本编码批大小。")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--use-modelscope", action="store_true", help="通过 ModelScope 下载模型权重。")
@@ -236,6 +237,7 @@ def build_category(
         "output_dir": relative_path(final_output, REPO_ROOT),
         "model_name": encoder.model_name,
         "checkpoint": relative_path(Path(encoder.checkpoint), REPO_ROOT) if encoder.checkpoint else "",
+        "quant": encoder.quant,
         "device": str(encoder.device),
         "dimension": int(image_vectors.shape[1]),
         "normalized": True,
@@ -271,11 +273,13 @@ def main() -> int:
     if checkpoint is not None and not checkpoint.is_file():
         raise FileNotFoundError(f"权重文件不存在：{checkpoint}")
     checkpoint_rel = relative_path(checkpoint, REPO_ROOT) if checkpoint else ""
+    quant = (args.quant or "none").strip().lower()
     registry_path = output_dir / "index_registry.json"
     registry = load_registry(registry_path)
     registry_model = registry.get("model", {})
     existing_model = registry_model.get("name")
     existing_checkpoint = registry_model.get("checkpoint", "")
+    existing_quant = registry_model.get("quant", "none") or "none"
     if registry.get("categories"):
         if existing_model and existing_model != args.model_name:
             raise RuntimeError(
@@ -288,12 +292,18 @@ def main() -> int:
                 f"{checkpoint_rel or '官方预训练权重'} 不同；不同权重的向量不能混用，"
                 "请使用新的 --output-dir，或删除旧索引后重新构建全部类别。"
             )
+        if existing_quant != quant:
+            raise RuntimeError(
+                f"已有索引用精度 {existing_quant}，与本次 {quant} 不同；"
+                "不同精度的向量不能混用，请使用新的 --output-dir。"
+            )
     encoder = ChineseClipEncoder(
         args.model_name,
         model_root,
         args.device,
         args.use_modelscope,
         checkpoint=checkpoint,
+        quant=quant,
     )
     print(f"编码模型：{encoder.model_tag}", flush=True)
     registry["updated_at"] = utc_now()
@@ -301,6 +311,7 @@ def main() -> int:
         "name": args.model_name,
         "download_root": relative_path(model_root, REPO_ROOT),
         "checkpoint": checkpoint_rel,
+        "quant": quant,
         "normalized": True,
         "use_modelscope": args.use_modelscope,
     }

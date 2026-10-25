@@ -39,6 +39,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-name", default="", help="默认读取索引注册表中的模型名称。")
     parser.add_argument("--model-download-root", default="", help="模型缓存目录；留空时读取索引注册表。")
     parser.add_argument("--checkpoint", default="", help="权重文件；留空时读取索引注册表记录的权重（推荐，保证与建索引一致）。")
+    parser.add_argument("--quant", choices=["none", "fp16", "int8", "int8-pc", "int8-text", "int8-visual"], default="", help="数值精度；留空时读取索引注册表（推荐，保证与建索引一致）。")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--use-modelscope", action="store_true", help="通过 ModelScope 下载模型权重。")
     return parse_configured_args(parser, "search", REPO_ROOT)
@@ -116,12 +117,14 @@ def main() -> int:
             f"索引记录/指定的权重文件不存在：{checkpoint}；"
             "请重新用 build_category_index.py 建立索引。"
         )
+    quant = (args.quant or model_config.get("quant", "none") or "none").strip().lower()
     encoder = ChineseClipEncoder(
         model_name,
         resolve_path(model_root_value),
         args.device,
         use_modelscope,
         checkpoint=checkpoint,
+        quant=quant,
     )
     text_query_vector = None
     image_query_vector = None
