@@ -2,6 +2,30 @@
 
 本目录集中存放检索评测代码、运行脚本、测试输入和本次测试结果。评测只读取索引与商品数据，不会修改它们。
 
+## 实验三推理加速评测与报告
+
+当前实验三使用 ONNX + TensorRT 主线，量化探索已冻结。用户认可的训练机凭证通过独立入口复算，避免把模型级测速与历史自然查询指标混算：
+
+    python -m pip install -r evaluation/retrieval/requirements-report.txt
+    python evaluation/retrieval/code/evaluate_acceleration.py --run-id exp3_report_my_run
+
+也可运行 scripts/run_exp3_evaluation.ps1。依赖只有 numpy、matplotlib、Pillow；已有环境可复用，Conda需先正常激活。Linux需要中文字体，如Noto Sans CJK SC。
+
+| 文件 | 职责 |
+|---|---|
+| configs/exp3_acceleration.json | 选择正式来源JSON、同硬件对照和阈值；排除旧的非对等记录 |
+| code/evaluate_acceleration.py | 复算速度、精度差、验收条件，快照输入；复用既有calculate_metrics复算历史132查询 |
+| code/render_acceleration_charts.py | 从run内表格生成9张中文PNG/PDF/SVG及图形来源记录 |
+| scripts/run_exp3_evaluation.ps1 | PowerShell启动入口，按脚本位置定位仓库 |
+| tests/test_acceleration.py | 8项逻辑测试，覆盖provider回退、线程对齐、同设备、阈值边界等 |
+| requirements-report.txt | 结果复算与绘图依赖，不含模型推理依赖 |
+
+输出统一在 results/runs/<run-id>/，默认拒绝覆盖，显式传 --overwrite 才可覆盖。路径按仓库根目录解析，与当前终端目录无关。来源快照配置可以作为下一轮 --config 输入；输出必须使用新run-id，避免覆盖快照自身。
+
+本轮：[推理加速评测结果与文件说明](results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)。完整行为要求见[杜军博任务交付](../../docs/流程与交接/实验三杜军博任务交付.md)。
+
+本入口只复算已认可的测量，不新跑模型。934条双塔R@K、图像塔forward速度和历史132查询排序复算分开保存。原有真实查询编码/检索入口仍是 code/evaluate_retrieval.py；该脚本当前使用PyTorch编码器，不能直接称为TRT端到端评测。
+
 ## 目录结构
 
 ```text

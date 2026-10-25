@@ -1,0 +1,114 @@
+[
+  {
+    "id": "runtime_cpu",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cpu_fp32_t8_all.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/runtime_cpu.json",
+    "sha256": "df60a748eb03dab5431286044d87642c45a0e1356fe516c5245c674907c4ed1f",
+    "sha256_utf8_lf": "d82c2495076511ed58d2a92247a74e74850b1494d50516cf3c0df97c2472d48f"
+  },
+  {
+    "id": "runtime_cuda",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_cuda_tauto_all.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/runtime_cuda.json",
+    "sha256": "e26cff82bad767bdab3f03e3e6369b8c3d3d2c934671682c47b422eea4057b71",
+    "sha256_utf8_lf": "7c33cb0ba3099a4b7d514427a1e498ef02cb32bfc41f5f39fdbb6200b5c23c66"
+  },
+  {
+    "id": "runtime_trt",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_tensorrt_tauto_all.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/runtime_trt.json",
+    "sha256": "c365a7715fe50a1ba538389f2a0b187b3ba857b000e264ea0aad4945a3f3c463",
+    "sha256_utf8_lf": "9f111585d92ecf9ec192ee392be13a605f652a1f8359b45154b281531b744e12"
+  },
+  {
+    "id": "accuracy_cpu",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/onnx_fp32_CPUExecutionProvider.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/accuracy_cpu.json",
+    "sha256": "40fee5813c028652bf70cbd852383108a003d8734c636cc54b31767d4aab11ef",
+    "sha256_utf8_lf": "7176454532afe034e9dde1a0b37282e5e8449324fd9d082abb5ebefa7089d75c"
+  },
+  {
+    "id": "accuracy_trt",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/onnx_fp16_TensorrtExecutionProvider.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/accuracy_trt.json",
+    "sha256": "2b9d5be1ce991cff386edd59220d38fdecef4d10dda9a5984482ad9a6b0ecddf",
+    "sha256_utf8_lf": "f4dbe816ab8b663bd2d286520f2d1e68204cbf7ce18b0776cc2b96afc8f01e4c"
+  },
+  {
+    "id": "baseline",
+    "source": "docs/optimize/runs/2026-10-23_exp3-quant/accuracy/test_fp32.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/baseline.json",
+    "sha256": "d83395b27d626954b92e273d8716fd63361693974cd59a04fd7563a88fe21223",
+    "sha256_utf8_lf": "bf20a1f60d8ce85d914a11d89a7bc657740f3e6e7d48d5ae57c4aef6e19a77d6"
+  },
+  {
+    "id": "category_baseline",
+    "source": "docs/optimize/runs/2026-10-23_exp3-quant/accuracy/by_category_fp32.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/category_baseline.json",
+    "sha256": "c0baccb2df9ed9b38327c9754e4d812cfa8b249983751f65727dc9ae8d18c30d",
+    "sha256_utf8_lf": "47868d99face578c69a7bb4da8c7da3f019e62d907d61a77f2711dc7c05f2d67"
+  },
+  {
+    "id": "scale",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/flops.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/scale.json",
+    "sha256": "9f5258e904064c344d84f35aefe94678b99de71387ab4f74356647241cfb7962",
+    "sha256_utf8_lf": "0b48947c7f5b06a0e3f962ca1a3f8b1bb4ba731a00c399bf53997b60a4aecfbc"
+  },
+  {
+    "id": "export_fp32",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/export_report_fp32.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/export_fp32.json",
+    "sha256": "5b63453b7e7e33506f4fbe3fd2f0c6045d4096afa6cc61153ad21683a7c4d943",
+    "sha256_utf8_lf": "cb1c1fe45906bcfb96f730528c42fe82fbe558e192439b54d2c2cb5cbe73e53b"
+  },
+  {
+    "id": "export_fp16",
+    "source": "docs/optimize/runs/2026-10-24_exp3-speed/export_report_fp16.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/export_fp16.json",
+    "sha256": "739c2eb2c69de5f43b904dfa190c63db10df7d8799a2cabd063089d2fddbc3cb",
+    "sha256_utf8_lf": "05df81ea77218ca41a9d626cff887dda74cd4223e7cd2e93a5d7436df6a08a10"
+  },
+  {
+    "id": "weight_sizes",
+    "source": "docs/optimize/runs/2026-10-23_exp3-quant/quantize_report.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/weight_sizes.json",
+    "sha256": "b0e52dae0cac86e719ed846115489766157abd27c23b7296a6034be9e034d992",
+    "sha256_utf8_lf": "315cfa7f0f8018b5a0db527144bd3033596581c08417e056d63ed6825344a13c"
+  },
+  {
+    "id": "reference_queries",
+    "source": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/inputs/queries.csv",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/reference_queries.csv",
+    "sha256": "7d1688866da2884a507aafefd03b4eccc1781d32adea5739408a655fae4f706d",
+    "sha256_utf8_lf": "9bf12f856cebe7798d7d3f38d585093664658d44a00c8213147ce37c5ffca6a3"
+  },
+  {
+    "id": "reference_qrels",
+    "source": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/inputs/qrels.csv",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/reference_qrels.csv",
+    "sha256": "6b02dcb411885f71d3c5d53ad1a9cdf1f3b76c6f1677ad0250b44bfb0261cbcf",
+    "sha256_utf8_lf": "85b8f3adcc79e8ac8dc7fbcf8d10947ac825c5f4b5d3745ec487df8404c3d97c"
+  },
+  {
+    "id": "reference_rankings",
+    "source": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/ranked_results.csv",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/reference_rankings.csv",
+    "sha256": "7e7aa2aa55279e0ccce63c37c889f76b6bff8fdde53c5e9a61b6a14454022c99",
+    "sha256_utf8_lf": "68637ef19915ec9bf3ec66940e1bdc7af0e200e5b864819b26e27ed67e9c3f7e"
+  },
+  {
+    "id": "reference_metadata",
+    "source": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/run_metadata.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/reference_metadata.json",
+    "sha256": "f8b6577475d67f5418bc027dc999dfbd02113df1cd94b8a473ac1e12272340c1",
+    "sha256_utf8_lf": "c54351ff67a6fbc7c439b607515fae647a13dba760b5d6e804ef3a43f71951ee"
+  },
+  {
+    "id": "reference_config",
+    "source": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/inputs/retrieval_config.json",
+    "snapshot": "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/inputs/reference_config.json",
+    "sha256": "d9acd00921d70f7c660023b39aff763096c16d96adbdf434227b6d530e413587",
+    "sha256_utf8_lf": "d9acd00921d70f7c660023b39aff763096c16d96adbdf434227b6d530e413587"
+  }
+]

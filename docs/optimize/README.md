@@ -2,6 +2,14 @@
 
 本文件回答两件事：**实验三做了什么**、**每一项结果存在哪里**。
 
+## 当前统一交付（2026-10-25）
+
+杜军博按用户确认沿用队友已核验结果，完成速度/精度验收复算、9张中文图、历史132查询指标复算与文件说明，统一放在 [evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/](../../evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)。
+
+本目录 runs/ 保留训练机原始凭证；统一交付目录保留输入快照、源表和图形，便于写作。新交付不追加量化/4-bit/剪枝实验，没有新增模型推理或现场录屏。本人后续操作见[杜军博任务交付](../流程与交接/实验三杜军博任务交付.md)。
+
+正式 ORT-CUDA 凭证给出 **1.097× / 0.933×**（batch1/32）；旧正文的1.05×/0.95×不作为本轮来源。export_report 只保留最后导出的文本塔，FP32/FP16为389.58/194.97MiB，不应当作双塔ONNX总体积。原始数据不改写，派生表与图以统一交付为准。
+
 ## 一、做了什么
 
 | 任务 | 状态 | 说明 |
@@ -17,12 +25,12 @@
 | 报告要求 | 需要的表/图 | 数据来源 |
 |---|---|---|
 | 1. 成员构成与分工 | 文字 | `docs/流程与交接/实验三流程与分工.md` §七 分工表 |
-| 2. 模型优化对比分析 | **表 1** 参数量/计算量/体积 | `runs/2026-10-24_exp3-speed/flops.json` + `runs/2026-10-23_exp3-quant/quantize_report.json` |
-| 2. 精度损失分析 | **表 2** | `runs/2026-10-23_exp3-quant/accuracy/test_*.json`（6 个配置） |
-| 2. 误差分布热力图 | **图** | `runs/2026-10-23_exp3-quant/accuracy/by_category_*.json`（9 类别 × 2 配置） |
+| 2. 模型优化对比分析 | **表 1** 参数量/计算量/体积 | 统一交付tables/model_scale.csv、model_sizes.csv；只使用当前FP32/FP16及有凭证的文件对象 |
+| 2. 精度损失分析 | **表 2** | 统一交付tables/accuracy_comparison.csv；PyTorch-FP32、ORT-CPU-FP32、TRT-FP16同源比较 |
+| 2. 误差分布热力图 | **图** | 统一交付figures/04为后端×R@K误差；06为9类FP32基线。没有TRT分类别输出，不冒用冻结INT8结果 |
 | 3. 推理加速验证 | **表 3** 速度 | `runs/2026-10-24_exp3-speed/bench_visual_*.json` |
 | 3. 异构精度一致性 | **表 4** | `runs/2026-10-24_exp3-speed/onnx_*.json` |
-| 4. 关联分析 | 文字 | `runs/2026-10-23_exp3-quant/02-精度评测.md` 第 3 节（分塔 / 粒度）+ 本文档第三节末的分类别观察 |
+| 4. 关联分析 | 文字 | 统一交付图05/06中的模型规模和9类基线差异；量化探索仅作为冻结路线的历史说明 |
 
 > 四张表的关键数字都已整理成表，见 [`02-推理加速（3.1.4）.md`](02-推理加速（3.1.4）.md) 第 7 节，可直接抄进报告。
 
@@ -40,7 +48,7 @@
 | `runs/2026-10-24_exp3-speed/flops.json` | 参数量 + FLOPs（图像塔 33.70G / 文本塔 8.93G / 合计 42.63G） |
 | `runs/2026-10-24_exp3-speed/export_report_{fp32,fp16}.json` | 导出体积与一致性校验 |
 | `runs/2026-10-24_exp3-speed/bench_visual_cpu_fp32_t8_all.json` | CPU 加速（**线程对齐**，1.06×） |
-| `runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_cuda_tauto_all.json` | ORT-CUDA（1.05× / 0.95×） |
+| `runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_cuda_tauto_all.json` | ORT-CUDA（1.097× / 0.933×，以JSON复算） |
 | `runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_tensorrt_tauto_all.json` | **TensorRT（2.37× / 2.12×）← 报告表 3 用这个** |
 | `runs/2026-10-24_exp3-speed/onnx_fp32_CPUExecutionProvider.json` | ONNX 精度一致性（**0.00pp**） |
 | `runs/2026-10-24_exp3-speed/onnx_fp16_TensorrtExecutionProvider.json` | TRT 精度一致性（**−0.43pp**）← 报告表 4 用这个 |
@@ -51,7 +59,7 @@
 |---|---|---|
 | `2026-10-23_exp3-quant/quantized/epoch3_{fp32w,fp16,int8}.pt` | 三份量化权重 | 718 / 359 / 314 MB |
 | `2026-10-24_exp3-speed/onnx/visual_{fp32,fp16}.onnx` | 图像塔 | 329 / 165 MB |
-| `2026-10-24_exp3-speed/onnx/text_{fp32,fp16}.onnx` | 文本塔 | 410 / 195 MB |
+| `2026-10-24_exp3-speed/onnx/text_{fp32,fp16}.onnx` | 文本塔 | 389.58 / 194.97 MiB |
 | `2026-10-24_exp3-speed/trt_cache/` | TensorRT 引擎缓存 | 数百 MB |
 | 各级 `bench/`、`accuracy/` | 与 docs 下凭证同内容的原始输出 | KB 级 |
 
@@ -84,6 +92,6 @@
 ## 六、两个注意事项
 
 1. **`bench_visual_cuda_fp16_tauto_all.json` 是历史遗留**：文件名缺 provider，内容是 TensorRT 首跑（2.50×）。
-   报告请用 `bench_visual_cuda_fp16_tensorrt_tauto_all.json`（2.37×）或 `..._cuda_...`（1.05×），两者命名规范、可对应。
+   报告请用 `bench_visual_cuda_fp16_tensorrt_tauto_all.json`（约2.366×）或 `..._cuda_...`（约1.097×），两者命名规范、可对应。
 2. **`data/optimize/2026-10-23_exp3-quant/quantized/epoch3_int8_statedict.pt`** 是早期诊断产物（约 314 MB），
    结论已取得，可随时删除。

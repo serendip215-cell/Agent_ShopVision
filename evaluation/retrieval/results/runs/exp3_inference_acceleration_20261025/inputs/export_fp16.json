@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "tower": "text",
+  "precision": "fp16",
+  "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+  "onnx_path": "data/optimize/2026-10-24_exp3-speed/onnx/text_fp16.onnx",
+  "fp32_onnx_path": "data/optimize/2026-10-24_exp3-speed/onnx/text_fp32.onnx",
+  "fp16_conversion_impl": "onnxruntime.transformers.float16",
+  "onnx_mb": 194.97,
+  "export_seconds": 19.4,
+  "opset": 17,
+  "input": {
+    "names": [
+      "input_ids",
+      "attention_mask"
+    ],
+    "shape": [
+      "batch",
+      "seq"
+    ]
+  },
+  "output": {
+    "name": "embedding",
+    "shape": [
+      "batch",
+      512
+    ]
+  }
+}

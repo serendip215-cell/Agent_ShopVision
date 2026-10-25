@@ -38,7 +38,7 @@
 <p align="center">
   读取本地商品图片和结构化字段，做属性识别、检索推荐、标题描述生成。<br>
   当前已完成实验 1 数据清洗、中文图文检索基线（含 FAISS 索引）、Chinese-CLIP 微调（test R@1 37.4→58.7）和实验三推理加速（ONNX + TensorRT）；<br>
-  实验三报告、剪枝、前后端和 Agent 仍待继续。
+  实验三评测图表已交付，正式报告整合、现场演示、可选剪枝以及前后端和 Agent 继续推进。
 </p>
 
 ## ✨ 当前进度
@@ -58,6 +58,7 @@
 | 微调权重接入检索 | ✅ 完成 | `data/index_data_finetuned/`，9 类 9,393 条，由 `epoch3.pt` 编码；旧索引 `data/index_data/` 保留作基线 |
 | 实验三 推理加速（3.1.4） | ✅ 完成 | ONNX + TensorRT：**延迟 −57.7%**（batch1）/ −52.7%（batch32）、**吞吐 +136.6%** / +111.5%、**精度一致性 −0.43pp**；记录见 [`docs/optimize/`](docs/optimize/) |
 | 实验三 量化（3.1.1） | 🧊 冻结 | 6 种配置实测（FP32 / FP16 / INT8 / per-channel / 分塔），裸动态量化最好 −13.06pp，未达 ≤2% 要求；数据与文档保留在 [`docs/optimize/runs/`](docs/optimize/runs/) |
+| 实验三评测与绘图交付 | ✅ 完成 | 杜军博沿用已核验训练机结果完成速度/精度判定、9张中文PNG/PDF/SVG与132历史查询指标复算；[统一结果](evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)，[本人现场操作待办](docs/流程与交接/实验三杜军博任务交付.md) |
 | 前后端、Agent | ⏳ 未开始 | 实验 4–5 |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
@@ -293,7 +294,8 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 
 ## 🚧 还没做
 
-- 实验三报告（实验三.typ 与误差热力图尚未开始，数据与凭证已齐）
+- 实验三正式报告整合与PDF（实验三.typ尚未创建；9张中文图、误差热力图与表格已在统一评测结果中交付）
+- 实验三现场演示/录屏（具体命令与分工见杜军博任务交付说明）
 - 检索融合权重调优（pilot 验证集已就绪，对比实验尚未做）
 - 剪枝（可选；量化已实测并冻结，见上表）
 - FastAPI / React

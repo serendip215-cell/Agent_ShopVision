@@ -1,0 +1,45 @@
+{
+  "scope": "historical_ranking_metric_replay",
+  "source_run_id": "deepseekv4_1_flash_pilot_20261018",
+  "query_count": 132,
+  "qrels_count": 1325,
+  "index_dir": "data/index_data",
+  "top_k": 10,
+  "metrics_by_mode": [
+    {
+      "mode": "all",
+      "query_count": 132,
+      "precision@10": 0.31893939393939397,
+      "recall@10": 0.9784205693296603,
+      "ndcg@10": 0.868219884370717,
+      "mrr@10": 0.7741161616161616
+    },
+    {
+      "mode": "text",
+      "query_count": 44,
+      "precision@10": 0.30000000000000004,
+      "recall@10": 0.9406565656565656,
+      "ndcg@10": 0.8683209540663926,
+      "mrr@10": 0.8645833333333333
+    },
+    {
+      "mode": "image",
+      "query_count": 45,
+      "precision@10": 0.39111111111111113,
+      "recall@10": 1.0,
+      "ndcg@10": 0.8739875372013312,
+      "mrr@10": 0.8035185185185185
+    },
+    {
+      "mode": "multimodal",
+      "query_count": 43,
+      "precision@10": 0.2627906976744186,
+      "recall@10": 1.0,
+      "ndcg@10": 0.8620716988669848,
+      "mrr@10": 0.6507751937984496
+    }
+  ],
+  "new_inference_executed": false,
+  "used_for_tensorrt_acceptance": false,
+  "interpretation": "沿用已核验的旧索引历史排序和 AI 标签，仅复算指标；不是微调/TRT 的新查询结果，不能推断端到端加速或调优收益。"
+}

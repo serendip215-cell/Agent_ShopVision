@@ -2,7 +2,7 @@
 
 本目录服务于实验三（算法优化）。**当前主线是 3.1.4 推理加速**（ONNX + TensorRT），3.1.1 量化已冻结但脚本保留。
 
-## 五个脚本
+## 七个模型侧脚本
 
 | 脚本 | 用途 | 输入 | 产物 |
 |---|---|---|---|
@@ -15,6 +15,10 @@
 | `eval_by_category.py` | 按 9 个类别拆分的 R@K（误差热力图的数据源） | 权重 + 数据集 | `data/optimize/<RUN>/accuracy/by_category_<quant>.json` |
 
 所有脚本都会把 KB 级 JSON **自动复制**到 `docs/optimize/runs/<RUN_ID>/` 作为入库凭证；大产物留在 `data/optimize/`（该目录已 gitignore）。
+
+结果复算与报告绘图不需要模型环境，独立入口是 evaluation/retrieval/code/evaluate_acceleration.py，配置和依赖见 evaluation/retrieval/README.md。统一交付位于 evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/，源凭证仍保留在 docs/optimize/。
+
+本轮正式报告使用同一源JSON里的PyTorch配对基线，warmup=10、iters=20。下文“默认50次”是脚本默认值，不是已经提交凭证的实际计时次数。ORT-CUDA正式JSON给出1.097×/0.933×；测速范围仅图像塔forward，不是用户请求总延迟。原有evaluate_retrieval.py仍用PyTorch编码器，不能把它称为TRT端到端新测。
 
 ## 典型流程
 
@@ -91,6 +95,6 @@ PyTorch 与 ORT 的线程数必须一致，否则加速比是假的（我们曾�
 | 后端 | 相对 PyTorch | 说明 |
 |---|---|---|
 | ORT-CPU | 1.06× | 无实质收益 |
-| ORT-CUDA | 1.05× / 0.95× | 无收益，图里有 Memcpy 与 CPU 回退 |
+| ORT-CUDA | 1.097× / 0.933× | 正式JSON复算值，未达目标；图里有Memcpy与CPU回退 |
 | **TensorRT-FP16** | **2.37× / 2.12×** | 延迟 −57.7% / −52.7%，吞吐 +136.6% / +111.5% |
 | 精度一致性 | ORT-FP32 **0.00pp** / TRT-FP16 **−0.43pp** | 均满足 ≤1pp |

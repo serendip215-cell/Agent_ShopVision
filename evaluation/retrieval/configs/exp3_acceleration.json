@@ -1,0 +1,45 @@
+{
+  "run_id": "exp3_inference_acceleration_20261025",
+  "task": "3.1.4",
+  "source_mode": "accepted_measurement_replay",
+  "thresholds": {
+    "latency_reduction_pct": 40,
+    "throughput_gain_pct": 50,
+    "accuracy_delta_pp": 1,
+    "graph_speedup": 1.2,
+    "graph_accuracy_delta_pp": 0.5
+  },
+  "sources": {
+    "runtime_cpu": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cpu_fp32_t8_all.json",
+    "runtime_cuda": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_cuda_tauto_all.json",
+    "runtime_trt": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_tensorrt_tauto_all.json",
+    "accuracy_cpu": "docs/optimize/runs/2026-10-24_exp3-speed/onnx_fp32_CPUExecutionProvider.json",
+    "accuracy_trt": "docs/optimize/runs/2026-10-24_exp3-speed/onnx_fp16_TensorrtExecutionProvider.json",
+    "baseline": "docs/optimize/runs/2026-10-23_exp3-quant/accuracy/test_fp32.json",
+    "category_baseline": "docs/optimize/runs/2026-10-23_exp3-quant/accuracy/by_category_fp32.json",
+    "scale": "docs/optimize/runs/2026-10-24_exp3-speed/flops.json",
+    "export_fp32": "docs/optimize/runs/2026-10-24_exp3-speed/export_report_fp32.json",
+    "export_fp16": "docs/optimize/runs/2026-10-24_exp3-speed/export_report_fp16.json",
+    "weight_sizes": "docs/optimize/runs/2026-10-23_exp3-quant/quantize_report.json",
+    "reference_queries": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/inputs/queries.csv",
+    "reference_qrels": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/inputs/qrels.csv",
+    "reference_rankings": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/ranked_results.csv",
+    "reference_metadata": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/run_metadata.json",
+    "reference_config": "evaluation/retrieval/results/runs/deepseekv4_1_flash_pilot_20261018/inputs/retrieval_config.json"
+  },
+  "runtime_groups": [
+    {"id": "cpu", "name": "ORT-CPU", "source": "runtime_cpu", "provider": "CPUExecutionProvider"},
+    {"id": "cuda", "name": "ORT-CUDA", "source": "runtime_cuda", "provider": "CUDAExecutionProvider"},
+    {"id": "trt", "name": "TensorRT", "source": "runtime_trt", "provider": "TensorrtExecutionProvider"}
+  ],
+  "accuracy_groups": [
+    {"id": "cpu", "name": "ORT-CPU FP32", "source": "accuracy_cpu"},
+    {"id": "trt", "name": "TensorRT FP16", "source": "accuracy_trt"}
+  ],
+  "primary_group": "trt",
+  "excluded_sources": [
+    {"path": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cpu.json", "reason": "早期记录，不作为线程对齐后的正式 CPU 结果。"},
+    {"path": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cpu_tauto_all.json", "reason": "早期 CPU 记录，正式汇总统一采用显式 8/8 线程。"},
+    {"path": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_tauto_all.json", "reason": "文件名未区分 provider，采用后续明确标注 TensorRT 的记录。"}
+  ]
+}

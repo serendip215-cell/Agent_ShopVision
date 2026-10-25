@@ -2,6 +2,23 @@
 
 每次评测保存在 `runs/<run-id>/`。一轮实验只维护一套最终 AI 复核输入、相关性标签和指标；所有调优都以该套结果为准。
 
+## 实验三推理加速交付（2026-10-25）
+
+[exp3_inference_acceleration_20261025](runs/exp3_inference_acceleration_20261025/测试结果说明.md) 使用用户认可的训练机结果，执行速度/精度验收复算和报告绘图，没有新增模型推理。INT8、4-bit、剪枝不纳入本轮。
+
+    runs/exp3_inference_acceleration_20261025/
+    ├── inputs/                 原始凭证、历史查询快照、配置及SHA-256来源记录
+    ├── tables/                 速度/精度/验收/模型规模/文件大小/类别基线CSV
+    ├── figures/                9张中文图：PNG/PDF/SVG/figure.json及逐图说明
+    ├── reference_retrieval/    历史132查询的排序指标复算，单独保留
+    ├── summary.json           主线判定、来源模式、范围和限制
+    ├── run_metadata.json      源提交、生成时间、实际执行/未执行项目
+    └── 测试结果说明.md         本轮结论、文件作用与复现方法
+
+这是推理加速交付结构，不强行套用下面的AI生成查询结构。934条精度为双塔模型级测试；测速只覆盖图像塔forward；132条历史查询不作为TRT新测或端到端加速证据。未提供的TRT分类别损失不补造。现场演示仍需本人在训练机操作。
+
+后续新的加速实验继续使用独立run-id；入口为 evaluation/retrieval/code/evaluate_acceleration.py，配置为 evaluation/retrieval/configs/exp3_acceleration.json。不要覆盖本轮或旧试点目录。
+
 另外，`runs/finetuned_epoch3_test_20261019/` 是微调权重在固定图文测试集上的模型级评估归档。它用于保存 checkpoint 测试分数和训练曲线图，不属于下述 AI 复核查询/qrels 评测结构，也不与端到端商品索引检索指标混算。见 [该轮测试结果说明](runs/finetuned_epoch3_test_20261019/测试结果说明.md)。
 
 ## 目录结构

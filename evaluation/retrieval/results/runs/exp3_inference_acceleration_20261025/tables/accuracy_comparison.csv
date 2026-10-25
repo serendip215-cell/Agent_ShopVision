@@ -1,0 +1,4 @@
+﻿group,backend,n_texts,candidate_pool,r1,r5,r10,mean_recall,delta_r1_pp,delta_r5_pp,delta_r10_pp,delta_mean_recall_pp,accuracy_pass,graph_accuracy_pass,source
+baseline,PyTorch FP32,934,934,58.5653,89.2934,96.6809,81.5132,0.0,0.0,0.0,0.0,True,True,baseline
+cpu,ORT-CPU FP32,934,934,58.5653,89.2934,96.6809,81.5132,0.0,0.0,0.0,0.0,True,True,accuracy_cpu
+trt,TensorRT FP16,934,934,58.137,89.2934,96.5739,81.3348,-0.4283000000000001,0.0,-0.10699999999999932,-0.17839999999999634,True,True,accuracy_trt

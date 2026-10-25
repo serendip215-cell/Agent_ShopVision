@@ -739,13 +739,17 @@ similarity
 | 项 | 结果 |
 |---|---|
 | 量化（3.1.1） | 体积 718 → 359 → 314 MB；R@1 58.57 → 58.46（FP16）→ 25.05（INT8 per-channel）。未达 ≤2% 要求，**冻结** |
-| 推理加速（3.1.4） | ONNX 双塔导出 → ORT-CPU 1.06×、ORT-CUDA 1.05×、**TensorRT 2.37×（batch1）/ 2.12×（batch32）** |
+| 推理加速（3.1.4） | ONNX 双塔导出；图像塔forward：ORT-CPU 1.062×/0.991×、ORT-CUDA 1.097×/0.933×、**TensorRT 2.366×/2.115×（batch1/32）**；均按同源JSON配对复算 |
 | 精度一致性 | ORT-FP32 **0.00pp**、TRT-FP16 **−0.43pp**（要求 ≤1pp） |
 | 4-bit / 剪枝 / KV Cache | 未做。KV Cache 对 CLIP 双塔无意义；剪枝需重训；4-bit 有 sm_120 兼容风险 |
 
 ### 6.2 结果存放
 
 见 [`docs/optimize/README.md`](../optimize/README.md) 第三节——逐个文件说明每张报告表该用哪个 JSON。
+
+2026-10-25 杜军博的统一交付在 [exp3_inference_acceleration_20261025](../../evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)，包含凭证快照、派生表、9张中文PNG/PDF/SVG及历史132查询指标复算。用户认可沿用训练机结果，本轮没有新增GPU推理。934条双塔精度、图像塔速度与132历史查询是三种独立口径；缺少TRT分类别损失和整系统延迟，不作对应改善声明。
+
+当前流程与成员任务以[实验三流程与分工](../流程与交接/实验三流程与分工.md)及[杜军博任务交付](../流程与交接/实验三杜军博任务交付.md)为准。现场演示/录屏需本人在训练机操作，正式Typst/PDF由报告成员整合。
 
 ## 7. 前后端开发（实验 4）
 
