@@ -1,0 +1,67 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "tower": "visual",
+  "precision": "fp32",
+  "onnx": "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp32.onnx",
+  "provider": "CPUExecutionProvider",
+  "torch_threads": 4,
+  "cpu_count": 8,
+  "method": {
+    "warmup": 10,
+    "metric": "median",
+    "scope": "仅模型 forward，不含预处理/后处理",
+    "fairness": "同硬件对比：PyTorch-CPU vs ORT-CPU"
+  },
+  "results": [
+    {
+      "batch": 1,
+      "torch": {
+        "batch": 1,
+        "iters": 50,
+        "median_ms": 131.65,
+        "mean_ms": 133.18,
+        "p90_ms": 146.89,
+        "throughput_per_s": 7.6
+      },
+      "ort": {
+        "batch": 1,
+        "iters": 50,
+        "median_ms": 81.28,
+        "mean_ms": 80.83,
+        "p90_ms": 84.07,
+        "throughput_per_s": 12.3,
+        "provider": "CPUExecutionProvider"
+      },
+      "speedup": 1.62,
+      "latency_change_pct": -38.26,
+      "throughput_change_pct": 61.84,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": true
+    },
+    {
+      "batch": 32,
+      "torch": {
+        "batch": 32,
+        "iters": 50,
+        "median_ms": 4068.12,
+        "mean_ms": 4067.94,
+        "p90_ms": 4139.07,
+        "throughput_per_s": 7.9
+      },
+      "ort": {
+        "batch": 32,
+        "iters": 50,
+        "median_ms": 2492.37,
+        "mean_ms": 2494.51,
+        "p90_ms": 2553.04,
+        "throughput_per_s": 12.8,
+        "provider": "CPUExecutionProvider"
+      },
+      "speedup": 1.632,
+      "latency_change_pct": -38.73,
+      "throughput_change_pct": 62.03,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": true
+    }
+  ]
+}

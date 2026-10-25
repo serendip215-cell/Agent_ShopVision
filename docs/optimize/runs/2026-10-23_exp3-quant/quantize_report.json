@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-10-23_exp3-quant",
+  "source_checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+  "source_ckpt_mb": 2100.85,
+  "note": "fp32w 为纯权重基准（100%）；原始 ckpt 含优化器动量不可用。官方 create_model() 默认把权重转成 FP16，故 fp32w/int8 均先 float() 转回 FP32。int8 为动态量化，只覆盖 nn.Linear；Embedding/LayerNorm/patch-embed 不量化，故降幅小于理论 75%。",
+  "results": [
+    {
+      "mode": "fp32w",
+      "params": 188262913,
+      "bytes": 753186618,
+      "mb": 718.29,
+      "file": "data/optimize/2026-10-23_exp3-quant/quantized/epoch3_fp32w.pt"
+    },
+    {
+      "mode": "fp16",
+      "params": 188262913,
+      "bytes": 376660437,
+      "mb": 359.21,
+      "file": "data/optimize/2026-10-23_exp3-quant/quantized/epoch3_fp16.pt"
+    },
+    {
+      "mode": "int8",
+      "params": 188262913,
+      "bytes": 329122901,
+      "mb": 313.88,
+      "file": "data/optimize/2026-10-23_exp3-quant/quantized/epoch3_int8.pt"
+    }
+  ]
+}

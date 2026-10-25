@@ -1,0 +1,90 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "tower": "visual",
+  "device": "cuda",
+  "precision": "fp16",
+  "onnx": "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp16.onnx",
+  "provider": "CUDAExecutionProvider",
+  "graph_optimization_level": "all",
+  "ort_intra_op_threads": "auto",
+  "torch_threads": 4,
+  "cpu_count": 8,
+  "method": {
+    "warmup": 10,
+    "metric": "median",
+    "scope": "仅模型 forward，不含预处理/后处理",
+    "fairness": "同硬件对比：PyTorch-CPU vs ORT-CPU"
+  },
+  "results": [
+    {
+      "batch": 1,
+      "torch": {
+        "batch": 1,
+        "iters": 20,
+        "median_ms": 4.98,
+        "mean_ms": 5.0,
+        "p90_ms": 5.21,
+        "throughput_per_s": 200.8,
+        "device": "cuda",
+        "precision": "fp16"
+      },
+      "ort": {
+        "batch": 1,
+        "iters": 20,
+        "median_ms": 4.54,
+        "mean_ms": 5.37,
+        "p90_ms": 6.47,
+        "throughput_per_s": 220.5,
+        "provider": "CUDAExecutionProvider",
+        "actual_providers": [
+          "CUDAExecutionProvider",
+          "CPUExecutionProvider"
+        ],
+        "provider_ok": true,
+        "graph_optimization_level": "all",
+        "intra_op_threads": "auto",
+        "precision": "fp16"
+      },
+      "speedup": 1.097,
+      "latency_change_pct": -8.84,
+      "throughput_change_pct": 9.81,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": false
+    },
+    {
+      "batch": 32,
+      "torch": {
+        "batch": 32,
+        "iters": 20,
+        "median_ms": 50.9,
+        "mean_ms": 51.18,
+        "p90_ms": 52.27,
+        "throughput_per_s": 628.7,
+        "device": "cuda",
+        "precision": "fp16"
+      },
+      "ort": {
+        "batch": 32,
+        "iters": 20,
+        "median_ms": 54.55,
+        "mean_ms": 54.26,
+        "p90_ms": 55.17,
+        "throughput_per_s": 586.6,
+        "provider": "CUDAExecutionProvider",
+        "actual_providers": [
+          "CUDAExecutionProvider",
+          "CPUExecutionProvider"
+        ],
+        "provider_ok": true,
+        "graph_optimization_level": "all",
+        "intra_op_threads": "auto",
+        "precision": "fp16"
+      },
+      "speedup": 0.933,
+      "latency_change_pct": 7.17,
+      "throughput_change_pct": -6.7,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": false
+    }
+  ]
+}

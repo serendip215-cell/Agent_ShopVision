@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-10-23_exp3-quant",
+  "quant": "int8-text",
+  "model_tag": "ViT-B-16+epoch3.pt@int8-text",
+  "device": "cpu",
+  "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+  "dataset": "data/processed_data_retrieval/datasets/ShopVision",
+  "n_texts": 934,
+  "n_images": 934,
+  "batch_size": 32,
+  "candidate_pool": 934,
+  "elapsed_s": 156.3,
+  "scores": {
+    "r1": 8.8865,
+    "r5": 27.5161,
+    "r10": 41.5418,
+    "mean_recall": 25.9815
+  },
+  "notes": [
+    "文搜图 top-10，候选池 = test 934 条，与实验二同一口径。",
+    "quant=none 走官方默认加载（create_model 会把权重转 FP16），实际为 FP16。",
+    "quant=int8 为 CPU 动态量化，只能与 CPU 口径的延迟对比。"
+  ]
+}

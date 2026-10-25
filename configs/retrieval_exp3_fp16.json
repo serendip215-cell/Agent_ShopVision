@@ -1,0 +1,36 @@
+{
+  "build": {
+    "input_dir": "data/processed_data_cleaning",
+    "output_dir": "data/index_data_exp3_fp16",
+    "categories": "",
+    "model_name": "ViT-B-16",
+    "model_download_root": "models/chinese_clip",
+    "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+    "quant": "fp16",
+    "batch_size": 16,
+    "device": "cuda",
+    "use_modelscope": false,
+    "overwrite": false
+  },
+  "search": {
+    "index_dir": "data/index_data_exp3_fp16",
+    "category": "",
+    "top_k": 5,
+    "candidate_k": 0,
+    "image_weight": 0.7,
+    "text_weight": 0.3,
+    "image_to_image_weight": 0.5,
+    "text_to_image_weight": 0.3,
+    "text_to_description_weight": 0.2,
+    "product_type": "",
+    "sub_type": "",
+    "color": "",
+    "material": "",
+    "model_name": "",
+    "model_download_root": "",
+    "checkpoint": "",
+    "quant": "fp16",
+    "device": "cuda",
+    "use_modelscope": false
+  }
+}

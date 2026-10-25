@@ -1,0 +1,100 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "tower": "visual",
+  "precision": "fp32",
+  "onnx": "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp32.onnx",
+  "provider": "CPUExecutionProvider",
+  "graph_optimization_level": "all",
+  "ort_intra_op_threads": "auto",
+  "torch_threads": 4,
+  "cpu_count": 8,
+  "method": {
+    "warmup": 10,
+    "metric": "median",
+    "scope": "仅模型 forward，不含预处理/后处理",
+    "fairness": "同硬件对比：PyTorch-CPU vs ORT-CPU"
+  },
+  "results": [
+    {
+      "batch": 1,
+      "torch": {
+        "batch": 1,
+        "iters": 20,
+        "median_ms": 133.62,
+        "mean_ms": 135.76,
+        "p90_ms": 147.98,
+        "throughput_per_s": 7.5
+      },
+      "ort": {
+        "batch": 1,
+        "iters": 20,
+        "median_ms": 82.49,
+        "mean_ms": 82.24,
+        "p90_ms": 84.4,
+        "throughput_per_s": 12.1,
+        "provider": "CPUExecutionProvider",
+        "graph_optimization_level": "all",
+        "intra_op_threads": "auto"
+      },
+      "speedup": 1.62,
+      "latency_change_pct": -38.27,
+      "throughput_change_pct": 61.33,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": true
+    },
+    {
+      "batch": 32,
+      "torch": {
+        "batch": 32,
+        "iters": 20,
+        "median_ms": 4075.11,
+        "mean_ms": 4082.71,
+        "p90_ms": 4113.3,
+        "throughput_per_s": 7.9
+      },
+      "ort": {
+        "batch": 32,
+        "iters": 20,
+        "median_ms": 2526.06,
+        "mean_ms": 2526.59,
+        "p90_ms": 2569.19,
+        "throughput_per_s": 12.7,
+        "provider": "CPUExecutionProvider",
+        "graph_optimization_level": "all",
+        "intra_op_threads": "auto"
+      },
+      "speedup": 1.613,
+      "latency_change_pct": -38.01,
+      "throughput_change_pct": 60.76,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": true
+    },
+    {
+      "batch": 64,
+      "torch": {
+        "batch": 64,
+        "iters": 10,
+        "median_ms": 8445.11,
+        "mean_ms": 8459.33,
+        "p90_ms": 8568.99,
+        "throughput_per_s": 7.6
+      },
+      "ort": {
+        "batch": 64,
+        "iters": 10,
+        "median_ms": 5095.6,
+        "mean_ms": 5091.04,
+        "p90_ms": 5137.79,
+        "throughput_per_s": 12.6,
+        "provider": "CPUExecutionProvider",
+        "graph_optimization_level": "all",
+        "intra_op_threads": "auto"
+      },
+      "speedup": 1.657,
+      "latency_change_pct": -39.66,
+      "throughput_change_pct": 65.79,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": true
+    }
+  ]
+}
