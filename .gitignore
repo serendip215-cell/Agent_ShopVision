@@ -36,3 +36,6 @@ __pycache__/
 # Chinese-CLIP 官方仓库克隆，只读使用，不纳入版本管理。
 /Chinese-CLIP/
 
+
+# JetBrains IDE ����
+/.idea/
