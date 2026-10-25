@@ -56,7 +56,9 @@
 | Chinese-CLIP 微调 | ✅ 完成 | 3 轮 / 705 步，test R@1 37.37→58.67、R@5 70.77→89.08；记录见 [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) |
 | 未清洗数据对照组 | ✅ 完成 | 同一配方只换数据（10,165 条），test R@1 **50.96**；据此拆分出"微调本身 +13.59 / 数据清洗 +7.71"，记录见 [`05-未清洗数据对照组.md`](docs/finetune/05-未清洗数据对照组.md) |
 | 微调权重接入检索 | ✅ 完成 | `data/index_data_finetuned/`，9 类 9,393 条，由 `epoch3.pt` 编码；旧索引 `data/index_data/` 保留作基线 |
-| 量化剪枝、前后端、Agent | ⏳ 未开始 | 实验 3–5 |
+| 实验三 推理加速（3.1.4） | ✅ 完成 | ONNX + TensorRT：**延迟 −57.7%**（batch1）/ −52.7%（batch32）、**吞吐 +136.6%** / +111.5%、**精度一致性 −0.43pp**；记录见 [`docs/optimize/`](docs/optimize/) |
+| 实验三 量化（3.1.1） | 🧊 冻结 | 6 种配置实测（FP32 / FP16 / INT8 / per-channel / 分塔），裸动态量化最好 −13.06pp，未达 ≤2% 要求；数据与文档保留在 [`docs/optimize/runs/`](docs/optimize/runs/) |
+| 前后端、Agent | ⏳ 未开始 | 实验 4–5 |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
 
@@ -272,7 +274,10 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 | [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) | **本次微调实验结果**：超参、valid 曲线、test 前后对比 |
 | [`docs/finetune/04-Chinese-CLIP补丁说明.md`](docs/finetune/04-Chinese-CLIP补丁说明.md) | 对官方 `Chinese-CLIP/` 的 3 处改动（含改前改后代码、重新施加步骤） |
 | [`docs/finetune/05-未清洗数据对照组.md`](docs/finetune/05-未清洗数据对照组.md) | **对照组实验**：未清洗数据直训，用于拆分"微调"与"数据清洗"的贡献 |
-| [`docs/流程与交接/实验三流程与分工.md`](docs/流程与交接/实验三流程与分工.md) | **实验三当前流程**：量化主线、训练机/非训练机分工、命令与验收清单 |
+| [`docs/流程与交接/实验三流程与分工.md`](docs/流程与交接/实验三流程与分工.md) | **实验三总流程**：任务切换（3.1.1 冻结 → 3.1.4 主线）、分工、命令与验收清单 |
+| [`docs/optimize/README.md`](docs/optimize/README.md) | **实验三执行记录索引**：结论、进度、文档编号规则 |
+| [`docs/optimize/02-推理加速（3.1.4）.md`](docs/optimize/02-推理加速（3.1.4）.md) | 主任务：指标、测量口径、导出/bench/一致性全套结果 |
+| [`scripts/optimize/README.md`](scripts/optimize/README.md) | 实验三 7 个脚本的用途、依赖版本与四个已知坑 |
 | [`docs/流程与交接/实验二模板要求.md`](docs/流程与交接/实验二模板要求.md) | 实验二的模板要求与训练机交接说明 |
 | [`data/raw_data/README.md`](data/raw_data/README.md) | 当前原始数据说明 |
 | [`data/raw_data/MUGE_data/README.md`](data/raw_data/MUGE_data/README.md) | 当前 MUGE 原始表说明 |
