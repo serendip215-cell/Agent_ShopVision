@@ -142,6 +142,10 @@ Agent_ShopVision/
 │   └── finetune/
 ├── models/chinese_clip/           # 预训练权重（不入库）
 ├── docs/
+│   ├── 课程材料/                   # 课程发的：开课 PDF、实验任务书、报告模板 .doc
+│   ├── 方案与指南/                 # 各阶段方案与使用指南（写于对应步骤之前）
+│   ├── 流程与交接/                 # 各实验的流程与分工、训练机交接说明
+│   ├── 交付材料/                   # 实验一/二的交付目录（报告 PDF、截图、下载链接、凭证）
 │   ├── typ/                       # 实验报告 Typst 源：.typ、refs.bib、figures/、figs/
 │   ├── scripts/                   # 报告编译脚本 build_typ.sh/.cmd、gen_figures.py
 │   ├── finetune/                  # 微调数据/训练/结果/补丁说明与入库凭证
@@ -268,17 +272,19 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 | [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) | **本次微调实验结果**：超参、valid 曲线、test 前后对比 |
 | [`docs/finetune/04-Chinese-CLIP补丁说明.md`](docs/finetune/04-Chinese-CLIP补丁说明.md) | 对官方 `Chinese-CLIP/` 的 3 处改动（含改前改后代码、重新施加步骤） |
 | [`docs/finetune/05-未清洗数据对照组.md`](docs/finetune/05-未清洗数据对照组.md) | **对照组实验**：未清洗数据直训，用于拆分"微调"与"数据清洗"的贡献 |
+| [`docs/流程与交接/实验三流程与分工.md`](docs/流程与交接/实验三流程与分工.md) | **实验三当前流程**：量化主线、训练机/非训练机分工、命令与验收清单 |
+| [`docs/流程与交接/实验二模板要求.md`](docs/流程与交接/实验二模板要求.md) | 实验二的模板要求与训练机交接说明 |
 | [`data/raw_data/README.md`](data/raw_data/README.md) | 当前原始数据说明 |
 | [`data/raw_data/MUGE_data/README.md`](data/raw_data/MUGE_data/README.md) | 当前 MUGE 原始表说明 |
 | [`data/raw_data/Amazon_data_translated/README.md`](data/raw_data/Amazon_data_translated/README.md) | 当前 Amazon 译文说明 |
-| [`docs/Chinese-CLIP介绍与使用指南.md`](docs/Chinese-CLIP介绍与使用指南.md) | 预留。检索阶段再读 |
-| [`docs/电商商品多模态推荐与上架Agent开发文档.md`](docs/电商商品多模态推荐与上架Agent开发文档.md) | 预留。实验 1–5 的总体设计 |
-| [`docs/MUGE商品属性大模型补全与描述生成方案.md`](docs/MUGE商品属性大模型补全与描述生成方案.md) | 预留。早期属性补全方案 |
-| [`docs/亚马逊数据中文化处理方案.md`](docs/亚马逊数据中文化处理方案.md) | 预留。Amazon 中文化方案 |
-| [`docs/Qwen2.5-VL-Ollama安装配置.md`](docs/Qwen2.5-VL-Ollama安装配置.md) | 预留。本地 Qwen 安装 |
+| [`docs/方案与指南/Chinese-CLIP介绍与使用指南.md`](docs/方案与指南/Chinese-CLIP介绍与使用指南.md) | 预留。检索阶段再读 |
+| [`docs/方案与指南/电商商品多模态推荐与上架Agent开发文档.md`](docs/方案与指南/电商商品多模态推荐与上架Agent开发文档.md) | 预留。实验 1–5 的总体设计 |
+| [`docs/方案与指南/MUGE商品属性大模型补全与描述生成方案.md`](docs/方案与指南/MUGE商品属性大模型补全与描述生成方案.md) | 预留。早期属性补全方案 |
+| [`docs/方案与指南/亚马逊数据中文化处理方案.md`](docs/方案与指南/亚马逊数据中文化处理方案.md) | 预留。Amazon 中文化方案 |
+| [`docs/方案与指南/Qwen2.5-VL-Ollama安装配置.md`](docs/方案与指南/Qwen2.5-VL-Ollama安装配置.md) | 预留。本地 Qwen 安装 |
 | [`data/raw_data/数据集训练阶段详细规划.md`](data/raw_data/数据集训练阶段详细规划.md) | 预留。早期阶段规划，正文仍是当时的 MUGE 三类 |
 
-`docs/` 里还有实验 1 任务书和开课 PDF、实验报告模板，以及已写好的实验一报告源（`docs/typ/实验一.typ`，编译方法见上文「实验报告编译」）。
+`docs/课程材料/` 里是开课 PDF、各实验任务书和报告模板；报告源在 `docs/typ/`（`实验一.typ`、`实验二.typ`，编译方法见上文「实验报告编译」）。目录怎么分、每份文档什么状态，见 [`docs/README.md`](docs/README.md)。
 
 ## 🚧 还没做
 

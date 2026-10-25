@@ -198,7 +198,8 @@ Agent_ShopVision/
 ├── scripts/
 │   └── build_retrieval_dataset.py    # 本次新增脚本（第 8 节第①步）
 └── docs/
-    └── Chinese-CLIP介绍与使用指南.md  # 本文档
+    └── 方案与指南/
+        └── Chinese-CLIP介绍与使用指南.md  # 本文档
 ```
 
 约定：

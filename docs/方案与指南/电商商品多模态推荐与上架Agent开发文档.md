@@ -170,7 +170,7 @@ data/
         └── image_quality_report.csv
 ```
 
-当前原始 MUGE 数据保存在 `data/raw_data/MUGE_data/`；正式处理数据统一按 `product_type` 分类到 `data/processed_data/<product_type>/`。当前正式数据包含多个类别目录；原始数据中的具体款式和可确认属性写入 `description`。每个类别目录包含自己的 `products.csv`、`images/`、`image_quality_report.csv` 和字段检查报告。 具体的大模型字段补全流程见 `docs/MUGE商品属性大模型补全与描述生成方案.md`。
+当前原始 MUGE 数据保存在 `data/raw_data/MUGE_data/`；正式处理数据统一按 `product_type` 分类到 `data/processed_data/<product_type>/`。当前正式数据包含多个类别目录；原始数据中的具体款式和可确认属性写入 `description`。每个类别目录包含自己的 `products.csv`、`images/`、`image_quality_report.csv` 和字段检查报告。 具体的大模型字段补全流程见 `docs/方案与指南/MUGE商品属性大模型补全与描述生成方案.md`。
 
 正式处理结果示例：
 
