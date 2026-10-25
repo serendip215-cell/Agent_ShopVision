@@ -1,0 +1,84 @@
+{
+  "run_id": "2026-10-23_exp3-quant",
+  "backend": "pytorch",
+  "quant": "int8-pc",
+  "model_tag": "ViT-B-16+epoch3.pt@int8-pc",
+  "device": "cpu",
+  "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+  "dataset": "data/processed_data_retrieval/datasets/ShopVision",
+  "n_texts": 934,
+  "candidate_pool": 934,
+  "elapsed_s": 96.8,
+  "note": "候选池为完整 934 条；分类别指标在完整候选池上计算后再按类别分组汇总。",
+  "global": {
+    "r1": 25.0535,
+    "r5": 56.1028,
+    "r10": 71.0921,
+    "mean_recall": 50.7495
+  },
+  "by_category": {
+    "包": {
+      "r1": 14.6341,
+      "r5": 43.9024,
+      "r10": 56.0976,
+      "mean_recall": 38.2114,
+      "n": 123
+    },
+    "厨房用品": {
+      "r1": 39.2857,
+      "r5": 71.4286,
+      "r10": 92.8571,
+      "mean_recall": 67.8571,
+      "n": 28
+    },
+    "女装": {
+      "r1": 62.5,
+      "r5": 87.5,
+      "r10": 90.625,
+      "mean_recall": 80.2083,
+      "n": 32
+    },
+    "家居用品": {
+      "r1": 52.1739,
+      "r5": 91.3043,
+      "r10": 100.0,
+      "mean_recall": 81.1594,
+      "n": 23
+    },
+    "手机壳": {
+      "r1": 34.4828,
+      "r5": 62.069,
+      "r10": 86.2069,
+      "mean_recall": 60.9196,
+      "n": 29
+    },
+    "水杯": {
+      "r1": 21.0256,
+      "r5": 50.2564,
+      "r10": 68.2051,
+      "mean_recall": 46.4957,
+      "n": 195
+    },
+    "男装": {
+      "r1": 27.451,
+      "r5": 66.6667,
+      "r10": 79.4118,
+      "mean_recall": 57.8432,
+      "n": 102
+    },
+    "运动服": {
+      "r1": 34.8485,
+      "r5": 69.697,
+      "r10": 81.8182,
+      "mean_recall": 62.1212,
+      "n": 66
+    },
+    "鞋": {
+      "r1": 21.131,
+      "r5": 50.8929,
+      "r10": 66.6667,
+      "mean_recall": 46.2302,
+      "n": 336
+    }
+  }
+}

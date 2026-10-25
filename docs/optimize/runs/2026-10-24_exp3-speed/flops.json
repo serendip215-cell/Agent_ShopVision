@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "checkpoint": "data/processed_data_retrieval/experiments/2026-10-18_bs32_lr1e-5/checkpoints/epoch3.pt",
+  "params": {
+    "visual": 86192640,
+    "text": 102070272,
+    "total": 188262912
+  },
+  "flops_forward_batch1": {
+    "visual": 33696251904,
+    "text": 8933670912,
+    "total": 42629922816
+  },
+  "flops_forward_human": {
+    "visual": "33.70G",
+    "text": "8.93G",
+    "total": "42.63G"
+  },
+  "input": {
+    "image": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "text_seq_len": 52
+  },
+  "scope": "MatMul/Conv only (no LayerNorm/GELU/Softmax/Embedding)",
+  "note": "FLOPs 只由模型结构决定，与 FP32/FP16/INT8 无关——量化改位宽，不改 FLOPs 计数。",
+  "elapsed_s": 15.1
+}

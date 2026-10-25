@@ -10,7 +10,9 @@
 | `eval_quant.py` | 在 934 条 test 上评某个精度的 R@K（PyTorch 侧） | 权重 + 数据集 | `data/optimize/<RUN>/accuracy/test_<quant>.json` |
 | `export_onnx.py` | 把单塔导出成 ONNX（先 fp32，可选在图层面转 fp16） | 微调权重 | `data/optimize/<RUN>/onnx/{visual,text}_{fp32,fp16}.onnx` |
 | `bench_runtime.py` | 延迟/吞吐基准：PyTorch vs ORT-CPU / ORT-CUDA / TensorRT | ONNX + 权重 | `data/optimize/<RUN>/bench/*.json` |
+| `bench_flops.py` | 两个塔的参数量与理论前向 FLOPs（报告表 1 的"计算量"） | 微调权重 | `data/optimize/<RUN>/bench/flops.json` |
 | `eval_onnx.py` | 两个 ONNX 塔跑 934 条，算 R@K 并与 PyTorch 基线比 | ONNX + 数据集 | `data/optimize/<RUN>/accuracy/onnx_*.json` |
+| `eval_by_category.py` | 按 9 个类别拆分的 R@K（误差热力图的数据源） | 权重 + 数据集 | `data/optimize/<RUN>/accuracy/by_category_<quant>.json` |
 
 所有脚本都会把 KB 级 JSON **自动复制**到 `docs/optimize/runs/<RUN_ID>/` 作为入库凭证；大产物留在 `data/optimize/`（该目录已 gitignore）。
 
@@ -28,6 +30,11 @@ python scripts/optimize/bench_runtime.py --device cuda --precision fp16 \
 
 python scripts/optimize/eval_onnx.py --precision fp16 \
   --provider TensorrtExecutionProvider                      # 精度一致性
+
+python scripts/optimize/bench_flops.py                      # 参数量 + FLOPs
+
+python scripts/optimize/eval_by_category.py --quant fp32 --device cpu       # 分类别（基线）
+python scripts/optimize/eval_by_category.py --quant int8-pc --device cpu    # 分类别（量化）
 
 # 3.1.1（已冻结，保留）
 python scripts/optimize/quantize.py --all
