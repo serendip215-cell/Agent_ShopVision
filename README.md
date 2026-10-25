@@ -37,8 +37,8 @@
 
 <p align="center">
   读取本地商品图片和结构化字段，做属性识别、检索推荐、标题描述生成。<br>
-  当前已完成实验 1 数据清洗、中文图文检索基线（含 FAISS 索引）和 Chinese-CLIP 微调（test R@1 37.4→58.7）；<br>
-  量化剪枝、前后端和 Agent 仍待继续。
+  当前已完成实验 1 数据清洗、中文图文检索基线（含 FAISS 索引）、Chinese-CLIP 微调（test R@1 37.4→58.7）和实验三推理加速（ONNX + TensorRT）；<br>
+  实验三报告、剪枝、前后端和 Agent 仍待继续。
 </p>
 
 ## ✨ 当前进度
@@ -293,8 +293,9 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 
 ## 🚧 还没做
 
+- 实验三报告（实验三.typ 与误差热力图尚未开始，数据与凭证已齐）
 - 检索融合权重调优（pilot 验证集已就绪，对比实验尚未做）
-- 量化与剪枝
+- 剪枝（可选；量化已实测并冻结，见上表）
 - FastAPI / React
 - Agent 工具调用和端到端评测
 

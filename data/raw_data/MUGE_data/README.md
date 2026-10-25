@@ -27,7 +27,7 @@ image_width
 
 缺失的品牌、颜色和材质保持为空，不根据图片或标题推断。
 
-上面是本目录原始表的 12 列。正式表在 `data/processed_data/`，是另一套 12 列：去掉 `main_image_id` 和 `domain_name`，加上 `description` 和 `is_readed`。MUGE 进入正式表时，`双肩包` 归为 `包`，`运动鞋` 归为 `鞋`。正式表已经和其他来源合并，中文检索样本还没生成。模型改写的描述在 `data/processed_data_cleaning/`，不在本目录。
+上面是本目录原始表的 12 列。正式表在 `data/processed_data/`，是另一套 12 列：去掉 `main_image_id` 和 `domain_name`，加上 `description` 和 `is_readed`。MUGE 进入正式表时，`双肩包` 归为 `包`，`运动鞋` 归为 `鞋`。正式表已经和其他来源合并。中文图文检索索引也已建好：`data/index_data/`（2026-10-18，预训练权重）和 `data/index_data_finetuned/`（微调权重 `epoch3.pt`），两套都是 9 类 9,393 条。模型改写的描述在 `data/processed_data_cleaning/`，不在本目录。
 
 ## `image_quality_report.csv` 字段
 
