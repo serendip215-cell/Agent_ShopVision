@@ -235,6 +235,10 @@ python scripts/retrieval/search_category_index.py "白色运动鞋" \
 | `docs/scripts/build_typ.sh` | Mac / Linux / Git Bash 编译入口 |
 | `docs/scripts/build_typ.cmd` | Windows 入口，双击即可运行 |
 | `docs/scripts/gen_figures.py` | 重新生成数据图（图 2–图 4） |
+| `docs/scripts/typ_to_word.py` | 把 `docs/typ/实验三.typ` 转成 cli-anything-word 的项目 JSON |
+| `docs/scripts/make_word_template.py` | 用 Word COM 造样式模板 `docs/typ/word/实验三报告-样式模板.docx`（字体、行距、缩进、表格线只能靠样式承载；该模板未入库，跑 Word 链前先生成一次） |
+| `docs/scripts/refine_word_report.py` | 用 Word COM 补 CLI 块模型表达不了的排版：封面填空线、三线表、粗体/上标、页码 |
+| `docs/scripts/check_word_vs_pdf.py` | 逐字比对 Word 版 PDF 与 Typst 版 PDF（相似度 < 0.995 即报错） |
 
 **Windows**：双击 `docs\scripts\build_typ.cmd`；或在 cmd / PowerShell 里：
 

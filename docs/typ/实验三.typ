@@ -1,12 +1,13 @@
 // AI全栈开发实验三：算法优化实验
 // 排版基准：沿用 docs/typ/实验二.typ（其逐项核对自 docs/typ/实验一.typ 与 Word 模板渲染图 figs/cover_template.png）：
-//   封面：校名/实验名 26pt 粗体（"AI" Times New Roman、"全栈开发实验"黑体，校名字间 13.2pt）；
+//   封面：校名（宋体）与实验名（"AI" Times New Roman、"全栈开发实验"黑体）均 26pt 粗体，校名字间 13.2pt；
 //         "题目：" 20pt、题目内容 22pt 粗体、252pt 固定宽下划线空白；
 //         组号/组员信息/时间 14pt 粗体，标签右对齐 189pt、空白线宽 234pt；
 //         组员表 14pt（表头粗体、学号 Times New Roman 粗体），全网格 0.5pt，
 //         总宽 410pt（列 112/99/198.5pt），单行行高约 31pt（模板 32pt）；仅题目与分工内容与实验二不同；
 //   正文：汉字小四宋体、英文 Times New Roman，行距 20 磅；
-//   章标题 14pt（本例 level1 用 SimHei，与实验二保持一致）、二级标题 12pt 粗体；
+//   章标题宋体 14pt 加粗、二级/三级标题 12pt 加粗（按课程模板 AI全栈开发实验报告模板-2026-3.doc，
+//   模板里章标题是宋体加粗；实验一/二 用的是黑体常规，本份按模板走）；
 //   图表中标题和文字字号均为五号（10.5pt），正文数据表为三线表。
 // 章节结构对应 docs/课程材料/AI全栈开发实验报告模板-2026-3.doc（题目：算法优化实验）：
 //   章标题「一、～七、」；三、实验内容与步骤下先列 3.1 模型优化、3.2 优化与部署验证
@@ -32,14 +33,19 @@
 // 只约束图片类图（表仍可跨页续排，避免大表被顶出版心）。
 #show figure.where(kind: image): it => block(breakable: false, it)
 #show cite: it => super(it)
+// 宋体没有粗体字面，Typst 会直接忽略 weight: "bold"（实测：加粗与常规的墨量完全相同，都是 0.122）。
+// 中文粗体改用描边做伪粗体，0.025em 是照 Word 渲染的宋体伪粗体标定的（Word 0.201，描边 0.02em 为 0.185、
+// 0.03em 为 0.216）。只影响本份：实验一/二 未改，仍是黑体常规。
+#let faux-bold = 0.025em
+#show strong: it => text(weight: "bold", stroke: faux-bold, it.body)
 
 // 标题：真实 heading（生成 PDF 书签大纲）；编号写在标题文本内（一、／3.5／3.5.1）。
 #show heading: it => {
   let sz = if it.level == 1 { 14pt } else { 12pt }
-  let wt = if it.level == 1 { "regular" } else { "bold" }
-  let fnt = if it.level == 1 { "SimHei" } else { "SimSun" }
+  let wt = "bold"
+  let fnt = "SimSun"
   v(if it.level == 1 { 13pt } else { 8pt })
-  par(first-line-indent: 0pt, text(size: sz, weight: wt, font: ("Times New Roman", fnt), it.body))
+  par(first-line-indent: 0pt, text(size: sz, weight: wt, stroke: faux-bold, font: ("Times New Roman", fnt), it.body))
   v(if it.level == 1 { 6pt } else { 3pt })
 }
 #let t5(body) = {
@@ -57,19 +63,19 @@
 
 #v(86pt)
 #align(center)[
-  #text(size: 26pt, font: ("Times New Roman", "SimHei"), weight: "bold")[西#h(13.2pt)安#h(13.2pt)邮#h(13.2pt)电#h(13.2pt)大#h(13.2pt)学]
+  #text(size: 26pt, font: ("Times New Roman", "SimSun"), stroke: faux-bold, weight: "bold")[西#h(13.2pt)安#h(13.2pt)邮#h(13.2pt)电#h(13.2pt)大#h(13.2pt)学]
 ]
 #v(79.5pt)
 #align(center)[
-  #text(size: 26pt, font: ("Times New Roman", "SimHei"), weight: "bold")[#text(font: "Times New Roman")[AI] 全栈开发实验]
+  #text(size: 26pt, font: ("Times New Roman", "SimHei"), stroke: faux-bold, weight: "bold")[#text(font: "Times New Roman")[AI] 全栈开发实验]
 ]
 #v(62.7pt)
 #pad(left: 92.6pt)[
   #grid(
     columns: (75pt, 335pt),
     align: (right + horizon, left + horizon),
-    [#text(size: 20pt, weight: "bold")[题目：]],
-    [#box(width: 335pt, height: 1.4em, stroke: (bottom: 0.5pt), inset: (x: 4pt, bottom: 2pt))[#align(center + horizon)[#text(size: 22pt, font: ("Times New Roman", "SimHei"), weight: "bold")[算法优化实验]]]],
+    [#text(size: 20pt, stroke: faux-bold, weight: "bold")[题目：]],
+    [#box(width: 335pt, height: 1.4em, stroke: (bottom: 0.5pt), inset: (x: 4pt, bottom: 2pt))[#align(center + horizon)[#text(size: 22pt, font: ("Times New Roman", "SimSun"), stroke: faux-bold, weight: "bold")[算法优化实验]]]],
   )
 ]
 #v(52pt)
@@ -77,8 +83,8 @@
   #grid(
     columns: (75pt, 335pt),
     align: (right + horizon, left + horizon),
-    [#text(size: 14pt, weight: "bold")[组#h(28.8pt)号：]],
-    [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[23]]]],
+    [#text(size: 14pt, stroke: faux-bold, weight: "bold")[组#h(28.8pt)号：]],
+    [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, stroke: faux-bold, weight: "bold")[23]]]],
   )
 ]
 #v(30pt)
@@ -86,7 +92,7 @@
   #grid(
     columns: (75pt, 335pt),
     align: (right + horizon, left + horizon),
-    [#text(size: 14pt, weight: "bold")[组员信息：]],
+    [#text(size: 14pt, stroke: faux-bold, weight: "bold")[组员信息：]],
     [],
   )
 ]
@@ -99,13 +105,13 @@
     align: center + horizon,
     stroke: 0.5pt,
     inset: (x: 5pt, y: 10.5pt),
-    table.header([#text(weight: "bold")[学号]], [#text(weight: "bold")[姓名]], [#text(weight: "bold")[分工]]),
-    [#text(weight: "bold")[2610321101]], [何朝杨], [实验三报告整合、排版与图表引用],
-    [#text(weight: "bold")[2610321103]], [杜军博], [推理加速评测复算与交付（速度精度验收、132 查询复算）],
-    [#text(weight: "bold")[2610321135]], [王陆洲], [模型导出与推理测量（ONNX、ORT/TRT 测速、FLOPs）],
-    [#text(weight: "bold")[2610320046]], [张梓萱], [训练数据与划分核验、成果核验与交付],
-    [#text(weight: "bold")[2610320033]], [刘凡思雨], [结果数据核对与模型/索引版本记录],
-    [#text(weight: "bold")[2610321168]], [秦鑫洋], [交付材料整理与报告校对],
+    table.header([#text(stroke: faux-bold, weight: "bold")[学号]], [#text(stroke: faux-bold, weight: "bold")[姓名]], [#text(stroke: faux-bold, weight: "bold")[分工]]),
+    [#text(stroke: faux-bold, weight: "bold")[2610321101]], [何朝杨], [实验三报告整合、排版与图表引用],
+    [#text(stroke: faux-bold, weight: "bold")[2610321103]], [杜军博], [推理加速评测复算与交付（速度精度验收、132 查询复算）],
+    [#text(stroke: faux-bold, weight: "bold")[2610321135]], [王陆洲], [模型导出与推理测量（ONNX、ORT/TRT 测速、FLOPs）],
+    [#text(stroke: faux-bold, weight: "bold")[2610320046]], [张梓萱], [训练数据与划分核验、成果核验与交付],
+    [#text(stroke: faux-bold, weight: "bold")[2610320033]], [刘凡思雨], [结果数据核对与模型/索引版本记录],
+    [#text(stroke: faux-bold, weight: "bold")[2610321168]], [秦鑫洋], [交付材料整理与报告校对],
   )
 ]
 #v(18pt)
@@ -113,8 +119,8 @@
   #grid(
     columns: (75pt, 335pt),
     align: (right + horizon, left + horizon),
-    [#text(size: 14pt, weight: "bold")[时#h(28.8pt)间：]],
-    [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, weight: "bold")[2026.10.25]]]],
+    [#text(size: 14pt, stroke: faux-bold, weight: "bold")[时#h(28.8pt)间：]],
+    [#box(width: 335pt, height: 1em, stroke: (bottom: 0.5pt), inset: (x: 0.5em))[#align(center + horizon)[#text(size: 14pt, stroke: faux-bold, weight: "bold")[2026.10.25]]]],
   )
 ]
 #pagebreak()

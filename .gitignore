@@ -33,9 +33,12 @@ __pycache__/
 /docs/typst/
 /docs/build/
 
+# Word 样式模板，由 docs/scripts/make_word_template.py 调用 Word COM 现场生成。
+/docs/typ/word/
+
 # Chinese-CLIP 官方仓库克隆，只读使用，不纳入版本管理。
 /Chinese-CLIP/
 
 
-# JetBrains IDE ����
+# JetBrains IDE ����
 /.idea/

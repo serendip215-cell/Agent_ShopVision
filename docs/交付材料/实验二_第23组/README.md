@@ -3,7 +3,7 @@
 在实验一的数据基座上，本实验完成中文图文检索模型的选型、微调、评测与检索接入。模型为 Chinese-CLIP ViT-B-16 双塔（视觉塔 ViT-B-16 + 文本塔 RoBERTa-wwm-ext-base-chinese），单卡 8GB 微调 3 轮后 test R@1 从 37.37 提升到 **58.67**。
 
 - 项目仓库：<https://github.com/serendip215-cell/Agent_ShopVision>
-- 全部代码、报告源文件与训练凭证都在仓库里；报告用 `docs\scripts\build_typ.cmd 实验二` 一条命令编译
+- 全部代码、报告源文件与训练凭证都在仓库里
 
 ## 一、交付清单
 

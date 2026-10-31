@@ -3,7 +3,6 @@
 在实验二微调得到的 Chinese-CLIP 双塔权重上，本实验完成 ONNX 导出（图像塔固定 224×224、文本塔 batch 与序列长度动态）、FP32→FP16 图层面转换，接入 ONNX Runtime 的 CPU/CUDA 执行提供器与 TensorRT 后端，在同一训练机上配对测速，并用 934 条文搜图核对精度一致性。**TensorRT-FP16 把图像塔 batch=1 中位延迟从 4.59 ms 降到 1.94 ms（2.366 倍）、batch=32 从 50.43 ms 降到 23.84 ms（2.115 倍）；双塔 R@1 相对同源 FP32 基线净差 −0.4283 个百分点。** 本轮主线是任务书 3.1.4 推理加速，兼顾 3.2.1 计算图优化；量化/剪枝/蒸馏均不在本轮主线。
 
 - 项目仓库：<https://github.com/serendip215-cell/Agent_ShopVision>
-- 换成报告源文件：`docs/typ/实验三.typ`；编译：`docs\scripts\build_typ.cmd 实验三`（输出到 `docs/build/`）
 - 完整结果目录：`evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/`（本目录是其交付副本）
 
 ## 一、交付清单
@@ -11,9 +10,10 @@
 | 文件 | 说明 |
 |---|---|
 | `实验三实验报告 第23组.pdf` | 实验报告正文（19 页） |
+| `实验三实验报告 第23组.docx` | 同一份报告的 Word 版（21 页，正文与 PDF 逐字一致，差异仅来自 Word 自带断行。字体按课程模板：章标题宋体 14pt 加粗、封面校名宋体、正文宋体/Times 12pt、代码与行内代码 Consolas 9pt 非斜体；封面的标签右缘与取值中心、三条填空线位置都与 PDF 对齐；编号列表的正文列也与 PDF 对齐；正文里 22 处图/表/代码交叉引用与 12 处文献引用号都是可点击跳转的内部超链接） |
 | `README.md` | 本文件：使用方法、特别解释、关键结果、仓库地址 |
-| `推理加速流水线图.png` / `.svg` | 报告图 1 的流水线（CeTZ 矢量图，源文件 `docs/typ/figures/acceleration_pipeline.typ`） |
-| `结果图表/` | 9 张中文结果图的 PNG/PDF/SVG 与逐图口径 `figure.json`，用法见 `图表说明.md` |
+| `推理加速流水线图.png` | 报告图 1 的推理加速与双塔 ONNX 部署流水线（450 DPI RGB PNG） |
+| `结果图表/` | 9 张中文结果图的 PNG/PDF 与逐图口径 `figure.json`，用法见 `图表说明.md` |
 | `测量凭证/` | 派生表格、判定汇总、运行元数据、源输入快照、132 条历史查询复算、逐文件说明 |
 | `模型与数据来源说明.txt` | 权重/数据从哪来、为什么 ONNX 与 TensorRT 引擎不随包交付 |
 
