@@ -172,3 +172,71 @@
   year        = {2022},
   url         = {https://openreview.net/forum?id=nZeVKeeFYf9}
 }
+
+@misc{onnx,
+  title       = {Open Neural Network Exchange ({ONNX})},
+  author      = {{ONNX Open Source Community}},
+  year        = {2026},
+  url         = {https://onnx.ai/},
+  note        = {跨框架模型交换格式与 opset 规范，访问日期 2026-10-25}
+}
+
+@misc{onnxruntime,
+  title       = {{ONNX Runtime}: Performance Tuning},
+  author      = {{Microsoft Corporation}},
+  year        = {2026},
+  url         = {https://onnxruntime.ai/docs/performance/},
+  note        = {图优化等级 ORT\_ENABLE\_ALL、执行提供器与线程配置说明，访问日期 2026-10-25}
+}
+
+@misc{tensorrt,
+  title       = {{NVIDIA TensorRT}: Best Practices},
+  author      = {{NVIDIA Corporation}},
+  year        = {2026},
+  url         = {https://docs.nvidia.com/deeplearning/tensorrt/latest/performance/best-practices.html},
+  note        = {层融合、FP16 精度与引擎缓存配置，任务书 3.1.4 的图像塔加速路线，访问日期 2026-10-25}
+}
+
+@inproceedings{ptq-jacob,
+  title       = {Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference},
+  author      = {Jacob, Benoit and Kligys, Skirmantas and Chen, Bo and Zhu, Menglong and Tang, Matthew and Howard, Andrew and Adam, Hartwig and Kalenichenko, Dmitry},
+  booktitle   = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages       = {2704--2713},
+  year        = {2018},
+  doi         = {10.1109/CVPR.2018.00286}
+}
+
+@article{quant-survey,
+  title       = {A Survey of Quantization Methods for Efficient Neural Network Inference},
+  author      = {Gholami, Amir and Kim, Sehoon and Dong, Zhen and Yao, Zhewei and Mahoney, Michael W. and Keutzer, Kurt},
+  journal     = {arXiv preprint arXiv:2103.13630},
+  year        = {2021},
+  url         = {https://arxiv.org/abs/2103.13630},
+  note        = {量化的误差来源与粒度（per-tensor/per-channel）综述}
+}
+
+@misc{distillation,
+  title       = {Distilling the Knowledge in a Neural Network},
+  author      = {Hinton, Geoffrey and Vinyals, Oriol and Dean, Jeff},
+  year        = {2015},
+  eprint      = {1503.02531},
+  archivePrefix = {arXiv},
+  url         = {https://arxiv.org/abs/1503.02531},
+  note        = {知识蒸馏，实验三 3.1.3 的可选方向（本轮未做）}
+}
+
+@inproceedings{fp16-training,
+  title       = {Mixed Precision Training},
+  author      = {Micikevicius, Paulius and Narang, Sharan and Alben, Jonah and Diamos, Gregory and Elsen, Erich and Garcia, David and Ginsburg, Boris and Houston, Michael and Kuchaiev, Oleksii and Venkatesh, Ganesh and Wu, Hao},
+  booktitle   = {International Conference on Learning Representations (ICLR)},
+  year        = {2018},
+  url         = {https://openreview.net/forum?id=r1gs9JgRZ}
+}
+
+@misc{openvino,
+  title       = {{OpenVINO} Model Optimization Guide},
+  author      = {{Intel Corporation}},
+  year        = {2026},
+  url         = {https://docs.openvino.ai/},
+  note        = {任务书 3.2.2 的 CPU 加速可选路线，本轮未实测，访问日期 2026-10-25}
+}

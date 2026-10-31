@@ -1,0 +1,5 @@
+﻿object,precision,size_mib,source
+text_onnx,fp32,389.58,export_fp32
+text_onnx,fp16,194.97,export_fp16
+pure_weights,fp32w,718.2947330474854,weight_sizes
+pure_weights,fp16,359.2113847732544,weight_sizes

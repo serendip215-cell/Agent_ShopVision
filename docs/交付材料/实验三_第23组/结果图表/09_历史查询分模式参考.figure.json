@@ -1,0 +1,48 @@
+{
+  "claim": "历史AI试点检索指标可复算，但不能证明本轮TRT端到端效果。",
+  "figure_role": "reference",
+  "source_paths": [
+    "evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/reference_retrieval/metrics_by_mode.csv"
+  ],
+  "model": "Chinese-CLIP ViT-B/16 + RoBERTa，epoch3",
+  "scope": "仅历史排序复算；未调用微调/TRT查询编码器；AI标签不是独立人工真值。",
+  "evidence_mode": "accepted_measurement_replay",
+  "sample_definition": "模型级934查询/934候选；速度次数见runtime_comparison.csv；历史查询另标132条。",
+  "statistic": "速度中位数/记录吞吐；精度 R@K；按每张图说明取值",
+  "uncertainty": "单轮记录，无独立重复试验置信区间；未绘制误差线。",
+  "transformations": "无额外筛选",
+  "randomness": "无随机抽样、无平滑、无插补",
+  "theme_name": "nature-accessible",
+  "color_roles": {
+    "torch": "#0072B2",
+    "engine": "#009E73",
+    "trt": "#D55E00",
+    "cpu": "#009E73",
+    "cuda": "#CC79A7",
+    "text": "#56B4E9",
+    "grey": "#6B7280"
+  },
+  "font": "Microsoft YaHei",
+  "design_brief": {
+    "width_mm": 183,
+    "height_mm": 73.66,
+    "layout": "single",
+    "message": "历史AI试点检索指标可复算，但不能证明本轮TRT端到端效果。"
+  },
+  "exports": {
+    "png_dpi": 450,
+    "png_mode": "RGB",
+    "vector": [
+      "pdf",
+      "svg"
+    ]
+  },
+  "audit": {
+    "missing_glyphs": "PASS",
+    "title_and_footer_bounds": "PASS",
+    "source_binding": "PASS",
+    "visual_review": "PASS",
+    "visual_review_method": "AI inspection: all-nine PNG contact sheet, full-size recall PNG, and PDF dashboard rasterized by pdftoppm; no clipping or legend occlusion observed.",
+    "reviewed_at": "2026-10-25T20:11:10+08:00"
+  }
+}

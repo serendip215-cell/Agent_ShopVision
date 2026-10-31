@@ -1,0 +1,44 @@
+实验三模型与数据来源说明（第23组）
+========================================
+本轮不提供大文件下载；下面每一项都能从实验一/二的交付材料或仓库脚本重新得到。
+
+
+1. 微调权重 epoch3.pt（本实验的输入，约 2.2 GB）
+   实验二清洗数据微调组第 3 轮的 checkpoint，含优化器动量。
+   保存在训练机本地：
+     data/processed_data_retrieval/experiments/<RUN_ID>/checkpoints/epoch3.pt
+   体量大，不随包交付、不提供下载。
+   不下载不影响复现：按实验二交付材料 README「怎么用」第 5 步约 6 分钟可重新训练得到。
+   实验二的 test R@1 为 58.67（官方脚本口径）；本实验精度基线另用同源自研 FP32 的
+   58.5653，两者相差约 0.1pp，来自特征传递与 top-k 实现差异，报告里不混用。
+
+
+2. Chinese-CLIP 预训练权重 clip_cn_vit-b-16.pt（约 719 MB）
+   训练起点，放到 models/chinese_clip/。
+   - Hugging Face:  https://huggingface.co/OFA-Sys/chinese-clip-vit-base-patch16
+   - 魔搭 ModelScope（国内推荐）:  https://www.modelscope.cn/models/AI-ModelScope/chinese-clip-vit-base-patch16
+   详见实验二交付材料 `模型与数据下载链接.txt`。
+
+
+3. 测试数据（934 条文搜图，候选池同为 934）
+   实验一产出的 9 类 test 划分图文对，与实验二评测口径完全一致，
+   LMDB 与划分方式见实验一/实验二交付材料。
+   另保留旧索引的 132 条 AI 试点查询（1325 条相关性标签）用于历史端到端参考——
+   它与 934 条不是同一个测试集，不能混算，也不能用来证明本轮 TensorRT 的端到端收益。
+
+
+4. 本实验的中间产物（随包不交付，可在训练机重建）
+   - 双塔 ONNX（FP32/FP16）与 TensorRT 引擎缓存：均在 .gitignore 内，
+     重建命令见 `docs/流程与交接/实验三杜军博任务交付.md` 第 5.2 节，
+     或仓库 `scripts/optimize/export_onnx.py`、`bench_runtime.py`。
+     TensorRT 首次构建引擎需 5–20 分钟，稳态延迟不含这段冷启动时间。
+   - 注意：`export_report_<precision>.json` 会被同一 run 中最后导出的塔覆盖，
+     本包中 389.58/194.97 MiB 只是文本塔单塔体积，不能当双塔 ONNX 总大小。
+
+
+5. 复算与绘图环境（本包全部图表由此产生，只需轻量依赖）
+   Windows 11 + Python 3.12.13；numpy、matplotlib、Pillow 即可，
+   不要求 torch / onnxruntime / TensorRT。Linux 需另装 Noto Sans CJK SC 字体。
+   安装与运行命令见本目录 README 第三节。
+   源输入快照与 SHA-256 记录在 `测量凭证/inputs/source_manifest.json`，
+   跨系统比较文本请用其中的 sha256_utf8_lf。

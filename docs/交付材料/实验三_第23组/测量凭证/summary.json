@@ -1,0 +1,378 @@
+{
+  "run_id": "exp3_inference_acceleration_20261025",
+  "generated_at": "2026-10-25T20:03:36+08:00",
+  "source_mode": "accepted_measurement_replay",
+  "new_model_inference_executed": false,
+  "dataset_previously_verified": true,
+  "main_scope": "visual_forward_speed_and_dual_encoder_recall_consistency",
+  "n_texts": 934,
+  "candidate_pool": 934,
+  "thresholds": {
+    "latency_reduction_pct": 40,
+    "throughput_gain_pct": 50,
+    "accuracy_delta_pp": 1,
+    "graph_speedup": 1.2,
+    "graph_accuracy_delta_pp": 0.5
+  },
+  "primary_group": "trt",
+  "runtime": [
+    {
+      "group": "cpu",
+      "backend": "ORT-CPU",
+      "device": "cpu",
+      "precision": "fp32",
+      "batch": 1,
+      "torch_median_ms": 90.56,
+      "engine_median_ms": 85.24,
+      "torch_p90_ms": 92.01,
+      "engine_p90_ms": 89.74,
+      "torch_throughput_per_s": 11.0,
+      "engine_throughput_per_s": 11.7,
+      "speedup": 1.0624120131393713,
+      "latency_reduction_pct": 5.874558303886934,
+      "throughput_gain_pct": 6.363636363636349,
+      "latency_pass": false,
+      "throughput_pass": false,
+      "warmup": 10,
+      "torch_iters": 20,
+      "engine_iters": 20,
+      "source": "runtime_cpu"
+    },
+    {
+      "group": "cpu",
+      "backend": "ORT-CPU",
+      "device": "cpu",
+      "precision": "fp32",
+      "batch": 32,
+      "torch_median_ms": 2532.61,
+      "engine_median_ms": 2554.38,
+      "torch_p90_ms": 2560.49,
+      "engine_p90_ms": 2581.17,
+      "torch_throughput_per_s": 12.6,
+      "engine_throughput_per_s": 12.5,
+      "speedup": 0.9914773839444405,
+      "latency_reduction_pct": -0.8595875401265829,
+      "throughput_gain_pct": -0.7936507936507908,
+      "latency_pass": false,
+      "throughput_pass": false,
+      "warmup": 10,
+      "torch_iters": 20,
+      "engine_iters": 20,
+      "source": "runtime_cpu"
+    },
+    {
+      "group": "cuda",
+      "backend": "ORT-CUDA",
+      "device": "cuda",
+      "precision": "fp16",
+      "batch": 1,
+      "torch_median_ms": 4.98,
+      "engine_median_ms": 4.54,
+      "torch_p90_ms": 5.21,
+      "engine_p90_ms": 6.47,
+      "torch_throughput_per_s": 200.8,
+      "engine_throughput_per_s": 220.5,
+      "speedup": 1.0969162995594715,
+      "latency_reduction_pct": 8.835341365461858,
+      "throughput_gain_pct": 9.810756972111555,
+      "latency_pass": false,
+      "throughput_pass": false,
+      "warmup": 10,
+      "torch_iters": 20,
+      "engine_iters": 20,
+      "source": "runtime_cuda"
+    },
+    {
+      "group": "cuda",
+      "backend": "ORT-CUDA",
+      "device": "cuda",
+      "precision": "fp16",
+      "batch": 32,
+      "torch_median_ms": 50.9,
+      "engine_median_ms": 54.55,
+      "torch_p90_ms": 52.27,
+      "engine_p90_ms": 55.17,
+      "torch_throughput_per_s": 628.7,
+      "engine_throughput_per_s": 586.6,
+      "speedup": 0.9330889092575619,
+      "latency_reduction_pct": -7.170923379174843,
+      "throughput_gain_pct": -6.696357563225708,
+      "latency_pass": false,
+      "throughput_pass": false,
+      "warmup": 10,
+      "torch_iters": 20,
+      "engine_iters": 20,
+      "source": "runtime_cuda"
+    },
+    {
+      "group": "trt",
+      "backend": "TensorRT",
+      "device": "cuda",
+      "precision": "fp16",
+      "batch": 1,
+      "torch_median_ms": 4.59,
+      "engine_median_ms": 1.94,
+      "torch_p90_ms": 4.85,
+      "engine_p90_ms": 1.98,
+      "torch_throughput_per_s": 217.9,
+      "engine_throughput_per_s": 515.5,
+      "speedup": 2.365979381443299,
+      "latency_reduction_pct": 57.73420479302832,
+      "throughput_gain_pct": 136.57641119779714,
+      "latency_pass": true,
+      "throughput_pass": true,
+      "warmup": 10,
+      "torch_iters": 20,
+      "engine_iters": 20,
+      "source": "runtime_trt"
+    },
+    {
+      "group": "trt",
+      "backend": "TensorRT",
+      "device": "cuda",
+      "precision": "fp16",
+      "batch": 32,
+      "torch_median_ms": 50.43,
+      "engine_median_ms": 23.84,
+      "torch_p90_ms": 51.25,
+      "engine_p90_ms": 25.01,
+      "torch_throughput_per_s": 634.5,
+      "engine_throughput_per_s": 1342.1,
+      "speedup": 2.1153523489932886,
+      "latency_reduction_pct": 52.72655165576046,
+      "throughput_gain_pct": 111.52088258471235,
+      "latency_pass": true,
+      "throughput_pass": true,
+      "warmup": 10,
+      "torch_iters": 20,
+      "engine_iters": 20,
+      "source": "runtime_trt"
+    }
+  ],
+  "accuracy": [
+    {
+      "group": "baseline",
+      "backend": "PyTorch FP32",
+      "n_texts": 934,
+      "candidate_pool": 934,
+      "r1": 58.5653,
+      "r5": 89.2934,
+      "r10": 96.6809,
+      "mean_recall": 81.5132,
+      "delta_r1_pp": 0.0,
+      "delta_r5_pp": 0.0,
+      "delta_r10_pp": 0.0,
+      "delta_mean_recall_pp": 0.0,
+      "accuracy_pass": true,
+      "graph_accuracy_pass": true,
+      "source": "baseline"
+    },
+    {
+      "group": "cpu",
+      "backend": "ORT-CPU FP32",
+      "n_texts": 934,
+      "candidate_pool": 934,
+      "r1": 58.5653,
+      "delta_r1_pp": 0.0,
+      "r5": 89.2934,
+      "delta_r5_pp": 0.0,
+      "r10": 96.6809,
+      "delta_r10_pp": 0.0,
+      "mean_recall": 81.5132,
+      "delta_mean_recall_pp": 0.0,
+      "accuracy_pass": true,
+      "graph_accuracy_pass": true,
+      "source": "accuracy_cpu"
+    },
+    {
+      "group": "trt",
+      "backend": "TensorRT FP16",
+      "n_texts": 934,
+      "candidate_pool": 934,
+      "r1": 58.137,
+      "delta_r1_pp": -0.4283000000000001,
+      "r5": 89.2934,
+      "delta_r5_pp": 0.0,
+      "r10": 96.5739,
+      "delta_r10_pp": -0.10699999999999932,
+      "mean_recall": 81.3348,
+      "delta_mean_recall_pp": -0.17839999999999634,
+      "accuracy_pass": true,
+      "graph_accuracy_pass": true,
+      "source": "accuracy_trt"
+    }
+  ],
+  "model_scale": [
+    {
+      "tower": "visual",
+      "params": 86192640,
+      "flops": 33696251904
+    },
+    {
+      "tower": "text",
+      "params": 102070272,
+      "flops": 8933670912
+    },
+    {
+      "tower": "total",
+      "params": 188262912,
+      "flops": 42629922816
+    }
+  ],
+  "model_sizes": [
+    {
+      "object": "text_onnx",
+      "precision": "fp32",
+      "size_mib": 389.58,
+      "source": "export_fp32"
+    },
+    {
+      "object": "text_onnx",
+      "precision": "fp16",
+      "size_mib": 194.97,
+      "source": "export_fp16"
+    },
+    {
+      "object": "pure_weights",
+      "precision": "fp32w",
+      "size_mib": 718.2947330474854,
+      "source": "weight_sizes"
+    },
+    {
+      "object": "pure_weights",
+      "precision": "fp16",
+      "size_mib": 359.2113847732544,
+      "source": "weight_sizes"
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "task": "3.1.4",
+      "metric": "延迟降低 batch=1",
+      "value": 57.73420479302832,
+      "operator": ">=",
+      "threshold": 40,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "task": "3.1.4",
+      "metric": "吞吐提升 batch=1",
+      "value": 136.57641119779714,
+      "operator": ">=",
+      "threshold": 50,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "task": "3.2.1",
+      "metric": "计算图加速比 batch=1",
+      "value": 2.365979381443299,
+      "operator": ">=",
+      "threshold": 1.2,
+      "unit": "倍",
+      "passed": true
+    },
+    {
+      "task": "3.1.4",
+      "metric": "延迟降低 batch=32",
+      "value": 52.72655165576046,
+      "operator": ">=",
+      "threshold": 40,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "task": "3.1.4",
+      "metric": "吞吐提升 batch=32",
+      "value": 111.52088258471235,
+      "operator": ">=",
+      "threshold": 50,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "task": "3.2.1",
+      "metric": "计算图加速比 batch=32",
+      "value": 2.1153523489932886,
+      "operator": ">=",
+      "threshold": 1.2,
+      "unit": "倍",
+      "passed": true
+    },
+    {
+      "task": "3.1.4",
+      "metric": "模型级 R@1 绝对差",
+      "value": 0.4283000000000001,
+      "operator": "<=",
+      "threshold": 1,
+      "unit": "pp",
+      "passed": true
+    },
+    {
+      "task": "3.2.1",
+      "metric": "模型级 R@1 绝对差",
+      "value": 0.4283000000000001,
+      "operator": "<=",
+      "threshold": 0.5,
+      "unit": "pp",
+      "passed": true
+    }
+  ],
+  "task_3_1_4_pass": true,
+  "task_3_2_1_pass": true,
+  "reference_retrieval": {
+    "scope": "historical_ranking_metric_replay",
+    "source_run_id": "deepseekv4_1_flash_pilot_20261018",
+    "query_count": 132,
+    "qrels_count": 1325,
+    "index_dir": "data/index_data",
+    "top_k": 10,
+    "metrics_by_mode": [
+      {
+        "mode": "all",
+        "query_count": 132,
+        "precision@10": 0.31893939393939397,
+        "recall@10": 0.9784205693296603,
+        "ndcg@10": 0.868219884370717,
+        "mrr@10": 0.7741161616161616
+      },
+      {
+        "mode": "text",
+        "query_count": 44,
+        "precision@10": 0.30000000000000004,
+        "recall@10": 0.9406565656565656,
+        "ndcg@10": 0.8683209540663926,
+        "mrr@10": 0.8645833333333333
+      },
+      {
+        "mode": "image",
+        "query_count": 45,
+        "precision@10": 0.39111111111111113,
+        "recall@10": 1.0,
+        "ndcg@10": 0.8739875372013312,
+        "mrr@10": 0.8035185185185185
+      },
+      {
+        "mode": "multimodal",
+        "query_count": 43,
+        "precision@10": 0.2627906976744186,
+        "recall@10": 1.0,
+        "ndcg@10": 0.8620716988669848,
+        "mrr@10": 0.6507751937984496
+      }
+    ],
+    "new_inference_executed": false,
+    "used_for_tensorrt_acceptance": false,
+    "interpretation": "沿用已核验的旧索引历史排序和 AI 标签，仅复算指标；不是微调/TRT 的新查询结果，不能推断端到端加速或调优收益。"
+  },
+  "limitations": [
+    "使用用户认可的训练机凭证，未新增模型推理；源 JSON 未独立记录 GPU 型号。",
+    "速度只覆盖图像塔 forward，不代表文本塔、FAISS 或端到端查询速度。",
+    "精度一致性数据是整体 R@K，缺少 TRT 分类别及逐样本排名，不能生成对应误差结论。",
+    "历史 132 查询仅复算原排序，未重新用微调权重或 TRT 查询。",
+    "单轮 warmup=10、iters=20；没有重复实验的置信区间。",
+    "export_report 仅保留最后导出的文本塔，不能推出双塔 ONNX 总体积。",
+    "量化、4-bit、剪枝不在本轮主线；现场演示/录屏尚需本人在训练机执行。"
+  ]
+}

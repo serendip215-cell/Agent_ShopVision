@@ -1,0 +1,7 @@
+﻿group,backend,device,precision,batch,torch_median_ms,engine_median_ms,torch_p90_ms,engine_p90_ms,torch_throughput_per_s,engine_throughput_per_s,speedup,latency_reduction_pct,throughput_gain_pct,latency_pass,throughput_pass,warmup,torch_iters,engine_iters,source
+cpu,ORT-CPU,cpu,fp32,1,90.56,85.24,92.01,89.74,11.0,11.7,1.0624120131393713,5.874558303886934,6.363636363636349,False,False,10,20,20,runtime_cpu
+cpu,ORT-CPU,cpu,fp32,32,2532.61,2554.38,2560.49,2581.17,12.6,12.5,0.9914773839444405,-0.8595875401265829,-0.7936507936507908,False,False,10,20,20,runtime_cpu
+cuda,ORT-CUDA,cuda,fp16,1,4.98,4.54,5.21,6.47,200.8,220.5,1.0969162995594715,8.835341365461858,9.810756972111555,False,False,10,20,20,runtime_cuda
+cuda,ORT-CUDA,cuda,fp16,32,50.9,54.55,52.27,55.17,628.7,586.6,0.9330889092575619,-7.170923379174843,-6.696357563225708,False,False,10,20,20,runtime_cuda
+trt,TensorRT,cuda,fp16,1,4.59,1.94,4.85,1.98,217.9,515.5,2.365979381443299,57.73420479302832,136.57641119779714,True,True,10,20,20,runtime_trt
+trt,TensorRT,cuda,fp16,32,50.43,23.84,51.25,25.01,634.5,1342.1,2.1153523489932886,52.72655165576046,111.52088258471235,True,True,10,20,20,runtime_trt

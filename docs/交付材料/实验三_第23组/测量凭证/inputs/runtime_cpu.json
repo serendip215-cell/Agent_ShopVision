@@ -1,0 +1,88 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "tower": "visual",
+  "device": "cpu",
+  "precision": "fp32",
+  "onnx": "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp32.onnx",
+  "provider": "CPUExecutionProvider",
+  "graph_optimization_level": "all",
+  "ort_intra_op_threads": 8,
+  "torch_threads": 8,
+  "cpu_count": 8,
+  "method": {
+    "warmup": 10,
+    "metric": "median",
+    "scope": "仅模型 forward，不含预处理/后处理",
+    "fairness": "同硬件对比：PyTorch-CPU vs ORT-CPU"
+  },
+  "results": [
+    {
+      "batch": 1,
+      "torch": {
+        "batch": 1,
+        "iters": 20,
+        "median_ms": 90.56,
+        "mean_ms": 90.69,
+        "p90_ms": 92.01,
+        "throughput_per_s": 11.0,
+        "device": "cpu",
+        "precision": "fp32"
+      },
+      "ort": {
+        "batch": 1,
+        "iters": 20,
+        "median_ms": 85.24,
+        "mean_ms": 84.56,
+        "p90_ms": 89.74,
+        "throughput_per_s": 11.7,
+        "provider": "CPUExecutionProvider",
+        "actual_providers": [
+          "CPUExecutionProvider"
+        ],
+        "provider_ok": true,
+        "graph_optimization_level": "all",
+        "intra_op_threads": 8,
+        "precision": "fp32"
+      },
+      "speedup": 1.062,
+      "latency_change_pct": -5.87,
+      "throughput_change_pct": 6.36,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": false
+    },
+    {
+      "batch": 32,
+      "torch": {
+        "batch": 32,
+        "iters": 20,
+        "median_ms": 2532.61,
+        "mean_ms": 2535.84,
+        "p90_ms": 2560.49,
+        "throughput_per_s": 12.6,
+        "device": "cpu",
+        "precision": "fp32"
+      },
+      "ort": {
+        "batch": 32,
+        "iters": 20,
+        "median_ms": 2554.38,
+        "mean_ms": 2549.38,
+        "p90_ms": 2581.17,
+        "throughput_per_s": 12.5,
+        "provider": "CPUExecutionProvider",
+        "actual_providers": [
+          "CPUExecutionProvider"
+        ],
+        "provider_ok": true,
+        "graph_optimization_level": "all",
+        "intra_op_threads": 8,
+        "precision": "fp32"
+      },
+      "speedup": 0.991,
+      "latency_change_pct": 0.86,
+      "throughput_change_pct": -0.79,
+      "meets_40pct_latency_target": false,
+      "meets_50pct_throughput_target": false
+    }
+  ]
+}

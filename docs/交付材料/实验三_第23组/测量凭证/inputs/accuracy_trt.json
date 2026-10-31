@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "backend": "onnxruntime",
+  "provider": "TensorrtExecutionProvider",
+  "precision": "fp16",
+  "onnx": {
+    "visual": "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp16.onnx",
+    "text": "data/optimize/2026-10-24_exp3-speed/onnx/text_fp16.onnx"
+  },
+  "dataset": "data/processed_data_retrieval/datasets/ShopVision",
+  "n_texts": 934,
+  "candidate_pool": 934,
+  "elapsed_s": 16.7,
+  "scores": {
+    "r1": 58.137,
+    "r5": 89.2934,
+    "r10": 96.5739,
+    "mean_recall": 81.3348
+  },
+  "pytorch_baseline": {
+    "r1": 58.5653,
+    "r5": 89.2934,
+    "r10": 96.6809,
+    "mean_recall": 81.5132
+  },
+  "delta_r1_pp": -0.4283,
+  "consistency_within_1pp": true
+}

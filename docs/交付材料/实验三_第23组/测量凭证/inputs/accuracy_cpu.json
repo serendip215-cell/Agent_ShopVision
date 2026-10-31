@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-10-24_exp3-speed",
+  "backend": "onnxruntime",
+  "provider": "CPUExecutionProvider",
+  "precision": "fp32",
+  "onnx": {
+    "visual": "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp32.onnx",
+    "text": "data/optimize/2026-10-24_exp3-speed/onnx/text_fp32.onnx"
+  },
+  "dataset": "data/processed_data_retrieval/datasets/ShopVision",
+  "n_texts": 934,
+  "candidate_pool": 934,
+  "elapsed_s": 96.9,
+  "scores": {
+    "r1": 58.5653,
+    "r5": 89.2934,
+    "r10": 96.6809,
+    "mean_recall": 81.5132
+  },
+  "pytorch_baseline": {
+    "r1": 58.5653,
+    "r5": 89.2934,
+    "r10": 96.6809,
+    "mean_recall": 81.5132
+  },
+  "delta_r1_pp": 0.0,
+  "consistency_within_1pp": true
+}

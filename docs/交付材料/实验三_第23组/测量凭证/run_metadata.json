@@ -1,0 +1,65 @@
+{
+  "run_id": "exp3_inference_acceleration_20261025",
+  "generated_at": "2026-10-25T20:03:36+08:00",
+  "source_commit": "50cdbfd944f6f3983910f0c017c028687bb52ba9",
+  "config": "evaluation/retrieval/configs/exp3_acceleration.json",
+  "source_mode": "accepted_measurement_replay",
+  "author_task": "杜军博：推理加速评测与交付",
+  "python": "3.12.13",
+  "platform": "Windows",
+  "executed": [
+    "accepted_measurement_replay",
+    "historical_ranking_metric_replay",
+    "report_generation"
+  ],
+  "not_executed": [
+    "onnx_export",
+    "new_gpu_benchmark",
+    "new_132_query_retrieval",
+    "live_demo_recording"
+  ],
+  "excluded_sources": [
+    {
+      "path": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cpu.json",
+      "reason": "早期记录，不作为线程对齐后的正式 CPU 结果。"
+    },
+    {
+      "path": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cpu_tauto_all.json",
+      "reason": "早期 CPU 记录，正式汇总统一采用显式 8/8 线程。"
+    },
+    {
+      "path": "docs/optimize/runs/2026-10-24_exp3-speed/bench_visual_cuda_fp16_tauto_all.json",
+      "reason": "文件名未区分 provider，采用后续明确标注 TensorRT 的记录。"
+    }
+  ],
+  "figures": {
+    "count": 9,
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "source": "saved_run_tables",
+    "visual_review": "PASS"
+  },
+  "repository_synced_through": "e803cf8fcfae02f35b481f2db14963e4f25b467d",
+  "source_measurements_unchanged_after_sync": true,
+  "verification": {
+    "reviewed_at": "2026-10-25T20:11:10+08:00",
+    "logic_tests_passed": 8,
+    "documented_powershell_entrypoint_outside_repo": "PASS",
+    "frozen_input_replay_scientific_outputs_equal": "PASS",
+    "normalized_source_hashes_verified": 16,
+    "png_rgb_450dpi_count": 9,
+    "pdf_svg_master_count_each": 9,
+    "new_document_links": "PASS",
+    "visual_review": "PASS",
+    "scope": "report replay only; no new model inference"
+  },
+  "report_code_sha256_utf8_lf": {
+    "evaluation/retrieval/code/evaluate_acceleration.py": "5be00066a35a7d58966b34b91ff0f88b371dc63d99f09c70a529f052e117cf3e",
+    "evaluation/retrieval/code/render_acceleration_charts.py": "1898d82d6d6bc832f64c0e73953b52ffd47c9205285c6bf8c5f7ce9e1f916b2d",
+    "evaluation/retrieval/scripts/run_exp3_evaluation.ps1": "6a89fa31697d446fca9f867e1d11138a61c7cb84b83eba0785a7fa8044973bd9",
+    "evaluation/retrieval/configs/exp3_acceleration.json": "328be1687973dae1e0ebabf80568321e52b975f72f1e29de0fdde915d7ec2dc3"
+  }
+}
