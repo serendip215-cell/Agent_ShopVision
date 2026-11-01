@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,12 +19,14 @@ from .config import get_settings
 from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
+logger = logging.getLogger("shopvision.api")
 
-def _body(code: ErrorCode, msg: str) -> JSONResponse:
+
+def _body(code: ErrorCode, msg: str = "") -> JSONResponse:
     """所有响应（含错误）都是 {code, result, msg}；HTTP 状态码取自业务码前三位。"""
     return JSONResponse(
         status_code=code.http_status,
-        content=ApiResponse(code=int(code), msg=msg).model_dump(),
+        content=ApiResponse(code=int(code), msg=msg or code.message).model_dump(),
     )
 
 
@@ -52,7 +56,9 @@ def _register_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(Exception)
     async def _unhandled(_: Request, exc: Exception) -> JSONResponse:
-        return _body(ErrorCode.INTERNAL_ERROR, f"{type(exc).__name__}: {exc}")
+        # 异常原文只进服务端日志，不回给前端（可能含路径等内部信息）
+        logger.exception("未捕获异常：%s", type(exc).__name__)
+        return _body(ErrorCode.INTERNAL_ERROR)
 
 
 def create_app() -> FastAPI:

@@ -41,16 +41,9 @@ def _open_image(raw: bytes) -> "PILImage":
 
 @router.get("/health", response_model=ApiResponse, summary="健康检查")
 def health(service: MatchService = Depends(get_match_service)) -> ApiResponse:
-    settings = get_settings()
-    return ApiResponse.ok(
-        {
-            "model_loaded": service.encoder.model_loaded,
-            "backend": settings.model_backend,
-            "index_dir": str(settings.index_path),
-            "categories": service.index.categories,
-            "dimension": service.index.dimension,
-        }
-    )
+    result = service.status()
+    result["backend"] = get_settings().model_backend
+    return ApiResponse.ok(result)
 
 
 @router.post("/image", response_model=ApiResponse, summary="图像分类")

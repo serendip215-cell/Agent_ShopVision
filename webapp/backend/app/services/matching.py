@@ -33,6 +33,10 @@ class MatchService:
         self.encoder = encoder
         self.index = index
 
+    # 系统状态：api 的 health 只调这个，不穿透到 encoder/index
+    def status(self) -> dict:
+        return {"model_loaded": self.encoder.model_loaded, **self.index.summary()}
+
     # 图像分类页：商品图 -> 最近类别
     def classify_image(self, image: "Image") -> dict:
         vector = self.encoder.encode_image(image)

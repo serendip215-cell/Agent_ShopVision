@@ -56,6 +56,14 @@ class IndexStore:
             return int(entry.get("dimension", 0)) or None
         return None
 
+    def summary(self) -> dict:
+        """索引概况，供 health 之类的状态接口用，别让上层去翻内部字段。"""
+        return {
+            "index_dir": str(self.index_dir),
+            "categories": self.categories,
+            "dimension": self.dimension,
+        }
+
     def _load(self, category: str) -> tuple[dict[int, dict[str, str]], np.ndarray]:
         if category not in self._cache:
             entry = (self._registry.get("categories") or {}).get(category)

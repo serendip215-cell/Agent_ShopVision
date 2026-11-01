@@ -152,8 +152,8 @@ class ApiTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.tmp = tempfile.TemporaryDirectory()
-        service = MatchService(PlaceholderEncoder(dim=DIM), _build_index(Path(cls.tmp.name)))
-        app.dependency_overrides[get_match_service] = lambda: service
+        cls.service = MatchService(PlaceholderEncoder(dim=DIM), _build_index(Path(cls.tmp.name)))
+        app.dependency_overrides[get_match_service] = lambda: cls.service
         from fastapi.testclient import TestClient
 
         cls.client = TestClient(app, raise_server_exceptions=False)
@@ -204,6 +204,19 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(set(body), {"code", "result", "msg"})
         self.assertIsNone(body["result"])
         self.assertTrue(body["msg"])
+
+    def test_internal_error_hides_server_details(self) -> None:
+        def boom():
+            raise RuntimeError("boom-secret")
+
+        app.dependency_overrides[get_match_service] = boom
+        try:
+            response = self.client.post("/api/v1/text", json={"query": "x"})
+        finally:
+            app.dependency_overrides[get_match_service] = lambda: self.service
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.json()["code"], ErrorCode.INTERNAL_ERROR)
+        self.assertNotIn("boom-secret", response.json()["msg"])
 
 
 class ErrorCodeTest(unittest.TestCase):

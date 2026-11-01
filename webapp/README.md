@@ -1,139 +1,152 @@
-# 实验四前后端开发文档（Agent_ShopVision）
+# webapp — 实验四前后端
 
-面向本项目的具体写法：这个前后端到底做什么、目录怎么分、每块怎么写、怎么跑起来。
-分工见 [`docs/流程与交接/实验四流程与分工.md`](../docs/流程与交接/实验四流程与分工.md)。
+面向本项目的具体写法与运行说明。分工见 [`docs/流程与交接/实验四流程与分工.md`](../docs/流程与交接/实验四流程与分工.md)，
+接口契约见 [`API约定.md`](API约定.md)。
 
-## 零、目前情况（2026-11-01）
+## 一、现状（2026-11-01）
 
 | 项 | 状态 |
 |---|---|
-| 后端代码 | ✅ 骨架完成，占位模式可跑（`webapp/backend/app/`，分层 api→services→数据访问，21 项自检通过；错误码见 [`API约定.md`](API约定.md)）；接真 ONNX 待产物到位 |
-| 前端代码 | ❌ 未开始。`frontend/` 仍是占位 README |
-| 实验四报告 | ❌ 未开始。分工与报告要求已定，见分工文档 |
-| 模型产物（双塔 ONNX） | ⏸ 待外部：不在仓库、不在本机，只在训练机；上传安排见 [`实验四模型产物上传说明.md`](../docs/流程与交接/实验四模型产物上传说明.md) |
-| Chinese-CLIP 权重 | ⏸ 不在仓库（`.gitignore`） |
+| **后端** | ✅ 可跑。`backend/app/` 分层完成，占位模式端到端通，22 项自检通过 |
+| **前端** | ❌ **未开始**。`frontend/` 只有占位 README |
+| 模型产物（双塔 ONNX） | ⏸ 不在仓库，待训练机上传，见 [`实验四模型产物上传说明.md`](../docs/流程与交接/实验四模型产物上传说明.md) |
 
-**决策：先搭前后端 + 占位编码器，模型后接。** 接口按第六节的接缝钉死，占位与真 ONNX 同形状，`MODEL_BACKEND` 一行配置切换，前端和三个接口不感知。
+**先跑后端 + 占位编码器，模型后接。** 编码器是可替换接缝，`SHOPVISION_MODEL_BACKEND`
+一行配置切换；接口形状不变，前端将来照 [`API约定.md`](API约定.md) 写即可。
 
-**占位模式的边界**：`/health` 返回 `model_loaded: false`；报告里只写"链路跑通、模型待接入"，**不写**实测推理延迟和检索指标。等 ONNX 到位再出这些数字。
+## 二、跑起来
 
-## 一、这套前后端是干什么的
+### 1. 建虚拟环境并装依赖
 
-## 一、这套前后端是干什么的
+```powershell
+cd webapp\backend
 
-不是通用 demo，是给我们自己的双塔检索应用做一层可交互的 Web 壳：
+py -3 -m venv .venv                 # 建虚拟环境（.venv 已在 .gitignore 里）
+.\.venv\Scripts\Activate.ps1        # PowerShell 激活
+# 若用 cmd：         .venv\Scripts\activate.bat
+# 若用 Git Bash：    source .venv/Scripts/activate
 
-- **前端**：上传商品图 / 输入中文查询，看到类别和检索结果。
-- **后端**：用实验三优化后的 Chinese-CLIP 双塔（ONNX）把图/文编成向量，在已建好的 FAISS 索引里检索，返回统一 JSON。
-
-数据不是 CIFAR-10，是 `data/processed_data_cleaning/` 的 9,393 条商品，索引是 `data/index_data_finetuned/`（9 类）。
-
-## 二、目录结构
-
-```
-webapp/
-├── README.md            # 本文档
-├── API约定.md            # 前后端共同遵守：返回体、错误码表、请求格式
-├── backend/             # FastAPI 服务（负责人：何朝杨）
-│   ├── app/
-│   │   ├── main.py      # FastAPI 实例、CORS、路由挂载
-│   │   ├── config.py     # 路径、端口、模型后端（ort/trt）、索引目录
-│   │   ├── api/          # /api/v1/* 路由
-│   │   ├── services/     # 编码器封装、FAISS 检索、图文匹配工作流
-│   │   └── schemas.py    # 统一返回体与请求体
-│   ├── requirements.txt
-│   └── .env.example      # 模型路径、索引目录、Redis
-└── frontend/            # React 应用（负责人：张梓萱）
-    ├── src/
-    │   ├── pages/        # 三个页面：ImagePage / TextPage / MatchPage
-    │   ├── components/   # 导航栏、上传区、文本输入、结果区、异常提示
-    │   └── api/          # Axios 实例与接口封装
-    ├── package.json
-    └── vite.config.js     # dev 代理到后端
-```
-
-## 三、后端怎么写（FastAPI）
-
-### 3.1 统一返回体与错误码
-
-所有接口返回同一形状 `{code, result, msg}`；`code` 是 5 位业务码，**前三位即 HTTP 状态码**
-（`40001`→400，`40401`→404，`50001`→500）。完整错误码表、请求/返回示例见
-[`API约定.md`](API约定.md)——那是架构层定死的契约，前后端照它写。错误码枚举在
-`backend/app/errors.py`，新增场景就加一行、取同前缀新码，不改老码含义。
-
-### 3.2 接口表
-
-| 方法 | 路径 | 用途 | 入参 | 返回 result |
-|---|---|---|---|---|
-| GET | `/api/v1/health` | 健康检查 | — | `{model_loaded, backend, index_dir}` |
-| POST | `/api/v1/image` | 图像分类：上传图 → 图像塔编码 → 找最近类别 | `multipart/form-data`：`file` | `{category, confidence, topk[]}` |
-| POST | `/api/v1/text` | 文本检索：中文查询 → 文本塔编码 → FAISS 检索 | `application/json`：`{query, top_k}` | `{category, items[]}` |
-| POST | `/api/v1/match` | 图文匹配 | `multipart/form-data`：`file` + `text` | `{match, image_category, text_category, items[]}` |
-
-`/api/v1/match` 就是任务书 4.2.3 的多模型协同：先走图像分类 → 再走文本检索 → 比对两边类别是否一致 → 给 `match` 真/假与证据。用 FastAPI 依赖注入把两个 service 串起来。
-
-`http://localhost:8000/docs` 是 FastAPI 自动文档，报告里 API 文档那节直接引用它 + 手写端点表。
-
-### 3.3 数据流
-
-```
-前端表单校验 → Axios POST → FastAPI 路由
-  → 预处理（图像 resize 224 / 文本分词）
-  → 双塔 ONNX 编码（实验三优化产物）
-  → FAISS 检索 data/index_data_finetuned/
-  → 统一 JSON → 前端渲染
-```
-
-图像预处理复用实验一的图像读取逻辑（尺寸、通道、可读性检查）。
-
-### 3.4 异常与 CORS
-
-- 定义业务异常类型（输入错 / 模型错 / 权限错），FastAPI 异常处理器统一转成 `{code,result,msg}`。
-- CORS：开发环境 `allow_origins=["http://localhost:5173"]`（Vite dev 端口），生产环境写具体域名，不用 `*`。
-- 返回值避免浏览器敏感字符，图像走二进制上传，不要 base64 塞进 URL。
-
-### 3.5 异步任务（Celery）
-
-大图 / 批量检索这类耗时任务走 Celery + Redis，前端轮询取结果。**先不做**：等单张推理的实测延迟出来，确认 ≤2s 目标的场景是否需要异步，再决定上不上（避免为没测过的任务加组件）。
-
-## 四、前端怎么写（React + Ant Design + Axios）
-
-- 三个页面一一对应三个接口：`ImagePage`→`/api/v1/image`、`TextPage`→`/api/v1/text`、`MatchPage`→`/api/v1/match`。
-- 公共组件：导航栏、数据输入区（`Upload` / `TextArea`）、结果区（类别标签 + 置信度 + 结果列表）、异常提示（`message.error`）。
-- Axios 统一拦截：请求错误 / 超时 / 非 0 `code` 都转成友好提示，例如"图像格式错误，请上传 PNG/JPG"。
-- 响应式用 Ant Design `Row/Col`（Grid）+ Flex，不用绝对定位，适配手机/平板/PC。
-- dev 代理：`vite.config.js` 里把 `/api` 代理到 `http://localhost:8000`，绕开开发期跨域。
-
-## 五、怎么跑起来
-
-后端：
-
-```bash
-cd webapp/backend
-python -m venv .venv && . .venv/Scripts/activate   # Windows
 pip install -r requirements.txt
-cp .env.example .env       # 填模型路径、索引目录
+```
+
+> 依赖：fastapi / uvicorn / pydantic(-settings) / numpy / pillow / python-multipart（+ httpx 仅测试用）。
+> 接真 ONNX 才需要 `onnxruntime` 与 Chinese-CLIP，见 `requirements.txt` 注释。
+
+### 2. 配置
+
+```powershell
+copy .env.example .env              # 默认 placeholder，开箱即用
+```
+
+### 3. 启动
+
+```powershell
 uvicorn app.main:app --reload --port 8000
 ```
 
-前端：
+- 在线文档（自动生成）：http://localhost:8000/docs
+- 健康检查：http://localhost:8000/api/v1/health
 
-```bash
-cd webapp/frontend
-npm install
-npm run dev                # 默认 http://localhost:5173
+### 4. 自检
+
+```powershell
+python -m unittest discover -s tests -v
 ```
 
-`GET http://localhost:8000/api/v1/health` 返回 `model_loaded: true` 就说明模型接上了。
+不依赖仓库大索引（自建小索引），覆盖检索、占位编码器、接口返回与错误码。
 
-## 六、模型怎么接（待定，本机暂未跑通）
+## 三、接口与调用
 
-这一段是本轮唯一的未知项，写清楚免得后面当成已完成：
+基址 `http://localhost:8000`，前缀 `/api/v1`；返回体统一 `{code, result, msg}`，
+错误码表见 [`API约定.md`](API约定.md)。
 
-- 实验三优化产物是**图像塔 TensorRT/ONNX + 文本塔 ONNX**，但 `scripts/models/` 和 `models/` 里目前没有双塔 ONNX，只有抠图用的 `isnet-general-use.onnx`；Chinese-CLIP 权重也不在仓库里。
-- 所以后端加载层留一个接缝：`config.py` 里读模型路径与后端类型（`ort` / `trt`），`services/encoder.py` 按配置加载；**配置缺失时降级为占位编码器**（随机/哈希向量），让前后端链路先跑通，`/health` 返回 `model_loaded: false`。
-- ONNX 双塔与权重到位后，只改 `.env` 指向真实文件，代码不动。产物来源由 王陆洲 对接。
-- 红线：模型没真跑通前，报告不写实测推理延迟。
+| 方法 | 路径 | 用途 | 请求 |
+|---|---|---|---|
+| GET | `/api/v1/health` | 健康检查 | — |
+| POST | `/api/v1/image` | 图像分类 | `multipart/form-data`：`file` |
+| POST | `/api/v1/text` | 文本检索 | `application/json`：`{query, top_k?, category?}` |
+| POST | `/api/v1/match` | 图文匹配 | `multipart/form-data`：`file` + `text` + `top_k?` |
+
+调用示例（PowerShell / Windows 自带 curl）：
+
+```powershell
+# 健康检查
+curl.exe http://localhost:8000/api/v1/health
+
+# 图像分类
+curl.exe -X POST http://localhost:8000/api/v1/image -F "file=@data\processed_data\鞋\images\xxx.jpg"
+
+# 文本检索
+curl.exe -X POST http://localhost:8000/api/v1/text -H "Content-Type: application/json" -d "{\"query\":\"白色运动鞋\",\"top_k\":3}"
+
+# 图文匹配
+curl.exe -X POST http://localhost:8000/api/v1/match -F "file=@xxx.jpg" -F "text=白色运动鞋"
+```
+
+Python 客户端：
+
+```python
+import requests
+print(requests.get("http://localhost:8000/api/v1/health").json())
+print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色运动鞋", "top_k": 3}).json())
+```
+
+> `health` 里 `model_loaded: false` = 当前占位模式，**检索结果无意义**；`true` = 已接真 ONNX。
+
+## 四、后端架构（分层与扩展点）
+
+```
+app/
+├── main.py            FastAPI 实例、CORS、全局异常处理
+├── config.py          Settings（环境变量 / .env）
+├── schemas.py         请求体 + 统一返回体
+├── errors.py          错误码枚举 + 业务异常
+├── deps.py            依赖注入：编码器 / 索引 / 服务
+├── api/v1.py          路由（Controller）：只取参、校验、调服务
+└── services/
+    ├── encoder.py     编码器接缝：PlaceholderEncoder / OnnxEncoder
+    ├── index_store.py 数据访问：index_data_finetuned 的条目与向量
+    └── matching.py    业务：status / 图像分类 / 文本检索 / 图文匹配
+```
+
+调用方向**单向**：`api → services → 数据访问`。
+
+| 想改什么 | 动哪里 | 会不会牵动别处 |
+|---|---|---|
+| 换模型（占位 ↔ ONNX） | `.env` 的 `model_backend` + 路径 | 不改代码 |
+| 加一个接口 | `api/v1.py` 加路由 + `matching.py` 加方法 | 不动其它层 |
+| 换索引来源 / 存储 | 新写一个类，换 `deps.get_index` | api 层不动 |
+| 改错误码 / 文案 | `errors.py` 一张表 | 全局一致 |
+| 加鉴权 / 限流 | `deps.py` 加依赖 + `api/v1.py` 挂 `Depends` | 业务层不动 |
+
+**已做到的解耦**：api 不写业务、services 不碰 HTTP；模型、索引、配置都从代码里抽成接缝或注入；
+错误码集中一处；测试用 `dependency_overrides` 注入假服务，不需要真模型。
+
+**已知取舍（有意为之，不是漏做）**：
+- services 抛的是带 HTTP 状态码的 `ApiError`——省一层映射，代价是服务层知道 HTTP 语义；
+  真要多协议复用时再拆成领域异常 + 适配层。
+- `IndexStore` 首次访问某类时整块读入内存（不 mmap，避免 Windows 文件句柄锁），
+  9 类全用约 120 MB；数据量再大就换 mmap 或向量库。
+- `deps` 用 `lru_cache` 做单例，改 `.env` 需重启进程。
+
+## 五、模型接入
+
+`SHOPVISION_MODEL_BACKEND=onnx` 时加载实验三双塔 ONNX：
+
+| 端点 | 输入 | 输出 |
+|---|---|---|
+| 图像塔 | `image` (batch,3,224,224) | `embedding` (batch,512) |
+| 文本塔 | `input_ids` + `attention_mask` (batch,seq) | `embedding` (batch,512) |
+
+分词仍用 `cn_clip.clip.tokenize`，预处理用 `image_transform(224)`，ONNX 输出自行 L2 归一化（已在 `OnnxEncoder` 处理）。
+产物到位后只改 `.env` 路径，代码不动。**占位模式红线**：报告里不写实测推理延迟与检索指标。
+
+## 六、前端（未开始）
+
+React 19+ / Ant Design / Axios，三个页面（图像分类 / 文本分类 / 多模态匹配）一一对上三个接口。
+公共组件：导航栏、输入区（Upload / TextArea）、结果区（类别标签 + 置信度）、异常提示。
+按 [`API约定.md`](API约定.md) 写 Axios 封装；dev 环境把 `/api` 代理到 `http://localhost:8000`。
+负责人：张梓萱（zzx）+ 刘凡思雨（lfsy）共同。
 
 ## 七、负责人
 
@@ -147,7 +160,7 @@ npm run dev                # 默认 http://localhost:5173
 | 端到端、CORS 与性能测试 | 刘凡思雨（lfsy） |
 | 模型产物（ONNX）与加载路径 | 王陆洲（wlz） |
 
-**文档（实验四报告）——写文档的是这三个人**
+**文档（实验四报告）**
 
 | 报告部分 | 负责人 |
 |---|---|
@@ -155,5 +168,3 @@ npm run dev                # 默认 http://localhost:5173
 | 报告整合、排版与正式 PDF | 杜军博（djb） |
 | API 文档、测试报告 | 王陆洲（wlz） |
 | 问题与解决方案、交付材料整理与报告校对 | 秦鑫洋（qxy） |
-
-> 性能/推理耗时口径由 djb 核对后再写进报告。完整分工与报告要求对照见 [`docs/流程与交接/实验四流程与分工.md`](../docs/流程与交接/实验四流程与分工.md)。
