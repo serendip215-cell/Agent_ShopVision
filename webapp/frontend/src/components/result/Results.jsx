@@ -1,36 +1,66 @@
 import { Button, Descriptions, Divider, Drawer, Skeleton, Tag } from 'antd'
 import {
-  ArrowRightOutlined,
   InboxOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
 import { CategoryBadge, CopyButton, EmptyState, SimilarityBar } from '../common/Ui'
+import { categoryStyle } from '../../constants/catalog'
 import { formatPercent } from '../../utils/format'
 
+function ItemPhoto({ item }) {
+  const style = categoryStyle(item.category)
+  return (
+    <span
+      className="sv-photo"
+      style={{ background: style.bg }}
+      data-fallback={item.category?.slice(0, 1) || '?'}
+    >
+      <img
+        src={`/items/${item.item_id}.jpg`}
+        alt={item.item_name || '商品图'}
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.closest('.sv-photo').classList.add('is-broken')
+          event.currentTarget.remove()
+        }}
+      />
+      <span className="sv-photo-rank" style={{ background: style.ink }} />
+    </span>
+  )
+}
+
 export function ItemRow({ item, rank, onSelect, highlight = false }) {
+  const style = categoryStyle(item.category)
   return (
     <button
       type="button"
-      className={`sv-item-row ${highlight ? 'is-highlight' : ''}`}
+      className={`sv-item-card ${highlight ? 'is-highlight' : ''}`}
       onClick={() => onSelect?.(item)}
     >
-      <span className="sv-item-rank sv-mono">{String(rank).padStart(2, '0')}</span>
-      <span className="sv-item-main">
+      <ItemPhoto item={item} />
+      <span className="sv-item-card-body">
+        <span className="sv-item-card-top">
+          <span className="sv-item-rank sv-mono" style={{ color: style.ink }}>
+            {String(rank).padStart(2, '0')}
+          </span>
+          <span className="sv-item-percent sv-mono">{formatPercent(item.similarity)}</span>
+        </span>
         <span className="sv-item-title">{item.item_name || '未命名商品'}</span>
         <span className="sv-item-tags">
-          <CategoryBadge category={item.category} small />
           {(item.type || item.product_type) && <span>{item.type || item.product_type}</span>}
-          {item.brand && <span>品牌：{item.brand}</span>}
-          {item.color && <span>颜色：{item.color}</span>}
-          {item.material && <span>材质：{item.material}</span>}
+          {item.brand && <span>{item.brand}</span>}
+          {item.color && <span>{item.color}</span>}
         </span>
-        <span className="sv-item-id sv-mono">{item.item_id}</span>
+        <span className="sv-item-card-foot">
+          <span
+            className="sv-item-cat"
+            style={{ background: style.bg, color: style.ink }}
+          >
+            {item.category || '未分类'}
+          </span>
+          <SimilarityBar value={item.similarity} compact />
+        </span>
       </span>
-      <span className="sv-item-score">
-        <SimilarityBar value={item.similarity} compact />
-        <span className="sv-item-percent">{formatPercent(item.similarity)}</span>
-      </span>
-      <ArrowRightOutlined className="sv-item-arrow" />
     </button>
   )
 }
@@ -38,10 +68,11 @@ export function ItemRow({ item, rank, onSelect, highlight = false }) {
 export function ResultList({ items, loading, onSelect, highlightCategory, emptyTitle, emptyDescription }) {
   if (loading) {
     return (
-      <div className="sv-result-list">
-        {[0, 1, 2].map((key) => (
+      <div className="sv-item-grid">
+        {[0, 1, 2, 3].map((key) => (
           <div className="sv-item-skeleton" key={key}>
-            <Skeleton active paragraph={{ rows: 1 }} title={{ width: '40%' }} />
+            <Skeleton.Image active style={{ width: '100%', height: 150 }} />
+            <Skeleton active paragraph={{ rows: 2 }} title={{ width: '60%' }} />
           </div>
         ))}
       </div>
@@ -59,7 +90,7 @@ export function ResultList({ items, loading, onSelect, highlightCategory, emptyT
   }
 
   return (
-    <div className="sv-result-list">
+    <div className="sv-item-grid">
       {items.map((item, index) => (
         <ItemRow
           key={`${item.item_id || 'item'}-${index}`}
@@ -91,6 +122,9 @@ export function DetailDrawer({ item, open, onClose, onSearch }) {
       }
     >
       <div className="sv-drawer-body">
+        <div className="sv-drawer-photo">
+          <ItemPhoto item={item} />
+        </div>
         <Descriptions column={1} size="small" items={[
           { key: 'id', label: '商品 ID', children: <span className="sv-mono">{item.item_id}</span> },
           { key: 'type', label: '细分类', children: item.type || item.product_type || '—' },

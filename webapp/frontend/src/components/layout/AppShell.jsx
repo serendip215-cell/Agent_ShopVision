@@ -1,32 +1,39 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
-import { Button, Drawer, Tooltip } from 'antd'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Avatar, Button, Drawer, Dropdown, Tooltip } from 'antd'
 import {
-  ApiOutlined,
   AppstoreOutlined,
   BlockOutlined,
   DashboardOutlined,
   FileSearchOutlined,
   HistoryOutlined,
+  LockOutlined,
+  LogoutOutlined,
   MenuOutlined,
   PictureOutlined,
   ReloadOutlined,
+  SearchOutlined,
 } from '@ant-design/icons'
 import { useApp } from '../../context/AppContext'
+import { useAuth } from '../../context/AuthContext'
 import { ErrorNotice } from '../common/Ui'
+import LoginModal from '../auth/LoginModal'
 
-const NAV_ITEMS = [
-  { to: '/', label: '工作台', hint: '系统概览与快捷入口', icon: <AppstoreOutlined />, end: true },
-  { to: '/image', label: '图像分类', hint: '上传商品图，判定类别', icon: <PictureOutlined /> },
-  { to: '/text', label: '文本检索', hint: '中文查询，找相似商品', icon: <FileSearchOutlined /> },
-  { to: '/match', label: '图文匹配', hint: '双塔独立判断，再比对', icon: <BlockOutlined /> },
-  { to: '/history', label: '运行记录', hint: '本地保存的检索轨迹', icon: <HistoryOutlined /> },
-  { to: '/status', label: '系统状态', hint: '模型、索引与接口', icon: <DashboardOutlined /> },
+const PUBLIC_NAV = [
+  { to: '/', label: '工作台', icon: <AppstoreOutlined />, end: true },
+  { to: '/image', label: '图像分类', icon: <PictureOutlined /> },
+  { to: '/text', label: '文本检索', icon: <FileSearchOutlined /> },
+  { to: '/match', label: '图文匹配', icon: <BlockOutlined /> },
+]
+
+const ADMIN_NAV = [
+  { to: '/history', label: '运行记录', icon: <HistoryOutlined /> },
+  { to: '/status', label: '系统状态', icon: <DashboardOutlined /> },
 ]
 
 function Brand() {
   return (
-    <div className="sv-brand">
+    <NavLink to="/" className="sv-brand">
       <svg className="sv-logo" viewBox="0 0 48 48" aria-hidden="true">
         <rect width="48" height="48" rx="14" fill="#DDEFEF" />
         <path
@@ -45,108 +52,110 @@ function Brand() {
         />
         <circle cx="34" cy="14" r="3.4" fill="#F7D9C4" />
       </svg>
-      <div>
+      <span className="sv-brand-copy">
         <strong>ShopVision</strong>
         <span>商品多模态检索台</span>
-      </div>
+      </span>
+    </NavLink>
+  )
+}
+
+function HeaderSearch() {
+  const navigate = useNavigate()
+  const [value, setValue] = useState('')
+
+  function submit() {
+    const query = value.trim()
+    if (!query) return
+    navigate(`/text?q=${encodeURIComponent(query)}`)
+    setValue('')
+  }
+
+  return (
+    <div className="sv-header-search">
+      <SearchOutlined className="sv-header-search-icon" />
+      <input
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') submit()
+        }}
+        placeholder="搜一句中文描述，例如「白色运动鞋」"
+        aria-label="全局文本检索"
+      />
+      <button type="button" onClick={submit} disabled={!value.trim()}>
+        检索
+      </button>
     </div>
   )
 }
 
-function NavContent({ onNavigate }) {
-  const { health, isPlaceholder, isOffline } = useApp()
-  const stateLabel = isOffline ? '后端未连接' : isPlaceholder ? '占位模式' : '模型在线'
-  const stateTone = isOffline ? 'is-offline' : isPlaceholder ? 'is-warm' : 'is-online'
+function HealthPill() {
+  const { health, healthLoading, healthError, refreshHealth, isPlaceholder, isOffline } = useApp()
+  const tone = isOffline ? 'is-offline' : isPlaceholder ? 'is-warm' : 'is-online'
+  const label = isOffline ? '后端未连接' : isPlaceholder ? '占位模式' : '模型在线'
 
   return (
-    <div className="sv-nav-content">
-      <Brand />
-      <nav className="sv-nav" aria-label="主导航">
-        {NAV_ITEMS.map((item, index) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.end}
-            onClick={onNavigate}
-            className={({ isActive }) => `sv-nav-item ${isActive ? 'is-active' : ''}`}
-          >
-            <span className="sv-nav-index">{String(index + 1).padStart(2, '0')}</span>
-            <span className="sv-nav-icon">{item.icon}</span>
-            <span className="sv-nav-copy">
-              <strong>{item.label}</strong>
-              <em>{item.hint}</em>
-            </span>
-          </NavLink>
-        ))}
-      </nav>
-      <div className="sv-nav-footer">
-        <div className={`sv-nav-state ${stateTone}`}>
-          <span className="sv-dot" />
-          <div>
-            <strong>{stateLabel}</strong>
-            <span>
-              {health?.backend ? `backend: ${health.backend}` : '等待 /health 响应'}
-            </span>
-          </div>
-        </div>
-        <a
-          className="sv-docs-link"
-          href="http://localhost:8000/docs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <ApiOutlined />
-          打开后端 API 文档
-        </a>
-      </div>
-    </div>
-  )
-}
-
-function StatusStrip() {
-  const { health, healthLoading, healthError, refreshHealth, categories, isPlaceholder } = useApp()
-  const tone = healthError ? 'is-offline' : isPlaceholder ? 'is-warm' : 'is-online'
-  const backend = health?.backend || (healthError ? 'unreachable' : 'checking')
-
-  return (
-    <div className="sv-status-strip">
-      <div className={`sv-status-pill ${tone}`}>
+    <Tooltip
+      title={
+        healthError
+          ? '无法连接 8000 端口，点击重新检查'
+          : `${health?.backend || 'unknown'} · dim ${health?.dimension ?? '—'} · 点击刷新`
+      }
+    >
+      <button type="button" className={`sv-health-pill ${tone}`} onClick={refreshHealth}>
         <span className="sv-dot" />
-        <span>{healthError ? '后端未连接' : isPlaceholder ? '占位模式' : '模型在线'}</span>
-      </div>
-      <div className="sv-status-metrics">
-        <span>
-          <em>BACKEND</em>
-          <strong className="sv-mono">{backend}</strong>
-        </span>
-        <span>
-          <em>DIM</em>
-          <strong className="sv-mono">{health?.dimension ?? '—'}</strong>
-        </span>
-        <span>
-          <em>CATEGORIES</em>
-          <strong className="sv-mono">{categories.length}</strong>
-        </span>
-        <span className="sv-status-index">
-          <em>INDEX</em>
-          <strong className="sv-mono">{health?.index_dir ? health.index_dir.split(/[\\/]/).pop() : '—'}</strong>
-        </span>
-      </div>
-      <div className="sv-status-actions">
-        <NavLink to="/status" className="sv-status-link">
-          详情
+        <span>{healthLoading && !health ? '检查中' : label}</span>
+        <ReloadOutlined spin={healthLoading} className="sv-health-pill-reload" />
+      </button>
+    </Tooltip>
+  )
+}
+
+function AccountZone() {
+  const { isAdmin, session, openLogin, logout } = useAuth()
+
+  if (!isAdmin) {
+    return (
+      <Button className="sv-login-btn" icon={<LockOutlined />} onClick={openLogin}>
+        管理员登录
+      </Button>
+    )
+  }
+
+  return (
+    <Dropdown
+      trigger={['click']}
+      menu={{
+        items: [{ key: 'logout', icon: <LogoutOutlined />, label: '退出登录', onClick: logout }],
+      }}
+    >
+      <button type="button" className="sv-account">
+        <Avatar size={30} style={{ background: '#5FA8B0', fontSize: 13 }}>
+          {session?.name?.slice(0, 1) || '管'}
+        </Avatar>
+        <span className="sv-account-name">{session?.name || '管理员'}</span>
+      </button>
+    </Dropdown>
+  )
+}
+
+function NavLinks({ items, onNavigate }) {
+  return (
+    <>
+      {items.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          end={item.end}
+          onClick={onNavigate}
+          className={({ isActive }) => `sv-topnav-item ${isActive ? 'is-active' : ''}`}
+        >
+          {item.icon}
+          <span>{item.label}</span>
         </NavLink>
-        <Tooltip title="刷新 /health">
-          <Button
-            size="small"
-            type="text"
-            icon={<ReloadOutlined spin={healthLoading} />}
-            onClick={refreshHealth}
-            aria-label="刷新系统状态"
-          />
-        </Tooltip>
-      </div>
-    </div>
+      ))}
+    </>
   )
 }
 
@@ -157,10 +166,7 @@ function SystemBanner() {
   if (healthError) {
     return (
       <div className="sv-system-banner">
-        <ErrorNotice
-          error={healthError}
-          onRetry={refreshHealth}
-        />
+        <ErrorNotice error={healthError} onRetry={refreshHealth} />
       </div>
     )
   }
@@ -185,50 +191,62 @@ function SystemBanner() {
 export default function AppShell({ children }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
+  const { isAdmin } = useAuth()
 
   useEffect(() => {
     window.scrollTo(0, 0)
     setDrawerOpen(false)
   }, [location.pathname])
 
+  const navItems = isAdmin ? [...PUBLIC_NAV, ...ADMIN_NAV] : PUBLIC_NAV
+
   return (
     <div className="sv-shell">
-      <aside className="sv-rail">
-        <NavContent />
-      </aside>
-
-      <div className="sv-main">
-        <header className="sv-mobile-bar">
+      <header className="sv-topbar">
+        <div className="sv-topbar-row">
           <Brand />
-          <Button
-            type="text"
-            icon={<MenuOutlined />}
-            onClick={() => setDrawerOpen(true)}
-            aria-label="打开导航"
-          />
-        </header>
-
-        <div className="sv-content">
-          <StatusStrip />
-          <SystemBanner />
-          <main className="sv-page sv-reveal">{children}</main>
-          <footer className="sv-footer">
-            <span>Agent ShopVision · 实验四前后端</span>
-            <span>数据来源：MUGE / Amazon / 苏宁 · 9 类商品图文索引</span>
-          </footer>
+          <HeaderSearch />
+          <div className="sv-topbar-side">
+            <HealthPill />
+            <AccountZone />
+            <Button
+              className="sv-menu-btn"
+              type="text"
+              icon={<MenuOutlined />}
+              onClick={() => setDrawerOpen(true)}
+              aria-label="打开导航"
+            />
+          </div>
         </div>
+        <nav className="sv-topnav" aria-label="主导航">
+          <NavLinks items={navItems} />
+          {isAdmin && <span className="sv-topnav-badge">管理员视图</span>}
+        </nav>
+      </header>
+
+      <div className="sv-content">
+        <SystemBanner />
+        <main className="sv-page sv-reveal">{children}</main>
+        <footer className="sv-footer">
+          <span>Agent ShopVision · 实验四前后端</span>
+          <span>数据来源：MUGE / Amazon / 苏宁 · 9 类商品图文索引</span>
+        </footer>
       </div>
 
       <Drawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         placement="left"
-        width={288}
-        styles={{ body: { padding: 0 } }}
+        width={280}
+        styles={{ body: { padding: '18px 14px' } }}
         title={null}
       >
-        <NavContent onNavigate={() => setDrawerOpen(false)} />
+        <nav className="sv-drawer-nav" aria-label="移动端导航">
+          <NavLinks items={navItems} onNavigate={() => setDrawerOpen(false)} />
+        </nav>
       </Drawer>
+
+      <LoginModal />
     </div>
   )
 }
