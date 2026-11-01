@@ -9,6 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import {
   CATEGORIES,
+  CATEGORY_PHOTOS,
   DEMO_PAIRS,
   HERO_PHOTOS,
   INDEX_TOTAL,
@@ -135,18 +136,34 @@ function CategorySection() {
       <div className="sv-category-grid">
         {CATEGORIES.map((category) => {
           const style = categoryStyle(category.key)
+          const featured = category.key === '鞋'
           return (
             <button
               type="button"
               key={category.key}
-              className="sv-category-tile"
+              className={`sv-category-tile ${featured ? 'is-featured' : ''}`}
               style={{ background: style.bg, color: style.ink }}
               onClick={() => navigate(`/text?category=${encodeURIComponent(category.key)}`)}
             >
-              <span className="sv-category-name">{category.key}</span>
-              <span className="sv-category-hint">{category.hint}</span>
-              <span className="sv-category-count sv-mono">
-                {category.count.toLocaleString('zh-CN')} 商品
+              <img
+                src={CATEGORY_PHOTOS[category.key]}
+                alt=""
+                loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.closest('.sv-category-tile').classList.add('is-broken')
+                  event.currentTarget.remove()
+                }}
+              />
+              <span className="sv-category-shade" aria-hidden="true" />
+              <span className="sv-category-copy">
+                <span className="sv-category-name">{category.key}</span>
+                <span className="sv-category-hint">{category.hint}</span>
+                <span className="sv-category-count sv-mono">
+                  {category.count.toLocaleString('zh-CN')} 商品
+                </span>
+              </span>
+              <span className="sv-category-go" aria-hidden="true">
+                <ArrowRightOutlined />
               </span>
             </button>
           )

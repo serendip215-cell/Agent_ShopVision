@@ -30,6 +30,19 @@ export function categoryStyle(category) {
   return CATEGORY_STYLE[category] || { bg: '#F1F3F5', ink: '#4E5A60' }
 }
 
+// 分类入口卡用的真实商品背景图（public/items 与 public/samples 下已逐张人工确认类别）
+export const CATEGORY_PHOTOS = {
+  鞋: '/samples/sample-shoe.jpg',
+  水杯: '/items/muge_1104.jpg',
+  包: '/samples/sample-bag.jpg',
+  男装: '/items/12303593760.jpg',
+  运动服: '/items/12440833831.jpg',
+  女装: '/items/B075DQBBJZ.jpg',
+  手机壳: '/items/B07R7WML4R.jpg',
+  厨房用品: '/items/muge_860.jpg',
+  家居用品: '/items/B07DWNWGNJ.jpg',
+}
+
 // Hero 拼贴用的真实商品图（public/items 下已确认存在）
 export const HERO_PHOTOS = [
   { src: '/samples/sample-shoe.jpg', category: '鞋', caption: '白色运动鞋' },
