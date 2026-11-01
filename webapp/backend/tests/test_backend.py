@@ -106,6 +106,12 @@ class IndexStoreTest(unittest.TestCase):
         self.assertEqual(set(scores), set(CATEGORIES))
         self.assertGreaterEqual(score, max(scores.values()) - 1e-6)
 
+    def test_best_category_checks_dimension_like_search(self) -> None:
+        """不同源时也要给 DIM_MISMATCH，不能放过 matmul 的 ValueError。"""
+        with self.assertRaises(ApiError) as caught:
+            self.store.best_category(np.zeros(DIM + 3, dtype="float32"))
+        self.assertEqual(caught.exception.code, ErrorCode.DIM_MISMATCH)
+
 
 class EncoderTest(unittest.TestCase):
     def test_placeholder_is_deterministic_and_normalised(self) -> None:
@@ -195,6 +201,21 @@ class ApiTest(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json()["code"], ErrorCode.INVALID_IMAGE)
+
+    def test_encoder_index_mismatch_is_400_not_500(self) -> None:
+        """编码器与索引不同源：图像分类要走 DIM_MISMATCH，不能掉进 500 兜底。"""
+        mismatched = MatchService(
+            PlaceholderEncoder(dim=DIM + 3), _build_index(Path(self.tmp.name))
+        )
+        app.dependency_overrides[get_match_service] = lambda: mismatched
+        try:
+            response = self.client.post(
+                "/api/v1/image", files={"file": ("p.png", _png_bytes(), "image/png")}
+            )
+        finally:
+            app.dependency_overrides[get_match_service] = lambda: self.service
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["code"], ErrorCode.DIM_MISMATCH)
 
     def test_text_endpoint_validates_empty_query(self) -> None:
         response = self.client.post("/api/v1/text", json={"query": "", "top_k": 3})

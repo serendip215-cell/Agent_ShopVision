@@ -111,9 +111,10 @@ class IndexStore:
         vector = np.asarray(vector, dtype="float32").reshape(-1)
         if top_k < 1:
             raise ApiError(ErrorCode.BAD_REQUEST, "top_k 必须大于 0")
+        # 维度只跟向量有关，查一次就够；放在循环外，别让它随类别数重复跑
+        self._check_dim(vector)
         pool: list[Hit] = []
         for category in categories or self.categories:
-            self._check_dim(vector)
             items, embeddings = self._load(category)
             sims = np.asarray(embeddings @ vector).reshape(-1)
             if sims.size == 0:
@@ -132,11 +133,13 @@ class IndexStore:
     def best_category(self, vector: np.ndarray) -> tuple[str | None, float, dict[str, float]]:
         """每个类别取最高相似度，返回（最佳类别, 分数, 各类分数表）。"""
         vector = np.asarray(vector, dtype="float32").reshape(-1)
+        # 与 search() 一致：不同源（编码器维度 ≠ 索引维度）时给 400 DIM_MISMATCH，
+        # 不能放任 matmul 抛 ValueError 落到全局兜底变成 500。
+        self._check_dim(vector)
         scores: dict[str, float] = {}
         best: tuple[str | None, float] = (None, float("-inf"))
         for category in self.categories:
-            items, embeddings = self._load(category)
-            del items
+            _, embeddings = self._load(category)
             if embeddings.shape[0] == 0:
                 continue
             top = float(np.max(np.asarray(embeddings @ vector).reshape(-1)))
