@@ -102,7 +102,7 @@ copy .env.example .env              # 默认 placeholder，开箱即用
 uvicorn app.main:app --reload --port 8000
 ```
 
-- 在线文档（自动生成）：http://localhost:8000/docs
+- 接口文档（自动生成，见 §三）：http://localhost:8000/docs
 - 健康检查：http://localhost:8000/api/v1/health
 
 ### 4. 自检
@@ -142,6 +142,30 @@ mypy .                              # 类型   可选依赖缺装不算错（已
 | POST | `/api/v1/text` | 文本检索 | `application/json`：`{query, top_k?, category?}` |
 | POST | `/api/v1/match` | 图文匹配 | `multipart/form-data`：`file` + `text` + `top_k?` |
 
+### 接口文档（FastAPI 内置，不用装插件）
+
+Java 那边用 springdoc / knife4j 挂 Swagger，FastAPI 是**自带**的，开服务就有：
+
+| 地址 | 是什么 | 谁来用 |
+|---|---|---|
+| `/docs` | Swagger UI，能直接点着发请求试 | 联调、演示、截图 |
+| `/redoc` | ReDoc，排版舒服的阅读版 | 写报告 API 文档那一节 |
+| `/openapi.json` | OpenAPI 3 规范，机器可读 | 导给别人 / 喂 Postman |
+
+接口分组按三个页面走（状态 / 图像分类页 / 文本检索页 / 多模态匹配页），每个接口都带
+summary、description、参数说明、**返回值结构**与可能的错误码（400/404/500）。
+所以 **wlz 写 API 文档那一节，直接把 `/docs` 里内容整理成表格即可**，不用猜。
+
+导出成文件给报告/Postman 用：
+
+```powershell
+python -c "import json,pathlib;from app.main import app;pathlib.Path('openapi.json').write_text(json.dumps(app.openapi(),ensure_ascii=False,indent=2),encoding='utf-8')"
+```
+
+> 返回值的字段结构来自 `app/schemas.py` 里的 `*Result` 模型（`ImageResult` / `TextResult` / …），
+> 它们**只用于生成文档**：线上 JSON 形状仍由 [`API约定.md`](API约定.md) 冻结，模型只描述不改形状。
+> 有测试盯着这点（`OpenApiTest`：三个字段不变、result 必须是有形状的模型而不是 `Any`）。
+
 调用示例（PowerShell / Windows 自带 curl）：
 
 ```powershell
@@ -174,7 +198,7 @@ print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色�
 app/
 ├── main.py            FastAPI 实例、CORS、全局异常处理
 ├── config.py          Settings（环境变量 / .env）
-├── schemas.py         请求体 + 统一返回体
+├── schemas.py         请求体、统一返回体、结果模型（后两者供 /docs 生成文档）
 ├── errors.py          错误码枚举 + 业务异常
 ├── deps.py            依赖注入：编码器 / 索引 / 服务
 ├── api/v1.py          路由（Controller）：只取参、校验、调服务

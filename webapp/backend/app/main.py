@@ -1,7 +1,10 @@
 """FastAPI 入口：装配路由、CORS、全局异常处理。
 
 启动：uvicorn app.main:app --reload --port 8000
-文档：http://localhost:8000/docs
+文档（FastAPI 内置，等价于 Java 的 springdoc/knife4j）：
+    http://localhost:8000/docs        Swagger UI，可直接发请求试
+    http://localhost:8000/redoc       ReDoc，适合当阅读版
+    http://localhost:8000/openapi.json  机器可读的 OpenAPI 3，可导出给报告/Postman
 """
 
 from __future__ import annotations
@@ -20,6 +23,24 @@ from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
 logger = logging.getLogger("shopvision.api")
+
+_DESCRIPTION = """实验四后端：电商商品图文检索服务，集成实验三优化后的 Chinese-CLIP 双塔（ONNX）。
+
+所有接口统一返回 `{code, result, msg}`：`code=0` 为成功，非 0 为错误码，且**前三位就是 HTTP 状态码**
+（`40001` → 400、`40401` → 404、`50001` → 500）。完整码表见仓库 `webapp/API约定.md`。
+
+- Swagger UI：`/docs`（本页，可直接发请求试接口）
+- ReDoc：`/redoc`（阅读版）
+- OpenAPI JSON：`/openapi.json`（可导出，供 API 文档或 Postman 使用）
+"""
+
+# tags 与前端页面一一对应，评审/报告里指哪打哪
+_TAGS_META = [
+    {"name": "状态", "description": "探活与索引概况，前端启动时先调"},
+    {"name": "图像分类页", "description": "对应前端「图像分类」页面"},
+    {"name": "文本检索页", "description": "对应前端「文本检索」页面"},
+    {"name": "多模态匹配页", "description": "对应前端「多模态匹配」页面"},
+]
 
 
 def _body(code: ErrorCode, msg: str = "") -> JSONResponse:
@@ -66,7 +87,8 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="Agent ShopVision API",
         version="0.1.0",
-        description="实验四后端：电商商品图文检索服务（集成实验三优化模型）。",
+        description=_DESCRIPTION,
+        openapi_tags=_TAGS_META,
     )
     app.add_middleware(
         CORSMiddleware,

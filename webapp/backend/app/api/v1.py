@@ -1,12 +1,14 @@
 """路由层（Controller）：只做取参、校验、调服务、包统一返回体。
 
 不写业务逻辑，不知道背后是占位还是 ONNX。
+每个路由的 summary / description / response_model 都是给 /docs（Swagger UI）看的，
+顺手把错误码表也塞进文档——报告"API 文档 / 异常处理说明"两节可以直接对着 /docs 写。
 """
 
 from __future__ import annotations
 
 import io
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 from PIL import Image
@@ -14,7 +16,14 @@ from PIL import Image
 from ..config import get_settings
 from ..deps import get_match_service
 from ..errors import ApiError, ErrorCode
-from ..schemas import ApiResponse, TextQueryRequest
+from ..schemas import (
+    ApiResponse,
+    HealthResponse,
+    ImageResponse,
+    MatchResponse,
+    TextQueryRequest,
+    TextResponse,
+)
 from ..services.matching import MatchService
 
 if TYPE_CHECKING:
@@ -23,6 +32,17 @@ if TYPE_CHECKING:
 router = APIRouter(prefix="/api/v1")
 
 _ALLOWED_FORMATS = {"PNG", "JPEG", "JPG", "WEBP"}
+
+# 统一挂在每个路由上：让 /docs 的每个接口都列出可能的错误码（错误体也是 {code, result, msg}）
+_ERROR_RESPONSES: dict[int | str, dict[str, Any]] = {
+    400: {
+        "model": ApiResponse,
+        "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / "
+        "40003 维度不一致 / 40004 文件过大",
+    },
+    404: {"model": ApiResponse, "description": "40401 类别不存在 / 40402 索引文件缺失"},
+    500: {"model": ApiResponse, "description": "50000 未捕获异常 / 50001 模型或依赖不可用"},
+}
 
 
 def _open_image(raw: bytes) -> "PILImage":
@@ -42,36 +62,68 @@ def _open_image(raw: bytes) -> "PILImage":
     return image.convert("RGB")
 
 
-@router.get("/health", response_model=ApiResponse, summary="健康检查")
-def health(service: MatchService = Depends(get_match_service)) -> ApiResponse:
+@router.get(
+    "/health",
+    response_model=HealthResponse,
+    summary="健康检查",
+    tags=["状态"],
+    responses=_ERROR_RESPONSES,
+    description="前端启动时先调这个探活。`model_loaded=false` 表示在跑占位编码器，"
+    "链路通但检索结果无意义。",
+)
+def health(service: MatchService = Depends(get_match_service)) -> HealthResponse:
     result = service.status()
     result["backend"] = get_settings().model_backend
-    return ApiResponse.ok(result)
+    return HealthResponse.ok(result)
 
 
-@router.post("/image", response_model=ApiResponse, summary="图像分类")
+@router.post(
+    "/image",
+    response_model=ImageResponse,
+    summary="图像分类",
+    tags=["图像分类页"],
+    responses=_ERROR_RESPONSES,
+    description="上传商品图 → 图像塔编码成 512 维向量 → 与索引里 9 类向量比相似度 → "
+    "返回最可能的类别、置信度与相似商品类别排序。",
+)
 async def classify_image(
-    file: UploadFile = File(..., description="商品图，multipart/form-data"),
+    file: UploadFile = File(..., description="商品图（PNG/JPG/WEBP，≤10 MB）"),
     service: MatchService = Depends(get_match_service),
-) -> ApiResponse:
+) -> ImageResponse:
     image = _open_image(await file.read())
-    return ApiResponse.ok(service.classify_image(image))
+    return ImageResponse.ok(service.classify_image(image))
 
 
-@router.post("/text", response_model=ApiResponse, summary="文本检索")
+@router.post(
+    "/text",
+    response_model=TextResponse,
+    summary="文本检索",
+    tags=["文本检索页"],
+    responses=_ERROR_RESPONSES,
+    description="中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。"
+    "`category` 留空表示搜全部类别。",
+)
 def search_text(
     payload: TextQueryRequest,
     service: MatchService = Depends(get_match_service),
-) -> ApiResponse:
-    return ApiResponse.ok(service.search_text(payload.query, payload.top_k, payload.category))
+) -> TextResponse:
+    return TextResponse.ok(service.search_text(payload.query, payload.top_k, payload.category))
 
 
-@router.post("/match", response_model=ApiResponse, summary="图文匹配")
+@router.post(
+    "/match",
+    response_model=MatchResponse,
+    summary="图文匹配",
+    tags=["多模态匹配页"],
+    responses=_ERROR_RESPONSES,
+    description="图与文**各自独立**编码、各自判类别，再比对两个类别是否一致；"
+    "不用图像判出的类别去限定文本检索（那样比对恒为一致，等于循环论证）。",
+)
 async def multimodal_match(
     file: UploadFile = File(..., description="商品图"),
-    text: str = Form(..., min_length=1, max_length=200),
-    top_k: int = Form(5, ge=1, le=50),
+    text: str = Form(..., min_length=1, max_length=200, description="中文文本，如「白色运动鞋」"),
+    top_k: int = Form(5, ge=1, le=50, description="返回的文本检索条数"),
     service: MatchService = Depends(get_match_service),
-) -> ApiResponse:
+) -> MatchResponse:
     image = _open_image(await file.read())
-    return ApiResponse.ok(service.match(image, text, top_k))
+    return MatchResponse.ok(service.match(image, text, top_k))

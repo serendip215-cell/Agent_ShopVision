@@ -284,5 +284,42 @@ class ConfigTest(unittest.TestCase):
         self.assertEqual(encoder.dim, DIM)
 
 
+class OpenApiTest(unittest.TestCase):
+    """/docs 的数据源（OpenAPI）不该退化：result 必须是有形状的模型，不是 Any。"""
+
+    def setUp(self) -> None:
+        self.schema = app.openapi()
+
+    def test_declares_the_four_endpoints(self) -> None:
+        self.assertEqual(
+            set(self.schema["paths"]),
+            {"/api/v1/health", "/api/v1/image", "/api/v1/text", "/api/v1/match"},
+        )
+
+    def test_every_response_keeps_the_three_field_shape(self) -> None:
+        for name, result_model in [
+            ("HealthResponse", "HealthResult"),
+            ("ImageResponse", "ImageResult"),
+            ("TextResponse", "TextResult"),
+            ("MatchResponse", "MatchResult"),
+        ]:
+            props = self.schema["components"]["schemas"][name]["properties"]
+            self.assertEqual(set(props), {"code", "result", "msg"}, name)
+            self.assertEqual(
+                props["result"]["anyOf"][0]["$ref"],
+                f"#/components/schemas/{result_model}",
+                name,
+            )
+
+    def test_error_codes_are_documented_per_endpoint(self) -> None:
+        responses = self.schema["paths"]["/api/v1/image"]["post"]["responses"]
+        for http_code in ("400", "404", "500"):
+            self.assertIn(http_code, responses)
+
+    def test_endpoints_are_grouped_by_page(self) -> None:
+        post = self.schema["paths"]["/api/v1/match"]["post"]
+        self.assertEqual(post["tags"], ["多模态匹配页"])
+
+
 if __name__ == "__main__":
     unittest.main()

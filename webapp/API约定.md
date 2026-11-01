@@ -42,7 +42,9 @@
 
 ## 三、接口清单
 
-基址 `http://localhost:8000`，版本前缀 `/api/v1`；在线文档 `/docs`（FastAPI 自动生成）。
+基址 `http://localhost:8000`，版本前缀 `/api/v1`；FastAPI 自动生成的接口文档：`/docs`（Swagger UI，
+可试接口）、`/redoc`（阅读版）、`/openapi.json`（OpenAPI 3，可导出）。返回值结构写在后端
+`app/schemas.py` 的 `*Result` 模型里，只用于生成文档，线上形状以本文为准。
 
 ### GET /api/v1/health — 健康检查
 
