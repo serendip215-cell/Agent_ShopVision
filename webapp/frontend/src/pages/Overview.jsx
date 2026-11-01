@@ -1,5 +1,11 @@
-import { Button } from 'antd'
-import { ArrowRightOutlined, ExperimentOutlined, LockOutlined } from '@ant-design/icons'
+import { Fragment } from 'react'
+import { Button, Tooltip } from 'antd'
+import {
+  ArrowRightOutlined,
+  ExperimentOutlined,
+  InfoCircleOutlined,
+  LockOutlined,
+} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import {
   CATEGORIES,
@@ -20,21 +26,21 @@ const INSTRUMENTS = [
     key: 'image',
     step: '第一步',
     title: '图像分类',
-    text: '传一张商品图，图像塔给出最可能的类别与置信度。',
+    text: '上传商品图片，图像塔输出预测类别与置信分数。',
     to: '/image',
   },
   {
     key: 'text',
     step: '第二步',
     title: '文本检索',
-    text: '输一句中文描述，文本塔在商品库里找最相似的条目。',
+    text: '输入中文描述，文本塔检索商品库，召回相似商品。',
     to: '/text?q=白色运动鞋',
   },
   {
     key: 'match',
     step: '第三步',
     title: '图文匹配',
-    text: '图和文各自独立判断，再比对是否说的是同一类商品。',
+    text: '图像、文本两路独立推理，交叉验证图文是否匹配。',
     to: '/match?demo=mismatch',
   },
 ]
@@ -119,7 +125,12 @@ function CategorySection() {
     <section className="sv-reveal">
       <div className="sv-strip-head">
         <h2>从类别进去逛</h2>
-        <span>点一块颜色，直接用该类别的热门查询开始检索</span>
+        <Tooltip title="点击任一类别，直接用该类别的热门查询开始检索">
+          <span className="sv-strip-hint">
+            <InfoCircleOutlined />
+            点击分类，直达热门检索
+          </span>
+        </Tooltip>
       </div>
       <div className="sv-category-grid">
         {CATEGORIES.map((category) => {
@@ -132,10 +143,10 @@ function CategorySection() {
               style={{ background: style.bg, color: style.ink }}
               onClick={() => navigate(`/text?category=${encodeURIComponent(category.key)}`)}
             >
-              <span className="sv-category-glyph">{category.glyph}</span>
               <span className="sv-category-name">{category.key}</span>
+              <span className="sv-category-hint">{category.hint}</span>
               <span className="sv-category-count sv-mono">
-                {category.count.toLocaleString('zh-CN')}
+                {category.count.toLocaleString('zh-CN')} 商品
               </span>
             </button>
           )
@@ -151,23 +162,34 @@ function InstrumentSection() {
     <section className="sv-reveal">
       <div className="sv-strip-head">
         <h2>三台仪器，同一套索引</h2>
-        <span>按顺序做一遍，正好是一次完整演示</span>
+        <Tooltip title="按顺序做一遍，正好是一次完整演示：先分类、再检索、最后交叉验证">
+          <span className="sv-strip-hint">
+            <InfoCircleOutlined />
+            三步走完一次完整演示
+          </span>
+        </Tooltip>
       </div>
       <div className="sv-instrument-grid">
-        {INSTRUMENTS.map((item) => (
-          <button
-            type="button"
-            key={item.key}
-            className="sv-instrument"
-            onClick={() => navigate(item.to)}
-          >
-            <span className="sv-instrument-step">{item.step}</span>
-            <strong>{item.title}</strong>
-            <p>{item.text}</p>
-            <span className="sv-instrument-go">
-              进入 <ArrowRightOutlined />
-            </span>
-          </button>
+        {INSTRUMENTS.map((item, index) => (
+          <Fragment key={item.key}>
+            {index > 0 && (
+              <span className="sv-flow-arrow" aria-hidden="true">
+                <ArrowRightOutlined />
+              </span>
+            )}
+            <button
+              type="button"
+              className="sv-instrument"
+              onClick={() => navigate(item.to)}
+            >
+              <span className="sv-instrument-step">{item.step}</span>
+              <strong>{item.title}</strong>
+              <p>{item.text}</p>
+              <span className="sv-instrument-go">
+                进入 <ArrowRightOutlined />
+              </span>
+            </button>
+          </Fragment>
         ))}
       </div>
       <div className="sv-demo-row">
