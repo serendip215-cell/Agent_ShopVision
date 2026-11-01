@@ -59,7 +59,8 @@
 | 实验三 推理加速（3.1.4） | ✅ 完成 | ONNX + TensorRT：**延迟 −57.7%**（batch1）/ −52.7%（batch32）、**吞吐 +136.6%** / +111.5%、**精度一致性 −0.43pp**；记录见 [`docs/optimize/`](docs/optimize/) |
 | 实验三 量化（3.1.1） | 🧊 冻结 | 6 种配置实测（FP32 / FP16 / INT8 / per-channel / 分塔），裸动态量化最好 −13.06pp，未达 ≤2% 要求；数据与文档保留在 [`docs/optimize/runs/`](docs/optimize/runs/) |
 | 实验三评测与绘图交付 | ✅ 完成 | 杜军博沿用已核验训练机结果完成速度/精度判定、9张中文PNG/PDF/SVG与132历史查询指标复算；[统一结果](evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)，[本人现场操作待办](docs/流程与交接/实验三杜军博任务交付.md) |
-| 前后端、Agent | ⏳ 未开始 | 实验 4–5 |
+| 实验 4 前后端 | 📋 规划中 | 分工、开发文档、模型产物上传说明已写；**代码未开始**，双塔 ONNX 待训练机上传。见 [`webapp/README.md`](webapp/README.md) |
+| Agent | ⏳ 未开始 | 实验 5 |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
 
@@ -154,6 +155,7 @@ Agent_ShopVision/
 │   ├── finetune/                  # 微调数据/训练/结果/补丁说明与入库凭证
 │   ├── typst/                     # Typst 编译器，首次运行自动下载
 │   └── build/                     # 编译出的带时间戳 PDF
+├── webapp/                        # 实验四前后端（前端 React + 后端 FastAPI；代码未开始，见 webapp/README.md）
 └── README.md
 ```
 
@@ -280,6 +282,9 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 | [`docs/finetune/04-Chinese-CLIP补丁说明.md`](docs/finetune/04-Chinese-CLIP补丁说明.md) | 对官方 `Chinese-CLIP/` 的 3 处改动（含改前改后代码、重新施加步骤） |
 | [`docs/finetune/05-未清洗数据对照组.md`](docs/finetune/05-未清洗数据对照组.md) | **对照组实验**：未清洗数据直训，用于拆分"微调"与"数据清洗"的贡献 |
 | [`docs/流程与交接/实验三流程与分工.md`](docs/流程与交接/实验三流程与分工.md) | **实验三总流程**：任务切换（3.1.1 冻结 → 3.1.4 主线）、分工、命令与验收清单 |
+| [`docs/流程与交接/实验四流程与分工.md`](docs/流程与交接/实验四流程与分工.md) | **实验四分工**：开发三人（何朝杨 主任务）、文档三人（djb/wlz/qxy）、报告要求逐条对照 |
+| [`docs/流程与交接/实验四模型产物上传说明.md`](docs/流程与交接/实验四模型产物上传说明.md) | 让 wlz 把双塔 ONNX 传到 GitHub Release 的执行说明 |
+| [`webapp/README.md`](webapp/README.md) | **实验四前后端开发文档**：目录结构、接口表、前后端写法、运行命令、模型接入接缝 |
 | [`docs/optimize/README.md`](docs/optimize/README.md) | **实验三执行记录索引**：结论、进度、文档编号规则 |
 | [`docs/optimize/02-推理加速（3.1.4）.md`](docs/optimize/02-推理加速（3.1.4）.md) | 主任务：指标、测量口径、导出/bench/一致性全套结果 |
 | [`scripts/optimize/README.md`](scripts/optimize/README.md) | 实验三 7 个脚本的用途、依赖版本与四个已知坑 |
@@ -302,7 +307,7 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 - 实验三现场演示/录屏（具体命令与分工见杜军博任务交付说明）
 - 检索融合权重调优（pilot 验证集已就绪，对比实验尚未做）
 - 剪枝（可选；量化已实测并冻结，见上表）
-- FastAPI / React
+- 实验四前后端代码（FastAPI / React）：分工、开发文档与产物上传说明已写，代码未开始；双塔 ONNX 待训练机上传后再接（先用占位编码器跑通链路）
 - Agent 工具调用和端到端评测
 
 微调权重的索引已建好（`data/index_data_finetuned/`，9 类 9,393 条）。下一步是用同一套查询集对比新旧索引的端到端召回，再据此调整融合权重。
