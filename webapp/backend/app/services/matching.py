@@ -60,6 +60,10 @@ class MatchService:
         }
 
     # 多模态匹配页：图 + 文 -> 先各判类别，再比对是否一致
+    #
+    # 故意不按 image_category 去过滤文本检索：任务书要的就是"两条独立编码、各判类别、
+    # 再比对一致性"；若用图像判出的类别去限定文本检索，比对就变成循环论证、恒为一致。
+    # items 保留全类别的文本检索结果，是为了给前端展示证据（含不一致时的对照）。
     def match(self, image: "Image", text: str, top_k: int = 5) -> dict:
         image_vector = self.encoder.encode_image(image)
         text_vector = self.encoder.encode_text(text)

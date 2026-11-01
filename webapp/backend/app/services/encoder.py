@@ -21,8 +21,10 @@ import numpy as np
 
 from ..errors import ApiError, ErrorCode
 
-if TYPE_CHECKING:  # 仅类型标注，避免占位模式拖入 PIL
+if TYPE_CHECKING:  # 仅类型标注，避免占位模式拖入 PIL / settings 运行时依赖
     from PIL.Image import Image
+
+    from ..config import Settings
 
 
 def _l2(vector: np.ndarray) -> np.ndarray:
@@ -117,7 +119,7 @@ class OnnxEncoder(Encoder):
         return _l2(out[0])
 
 
-def build_encoder(settings) -> Encoder:
+def build_encoder(settings: "Settings") -> Encoder:
     """按配置产出编码器。占位/ONNX 的分支只在这里。"""
     backend = (settings.model_backend or "placeholder").strip().lower()
     if backend == "onnx":

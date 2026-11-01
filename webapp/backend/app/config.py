@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -25,6 +26,7 @@ class Settings(BaseSettings):
     index_dir: str = "data/index_data_finetuned"
     embedding_dim: int = 512
     candidate_k: int = 50
+    max_upload_mb: int = 10  # 上传图片大小上限，防止大文件全量读进内存
 
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 
@@ -38,5 +40,7 @@ class Settings(BaseSettings):
         return self.repo_path(self.index_dir)
 
 
+@lru_cache(maxsize=1)
 def get_settings() -> Settings:
+    """单例：.env 只在首次读取，改配置需重启进程（与 deps 的单例一致）。"""
     return Settings()

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import csv
 import json
+import threading
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -45,6 +46,8 @@ class IndexStore:
             self._registry = json.load(handle)
         self.candidate_k = candidate_k
         self._cache: dict[str, tuple[dict[int, dict[str, str]], np.ndarray]] = {}
+        # 同步路由跑在线程池里，首次加载要串起来；锁只护首次加载，命中后不加锁。
+        self._lock = threading.Lock()
 
     @property
     def categories(self) -> list[str]:
@@ -65,22 +68,29 @@ class IndexStore:
         }
 
     def _load(self, category: str) -> tuple[dict[int, dict[str, str]], np.ndarray]:
-        if category not in self._cache:
-            entry = (self._registry.get("categories") or {}).get(category)
-            if entry is None:
-                raise ApiError(ErrorCode.CATEGORY_NOT_FOUND, category)
-            csv_path = self.index_dir / entry["items_csv"]
-            if not csv_path.is_file():
-                raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少条目表：{csv_path}")
-            with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
-                items = {int(row["vector_id"]): row for row in csv.DictReader(handle)}
-            embeddings_path = csv_path.parent / "image_embeddings.npy"
-            if not embeddings_path.is_file():
-                raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少向量：{embeddings_path}")
-            # 不 mmap：每类向量仅数 MB，直接读入内存；mmap 会一直占着文件句柄，
-            # Windows 下连测试的临时目录都删不掉。
-            self._cache[category] = (items, np.load(embeddings_path))
-        return self._cache[category]
+        cached = self._cache.get(category)
+        if cached is not None:
+            return cached
+        with self._lock:
+            if category not in self._cache:
+                self._cache[category] = self._read(category)
+            return self._cache[category]
+
+    def _read(self, category: str) -> tuple[dict[int, dict[str, str]], np.ndarray]:
+        entry = (self._registry.get("categories") or {}).get(category)
+        if entry is None:
+            raise ApiError(ErrorCode.CATEGORY_NOT_FOUND, category)
+        csv_path = self.index_dir / entry["items_csv"]
+        if not csv_path.is_file():
+            raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少条目表：{csv_path}")
+        with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
+            items = {int(row["vector_id"]): row for row in csv.DictReader(handle)}
+        embeddings_path = csv_path.parent / "image_embeddings.npy"
+        if not embeddings_path.is_file():
+            raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少向量：{embeddings_path}")
+        # 不 mmap：每类向量仅数 MB，直接读入内存；mmap 会一直占着文件句柄，
+        # Windows 下连测试的临时目录都删不掉。
+        return items, np.load(embeddings_path)
 
     def _check_dim(self, vector: np.ndarray) -> None:
         expected = self.dimension

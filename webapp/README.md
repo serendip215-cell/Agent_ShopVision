@@ -127,7 +127,9 @@ app/
   真要多协议复用时再拆成领域异常 + 适配层。
 - `IndexStore` 首次访问某类时整块读入内存（不 mmap，避免 Windows 文件句柄锁），
   9 类全用约 120 MB；数据量再大就换 mmap 或向量库。
-- `deps` 用 `lru_cache` 做单例，改 `.env` 需重启进程。
+- `deps` / `get_settings` 用 `lru_cache` 做单例，改 `.env` 需重启进程。
+- 上传图片上限 10 MB（`SHOPVISION_MAX_UPLOAD_MB`），超限返回 40004——防大文件全量读进内存；
+  真要收大图再上流式接收或分片，不在本轮范围。
 
 ## 五、模型接入
 

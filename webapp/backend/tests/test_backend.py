@@ -20,6 +20,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from app.config import get_settings  # noqa: E402
 from app.deps import get_match_service  # noqa: E402
 from app.errors import ApiError, ErrorCode  # noqa: E402
 from app.main import app  # noqa: E402
@@ -177,6 +178,15 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["code"], 0)
 
+    def test_oversized_upload_is_rejected(self) -> None:
+        limit = get_settings().max_upload_mb * 1024 * 1024
+        payload = b"\x89PNG" + b"\x00" * (limit + 1)
+        response = self.client.post(
+            "/api/v1/image", files={"file": ("big.png", payload, "image/png")}
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["code"], ErrorCode.FILE_TOO_LARGE)
+
     def test_image_endpoint_rejects_non_image(self) -> None:
         response = self.client.post(
             "/api/v1/image", files={"file": ("p.txt", b"not an image", "text/plain")}
@@ -237,6 +247,9 @@ class ErrorCodeTest(unittest.TestCase):
 
 
 class ConfigTest(unittest.TestCase):
+    def test_settings_is_a_cached_singleton(self) -> None:
+        self.assertIs(get_settings(), get_settings())
+
     def test_build_encoder_defaults_to_placeholder(self) -> None:
         class FakeSettings:
             model_backend = "placeholder"

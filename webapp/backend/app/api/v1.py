@@ -26,7 +26,10 @@ _ALLOWED_FORMATS = {"PNG", "JPEG", "JPG", "WEBP"}
 
 
 def _open_image(raw: bytes) -> "PILImage":
-    """上传字节 -> RGB 图片；格式不对抛 400，前端拿到的 msg 可直接展示。"""
+    """上传字节 -> RGB 图片；所有上传都从这里过，大小/格式校验也集中在这一道。"""
+    limit = get_settings().max_upload_mb * 1024 * 1024
+    if len(raw) > limit:
+        raise ApiError(ErrorCode.FILE_TOO_LARGE, f"上限 {get_settings().max_upload_mb} MB")
     if not raw:
         raise ApiError(ErrorCode.EMPTY_UPLOAD)
     try:

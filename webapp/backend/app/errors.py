@@ -12,6 +12,7 @@
 | 40001 | 400 | 图像格式错误/损坏 | 图像格式错误，请上传 PNG/JPG |
 | 40002 | 400 | 上传内容为空 | 上传内容为空 |
 | 40003 | 400 | 查询向量维度与索引不一致 | 查询向量维度与索引不一致 |
+| 40004 | 400 | 上传文件过大 | 上传文件过大 |
 | 40400 | 404 | 路径/资源不存在 | 资源不存在 |
 | 40401 | 404 | 类别不存在 | 类别不存在 |
 | 40402 | 404 | 索引文件缺失 | 索引文件缺失 |
@@ -34,6 +35,7 @@ class ErrorCode(IntEnum):
     INVALID_IMAGE = 40001
     EMPTY_UPLOAD = 40002
     DIM_MISMATCH = 40003
+    FILE_TOO_LARGE = 40004
 
     # 404 系：目标不存在
     NOT_FOUND = 40400
@@ -59,6 +61,7 @@ _MESSAGES: dict[ErrorCode, str] = {
     ErrorCode.INVALID_IMAGE: "图像格式错误，请上传 PNG/JPG",
     ErrorCode.EMPTY_UPLOAD: "上传内容为空",
     ErrorCode.DIM_MISMATCH: "查询向量维度与索引不一致",
+    ErrorCode.FILE_TOO_LARGE: "上传文件过大",
     ErrorCode.NOT_FOUND: "资源不存在",
     ErrorCode.CATEGORY_NOT_FOUND: "类别不存在",
     ErrorCode.INDEX_MISSING: "索引文件缺失",
