@@ -14,7 +14,7 @@
 
 # 本地缓存、虚拟环境、系统文件与崩溃转储。
 __pycache__/
-/.venv/
+.venv/
 .DS_Store
 *.stackdump
 

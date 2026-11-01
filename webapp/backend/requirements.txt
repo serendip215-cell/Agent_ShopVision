@@ -1,0 +1,14 @@
+# 占位模式只需这些即可跑通前后端：
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.7
+pydantic-settings>=2.3
+numpy>=1.26
+pillow>=10.0
+python-multipart>=0.0.9
+httpx>=0.27            # 仅测试用（fastapi TestClient 依赖）
+
+# 接真模型（SHOPVISION_MODEL_BACKEND=onnx）再加：
+# onnxruntime>=1.18
+# Chinese-CLIP：克隆官方仓库后安装（提供 cn_clip 的 tokenize / image_transform）
+#   https://github.com/OFA-Sys/Chinese-CLIP

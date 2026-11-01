@@ -59,7 +59,7 @@
 | 实验三 推理加速（3.1.4） | ✅ 完成 | ONNX + TensorRT：**延迟 −57.7%**（batch1）/ −52.7%（batch32）、**吞吐 +136.6%** / +111.5%、**精度一致性 −0.43pp**；记录见 [`docs/optimize/`](docs/optimize/) |
 | 实验三 量化（3.1.1） | 🧊 冻结 | 6 种配置实测（FP32 / FP16 / INT8 / per-channel / 分塔），裸动态量化最好 −13.06pp，未达 ≤2% 要求；数据与文档保留在 [`docs/optimize/runs/`](docs/optimize/runs/) |
 | 实验三评测与绘图交付 | ✅ 完成 | 杜军博沿用已核验训练机结果完成速度/精度判定、9张中文PNG/PDF/SVG与132历史查询指标复算；[统一结果](evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)，[本人现场操作待办](docs/流程与交接/实验三杜军博任务交付.md) |
-| 实验 4 前后端 | 📋 规划中 | 分工、开发文档、模型产物上传说明已写；**代码未开始**，双塔 ONNX 待训练机上传。见 [`webapp/README.md`](webapp/README.md) |
+| 实验 4 前后端 | 🚧 进行中 | 后端 FastAPI 骨架完成（占位模式可跑，17 项自检通过），前端未开始；双塔 ONNX 待训练机上传后切真模型。见 [`webapp/README.md`](webapp/README.md) |
 | Agent | ⏳ 未开始 | 实验 5 |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
