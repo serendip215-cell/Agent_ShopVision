@@ -1,17 +1,17 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Button, Tooltip } from 'antd'
 import {
   ArrowRightOutlined,
   ExperimentOutlined,
   InfoCircleOutlined,
   LockOutlined,
+  SearchOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import {
   CATEGORIES,
   CATEGORY_PHOTOS,
   DEMO_PAIRS,
-  HERO_PHOTOS,
   INDEX_TOTAL,
   SAMPLE_QUERIES,
   TOTAL_PRODUCTS,
@@ -46,57 +46,73 @@ const INSTRUMENTS = [
   },
 ]
 
-function HeroPhoto({ photo, className }) {
-  const style = categoryStyle(photo.category)
-  return (
-    <figure className={`sv-collage-item ${className}`}>
-      <img
-        src={photo.src}
-        alt={photo.caption}
-        loading="lazy"
-        onError={(event) => {
-          event.currentTarget.closest('.sv-collage-item').classList.add('is-broken')
-          event.currentTarget.remove()
-        }}
-      />
-      <figcaption style={{ background: style.bg, color: style.ink }}>
-        {photo.caption}
-      </figcaption>
-    </figure>
-  )
+// 分类矩阵的大小错落：大卡 2x2、中卡 2x1、小卡 1x1，正好填满 6 列 3 行
+const CATEGORY_SIZE = {
+  鞋: 'is-size-l',
+  水杯: 'is-size-m',
+  包: 'is-size-m',
+  男装: 'is-size-m',
+  运动服: 'is-size-m',
+  手机壳: 'is-size-m',
+  厨房用品: 'is-size-m',
+  女装: 'is-size-s',
+  家居用品: 'is-size-s',
 }
 
 function Hero() {
   const navigate = useNavigate()
+  const [query, setQuery] = useState('')
+
+  function goSearch(value) {
+    const q = String(value || '').trim()
+    navigate(q ? `/text?q=${encodeURIComponent(q)}` : '/text')
+  }
+
   return (
     <section className="sv-hero sv-reveal">
-      <div className="sv-hero-copy">
-        <span className="sv-hero-kicker">Chinese-CLIP 双塔 · 9 类 · 9,393 条索引</span>
-        <h2>
-          拍一张商品图，
-          <br />
-          剩下的交给<em>向量</em>。
-        </h2>
-        <p>
-          图像塔和文本塔各自编码成 512 维向量，再在同一个商品索引里相遇。
-          分类、检索、匹配，其实是一次编码的三种看法。
-        </p>
-        <div className="sv-hero-actions">
-          <Button type="primary" size="large" onClick={() => navigate('/image')}>
-            上传一张商品图
-          </Button>
-          <Button size="large" type="text" onClick={() => navigate('/match?demo=mismatch')}>
-            看一次「不一致」示例 <ArrowRightOutlined />
-          </Button>
+      <div className="sv-hero-banner">
+        <div className="sv-hero-copy">
+          <span className="sv-hero-kicker">Chinese-CLIP 双塔 · 9 类 · 9,393 条索引</span>
+          <h2>
+            用图像和文字
+            <br />
+            找到<em>同款</em>商品。
+          </h2>
+          <p>
+            上传图片、输入描述，跨模态检索同一个商品库。
+            分类、检索、匹配，是一次向量编码的三种看法。
+          </p>
         </div>
-      </div>
-      <div className="sv-collage" aria-hidden="true">
-        <HeroPhoto photo={HERO_PHOTOS[0]} className="c1" />
-        <HeroPhoto photo={HERO_PHOTOS[1]} className="c2" />
-        <HeroPhoto photo={HERO_PHOTOS[2]} className="c3" />
-        <HeroPhoto photo={HERO_PHOTOS[3]} className="c4" />
-        <HeroPhoto photo={HERO_PHOTOS[4]} className="c5" />
-        <HeroPhoto photo={HERO_PHOTOS[5]} className="c6" />
+        <div className="sv-hero-search">
+          <div className="sv-hero-search-field">
+            <SearchOutlined aria-hidden="true" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') goSearch(query)
+              }}
+              placeholder="输入商品描述，如：白色运动鞋"
+              aria-label="搜索商品"
+            />
+            <Button type="primary" onClick={() => goSearch(query)}>
+              开始检索
+            </Button>
+          </div>
+          <div className="sv-hero-chips">
+            <span>试试：</span>
+            {SAMPLE_QUERIES.slice(0, 4).map((item) => (
+              <button
+                key={item}
+                type="button"
+                className="sv-chip"
+                onClick={() => goSearch(item)}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="sv-hero-stats">
         <div>
@@ -136,12 +152,11 @@ function CategorySection() {
       <div className="sv-category-grid">
         {CATEGORIES.map((category) => {
           const style = categoryStyle(category.key)
-          const featured = category.key === '鞋'
           return (
             <button
               type="button"
               key={category.key}
-              className={`sv-category-tile ${featured ? 'is-featured' : ''}`}
+              className={`sv-category-tile ${CATEGORY_SIZE[category.key] || 'is-size-s'}`}
               style={{ background: style.bg, color: style.ink }}
               onClick={() => navigate(`/text?category=${encodeURIComponent(category.key)}`)}
             >
