@@ -28,6 +28,7 @@ from app.main import app  # noqa: E402
 from app.services.encoder import PlaceholderEncoder, build_encoder  # noqa: E402
 from app.services.index_store import IndexStore  # noqa: E402
 from app.services.matching import MatchService  # noqa: E402
+from scripts.export_api_docs import render_markdown  # noqa: E402
 
 DIM = 8
 CATEGORIES = ["甲", "乙"]
@@ -319,6 +320,30 @@ class OpenApiTest(unittest.TestCase):
     def test_endpoints_are_grouped_by_page(self) -> None:
         post = self.schema["paths"]["/api/v1/match"]["post"]
         self.assertEqual(post["tags"], ["多模态匹配页"])
+
+
+class ExportApiDocsTest(unittest.TestCase):
+    """交付用的离线 API 文档是生成的，别让它悄悄生成出半截内容。"""
+
+    def setUp(self) -> None:
+        schema = app.openapi()
+        self.markdown = render_markdown(schema, list(ErrorCode))
+
+    def test_lists_every_endpoint(self) -> None:
+        for path in ("/api/v1/health", "/api/v1/image", "/api/v1/text", "/api/v1/match"):
+            self.assertIn(path, self.markdown)
+
+    def test_expands_result_into_concrete_fields(self) -> None:
+        # result 那一支要能解出 $ref，解不出来表格里就只剩 code/msg
+        for field in ("result.topk[].similarity", "result.items[].item_name", "result.match"):
+            self.assertIn(f"`{field}`", self.markdown)
+
+    def test_upload_field_is_marked_as_file(self) -> None:
+        self.assertIn("| `file` | 文件 | 文件 | 是 |", self.markdown)
+
+    def test_carries_the_error_code_table(self) -> None:
+        for code in (ErrorCode.FILE_TOO_LARGE, ErrorCode.DIM_MISMATCH):
+            self.assertIn(f"| `{int(code)}` |", self.markdown)
 
 
 if __name__ == "__main__":

@@ -50,18 +50,18 @@ class MatchedItem(BaseModel):
 
     category: str = Field(description="命中类别")
     similarity: float = Field(description="余弦相似度（向量已 L2 归一化，故等于点积）")
-    item_id: str | None = None
-    item_name: str | None = None
-    product_type: str | None = None
-    brand: str | None = None
-    color: str | None = None
-    material: str | None = None
-    description: str | None = None
-    type: str | None = None
-    local_image_path: str | None = None
-    image_status: str | None = None
-    image_height: str | None = None
-    image_width: str | None = None
+    item_id: str | None = Field(default=None, description="数据源商品 ID")
+    item_name: str | None = Field(default=None, description="商品标题")
+    product_type: str | None = Field(default=None, description="商品大类")
+    brand: str | None = Field(default=None, description="品牌，可能为空串")
+    color: str | None = Field(default=None, description="颜色")
+    material: str | None = Field(default=None, description="材质")
+    description: str | None = Field(default=None, description="商品文案（实验一清洗后）")
+    type: str | None = Field(default=None, description="细分类，如「女士小板鞋」")
+    local_image_path: str | None = Field(default=None, description="原图相对路径")
+    image_status: str | None = Field(default=None, description="图片处理状态")
+    image_height: str | None = Field(default=None, description="图高（CSV 原样字符串）")
+    image_width: str | None = Field(default=None, description="图宽（CSV 原样字符串）")
 
 
 class HealthResult(BaseModel):

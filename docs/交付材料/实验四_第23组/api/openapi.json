@@ -1,0 +1,941 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Agent ShopVision API",
+    "description": "实验四后端：电商商品图文检索服务，集成实验三优化后的 Chinese-CLIP 双塔（ONNX）。\n\n所有接口统一返回 `{code, result, msg}`：`code=0` 为成功，非 0 为错误码，且**前三位就是 HTTP 状态码**\n（`40001` → 400、`40401` → 404、`50001` → 500）。完整码表见仓库 `webapp/API约定.md`。\n\n- Swagger UI：`/docs`（本页，可直接发请求试接口）\n- ReDoc：`/redoc`（阅读版）\n- OpenAPI JSON：`/openapi.json`（可导出，供 API 文档或 Postman 使用）\n",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "状态"
+        ],
+        "summary": "健康检查",
+        "description": "前端启动时先调这个探活。`model_loaded=false` 表示在跑占位编码器，链路通但检索结果无意义。",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/image": {
+      "post": {
+        "tags": [
+          "图像分类页"
+        ],
+        "summary": "图像分类",
+        "description": "上传商品图 → 图像塔编码成 512 维向量 → 与索引里 9 类向量比相似度 → 返回最可能的类别、置信度与相似商品类别排序。",
+        "operationId": "classify_image_api_v1_image_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_classify_image_api_v1_image_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/text": {
+      "post": {
+        "tags": [
+          "文本检索页"
+        ],
+        "summary": "文本检索",
+        "description": "中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。`category` 留空表示搜全部类别。",
+        "operationId": "search_text_api_v1_text_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/match": {
+      "post": {
+        "tags": [
+          "多模态匹配页"
+        ],
+        "summary": "图文匹配",
+        "description": "图与文**各自独立**编码、各自判类别，再比对两个类别是否一致；不用图像判出的类别去限定文本检索（那样比对恒为一致，等于循环论证）。",
+        "operationId": "multimodal_match_api_v1_match_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_multimodal_match_api_v1_match_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "title": "Result",
+            "description": "成功时的业务数据；失败时为 null"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "ApiResponse",
+        "description": "所有接口的统一返回体（成功与失败同形）。"
+      },
+      "Body_classify_image_api_v1_image_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "description": "商品图（PNG/JPG/WEBP，≤10 MB）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_classify_image_api_v1_image_post"
+      },
+      "Body_multimodal_match_api_v1_match_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "description": "商品图"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Text",
+            "description": "中文文本，如「白色运动鞋」"
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "description": "返回的文本检索条数",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "file",
+          "text"
+        ],
+        "title": "Body_multimodal_match_api_v1_match_post"
+      },
+      "CategoryScore": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "类别名"
+          },
+          "similarity": {
+            "type": "number",
+            "title": "Similarity",
+            "description": "该类最高余弦相似度"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "similarity"
+        ],
+        "title": "CategoryScore"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HealthResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "HealthResponse"
+      },
+      "HealthResult": {
+        "properties": {
+          "model_loaded": {
+            "type": "boolean",
+            "title": "Model Loaded",
+            "description": "true=已接真 ONNX 双塔；false=占位编码器，检索结果无意义"
+          },
+          "backend": {
+            "type": "string",
+            "title": "Backend",
+            "description": "当前编码器后端：placeholder / onnx"
+          },
+          "index_dir": {
+            "type": "string",
+            "title": "Index Dir",
+            "description": "索引目录"
+          },
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Categories",
+            "description": "索引里注册的类别"
+          },
+          "dimension": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dimension",
+            "description": "向量维度"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_loaded",
+          "backend",
+          "index_dir",
+          "categories"
+        ],
+        "title": "HealthResult"
+      },
+      "ImageResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ImageResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "ImageResponse"
+      },
+      "ImageResult": {
+        "properties": {
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "判出的类别：9 类里相似度最高的那个"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence",
+            "description": "对 9 类最高分做 softmax 后的概率"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score",
+            "description": "该类原始相似度"
+          },
+          "topk": {
+            "items": {
+              "$ref": "#/components/schemas/CategoryScore"
+            },
+            "type": "array",
+            "title": "Topk",
+            "description": "各类最高分，降序前 3"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "confidence",
+          "score",
+          "topk"
+        ],
+        "title": "ImageResult"
+      },
+      "MatchResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MatchResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "MatchResponse"
+      },
+      "MatchResult": {
+        "properties": {
+          "match": {
+            "type": "boolean",
+            "title": "Match",
+            "description": "两条独立编码各自判出的类别是否一致"
+          },
+          "image_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Category",
+            "description": "图像塔判出的类别"
+          },
+          "text_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Category",
+            "description": "文本塔判出的类别"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MatchedItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "文本检索结果，供对照"
+          }
+        },
+        "type": "object",
+        "required": [
+          "match",
+          "items"
+        ],
+        "title": "MatchResult"
+      },
+      "MatchedItem": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "命中类别"
+          },
+          "similarity": {
+            "type": "number",
+            "title": "Similarity",
+            "description": "余弦相似度（向量已 L2 归一化，故等于点积）"
+          },
+          "item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Id",
+            "description": "数据源商品 ID"
+          },
+          "item_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Name",
+            "description": "商品标题"
+          },
+          "product_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Type",
+            "description": "商品大类"
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand",
+            "description": "品牌，可能为空串"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color",
+            "description": "颜色"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material",
+            "description": "材质"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "商品文案（实验一清洗后）"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "细分类，如「女士小板鞋」"
+          },
+          "local_image_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Image Path",
+            "description": "原图相对路径"
+          },
+          "image_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Status",
+            "description": "图片处理状态"
+          },
+          "image_height": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Height",
+            "description": "图高（CSV 原样字符串）"
+          },
+          "image_width": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Width",
+            "description": "图宽（CSV 原样字符串）"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "category",
+          "similarity"
+        ],
+        "title": "MatchedItem",
+        "description": "检索命中的一条商品：相似度 + items.csv 原样字段。\n\nCSV 值一律是字符串，读取不做类型转换（`image_height` 等也是字符串）；\n未列出的列原样带出（extra=allow），`vector_id` 与 `text` 不外露。"
+      },
+      "TextQueryRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Query",
+            "description": "中文查询词",
+            "examples": [
+              "白色运动鞋"
+            ]
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "description": "返回条数上限",
+            "default": 5
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "限定类别，留空搜全部",
+            "examples": [
+              "鞋"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "TextQueryRequest"
+      },
+      "TextResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TextResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "TextResponse"
+      },
+      "TextResult": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "原查询词"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "限定类别；搜全部时为命中最高的类别"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MatchedItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "相关商品，按相似度降序"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "category",
+          "items"
+        ],
+        "title": "TextResult"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "状态",
+      "description": "探活与索引概况，前端启动时先调"
+    },
+    {
+      "name": "图像分类页",
+      "description": "对应前端「图像分类」页面"
+    },
+    {
+      "name": "文本检索页",
+      "description": "对应前端「文本检索」页面"
+    },
+    {
+      "name": "多模态匹配页",
+      "description": "对应前端「多模态匹配」页面"
+    }
+  ]
+}

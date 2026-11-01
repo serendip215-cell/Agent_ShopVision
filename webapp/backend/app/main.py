@@ -10,11 +10,12 @@
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .api import v1
@@ -23,6 +24,8 @@ from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
 logger = logging.getLogger("shopvision.api")
+
+_STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 _DESCRIPTION = """实验四后端：电商商品图文检索服务，集成实验三优化后的 Chinese-CLIP 双塔（ONNX）。
 
@@ -100,9 +103,16 @@ def create_app() -> FastAPI:
     app.include_router(v1.router)
     _register_handlers(app)
 
+    @app.get("/scalar", include_in_schema=False)
+    def scalar_docs() -> FileResponse:
+        """Scalar 版接口文档（比 Swagger UI 好看，同样能在页面上直接调）。"""
+        return FileResponse(_STATIC_DIR / "scalar.html")
+
     @app.get("/", include_in_schema=False)
     def root() -> ApiResponse:
-        return ApiResponse.ok({"docs": "/docs", "health": "/api/v1/health"})
+        return ApiResponse.ok(
+            {"docs": "/docs", "scalar": "/scalar", "redoc": "/redoc", "health": "/api/v1/health"}
+        )
 
     return app
 

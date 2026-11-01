@@ -102,7 +102,7 @@ copy .env.example .env              # 默认 placeholder，开箱即用
 uvicorn app.main:app --reload --port 8000
 ```
 
-- 接口文档（自动生成，见 §三）：http://localhost:8000/docs
+- 接口文档（自动生成，见 §三）：http://localhost:8000/docs （还有 `/scalar`、`/redoc`）
 - 健康检查：http://localhost:8000/api/v1/health
 
 ### 4. 自检
@@ -148,7 +148,8 @@ Java 那边用 springdoc / knife4j 挂 Swagger，FastAPI 是**自带**的，开�
 
 | 地址 | 是什么 | 谁来用 |
 |---|---|---|
-| `/docs` | Swagger UI，能直接点着发请求试 | 联调、演示、截图 |
+| `/docs` | Swagger UI，能直接点着发请求试（等价于 Java 的 Knife4j） | 联调、演示、截图 |
+| `/scalar` | Scalar，比 Swagger UI 现代、能折叠分组，同样能直接调 | 答辩演示、给人看 |
 | `/redoc` | ReDoc，排版舒服的阅读版 | 写报告 API 文档那一节 |
 | `/openapi.json` | OpenAPI 3 规范，机器可读 | 导给别人 / 喂 Postman |
 
@@ -156,11 +157,24 @@ Java 那边用 springdoc / knife4j 挂 Swagger，FastAPI 是**自带**的，开�
 summary、description、参数说明、**返回值结构**与可能的错误码（400/404/500）。
 所以 **wlz 写 API 文档那一节，直接把 `/docs` 里内容整理成表格即可**，不用猜。
 
-导出成文件给报告/Postman 用：
+三份都是同一个来源（后端代码 + `app/schemas.py` 的结果模型），改接口自动跟着变；
+`/docs`、`/scalar` 的前端资源走 CDN，**离线环境打不开**，离线看用下面这份 md。
+
+### 离线版（交付材料，不用起服务）
 
 ```powershell
-python -c "import json,pathlib;from app.main import app;pathlib.Path('openapi.json').write_text(json.dumps(app.openapi(),ensure_ascii=False,indent=2),encoding='utf-8')"
+python scripts/export_api_docs.py     # 在 webapp/backend 下跑
 ```
+
+生成到 `docs/交付材料/实验四_第23组/api/`：
+
+| 文件 | 用途 |
+|---|---|
+| `API文档.md` | 人读版：路径/方法/参数/**返回值字段表**/错误码表，可离线翻、可直接贴报告 |
+| `openapi.json` | 机器可读，导入 Postman / Apifox，或喂给 AI 让它照着调 |
+
+它是**生成的**，改了接口重跑一遍即可；别手改那份 md（wlz 要润色就在报告正文里改）。
+有测试盯着生成结果（`ExportApiDocsTest`），生成出半截内容会当场红。
 
 > 返回值的字段结构来自 `app/schemas.py` 里的 `*Result` 模型（`ImageResult` / `TextResult` / …），
 > 它们**只用于生成文档**：线上 JSON 形状仍由 [`API约定.md`](API约定.md) 冻结，模型只描述不改形状。
