@@ -92,6 +92,13 @@ export const DEMO_IMAGES = [
     text: '保温杯',
     hint: '水杯类 · 适合文本检索',
   },
+  {
+    key: 'dress',
+    label: '碎花连衣裙',
+    src: '/items/12445240159.jpg',
+    text: '碎花连衣裙',
+    hint: '女装类 · 适合图像分类',
+  },
 ]
 
 export const DEMO_PAIRS = [
