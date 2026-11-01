@@ -1,8 +1,7 @@
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { Button, Tooltip } from 'antd'
 import {
   ArrowRightOutlined,
-  ExperimentOutlined,
   InfoCircleOutlined,
   LockOutlined,
   SearchOutlined,
@@ -11,7 +10,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   CATEGORIES,
   CATEGORY_PHOTOS,
-  DEMO_PAIRS,
   INDEX_TOTAL,
   SAMPLE_QUERIES,
   TOTAL_PRODUCTS,
@@ -21,30 +19,6 @@ import { useApp } from '../context/AppContext'
 import { useAuth } from '../context/AuthContext'
 import { EmptyState, SectionLabel } from '../components/common/Ui'
 import RunRow from '../components/common/RunRow'
-
-const INSTRUMENTS = [
-  {
-    key: 'image',
-    step: '第一步',
-    title: '图像分类',
-    text: '上传商品图片，图像塔输出预测类别与置信分数。',
-    to: '/image',
-  },
-  {
-    key: 'text',
-    step: '第二步',
-    title: '文本检索',
-    text: '输入中文描述，文本塔检索商品库，召回相似商品。',
-    to: '/text?q=白色运动鞋',
-  },
-  {
-    key: 'match',
-    step: '第三步',
-    title: '图文匹配',
-    text: '图像、文本两路独立推理，交叉验证图文是否匹配。',
-    to: '/match?demo=mismatch',
-  },
-]
 
 // 分类矩阵的大小错落：大卡 2x2、中卡 2x1、小卡 1x1，正好填满 6 列 3 行
 const CATEGORY_SIZE = {
@@ -188,59 +162,6 @@ function CategorySection() {
   )
 }
 
-function InstrumentSection() {
-  const navigate = useNavigate()
-  return (
-    <section className="sv-reveal">
-      <div className="sv-strip-head">
-        <h2>三台仪器，同一套索引</h2>
-        <Tooltip title="按顺序做一遍，正好是一次完整演示：先分类、再检索、最后交叉验证">
-          <span className="sv-strip-hint">
-            <InfoCircleOutlined />
-            三步走完一次完整演示
-          </span>
-        </Tooltip>
-      </div>
-      <div className="sv-instrument-grid">
-        {INSTRUMENTS.map((item, index) => (
-          <Fragment key={item.key}>
-            {index > 0 && (
-              <span className="sv-flow-arrow" aria-hidden="true">
-                <ArrowRightOutlined />
-              </span>
-            )}
-            <button
-              type="button"
-              className="sv-instrument"
-              onClick={() => navigate(item.to)}
-            >
-              <span className="sv-instrument-step">{item.step}</span>
-              <strong>{item.title}</strong>
-              <p>{item.text}</p>
-              <span className="sv-instrument-go">
-                进入 <ArrowRightOutlined />
-              </span>
-            </button>
-          </Fragment>
-        ))}
-      </div>
-      <div className="sv-demo-row">
-        <ExperimentOutlined />
-        <span>图文匹配快演：</span>
-        {DEMO_PAIRS.map((pair) => (
-          <button
-            type="button"
-            key={pair.key}
-            onClick={() => navigate(`/match?demo=${pair.key}`)}
-          >
-            {pair.label}
-          </button>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function RecentRuns() {
   const navigate = useNavigate()
   const { history } = useApp()
@@ -320,7 +241,6 @@ export default function Overview() {
     <div className="sv-overview">
       <Hero />
       <CategorySection />
-      <InstrumentSection />
       <RecentRuns />
     </div>
   )
