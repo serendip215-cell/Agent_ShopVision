@@ -30,17 +30,19 @@ export function categoryStyle(category) {
   return CATEGORY_STYLE[category] || { bg: '#F1F3F5', ink: '#4E5A60' }
 }
 
-// 分类入口卡用的真实商品背景图（public/items 与 public/samples 下已逐张人工确认类别）
+// 分类入口卡的真实商品背景图。每张都经过双重核验：
+// 1) 图内容人工看过与类别相符；2) 文件名 ID 在 items.csv 中确属该类别。
+// 此前版本仅凭看图印象挑选，出现过水杯卡配高跟鞋等 4 处错位。
 export const CATEGORY_PHOTOS = {
-  鞋: '/samples/sample-shoe.jpg',
-  水杯: '/items/muge_1104.jpg',
-  包: '/samples/sample-bag.jpg',
-  男装: '/items/12303593760.jpg',
-  运动服: '/items/12440833831.jpg',
-  女装: '/items/B075DQBBJZ.jpg',
-  手机壳: '/items/B07R7WML4R.jpg',
-  厨房用品: '/items/muge_860.jpg',
-  家居用品: '/items/B07DWNWGNJ.jpg',
+  鞋: '/samples/sample-shoe.jpg', // 白色运动鞋
+  水杯: '/items/muge_860.jpg', // 维尼熊马克杯（水杯类索引内）
+  包: '/samples/sample-bag.jpg', // 米白双肩包
+  男装: '/items/12449731693.jpg', // 深蓝男士衬衫
+  运动服: '/items/12440833831.jpg', // 白绿印花运动套装
+  女装: '/items/12445240159.jpg', // 粉色蝴蝶印花连衣裙
+  手机壳: '/items/B07R7WML4R.jpg', // 粉色小猫手机壳
+  厨房用品: '/items/B08CGSSCB8.jpg', // 不粘平底煎锅
+  家居用品: '/items/B07DWNWGNJ.jpg', // 木质衣架
 }
 
 // Hero 拼贴用的真实商品图（public/items 下已确认存在）
