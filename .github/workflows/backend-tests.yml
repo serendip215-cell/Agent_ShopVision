@@ -26,7 +26,15 @@ jobs:
           cache-dependency-path: webapp/backend/requirements.txt
 
       - name: 安装依赖
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install black ruff mypy
+
+      - name: 代码规范（配置见 pyproject.toml）
+        run: |
+          black --check .
+          ruff check .
+          mypy .
 
       - name: 后端自检
         run: python -m unittest discover -s tests -v

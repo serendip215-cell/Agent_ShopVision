@@ -63,9 +63,7 @@ def search_text(
     payload: TextQueryRequest,
     service: MatchService = Depends(get_match_service),
 ) -> ApiResponse:
-    return ApiResponse.ok(
-        service.search_text(payload.query, payload.top_k, payload.category)
-    )
+    return ApiResponse.ok(service.search_text(payload.query, payload.top_k, payload.category))
 
 
 @router.post("/match", response_model=ApiResponse, summary="图文匹配")

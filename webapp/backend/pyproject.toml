@@ -1,0 +1,22 @@
+# 后端代码规范配置：一份配置定死工具行为，别让评审按各自默认值来判
+# 用法：cd webapp/backend && black --check . && ruff check . && mypy .
+# CI 会自动跑同一套（.github/workflows/backend-tests.yml）
+
+[tool.black]
+line-length = 100          # 默认 88 会把中文注释切得很碎，本项目统一 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]   # 含 W：末尾换行等
+
+[tool.mypy]
+python_version = "3.11"
+
+# 可选依赖按需安装，缺了不算错：接真模型才装 onnxruntime / Chinese-CLIP
+[[tool.mypy.overrides]]
+module = ["onnxruntime.*", "cn_clip.*"]
+ignore_missing_imports = true

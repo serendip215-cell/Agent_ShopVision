@@ -31,6 +31,7 @@ pip install -r requirements.txt
 
 > 依赖：fastapi / uvicorn / pydantic(-settings) / numpy / pillow / python-multipart（+ httpx 仅测试用）。
 > 接真 ONNX 才需要 `onnxruntime` 与 Chinese-CLIP，见 `requirements.txt` 注释。
+> 规范工具单独装：`pip install black ruff mypy`（不在运行依赖里，CI 与本地各自装）。
 
 ### 2. 配置
 
@@ -54,6 +55,14 @@ python -m unittest discover -s tests -v
 ```
 
 不依赖仓库大索引（自建小索引），覆盖检索、占位编码器、接口返回与错误码。
+
+代码规范（配置统一在 [`backend/pyproject.toml`](backend/pyproject.toml)，行宽 100）：
+
+```powershell
+black --check .                     # 格式   black . 直接改
+ruff check .                        # 静态   ruff check --fix . 自动修
+mypy .                              # 类型   可选依赖缺装不算错（已配 overrides）
+```
 
 > CI：改动 `webapp/**` 推送或提 PR 时，GitHub Actions 自动跑同一套自检
 > （[`.github/workflows/backend-tests.yml`](../.github/workflows/backend-tests.yml)）。

@@ -12,9 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_prefix="SHOPVISION_", env_file=".env", extra="ignore"
-    )
+    model_config = SettingsConfigDict(env_prefix="SHOPVISION_", env_file=".env", extra="ignore")
 
     # placeholder = 确定性占位编码器（先跑通链路）；onnx = 实验三双塔 ONNX
     model_backend: str = "placeholder"

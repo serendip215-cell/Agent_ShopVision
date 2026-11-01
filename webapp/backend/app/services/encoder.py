@@ -82,8 +82,8 @@ class OnnxEncoder(Encoder):
     ) -> None:
         try:
             import onnxruntime as ort
-            from PIL import Image  # noqa: F401
             from cn_clip.clip import image_transform, tokenize
+            from PIL import Image  # noqa: F401
         except ImportError as exc:
             raise ApiError(
                 ErrorCode.MODEL_UNAVAILABLE,
@@ -124,8 +124,12 @@ def build_encoder(settings: "Settings") -> Encoder:
     backend = (settings.model_backend or "placeholder").strip().lower()
     if backend == "onnx":
         return OnnxEncoder(
-            settings.repo_path(settings.onnx_visual or "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp32.onnx"),
-            settings.repo_path(settings.onnx_text or "data/optimize/2026-10-24_exp3-speed/onnx/text_fp32.onnx"),
+            settings.repo_path(
+                settings.onnx_visual or "data/optimize/2026-10-24_exp3-speed/onnx/visual_fp32.onnx"
+            ),
+            settings.repo_path(
+                settings.onnx_text or "data/optimize/2026-10-24_exp3-speed/onnx/text_fp32.onnx"
+            ),
             provider=settings.onnx_provider,
             context_length=settings.onnx_context_length,
         )

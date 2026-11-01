@@ -16,6 +16,7 @@ import unittest
 from pathlib import Path
 
 import numpy as np
+from fastapi.testclient import TestClient
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -36,7 +37,7 @@ ITEMS_PER_CATEGORY = 4
 def _build_index(root: Path) -> IndexStore:
     """写一个最小可用的索引目录：注册表 + 每类 items.csv 与 image_embeddings.npy。"""
     rng = np.random.default_rng(20261101)
-    registry = {"version": 1, "categories": {}, "model": {"name": "test"}}
+    registry: dict = {"version": 1, "categories": {}, "model": {"name": "test"}}
     for category in CATEGORIES:
         vectors = rng.standard_normal((ITEMS_PER_CATEGORY, DIM)).astype("float32")
         vectors /= np.linalg.norm(vectors, axis=1, keepdims=True)
@@ -125,9 +126,7 @@ class EncoderTest(unittest.TestCase):
 class ServiceTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
-        self.service = MatchService(
-            PlaceholderEncoder(dim=DIM), _build_index(Path(self.tmp.name))
-        )
+        self.service = MatchService(PlaceholderEncoder(dim=DIM), _build_index(Path(self.tmp.name)))
 
     def tearDown(self) -> None:
         self.tmp.cleanup()
@@ -150,13 +149,16 @@ class ServiceTest(unittest.TestCase):
 
 
 class ApiTest(unittest.TestCase):
+    # 类级标注：setUpClass 里赋值的属性，mypy 只认这里的声明
+    tmp: tempfile.TemporaryDirectory
+    service: MatchService
+    client: TestClient
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.tmp = tempfile.TemporaryDirectory()
         cls.service = MatchService(PlaceholderEncoder(dim=DIM), _build_index(Path(cls.tmp.name)))
         app.dependency_overrides[get_match_service] = lambda: cls.service
-        from fastapi.testclient import TestClient
-
         cls.client = TestClient(app, raise_server_exceptions=False)
 
     @classmethod
@@ -243,7 +245,7 @@ class ErrorCodeTest(unittest.TestCase):
 
     def test_unknown_business_code_is_rejected(self) -> None:
         with self.assertRaises(ValueError):
-            ApiError(12345)
+            ApiError(12345)  # type: ignore[arg-type]  # 故意传非法码，验证构造器会拒绝
 
 
 class ConfigTest(unittest.TestCase):
@@ -255,7 +257,8 @@ class ConfigTest(unittest.TestCase):
             model_backend = "placeholder"
             embedding_dim = DIM
 
-        encoder = build_encoder(FakeSettings())
+        # 鸭子类型替身：build_encoder 只用这两个字段，不读 .env
+        encoder = build_encoder(FakeSettings())  # type: ignore[arg-type]
         self.assertIsInstance(encoder, PlaceholderEncoder)
         self.assertEqual(encoder.dim, DIM)
 

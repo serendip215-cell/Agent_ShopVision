@@ -112,16 +112,14 @@ class IndexStore:
         if top_k < 1:
             raise ApiError(ErrorCode.BAD_REQUEST, "top_k 必须大于 0")
         pool: list[Hit] = []
-        for category in (categories or self.categories):
+        for category in categories or self.categories:
             self._check_dim(vector)
             items, embeddings = self._load(category)
             sims = np.asarray(embeddings @ vector).reshape(-1)
             if sims.size == 0:
                 continue
             k = min(self.candidate_k, sims.size)
-            idx = (
-                np.argpartition(-sims, k - 1)[:k] if k < sims.size else np.arange(sims.size)
-            )
+            idx = np.argpartition(-sims, k - 1)[:k] if k < sims.size else np.arange(sims.size)
             for i in idx:
                 i = int(i)
                 row = items.get(i)
