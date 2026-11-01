@@ -64,9 +64,14 @@ ruff check .                        # 静态   ruff check --fix . 自动修
 mypy .                              # 类型   可选依赖缺装不算错（已配 overrides）
 ```
 
-> CI：改动 `webapp/**` 推送或提 PR 时，GitHub Actions 自动跑同一套自检
+> **硬规则**：动过 `webapp/backend/**/*.py` 的提交，本地四条（black / ruff / mypy / unittest）
+> 全绿才能推；CI 会复核同一套，红叉不许留着过夜。不许改 `pyproject.toml`、加 `# noqa`
+> 或 `# type: ignore` 来绕红——规则松紧找 何朝杨 改，全组同步。
+> 用 AI 改后端时，把这一段连同本 README 一起给它看。详见
+> [`docs/流程与交接/实验四流程与分工.md` §七](../docs/流程与交接/实验四流程与分工.md)。
+>
+> CI：改动 `webapp/**` 推送或提 PR 时，GitHub Actions 自动跑这套
 > （[`.github/workflows/backend-tests.yml`](../.github/workflows/backend-tests.yml)）。
-> 推之前本地先跑一遍，别把红叉推上去。
 
 ## 三、接口与调用
 
