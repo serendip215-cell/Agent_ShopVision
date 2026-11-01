@@ -282,7 +282,7 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 | [`docs/finetune/04-Chinese-CLIP补丁说明.md`](docs/finetune/04-Chinese-CLIP补丁说明.md) | 对官方 `Chinese-CLIP/` 的 3 处改动（含改前改后代码、重新施加步骤） |
 | [`docs/finetune/05-未清洗数据对照组.md`](docs/finetune/05-未清洗数据对照组.md) | **对照组实验**：未清洗数据直训，用于拆分"微调"与"数据清洗"的贡献 |
 | [`docs/流程与交接/实验三流程与分工.md`](docs/流程与交接/实验三流程与分工.md) | **实验三总流程**：任务切换（3.1.1 冻结 → 3.1.4 主线）、分工、命令与验收清单 |
-| [`docs/流程与交接/实验四流程与分工.md`](docs/流程与交接/实验四流程与分工.md) | **实验四分工**：开发三人（何朝杨 主任务）、文档三人（djb/wlz/qxy）、报告要求逐条对照 |
+| [`docs/流程与交接/实验四流程与分工.md`](docs/流程与交接/实验四流程与分工.md) | **实验四分工**：开发三人（何朝杨 主任务，前端 zzx+lfsy 共同）、文档（架构与成员表 何朝杨，其余 djb/wlz/qxy）、报告要求逐条对照 |
 | [`docs/流程与交接/实验四模型产物上传说明.md`](docs/流程与交接/实验四模型产物上传说明.md) | 让 wlz 把双塔 ONNX 传到 GitHub Release 的执行说明 |
 | [`webapp/README.md`](webapp/README.md) | **实验四前后端开发文档**：目录结构、接口表、前后端写法、运行命令、模型接入接缝 |
 | [`docs/optimize/README.md`](docs/optimize/README.md) | **实验三执行记录索引**：结论、进度、文档编号规则 |
