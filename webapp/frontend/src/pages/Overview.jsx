@@ -4,7 +4,10 @@ import {
   ArrowRightOutlined,
   InfoCircleOutlined,
   LockOutlined,
+  NodeIndexOutlined,
   SearchOutlined,
+  ShoppingOutlined,
+  TagsOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -19,6 +22,30 @@ import { useApp } from '../context/AppContext'
 import { useAuth } from '../context/AuthContext'
 import { EmptyState, SectionLabel } from '../components/common/Ui'
 import RunRow from '../components/common/RunRow'
+import useCountUp from '../utils/useCountUp'
+
+// 指标栏：大号数字是视觉重心，图标只做低饱和点缀
+const HERO_STATS = [
+  { key: 'raw', icon: ShoppingOutlined, value: TOTAL_PRODUCTS, label: '原始商品' },
+  { key: 'index', icon: SearchOutlined, value: INDEX_TOTAL, label: '检索索引' },
+  { key: 'cat', icon: TagsOutlined, value: 9, label: '商品类别' },
+  { key: 'dim', icon: NodeIndexOutlined, value: 512, label: '向量维度' },
+]
+
+function StatUnit({ icon: Icon, value, label, index }) {
+  const animated = useCountUp(value, { delay: 360 + index * 120, duration: 900 })
+  return (
+    <div className="sv-hero-stat" style={{ animationDelay: `${index * 90}ms` }}>
+      <span className="sv-hero-stat-icon" aria-hidden="true">
+        <Icon />
+      </span>
+      <span className="sv-hero-stat-copy">
+        <strong className="sv-mono">{Math.round(animated).toLocaleString('zh-CN')}</strong>
+        <span>{label}</span>
+      </span>
+    </div>
+  )
+}
 
 // 分类矩阵的大小错落：大卡 2x2、中卡 2x1、小卡 1x1，正好填满 6 列 3 行
 const CATEGORY_SIZE = {
@@ -89,22 +116,9 @@ function Hero() {
         </div>
       </div>
       <div className="sv-hero-stats">
-        <div>
-          <strong>{TOTAL_PRODUCTS.toLocaleString('zh-CN')}</strong>
-          <span>原始商品</span>
-        </div>
-        <div>
-          <strong>{INDEX_TOTAL.toLocaleString('zh-CN')}</strong>
-          <span>检索索引</span>
-        </div>
-        <div>
-          <strong>9</strong>
-          <span>商品类别</span>
-        </div>
-        <div>
-          <strong className="sv-mono">512</strong>
-          <span>向量维度</span>
-        </div>
+        {HERO_STATS.map((stat, index) => (
+          <StatUnit key={stat.key} {...stat} index={index} />
+        ))}
       </div>
     </section>
   )

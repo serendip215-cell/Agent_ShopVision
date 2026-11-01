@@ -17,32 +17,9 @@ import { DEMO_IMAGES } from '../constants/catalog'
 import { isCanceled } from '../utils/errors'
 import { fileFromUrl, validateImageFile } from '../utils/samples'
 import { formatScore } from '../utils/format'
+import useCountUp from '../utils/useCountUp'
 
-/* ---------- 小工具 ---------- */
-
-// 置信度大数字：识别完成时从 0 缓动跳到目标值
-function useCountUp(target, { delay = 260, duration = 950 } = {}) {
-  const [value, setValue] = useState(0)
-  useEffect(() => {
-    if (target == null) {
-      setValue(0)
-      return
-    }
-    let raf
-    const start = performance.now() + delay
-    const tick = (now) => {
-      const t = Math.min(1, Math.max(0, (now - start) / duration))
-      const eased = 1 - Math.pow(1 - t, 3)
-      setValue(target * eased)
-      if (t < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, delay, duration])
-  return value
-}
-
-// 把接口错误翻成普通用户能懂的话，不露错误码
+// friendlyError：把接口错误翻成普通用户能懂的话，不露错误码
 function friendlyError(error) {
   if (!error) return null
   if (error.code === 40004) return '图片超出 10MB 上限，请更换一张更小的图片'
