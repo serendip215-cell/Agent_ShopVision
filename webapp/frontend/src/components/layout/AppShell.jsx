@@ -188,6 +188,22 @@ function SystemBanner() {
   return null
 }
 
+function Breadcrumb() {
+  const location = useLocation()
+  if (location.pathname === '/') return null
+  const current = [...PUBLIC_NAV, ...ADMIN_NAV].find(
+    (item) => item.to !== '/' && location.pathname.startsWith(item.to),
+  )
+  if (!current) return null
+  return (
+    <nav className="sv-breadcrumb" aria-label="面包屑">
+      <NavLink to="/">首页</NavLink>
+      <span className="sv-breadcrumb-sep">/</span>
+      <strong>{current.label}</strong>
+    </nav>
+  )
+}
+
 export default function AppShell({ children }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
@@ -225,8 +241,9 @@ export default function AppShell({ children }) {
       </header>
 
       <div className="sv-content">
+        <Breadcrumb />
         <SystemBanner />
-        <main className="sv-page sv-reveal">{children}</main>
+        <main key={location.pathname} className="sv-page sv-reveal">{children}</main>
         <footer className="sv-footer">
           <span>Agent ShopVision · 实验四前后端</span>
           <span>数据来源：MUGE / Amazon / 苏宁 · 9 类商品图文索引</span>

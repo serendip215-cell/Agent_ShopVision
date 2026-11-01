@@ -10,7 +10,7 @@
   --success-ink: #2f7d58;
   --danger-soft: #f7d7d7;
   --danger-ink: #b4534f;
-  --bg: #fafbfc;
+  --bg: #fbfcfe;
   --surface: #ffffff;
   --text: #2f353a;
   --muted: #6b7280;
@@ -22,6 +22,11 @@
   --shadow-sm: 0 1px 2px rgba(47, 53, 58, 0.04), 0 10px 28px rgba(47, 53, 58, 0.045);
   --shadow-md: 0 2px 6px rgba(47, 53, 58, 0.05), 0 24px 60px rgba(47, 53, 58, 0.08);
   --font-sans: Manrope, "HarmonyOS Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --text-page: clamp(30px, 3.3vw, 46px);
+  --text-section: 19px;
+  --text-body: 14px;
+  --text-caption: 12px;
+  --text-hint: 11px;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 }
 
@@ -451,7 +456,7 @@ a {
   position: relative;
   margin: 10px 0 0;
   padding-bottom: 16px;
-  font-size: clamp(30px, 3.3vw, 46px);
+  font-size: var(--text-page);
   line-height: 1.14;
   letter-spacing: -0.035em;
   font-weight: 700;
@@ -471,8 +476,8 @@ a {
 .sv-page-desc {
   max-width: 640px;
   margin: 16px 0 0;
-  color: #5b676e;
-  font-size: 14.5px;
+  color: var(--muted);
+  font-size: var(--text-body);
   line-height: 1.95;
 }
 
@@ -484,12 +489,81 @@ a {
   margin-top: 18px;
 }
 
+.sv-page-meta .ant-tag {
+  margin-inline-end: 0;
+  padding: 0 8px;
+  font-size: 11px;
+  line-height: 20px;
+  border-radius: 7px;
+}
+
 .sv-page-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 8px;
   padding-bottom: 2px;
+}
+
+.sv-page-actions .sv-demo-btn {
+  border: 1px solid rgba(95, 168, 176, 0.4);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--primary-ink);
+}
+
+.sv-page-actions .sv-demo-btn:hover {
+  border-color: var(--primary);
+  background: #f4fbfb;
+  color: var(--primary-deep);
+}
+
+/* ---------- Breadcrumb ---------- */
+
+.sv-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: #9aa4aa;
+  font-size: 12px;
+  animation: sv-fade-up 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.sv-breadcrumb a {
+  color: var(--muted);
+  transition: color 160ms ease;
+}
+
+.sv-breadcrumb a:hover {
+  color: var(--primary-deep);
+}
+
+.sv-breadcrumb .sv-breadcrumb-sep {
+  color: #c3ccd1;
+  font-size: 11px;
+}
+
+.sv-breadcrumb strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------- 统一禁用态 ---------- */
+
+.ant-btn:disabled,
+.ant-btn.ant-btn-disabled {
+  color: #a9b4ba;
+  background: #f2f5f6;
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.ant-btn-primary:disabled,
+.ant-btn-primary.ant-btn-disabled {
+  background: #c9d8db;
+  border-color: transparent;
+  color: #f5f9fa;
 }
 
 /* ---------- Cards & sections ---------- */
@@ -533,7 +607,7 @@ a {
 
 .sv-section-title {
   margin: 0;
-  font-size: 19px;
+  font-size: var(--text-section);
   line-height: 1.25;
   letter-spacing: -0.015em;
 }
@@ -600,7 +674,7 @@ a {
 .sv-hero p {
   max-width: 480px;
   margin: 20px 0 0;
-  color: #5b676e;
+  color: var(--muted);
   font-size: 14.5px;
   line-height: 1.95;
   animation: sv-fade-up 600ms 160ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -864,7 +938,7 @@ a {
   padding: 12px;
   border: 1px solid var(--divider);
   border-radius: 14px;
-  background: #fbfdfd;
+  background: var(--bg);
   color: var(--text);
   text-align: left;
   cursor: pointer;
@@ -1012,7 +1086,7 @@ a {
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(47, 53, 58, 0.05);
   animation: sv-pop 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
 }
 
 .sv-category-tile:nth-child(1) { animation-delay: 40ms; }
@@ -1028,6 +1102,7 @@ a {
 .sv-category-tile:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 26px rgba(47, 53, 58, 0.12);
+  filter: brightness(0.965) saturate(1.06);
 }
 
 .sv-category-tile:active {
@@ -1121,7 +1196,7 @@ a {
 .sv-instrument p {
   flex: 1;
   margin: 0;
-  color: #666f75;
+  color: var(--muted);
   font-size: 13.5px;
   line-height: 1.85;
 }
@@ -1262,12 +1337,13 @@ a {
 
 .sv-input-note {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 10px 0 16px;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 10px 0 2px;
   color: var(--muted);
   font-size: 10px;
   line-height: 1.5;
+  text-align: right;
 }
 
 .sv-inline-error {
@@ -1289,7 +1365,7 @@ a {
 .sv-upload .ant-upload-drag {
   border: 1.5px dashed #cfe3e4;
   border-radius: 20px;
-  background: #fbfdfd;
+  background: var(--bg);
   transition: border-color 160ms ease, background 160ms ease;
 }
 
@@ -1307,8 +1383,15 @@ a {
 }
 
 .sv-upload-icon {
-  color: var(--primary);
-  font-size: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  font-size: 24px;
   line-height: 1;
 }
 
@@ -1412,7 +1495,7 @@ a {
   padding: 7px;
   border: 1px solid var(--divider);
   border-radius: 12px;
-  background: #fbfdfd;
+  background: var(--bg);
   text-align: left;
   cursor: pointer;
   transition: border-color 160ms ease, transform 160ms ease;
@@ -1461,19 +1544,25 @@ a {
 }
 
 .sv-chip {
-  padding: 7px 11px;
-  border: 1px solid var(--border);
+  padding: 7px 12px;
+  border: 1px solid rgba(95, 168, 176, 0.32);
   border-radius: 999px;
-  background: #fbfdfd;
-  color: var(--text);
+  background: var(--surface);
+  color: #4e5a60;
   font-size: 12px;
   cursor: pointer;
   transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
 
 .sv-chip:hover {
-  border-color: rgba(95, 168, 176, 0.45);
+  border-color: var(--primary);
   background: #f4fbfb;
+  color: var(--primary-ink);
+}
+
+.sv-chip:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .sv-chip.is-active {
@@ -2083,7 +2172,7 @@ a {
   padding: 24px;
   border-radius: 22px;
   border: 1px solid var(--divider);
-  background: #fbfdfd;
+  background: var(--bg);
 }
 
 .sv-verdict.is-match {
@@ -2249,7 +2338,7 @@ a {
   padding: 12px 10px;
   border-radius: 14px;
   border: 1px solid var(--divider);
-  background: #fbfdfd;
+  background: var(--bg);
 }
 
 .sv-run-row.is-error {
@@ -2355,7 +2444,7 @@ a {
   padding: 4px 8px;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: #fbfdfd;
+  background: var(--bg);
   color: var(--text);
   font-size: 10px;
   cursor: pointer;
@@ -2412,7 +2501,7 @@ a {
   padding: 16px;
   border: 1px solid var(--divider);
   border-radius: 16px;
-  background: #fbfdfd;
+  background: var(--bg);
   min-width: 0;
 }
 

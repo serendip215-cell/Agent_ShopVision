@@ -196,10 +196,6 @@ export default function ImageLab() {
             disabled={loading}
           />
           <DemoImageStrip images={DEMO_IMAGES} onPick={loadSample} loadingKey={loadingSample} />
-          <div className="sv-input-note">
-            <span>图片不会写入浏览器历史，只用于本次请求。</span>
-            <span>后端上限 10 MB。</span>
-          </div>
           <Button
             type="primary"
             size="large"
@@ -211,6 +207,9 @@ export default function ImageLab() {
           >
             开始分析图片
           </Button>
+          <div className="sv-input-note">
+            <span>图片仅用于本次请求 · 后端上限 10 MB</span>
+          </div>
         </section>
 
         <section className="sv-card sv-reveal">
@@ -233,7 +232,7 @@ export default function ImageLab() {
             <EmptyState
               icon={<PictureOutlined />}
               title="结果会出现在这里"
-              description="选择左侧商品图后点击「开始分析」。示例图可以直接点，不需要自己准备文件。"
+              description="选一张商品图点「开始分析」，类别、置信度与前三类别会显示在这里。"
             />
           )}
 

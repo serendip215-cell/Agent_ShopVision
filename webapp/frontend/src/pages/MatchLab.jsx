@@ -225,6 +225,8 @@ export default function MatchLab() {
         actions={
           <>
             <Button
+              size="small"
+              className="sv-demo-btn"
               icon={<ThunderboltOutlined />}
               loading={demoLoading === 'match'}
               onClick={() => applyDemo('match')}
@@ -232,6 +234,8 @@ export default function MatchLab() {
               一致示例
             </Button>
             <Button
+              size="small"
+              className="sv-demo-btn"
               icon={<ThunderboltOutlined />}
               loading={demoLoading === 'mismatch'}
               onClick={() => applyDemo('mismatch')}
@@ -294,8 +298,7 @@ export default function MatchLab() {
             开始比对
           </Button>
           <div className="sv-input-note">
-            <span>两条链路独立编码。</span>
-            <span>不做类别过滤，结果才可用于一致性检验。</span>
+            <span>两条链路独立编码 · 不做类别过滤，结果才可用于一致性检验</span>
           </div>
         </section>
       </div>
