@@ -19,7 +19,7 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
-from ..errors import ModelUnavailable
+from ..errors import ApiError, ErrorCode
 
 if TYPE_CHECKING:  # 仅类型标注，避免占位模式拖入 PIL
     from PIL.Image import Image
@@ -83,12 +83,14 @@ class OnnxEncoder(Encoder):
             from PIL import Image  # noqa: F401
             from cn_clip.clip import image_transform, tokenize
         except ImportError as exc:
-            raise ModelUnavailable(
-                f"ONNX 后端缺依赖（onnxruntime / Pillow / cn_clip）：{exc}"
+            raise ApiError(
+                ErrorCode.MODEL_UNAVAILABLE,
+                f"ONNX 后端缺依赖（onnxruntime / Pillow / cn_clip）：{exc}",
             ) from exc
         if not visual_path.is_file() or not text_path.is_file():
-            raise ModelUnavailable(
-                f"找不到 ONNX 产物：{visual_path} / {text_path}"
+            raise ApiError(
+                ErrorCode.MODEL_UNAVAILABLE,
+                f"找不到 ONNX 产物：{visual_path} / {text_path}",
             )
         self._tokenize = tokenize
         self._preprocess = image_transform(image_size)
@@ -126,5 +128,8 @@ def build_encoder(settings) -> Encoder:
             context_length=settings.onnx_context_length,
         )
     if backend != "placeholder":
-        raise ModelUnavailable(f"不支持的 model_backend：{backend}（可选 placeholder / onnx）")
+        raise ApiError(
+            ErrorCode.MODEL_UNAVAILABLE,
+            f"不支持的 model_backend：{backend}（可选 placeholder / onnx）",
+        )
     return PlaceholderEncoder(dim=settings.embedding_dim)

@@ -21,7 +21,7 @@ from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.deps import get_match_service  # noqa: E402
-from app.errors import BadInput  # noqa: E402
+from app.errors import ApiError, ErrorCode  # noqa: E402
 from app.main import app  # noqa: E402
 from app.services.encoder import PlaceholderEncoder, build_encoder  # noqa: E402
 from app.services.index_store import IndexStore  # noqa: E402
@@ -93,8 +93,9 @@ class IndexStoreTest(unittest.TestCase):
         self.assertEqual(hit["category"], "乙")
 
     def test_wrong_dimension_is_rejected(self) -> None:
-        with self.assertRaises(BadInput):
+        with self.assertRaises(ApiError) as caught:
             self.store.search(np.zeros(DIM + 3, dtype="float32"), ["甲"], top_k=1)
+        self.assertEqual(caught.exception.code, ErrorCode.DIM_MISMATCH)
 
     def test_best_category_returns_the_owning_category(self) -> None:
         embeddings = np.load(Path(self.tmp.name) / "乙" / "image_embeddings.npy")
@@ -181,12 +182,12 @@ class ApiTest(unittest.TestCase):
             "/api/v1/image", files={"file": ("p.txt", b"not an image", "text/plain")}
         )
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()["code"], 400)
+        self.assertEqual(response.json()["code"], ErrorCode.INVALID_IMAGE)
 
     def test_text_endpoint_validates_empty_query(self) -> None:
         response = self.client.post("/api/v1/text", json={"query": "", "top_k": 3})
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()["code"], 400)
+        self.assertEqual(response.json()["code"], ErrorCode.BAD_REQUEST)
 
     def test_text_endpoint_returns_items(self) -> None:
         response = self.client.post("/api/v1/text", json={"query": "白色运动鞋", "top_k": 2})
@@ -196,7 +197,30 @@ class ApiTest(unittest.TestCase):
     def test_unknown_path_returns_404_body(self) -> None:
         response = self.client.get("/api/v1/nope")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()["code"], 404)
+        self.assertEqual(response.json()["code"], ErrorCode.NOT_FOUND)
+
+    def test_error_body_keeps_the_agreed_shape(self) -> None:
+        body = self.client.post("/api/v1/text", json={"query": ""}).json()
+        self.assertEqual(set(body), {"code", "result", "msg"})
+        self.assertIsNone(body["result"])
+        self.assertTrue(body["msg"])
+
+
+class ErrorCodeTest(unittest.TestCase):
+    def test_http_status_is_derived_from_business_code(self) -> None:
+        for code in ErrorCode:
+            expected = 200 if code is ErrorCode.OK else int(code) // 100
+            self.assertEqual(code.http_status, expected, f"{code.name}={int(code)}")
+
+    def test_api_error_carries_status_and_message(self) -> None:
+        error = ApiError(ErrorCode.CATEGORY_NOT_FOUND, "包")
+        self.assertEqual(error.status, 404)
+        self.assertIn("类别不存在", error.msg)
+        self.assertIn("包", error.msg)
+
+    def test_unknown_business_code_is_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            ApiError(12345)
 
 
 class ConfigTest(unittest.TestCase):

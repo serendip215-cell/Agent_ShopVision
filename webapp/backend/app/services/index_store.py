@@ -13,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
-from ..errors import BadInput, ModelUnavailable, NotFound
+from ..errors import ApiError, ErrorCode
 
 _HIDDEN_FIELDS = {"vector_id", "text"}
 
@@ -40,7 +40,7 @@ class IndexStore:
         self.index_dir = Path(index_dir)
         registry_path = self.index_dir / "index_registry.json"
         if not registry_path.is_file():
-            raise ModelUnavailable(f"找不到索引注册表：{registry_path}")
+            raise ApiError(ErrorCode.INDEX_MISSING, f"找不到索引注册表：{registry_path}")
         with registry_path.open("r", encoding="utf-8") as handle:
             self._registry = json.load(handle)
         self.candidate_k = candidate_k
@@ -60,15 +60,15 @@ class IndexStore:
         if category not in self._cache:
             entry = (self._registry.get("categories") or {}).get(category)
             if entry is None:
-                raise NotFound(f"索引里没有类别：{category}")
+                raise ApiError(ErrorCode.CATEGORY_NOT_FOUND, category)
             csv_path = self.index_dir / entry["items_csv"]
             if not csv_path.is_file():
-                raise NotFound(f"类别 {category} 缺少条目表：{csv_path}")
+                raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少条目表：{csv_path}")
             with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
                 items = {int(row["vector_id"]): row for row in csv.DictReader(handle)}
             embeddings_path = csv_path.parent / "image_embeddings.npy"
             if not embeddings_path.is_file():
-                raise NotFound(f"类别 {category} 缺少向量：{embeddings_path}")
+                raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少向量：{embeddings_path}")
             # 不 mmap：每类向量仅数 MB，直接读入内存；mmap 会一直占着文件句柄，
             # Windows 下连测试的临时目录都删不掉。
             self._cache[category] = (items, np.load(embeddings_path))
@@ -77,9 +77,10 @@ class IndexStore:
     def _check_dim(self, vector: np.ndarray) -> None:
         expected = self.dimension
         if expected and vector.shape[-1] != expected:
-            raise BadInput(
-                f"查询向量维度 {vector.shape[-1]} 与索引 {expected} 不一致，"
-                "多半是模型/索引不同源（占位编码器下检索结果无意义）"
+            raise ApiError(
+                ErrorCode.DIM_MISMATCH,
+                f"查询向量 {vector.shape[-1]} 维，索引 {expected} 维；"
+                "多半是模型/索引不同源（占位编码器下检索结果无意义）",
             )
 
     def search(
@@ -91,7 +92,7 @@ class IndexStore:
         """在指定（或全部）类别的图像向量上取余弦相似度最高的 top_k 条。"""
         vector = np.asarray(vector, dtype="float32").reshape(-1)
         if top_k < 1:
-            raise BadInput("top_k 必须大于 0")
+            raise ApiError(ErrorCode.BAD_REQUEST, "top_k 必须大于 0")
         pool: list[Hit] = []
         for category in (categories or self.categories):
             self._check_dim(vector)

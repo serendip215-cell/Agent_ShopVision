@@ -14,33 +14,45 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .api import v1
 from .config import get_settings
-from .errors import ApiError
+from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
 
-def _error(status: int, msg: str) -> JSONResponse:
-    """错误也走统一返回体，HTTP 状态码与 body 里的 code 一致。"""
-    return JSONResponse(status_code=status, content=ApiResponse(code=status, msg=msg).model_dump())
+def _body(code: ErrorCode, msg: str) -> JSONResponse:
+    """所有响应（含错误）都是 {code, result, msg}；HTTP 状态码取自业务码前三位。"""
+    return JSONResponse(
+        status_code=code.http_status,
+        content=ApiResponse(code=int(code), msg=msg).model_dump(),
+    )
 
 
 def _register_handlers(app: FastAPI) -> None:
     @app.exception_handler(ApiError)
     async def _api_error(_: Request, exc: ApiError) -> JSONResponse:
-        return _error(exc.code, exc.msg)
+        return JSONResponse(
+            status_code=exc.status,
+            content=ApiResponse(code=int(exc.code), msg=exc.msg).model_dump(),
+        )
 
     @app.exception_handler(RequestValidationError)
     async def _validation(_: Request, exc: RequestValidationError) -> JSONResponse:
         first = exc.errors()[0] if exc.errors() else {}
-        field = ".".join(str(p) for p in first.get("loc", []))
-        return _error(400, f"参数错误：{field} {first.get('msg', '')}".strip())
+        field = ".".join(str(p) for p in first.get("loc", []) if p != "body")
+        return _body(ErrorCode.BAD_REQUEST, f"{field} {first.get('msg', '')}".strip())
 
     @app.exception_handler(StarletteHTTPException)
     async def _http(_: Request, exc: StarletteHTTPException) -> JSONResponse:
-        return _error(exc.status_code, str(exc.detail))
+        if exc.status_code == 404:
+            code = ErrorCode.NOT_FOUND
+        elif exc.status_code >= 500:
+            code = ErrorCode.INTERNAL_ERROR
+        else:
+            code = ErrorCode.BAD_REQUEST
+        return _body(code, str(exc.detail))
 
     @app.exception_handler(Exception)
     async def _unhandled(_: Request, exc: Exception) -> JSONResponse:
-        return _error(500, f"服务器错误：{type(exc).__name__}: {exc}")
+        return _body(ErrorCode.INTERNAL_ERROR, f"{type(exc).__name__}: {exc}")
 
 
 def create_app() -> FastAPI:

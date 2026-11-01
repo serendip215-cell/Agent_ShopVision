@@ -13,7 +13,7 @@ from PIL import Image
 
 from ..config import get_settings
 from ..deps import get_match_service
-from ..errors import BadInput
+from ..errors import ApiError, ErrorCode
 from ..schemas import ApiResponse, TextQueryRequest
 from ..services.matching import MatchService
 
@@ -28,14 +28,14 @@ _ALLOWED_FORMATS = {"PNG", "JPEG", "JPG", "WEBP"}
 def _open_image(raw: bytes) -> "PILImage":
     """上传字节 -> RGB 图片；格式不对抛 400，前端拿到的 msg 可直接展示。"""
     if not raw:
-        raise BadInput("上传内容为空")
+        raise ApiError(ErrorCode.EMPTY_UPLOAD)
     try:
         image = Image.open(io.BytesIO(raw))
         image.load()
     except Exception as exc:  # noqa: BLE001 - 任何解析失败都归为格式错误
-        raise BadInput("图像格式错误，请上传 PNG/JPG") from exc
+        raise ApiError(ErrorCode.INVALID_IMAGE, f"无法解析：{type(exc).__name__}") from exc
     if (image.format or "").upper() not in _ALLOWED_FORMATS:
-        raise BadInput(f"不支持的图像格式 {image.format}，请上传 PNG/JPG")
+        raise ApiError(ErrorCode.INVALID_IMAGE, f"不支持 {image.format}")
     return image.convert("RGB")
 
 

@@ -21,6 +21,8 @@ app/
 调用方向单向：`api → services → 数据访问`。api 层不写业务，services 不碰 HTTP，
 编码器是可替换的接缝（`SHOPVISION_MODEL_BACKEND=placeholder|onnx`）。
 
+返回体形状与**错误码表**是架构契约，见 [`../API约定.md`](../API约定.md)；错误码枚举在 `app/errors.py`。
+
 ## 跑起来
 
 ```bash
