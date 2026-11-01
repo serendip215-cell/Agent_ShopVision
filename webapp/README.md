@@ -55,6 +55,10 @@ python -m unittest discover -s tests -v
 
 不依赖仓库大索引（自建小索引），覆盖检索、占位编码器、接口返回与错误码。
 
+> CI：改动 `webapp/**` 推送或提 PR 时，GitHub Actions 自动跑同一套自检
+> （[`.github/workflows/backend-tests.yml`](../.github/workflows/backend-tests.yml)）。
+> 推之前本地先跑一遍，别把红叉推上去。
+
 ## 三、接口与调用
 
 基址 `http://localhost:8000`，前缀 `/api/v1`；返回体统一 `{code, result, msg}`，
