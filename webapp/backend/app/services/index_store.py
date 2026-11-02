@@ -61,10 +61,14 @@ class IndexStore:
 
     def summary(self) -> dict:
         """索引概况，供 health 之类的状态接口用，别让上层去翻内部字段。"""
+        entries = self._registry.get("categories", {})
+        category_counts = {name: int(entry.get("items", 0)) for name, entry in entries.items()}
         return {
             "index_dir": str(self.index_dir),
             "categories": self.categories,
             "dimension": self.dimension,
+            "category_counts": category_counts,
+            "total_items": sum(category_counts.values()),
         }
 
     def _load(self, category: str) -> tuple[dict[int, dict[str, str]], np.ndarray]:
