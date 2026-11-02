@@ -16,9 +16,9 @@
   --muted: #6b7280;
   --border: #eceff1;
   --divider: #f1f3f5;
-  --radius: 16px;
-  --radius-sm: 12px;
-  --radius-lg: 24px;
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-lg: 0;
   --shadow-sm: 0 1px 2px rgba(47, 53, 58, 0.04), 0 10px 28px rgba(47, 53, 58, 0.045);
   --shadow-md: 0 2px 6px rgba(47, 53, 58, 0.05), 0 24px 60px rgba(47, 53, 58, 0.08);
   --font-sans: Manrope, "HarmonyOS Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -171,7 +171,7 @@ a {
   height: 42px;
   padding: 0 6px 0 16px;
   border: 1.5px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--bg);
   transition: border-color 200ms ease, background 200ms ease, box-shadow 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -208,7 +208,7 @@ a {
   height: 30px;
   padding: 0 16px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--primary);
   color: #fff;
   font-size: 12.5px;
@@ -241,7 +241,7 @@ a {
   height: 36px;
   padding: 0 14px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--text);
   font-size: 12.5px;
@@ -291,7 +291,7 @@ a {
 }
 
 .sv-login-btn {
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .sv-account {
@@ -301,7 +301,7 @@ a {
   height: 38px;
   padding: 0 12px 0 4px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   cursor: pointer;
 }
@@ -330,7 +330,7 @@ a {
   align-items: center;
   gap: 9px;
   padding: 11px 20px;
-  border-radius: 12px 12px 0 0;
+  border-radius: 0;
   color: var(--muted);
   font-size: 13.5px;
   transition: color 220ms ease, background 220ms ease;
@@ -358,7 +358,7 @@ a {
   right: 20px;
   bottom: -1px;
   height: 2.5px;
-  border-radius: 2px 2px 0 0;
+  border-radius: 0;
   background: var(--primary);
   transform: scaleX(0);
   transform-origin: left center;
@@ -378,7 +378,7 @@ a {
 .sv-topnav-badge {
   margin-left: auto;
   padding: 4px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--warm-soft);
   color: var(--warm-ink);
   font-size: 11.5px;
@@ -391,7 +391,7 @@ a {
 }
 
 .sv-drawer-nav .sv-topnav-item {
-  border-radius: 12px;
+  border-radius: 0;
   padding: 13px 16px;
 }
 
@@ -432,7 +432,7 @@ a {
   align-items: flex-start;
   gap: 12px;
   padding: 14px 18px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--warm-bg);
   border: 1px solid rgba(169, 106, 67, 0.16);
 }
@@ -502,7 +502,7 @@ a {
   bottom: 0;
   width: 52px;
   height: 4px;
-  border-radius: 2px;
+  border-radius: 0;
   background: linear-gradient(90deg, var(--warm-soft), rgba(247, 217, 196, 0.3));
 }
 
@@ -527,7 +527,7 @@ a {
   padding: 0 8px;
   font-size: 11px;
   line-height: 20px;
-  border-radius: 7px;
+  border-radius: 0;
 }
 
 .sv-page-actions {
@@ -540,7 +540,7 @@ a {
 
 .sv-page-actions .sv-demo-btn {
   border: 1px solid rgba(95, 168, 176, 0.4);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--primary-ink);
 }
@@ -605,7 +605,7 @@ a {
   padding: 22px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   box-shadow: var(--shadow-sm);
 }
 
@@ -630,7 +630,7 @@ a {
   justify-content: center;
   width: 28px;
   height: 22px;
-  border-radius: 7px;
+  border-radius: 0;
   background: var(--primary-soft);
   color: var(--primary-deep);
   font-family: var(--font-mono);
@@ -685,7 +685,7 @@ a {
   gap: 48px;
   align-items: center;
   padding: 40px 44px;
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   background: linear-gradient(135deg, #edf6f7 0%, #f5fafb 55%, #fbfcfe 100%);
   border: 1px solid var(--border);
 }
@@ -738,7 +738,7 @@ a {
   padding: 0 7px 0 18px;
   background: var(--surface);
   border: 1.5px solid var(--border);
-  border-radius: 17px;
+  border-radius: 0;
   box-shadow: var(--shadow-sm);
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -773,7 +773,7 @@ a {
   flex: 0 0 auto;
   height: 42px;
   padding: 0 24px;
-  border-radius: 12px;
+  border-radius: 0;
   font-weight: 600;
 }
 
@@ -804,7 +804,7 @@ a {
   align-items: center;
   gap: 13px;
   padding: 18px 22px;
-  border-radius: 14px;
+  border-radius: 0;
   animation: sv-fade-up 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
   transition: background 220ms ease;
 }
@@ -823,7 +823,7 @@ a {
   width: 40px;
   height: 40px;
   flex: 0 0 auto;
-  border-radius: 12px;
+  border-radius: 0;
   background: rgba(95, 168, 176, 0.1);
   color: var(--primary-ink);
   font-size: 17px;
@@ -864,7 +864,7 @@ a {
   justify-content: center;
   min-height: 100px;
   padding: 16px;
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--surface);
   border: 1px solid var(--border);
 }
@@ -912,7 +912,7 @@ a {
   justify-content: center;
   gap: 6px;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--primary-soft);
   border: 1px solid rgba(95, 168, 176, 0.16);
 }
@@ -935,7 +935,7 @@ a {
   gap: 4px;
   min-height: 78px;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: 0;
   background: #f9fbfc;
   border: 1px solid var(--divider);
 }
@@ -969,7 +969,7 @@ a {
   align-items: flex-start;
   gap: 8px;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--danger-soft);
   border: 1px solid rgba(180, 83, 79, 0.16);
 }
@@ -999,7 +999,7 @@ a {
   gap: 10px;
   padding: 12px;
   border: 1px solid var(--divider);
-  border-radius: 14px;
+  border-radius: 0;
   background: var(--bg);
   color: var(--text);
   text-align: left;
@@ -1019,7 +1019,7 @@ a {
   justify-content: center;
   width: 30px;
   height: 30px;
-  border-radius: 9px;
+  border-radius: 0;
   background: var(--primary-soft);
   color: var(--primary-deep);
   font-size: 10px;
@@ -1050,7 +1050,7 @@ a {
   align-items: flex-start;
   gap: 8px;
   padding: 11px 12px;
-  border-radius: 13px;
+  border-radius: 0;
   border: 1px solid rgba(95, 168, 176, 0.18);
   background: #f5fbfb;
   color: var(--primary-ink);
@@ -1112,7 +1112,7 @@ a {
   gap: 6px;
   padding: 5px 12px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--muted);
   font-size: 12px;
@@ -1143,7 +1143,7 @@ a {
   overflow: hidden;
   padding: 0;
   border: 0;
-  border-radius: 18px;
+  border-radius: 0;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(47, 53, 58, 0.06);
   animation: sv-pop 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -1323,7 +1323,7 @@ a {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  border-radius: 12px;
+  border-radius: 0;
   background: var(--primary-soft);
   color: var(--primary-ink);
   font-weight: 700;
@@ -1342,7 +1342,7 @@ a {
   align-items: center;
   gap: 6px;
   padding: 3px 8px 3px 3px;
-  border-radius: 999px;
+  border-radius: 0;
   background: #f5f9fa;
   color: #4e5a60;
   font-size: 12px;
@@ -1380,7 +1380,7 @@ a {
 }
 
 .sv-query-input .ant-input-textarea {
-  border-radius: 14px;
+  border-radius: 0;
 }
 
 .sv-query-hint {
@@ -1409,7 +1409,7 @@ a {
 .sv-inline-error {
   margin-top: 10px;
   padding: 9px 12px;
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--danger-soft);
   color: var(--danger-ink);
   font-size: 12px;
@@ -1424,7 +1424,7 @@ a {
 
 .sv-upload .ant-upload-drag {
   border: 1.5px dashed #cfe3e4;
-  border-radius: 20px;
+  border-radius: 0;
   background: var(--bg);
   transition: border-color 160ms ease, background 160ms ease;
 }
@@ -1448,7 +1448,7 @@ a {
   justify-content: center;
   width: 58px;
   height: 58px;
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--primary-soft);
   color: var(--primary-deep);
   font-size: 24px;
@@ -1476,7 +1476,7 @@ a {
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  border-radius: 18px;
+  border-radius: 0;
   border: 1px solid var(--border);
   background: #f3f7f8;
 }
@@ -1554,7 +1554,7 @@ a {
   gap: 8px;
   padding: 7px;
   border: 1px solid var(--divider);
-  border-radius: 12px;
+  border-radius: 0;
   background: var(--bg);
   text-align: left;
   cursor: pointer;
@@ -1575,7 +1575,7 @@ a {
   width: 46px;
   height: 46px;
   flex: 0 0 auto;
-  border-radius: 9px;
+  border-radius: 0;
   object-fit: cover;
   background: var(--primary-soft);
 }
@@ -1606,7 +1606,7 @@ a {
 .sv-chip {
   padding: 7px 12px;
   border: 1px solid rgba(95, 168, 176, 0.32);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: #4e5a60;
   font-size: 12px;
@@ -1669,7 +1669,7 @@ a {
   align-items: center;
   gap: 20px;
   padding: 18px;
-  border-radius: 20px;
+  border-radius: 0;
   background: #f5fbfb;
   border: 1px solid rgba(95, 168, 176, 0.14);
 }
@@ -1778,7 +1778,7 @@ a {
 .sv-sim-track {
   height: 8px;
   overflow: hidden;
-  border-radius: 999px;
+  border-radius: 0;
   background: #eff4f5;
 }
 
@@ -1789,7 +1789,7 @@ a {
 .sv-sim-fill {
   display: block;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--primary);
   transition: width 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -1808,7 +1808,7 @@ a {
 .sv-note {
   margin-top: 18px;
   padding: 14px 16px;
-  border-radius: 14px;
+  border-radius: 0;
   background: #f7fbfb;
   border: 1px solid var(--divider);
 }
@@ -1849,7 +1849,7 @@ a {
   gap: 18px;
   padding: 12px 14px;
   margin-bottom: 12px;
-  border-radius: 14px;
+  border-radius: 0;
   background: #f9fbfc;
   border: 1px solid var(--divider);
 }
@@ -1899,7 +1899,7 @@ a {
   overflow: hidden;
   padding: 0;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--text);
   text-align: left;
@@ -2011,7 +2011,7 @@ a {
 .sv-item-cat {
   flex: 0 0 auto;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 10px;
   font-weight: 600;
 }
@@ -2023,13 +2023,13 @@ a {
 .sv-item-skeleton {
   padding: 12px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--surface);
 }
 
 .sv-drawer-photo .sv-photo {
   margin-bottom: 16px;
-  border-radius: 14px;
+  border-radius: 0;
   border: 1px solid var(--border);
 }
 
@@ -2042,7 +2042,7 @@ a {
 
 .sv-loading {
   padding: 18px;
-  border-radius: 16px;
+  border-radius: 0;
   background: #f9fbfc;
   border: 1px solid var(--divider);
 }
@@ -2074,7 +2074,7 @@ a {
 .sv-loading-bars span {
   display: block;
   height: 8px;
-  border-radius: 999px;
+  border-radius: 0;
   background: linear-gradient(90deg, #eef4f5 20%, #ddefef 40%, #eef4f5 60%);
   background-size: 200% 100%;
   animation: sv-shimmer 1.5s linear infinite;
@@ -2120,7 +2120,7 @@ a {
   width: 58px;
   height: 58px;
   margin-bottom: 14px;
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--primary-soft);
   color: var(--primary-deep);
   font-size: 24px;
@@ -2148,7 +2148,7 @@ a {
   align-items: flex-start;
   gap: 12px;
   padding: 14px 16px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--danger-soft);
   border: 1px solid rgba(180, 83, 79, 0.18);
 }
@@ -2160,7 +2160,7 @@ a {
   width: 32px;
   height: 32px;
   flex: 0 0 auto;
-  border-radius: 10px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.6);
   color: var(--danger-ink);
 }
@@ -2182,7 +2182,7 @@ a {
 
 .sv-error-code {
   padding: 1px 6px;
-  border-radius: 6px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.66);
   color: #8f5652;
   font-family: var(--font-mono);
@@ -2216,7 +2216,7 @@ a {
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: 0;
   background: var(--success-soft);
   color: var(--success-ink);
   font-size: 12px;
@@ -2230,7 +2230,7 @@ a {
   align-items: center;
   gap: 20px;
   padding: 24px;
-  border-radius: 22px;
+  border-radius: 0;
   border: 1px solid var(--divider);
   background: var(--bg);
 }
@@ -2309,7 +2309,7 @@ a {
 .sv-verdict-note {
   margin-top: 16px;
   padding: 14px 16px;
-  border-radius: 14px;
+  border-radius: 0;
   background: #f9fbfc;
   border: 1px solid var(--divider);
 }
@@ -2396,7 +2396,7 @@ a {
   align-items: center;
   gap: 12px;
   padding: 12px 10px;
-  border-radius: 14px;
+  border-radius: 0;
   border: 1px solid var(--divider);
   background: var(--bg);
 }
@@ -2412,7 +2412,7 @@ a {
   justify-content: center;
   min-height: 26px;
   padding: 4px 8px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 10px;
   font-weight: 600;
   white-space: nowrap;
@@ -2503,7 +2503,7 @@ a {
 .sv-quick-queries button {
   padding: 4px 8px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--bg);
   color: var(--text);
   font-size: 10px;
@@ -2560,7 +2560,7 @@ a {
 .sv-endpoint-card {
   padding: 16px;
   border: 1px solid var(--divider);
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--bg);
   min-width: 0;
 }
@@ -2574,7 +2574,7 @@ a {
 
 .sv-method {
   padding: 2px 7px;
-  border-radius: 6px;
+  border-radius: 0;
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 500;
@@ -2624,7 +2624,7 @@ a {
   overflow: auto;
   margin: 0;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 0;
   background: #f4f8f9;
   color: #42505a;
   font-family: var(--font-mono);
@@ -2654,7 +2654,7 @@ a {
   justify-content: center;
   width: 52px;
   height: 52px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--primary-soft);
   color: var(--primary-deep);
   font-size: 22px;
@@ -2695,7 +2695,7 @@ a {
   min-height: 420px;
   padding: 40px;
   border: 1.5px dashed var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   background: var(--surface);
   text-align: center;
 }
@@ -2706,7 +2706,7 @@ a {
   justify-content: center;
   width: 64px;
   height: 64px;
-  border-radius: 20px;
+  border-radius: 0;
   background: var(--warm-soft);
   color: var(--warm-ink);
   font-size: 26px;
@@ -2737,7 +2737,7 @@ a {
   width: 100%;
   padding: 16px;
   border: 1.5px dashed var(--border);
-  border-radius: 14px;
+  border-radius: 0;
   background: var(--bg);
   color: var(--text);
   text-align: left;
@@ -3030,7 +3030,7 @@ a {
   position: absolute;
   inset: -70px -150px 0;
   overflow: hidden;
-  border-radius: 48px;
+  border-radius: 0;
   pointer-events: none;
   z-index: 0;
 }
@@ -3101,7 +3101,7 @@ a {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 26px;
+  border-radius: 0;
   box-shadow: 0 16px 44px rgba(47, 53, 58, 0.07);
 }
 
@@ -3178,7 +3178,7 @@ a {
   place-items: center;
   min-height: 280px;
   border: 2px dashed rgba(95, 168, 176, 0.5);
-  border-radius: 22px;
+  border-radius: 0;
   background: rgba(240, 250, 250, 0.5);
   cursor: pointer;
   transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
@@ -3257,7 +3257,7 @@ a {
   max-width: 100%;
   max-height: 360px;
   margin: 0 auto;
-  border-radius: 16px;
+  border-radius: 0;
   animation: sv-fade-up 450ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
@@ -3275,7 +3275,7 @@ a {
   gap: 8px;
   padding: 6px 13px 6px 6px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--text);
   font-size: 12px;
@@ -3370,7 +3370,7 @@ a {
   gap: 12px;
   padding: 16px 20px;
   border: 1px solid rgba(169, 106, 67, 0.2);
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--warm-bg);
   color: var(--warm-ink);
   animation: sv-il-shake 480ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
@@ -3437,7 +3437,7 @@ a {
   place-items: center;
   max-height: 380px;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 0;
   background: var(--primary-soft);
 }
 
@@ -3476,7 +3476,7 @@ a {
   left: 0;
   bottom: 0;
   height: 5px;
-  border-radius: 3px;
+  border-radius: 0;
   background: linear-gradient(90deg, var(--primary), var(--primary-deep));
   animation: sv-il-underline 900ms 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -3582,7 +3582,7 @@ a {
 .sv-il-bar {
   height: 14px;
   overflow: hidden;
-  border-radius: 999px;
+  border-radius: 0;
   background: #eef4f5;
 }
 
@@ -3646,7 +3646,7 @@ a {
 
 .sv-il-placeholder-note {
   padding: 4px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--warm-soft);
   color: var(--warm-ink);
   font-size: 12px;
@@ -3669,7 +3669,7 @@ a {
   width: 128px;
   padding: 8px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--surface);
   cursor: pointer;
   text-align: left;
@@ -3681,7 +3681,7 @@ a {
   width: 100%;
   height: 84px;
   object-fit: cover;
-  border-radius: 11px;
+  border-radius: 0;
   background: var(--primary-soft);
 }
 
@@ -3710,7 +3710,7 @@ a {
 @media (max-width: 680px) {
   .sv-il-glass {
     padding: 20px 18px;
-    border-radius: 20px;
+    border-radius: 0;
   }
 
   .sv-il-head h1 {
@@ -3851,7 +3851,7 @@ a {
 
 .sv-tx-glass {
   border: 1px solid rgba(95, 168, 176, 0.13);
-  border-radius: 26px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.78);
   box-shadow: 0 2px 4px rgba(47, 53, 58, 0.03), 0 26px 60px rgba(47, 53, 58, 0.06);
   backdrop-filter: blur(18px);
@@ -3872,7 +3872,7 @@ a {
 .sv-tx-field {
   padding: 16px 18px 10px;
   border: 1px solid transparent;
-  border-radius: 18px;
+  border-radius: 0;
   background: rgba(251, 252, 254, 0.72);
   transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
 }
@@ -3941,7 +3941,7 @@ a {
   gap: 6px;
   padding: 7px 14px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: #fff;
   color: var(--muted);
   font-size: 12.5px;
@@ -4011,7 +4011,7 @@ a {
   height: 25px;
   padding: 0 7px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 0;
   background: #f2f7f8;
   color: var(--muted);
   font-family: var(--font-mono);
@@ -4035,7 +4035,7 @@ a {
   height: 46px;
   padding: 0 30px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 14.5px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -4075,7 +4075,7 @@ a {
 .sv-tx-samples-row button {
   padding: 5px 13px;
   border: 1px solid rgba(95, 168, 176, 0.25);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.7);
   color: var(--primary-ink);
   font-size: 12px;
@@ -4108,7 +4108,7 @@ a {
 
 .sv-tx-tag-warm {
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--warm-bg);
   color: var(--warm-ink);
   font-family: var(--font-sans);
@@ -4158,7 +4158,7 @@ a {
 .sv-tx-shimmer i {
   flex: 1;
   height: 4px;
-  border-radius: 999px;
+  border-radius: 0;
   background: linear-gradient(90deg, #eef4f5, #cfdfe1, #eef4f5);
   background-size: 200% 100%;
   animation: sv-tx-shimmer 1.4s ease-in-out infinite;
@@ -4184,7 +4184,7 @@ a {
   gap: 0;
   padding: 6px 20px;
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 0;
   background: #fff;
   box-shadow: var(--shadow-sm);
 }
@@ -4227,7 +4227,7 @@ a {
 }
 
 .sv-tx-summary-actions .ant-btn {
-  border-radius: 999px;
+  border-radius: 0;
   border-color: rgba(95, 168, 176, 0.4);
   color: var(--primary-ink);
   background: #fff;
@@ -4244,7 +4244,7 @@ a {
 .sv-tx-dist {
   padding: 16px 22px 14px;
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 0;
   background: #fff;
   box-shadow: var(--shadow-sm);
 }
@@ -4267,7 +4267,7 @@ a {
   display: flex;
   gap: 3px;
   height: 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--divider);
   overflow: hidden;
 }
@@ -4275,7 +4275,7 @@ a {
 .sv-tx-dist-bar i {
   display: block;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 0;
   transform-origin: left center;
   animation: sv-tx-seg 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -4347,7 +4347,7 @@ a {
   width: 100%;
   padding: 11px 16px 11px 10px;
   border: 1px solid rgba(236, 239, 241, 0.9);
-  border-radius: 18px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.92);
   text-align: left;
   cursor: pointer;
@@ -4386,7 +4386,7 @@ a {
   display: block;
   width: 62px;
   height: 62px;
-  border-radius: 14px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -4442,7 +4442,7 @@ a {
 
 .sv-tx-cat {
   padding: 2px 9px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 10.5px;
   font-weight: 600;
 }
@@ -4456,7 +4456,7 @@ a {
 .sv-tx-track {
   flex: 1 1 auto;
   height: 5px;
-  border-radius: 999px;
+  border-radius: 0;
   background: #eef3f4;
   overflow: hidden;
 }
@@ -4465,7 +4465,7 @@ a {
   display: block;
   width: 0;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 0;
   background: linear-gradient(90deg, #bfdde0, #8fc0c6);
   animation: sv-tx-grow 760ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
   animation-delay: var(--d, 0ms);
@@ -4515,7 +4515,7 @@ a {
   gap: 8px;
   padding: 40px 24px;
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: 0;
   background: #fff;
   text-align: center;
 }
@@ -4526,7 +4526,7 @@ a {
   place-items: center;
   width: 46px;
   height: 46px;
-  border-radius: 14px;
+  border-radius: 0;
   background: rgba(95, 168, 176, 0.1);
   color: var(--primary-ink);
   font-size: 19px;
@@ -4547,7 +4547,7 @@ a {
 }
 
 .sv-tx-empty .ant-btn {
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .sv-tx-idle {
@@ -4556,7 +4556,7 @@ a {
   gap: 16px;
   padding: 22px 26px;
   border: 1px dashed rgba(95, 168, 176, 0.26);
-  border-radius: 22px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.55);
   animation: sv-fade-up 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
   animation-delay: 260ms;
@@ -4688,7 +4688,7 @@ a {
   .sv-tx-photo {
     width: 48px;
     height: 48px;
-    border-radius: 12px;
+    border-radius: 0;
   }
 
   .sv-tx-go {
@@ -4849,7 +4849,7 @@ a {
   position: relative;
   padding: 22px 24px 24px;
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: 0;
   background: var(--surface);
   box-shadow: 0 1px 2px rgba(47, 53, 58, 0.03), 0 18px 46px rgba(47, 53, 58, 0.05);
   animation: sv-fade-up 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -4898,7 +4898,7 @@ a {
   gap: 6px;
   padding: 6px 12px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: #fafbfc;
   color: var(--primary-ink);
   font-size: 12px;
@@ -4968,7 +4968,7 @@ a {
   min-height: 208px;
   padding: 14px;
   border: 1.5px dashed #dfe6ea;
-  border-radius: 16px;
+  border-radius: 0;
   background: #fcfdfe;
   cursor: pointer;
   overflow: hidden;
@@ -4997,7 +4997,7 @@ a {
 .sv-mm-drop.has-file img {
   max-width: 100%;
   max-height: 232px;
-  border-radius: 12px;
+  border-radius: 0;
   object-fit: contain;
 }
 
@@ -5014,7 +5014,7 @@ a {
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 14px;
+  border-radius: 0;
   background: var(--mm-teal-soft);
   color: var(--mm-teal);
   font-size: 19px;
@@ -5038,7 +5038,7 @@ a {
 .sv-mm-drop-actions button {
   padding: 5px 12px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.94);
   color: var(--text);
   font-size: 12px;
@@ -5064,7 +5064,7 @@ a {
   gap: 6px;
   padding: 14px 16px 10px;
   border: 1.5px solid var(--border);
-  border-radius: 16px;
+  border-radius: 0;
   background: #fcfdfe;
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
@@ -5109,7 +5109,7 @@ a {
 .sv-mm-text-samples button {
   padding: 5px 12px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: #fafbfc;
   color: var(--muted);
   font-size: 12px;
@@ -5135,7 +5135,7 @@ a {
   gap: 12px;
   padding: 16px;
   border: 1px solid var(--divider);
-  border-radius: 16px;
+  border-radius: 0;
   background: #fbfdfd;
   text-align: center;
 }
@@ -5156,7 +5156,7 @@ a {
   min-width: 42px;
   padding: 5px 0;
   border: 1px solid var(--border);
-  border-radius: 9px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--muted);
   font-family: var(--font-mono);
@@ -5179,7 +5179,7 @@ a {
 
 .sv-mm-run-btn.ant-btn {
   height: 44px;
-  border-radius: 12px;
+  border-radius: 0;
   background: #4f93a6;
   border-color: #4f93a6;
   font-size: 14px;
@@ -5212,7 +5212,7 @@ a {
   gap: 12px;
   margin: -22px -24px 20px;
   padding: 14px 24px;
-  border-radius: 22px 22px 0 0;
+  border-radius: 0;
   border-bottom: 1px solid transparent;
 }
 
@@ -5242,7 +5242,7 @@ a {
   width: 4px;
   height: 15px;
   margin-top: -7.5px;
-  border-radius: 3px;
+  border-radius: 0;
   background: var(--mm-blue);
 }
 
@@ -5264,7 +5264,7 @@ a {
 .sv-mm-bar-warm {
   margin-left: auto;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--warm-bg);
   color: var(--warm-ink);
   font-size: 11px;
@@ -5289,7 +5289,7 @@ a {
   gap: 14px;
   padding: 18px;
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 0;
   background: #fcfeff;
 }
 
@@ -5314,7 +5314,7 @@ a {
 .sv-mm-tower-head em {
   margin-left: auto;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--warm-bg);
   color: var(--warm-ink);
   font-size: 10.5px;
@@ -5328,7 +5328,7 @@ a {
   justify-content: center;
   height: 104px;
   border: 1px solid var(--divider);
-  border-radius: 14px;
+  border-radius: 0;
   background: #f8fbfb;
   overflow: hidden;
 }
@@ -5364,7 +5364,7 @@ a {
   flex-direction: column;
   gap: 1px;
   margin: 0;
-  border-radius: 12px;
+  border-radius: 0;
   background: #eef2f4;
   overflow: hidden;
 }
@@ -5427,7 +5427,7 @@ a {
 .sv-mm-link-badge {
   padding: 4px 9px;
   border: 1px solid #dfeaee;
-  border-radius: 999px;
+  border-radius: 0;
   background: #f7fbfc;
   color: var(--mm-blue);
   font-size: 10.5px;
@@ -5443,7 +5443,7 @@ a {
   margin-top: 18px;
   padding: 16px 20px;
   border: 1px solid var(--divider);
-  border-radius: 16px;
+  border-radius: 0;
   background: #fafcfc;
   animation: sv-mm-pop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -5454,7 +5454,7 @@ a {
   width: 40px;
   height: 40px;
   flex: 0 0 auto;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 20px;
 }
 
@@ -5559,7 +5559,7 @@ a {
   width: 100%;
   padding: 8px 10px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 0;
   background: transparent;
   color: var(--text);
   font-family: inherit;
@@ -5588,7 +5588,7 @@ a {
   display: block;
   width: 56px;
   height: 56px;
-  border-radius: 11px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -5620,7 +5620,7 @@ a {
   flex: 1;
   height: 6px;
   min-width: 40px;
-  border-radius: 999px;
+  border-radius: 0;
   background: #f0f4f6;
   overflow: hidden;
 }
@@ -5628,7 +5628,7 @@ a {
 .sv-mm-ev-track > i {
   display: block;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 0;
   background: linear-gradient(90deg, #9ed0d6, #4f93a6);
   animation: sv-mm-grow 640ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -5647,7 +5647,7 @@ a {
   width: fit-content;
   max-width: 100%;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 12px;
   font-weight: 600;
 }
@@ -5671,7 +5671,7 @@ a {
   bottom: 18px;
   padding: 6px 12px;
   border: 1px solid #e0eee5;
-  border-radius: 999px;
+  border-radius: 0;
   background: #f3faf6;
   color: var(--mm-green);
   font-family: var(--font-mono);
@@ -5686,7 +5686,7 @@ a {
   gap: 14px;
   padding: 30px 22px;
   border: 1px dashed #e2e8ea;
-  border-radius: 16px;
+  border-radius: 0;
   background: #fbfcfd;
   color: var(--muted);
 }
@@ -5697,7 +5697,7 @@ a {
   width: 42px;
   height: 42px;
   flex: 0 0 auto;
-  border-radius: 12px;
+  border-radius: 0;
   background: #f1f6f7;
   color: #9fb6bd;
   font-size: 18px;
@@ -5723,7 +5723,7 @@ a {
 }
 
 .sv-mm-actions .ant-btn {
-  border-radius: 9px;
+  border-radius: 0;
   color: var(--primary-ink);
   font-size: 12px;
 }
@@ -5874,7 +5874,7 @@ a {
   .sv-mm-ev-photo {
     width: 44px;
     height: 44px;
-    border-radius: 9px;
+    border-radius: 0;
   }
 
   .sv-mm-float-tip {
