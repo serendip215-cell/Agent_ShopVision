@@ -8,7 +8,7 @@ import { categoryStyle } from '../../constants/catalog'
 import { formatPercent } from '../../utils/format'
 import { resolveItemImage } from '../../utils/itemImage'
 
-function ItemPhoto({ item }) {
+function ItemPhoto({ item, isTop = false }) {
   const style = categoryStyle(item.category)
   const imagePath = resolveItemImage(item)
 
@@ -27,12 +27,13 @@ function ItemPhoto({ item }) {
           event.currentTarget.remove()
         }}
       />
+      {isTop && <span className="sv-item-best">最佳匹配</span>}
       <span className="sv-photo-rank" style={{ background: style.ink }} />
     </span>
   )
 }
 
-export function ItemRow({ item, rank, onSelect, highlight = false }) {
+export function ItemRow({ item, rank, onSelect, highlight = false, isTop = false }) {
   const style = categoryStyle(item.category)
   return (
     <button
@@ -40,7 +41,7 @@ export function ItemRow({ item, rank, onSelect, highlight = false }) {
       className={`sv-item-card ${highlight ? 'is-highlight' : ''}`}
       onClick={() => onSelect?.(item)}
     >
-      <ItemPhoto item={item} />
+      <ItemPhoto item={item} isTop={isTop} />
       <span className="sv-item-card-body">
         <span className="sv-item-card-top">
           <span className="sv-item-rank sv-mono" style={{ color: style.ink }}>
@@ -100,6 +101,7 @@ export function ResultList({ items, loading, onSelect, highlightCategory, emptyT
           item={item}
           rank={index + 1}
           onSelect={onSelect}
+          isTop={index === 0}
           highlight={highlightCategory ? item.category === highlightCategory : false}
         />
       ))}
