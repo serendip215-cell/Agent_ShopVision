@@ -226,11 +226,6 @@ export default function MatchLab() {
 
   return (
     <div className="sv-mm">
-      <div className="sv-mm-glow" aria-hidden="true">
-        <i />
-        <i />
-      </div>
-
       {/* 标题区 */}
       <header className="sv-mm-head">
         <div>

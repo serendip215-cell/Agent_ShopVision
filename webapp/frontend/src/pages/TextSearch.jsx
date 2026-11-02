@@ -191,11 +191,6 @@ export default function TextSearch() {
 
   return (
     <div className="sv-tx">
-      <div className="sv-tx-glow" aria-hidden="true">
-        <i />
-        <i />
-      </div>
-
       {/* 区块 1：页面头部 */}
       <header className="sv-tx-head">
         <div className="sv-tx-head-copy">

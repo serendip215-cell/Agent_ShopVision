@@ -263,12 +263,6 @@ export default function ImageLab() {
 
   return (
     <div className="sv-il">
-      <div className="sv-il-glow" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </div>
-
       <ImageUploadSectionWithHeader
         eyebrow="Chinese-CLIP 双塔 · 图像分类"
         title="上传商品图片，AI 识别商品类别"
