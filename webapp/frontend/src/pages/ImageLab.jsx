@@ -167,7 +167,7 @@ export default function ImageLab() {
       await analyze(sampleFile)
     } catch (loadError) {
       if (!isCanceled(loadError)) {
-        // error handled by execute
+        setValidation(`示例图加载失败：${loadError.message || '请检查网络后重试'}`)
       }
     }
   }
@@ -194,8 +194,9 @@ export default function ImageLab() {
 
       const entries = []
       let lastGood = null
-      items.forEach((item) => {
-        const source = list.find((item2) => item2.name === item.file_name) || list[0]
+      items.forEach((item, index) => {
+        // 先按原始文件名配，配不上就按顺序兜底（后端按上传顺序返回）
+        const source = list.find((item2) => item2.name === item.file_name) || list[index] || list[0]
         if (item.code !== 0 || !item.result) {
           addRun({
             mode: 'image',

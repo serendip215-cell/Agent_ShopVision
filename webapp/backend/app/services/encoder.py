@@ -97,9 +97,15 @@ class OnnxEncoder(Encoder):
         self._tokenize = tokenize
         self._preprocess = image_transform(image_size)
         self.context_length = context_length
-        self._visual = ort.InferenceSession(str(visual_path), providers=[provider])
-        self._text = ort.InferenceSession(str(text_path), providers=[provider])
-        self.dim = int(self._visual.get_outputs()[0].shape[-1])
+        try:
+            self._visual = ort.InferenceSession(str(visual_path), providers=[provider])
+            self._text = ort.InferenceSession(str(text_path), providers=[provider])
+            self.dim = int(self._visual.get_outputs()[0].shape[-1])
+        except Exception as exc:  # noqa: BLE001 - 产物损坏/硬件不支持都归为不可用
+            raise ApiError(
+                ErrorCode.MODEL_UNAVAILABLE,
+                f"ONNX 模型加载失败（provider={provider}）：{exc}",
+            ) from exc
 
     def encode_image(self, image: "Image") -> np.ndarray:
         arr = self._preprocess(image.convert("RGB")).numpy()[None].astype("float32")

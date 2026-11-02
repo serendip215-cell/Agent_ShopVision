@@ -23,9 +23,9 @@ from .v1 import _open_image
 
 router = APIRouter(prefix="/api/v1/tasks", tags=["异步任务"])
 
-# eager 模式（测试/无 Redis 冒烟）下 Celery 不落 backend，自己存一份结果
+# eager 模式（测试/无 Redis 冒烟）下 Celery 不落 backend，自己存一份结果。
+# 不做淘汰：eager 只在测试里用，淘汰会让已完成任务被误报成 PENDING。
 _EAGER_RESULTS: dict[str, EagerResult] = {}
-_EAGER_KEEP = 100
 
 _TASK_ERROR_HINT = "任务队列不可用：请确认 SHOPVISION_CELERY_BROKER_URL 指向的 Redis 可达"
 
@@ -45,8 +45,6 @@ def _save_upload(file: UploadFile, raw: bytes) -> Path:
 
 
 def _remember_eager(result: EagerResult) -> None:
-    if len(_EAGER_RESULTS) >= _EAGER_KEEP:
-        _EAGER_RESULTS.pop(next(iter(_EAGER_RESULTS)))
     _EAGER_RESULTS[result.id] = result
 
 
@@ -147,7 +145,18 @@ def task_status(task_id: str) -> TaskStatusResponse:
             }
         elif state == "SUCCESS":
             returned = result.result
-            payload["result"] = returned.get("result") if isinstance(returned, dict) else returned
+            # 任务内部把业务错误当返回值（code != 0）而不是抛异常，这里要还原成 FAILURE，
+            # 否则前端拿到 SUCCESS + result=null，分不清“没结果”和“出错了”
+            if isinstance(returned, dict) and returned.get("code"):
+                payload["status"] = "FAILURE"
+                payload["error"] = {
+                    "code": int(returned["code"]),
+                    "msg": returned.get("msg") or ErrorCode.INTERNAL_ERROR.message,
+                }
+            else:
+                payload["result"] = (
+                    returned.get("result") if isinstance(returned, dict) else returned
+                )
         elif state == "FAILURE":
             payload["error"] = {
                 "code": int(ErrorCode.INTERNAL_ERROR),

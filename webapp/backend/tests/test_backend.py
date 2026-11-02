@@ -333,6 +333,26 @@ class AsyncTaskApiTest(unittest.TestCase):
         self.assertEqual(body["code"], 0)
         self.assertEqual(body["result"]["status"], "PENDING")
 
+    def test_single_task_business_error_is_reported_as_failure(self) -> None:
+        """任务内部把业务错误当返回值；轮询接口要还原成 FAILURE，不能回 SUCCESS + null。"""
+        from celery.result import EagerResult  # 延迟导入：只有这个用例需要
+
+        from app.api import tasks as tasks_api
+
+        task_id = "business-error-task"
+        tasks_api._EAGER_RESULTS[task_id] = EagerResult(
+            task_id,
+            {"code": int(ErrorCode.INVALID_IMAGE), "result": None, "msg": "坏图"},
+            "SUCCESS",
+        )
+        try:
+            body = self.client.get(f"/api/v1/tasks/{task_id}").json()
+        finally:
+            tasks_api._EAGER_RESULTS.pop(task_id, None)
+        self.assertEqual(body["result"]["status"], "FAILURE")
+        self.assertEqual(body["result"]["error"]["code"], int(ErrorCode.INVALID_IMAGE))
+        self.assertEqual(body["result"]["error"]["msg"], "坏图")
+
 
 class ErrorCodeTest(unittest.TestCase):
     def test_http_status_is_derived_from_business_code(self) -> None:
