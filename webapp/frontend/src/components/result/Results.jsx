@@ -10,11 +10,11 @@ import { formatPercent } from '../../utils/format'
 function ItemPhoto({ item }) {
   const style = categoryStyle(item.category)
 
-  // 使用后端返回的 local_image_path，去掉 data/ 前缀
-  // 例: data/processed_data_cleaning/鞋/images/xxx.jpg -> /items/processed_data_cleaning/鞋/images/xxx.jpg
+  // 后端把 data/processed_data_cleaning 挂在 /item-images 下
+  // 例: data/processed_data_cleaning/鞋/images/xxx.jpg -> /item-images/鞋/images/xxx.jpg
   const imagePath = item.local_image_path
-    ? `/items/${item.local_image_path.replace(/^data\//, '')}`
-    : `/items/${item.item_id}.jpg` // 兜底：使用 item_id
+    ? `/item-images/${item.local_image_path.replace(/^data\/processed_data_cleaning\//, '')}`
+    : `/items/${item.item_id}.jpg` // 兜底：public/items 里的演示图
 
   return (
     <span
