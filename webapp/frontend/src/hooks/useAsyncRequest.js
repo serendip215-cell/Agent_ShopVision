@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { isCanceled } from '../utils/errors'
 
-export function useAsyncRequest(fn, options = {}) {
+export function useAsyncRequest(fn) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [result, setResult] = useState(null)

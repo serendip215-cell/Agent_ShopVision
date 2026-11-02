@@ -1,6 +1,5 @@
 import { Button } from 'antd'
 import { ArrowRightOutlined, CheckCircleOutlined, WarningOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
 import useCountUp from '../../utils/useCountUp'
 import { formatScore } from '../../utils/format'
 
@@ -25,7 +24,6 @@ function plainWords(result) {
 }
 
 export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCategory }) {
-  const navigate = useNavigate()
   const confidenceValue = useCountUp(result?.confidence ?? null)
   const topk = topkPercents(result)
   const plain = plainWords(result)

@@ -103,6 +103,7 @@ export function describeError(error) {
 
 export function isCanceled(error) {
   return (
+    error?.__CANCEL__ === true ||
     error?.code === 'ERR_CANCELED' ||
     error?.name === 'CanceledError' ||
     error?.name === 'AbortError'
