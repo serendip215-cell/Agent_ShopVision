@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { Button, Tooltip } from 'antd'
 import {
   CameraOutlined,
-  FolderOpenOutlined,
+  PlusOutlined,
   QuestionCircleOutlined,
   WarningOutlined,
 } from '@ant-design/icons'
@@ -21,19 +22,34 @@ export function ImageUploadSection({
   onBatchFiles,
   batchInputRef,
 }) {
+  const [dragging, setDragging] = useState(false)
+
   function handleDragOver(e) {
     e.preventDefault()
+    setDragging(true)
+  }
+
+  function handleDragLeave(e) {
+    // 指针移到子元素上也会触发 dragleave，这里只在真正离开拖拽框时取消高亮
+    if (e.currentTarget.contains(e.relatedTarget)) return
+    setDragging(false)
   }
 
   function handleDrop(e) {
     e.preventDefault()
+    setDragging(false)
     const droppedFile = e.dataTransfer.files?.[0]
     if (droppedFile) onSelect(droppedFile)
   }
 
-  if (loading) {
-    return (
-      <section className="sv-il-upload sv-il-glass">
+  return (
+    <section className="sv-il-upload sv-il-glass">
+      <div className="sv-il-upload-head">
+        <h2>工作台</h2>
+        <span className="sv-il-upload-limit">PNG / JPG / WEBP · ≤ 10MB</span>
+      </div>
+
+      {loading ? (
         <div className="sv-il-loading" role="status">
           <span className="sv-il-ring" aria-hidden="true" />
           <strong>
@@ -43,96 +59,93 @@ export function ImageUploadSection({
           </strong>
           <span className="sv-il-loading-note">模型正在提取图像向量，对比商品类别库</span>
         </div>
-      </section>
-    )
-  }
-
-  return (
-    <section className="sv-il-upload sv-il-glass">
-      <div className="sv-il-upload-head">
-        <h2>上传商品图</h2>
-        <span className="sv-il-upload-limit">支持 PNG / JPG / WEBP · 单张 ≤ 10MB</span>
-      </div>
-
-      <label
-        className={`sv-il-dropzone ${previewUrl ? 'has-file' : ''}`}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        <input
-          type="file"
-          accept="image/png,image/jpeg,image/webp"
-          disabled={false}
-          onChange={(event) => {
-            onSelect(event.target.files?.[0])
-            event.target.value = ''
-          }}
-        />
-        {previewUrl ? (
-          <img src={previewUrl} alt="已选择的商品图预览" />
-        ) : (
-          <span className="sv-il-dropzone-empty">
-            <span className="sv-il-dropzone-icon">
-              <CameraOutlined />
-            </span>
-            <strong>拖拽图片到这里，或点击上传</strong>
-            <small>图片仅用于本次识别请求</small>
-          </span>
-        )}
-      </label>
-
-      <div className="sv-il-samples">
-        {DEMO_IMAGES.map((sample) => (
-          <button
-            type="button"
-            key={sample.key}
-            className="sv-il-sample"
-            title={`直接用「${sample.label}」试试识别`}
-            onClick={() => onLoadSample(sample)}
+      ) : (
+        <>
+          <label
+            className={`sv-il-dropzone ${previewUrl ? 'has-file' : ''} ${dragging ? 'is-drag' : ''}`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
           >
-            <img src={sample.src} alt={sample.label} loading="lazy" />
-            <span>{sample.label}</span>
-          </button>
-        ))}
-        <button type="button" className="sv-il-sample is-more" onClick={onBatchClick}>
-          <FolderOpenOutlined />
-          <span>批量测试</span>
-        </button>
-        <input
-          ref={batchInputRef}
-          type="file"
-          accept="image/png,image/jpeg,image/webp"
-          multiple
-          hidden
-          onChange={(event) => {
-            const files = event.target.files
-            event.target.value = ''
-            if (files?.length) {
-              const validated = [...files]
-                .slice(0, 12)
-                .filter((f) => {
-                  const err = validateImageFile(f)
-                  if (err) console.warn(`跳过「${f.name}」：${err}`)
-                  return !err
-                })
-              if (validated.length) onBatchFiles(validated)
-            }
-          }}
-        />
-      </div>
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              onChange={(event) => {
+                onSelect(event.target.files?.[0])
+                event.target.value = ''
+              }}
+            />
+            {previewUrl ? (
+              <img src={previewUrl} alt="已选择的商品图预览" />
+            ) : (
+              <span className="sv-il-dropzone-empty">
+                <span className="sv-il-dropzone-icon">
+                  <CameraOutlined />
+                </span>
+                <strong>拖拽图片到这里，或点击上传</strong>
+                <small>图片仅用于本次识别请求</small>
+              </span>
+            )}
+          </label>
 
-      <div className="sv-il-upload-foot">
-        {validation ? (
-          <span className="sv-il-inline-error">
-            <WarningOutlined /> {validation}
-          </span>
-        ) : (
-          <span className="sv-il-upload-hint">不确定选什么？点一张示例图直接看效果</span>
-        )}
-        <Button type="primary" size="large" onClick={onAnalyze} disabled={!file}>
-          开始识别
-        </Button>
-      </div>
+          <div className="sv-il-samples">
+            {DEMO_IMAGES.slice(0, 4).map((sample) => (
+              <Tooltip key={sample.key} title={`用「${sample.label}」示例图试试`}>
+                <button
+                  type="button"
+                  className="sv-il-sample"
+                  aria-label={`使用示例图 ${sample.label}`}
+                  onClick={() => onLoadSample(sample)}
+                >
+                  <img src={sample.src} alt={sample.label} loading="lazy" />
+                </button>
+              </Tooltip>
+            ))}
+            <Tooltip title="批量识别多张商品图">
+              <button
+                type="button"
+                className="sv-il-sample is-add"
+                aria-label="批量识别"
+                onClick={onBatchClick}
+              >
+                <PlusOutlined />
+              </button>
+            </Tooltip>
+            <input
+              ref={batchInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              multiple
+              hidden
+              onChange={(event) => {
+                const files = event.target.files
+                event.target.value = ''
+                if (files?.length) {
+                  const validated = [...files]
+                    .slice(0, 12)
+                    .filter((f) => !validateImageFile(f))
+                  if (validated.length) onBatchFiles(validated)
+                }
+              }}
+            />
+          </div>
+
+          <div className="sv-il-upload-foot">
+            {validation ? (
+              <span className="sv-il-inline-error">
+                <WarningOutlined /> {validation}
+              </span>
+            ) : (
+              <span className="sv-il-upload-hint">
+                {file ? `已选择：${file.name}` : '拖入图片或点一张示例图即可开始'}
+              </span>
+            )}
+            <Button type="primary" size="large" onClick={onAnalyze}>
+              开始识别
+            </Button>
+          </div>
+        </>
+      )}
     </section>
   )
 }

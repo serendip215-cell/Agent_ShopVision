@@ -6,15 +6,11 @@ import {
 import { CategoryBadge, CopyButton, EmptyState, SimilarityBar } from '../common/Ui'
 import { categoryStyle } from '../../constants/catalog'
 import { formatPercent } from '../../utils/format'
+import { resolveItemImage } from '../../utils/itemImage'
 
-function ItemPhoto({ item }) {
+function ItemPhoto({ item, isTop = false }) {
   const style = categoryStyle(item.category)
-
-  // 后端把 data/processed_data_cleaning 挂在 /item-images 下
-  // 例: data/processed_data_cleaning/鞋/images/xxx.jpg -> /item-images/鞋/images/xxx.jpg
-  const imagePath = item.local_image_path
-    ? `/item-images/${item.local_image_path.replace(/^data\/processed_data_cleaning\//, '')}`
-    : `/items/${item.item_id}.jpg` // 兜底：public/items 里的演示图
+  const imagePath = resolveItemImage(item)
 
   return (
     <span
@@ -31,12 +27,13 @@ function ItemPhoto({ item }) {
           event.currentTarget.remove()
         }}
       />
+      {isTop && <span className="sv-item-best">最佳匹配</span>}
       <span className="sv-photo-rank" style={{ background: style.ink }} />
     </span>
   )
 }
 
-export function ItemRow({ item, rank, onSelect, highlight = false }) {
+export function ItemRow({ item, rank, onSelect, highlight = false, isTop = false }) {
   const style = categoryStyle(item.category)
   return (
     <button
@@ -44,7 +41,7 @@ export function ItemRow({ item, rank, onSelect, highlight = false }) {
       className={`sv-item-card ${highlight ? 'is-highlight' : ''}`}
       onClick={() => onSelect?.(item)}
     >
-      <ItemPhoto item={item} />
+      <ItemPhoto item={item} isTop={isTop} />
       <span className="sv-item-card-body">
         <span className="sv-item-card-top">
           <span className="sv-item-rank sv-mono" style={{ color: style.ink }}>
@@ -104,6 +101,7 @@ export function ResultList({ items, loading, onSelect, highlightCategory, emptyT
           item={item}
           rank={index + 1}
           onSelect={onSelect}
+          isTop={index === 0}
           highlight={highlightCategory ? item.category === highlightCategory : false}
         />
       ))}

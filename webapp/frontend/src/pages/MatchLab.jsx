@@ -4,38 +4,33 @@ import {
   ArrowRightOutlined,
   CameraOutlined,
   CheckCircleFilled,
+  ClockCircleOutlined,
   CloseCircleFilled,
   DeleteOutlined,
   FileTextOutlined,
   QuestionCircleOutlined,
-  ThunderboltOutlined,
 } from '@ant-design/icons'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { matchImageText } from '../api/client'
 import { useApp } from '../context/AppContext'
 import { useWorkflow } from '../context/WorkflowContext'
-import { DEMO_PAIRS, categoryStyle } from '../constants/catalog'
+import { DEMO_PAIRS, SAMPLE_QUERIES } from '../constants/catalog'
 import { isCanceled } from '../utils/errors'
 import { fileFromUrl, validateImageFile } from '../utils/samples'
-import { formatDuration, formatPercent } from '../utils/format'
-import { ErrorNotice } from '../components/common/Ui'
-import { DetailDrawer } from '../components/result/Results'
+import { formatDuration } from '../utils/format'
+import {
+  CategoryBadge,
+  EmptyState,
+  ErrorNotice,
+  LoadingState,
+  PageHeader,
+  SimilarityBar,
+} from '../components/common/Ui'
+import { DetailDrawer, ResultList } from '../components/result/Results'
 
 const TOPK_PRESETS = [3, 5, 10]
-const TEXT_SAMPLES = ['白色运动鞋', '黑色双肩包', '粉色连衣裙']
-
-// 后端还没回传双塔置信度 / 细分类时用的示例值；页面会挂「示例数值」标识。
-// 换到真实模型后 image_confidence / text_confidence / text_type 一到位就自动显示真值。
-const SAMPLE_FILL = {
-  imageConfidence: 0.91,
-  imageType: '女士小板鞋',
-  textConfidence: 0.88,
-  textType: '休闲鞋',
-}
-
-function fixed2(value) {
-  return Number.isFinite(value) ? value.toFixed(2) : '—'
-}
+const TEXT_SAMPLES = SAMPLE_QUERIES.slice(0, 3)
+const IDLE_STEPS = ['上传商品图', '填写描述', '查看是否一致']
 
 export default function MatchLab() {
   const navigate = useNavigate()
@@ -49,6 +44,7 @@ export default function MatchLab() {
   const [text, setText] = useState('')
   const [topK, setTopK] = useState(5)
   const [result, setResult] = useState(null)
+  const [matchedText, setMatchedText] = useState('')
   const [selected, setSelected] = useState(null)
   const [loading, setLoading] = useState(false)
   const [demoLoading, setDemoLoading] = useState(null)
@@ -125,6 +121,7 @@ export default function MatchLab() {
       )
       const elapsed = performance.now() - startedAt
       setResult(data)
+      setMatchedText(activeText)
       setDuration(elapsed)
       addRun({
         mode: 'match',
@@ -140,7 +137,7 @@ export default function MatchLab() {
         durationMs: elapsed,
         placeholder: isPlaceholder,
       })
-      message.success(data.match ? '图文一致' : '图文不一致，见下方证据')
+      message.success(data.match ? '图文一致' : '图文不一致')
     } catch (requestError) {
       if (isCanceled(requestError)) return
       setError(requestError)
@@ -226,16 +223,11 @@ export default function MatchLab() {
     navigate(`/text?q=${encodeURIComponent(keyword)}`)
   }
 
-  const imageSample = !Number.isFinite(result?.image_confidence)
-  const textSample = !Number.isFinite(result?.text_confidence) || !result?.text_type
-  const imageConfidence = Number.isFinite(result?.image_confidence)
-    ? result.image_confidence
-    : SAMPLE_FILL.imageConfidence
-  const textConfidence = Number.isFinite(result?.text_confidence)
-    ? result.text_confidence
-    : SAMPLE_FILL.textConfidence
-  const imageType = result?.image_type || SAMPLE_FILL.imageType
-  const textType = result?.text_type || result?.items?.[0]?.type || SAMPLE_FILL.textType
+  const imageConfidence = Number.isFinite(result?.image_confidence) ? result.image_confidence : null
+  const textConfidence = Number.isFinite(result?.text_confidence) ? result.text_confidence : null
+  const textType = result?.text_type || result?.items?.[0]?.type || null
+  const submittedText = matchedText || text
+  const items = result?.items || []
 
   return (
     <div className="sv-mm">
@@ -244,51 +236,33 @@ export default function MatchLab() {
         <i />
       </div>
 
-      {/* 标题区 */}
-      <header className="sv-mm-head">
-        <div>
-          <span className="sv-eyebrow">Chinese-CLIP 双塔 · 图文匹配</span>
-          <h1>
-            <i className="sv-mm-dot is-green" aria-hidden="true" />
-            图文匹配页
-          </h1>
-          <p>
-            <i className="sv-mm-dot is-blue" aria-hidden="true" />
-            POST /match · 输入图片和句子，看两个模型分别怎么判，再核对它们是否指向同一个类别。
-          </p>
-        </div>
-        <div className="sv-mm-head-actions">
-          <Tooltip title="图像塔与文本塔各自独立判类，只比顶层大类，不比细分类">
+      <PageHeader
+        eyebrow="图文一致性校验"
+        title="这张图和描述说的是同一件商品吗"
+        description="上传一张商品图、写一句中文描述，分别识别两侧的类别，再核对它们是否指向同一类商品。"
+        actions={
+          <Tooltip title="两侧只比对顶层大类是否相同，不比较细分类。">
             <button type="button" className="sv-mm-help" aria-label="使用帮助">
               <QuestionCircleOutlined />
             </button>
           </Tooltip>
-        </div>
-      </header>
+        }
+      />
 
-      {/* 模块 1：输入区 */}
-      <section className="sv-mm-card sv-mm-input">
-        <div className="sv-mm-card-head">
-          <h2>输入区</h2>
-          <span>左图右文，同时喂给两条链路</span>
-          <div className="sv-mm-demos">
-            <button type="button" onClick={() => applyDemo('match')} disabled={Boolean(demoLoading)}>
-              <ThunderboltOutlined /> 一致示例
-            </button>
-            <button type="button" onClick={() => applyDemo('mismatch')} disabled={Boolean(demoLoading)}>
-              <ThunderboltOutlined /> 不一致示例
-            </button>
+      <div className="sv-mm-body">
+        {/* 左栏：比对准备 */}
+        <section className="sv-mm-card sv-mm-input">
+          <div className="sv-mm-card-head">
+            <h2>比对准备</h2>
+            <span>先准备图片和描述，再开始比对</span>
           </div>
-        </div>
 
-        <div className="sv-mm-input-grid">
-          {/* 图像输入 */}
           <div className="sv-mm-slot">
             <div className="sv-mm-slot-head">
               <span className="sv-mm-slot-title">
-                <CameraOutlined /> 图像输入
+                <CameraOutlined /> 图片内容
               </span>
-              <span className="sv-mm-slot-note">图像塔的输入源</span>
+              <span className="sv-mm-slot-note">拖拽或点击上传</span>
             </div>
 
             <div
@@ -313,7 +287,7 @@ export default function MatchLab() {
             >
               {previewUrl ? (
                 <>
-                  <img src={previewUrl} alt="待匹配商品图" />
+                  <img src={previewUrl} alt="待比对商品图" />
                   <span className="sv-mm-drop-actions">
                     <button type="button" onClick={(event) => {
                       event.stopPropagation()
@@ -352,19 +326,18 @@ export default function MatchLab() {
             />
           </div>
 
-          {/* 文本输入 */}
           <div className="sv-mm-slot">
             <div className="sv-mm-slot-head">
               <span className="sv-mm-slot-title">
-                <FileTextOutlined /> 文本输入
+                <FileTextOutlined /> 文字描述
               </span>
-              <span className="sv-mm-slot-note">文本塔的输入源</span>
+              <span className="sv-mm-slot-note">一句话说清是什么商品</span>
             </div>
 
             <div className="sv-mm-text">
               <textarea
                 value={text}
-                rows={5}
+                rows={3}
                 maxLength={200}
                 placeholder="例如：白色运动鞋"
                 onChange={(event) => {
@@ -379,7 +352,7 @@ export default function MatchLab() {
                 }}
               />
               <div className="sv-mm-text-foot">
-                <span>Enter 运行 · Shift + Enter 换行</span>
+                <span>Enter 比对 · Shift + Enter 换行</span>
                 <span className="sv-mono">{text.length} / 200</span>
               </div>
             </div>
@@ -401,231 +374,184 @@ export default function MatchLab() {
             </div>
           </div>
 
-          {/* 运行区 */}
-          <div className="sv-mm-run">
-            <span className="sv-mm-run-label">证据条数</span>
-            <div className="sv-mm-topk">
-              {TOPK_PRESETS.map((preset) => (
-                <button
-                  type="button"
-                  key={preset}
-                  className={topK === preset ? 'is-active' : ''}
-                  onClick={() => setTopK(preset)}
-                >
-                  {preset}
-                </button>
-              ))}
+          <div className="sv-mm-run-row">
+            <div className="sv-mm-run-head">
+              <span className="sv-mm-run-label">参考商品条数</span>
+              <div className="sv-mm-topk">
+                {TOPK_PRESETS.map((preset) => (
+                  <button
+                    type="button"
+                    key={preset}
+                    className={topK === preset ? 'is-active' : ''}
+                    onClick={() => setTopK(preset)}
+                  >
+                    {preset}
+                  </button>
+                ))}
+              </div>
             </div>
             <Button
               type="primary"
               size="large"
+              block
               className="sv-mm-run-btn"
+              icon={<ArrowRightOutlined />}
+              iconPosition="end"
               loading={loading}
-              disabled={!file || !text.trim()}
               onClick={() => runMatch()}
             >
-              运行推理 <ArrowRightOutlined />
+              开始比对
             </Button>
             {validation && <span className="sv-mm-validate">{validation}</span>}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {error && !loading && (
-        <ErrorNotice error={error} onRetry={() => runMatch()} onDismiss={() => setError(null)} />
-      )}
+        {/* 右栏：结论 / 判断 / 证据 */}
+        <div className="sv-mm-result">
+          {!loading && result && (
+            <div className={`sv-match-verdict ${result.match ? 'is-match' : 'is-mismatch'}`}>
+              <span className="sv-match-verdict-icon">
+                {result.match ? <CheckCircleFilled /> : <CloseCircleFilled />}
+              </span>
+              <div className="sv-match-verdict-copy">
+                <strong>{result.match ? '图文一致' : '图文不一致'}</strong>
+                <span>
+                  图片判断为「{result.image_category || '—'}」，描述判断为「{result.text_category || '—'}」
+                  {result.match ? '，二者一致' : '，不是同一类商品'}
+                </span>
+              </div>
+              <div className="sv-match-verdict-side">
+                {duration != null && (
+                  <span className="sv-match-verdict-time">
+                    <ClockCircleOutlined /> 耗时 <em className="sv-mono">{formatDuration(duration)}</em>
+                  </span>
+                )}
+                <div className="sv-match-verdict-actions">
+                  <Button size="small" onClick={useImageInClassification} disabled={!file}>
+                    单独分析这张图
+                  </Button>
+                  <Button size="small" onClick={useTextInSearch} disabled={!text.trim()}>
+                    单独检索这句描述
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
 
-      {/* 模块 2：双塔判断 */}
-      <section className="sv-mm-card">
-        <div className="sv-mm-bar is-blue">
-          <span className="sv-mm-bar-title">双塔判断</span>
-          <span className="sv-mm-bar-note">两条独立编码链路，分开预测，再比对结果</span>
-          {duration != null && !loading && (
-            <span className="sv-mm-bar-time sv-mono">{formatDuration(duration)}</span>
+          {loading ? (
+            <>
+              <LoadingState
+                title="正在比对图片与描述"
+                description="分别识别图片与描述的类别，完成后自动展示是否一致。"
+              />
+              <section className="sv-mm-card sv-mm-evidence">
+                <div className="sv-mm-bar is-green">
+                  <span className="sv-mm-bar-title">参考商品证据</span>
+                  <span className="sv-mm-bar-note">与描述语义相近的商品，用于查看判断依据</span>
+                </div>
+                <ResultList items={[]} loading />
+              </section>
+            </>
+          ) : result ? (
+            <>
+              <div className="sv-mm-compare">
+                <div className="sv-mm-subhead">
+                  <span className="sv-mm-bar-title">两侧判断对照</span>
+                </div>
+                <div className="sv-match-facts">
+                  <div className="sv-match-fact-card">
+                    <h3>图片判断</h3>
+                    <div className="sv-match-fact-photo">
+                      {previewUrl ? <img src={previewUrl} alt="待比对商品图" /> : <CameraOutlined />}
+                    </div>
+                    <div className="sv-match-fact-tags">
+                      <CategoryBadge category={result.image_category} small />
+                    </div>
+                    {imageConfidence != null ? (
+                      <SimilarityBar label="判断置信度" value={imageConfidence} compact />
+                    ) : (
+                      <span className="sv-mm-na">等待结果</span>
+                    )}
+                  </div>
+
+                  <div className="sv-match-fact-card">
+                    <h3>描述判断</h3>
+                    <div className="sv-match-fact-text">
+                      <span className="sv-match-quote">“</span>
+                      {submittedText || '尚未填写描述'}
+                    </div>
+                    <div className="sv-match-fact-tags">
+                      <CategoryBadge category={result.text_category} small />
+                      {textType && <span className="sv-match-type-tag">{textType}</span>}
+                    </div>
+                    {textConfidence != null ? (
+                      <SimilarityBar label="判断置信度" value={textConfidence} compact />
+                    ) : (
+                      <span className="sv-mm-na">等待结果</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <section className="sv-mm-card sv-mm-evidence">
+                <div className="sv-mm-bar is-green">
+                  <span className="sv-mm-bar-title">参考商品证据</span>
+                  <span className="sv-mm-bar-note">与这句描述语义相近的商品，按相似度排列，用于查看判断依据</span>
+                </div>
+                <ResultList
+                  items={items}
+                  loading={false}
+                  onSelect={setSelected}
+                  highlightCategory={result.text_category}
+                  emptyTitle="暂无参考商品"
+                  emptyDescription="这次比对没有返回相近商品，可以换一句描述再试。"
+                />
+              </section>
+            </>
+          ) : error ? (
+            <ErrorNotice error={error} onRetry={() => runMatch()} onDismiss={() => setError(null)} />
+          ) : (
+            <section className="sv-mm-card sv-mm-idle">
+              <EmptyState
+                icon={<QuestionCircleOutlined />}
+                title="还没有比对结果"
+                description="在左侧准备好图片和描述，或直接用示例快速体验一次比对。"
+                action={
+                  <>
+                    <div className="sv-idle-steps">
+                      {IDLE_STEPS.map((step, index) => (
+                        <div className="sv-idle-step" key={step}>
+                          <b>{index + 1}</b>
+                          <span>{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="sv-idle-actions">
+                      <Button
+                        type="primary"
+                        ghost
+                        size="middle"
+                        onClick={() => applyDemo('match')}
+                        disabled={Boolean(demoLoading)}
+                      >
+                        一致示例
+                      </Button>
+                      <Button
+                        type="text"
+                        size="middle"
+                        onClick={() => applyDemo('mismatch')}
+                        disabled={Boolean(demoLoading)}
+                      >
+                        不一致示例
+                      </Button>
+                    </div>
+                  </>
+                }
+              />
+            </section>
           )}
         </div>
-
-        {loading ? (
-          <div className="sv-mm-loading" role="status" aria-live="polite">
-            <span className="sv-mm-ring" aria-hidden="true" />
-            <strong>双塔正在分别编码...</strong>
-            <span>图像塔判一次类别，文本塔再判一次，最后核对是否一致</span>
-          </div>
-        ) : (
-          <>
-            <div className="sv-mm-towers">
-              <div className="sv-mm-tower is-image">
-                <div className="sv-mm-tower-head">
-                  <i className="sv-mm-dot is-teal" aria-hidden="true" />
-                  图像塔
-                  {imageSample && result && <em>示例数值</em>}
-                </div>
-                <div className="sv-mm-tower-thumb">
-                  {previewUrl ? <img src={previewUrl} alt="图像塔输入" /> : <i><CameraOutlined /></i>}
-                </div>
-                <dl className="sv-mm-facts">
-                  <div>
-                    <dt>类别</dt>
-                    <dd>{result?.image_category || '—'}</dd>
-                  </div>
-                  <div>
-                    <dt>细分类</dt>
-                    <dd>{result ? imageType : '—'}</dd>
-                  </div>
-                  <div>
-                    <dt>置信度</dt>
-                    <dd className="sv-mm-figure sv-mono">{result ? fixed2(imageConfidence) : '—'}</dd>
-                  </div>
-                </dl>
-              </div>
-
-              <div className="sv-mm-link" aria-hidden="true">
-                <span className="sv-mm-link-line" />
-                <span className="sv-mm-link-badge">各自判类</span>
-                <span className="sv-mm-link-line" />
-              </div>
-
-              <div className="sv-mm-tower is-text">
-                <div className="sv-mm-tower-head">
-                  <i className="sv-mm-dot is-blue" aria-hidden="true" />
-                  文本塔
-                  {textSample && result && <em>示例数值</em>}
-                </div>
-                <div className="sv-mm-tower-thumb is-text">
-                  {result ? (
-                    <>
-                      <FileTextOutlined />
-                      <span>{result.text_category || '未判定'}</span>
-                    </>
-                  ) : (
-                    <i><FileTextOutlined /></i>
-                  )}
-                </div>
-                <dl className="sv-mm-facts">
-                  <div>
-                    <dt>类别</dt>
-                    <dd>{result?.text_category || '—'}</dd>
-                  </div>
-                  <div>
-                    <dt>细分类</dt>
-                    <dd>{result ? textType : '—'}</dd>
-                  </div>
-                  <div>
-                    <dt>置信度</dt>
-                    <dd className="sv-mm-figure sv-mono">{result ? fixed2(textConfidence) : '—'}</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-
-            {result ? (
-              <div className={`sv-mm-verdict ${result.match ? 'is-match' : 'is-mismatch'}`}>
-                <span className="sv-mm-verdict-icon">
-                  {result.match ? <CheckCircleFilled /> : <CloseCircleFilled />}
-                </span>
-                <div>
-                  <strong>{result.match ? '一致' : '不一致'}</strong>
-                  <span>
-                    {result.match
-                      ? '图像类别与文本类别相同'
-                      : `图像判「${result.image_category || '—'}」，文本判「${result.text_category || '—'}」`}
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <div className="sv-mm-verdict is-idle">
-                <span className="sv-mm-verdict-icon">
-                  <QuestionCircleOutlined />
-                </span>
-                <div>
-                  <strong>等待一次比对</strong>
-                  <span>放图、写句，点右上角「运行推理」；只比顶层大类，不比细分类</span>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-      </section>
-
-      {/* 模块 3：证据列表 */}
-      <section className="sv-mm-card sv-mm-evidence">
-        <div className="sv-mm-bar is-green">
-          <span className="sv-mm-bar-title">证据列表</span>
-          <span className="sv-mm-bar-note">
-            文本检索结果，用于解释判断：这句话在文本塔的向量空间里最像哪些商品
-          </span>
-          {isPlaceholder && <span className="sv-mm-bar-warm">占位模式</span>}
-        </div>
-
-        {result?.items?.length ? (
-          <>
-            <div className="sv-mm-table">
-              <div className="sv-mm-tr is-head">
-                <span>预览图</span>
-                <span>相似度</span>
-                <span>类别</span>
-                <span>细分类</span>
-              </div>
-              {result.items.map((item, index) => {
-                const style = categoryStyle(item.category)
-                const isSame = item.category === result.text_category
-                return (
-                  <button
-                    type="button"
-                    key={`${item.item_id || 'item'}-${index}`}
-                    className="sv-mm-tr"
-                    style={{ animationDelay: `${Math.min(index, 10) * 55}ms` }}
-                    onClick={() => setSelected(item)}
-                  >
-                    <span className="sv-mm-ev-photo" style={{ background: style.bg }}>
-                      <img
-                        src={`/items/${item.item_id}.jpg`}
-                        alt={item.item_name || '商品图'}
-                        loading="lazy"
-                        onError={(event) => {
-                          event.currentTarget.closest('.sv-mm-ev-photo').classList.add('is-broken')
-                          event.currentTarget.remove()
-                        }}
-                      />
-                    </span>
-                    <span className="sv-mm-ev-sim">
-                      <span className="sv-mm-ev-track">
-                        <i style={{ '--w': `${Math.max(0, Math.min(1, item.similarity)) * 100}%` }} />
-                      </span>
-                      <span className="sv-mono">{formatPercent(item.similarity)}</span>
-                    </span>
-                    <span className="sv-mm-ev-cat" style={{ background: style.bg, color: style.ink }}>
-                      {item.category || '未分类'}
-                      {isSame && <CheckCircleFilled />}
-                    </span>
-                    <span className="sv-mm-ev-type">{item.type || '—'}</span>
-                  </button>
-                )
-              })}
-            </div>
-            <span className="sv-mm-float-tip">图像类别 == 文本类别 → 一致</span>
-          </>
-        ) : (
-          <div className="sv-mm-ev-empty">
-            <FileTextOutlined />
-            <div>
-              <strong>还没有证据</strong>
-              <span>运行一次推理后，文本塔检索到的商品会按相似度排在这里。</span>
-            </div>
-          </div>
-        )}
-
-        {result && (
-          <div className="sv-mm-actions">
-            <Button size="small" onClick={useImageInClassification} disabled={!file}>
-              单独分析这张图
-            </Button>
-            <Button size="small" onClick={useTextInSearch} disabled={!text.trim()}>
-              单独检索这句话
-            </Button>
-          </div>
-        )}
-      </section>
+      </div>
 
       <DetailDrawer
         item={selected}

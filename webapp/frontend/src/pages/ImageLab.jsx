@@ -252,6 +252,7 @@ export default function ImageLab() {
   function reviewHistory(entry) {
     replacePreview(entry.file)
     setFile(entry.file)
+    setResult(entry.result)
   }
 
   function useInMatch() {
@@ -274,36 +275,42 @@ export default function ImageLab() {
         description="上传一张商品照片，AI 自动判断它属于哪一类，同时告诉你模型的判断把握与备选猜测。"
       />
 
-      <ImageUploadSection
-        file={file}
-        previewUrl={previewUrl}
-        loading={loading || !!batch}
-        progress={taskProgress || batch}
-        validation={validation}
-        onSelect={selectFile}
-        onLoadSample={loadSample}
-        onAnalyze={() => analyze()}
-        onBatchClick={() => batchInputRef.current?.click()}
-        onBatchFiles={runBatch}
-        batchInputRef={batchInputRef}
-      />
+      <div className="sv-il-layout">
+        <div className="sv-il-aside">
+          <ImageUploadSection
+            file={file}
+            previewUrl={previewUrl}
+            loading={loading || !!batch}
+            progress={taskProgress || batch}
+            validation={validation}
+            onSelect={selectFile}
+            onLoadSample={loadSample}
+            onAnalyze={() => analyze()}
+            onBatchClick={() => batchInputRef.current?.click()}
+            onBatchFiles={runBatch}
+            batchInputRef={batchInputRef}
+          />
+        </div>
 
-      {error && (
-        <ImageErrorNotice
-          error={error}
-          onRetry={() => analyze()}
-          onDismiss={() => undefined}
-        />
-      )}
+        <div className="sv-il-main">
+          {error && (
+            <ImageErrorNotice
+              error={error}
+              onRetry={() => analyze()}
+              onDismiss={() => undefined}
+            />
+          )}
 
-      <ImageResultsSection
-        result={result}
-        previewUrl={previewUrl}
-        onUseInMatch={useInMatch}
-        onViewCategory={() =>
-          navigate(`/text?q=${encodeURIComponent(result?.category || '')}`)
-        }
-      />
+          <ImageResultsSection
+            result={result}
+            previewUrl={previewUrl}
+            onUseInMatch={useInMatch}
+            onViewCategory={() =>
+              navigate(`/text?q=${encodeURIComponent(result?.category || '')}`)
+            }
+          />
+        </div>
+      </div>
 
       <ImageHistorySection
         history={history}
@@ -311,7 +318,6 @@ export default function ImageLab() {
         isPlaceholder={isPlaceholder}
         onReviewHistory={reviewHistory}
         onClearAll={clearAll}
-        onBatchClick={() => batchInputRef.current?.click()}
       />
     </div>
   )
