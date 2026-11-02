@@ -9,6 +9,13 @@ import { formatPercent } from '../../utils/format'
 
 function ItemPhoto({ item }) {
   const style = categoryStyle(item.category)
+
+  // 后端把 data/processed_data_cleaning 挂在 /item-images 下
+  // 例: data/processed_data_cleaning/鞋/images/xxx.jpg -> /item-images/鞋/images/xxx.jpg
+  const imagePath = item.local_image_path
+    ? `/item-images/${item.local_image_path.replace(/^data\/processed_data_cleaning\//, '')}`
+    : `/items/${item.item_id}.jpg` // 兜底：public/items 里的演示图
+
   return (
     <span
       className="sv-photo"
@@ -16,7 +23,7 @@ function ItemPhoto({ item }) {
       data-fallback={item.category?.slice(0, 1) || '?'}
     >
       <img
-        src={`/items/${item.item_id}.jpg`}
+        src={imagePath}
         alt={item.item_name || '商品图'}
         loading="lazy"
         onError={(event) => {

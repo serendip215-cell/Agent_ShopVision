@@ -68,7 +68,19 @@ def _type_of(spec: dict, node: dict) -> tuple[str, dict | None]:
         return "文件", None  # OpenAPI 3.1 用 contentMediaType 表示上传文件
     if "properties" in node:
         return "对象", node
-    return _PRIMITIVE.get(node.get("type", "string"), "字符串"), None
+    kind = node.get("type")
+    if not kind:  # Any / 无 schema：批量结果是对象数组，单张是对象，别写成“字符串”
+        return "对象或数组", None
+    return _PRIMITIVE.get(kind, "字符串"), None
+
+
+def _is_array(spec: dict, node: dict) -> bool:
+    """这个字段本身是不是数组（决定嵌套路径用 [] 还是点号）。"""
+    node = _resolve(spec, node)
+    if "anyOf" in node:
+        parts = [_resolve(spec, p) for p in node["anyOf"]]
+        node = next((p for p in parts if isinstance(p, dict)), {})
+    return node.get("type") == "array"
 
 
 def _field_rows(spec: dict, node: dict, prefix: str = "", depth: int = 0) -> list[str]:
@@ -79,7 +91,8 @@ def _field_rows(spec: dict, node: dict, prefix: str = "", depth: int = 0) -> lis
         text, child = _type_of(spec, prop)
         rows.append(f"| `{prefix}{name}` | {text} | {_cell(prop.get('description', ''))} |")
         if child is not None and depth < _MAX_DEPTH:
-            rows.extend(_field_rows(spec, child, f"{prefix}{name}[].", depth + 1))
+            step = "[]." if _is_array(spec, prop) else "."
+            rows.extend(_field_rows(spec, child, f"{prefix}{name}{step}", depth + 1))
     return rows
 
 

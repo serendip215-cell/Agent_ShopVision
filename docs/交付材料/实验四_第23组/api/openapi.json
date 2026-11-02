@@ -273,6 +273,133 @@
           }
         }
       }
+    },
+    "/api/v1/tasks/image": {
+      "post": {
+        "tags": [
+          "异步任务"
+        ],
+        "summary": "提交单张图片异步分类",
+        "description": "大图或需要立即返回的场景用这个：提交后拿 task_id，再轮询 GET /api/v1/tasks/{task_id}。校验（格式/大小）仍在这里做，错误立即返回。",
+        "operationId": "submit_image_task_api_v1_tasks_image_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_submit_image_task_api_v1_tasks_image_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskSubmitResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tasks/batch": {
+      "post": {
+        "tags": [
+          "异步任务"
+        ],
+        "summary": "提交批量图片异步分类",
+        "description": "一次提交多张图，worker 串行处理并上报进度。单批上限见 SHOPVISION_ASYNC_BATCH_MAX_FILES（默认 12）。",
+        "operationId": "submit_batch_task_api_v1_tasks_batch_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_submit_batch_task_api_v1_tasks_batch_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskSubmitResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tasks/{task_id}": {
+      "get": {
+        "tags": [
+          "异步任务"
+        ],
+        "summary": "轮询任务状态",
+        "description": "前端约每 800ms 轮询一次。PENDING/PROGRESS 时继续轮询；SUCCESS 拿结果；FAILURE 看 error。注意：不存在的 task_id 也会返回 PENDING（Celery 的语义）。",
+        "operationId": "task_status_api_v1_tasks__task_id__get",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -345,6 +472,39 @@
           "text"
         ],
         "title": "Body_multimodal_match_api_v1_match_post"
+      },
+      "Body_submit_batch_task_api_v1_tasks_batch_post": {
+        "properties": {
+          "files": {
+            "items": {
+              "type": "string",
+              "contentMediaType": "application/octet-stream"
+            },
+            "type": "array",
+            "title": "Files",
+            "description": "多张商品图"
+          }
+        },
+        "type": "object",
+        "required": [
+          "files"
+        ],
+        "title": "Body_submit_batch_task_api_v1_tasks_batch_post"
+      },
+      "Body_submit_image_task_api_v1_tasks_image_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "description": "商品图（PNG/JPG/WEBP，≤10 MB）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_submit_image_task_api_v1_tasks_image_post"
       },
       "CategoryScore": {
         "properties": {
@@ -771,6 +931,180 @@
         ],
         "title": "MatchedItem",
         "description": "检索命中的一条商品：相似度 + items.csv 原样字段。\n\nCSV 值一律是字符串，读取不做类型转换（`image_height` 等也是字符串）；\n未列出的列原样带出（extra=allow），`vector_id` 与 `text` 不外露。"
+      },
+      "TaskError": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "业务错误码，见错误码表"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "msg"
+        ],
+        "title": "TaskError"
+      },
+      "TaskProgress": {
+        "properties": {
+          "done": {
+            "type": "integer",
+            "title": "Done",
+            "description": "已完成数"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "总数"
+          }
+        },
+        "type": "object",
+        "required": [
+          "done",
+          "total"
+        ],
+        "title": "TaskProgress"
+      },
+      "TaskStatusResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskStatusResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "TaskStatusResponse"
+      },
+      "TaskStatusResult": {
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "title": "Task Id",
+            "description": "任务 ID"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "PENDING / PROGRESS / SUCCESS / FAILURE"
+          },
+          "progress": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskProgress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "PROGRESS 时的进度"
+          },
+          "result": {
+            "title": "Result",
+            "description": "SUCCESS 时的业务结果：单张任务为 ImageResult；批量任务为逐张 [{file_name, code, result, msg}] 列表"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "FAILURE 时的错误"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_id",
+          "status"
+        ],
+        "title": "TaskStatusResult"
+      },
+      "TaskSubmitResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskSubmitResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "TaskSubmitResponse"
+      },
+      "TaskSubmitResult": {
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "title": "Task Id",
+            "description": "任务 ID，用于轮询 GET /api/v1/tasks/{task_id}"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "提交后的初始状态，通常是 PENDING"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "批量任务的文件数；单张任务为 null"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_id",
+          "status"
+        ],
+        "title": "TaskSubmitResult"
       },
       "TextQueryRequest": {
         "properties": {

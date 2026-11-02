@@ -16,16 +16,18 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from .api import v1
-from .config import get_settings
+from .api import tasks, v1
+from .config import REPO_ROOT, get_settings
 from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
 logger = logging.getLogger("shopvision.api")
 
 _STATIC_DIR = Path(__file__).resolve().parent / "static"
+_IMAGES_DIR = REPO_ROOT / "data" / "processed_data_cleaning"
 
 _DESCRIPTION = """实验四后端：电商商品图文检索服务，集成实验三优化后的 Chinese-CLIP 双塔（ONNX）。
 
@@ -101,7 +103,16 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app.include_router(v1.router)
+    app.include_router(tasks.router)
     _register_handlers(app)
+
+    # 静态文件服务：商品原图。用独立前缀，避免和前端 public/items 演示图冲突
+    # 前端通过 /item-images/{category}/images/{file} 访问
+    if _IMAGES_DIR.exists():
+        app.mount("/item-images", StaticFiles(directory=str(_IMAGES_DIR)), name="item-images")
+        logger.info(f"已挂载商品图片目录: {_IMAGES_DIR} -> /item-images")
+    else:
+        logger.warning(f"商品图片目录不存在: {_IMAGES_DIR}")
 
     @app.get("/scalar", include_in_schema=False)
     def scalar_docs() -> FileResponse:
