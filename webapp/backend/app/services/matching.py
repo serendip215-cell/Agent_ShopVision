@@ -67,12 +67,26 @@ class MatchService:
     def match(self, image: "Image", text: str, top_k: int = 5) -> dict:
         image_vector = self.encoder.encode_image(image)
         text_vector = self.encoder.encode_text(text)
-        image_category, _, _ = self.index.best_category(image_vector)
-        text_category, _, _ = self.index.best_category(text_vector)
+        image_category, image_score, image_scores = self.index.best_category(image_vector)
+        text_category, text_score, text_scores = self.index.best_category(text_vector)
         hits = self.index.search(text_vector, top_k=top_k)
+        # 文本塔细分类取「同类命中里排最前的那条」的 type；没有同类命中就留空
+        text_type = next(
+            (
+                hit.item.get("type")
+                for hit in hits
+                if hit.category == text_category and hit.item.get("type")
+            ),
+            None,
+        )
         return {
             "match": bool(image_category) and image_category == text_category,
             "image_category": image_category,
             "text_category": text_category,
+            "image_confidence": round(_softmax_pick(image_scores, image_category or ""), 6),
+            "image_score": round(image_score, 6) if image_category else None,
+            "text_confidence": round(_softmax_pick(text_scores, text_category or ""), 6),
+            "text_score": round(text_score, 6) if text_category else None,
+            "text_type": text_type,
             "items": [hit.as_dict() for hit in hits],
         }

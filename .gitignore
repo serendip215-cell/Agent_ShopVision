@@ -42,3 +42,6 @@ __pycache__/
 
 # JetBrains IDE ����
 /.idea/
+
+# Celery worker 本地日志（运行产物，不纳入版本管理）。
+webapp/backend/celery-worker*.log

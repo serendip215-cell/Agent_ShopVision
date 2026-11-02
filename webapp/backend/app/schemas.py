@@ -91,6 +91,17 @@ class MatchResult(BaseModel):
     match: bool = Field(description="两条独立编码各自判出的类别是否一致")
     image_category: str | None = Field(default=None, description="图像塔判出的类别")
     text_category: str | None = Field(default=None, description="文本塔判出的类别")
+    image_confidence: float = Field(
+        default=0.0, description="图像塔对判出类别的置信度（9 类最高分 softmax）"
+    )
+    image_score: float | None = Field(default=None, description="图像塔该类别原始相似度")
+    text_confidence: float = Field(
+        default=0.0, description="文本塔对判出类别的置信度（9 类最高分 softmax）"
+    )
+    text_score: float | None = Field(default=None, description="文本塔该类别原始相似度")
+    text_type: str | None = Field(
+        default=None, description="文本塔细分类：同类命中里排最前的那条商品的 type"
+    )
     items: list[MatchedItem] = Field(description="文本检索结果，供对照")
 
 

@@ -95,8 +95,14 @@
 - 返回 `result`：
 
 ```json
-{ "match": false, "image_category": "手机壳", "text_category": "包", "items": [ … ] }
+{ "match": false, "image_category": "手机壳", "text_category": "包",
+  "image_confidence": 0.91, "image_score": 0.37,
+  "text_confidence": 0.88, "text_score": 0.33,
+  "text_type": "休闲鞋", "items": [ … ] }
 ```
+
+`image_confidence` / `text_confidence` 是两塔各自对判出类别做 9 类 softmax 的概率；
+`text_type` 是文本塔同类命中里排最前那条商品的细分类，用于解释判断；`items` 是文本检索证据。
 
 ## 四、前端约定（zzx / lfsy 照此写 Axios）
 
@@ -109,7 +115,9 @@
 
 - URL 用名词 + 版本：`/api/v1/image`、`/api/v1/text`、`/api/v1/match`；方法对应动作。
 - JSON 字段用 `snake_case`（与后端 Python 一致），不混 `camelCase`。
-- 不新增返回字段、不改老码含义；要改就升 `/api/v2`。
+- 不新增返回字段、不改老码含义；要改就升 `/api/v2`（例外：`/match` 已追加
+  `image_confidence` / `image_score` / `text_confidence` / `text_score` / `text_type`，
+  均为纯新增，既有字段含义不变）
 
 ## 六、现状提醒
 
