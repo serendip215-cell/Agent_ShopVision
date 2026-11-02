@@ -36,22 +36,22 @@ function Brand() {
   return (
     <NavLink to="/" className="sv-brand">
       <svg className="sv-logo" viewBox="0 0 48 48" aria-hidden="true">
-        <rect width="48" height="48" rx="14" fill="#DDEFEF" />
+        <rect width="48" height="48" rx="14" fill="#EEEDFD" />
         <path
           d="M12 19h24l-3 18H15z"
           fill="none"
-          stroke="#5FA8B0"
+          stroke="#4F46E5"
           strokeWidth="3.2"
           strokeLinejoin="round"
         />
         <path
           d="M18 19v-2.4a6 6 0 0 1 12 0V19"
           fill="none"
-          stroke="#5FA8B0"
+          stroke="#4F46E5"
           strokeWidth="3.2"
           strokeLinecap="round"
         />
-        <circle cx="34" cy="14" r="3.4" fill="#F7D9C4" />
+        <circle cx="34" cy="14" r="3.4" fill="#FBF0DF" />
       </svg>
       <span className="sv-brand-copy">
         <strong>ShopVision</strong>
@@ -132,7 +132,7 @@ function AccountZone() {
       }}
     >
       <button type="button" className="sv-account">
-        <Avatar size={30} style={{ background: '#5FA8B0', fontSize: 13 }}>
+        <Avatar size={30} style={{ background: '#4F46E5', fontSize: 13 }}>
           {session?.name?.slice(0, 1) || '管'}
         </Avatar>
         <span className="sv-account-name">{session?.name || '管理员'}</span>

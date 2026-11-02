@@ -172,7 +172,7 @@ const CATEGORY_COLUMNS = [
     dataIndex: 'share',
     width: 180,
     render: (value) => (
-      <Progress percent={value} size="small" strokeColor="#5FA8B0" showInfo={false} />
+      <Progress percent={value} size="small" strokeColor="#4F46E5" showInfo={false} />
     ),
   },
   {

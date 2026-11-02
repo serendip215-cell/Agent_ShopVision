@@ -15,19 +15,19 @@ export const CATEGORIES = [
 
 // 9 类各自的识别色：柔和底色 + 对比墨色，全部与主色板同灰度
 export const CATEGORY_STYLE = {
-  鞋: { bg: '#DDEFEF', ink: '#2F6F77' },
-  水杯: { bg: '#E3EDF5', ink: '#3D6F9E' },
-  包: { bg: '#F7D9C4', ink: '#A96A43' },
-  男装: { bg: '#E6EAF2', ink: '#4E5B7C' },
-  运动服: { bg: '#DFF3E4', ink: '#2F7D58' },
-  女装: { bg: '#F8E3E8', ink: '#B4586F' },
-  手机壳: { bg: '#EBE7F4', ink: '#6E5FA3' },
-  厨房用品: { bg: '#EEEFDD', ink: '#74753B' },
-  家居用品: { bg: '#F0E8DE', ink: '#8F6B4A' },
+  鞋: { bg: '#EEEDFD', ink: '#4338CA' },
+  水杯: { bg: '#E0F2FE', ink: '#0369A1' },
+  包: { bg: '#FBF0DF', ink: '#B45309' },
+  男装: { bg: '#EEF2F6', ink: '#475569' },
+  运动服: { bg: '#E4F6EC', ink: '#15803D' },
+  女装: { bg: '#FCE7F3', ink: '#BE185D' },
+  手机壳: { bg: '#F3E8FF', ink: '#7E22CE' },
+  厨房用品: { bg: '#FFEDD5', ink: '#C2410C' },
+  家居用品: { bg: '#CCFBF1', ink: '#0F766E' },
 }
 
 export function categoryStyle(category) {
-  return CATEGORY_STYLE[category] || { bg: '#F1F3F5', ink: '#4E5A60' }
+  return CATEGORY_STYLE[category] || { bg: '#F1F1F4', ink: '#4B4B53' }
 }
 
 // 分类入口卡的真实商品背景图。每张都经过双重核验：
