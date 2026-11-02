@@ -6,7 +6,6 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { useApp } from '../context/AppContext'
-import { CATEGORIES, INDEX_TOTAL } from '../constants/catalog'
 import {
   CategoryGlyph,
   PageHeader,
@@ -23,11 +22,17 @@ const ENDPOINTS = [
     response: `{
   "code": 0,
   "result": {
-    "model_loaded": false,
-    "backend": "placeholder",
+    "model_loaded": true,
+    "backend": "onnx",
     "index_dir": "data/index_data_finetuned",
     "categories": ["包", "厨房用品", "…"],
-    "dimension": 512
+    "dimension": 512,
+    "category_counts": { "鞋": 3219, "…": 0 },
+    "total_items": 9393,
+    "category_ready": { "鞋": true, "…": true },
+    "updated_at": "2026-10-18T13:50:44Z",
+    "model_name": "ViT-B-16",
+    "model_checkpoint": "…/checkpoints/epoch3.pt"
   },
   "msg": "ok"
 }`,
@@ -45,9 +50,10 @@ const ENDPOINTS = [
     "confidence": 0.42,
     "score": 0.31,
     "topk": [
-      { "category": "鞋", "similarity": 0.31 },
-      { "category": "包", "similarity": 0.28 }
-    ]
+      { "category": "鞋", "similarity": 0.31, "confidence": 0.42 },
+      { "category": "包", "similarity": 0.28, "confidence": 0.33 }
+    ],
+    "items": [ { "category": "鞋", "similarity": 0.92, "item_name": "…" } ]
   },
   "msg": "ok"
 }`,
@@ -165,21 +171,33 @@ const CATEGORY_COLUMNS = [
     title: '索引条数',
     dataIndex: 'count',
     align: 'right',
-    render: (value) => <span className="sv-mono">{value.toLocaleString('zh-CN')}</span>,
+    render: (value) => (
+      <span className="sv-mono">{value == null ? '—' : value.toLocaleString('zh-CN')}</span>
+    ),
   },
   {
     title: '占索引总量',
     dataIndex: 'share',
     width: 180,
-    render: (value) => (
-      <Progress percent={value} size="small" strokeColor="#5FA8B0" showInfo={false} />
-    ),
+    render: (value) =>
+      value == null ? (
+        <span className="sv-muted">—</span>
+      ) : (
+        <Progress percent={value} size="small" strokeColor="#5FA8B0" showInfo={false} />
+      ),
   },
   {
     title: '状态',
-    dataIndex: 'status',
+    dataIndex: 'ready',
     align: 'right',
-    render: () => <Tag bordered={false} color="green">可检索</Tag>,
+    render: (value) =>
+      value == null ? (
+        <Tag bordered={false}>未知</Tag>
+      ) : value ? (
+        <Tag bordered={false} color="green">可检索</Tag>
+      ) : (
+        <Tag bordered={false} color="red">文件缺失</Tag>
+      ),
   },
 ]
 
@@ -191,17 +209,27 @@ const ERROR_COLUMNS = [
 ]
 
 export default function Status() {
-  const { health, healthLoading, healthError, refreshHealth, isPlaceholder } = useApp()
+  const {
+    health,
+    healthLoading,
+    healthError,
+    refreshHealth,
+    isPlaceholder,
+    categories,
+  } = useApp()
 
-  const categoryRows = CATEGORIES.map((item) => ({
-    ...item,
-    count: health?.category_counts?.[item.key] ?? item.count,
-    status: 'ok',
+  const categoryRows = categories.map((key) => ({
+    key,
+    count: health?.category_counts?.[key] ?? null,
+    ready: health?.category_ready?.[key] ?? null,
   }))
-  const indexTotal = health?.total_items ?? INDEX_TOTAL
+  const indexTotal = health?.total_items ?? null
   const rowsWithShare = categoryRows.map((item) => ({
     ...item,
-    share: Math.round((item.count / indexTotal) * 1000) / 10,
+    share:
+      item.count != null && indexTotal
+        ? Math.round((item.count / indexTotal) * 1000) / 10
+        : null,
   }))
 
   return (
@@ -242,8 +270,11 @@ export default function Status() {
                   key: 'state',
                   label: '当前状态',
                   children: (
-                    <Tag bordered={false} color={isPlaceholder ? 'orange' : 'green'}>
-                      {isPlaceholder ? '占位模式' : '模型在线'}
+                    <Tag
+                      bordered={false}
+                      color={!health ? 'default' : isPlaceholder ? 'orange' : 'green'}
+                    >
+                      {!health ? '检查中' : isPlaceholder ? '占位模式' : '模型在线'}
                     </Tag>
                   ),
                 },
@@ -255,7 +286,7 @@ export default function Status() {
                 {
                   key: 'loaded',
                   label: '模型已加载',
-                  children: health?.model_loaded ? '是' : '否',
+                  children: health ? (health.model_loaded ? '是' : '否') : '—',
                 },
                 {
                   key: 'dim',
@@ -265,7 +296,9 @@ export default function Status() {
                 {
                   key: 'categories',
                   label: '类别数量',
-                  children: <span className="sv-mono">{health?.categories?.length ?? 0}</span>,
+                  children: (
+                    <span className="sv-mono">{health?.categories?.length ?? '—'}</span>
+                  ),
                 },
                 {
                   key: 'index',
@@ -282,19 +315,36 @@ export default function Status() {
           <div className="sv-env-list">
             <div>
               <span>运行模式</span>
-              <strong>{health?.backend === 'onnx' ? 'ONNX Runtime' : '占位编码器'}</strong>
+              <strong>
+                {health
+                  ? health.backend === 'onnx'
+                    ? 'ONNX Runtime'
+                    : '占位编码器'
+                  : '—'}
+              </strong>
             </div>
             <div>
               <span>索引版本</span>
-              <strong>epoch3.pt 微调索引</strong>
+              <strong>
+                {[
+                  health?.model_name,
+                  health?.model_checkpoint
+                    ? String(health.model_checkpoint).split(/[\\/]/).pop()
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(' · ') || '—'}
+              </strong>
             </div>
             <div>
               <span>索引条数</span>
-              <strong className="sv-mono">{indexTotal.toLocaleString('zh-CN')}</strong>
+              <strong className="sv-mono">
+                {indexTotal == null ? '—' : indexTotal.toLocaleString('zh-CN')}
+              </strong>
             </div>
             <div>
-              <span>数据来源</span>
-              <strong>MUGE / Amazon / 苏宁</strong>
+              <span>构建时间</span>
+              <strong className="sv-mono">{health?.updated_at || '—'}</strong>
             </div>
           </div>
           <div className="sv-note sv-note-warm">
@@ -314,7 +364,7 @@ export default function Status() {
         <SectionLabel
           index="03"
           title={`${rowsWithShare.length} 类索引明细`}
-          extra={<span className="sv-muted">构建时快照，后端提供统计后自动更新</span>}
+          extra={<span className="sv-muted">来自 /health 的索引注册表</span>}
         />
         <Table
           rowKey="key"

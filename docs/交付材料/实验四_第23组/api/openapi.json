@@ -517,12 +517,18 @@
             "type": "number",
             "title": "Similarity",
             "description": "该类最高余弦相似度"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence",
+            "description": "对全部类别做 softmax 后该类的概率，与顶层 confidence 同口径"
           }
         },
         "type": "object",
         "required": [
           "category",
-          "similarity"
+          "similarity",
+          "confidence"
         ],
         "title": "CategoryScore"
       },
@@ -617,6 +623,50 @@
             "title": "Total Items",
             "description": "索引总条数",
             "default": 0
+          },
+          "category_ready": {
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "type": "object",
+            "title": "Category Ready",
+            "description": "各类索引文件是否齐全（items.csv + image_embeddings.npy）"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At",
+            "description": "索引构建时间，来自注册表"
+          },
+          "model_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Name",
+            "description": "建索引所用视觉塔，如 ViT-B-16"
+          },
+          "model_checkpoint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Checkpoint",
+            "description": "建索引所用权重路径"
           }
         },
         "type": "object",
@@ -694,6 +744,14 @@
             "type": "array",
             "title": "Topk",
             "description": "各类最高分，降序前 3"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MatchedItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "判出类别内与上传图最相似的商品，供相似商品推荐"
           }
         },
         "type": "object",

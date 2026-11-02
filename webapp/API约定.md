@@ -57,12 +57,18 @@
     "categories": ["包","厨房用品","女装","家居用品","手机壳","水杯","男装","运动服","鞋"],
     "dimension": 512,
     "category_counts": { "鞋": 3219, "水杯": 2016, "…": 0 },
-    "total_items": 9393
+    "total_items": 9393,
+    "category_ready": { "鞋": true, "水杯": true, "…": true },
+    "updated_at": "2026-10-18T13:50:44Z",
+    "model_name": "ViT-B-16",
+    "model_checkpoint": "data/processed_data_retrieval/experiments/…/checkpoints/epoch3.pt"
 }, "msg": "ok" }
 ```
 
 `model_loaded: false` 表示当前跑占位编码器，检索结果无意义。
 `category_counts` / `total_items` 来自索引注册表，是**建库时快照**，不是实时库存。
+`category_ready` 逐类检查 `items.csv` 与 `image_embeddings.npy` 是否存在，状态页据此显示可检索性；
+`updated_at` / `model_name` / `model_checkpoint` 也来自注册表，不在前端写死。
 
 ### POST /api/v1/image — 图像分类
 
@@ -71,8 +77,13 @@
 
 ```json
 { "category": "鞋", "confidence": 0.42, "score": 0.31,
-  "topk": [ { "category": "鞋", "similarity": 0.31 }, { "category": "包", "similarity": 0.28 } ] }
+  "topk": [ { "category": "鞋", "similarity": 0.31, "confidence": 0.42 },
+            { "category": "包", "similarity": 0.28, "confidence": 0.33 } ],
+  "items": [ { "category": "鞋", "similarity": 0.92, "item_id": "…", "item_name": "…" } ] }
 ```
+
+`topk[].confidence` 与顶层 `confidence` 同口径（对全部类别做 softmax），不是只对前 3 名归一化；
+`items` 是判出类别内与上传图最相似的商品（最多 4 条），供前端做相似商品推荐。
 
 ### POST /api/v1/text — 文本检索
 
@@ -165,8 +176,9 @@
 - JSON 字段用 `snake_case`（与后端 Python 一致），不混 `camelCase`。
 - 不新增返回字段、不改老码含义；要改就升 `/api/v2`（例外：`/match` 已追加
   `image_confidence` / `image_score` / `image_type` / `text_confidence` / `text_score` /
-  `text_type`，
-  均为纯新增，既有字段含义不变）
+  `text_type`；`/health` 追加 `category_ready` / `updated_at` / `model_name` /
+  `model_checkpoint`；`/image` 追加 `topk[].confidence` 与 `items`。以上均为纯新增，
+  既有字段含义不变）
 
 ## 六、现状提醒
 

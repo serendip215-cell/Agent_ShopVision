@@ -1,7 +1,7 @@
 """请求体、结果模型与统一返回体。前端只认一种返回形状：{code, result, msg}。
 
 结果模型（`*Result` / `*Response`）只服务文档：让 /docs 把"返回值长什么样"画出来，
-线上 JSON 形状仍由 `webapp/API约定.md` 冻结——模型只描述，不改形状、不增字段。
+线上 JSON 形状仍由 `webapp/API约定.md` 冻结——模型只描述；新增字段先写进约定再落模型。
 """
 
 from __future__ import annotations
@@ -37,6 +37,9 @@ class TextQueryRequest(BaseModel):
 class CategoryScore(BaseModel):
     category: str = Field(description="类别名")
     similarity: float = Field(description="该类最高余弦相似度")
+    confidence: float = Field(
+        description="对全部类别做 softmax 后该类的概率，与顶层 confidence 同口径"
+    )
 
 
 class MatchedItem(BaseModel):
@@ -76,6 +79,12 @@ class HealthResult(BaseModel):
         default_factory=dict, description="各类索引条数（构建时快照）"
     )
     total_items: int = Field(default=0, description="索引总条数")
+    category_ready: dict[str, bool] = Field(
+        default_factory=dict, description="各类索引文件是否齐全（items.csv + image_embeddings.npy）"
+    )
+    updated_at: str | None = Field(default=None, description="索引构建时间，来自注册表")
+    model_name: str | None = Field(default=None, description="建索引所用视觉塔，如 ViT-B-16")
+    model_checkpoint: str | None = Field(default=None, description="建索引所用权重路径")
 
 
 class ImageResult(BaseModel):
@@ -83,6 +92,9 @@ class ImageResult(BaseModel):
     confidence: float = Field(description="对 9 类最高分做 softmax 后的概率")
     score: float | None = Field(description="该类原始相似度")
     topk: list[CategoryScore] = Field(description="各类最高分，降序前 3")
+    items: list[MatchedItem] = Field(
+        default_factory=list, description="判出类别内与上传图最相似的商品，供相似商品推荐"
+    )
 
 
 class TextResult(BaseModel):

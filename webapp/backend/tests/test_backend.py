@@ -45,7 +45,12 @@ ITEMS_PER_CATEGORY = 4
 def _build_index(root: Path) -> IndexStore:
     """写一个最小可用的索引目录：注册表 + 每类 items.csv 与 image_embeddings.npy。"""
     rng = np.random.default_rng(20261101)
-    registry: dict = {"version": 1, "categories": {}, "model": {"name": "test"}}
+    registry: dict = {
+        "version": 1,
+        "updated_at": "2026-01-01T00:00:00Z",
+        "categories": {},
+        "model": {"name": "test", "checkpoint": "checkpoints/epoch3.pt"},
+    }
     for category in CATEGORIES:
         vectors = rng.standard_normal((ITEMS_PER_CATEGORY, DIM)).astype("float32")
         vectors /= np.linalg.norm(vectors, axis=1, keepdims=True)
@@ -99,6 +104,16 @@ class IndexStoreTest(unittest.TestCase):
         summary = self.store.summary()
         self.assertEqual(summary["category_counts"], {c: ITEMS_PER_CATEGORY for c in CATEGORIES})
         self.assertEqual(summary["total_items"], ITEMS_PER_CATEGORY * len(CATEGORIES))
+        self.assertEqual(summary["category_ready"], {c: True for c in CATEGORIES})
+        self.assertEqual(summary["model_name"], "test")
+        self.assertEqual(summary["model_checkpoint"], "checkpoints/epoch3.pt")
+        self.assertEqual(summary["updated_at"], "2026-01-01T00:00:00Z")
+
+    def test_summary_marks_category_with_missing_files(self) -> None:
+        (Path(self.tmp.name) / "甲" / "image_embeddings.npy").unlink()
+        summary = self.store.summary()
+        self.assertFalse(summary["category_ready"]["甲"])
+        self.assertTrue(summary["category_ready"]["乙"])
 
     def test_exact_vector_hits_its_own_item(self) -> None:
         embeddings = np.load(Path(self.tmp.name) / "甲" / "image_embeddings.npy")
@@ -162,6 +177,10 @@ class ServiceTest(unittest.TestCase):
         result = self.service.classify_image(Image.open(io.BytesIO(_png_bytes())))
         self.assertIn(result["category"], CATEGORIES)
         self.assertLessEqual(len(result["topk"]), 3)
+        self.assertTrue(all("confidence" in row for row in result["topk"]))
+        # 相似商品推荐来自判出类别内的真实检索结果
+        self.assertTrue(result["items"])
+        self.assertTrue(all(hit["category"] == result["category"] for hit in result["items"]))
 
     def test_search_text_respects_top_k(self) -> None:
         result = self.service.search_text("白色运动鞋", top_k=3)
@@ -205,6 +224,8 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(
             body["result"]["category_counts"], {c: ITEMS_PER_CATEGORY for c in CATEGORIES}
         )
+        self.assertEqual(body["result"]["category_ready"], {c: True for c in CATEGORIES})
+        self.assertEqual(body["result"]["model_name"], "test")
 
     def test_image_endpoint_accepts_png(self) -> None:
         response = self.client.post(

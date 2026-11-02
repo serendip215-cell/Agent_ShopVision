@@ -3,32 +3,25 @@ import { Button, Tooltip } from 'antd'
 import {
   ArrowRightOutlined,
   InfoCircleOutlined,
-  LockOutlined,
   NodeIndexOutlined,
   SearchOutlined,
-  ShoppingOutlined,
   TagsOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import {
   CATEGORIES,
   CATEGORY_PHOTOS,
-  INDEX_TOTAL,
   SAMPLE_QUERIES,
-  TOTAL_PRODUCTS,
   categoryStyle,
 } from '../constants/catalog'
 import { useApp } from '../context/AppContext'
-import { useAuth } from '../context/AuthContext'
 import { EmptyState, SectionLabel } from '../components/common/Ui'
 import RunRow from '../components/common/RunRow'
 import useCountUp from '../utils/useCountUp'
 
-// 指标栏：大号数字是视觉重心，图标只做低饱和点缀
-// 类别数与维度优先用 /health 的真值；10,165 是实验一原始数据量，索引数暂为构建时快照。
+// 指标栏：所有数字都来自 /health；拿不到时显示“—”，不用前端快照兜底。
 function buildHeroStats(categoryCount, dimension, indexTotal) {
   return [
-    { key: 'raw', icon: ShoppingOutlined, value: TOTAL_PRODUCTS, label: '原始商品' },
     { key: 'index', icon: SearchOutlined, value: indexTotal, label: '检索索引' },
     { key: 'cat', icon: TagsOutlined, value: categoryCount, label: '商品类别' },
     { key: 'dim', icon: NodeIndexOutlined, value: dimension, label: '向量维度' },
@@ -36,14 +29,16 @@ function buildHeroStats(categoryCount, dimension, indexTotal) {
 }
 
 function StatUnit({ icon: Icon, value, label, index }) {
-  const animated = useCountUp(value, { delay: 360 + index * 120, duration: 900 })
+  const animated = useCountUp(value ?? 0, { delay: 360 + index * 120, duration: 900 })
   return (
     <div className="sv-hero-stat" style={{ animationDelay: `${index * 90}ms` }}>
       <span className="sv-hero-stat-icon" aria-hidden="true">
         <Icon />
       </span>
       <span className="sv-hero-stat-copy">
-        <strong className="sv-mono">{Math.round(animated).toLocaleString('zh-CN')}</strong>
+        <strong className="sv-mono">
+          {value == null ? '—' : Math.round(animated).toLocaleString('zh-CN')}
+        </strong>
         <span>{label}</span>
       </span>
     </div>
@@ -68,9 +63,9 @@ function Hero() {
   const { health } = useApp()
   const [query, setQuery] = useState('')
   const heroStats = buildHeroStats(
-    health?.categories?.length || CATEGORIES.length,
-    health?.dimension || 512,
-    health?.total_items || INDEX_TOTAL,
+    health?.categories?.length ?? null,
+    health?.dimension ?? null,
+    health?.total_items ?? null,
   )
 
   function goSearch(value) {
@@ -83,8 +78,10 @@ function Hero() {
       <div className="sv-hero-banner">
         <div className="sv-hero-copy">
           <span className="sv-hero-kicker">
-            Chinese-CLIP 双塔 · {heroStats[2].value} 类 ·{' '}
-            {heroStats[1].value.toLocaleString('zh-CN')} 条索引
+            Chinese-CLIP 双塔
+            {heroStats[1].value != null && ` · ${heroStats[1].value} 类`}
+            {heroStats[0].value != null &&
+              ` · ${heroStats[0].value.toLocaleString('zh-CN')} 条索引`}
           </span>
           <h2>
             用图像和文字
@@ -175,10 +172,9 @@ function CategorySection() {
                 <span className="sv-category-name">{category.key}</span>
                 <span className="sv-category-hint">{category.hint}</span>
                 <span className="sv-category-count sv-mono">
-                  {(health?.category_counts?.[category.key] ?? category.count).toLocaleString(
-                    'zh-CN',
-                  )}{' '}
-                  商品
+                  {health?.category_counts?.[category.key] != null
+                    ? `${health.category_counts[category.key].toLocaleString('zh-CN')} 商品`
+                    : '数量未知'}
                 </span>
               </span>
               <span className="sv-category-go" aria-hidden="true">
@@ -195,7 +191,6 @@ function CategorySection() {
 function RecentRuns() {
   const navigate = useNavigate()
   const { history } = useApp()
-  const { isAdmin, openLogin } = useAuth()
 
   return (
     <section className="sv-card sv-reveal">
@@ -203,52 +198,40 @@ function RecentRuns() {
         index=""
         title="最近运行"
         extra={
-          isAdmin ? (
-            <Button type="link" size="small" onClick={() => navigate('/history')}>
-              全部记录
-            </Button>
-          ) : null
+          <Button type="link" size="small" onClick={() => navigate('/history')}>
+            全部记录
+          </Button>
         }
       />
-      {isAdmin ? (
-        history.length ? (
-          <div className="sv-run-list">
-            {history.slice(0, 5).map((run) => (
-              <RunRow
-                key={run.id}
-                run={run}
-                onReplay={(run) =>
-                  navigate(
-                    run.mode === 'text'
-                      ? `/text?q=${encodeURIComponent(run.input?.query || '')}`
-                      : run.mode === 'match'
-                        ? `/match?text=${encodeURIComponent(run.input?.text || '')}`
-                        : '/image',
-                  )
-                }
-              />
-            ))}
-          </div>
-        ) : (
-          <EmptyState
-            compact
-            title="还没有运行记录"
-            description="完成一次图像分类或文本检索后，这里会留下最近 5 条轨迹。"
-            action={
-              <Button type="primary" onClick={() => navigate('/image')}>
-                先做一次图像分类
-              </Button>
-            }
-          />
-        )
+      {history.length ? (
+        <div className="sv-run-list">
+          {history.slice(0, 5).map((run) => (
+            <RunRow
+              key={run.id}
+              run={run}
+              onReplay={(run) =>
+                navigate(
+                  run.mode === 'text'
+                    ? `/text?q=${encodeURIComponent(run.input?.query || '')}`
+                    : run.mode === 'match'
+                      ? `/match?text=${encodeURIComponent(run.input?.text || '')}`
+                      : '/image',
+                )
+              }
+            />
+          ))}
+        </div>
       ) : (
-        <button type="button" className="sv-locked-inline" onClick={openLogin}>
-          <LockOutlined />
-          <span>
-            <strong>运行记录只对管理员开放</strong>
-            <em>登录后可查看本机的检索轨迹</em>
-          </span>
-        </button>
+        <EmptyState
+          compact
+          title="还没有运行记录"
+          description="完成一次图像分类或文本检索后，这里会留下最近 5 条轨迹。"
+          action={
+            <Button type="primary" onClick={() => navigate('/image')}>
+              先做一次图像分类
+            </Button>
+          }
+        />
       )}
       <div className="sv-quick-queries">
         <span>快捷查询</span>
