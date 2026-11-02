@@ -10,7 +10,7 @@
   --success-ink: #189a58;
   --danger-soft: #fbe9e9;
   --danger-ink: #d64545;
-  --bg: #f4f4f6;
+  --bg: #fafafa;
   --surface: #ffffff;
   --text: #1c1c21;
   --muted: #85858d;
@@ -251,7 +251,7 @@ a {
 
 .sv-health-pill:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
 }
 
 .sv-health-pill .sv-dot {
@@ -547,7 +547,7 @@ a {
 
 .sv-page-actions .sv-demo-btn:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
   color: var(--primary-deep);
 }
 
@@ -686,7 +686,7 @@ a {
   align-items: center;
   padding: 40px 44px;
   border-radius: 0;
-  background: linear-gradient(135deg, #f4f4f6 0%, #f7f7fa 55%, #eef2ff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 55%, #f4f4f8 100%);
   border: 1px solid var(--border);
 }
 
@@ -1009,7 +1009,7 @@ a {
 
 .sv-demo-step:hover {
   border-color: rgba(79, 70, 229, 0.4);
-  background: #f4f4f6;
+  background: #f2f2f5;
   transform: translateX(2px);
 }
 
@@ -1052,7 +1052,7 @@ a {
   padding: 11px 12px;
   border-radius: 0;
   border: 1px solid rgba(79, 70, 229, 0.18);
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: var(--primary-ink);
   text-align: left;
   cursor: pointer;
@@ -1332,7 +1332,7 @@ a {
 }
 
 .sv-glyph.is-muted {
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: var(--primary-ink);
   box-shadow: none;
 }
@@ -1343,7 +1343,7 @@ a {
   gap: 6px;
   padding: 3px 8px 3px 3px;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: #4b4b53;
   font-size: 12px;
   white-space: nowrap;
@@ -1431,7 +1431,7 @@ a {
 
 .sv-upload .ant-upload-drag:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
 }
 
 .sv-upload .ant-upload-btn {
@@ -1478,7 +1478,7 @@ a {
   aspect-ratio: 4 / 3;
   border-radius: 0;
   border: 1px solid var(--border);
-  background: #f4f4f6;
+  background: #f7f7f9;
 }
 
 .sv-preview img {
@@ -1616,7 +1616,7 @@ a {
 
 .sv-chip:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
   color: var(--primary-ink);
 }
 
@@ -1670,7 +1670,7 @@ a {
   gap: 20px;
   padding: 18px;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   border: 1px solid rgba(79, 70, 229, 0.14);
 }
 
@@ -1809,7 +1809,7 @@ a {
   margin-top: 18px;
   padding: 14px 16px;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   border: 1px solid var(--divider);
 }
 
@@ -2236,12 +2236,12 @@ a {
 }
 
 .sv-verdict.is-match {
-  background: #f4f4f6;
+  background: #f7f7f9;
   border-color: rgba(4, 120, 87, 0.16);
 }
 
 .sv-verdict.is-mismatch {
-  background: #f4f4f6;
+  background: #f7f7f9;
   border-color: rgba(239, 68, 68, 0.16);
 }
 
@@ -2625,7 +2625,7 @@ a {
   margin: 0;
   padding: 10px;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: #3730a3;
   font-family: var(--font-mono);
   font-size: 10px;
@@ -3148,7 +3148,7 @@ a {
 
 .sv-il-help:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
   transform: translateY(-2px);
 }
 
@@ -3294,7 +3294,7 @@ a {
 
 .sv-il-sample:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(28, 28, 33, 0.08);
 }
@@ -3843,7 +3843,7 @@ a {
 
 .sv-tx-help:hover {
   border-color: rgba(79, 70, 229, 0.5);
-  background: #f4f4f6;
+  background: #f2f2f5;
   transform: translateY(-1px);
 }
 
@@ -4012,7 +4012,7 @@ a {
   padding: 0 7px;
   border: 0;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -4235,7 +4235,7 @@ a {
 
 .sv-tx-summary-actions .ant-btn:hover {
   border-color: var(--primary);
-  background: #f4f4f6;
+  background: #f2f2f5;
   color: var(--primary-deep);
 }
 
@@ -4839,7 +4839,7 @@ a {
 
 .sv-mm-help:hover {
   border-color: rgba(79, 70, 229, 0.5);
-  background: #f4f4f6;
+  background: #f2f2f5;
   transform: translateY(-1px);
 }
 
@@ -4908,7 +4908,7 @@ a {
 
 .sv-mm-demos button:hover:not(:disabled) {
   border-color: rgba(79, 70, 229, 0.45);
-  background: #f4f4f6;
+  background: #f2f2f5;
 }
 
 .sv-mm-demos button:disabled {
@@ -4991,7 +4991,7 @@ a {
 .sv-mm-drop.has-file {
   border-style: solid;
   border-color: var(--border);
-  background: #f4f4f6;
+  background: #f7f7f9;
 }
 
 .sv-mm-drop.has-file img {
@@ -5053,7 +5053,7 @@ a {
 
 .sv-mm-drop-actions button.is-danger:hover {
   border-color: rgba(239, 68, 68, 0.4);
-  background: #f4f4f6;
+  background: #f2f2f5;
   color: var(--danger-ink);
 }
 
@@ -5295,12 +5295,12 @@ a {
 
 .sv-mm-tower.is-image {
   border-color: #e6e6eb;
-  background: linear-gradient(180deg, #f4f4f6 0%, #ffffff 62%);
+  background: linear-gradient(180deg, #f7f7f9 0%, #ffffff 62%);
 }
 
 .sv-mm-tower.is-text {
   border-color: #e6e6eb;
-  background: linear-gradient(180deg, #f4f4f6 0%, #ffffff 62%);
+  background: linear-gradient(180deg, #f7f7f9 0%, #ffffff 62%);
 }
 
 .sv-mm-tower-head {
@@ -5329,7 +5329,7 @@ a {
   height: 104px;
   border: 1px solid var(--divider);
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   overflow: hidden;
 }
 
@@ -5428,7 +5428,7 @@ a {
   padding: 4px 9px;
   border: 1px solid #e6e6eb;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: var(--mm-blue);
   font-size: 10.5px;
   white-space: nowrap;
@@ -5577,7 +5577,7 @@ a {
 }
 
 .sv-mm-tr:not(.is-head):hover {
-  background: #f4f4f6;
+  background: #f2f2f5;
 }
 
 .sv-mm-tr:not(.is-head) {
@@ -5672,7 +5672,7 @@ a {
   padding: 6px 12px;
   border: 1px solid #e6e6eb;
   border-radius: 0;
-  background: #f4f4f6;
+  background: #f7f7f9;
   color: var(--mm-green);
   font-family: var(--font-mono);
   font-size: 11px;

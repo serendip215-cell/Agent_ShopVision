@@ -8,7 +8,7 @@ export const antdTheme = {
     colorSuccess: '#189A58',
     colorWarning: '#B45309',
     colorError: '#D64545',
-    colorBgLayout: '#F4F4F6',
+    colorBgLayout: '#FAFAFA',
     colorBgContainer: '#FFFFFF',
     colorBgElevated: '#FFFFFF',
     colorText: '#1C1C21',
@@ -32,7 +32,7 @@ export const antdTheme = {
   },
   components: {
     Layout: {
-      bodyBg: '#F4F4F6',
+      bodyBg: '#FAFAFA',
       headerBg: '#FFFFFF',
       siderBg: '#FFFFFF',
     },
