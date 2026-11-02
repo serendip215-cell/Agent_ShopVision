@@ -9,6 +9,13 @@ import { formatPercent } from '../../utils/format'
 
 function ItemPhoto({ item }) {
   const style = categoryStyle(item.category)
+
+  // 使用后端返回的 local_image_path，去掉 data/ 前缀
+  // 例: data/processed_data_cleaning/鞋/images/xxx.jpg -> /items/processed_data_cleaning/鞋/images/xxx.jpg
+  const imagePath = item.local_image_path
+    ? `/items/${item.local_image_path.replace(/^data\//, '')}`
+    : `/items/${item.item_id}.jpg` // 兜底：使用 item_id
+
   return (
     <span
       className="sv-photo"
@@ -16,7 +23,7 @@ function ItemPhoto({ item }) {
       data-fallback={item.category?.slice(0, 1) || '?'}
     >
       <img
-        src={`/items/${item.item_id}.jpg`}
+        src={imagePath}
         alt={item.item_name || '商品图'}
         loading="lazy"
         onError={(event) => {
