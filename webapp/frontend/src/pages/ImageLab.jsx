@@ -56,35 +56,35 @@ export default function ImageLab() {
     }
   }, [])
 
-  const { loading, error, result, duration, execute, abort, setResult } = useAsyncRequest(classify)
+  const { loading, error, result, execute, abort, setResult, clearError } = useAsyncRequest(classify)
 
   const [file, setFile] = useState(null)
   const [validation, setValidation] = useState(null)
   const [history, setHistory] = useState([])
   const batchInputRef = useRef(null)
-  const initRef = useRef(false)
+  const pendingImageRef = useRef(null)
+  const mountedRef = useRef(true)
 
   useEffect(() => {
-    if (initRef.current) return
-    initRef.current = true
-    const pendingImage = takeImage()
+    // StrictMode 会重跑一次 setup；payload 已被 takeImage 取走，用 ref 留住再建一次预览 URL
+    if (pendingImageRef.current === null) pendingImageRef.current = takeImage()
+    const pendingImage = pendingImageRef.current
     if (pendingImage?.file) {
       setFile(pendingImage.file)
-      if (pendingImage.previewUrl) {
-        replacePreview(pendingImage.file)
-      }
+      replacePreview(pendingImage.file)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
       abort()
       batchAbortRef.current?.abort()
       releaseAll()
-    },
-    [abort, releaseAll]
-  )
+    }
+  }, [abort, releaseAll])
 
   function selectFile(nextFile) {
     const invalid = validateImageFile(nextFile)
@@ -126,6 +126,7 @@ export default function ImageLab() {
     }
 
     setValidation(null)
+    const startedAt = performance.now()
     try {
       const data = await execute(activeFile)
       rememberRun(activeFile.name, activeFile, createThumb(activeFile), data)
@@ -140,7 +141,7 @@ export default function ImageLab() {
         },
         status: 'ok',
         code: 0,
-        durationMs: duration,
+        durationMs: performance.now() - startedAt,
         placeholder: isPlaceholder,
       })
       message.success(`已判定为「${data.category || '未分类'}」`)
@@ -152,7 +153,7 @@ export default function ImageLab() {
         status: 'error',
         code: requestError.code,
         message: requestError.message,
-        durationMs: duration,
+        durationMs: performance.now() - startedAt,
         placeholder: isPlaceholder,
       })
     }
@@ -162,6 +163,7 @@ export default function ImageLab() {
     setValidation(null)
     try {
       const sampleFile = await fileFromUrl(sample.src, `${sample.key}.jpg`)
+      if (!mountedRef.current) return
       replacePreview(sampleFile)
       setFile(sampleFile)
       await analyze(sampleFile)
@@ -257,8 +259,8 @@ export default function ImageLab() {
   }
 
   function useInMatch() {
-    if (!file || !previewUrl) return
-    stageImage({ file, previewUrl, name: file.name, size: file.size })
+    if (!file) return
+    stageImage({ file, name: file.name, size: file.size })
     navigate('/match')
   }
 
@@ -292,7 +294,7 @@ export default function ImageLab() {
             <ImageErrorNotice
               error={error}
               onRetry={() => analyze()}
-              onDismiss={() => undefined}
+              onDismiss={clearError}
             />
           )}
 
