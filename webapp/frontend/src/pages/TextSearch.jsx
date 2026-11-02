@@ -14,6 +14,7 @@ import { useWorkflow } from '../context/WorkflowContext'
 import { CATEGORY_MAP, SAMPLE_QUERIES, categoryStyle } from '../constants/catalog'
 import { isCanceled } from '../utils/errors'
 import { formatDuration, formatPercent, formatScore } from '../utils/format'
+import { resolveItemImage } from '../utils/itemImage'
 import { ErrorNotice } from '../components/common/Ui'
 import { DetailDrawer } from '../components/result/Results'
 
@@ -52,7 +53,7 @@ function ItemThumb({ item }) {
       data-fallback={item.category?.slice(0, 1) || '?'}
     >
       <img
-        src={`/items/${item.item_id}.jpg`}
+        src={resolveItemImage(item)}
         alt={item.item_name || '商品图'}
         loading="lazy"
         onError={(event) => {

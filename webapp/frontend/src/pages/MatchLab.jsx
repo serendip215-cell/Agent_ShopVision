@@ -18,6 +18,7 @@ import { DEMO_PAIRS, categoryStyle } from '../constants/catalog'
 import { isCanceled } from '../utils/errors'
 import { fileFromUrl, validateImageFile } from '../utils/samples'
 import { formatDuration, formatPercent } from '../utils/format'
+import { resolveItemImage } from '../utils/itemImage'
 import { ErrorNotice } from '../components/common/Ui'
 import { DetailDrawer } from '../components/result/Results'
 
@@ -579,7 +580,7 @@ export default function MatchLab() {
                   >
                     <span className="sv-mm-ev-photo" style={{ background: style.bg }}>
                       <img
-                        src={`/items/${item.item_id}.jpg`}
+                        src={resolveItemImage(item)}
                         alt={item.item_name || '商品图'}
                         loading="lazy"
                         onError={(event) => {

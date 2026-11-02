@@ -6,15 +6,11 @@ import {
 import { CategoryBadge, CopyButton, EmptyState, SimilarityBar } from '../common/Ui'
 import { categoryStyle } from '../../constants/catalog'
 import { formatPercent } from '../../utils/format'
+import { resolveItemImage } from '../../utils/itemImage'
 
 function ItemPhoto({ item }) {
   const style = categoryStyle(item.category)
-
-  // 后端把 data/processed_data_cleaning 挂在 /item-images 下
-  // 例: data/processed_data_cleaning/鞋/images/xxx.jpg -> /item-images/鞋/images/xxx.jpg
-  const imagePath = item.local_image_path
-    ? `/item-images/${item.local_image_path.replace(/^data\/processed_data_cleaning\//, '')}`
-    : `/items/${item.item_id}.jpg` // 兜底：public/items 里的演示图
+  const imagePath = resolveItemImage(item)
 
   return (
     <span
