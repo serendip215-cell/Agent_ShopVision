@@ -2,6 +2,7 @@ import { Button } from 'antd'
 import { ArrowRightOutlined, CheckCircleOutlined, WarningOutlined } from '@ant-design/icons'
 import useCountUp from '../../utils/useCountUp'
 import { formatScore } from '../../utils/format'
+import { CATEGORIES } from '../../constants/catalog'
 
 function topkPercents(result) {
   const rows = result?.topk || []
@@ -85,7 +86,8 @@ export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCa
             ))}
           </div>
           <p className="sv-il-topk-note">
-            百分比为前三类相对可能性的直观展示；预测类别取模型在全部 9 类中的最高响应。
+            百分比为前三类相对可能性的直观展示；预测类别取模型在全部 {CATEGORIES.length}{' '}
+            类中的最高响应。
           </p>
         </section>
       )}

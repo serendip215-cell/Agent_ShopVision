@@ -16,6 +16,7 @@ import {
 } from '@ant-design/icons'
 import { useApp } from '../../context/AppContext'
 import { useAuth } from '../../context/AuthContext'
+import { CATEGORIES } from '../../constants/catalog'
 import { ErrorNotice } from '../common/Ui'
 import LoginModal from '../auth/LoginModal'
 
@@ -208,6 +209,7 @@ export default function AppShell({ children }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
   const { isAdmin } = useAuth()
+  const { health } = useApp()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -246,7 +248,10 @@ export default function AppShell({ children }) {
         <main key={location.pathname} className="sv-page sv-reveal">{children}</main>
         <footer className="sv-footer">
           <span>Agent ShopVision · 实验四前后端</span>
-          <span>数据来源：MUGE / Amazon / 苏宁 · 9 类商品图文索引</span>
+          <span>
+            数据来源：MUGE / Amazon / 苏宁 · {health?.categories?.length ?? CATEGORIES.length}{' '}
+            类商品图文索引
+          </span>
         </footer>
       </div>
 

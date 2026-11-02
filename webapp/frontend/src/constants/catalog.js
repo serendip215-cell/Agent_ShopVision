@@ -45,16 +45,6 @@ export const CATEGORY_PHOTOS = {
   家居用品: '/items/B07DWNWGNJ.jpg', // 木质衣架
 }
 
-// Hero 拼贴用的真实商品图（public/items 下已确认存在）
-export const HERO_PHOTOS = [
-  { src: '/samples/sample-shoe.jpg', category: '鞋', caption: '白色运动鞋' },
-  { src: '/items/muge_1104.jpg', category: '水杯', caption: '保温杯' },
-  { src: '/samples/sample-bag.jpg', category: '包', caption: '双肩包' },
-  { src: '/items/B075DQBBJZ.jpg', category: '女装', caption: '连衣裙' },
-  { src: '/items/muge_860.jpg', category: '厨房用品', caption: '厨房好物' },
-  { src: '/items/12303593760.jpg', category: '男装', caption: '男士外套' },
-]
-
 export const CATEGORY_KEYS = CATEGORIES.map((item) => item.key)
 
 export const CATEGORY_MAP = Object.fromEntries(

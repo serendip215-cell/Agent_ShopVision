@@ -11,7 +11,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { searchText } from '../api/client'
 import { useApp } from '../context/AppContext'
 import { useWorkflow } from '../context/WorkflowContext'
-import { CATEGORY_MAP, SAMPLE_QUERIES, categoryStyle } from '../constants/catalog'
+import { CATEGORY_MAP, INDEX_TOTAL, SAMPLE_QUERIES, categoryStyle } from '../constants/catalog'
 import { isCanceled } from '../utils/errors'
 import { formatDuration, formatPercent, formatScore } from '../utils/format'
 import { resolveItemImage } from '../utils/itemImage'
@@ -68,7 +68,8 @@ function ItemThumb({ item }) {
 export default function TextSearch() {
   const navigate = useNavigate()
   const { message } = AntApp.useApp()
-  const { addRun, isPlaceholder, categories } = useApp()
+  const { addRun, isPlaceholder, categories, health } = useApp()
+  const indexTotal = health?.total_items ?? INDEX_TOTAL
   const { stageText } = useWorkflow()
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -199,7 +200,7 @@ export default function TextSearch() {
       <header className="sv-tx-head">
         <div className="sv-tx-head-copy">
           <span className="sv-eyebrow">Chinese-CLIP 双塔 · 文本检索</span>
-          <h1>用一句话，搜遍 9,393 件商品</h1>
+          <h1>用一句话，搜遍 {indexTotal.toLocaleString('zh-CN')} 件商品</h1>
           <p>
             输入一句中文描述，AI 会把它编码成向量，在全库商品里按相似度排序，
             越像的越靠前，每条都带完整商品档案。
@@ -257,7 +258,13 @@ export default function TextSearch() {
                 onClick={() => setCategory(key)}
               >
                 {key}
-                {CATEGORY_MAP[key] && <em>{CATEGORY_MAP[key].count.toLocaleString('zh-CN')}</em>}
+                {CATEGORY_MAP[key] && (
+                  <em>
+                    {(health?.category_counts?.[key] ?? CATEGORY_MAP[key].count).toLocaleString(
+                      'zh-CN',
+                    )}
+                  </em>
+                )}
               </button>
             ))}
           </div>
@@ -322,7 +329,9 @@ export default function TextSearch() {
         {validation && <div className="sv-tx-tip is-warn">{validation}</div>}
         <div className="sv-tx-console-foot">
           <span>POST /api/v1/text</span>
-          <span>9,393 条索引 · 512 维向量</span>
+          <span>
+            {indexTotal.toLocaleString('zh-CN')} 条索引 · {health?.dimension ?? 512} 维向量
+          </span>
           {isPlaceholder && <span className="sv-tx-tag-warm">当前为联调模式，结果仅验证链路</span>}
         </div>
       </section>

@@ -25,12 +25,15 @@ import RunRow from '../components/common/RunRow'
 import useCountUp from '../utils/useCountUp'
 
 // 指标栏：大号数字是视觉重心，图标只做低饱和点缀
-const HERO_STATS = [
-  { key: 'raw', icon: ShoppingOutlined, value: TOTAL_PRODUCTS, label: '原始商品' },
-  { key: 'index', icon: SearchOutlined, value: INDEX_TOTAL, label: '检索索引' },
-  { key: 'cat', icon: TagsOutlined, value: 9, label: '商品类别' },
-  { key: 'dim', icon: NodeIndexOutlined, value: 512, label: '向量维度' },
-]
+// 类别数与维度优先用 /health 的真值；10,165 是实验一原始数据量，索引数暂为构建时快照。
+function buildHeroStats(categoryCount, dimension, indexTotal) {
+  return [
+    { key: 'raw', icon: ShoppingOutlined, value: TOTAL_PRODUCTS, label: '原始商品' },
+    { key: 'index', icon: SearchOutlined, value: indexTotal, label: '检索索引' },
+    { key: 'cat', icon: TagsOutlined, value: categoryCount, label: '商品类别' },
+    { key: 'dim', icon: NodeIndexOutlined, value: dimension, label: '向量维度' },
+  ]
+}
 
 function StatUnit({ icon: Icon, value, label, index }) {
   const animated = useCountUp(value, { delay: 360 + index * 120, duration: 900 })
@@ -62,7 +65,13 @@ const CATEGORY_SIZE = {
 
 function Hero() {
   const navigate = useNavigate()
+  const { health } = useApp()
   const [query, setQuery] = useState('')
+  const heroStats = buildHeroStats(
+    health?.categories?.length || CATEGORIES.length,
+    health?.dimension || 512,
+    health?.total_items || INDEX_TOTAL,
+  )
 
   function goSearch(value) {
     const q = String(value || '').trim()
@@ -73,7 +82,10 @@ function Hero() {
     <section className="sv-hero sv-reveal">
       <div className="sv-hero-banner">
         <div className="sv-hero-copy">
-          <span className="sv-hero-kicker">Chinese-CLIP 双塔 · 9 类 · 9,393 条索引</span>
+          <span className="sv-hero-kicker">
+            Chinese-CLIP 双塔 · {heroStats[2].value} 类 ·{' '}
+            {heroStats[1].value.toLocaleString('zh-CN')} 条索引
+          </span>
           <h2>
             用图像和文字
             <br />
@@ -116,7 +128,7 @@ function Hero() {
         </div>
       </div>
       <div className="sv-hero-stats">
-        {HERO_STATS.map((stat, index) => (
+        {heroStats.map((stat, index) => (
           <StatUnit key={stat.key} {...stat} index={index} />
         ))}
       </div>
@@ -126,6 +138,7 @@ function Hero() {
 
 function CategorySection() {
   const navigate = useNavigate()
+  const { health } = useApp()
   return (
     <section className="sv-reveal">
       <div className="sv-strip-head">
@@ -162,7 +175,10 @@ function CategorySection() {
                 <span className="sv-category-name">{category.key}</span>
                 <span className="sv-category-hint">{category.hint}</span>
                 <span className="sv-category-count sv-mono">
-                  {category.count.toLocaleString('zh-CN')} 商品
+                  {(health?.category_counts?.[category.key] ?? category.count).toLocaleString(
+                    'zh-CN',
+                  )}{' '}
+                  商品
                 </span>
               </span>
               <span className="sv-category-go" aria-hidden="true">

@@ -93,6 +93,48 @@ const ENDPOINTS = [
   "msg": "ok"
 }`,
   },
+  {
+    method: 'POST',
+    path: '/api/v1/tasks/image',
+    title: '提交单张异步分类',
+    description: '大图改走任务队列：先拿 task_id，再轮询 GET /tasks/{task_id}。',
+    request: 'multipart/form-data: file',
+    response: `{
+  "code": 0,
+  "result": { "task_id": "…", "status": "PENDING", "total": null },
+  "msg": "ok"
+}`,
+  },
+  {
+    method: 'POST',
+    path: '/api/v1/tasks/batch',
+    title: '提交批量异步分类',
+    description: '单批上限 12 张，任意一张校验失败整批拒绝。',
+    request: 'multipart/form-data: files（可重复）',
+    response: `{
+  "code": 0,
+  "result": { "task_id": "…", "status": "PENDING", "total": 5 },
+  "msg": "ok"
+}`,
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/tasks/{task_id}',
+    title: '轮询任务状态',
+    description: 'PENDING / PROGRESS / SUCCESS / FAILURE 四态；SUCCESS 后取 result。',
+    request: '路径参数 task_id',
+    response: `{
+  "code": 0,
+  "result": {
+    "task_id": "…",
+    "status": "PROGRESS",
+    "progress": { "done": 2, "total": 5 },
+    "result": null,
+    "error": null
+  },
+  "msg": "ok"
+}`,
+  },
 ]
 
 const ERROR_CODES = [
@@ -153,8 +195,13 @@ export default function Status() {
 
   const categoryRows = CATEGORIES.map((item) => ({
     ...item,
-    share: Math.round((item.count / INDEX_TOTAL) * 1000) / 10,
+    count: health?.category_counts?.[item.key] ?? item.count,
     status: 'ok',
+  }))
+  const indexTotal = health?.total_items ?? INDEX_TOTAL
+  const rowsWithShare = categoryRows.map((item) => ({
+    ...item,
+    share: Math.round((item.count / indexTotal) * 1000) / 10,
   }))
 
   return (
@@ -243,7 +290,7 @@ export default function Status() {
             </div>
             <div>
               <span>索引条数</span>
-              <strong className="sv-mono">{INDEX_TOTAL.toLocaleString('zh-CN')}</strong>
+              <strong className="sv-mono">{indexTotal.toLocaleString('zh-CN')}</strong>
             </div>
             <div>
               <span>数据来源</span>
@@ -264,11 +311,15 @@ export default function Status() {
       </div>
 
       <section className="sv-card sv-reveal">
-        <SectionLabel index="03" title="九类索引明细" extra={<span className="sv-muted">数据来自清洗后索引</span>} />
+        <SectionLabel
+          index="03"
+          title={`${rowsWithShare.length} 类索引明细`}
+          extra={<span className="sv-muted">构建时快照，后端提供统计后自动更新</span>}
+        />
         <Table
           rowKey="key"
           columns={CATEGORY_COLUMNS}
-          dataSource={categoryRows}
+          dataSource={rowsWithShare}
           pagination={false}
           size="middle"
           scroll={{ x: 640 }}

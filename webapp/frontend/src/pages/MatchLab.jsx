@@ -25,15 +25,6 @@ import { DetailDrawer } from '../components/result/Results'
 const TOPK_PRESETS = [3, 5, 10]
 const TEXT_SAMPLES = ['白色运动鞋', '黑色双肩包', '粉色连衣裙']
 
-// 后端还没回传双塔置信度 / 细分类时用的示例值；页面会挂「示例数值」标识。
-// 换到真实模型后 image_confidence / text_confidence / text_type 一到位就自动显示真值。
-const SAMPLE_FILL = {
-  imageConfidence: 0.91,
-  imageType: '女士小板鞋',
-  textConfidence: 0.88,
-  textType: '休闲鞋',
-}
-
 function fixed2(value) {
   return Number.isFinite(value) ? value.toFixed(2) : '—'
 }
@@ -227,16 +218,11 @@ export default function MatchLab() {
     navigate(`/text?q=${encodeURIComponent(keyword)}`)
   }
 
-  const imageSample = !Number.isFinite(result?.image_confidence)
-  const textSample = !Number.isFinite(result?.text_confidence) || !result?.text_type
-  const imageConfidence = Number.isFinite(result?.image_confidence)
-    ? result.image_confidence
-    : SAMPLE_FILL.imageConfidence
-  const textConfidence = Number.isFinite(result?.text_confidence)
-    ? result.text_confidence
-    : SAMPLE_FILL.textConfidence
-  const imageType = result?.image_type || SAMPLE_FILL.imageType
-  const textType = result?.text_type || result?.items?.[0]?.type || SAMPLE_FILL.textType
+  // 只展示后端真值；缺字段就留空，不再用示例值顶替。
+  const imageConfidence = result?.image_confidence
+  const textConfidence = result?.text_confidence
+  const imageType = result?.image_type || null
+  const textType = result?.text_type || result?.items?.[0]?.type || null
 
   return (
     <div className="sv-mm">
@@ -459,7 +445,6 @@ export default function MatchLab() {
                 <div className="sv-mm-tower-head">
                   <i className="sv-mm-dot is-teal" aria-hidden="true" />
                   图像塔
-                  {imageSample && result && <em>示例数值</em>}
                 </div>
                 <div className="sv-mm-tower-thumb">
                   {previewUrl ? <img src={previewUrl} alt="图像塔输入" /> : <i><CameraOutlined /></i>}
@@ -471,7 +456,7 @@ export default function MatchLab() {
                   </div>
                   <div>
                     <dt>细分类</dt>
-                    <dd>{result ? imageType : '—'}</dd>
+                    <dd>{imageType || '—'}</dd>
                   </div>
                   <div>
                     <dt>置信度</dt>
@@ -490,7 +475,6 @@ export default function MatchLab() {
                 <div className="sv-mm-tower-head">
                   <i className="sv-mm-dot is-blue" aria-hidden="true" />
                   文本塔
-                  {textSample && result && <em>示例数值</em>}
                 </div>
                 <div className="sv-mm-tower-thumb is-text">
                   {result ? (
@@ -509,7 +493,7 @@ export default function MatchLab() {
                   </div>
                   <div>
                     <dt>细分类</dt>
-                    <dd>{result ? textType : '—'}</dd>
+                    <dd>{textType || '—'}</dd>
                   </div>
                   <div>
                     <dt>置信度</dt>
