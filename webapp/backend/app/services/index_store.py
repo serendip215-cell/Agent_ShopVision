@@ -63,13 +63,26 @@ class IndexStore:
         """索引概况，供 health 之类的状态接口用，别让上层去翻内部字段。"""
         entries = self._registry.get("categories", {})
         category_counts = {name: int(entry.get("items", 0)) for name, entry in entries.items()}
+        model = self._registry.get("model") or {}
         return {
             "index_dir": str(self.index_dir),
             "categories": self.categories,
             "dimension": self.dimension,
             "category_counts": category_counts,
             "total_items": sum(category_counts.values()),
+            "category_ready": {name: self._files_ready(entry) for name, entry in entries.items()},
+            "updated_at": self._registry.get("updated_at"),
+            "model_name": model.get("name"),
+            "model_checkpoint": model.get("checkpoint"),
         }
+
+    def _files_ready(self, entry: dict) -> bool:
+        """只查文件是否存在，不加载向量：状态页要的是真实可检索性，不是猜测。"""
+        items_csv = entry.get("items_csv")
+        if not items_csv:
+            return False
+        csv_path = self.index_dir / items_csv
+        return csv_path.is_file() and (csv_path.parent / "image_embeddings.npy").is_file()
 
     def _load(self, category: str) -> tuple[dict[int, dict[str, str]], np.ndarray]:
         cached = self._cache.get(category)

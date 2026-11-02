@@ -1,16 +1,14 @@
-export const TOTAL_PRODUCTS = 10165
-export const INDEX_TOTAL = 9393
-
+// 只保留类别本身与展示文案；条数、总量一律来自 /health，不在前端写快照。
 export const CATEGORIES = [
-  { key: '鞋', glyph: '鞋', count: 3219, hint: '运动鞋 / 休闲鞋 / 皮鞋' },
-  { key: '水杯', glyph: '杯', count: 2016, hint: '保温杯 / 随行杯 / 水壶' },
-  { key: '包', glyph: '包', count: 1291, hint: '双肩包 / 单肩包 / 旅行包' },
-  { key: '男装', glyph: '男', count: 999, hint: 'T 恤 / 卫衣 / 外套' },
-  { key: '运动服', glyph: '运', count: 668, hint: '运动套装 / 健身服' },
-  { key: '女装', glyph: '女', count: 357, hint: '连衣裙 / 上衣 / 裤装' },
-  { key: '手机壳', glyph: '壳', count: 300, hint: '保护壳 / 硅胶壳' },
-  { key: '厨房用品', glyph: '厨', count: 279, hint: '收纳 / 餐具 / 小家电周边' },
-  { key: '家居用品', glyph: '居', count: 264, hint: '日用 / 收纳 / 装饰' },
+  { key: '鞋', glyph: '鞋', hint: '运动鞋 / 休闲鞋 / 皮鞋' },
+  { key: '水杯', glyph: '杯', hint: '保温杯 / 随行杯 / 水壶' },
+  { key: '包', glyph: '包', hint: '双肩包 / 单肩包 / 旅行包' },
+  { key: '男装', glyph: '男', hint: 'T 恤 / 卫衣 / 外套' },
+  { key: '运动服', glyph: '运', hint: '运动套装 / 健身服' },
+  { key: '女装', glyph: '女', hint: '连衣裙 / 上衣 / 裤装' },
+  { key: '手机壳', glyph: '壳', hint: '保护壳 / 硅胶壳' },
+  { key: '厨房用品', glyph: '厨', hint: '收纳 / 餐具 / 小家电周边' },
+  { key: '家居用品', glyph: '居', hint: '日用 / 收纳 / 装饰' },
 ]
 
 // 9 类各自的识别色：柔和底色 + 对比墨色，全部与主色板同灰度

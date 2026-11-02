@@ -57,6 +57,10 @@
 | `result.dimension` | 整数（可为空） | 向量维度 |
 | `result.category_counts` | 对象 | 各类索引条数（构建时快照） |
 | `result.total_items` | 整数 | 索引总条数 |
+| `result.category_ready` | 对象 | 各类索引文件是否齐全（items.csv + image_embeddings.npy） |
+| `result.updated_at` | 字符串（可为空） | 索引构建时间，来自注册表 |
+| `result.model_name` | 字符串（可为空） | 建索引所用视觉塔，如 ViT-B-16 |
+| `result.model_checkpoint` | 字符串（可为空） | 建索引所用权重路径 |
 
 ### 图像分类页
 
@@ -84,6 +88,22 @@
 | `result.topk` | 对象 的数组 | 各类最高分，降序前 3 |
 | `result.topk[].category` | 字符串 | 类别名 |
 | `result.topk[].similarity` | 小数 | 该类最高余弦相似度 |
+| `result.topk[].confidence` | 小数 | 对全部类别做 softmax 后该类的概率，与顶层 confidence 同口径 |
+| `result.items` | 对象 的数组 | 判出类别内与上传图最相似的商品，供相似商品推荐 |
+| `result.items[].category` | 字符串 | 命中类别 |
+| `result.items[].similarity` | 小数 | 余弦相似度（向量已 L2 归一化，故等于点积） |
+| `result.items[].item_id` | 字符串（可为空） | 数据源商品 ID |
+| `result.items[].item_name` | 字符串（可为空） | 商品标题 |
+| `result.items[].product_type` | 字符串（可为空） | 商品大类 |
+| `result.items[].brand` | 字符串（可为空） | 品牌，可能为空串 |
+| `result.items[].color` | 字符串（可为空） | 颜色 |
+| `result.items[].material` | 字符串（可为空） | 材质 |
+| `result.items[].description` | 字符串（可为空） | 商品文案（实验一清洗后） |
+| `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
+| `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
+| `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
+| `result.items[].image_height` | 字符串（可为空） | 图高（CSV 原样字符串） |
+| `result.items[].image_width` | 字符串（可为空） | 图宽（CSV 原样字符串） |
 
 ### 文本检索页
 

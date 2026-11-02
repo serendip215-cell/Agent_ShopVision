@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { searchText } from '../api/client'
 import { useApp } from '../context/AppContext'
 import { useWorkflow } from '../context/WorkflowContext'
-import { CATEGORY_MAP, INDEX_TOTAL, SAMPLE_QUERIES, categoryStyle } from '../constants/catalog'
+import { SAMPLE_QUERIES, categoryStyle } from '../constants/catalog'
 import { isCanceled } from '../utils/errors'
 import { formatDuration } from '../utils/format'
 import { EmptyState, ErrorNotice } from '../components/common/Ui'
@@ -36,7 +36,7 @@ function categoryDistribution(items) {
 export default function TextSearch() {
   const navigate = useNavigate()
   const { message } = AntApp.useApp()
-  const { addRun, isPlaceholder, categories } = useApp()
+  const { addRun, isPlaceholder, categories, health } = useApp()
   const { stageText } = useWorkflow()
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -194,7 +194,9 @@ export default function TextSearch() {
             点开任意商品可查看完整档案。
           </p>
           <span className="sv-tx-head-meta">
-            已索引 {INDEX_TOTAL.toLocaleString('zh-CN')} 件商品
+            {health?.total_items != null
+              ? `已索引 ${health.total_items.toLocaleString('zh-CN')} 件商品`
+              : '索引统计暂不可用'}
             {isPlaceholder && <em>联调模式 · 结果仅验证链路</em>}
           </span>
         </div>
@@ -277,7 +279,9 @@ export default function TextSearch() {
                 onClick={() => setCategory(key)}
               >
                 {key}
-                {CATEGORY_MAP[key] && <em>{CATEGORY_MAP[key].count.toLocaleString('zh-CN')}</em>}
+                {health?.category_counts?.[key] != null && (
+                  <em>{health.category_counts[key].toLocaleString('zh-CN')}</em>
+                )}
               </button>
             ))}
           </div>

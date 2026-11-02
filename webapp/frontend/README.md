@@ -34,10 +34,10 @@ React 19 · Vite 5 · Ant Design 5 · React Router 7 · Axios；样式为纯 CSS
 | `/image` | [ImageLab.jsx](src/pages/ImageLab.jsx) | 图像分类：拖拽上传/示例图 → 置信度结果卡、Top3 候选条形图、通俗解读、批量连续测试与页内历史 | `POST /image` |
 | `/text` | [TextSearch.jsx](src/pages/TextSearch.jsx) | 文本检索：中文查询 + 类别限定 + top_k → 商品列表 | `POST /text` |
 | `/match` | [MatchLab.jsx](src/pages/MatchLab.jsx) | 图文匹配：图/文两路独立判类 + 一致性结论 + 检索证据 | `POST /match` |
-| `/history` | [History.jsx](src/pages/History.jsx) | 运行记录（管理员）：localStorage 持久化，可重放/导出 JSON | — |
-| `/status` | [Status.jsx](src/pages/Status.jsx) | 系统状态（管理员）：health、索引明细、接口契约、错误码表 | `GET /health` |
+| `/history` | [History.jsx](src/pages/History.jsx) | 运行记录：localStorage 持久化，可重放/导出 JSON | — |
+| `/status` | [Status.jsx](src/pages/Status.jsx) | 系统状态：health、索引明细、接口契约、错误码表 | `GET /health` |
 
-`/history`、`/status` 由 [RequireAdmin](src/components/auth/RequireAdmin.jsx) 包裹，未登录展示解锁入口。跨页交接：文本走 URL 参数 `q`，图片走 WorkflowContext（内存 File + 预览地址）。
+跨页交接：文本走 URL 参数 `q`，图片走 WorkflowContext（内存 File + 预览地址）。
 
 ## 目录结构
 
@@ -45,7 +45,6 @@ React 19 · Vite 5 · Ant Design 5 · React Router 7 · Axios；样式为纯 CSS
 src/
 ├── api/client.js            # Axios 实例：统一返回体 {code, result, msg} 拦截，错误翻成 AppError
 ├── components/
-│   ├── auth/                # 登录弹窗、管理员路由守卫
 │   ├── common/              # Ui.jsx（空态/分区标签等原子件）、RunRow 运行轨迹行
 │   ├── input/               # 上传/查询输入组件
 │   ├── layout/AppShell.jsx  # 顶栏（全局搜索、健康徽标、导航、面包屑）+ 出口
@@ -53,7 +52,6 @@ src/
 ├── constants/catalog.js     # 9 类目数据、类别识别色、示例图/示例查询（图与类属经双重核验）
 ├── context/
 │   ├── AppContext.jsx       # 健康状态、模型占位标记、运行历史（localStorage）
-│   ├── AuthContext.jsx      # 管理员登录态
 │   └── WorkflowContext.jsx  # 图像分类 → 图文匹配 的图片交接
 ├── pages/                   # 上表 6 个路由页 + NotFound
 ├── __tests__/               # Vitest 单元测试（api / utils）

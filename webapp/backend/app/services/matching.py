@@ -42,11 +42,22 @@ class MatchService:
         vector = self.encoder.encode_image(image)
         category, score, scores = self.index.best_category(vector)
         ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:3]
+        # 判出类别内最相似的商品：前端拿它做“相似商品推荐”，不再用类别参考图顶替
+        hits = self.index.search(vector, [category], top_k=4) if category else []
         return {
             "category": category,
             "confidence": round(_softmax_pick(scores, category or ""), 6),
             "score": round(score, 6) if category else None,
-            "topk": [{"category": c, "similarity": round(s, 6)} for c, s in ranked],
+            "topk": [
+                {
+                    "category": c,
+                    "similarity": round(s, 6),
+                    # 与顶层 confidence 同口径：对全部类别做 softmax，而不是只归一化前三
+                    "confidence": round(_softmax_pick(scores, c), 6),
+                }
+                for c, s in ranked
+            ],
+            "items": [hit.as_dict() for hit in hits],
         }
 
     # 文本分类页：中文查询 -> 相关商品
