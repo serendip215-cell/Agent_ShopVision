@@ -55,7 +55,10 @@ export default function MatchLab() {
 
   const previewRef = useRef('')
   const abortRef = useRef(null)
-  const initRef = useRef(false)
+  const pendingImageRef = useRef(null)
+  const pendingTextRef = useRef(null)
+  const demoInitRef = useRef(false)
+  const mountedRef = useRef(true)
   const fileInputRef = useRef(null)
 
   function replacePreview(nextFile) {
@@ -119,6 +122,7 @@ export default function MatchLab() {
         { file: activeFile, text: activeText, topK: activeTopK },
         controller.signal,
       )
+      if (abortRef.current !== controller) return
       const elapsed = performance.now() - startedAt
       setResult(data)
       setMatchedText(activeText)
@@ -139,7 +143,7 @@ export default function MatchLab() {
       })
       message.success(data.match ? '图文一致' : '图文不一致')
     } catch (requestError) {
-      if (isCanceled(requestError)) return
+      if (isCanceled(requestError) || abortRef.current !== controller) return
       setError(requestError)
       addRun({
         mode: 'match',
@@ -163,6 +167,7 @@ export default function MatchLab() {
     setError(null)
     try {
       const demoFile = await fileFromUrl(pair.image.src, `${pair.image.key}.jpg`)
+      if (!mountedRef.current) return
       setFile(demoFile)
       replacePreview(demoFile)
       setText(pair.text)
@@ -175,38 +180,45 @@ export default function MatchLab() {
   }
 
   useEffect(() => {
-    if (initRef.current) return
-    initRef.current = true
+    // StrictMode 会重跑一次 setup；takeImage/takeText 只取一次，值留在 ref 里
+    if (pendingImageRef.current === null) pendingImageRef.current = takeImage()
+    if (pendingTextRef.current === null) pendingTextRef.current = takeText()
 
-    const pendingImage = takeImage()
+    const pendingImage = pendingImageRef.current
     if (pendingImage?.file) {
       setFile(pendingImage.file)
-      setPreviewUrl(pendingImage.previewUrl || '')
-      previewRef.current = pendingImage.previewUrl || ''
+      replacePreview(pendingImage.file)
     }
 
-    const pendingText = takeText()
+    const pendingText = pendingTextRef.current
     const textFromUrl = searchParams.get('text') || ''
     const initialText = pendingText || textFromUrl
     if (initialText) setText(initialText)
 
-    const demo = searchParams.get('demo')
-    if (demo === 'match' || demo === 'mismatch') {
-      applyDemo(demo)
+    if (!demoInitRef.current) {
+      demoInitRef.current = true
+      const demo = searchParams.get('demo')
+      if (demo === 'match' || demo === 'mismatch') {
+        applyDemo(demo)
+      }
     }
-    // 只在首次进入时读取跨页交接与 URL 参数
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => () => {
-    if (previewRef.current && previewRef.current.startsWith('blob:')) {
-      URL.revokeObjectURL(previewRef.current)
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+      abortRef.current?.abort()
+      if (previewRef.current && previewRef.current.startsWith('blob:')) {
+        URL.revokeObjectURL(previewRef.current)
+      }
     }
   }, [])
 
   function useImageInClassification() {
     if (!file) return
-    stageImage({ file, previewUrl, name: file.name, size: file.size })
+    stageImage({ file, name: file.name, size: file.size })
     navigate('/image')
   }
 

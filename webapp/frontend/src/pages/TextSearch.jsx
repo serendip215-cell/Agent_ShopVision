@@ -56,9 +56,13 @@ export default function TextSearch() {
   const [duration, setDuration] = useState(null)
 
   const abortRef = useRef(null)
-  const initialRunRef = useRef(false)
   const resultRef = useRef(null)
   const hasResultRef = useRef(false)
+  const skipAutoSearchRef = useRef(false)
+  const autoSearchTimerRef = useRef(null)
+  const latestQueryRef = useRef(query)
+  // 上一次真正发出去的检索条件；URL 与它比对，避免把「输入框已改但还没搜」误判成已同步
+  const lastSearchRef = useRef({ query: '', category: '', topK: null })
 
   async function runSearch(options = {}) {
     const nextQuery = String(options.query ?? query).trim()
@@ -70,6 +74,8 @@ export default function TextSearch() {
       return
     }
     setValidation(null)
+    hasResultRef.current = true
+    lastSearchRef.current = { query: nextQuery, category: nextCategory, topK: nextTopK }
 
     if (options.updateUrl !== false) {
       const nextParams = { q: nextQuery, top_k: String(nextTopK) }
@@ -93,10 +99,10 @@ export default function TextSearch() {
         { query: nextQuery, topK: nextTopK, category: nextCategory },
         controller.signal,
       )
+      if (abortRef.current !== controller) return
       const elapsed = performance.now() - startedAt
       setResult(data)
       setDuration(elapsed)
-      hasResultRef.current = true
       addRun({
         mode: 'text',
         input: { query: nextQuery, category: nextCategory, topK: nextTopK },
@@ -114,7 +120,7 @@ export default function TextSearch() {
         resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       })
     } catch (requestError) {
-      if (isCanceled(requestError)) return
+      if (isCanceled(requestError) || abortRef.current !== controller) return
       setError(requestError)
       addRun({
         mode: 'text',
@@ -130,31 +136,96 @@ export default function TextSearch() {
     }
   }
 
+  // 输入框最新值给防抖定时器读，避免 280ms 内改过 query 后仍用旧闭包
   useEffect(() => {
-    if (initialRunRef.current) return
-    initialRunRef.current = true
-    if (initialQuery) {
-      runSearch({
-        query: initialQuery,
-        category: initialCategory,
-        topK: initialTopK,
-        updateUrl: false,
-      })
-    }
-    // 只在首次进入时读取 URL 参数
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    latestQueryRef.current = query
+  }, [query])
 
-  // 已有结果后，切换类别 / 条数自动重搜（防抖，重复请求由 AbortController 取消）
+  // URL 是检索的唯一入口：首次进入、全局搜索、浏览器前进后退都走这里
   useEffect(() => {
-    if (!hasResultRef.current || !query.trim()) return undefined
+    const nextQuery = searchParams.get('q') || ''
+    const nextCategory = searchParams.get('category') || ''
+    const nextTopK = Math.min(50, Math.max(1, Number(searchParams.get('top_k')) || 5))
+
+    if (nextQuery !== query || nextCategory !== category || nextTopK !== topK) {
+      if (nextCategory !== category || nextTopK !== topK) {
+        skipAutoSearchRef.current = true
+      }
+      setQuery(nextQuery)
+      setCategory(nextCategory)
+      setTopK(nextTopK)
+    }
+
+    if (!nextQuery) {
+      lastSearchRef.current = { query: '', category: nextCategory, topK: nextTopK }
+      if (autoSearchTimerRef.current) {
+        window.clearTimeout(autoSearchTimerRef.current)
+        autoSearchTimerRef.current = null
+      }
+      abortRef.current?.abort()
+      abortRef.current = null
+      setLoading(false)
+      setResult(null)
+      setSelected(null)
+      setDistFilter(null)
+      setDuration(null)
+      setError(null)
+      setValidation(null)
+      hasResultRef.current = false
+      return
+    }
+
+    const last = lastSearchRef.current
+    if (nextQuery === last.query && nextCategory === last.category && nextTopK === last.topK) {
+      return
+    }
+    runSearch({
+      query: nextQuery,
+      category: nextCategory,
+      topK: nextTopK,
+      updateUrl: false,
+    })
+    // URL 变化才触发；query/category/topK 只做比较，不参与依赖
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
+
+  // 检索开始过之后，切换类别 / 条数自动重搜（防抖，重复请求由 AbortController 取消）
+  useEffect(() => {
+    if (skipAutoSearchRef.current) {
+      skipAutoSearchRef.current = false
+      return undefined
+    }
+    if (!hasResultRef.current) return undefined
     const timer = window.setTimeout(() => {
-      runSearch()
+      autoSearchTimerRef.current = null
+      if (!hasResultRef.current) return
+      // 定时器里读最新 query：防抖窗口内用户可能已经改了输入或提交过
+      const latestQuery = latestQueryRef.current.trim()
+      if (!latestQuery) return
+      const last = lastSearchRef.current
+      if (latestQuery === last.query && category === last.category && topK === last.topK) {
+        return
+      }
+      runSearch({ query: latestQuery })
     }, AUTO_SEARCH_DELAY)
-    return () => window.clearTimeout(timer)
-    // 只有类别与条数变化才触发；query 仍由 Enter / 按钮提交
+    autoSearchTimerRef.current = timer
+    return () => {
+      window.clearTimeout(timer)
+      if (autoSearchTimerRef.current === timer) autoSearchTimerRef.current = null
+    }
+    // 只有类别与条数变化才触发；改筛选时用当前输入重搜
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, topK])
+
+  useEffect(
+    () => () => {
+      abortRef.current?.abort()
+      abortRef.current = null
+      // StrictMode 会模拟一次卸载再挂载；清掉已发出的条件，让第二次 setup 重新检索
+      lastSearchRef.current = { query: '', category: '', topK: null }
+    },
+    []
+  )
 
   function useInMatch() {
     const text = result?.query || query
