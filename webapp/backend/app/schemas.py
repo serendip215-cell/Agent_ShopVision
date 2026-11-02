@@ -72,6 +72,10 @@ class HealthResult(BaseModel):
     index_dir: str = Field(description="索引目录")
     categories: list[str] = Field(description="索引里注册的类别")
     dimension: int | None = Field(default=None, description="向量维度")
+    category_counts: dict[str, int] = Field(
+        default_factory=dict, description="各类索引条数（构建时快照）"
+    )
+    total_items: int = Field(default=0, description="索引总条数")
 
 
 class ImageResult(BaseModel):
@@ -95,6 +99,10 @@ class MatchResult(BaseModel):
         default=0.0, description="图像塔对判出类别的置信度（9 类最高分 softmax）"
     )
     image_score: float | None = Field(default=None, description="图像塔该类别原始相似度")
+    image_type: str | None = Field(
+        default=None,
+        description="图像塔细分类：图像判出类别内最相似商品的 type",
+    )
     text_confidence: float = Field(
         default=0.0, description="文本塔对判出类别的置信度（9 类最高分 softmax）"
     )

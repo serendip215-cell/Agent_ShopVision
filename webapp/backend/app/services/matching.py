@@ -70,6 +70,12 @@ class MatchService:
         image_category, image_score, image_scores = self.index.best_category(image_vector)
         text_category, text_score, text_scores = self.index.best_category(text_vector)
         hits = self.index.search(text_vector, top_k=top_k)
+        # 图像塔细分类取「判出类别内最相似的那条」的 type；类别未判定就留空
+        image_type = None
+        if image_category:
+            image_hits = self.index.search(image_vector, [image_category], top_k=1)
+            if image_hits:
+                image_type = image_hits[0].item.get("type") or None
         # 文本塔细分类取「同类命中里排最前的那条」的 type；没有同类命中就留空
         text_type = next(
             (
@@ -85,6 +91,7 @@ class MatchService:
             "text_category": text_category,
             "image_confidence": round(_softmax_pick(image_scores, image_category or ""), 6),
             "image_score": round(image_score, 6) if image_category else None,
+            "image_type": image_type,
             "text_confidence": round(_softmax_pick(text_scores, text_category or ""), 6),
             "text_score": round(text_score, 6) if text_category else None,
             "text_type": text_type,

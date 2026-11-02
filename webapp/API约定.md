@@ -55,11 +55,14 @@
     "backend": "placeholder",
     "index_dir": "…/data/index_data_finetuned",
     "categories": ["包","厨房用品","女装","家居用品","手机壳","水杯","男装","运动服","鞋"],
-    "dimension": 512
+    "dimension": 512,
+    "category_counts": { "鞋": 3219, "水杯": 2016, "…": 0 },
+    "total_items": 9393
 }, "msg": "ok" }
 ```
 
 `model_loaded: false` 表示当前跑占位编码器，检索结果无意义。
+`category_counts` / `total_items` 来自索引注册表，是**建库时快照**，不是实时库存。
 
 ### POST /api/v1/image — 图像分类
 
@@ -96,13 +99,14 @@
 
 ```json
 { "match": false, "image_category": "手机壳", "text_category": "包",
-  "image_confidence": 0.91, "image_score": 0.37,
+  "image_confidence": 0.91, "image_score": 0.37, "image_type": "女士小板鞋",
   "text_confidence": 0.88, "text_score": 0.33,
   "text_type": "休闲鞋", "items": [ … ] }
 ```
 
 `image_confidence` / `text_confidence` 是两塔各自对判出类别做 9 类 softmax 的概率；
-`text_type` 是文本塔同类命中里排最前那条商品的细分类，用于解释判断；`items` 是文本检索证据。
+`image_type` / `text_type` 是各自类别内最相似商品的细分类，用于解释判断；
+`items` 是文本检索证据。细分类是**检索证据**，不是模型直接预测的细分类。
 
 ### 异步任务（批量 / 大图）— Celery + Redis
 
@@ -160,7 +164,8 @@
 - URL 用名词 + 版本：`/api/v1/image`、`/api/v1/text`、`/api/v1/match`；方法对应动作。
 - JSON 字段用 `snake_case`（与后端 Python 一致），不混 `camelCase`。
 - 不新增返回字段、不改老码含义；要改就升 `/api/v2`（例外：`/match` 已追加
-  `image_confidence` / `image_score` / `text_confidence` / `text_score` / `text_type`，
+  `image_confidence` / `image_score` / `image_type` / `text_confidence` / `text_score` /
+  `text_type`，
   均为纯新增，既有字段含义不变）
 
 ## 六、现状提醒

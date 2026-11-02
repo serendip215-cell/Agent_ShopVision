@@ -603,6 +603,20 @@
             ],
             "title": "Dimension",
             "description": "向量维度"
+          },
+          "category_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Category Counts",
+            "description": "各类索引条数（构建时快照）"
+          },
+          "total_items": {
+            "type": "integer",
+            "title": "Total Items",
+            "description": "索引总条数",
+            "default": 0
           }
         },
         "type": "object",
@@ -749,6 +763,66 @@
             ],
             "title": "Text Category",
             "description": "文本塔判出的类别"
+          },
+          "image_confidence": {
+            "type": "number",
+            "title": "Image Confidence",
+            "description": "图像塔对判出类别的置信度（9 类最高分 softmax）",
+            "default": 0.0
+          },
+          "image_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Score",
+            "description": "图像塔该类别原始相似度"
+          },
+          "image_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Type",
+            "description": "图像塔细分类：图像判出类别内最相似商品的 type"
+          },
+          "text_confidence": {
+            "type": "number",
+            "title": "Text Confidence",
+            "description": "文本塔对判出类别的置信度（9 类最高分 softmax）",
+            "default": 0.0
+          },
+          "text_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Score",
+            "description": "文本塔该类别原始相似度"
+          },
+          "text_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Type",
+            "description": "文本塔细分类：同类命中里排最前的那条商品的 type"
           },
           "items": {
             "items": {

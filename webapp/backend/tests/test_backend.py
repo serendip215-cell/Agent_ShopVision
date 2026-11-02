@@ -54,9 +54,17 @@ def _build_index(root: Path) -> IndexStore:
         np.save(folder / "image_embeddings.npy", vectors)
         with (folder / "items.csv").open("w", encoding="utf-8", newline="") as handle:
             writer = csv.writer(handle)
-            writer.writerow(["vector_id", "item_name", "product_type", "text"])
+            writer.writerow(["vector_id", "item_name", "product_type", "type", "text"])
             for i in range(ITEMS_PER_CATEGORY):
-                writer.writerow([i, f"{category}商品{i}", category, f"{category} 的描述 {i}"])
+                writer.writerow(
+                    [
+                        i,
+                        f"{category}商品{i}",
+                        category,
+                        f"{category}细分类{i}",
+                        f"{category} 的描述 {i}",
+                    ]
+                )
         registry["categories"][category] = {
             "items": ITEMS_PER_CATEGORY,
             "dimension": DIM,
@@ -86,6 +94,11 @@ class IndexStoreTest(unittest.TestCase):
     def test_loads_registry(self) -> None:
         self.assertEqual(self.store.categories, sorted(CATEGORIES))
         self.assertEqual(self.store.dimension, DIM)
+
+    def test_summary_reports_counts_from_registry(self) -> None:
+        summary = self.store.summary()
+        self.assertEqual(summary["category_counts"], {c: ITEMS_PER_CATEGORY for c in CATEGORIES})
+        self.assertEqual(summary["total_items"], ITEMS_PER_CATEGORY * len(CATEGORIES))
 
     def test_exact_vector_hits_its_own_item(self) -> None:
         embeddings = np.load(Path(self.tmp.name) / "甲" / "image_embeddings.npy")
@@ -160,6 +173,8 @@ class ServiceTest(unittest.TestCase):
         self.assertIsInstance(result["match"], bool)
         self.assertIn(result["image_category"], CATEGORIES)
         self.assertIn(result["text_category"], CATEGORIES)
+        # 图像塔细分类来自判出类别内最相似商品的 type
+        self.assertTrue(str(result["image_type"]).startswith(result["image_category"]))
 
 
 class ApiTest(unittest.TestCase):
@@ -186,6 +201,10 @@ class ApiTest(unittest.TestCase):
         body = response.json()
         self.assertEqual(body["code"], 0)
         self.assertFalse(body["result"]["model_loaded"])
+        self.assertEqual(body["result"]["total_items"], ITEMS_PER_CATEGORY * len(CATEGORIES))
+        self.assertEqual(
+            body["result"]["category_counts"], {c: ITEMS_PER_CATEGORY for c in CATEGORIES}
+        )
 
     def test_image_endpoint_accepts_png(self) -> None:
         response = self.client.post(
@@ -332,6 +351,26 @@ class AsyncTaskApiTest(unittest.TestCase):
         body = self.client.get("/api/v1/tasks/not-a-real-task").json()
         self.assertEqual(body["code"], 0)
         self.assertEqual(body["result"]["status"], "PENDING")
+
+    def test_single_task_business_error_is_reported_as_failure(self) -> None:
+        """任务内部把业务错误当返回值；轮询接口要还原成 FAILURE，不能回 SUCCESS + null。"""
+        from celery.result import EagerResult  # 延迟导入：只有这个用例需要
+
+        from app.api import tasks as tasks_api
+
+        task_id = "business-error-task"
+        tasks_api._EAGER_RESULTS[task_id] = EagerResult(
+            task_id,
+            {"code": int(ErrorCode.INVALID_IMAGE), "result": None, "msg": "坏图"},
+            "SUCCESS",
+        )
+        try:
+            body = self.client.get(f"/api/v1/tasks/{task_id}").json()
+        finally:
+            tasks_api._EAGER_RESULTS.pop(task_id, None)
+        self.assertEqual(body["result"]["status"], "FAILURE")
+        self.assertEqual(body["result"]["error"]["code"], int(ErrorCode.INVALID_IMAGE))
+        self.assertEqual(body["result"]["error"]["msg"], "坏图")
 
 
 class ErrorCodeTest(unittest.TestCase):

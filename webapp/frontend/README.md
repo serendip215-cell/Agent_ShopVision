@@ -11,6 +11,17 @@ npm run build                                       # 产物输出 dist/
 
 Vite 已配置 `/api` → `http://localhost:8000` 代理，前端不用改 baseURL。
 
+## 校验
+
+```bash
+npm test        # Vitest + jsdom，跑 src/__tests__ 下的单元测试
+npm run lint    # ESLint（react-hooks / react-refresh / prettier 兼容规则）
+npm run format  # Prettier，按 .prettierrc（单引号、无分号、行宽 100）
+```
+
+测试覆盖 API 错误类型、取消判定与图片校验；`src/setupTests.js` 给 jsdom 垫了
+`matchMedia` / `IntersectionObserver`。ESLint 配置见 `.eslintrc.cjs`。
+
 ## 技术栈
 
 React 19 · Vite 5 · Ant Design 5 · React Router 7 · Axios；样式为纯 CSS 设计令牌（不依赖 CSS 框架），动效全部 CSS/rAF 手写。
@@ -45,6 +56,8 @@ src/
 │   ├── AuthContext.jsx      # 管理员登录态
 │   └── WorkflowContext.jsx  # 图像分类 → 图文匹配 的图片交接
 ├── pages/                   # 上表 6 个路由页 + NotFound
+├── __tests__/               # Vitest 单元测试（api / utils）
+├── setupTests.js            # jsdom 环境垫片（matchMedia / IntersectionObserver）
 ├── styles/global.css        # 全部样式：设计令牌 + 分区注释（壳/首页/三功能页/动效）
 ├── theme/antdTheme.js       # AntD 主题 token（主色/圆角/字体对齐设计令牌）
 └── utils/                   # errors/samples/format/storage + useCountUp（计数动画，首页与图像页共用）
@@ -58,4 +71,4 @@ src/
 
 ## 当前状态
 
-后端 `SHOPVISION_MODEL_BACKEND=placeholder` 时页面正常出数，但结果无参考意义（页内挂暖色提示）；真模型产物切换见仓库根 `scripts/fetch_model_assets.py`。
+默认 `.env` 走实验三 ONNX 双塔（`SHOPVISION_MODEL_BACKEND=onnx`）；切 `placeholder` 时页面正常出数但结果无参考意义（页内挂暖色提示）。模型产物拉取见仓库根 `scripts/fetch_model_assets.py`。

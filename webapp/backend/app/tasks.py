@@ -66,11 +66,12 @@ def classify_images_batch(self: Any, entries: list[dict[str, str]]) -> dict[str,
     total = len(entries)
     items: list[dict[str, Any]] = []
     for index, entry in enumerate(entries, 1):
-        if not get_settings().celery_always_eager:
-            self.update_state(state="PROGRESS", meta={"done": index, "total": total})
         try:
             outcome = _classify_one(entry["path"])
         finally:
             Path(entry["path"]).unlink(missing_ok=True)
+        # 处理完再报进度，done 才代表“已完成”而不是“正在做第几张”
+        if not get_settings().celery_always_eager:
+            self.update_state(state="PROGRESS", meta={"done": index, "total": total})
         items.append({**outcome, "file_name": entry["name"]})
     return {"code": 0, "result": items, "msg": "ok"}

@@ -55,6 +55,8 @@
 | `result.index_dir` | 字符串 | 索引目录 |
 | `result.categories` | 字符串 的数组 | 索引里注册的类别 |
 | `result.dimension` | 整数（可为空） | 向量维度 |
+| `result.category_counts` | 对象 | 各类索引条数（构建时快照） |
+| `result.total_items` | 整数 | 索引总条数 |
 
 ### 图像分类页
 
@@ -148,6 +150,12 @@
 | `result.match` | 布尔 | 两条独立编码各自判出的类别是否一致 |
 | `result.image_category` | 字符串（可为空） | 图像塔判出的类别 |
 | `result.text_category` | 字符串（可为空） | 文本塔判出的类别 |
+| `result.image_confidence` | 小数 | 图像塔对判出类别的置信度（9 类最高分 softmax） |
+| `result.image_score` | 小数（可为空） | 图像塔该类别原始相似度 |
+| `result.image_type` | 字符串（可为空） | 图像塔细分类：图像判出类别内最相似商品的 type |
+| `result.text_confidence` | 小数 | 文本塔对判出类别的置信度（9 类最高分 softmax） |
+| `result.text_score` | 小数（可为空） | 文本塔该类别原始相似度 |
+| `result.text_type` | 字符串（可为空） | 文本塔细分类：同类命中里排最前的那条商品的 type |
 | `result.items` | 对象 的数组 | 文本检索结果，供对照 |
 | `result.items[].category` | 字符串 | 命中类别 |
 | `result.items[].similarity` | 小数 | 余弦相似度（向量已 L2 归一化，故等于点积） |

@@ -6,7 +6,7 @@ import {
   QuestionCircleOutlined,
   WarningOutlined,
 } from '@ant-design/icons'
-import { DEMO_IMAGES } from '../../constants/catalog'
+import { CATEGORIES, DEMO_IMAGES } from '../../constants/catalog'
 import { validateImageFile } from '../../utils/samples'
 
 export function ImageUploadSection({
@@ -158,7 +158,9 @@ export function ImageUploadSectionWithHeader({ eyebrow, title, description }) {
         <h1>{title}</h1>
         <p>{description}</p>
       </div>
-      <Tooltip title="模型一共识别 9 类商品，会给出最匹配结果 + 备选猜测">
+      <Tooltip
+        title={`模型一共识别 ${CATEGORIES.length} 类商品，会给出最匹配结果 + 备选猜测`}
+      >
         <button type="button" className="sv-il-help" aria-label="使用帮助">
           <QuestionCircleOutlined />
         </button>
