@@ -1,0 +1,16 @@
+{
+  "release": {
+    "repo": "serendip215-cell/Agent_ShopVision",
+    "tag": "assets-exp3-20261025",
+    "title": "实验三模型产物（双塔 ONNX）",
+    "note": "实验四后端加载的双塔 ONNX（fp32，CPU 后端必需）。由 scripts/fetch_model_assets.py 下载并校验 sha256。fp16 版本暂未上传，需要 GPU / TensorRT 后端时再补传并回填本清单。"
+  },
+  "visual_fp32.onnx": {
+    "bytes": 345157170,
+    "sha256": "30c0c0a681bc2f17f35ebbcfc0215b809f74ca06cdf69caf09d0624e8f634182"
+  },
+  "text_fp32.onnx": {
+    "bytes": 408499590,
+    "sha256": "f5c7734770299fd38b0f53c78c495bee41ddf28e2eb08c282d796773542297df"
+  }
+}
