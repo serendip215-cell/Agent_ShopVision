@@ -5,48 +5,29 @@ import {
   PictureOutlined,
   WarningOutlined,
 } from '@ant-design/icons'
-import { CATEGORIES, CATEGORY_PHOTOS, categoryStyle } from '../../constants/catalog'
+import { categoryStyle } from '../../constants/catalog'
+import { useApp } from '../../context/AppContext'
 import { ConfidenceRing } from '../common/Ui'
 import { formatScore } from '../../utils/format'
 import { resolveItemImage } from '../../utils/itemImage'
-
-function topkPercents(result) {
-  const rows = result?.topk || []
-  if (!rows.length) return []
-  const values = rows.map((row) => Math.exp(Number(row.similarity) || 0))
-  const sum = values.reduce((acc, value) => acc + value, 0) || 1
-  return rows.map((row, index) => ({
-    ...row,
-    percent: (values[index] / sum) * 100,
-  }))
-}
 
 function itemImagePath(item) {
   return resolveItemImage(item)
 }
 
-// 后端目前只返回类别级 topk；等 /image 补上商品级 items 后，这里会自动改用真实商品图
-function buildRecommendations(result, topk) {
-  const items = result?.items || []
-  if (items.length) {
-    return items.slice(0, 4).map((item) => ({
-      key: `${item.item_id || item.item_name}-${item.similarity}`,
-      label: item.item_name || '未命名商品',
-      category: item.category,
-      percent: Number(item.similarity) > 1 ? 100 : (Number(item.similarity) || 0) * 100,
-      image: itemImagePath(item),
-    }))
-  }
-  return topk.slice(0, 4).map((row) => ({
-    key: row.category,
-    label: `${row.category}·参考图`,
-    category: row.category,
-    percent: row.percent,
-    image: CATEGORY_PHOTOS[row.category],
+// 相似商品来自后端 /image 的 items（判出类别内按图向量检索），不再用类别参考图顶替
+function buildRecommendations(result) {
+  return (result?.items || []).slice(0, 4).map((item) => ({
+    key: `${item.item_id || item.item_name}-${item.similarity}`,
+    label: item.item_name || '未命名商品',
+    category: item.category,
+    percent: Math.max(0, Math.min(100, (Number(item.similarity) || 0) * 100)),
+    image: itemImagePath(item),
   }))
 }
 
 function EmptyResult() {
+  const { categories } = useApp()
   return (
     <section className="sv-il-empty sv-il-glass">
       <div className="sv-il-empty-icon">
@@ -58,20 +39,20 @@ function EmptyResult() {
         下方再推荐外形相似的商品。
       </p>
       <div className="sv-il-palette">
-        {CATEGORIES.map((category) => {
-          const style = categoryStyle(category.key)
+        {categories.map((key) => {
+          const style = categoryStyle(key)
           return (
             <span
-              key={category.key}
+              key={key}
               className="sv-il-palette-chip"
               style={{ background: style.bg, color: style.ink }}
             >
-              {category.key}
+              {key}
             </span>
           )
         })}
       </div>
-      <small className="sv-il-empty-note">模型可识别以上 9 类商品</small>
+      <small className="sv-il-empty-note">模型可识别以上 {categories.length} 类商品</small>
     </section>
   )
 }
@@ -109,8 +90,12 @@ function RecommendationCard({ item }) {
 export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCategory }) {
   if (!result) return <EmptyResult />
 
-  const topk = topkPercents(result)
-  const recommendations = buildRecommendations(result, topk)
+  // 百分比直接取后端对全部类别做 softmax 的 confidence，与置信度环同口径
+  const topk = (result?.topk || []).map((row) => ({
+    ...row,
+    percent: Math.max(0, Math.min(100, (Number(row.confidence) || 0) * 100)),
+  }))
+  const recommendations = buildRecommendations(result)
 
   return (
     <>
@@ -155,9 +140,7 @@ export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCa
       <section className="sv-il-reco sv-il-glass">
         <div className="sv-il-section-head">
           <h2>相似商品推荐</h2>
-          <span>
-            {result.items?.length ? '按与上传图的相近程度排序' : '当前为类别级参考图，等后端返回商品级结果后替换'}
-          </span>
+          <span>按与上传图的相近程度排序</span>
         </div>
         {recommendations.length > 0 ? (
           <div className="sv-il-reco-grid">
@@ -166,7 +149,7 @@ export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCa
             ))}
           </div>
         ) : (
-          <p className="sv-il-reco-empty">这张图没有可推荐的相似商品。</p>
+          <p className="sv-il-reco-empty">这张图没有检索到相似商品。</p>
         )}
       </section>
     </>

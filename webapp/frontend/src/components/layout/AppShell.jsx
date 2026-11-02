@@ -1,33 +1,25 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { Avatar, Button, Drawer, Dropdown, Tooltip } from 'antd'
+import { Button, Drawer, Tooltip } from 'antd'
 import {
   AppstoreOutlined,
   BlockOutlined,
   DashboardOutlined,
   FileSearchOutlined,
   HistoryOutlined,
-  LockOutlined,
-  LogoutOutlined,
   MenuOutlined,
   PictureOutlined,
   ReloadOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
 import { useApp } from '../../context/AppContext'
-import { useAuth } from '../../context/AuthContext'
-import { CATEGORIES } from '../../constants/catalog'
 import { ErrorNotice } from '../common/Ui'
-import LoginModal from '../auth/LoginModal'
 
-const PUBLIC_NAV = [
+const NAV = [
   { to: '/', label: '工作台', icon: <AppstoreOutlined />, end: true },
   { to: '/image', label: '图像分类', icon: <PictureOutlined /> },
   { to: '/text', label: '文本检索', icon: <FileSearchOutlined /> },
   { to: '/match', label: '图文匹配', icon: <BlockOutlined /> },
-]
-
-const ADMIN_NAV = [
   { to: '/history', label: '运行记录', icon: <HistoryOutlined /> },
   { to: '/status', label: '系统状态', icon: <DashboardOutlined /> },
 ]
@@ -113,34 +105,6 @@ function HealthPill() {
   )
 }
 
-function AccountZone() {
-  const { isAdmin, session, openLogin, logout } = useAuth()
-
-  if (!isAdmin) {
-    return (
-      <Button className="sv-login-btn" icon={<LockOutlined />} onClick={openLogin}>
-        管理员登录
-      </Button>
-    )
-  }
-
-  return (
-    <Dropdown
-      trigger={['click']}
-      menu={{
-        items: [{ key: 'logout', icon: <LogoutOutlined />, label: '退出登录', onClick: logout }],
-      }}
-    >
-      <button type="button" className="sv-account">
-        <Avatar size={30} style={{ background: '#4F46E5', fontSize: 13 }}>
-          {session?.name?.slice(0, 1) || '管'}
-        </Avatar>
-        <span className="sv-account-name">{session?.name || '管理员'}</span>
-      </button>
-    </Dropdown>
-  )
-}
-
 function NavLinks({ items, onNavigate }) {
   return (
     <>
@@ -192,7 +156,7 @@ function SystemBanner() {
 function Breadcrumb() {
   const location = useLocation()
   if (location.pathname === '/') return null
-  const current = [...PUBLIC_NAV, ...ADMIN_NAV].find(
+  const current = NAV.find(
     (item) => item.to !== '/' && location.pathname.startsWith(item.to),
   )
   if (!current) return null
@@ -208,15 +172,12 @@ function Breadcrumb() {
 export default function AppShell({ children }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
-  const { isAdmin } = useAuth()
   const { health } = useApp()
 
   useEffect(() => {
     window.scrollTo(0, 0)
     setDrawerOpen(false)
   }, [location.pathname])
-
-  const navItems = isAdmin ? [...PUBLIC_NAV, ...ADMIN_NAV] : PUBLIC_NAV
 
   return (
     <div className="sv-shell">
@@ -226,7 +187,6 @@ export default function AppShell({ children }) {
           <HeaderSearch />
           <div className="sv-topbar-side">
             <HealthPill />
-            <AccountZone />
             <Button
               className="sv-menu-btn"
               type="text"
@@ -237,8 +197,7 @@ export default function AppShell({ children }) {
           </div>
         </div>
         <nav className="sv-topnav" aria-label="主导航">
-          <NavLinks items={navItems} />
-          {isAdmin && <span className="sv-topnav-badge">管理员视图</span>}
+          <NavLinks items={NAV} />
         </nav>
       </header>
 
@@ -249,8 +208,9 @@ export default function AppShell({ children }) {
         <footer className="sv-footer">
           <span>Agent ShopVision · 实验四前后端</span>
           <span>
-            数据来源：MUGE / Amazon / 苏宁 · {health?.categories?.length ?? CATEGORIES.length}{' '}
-            类商品图文索引
+            {health?.categories?.length != null
+              ? `${health.categories.length} 类商品图文索引`
+              : '商品图文索引'}
           </span>
         </footer>
       </div>
@@ -264,11 +224,9 @@ export default function AppShell({ children }) {
         title={null}
       >
         <nav className="sv-drawer-nav" aria-label="移动端导航">
-          <NavLinks items={navItems} onNavigate={() => setDrawerOpen(false)} />
+          <NavLinks items={NAV} onNavigate={() => setDrawerOpen(false)} />
         </nav>
       </Drawer>
-
-      <LoginModal />
     </div>
   )
 }

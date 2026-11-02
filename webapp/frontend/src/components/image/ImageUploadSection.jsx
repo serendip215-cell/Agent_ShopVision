@@ -6,7 +6,8 @@ import {
   QuestionCircleOutlined,
   WarningOutlined,
 } from '@ant-design/icons'
-import { CATEGORIES, DEMO_IMAGES } from '../../constants/catalog'
+import { DEMO_IMAGES } from '../../constants/catalog'
+import { useApp } from '../../context/AppContext'
 import { validateImageFile } from '../../utils/samples'
 
 export function ImageUploadSection({
@@ -151,6 +152,7 @@ export function ImageUploadSection({
 }
 
 export function ImageUploadSectionWithHeader({ eyebrow, title, description }) {
+  const { categories } = useApp()
   return (
     <header className="sv-il-head">
       <div className="sv-il-head-copy">
@@ -159,7 +161,7 @@ export function ImageUploadSectionWithHeader({ eyebrow, title, description }) {
         <p>{description}</p>
       </div>
       <Tooltip
-        title={`模型一共识别 ${CATEGORIES.length} 类商品，会给出最匹配结果 + 备选猜测`}
+        title={`模型一共识别 ${categories.length} 类商品，会给出最匹配结果 + 备选猜测`}
       >
         <button type="button" className="sv-il-help" aria-label="使用帮助">
           <QuestionCircleOutlined />

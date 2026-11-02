@@ -12,9 +12,11 @@ export function ImageHistorySection({
     <section className="sv-il-history-block">
       <div className="sv-il-history-head">
         <div className="sv-il-history-title">
-          <h2>识别历史</h2>
+          <h2>本次会话识别历史</h2>
           <span>
-            {history.length > 0 ? `${history.length} 条记录 · 点击卡片回填结果` : '还没有识别记录'}
+            {history.length > 0
+              ? `${history.length} 条记录 · 刷新页面后清空`
+              : '还没有识别记录'}
           </span>
         </div>
         <div className="sv-il-history-tools">
