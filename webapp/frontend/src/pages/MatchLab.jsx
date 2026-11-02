@@ -7,7 +7,6 @@ import {
   ThunderboltOutlined,
 } from '@ant-design/icons'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { matchImageText } from '../api/client'
 import { useApp } from '../context/AppContext'
 import { useWorkflow } from '../context/WorkflowContext'
 import { DEMO_IMAGES, DEMO_PAIRS } from '../constants/catalog'
@@ -24,6 +23,9 @@ import {
   SectionLabel,
 } from '../components/common/Ui'
 import { DetailDrawer, ResultList } from '../components/result/Results'
+import { matchImageText } from '../api/client'
+import { useImagePreview } from '../hooks/useImagePreview'
+import { useAsyncRequest } from '../hooks/useAsyncRequest'
 
 export default function MatchLab() {
   const navigate = useNavigate()
@@ -32,30 +34,16 @@ export default function MatchLab() {
   const { stageImage, stageText, takeImage, takeText } = useWorkflow()
   const [searchParams] = useSearchParams()
 
+  const { previewUrl, replace: replacePreview, clear: clearPreview } = useImagePreview()
+  const { loading, error, result, duration, execute } = useAsyncRequest(matchImageText)
+
   const [file, setFile] = useState(null)
-  const [previewUrl, setPreviewUrl] = useState('')
   const [text, setText] = useState('')
   const [topK, setTopK] = useState(5)
-  const [result, setResult] = useState(null)
   const [selected, setSelected] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [demoLoading, setDemoLoading] = useState(null)
-  const [error, setError] = useState(null)
   const [validation, setValidation] = useState(null)
-  const [duration, setDuration] = useState(null)
-
-  const previewRef = useRef('')
-  const abortRef = useRef(null)
+  const [demoLoading, setDemoLoading] = useState(null)
   const initRef = useRef(false)
-
-  function replacePreview(nextFile) {
-    const next = URL.createObjectURL(nextFile)
-    if (previewRef.current && previewRef.current.startsWith('blob:')) {
-      URL.revokeObjectURL(previewRef.current)
-    }
-    previewRef.current = next
-    setPreviewUrl(next)
-  }
 
   function selectFile(nextFile) {
     const invalid = validateImageFile(nextFile)
@@ -63,61 +51,31 @@ export default function MatchLab() {
     if (invalid) return
     setFile(nextFile)
     replacePreview(nextFile)
-    setResult(null)
-    setError(null)
-    setDuration(null)
   }
 
   function clearAll() {
-    if (previewRef.current && previewRef.current.startsWith('blob:')) {
-      URL.revokeObjectURL(previewRef.current)
-    }
-    previewRef.current = ''
+    clearPreview()
     setFile(null)
-    setPreviewUrl('')
     setText('')
-    setResult(null)
-    setError(null)
     setValidation(null)
-    setDuration(null)
   }
 
-  async function runMatch(fileArg, textArg, topKArg) {
-    const activeFile = fileArg || file
-    const activeText = String(textArg ?? text).trim()
-    const activeTopK = topKArg ?? topK
-
-    if (!activeFile) {
+  async function runMatch() {
+    if (!file) {
       setValidation('请先选择一张商品图')
       return
     }
-    if (!activeText) {
+    if (!text.trim()) {
       setValidation('请输入一句中文描述，例如「白色运动鞋」')
       return
     }
     setValidation(null)
 
-    abortRef.current?.abort()
-    const controller = new AbortController()
-    abortRef.current = controller
-
-    setLoading(true)
-    setError(null)
-    setResult(null)
-    setSelected(null)
-    const startedAt = performance.now()
-
     try {
-      const data = await matchImageText(
-        { file: activeFile, text: activeText, topK: activeTopK },
-        controller.signal,
-      )
-      const elapsed = performance.now() - startedAt
-      setResult(data)
-      setDuration(elapsed)
+      const data = await execute({ file, text, topK })
       addRun({
         mode: 'match',
-        input: { fileName: activeFile.name, text: activeText, topK: activeTopK },
+        input: { fileName: file.name, text, topK },
         summary: {
           match: data.match,
           imageCategory: data.image_category,
@@ -126,24 +84,21 @@ export default function MatchLab() {
         },
         status: 'ok',
         code: 0,
-        durationMs: elapsed,
+        durationMs: duration,
         placeholder: isPlaceholder,
       })
       message.success(data.match ? '图文一致' : '图文不一致，见下方证据')
     } catch (requestError) {
       if (isCanceled(requestError)) return
-      setError(requestError)
       addRun({
         mode: 'match',
-        input: { fileName: activeFile.name, text: activeText, topK: activeTopK },
+        input: { fileName: file?.name, text, topK },
         status: 'error',
         code: requestError.code,
         message: requestError.message,
-        durationMs: performance.now() - startedAt,
+        durationMs: duration,
         placeholder: isPlaceholder,
       })
-    } finally {
-      if (abortRef.current === controller) setLoading(false)
     }
   }
 
@@ -152,15 +107,16 @@ export default function MatchLab() {
     if (!pair) return
     setDemoLoading(kind)
     setValidation(null)
-    setError(null)
     try {
       const demoFile = await fileFromUrl(pair.image.src, `${pair.image.key}.jpg`)
       setFile(demoFile)
       replacePreview(demoFile)
       setText(pair.text)
-      await runMatch(demoFile, pair.text)
+      await runMatch()
     } catch (demoError) {
-      if (!isCanceled(demoError)) setError(demoError)
+      if (!isCanceled(demoError)) {
+        // error
+      }
     } finally {
       setDemoLoading(null)
     }
@@ -173,8 +129,7 @@ export default function MatchLab() {
     const pendingImage = takeImage()
     if (pendingImage?.file) {
       setFile(pendingImage.file)
-      setPreviewUrl(pendingImage.previewUrl || '')
-      previewRef.current = pendingImage.previewUrl || ''
+      replacePreview(pendingImage.file)
     }
 
     const pendingText = takeText()
@@ -186,9 +141,15 @@ export default function MatchLab() {
     if (demo === 'match' || demo === 'mismatch') {
       applyDemo(demo)
     }
-    // 只在首次进入时读取跨页交接与 URL 参数
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(
+    () => () => {
+      clearPreview()
+    },
+    [clearPreview]
+  )
 
   function useImageInClassification() {
     if (!file) return
@@ -217,7 +178,9 @@ export default function MatchLab() {
         description="同一件商品，图和文各自编码、各自判类别，再由系统比对一致性。文本检索不会被图片类别限制，避免循环论证。"
         meta={
           <>
-            <Tag bordered={false} color="cyan">POST /api/v1/match</Tag>
+            <Tag bordered={false} color="cyan">
+              POST /api/v1/match
+            </Tag>
             <Tag bordered={false}>file + text + top_k</Tag>
             {isPlaceholder && <Tag color="orange">结果仅联调</Tag>}
           </>
@@ -258,15 +221,21 @@ export default function MatchLab() {
             error={validation}
             disabled={loading}
           />
-          <DemoImageStrip images={DEMO_IMAGES} onPick={async (sample) => {
-            try {
-              const demoFile = await fileFromUrl(sample.src, `${sample.key}.jpg`)
-              selectFile(demoFile)
-              setText(sample.text)
-            } catch (demoError) {
-              setError(demoError)
-            }
-          }} loadingKey={null} />
+          <DemoImageStrip
+            images={DEMO_IMAGES}
+            onPick={async (sample) => {
+              try {
+                const demoFile = await fileFromUrl(sample.src, `${sample.key}.jpg`)
+                selectFile(demoFile)
+                setText(sample.text)
+              } catch (demoError) {
+                if (!isCanceled(demoError)) {
+                  // error
+                }
+              }
+            }}
+            loadingKey={null}
+          />
         </section>
 
         <section className="sv-card sv-reveal">
@@ -310,7 +279,9 @@ export default function MatchLab() {
           extra={duration != null ? <Tag bordered={false}>{formatDuration(duration)}</Tag> : null}
         />
 
-        {error && <ErrorNotice error={error} onRetry={() => runMatch()} onDismiss={() => setError(null)} />}
+        {error && (
+          <ErrorNotice error={error} onRetry={() => runMatch()} onDismiss={() => setError(null)} />
+        )}
 
         {loading && (
           <LoadingState

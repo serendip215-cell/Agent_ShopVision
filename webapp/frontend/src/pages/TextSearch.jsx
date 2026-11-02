@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { App as AntApp, Button, Tag } from 'antd'
 import { FileSearchOutlined, SwapOutlined } from '@ant-design/icons'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { searchText } from '../api/client'
 import { useApp } from '../context/AppContext'
 import { useWorkflow } from '../context/WorkflowContext'
@@ -22,29 +22,27 @@ import {
   SectionLabel,
 } from '../components/common/Ui'
 import { DetailDrawer, ResultList } from '../components/result/Results'
+import { useAsyncRequest } from '../hooks/useAsyncRequest'
+import { useQuerySync } from '../hooks/useQuerySync'
 
 export default function TextSearch() {
   const navigate = useNavigate()
   const { message } = AntApp.useApp()
   const { addRun, isPlaceholder, categories } = useApp()
   const { stageText } = useWorkflow()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const { sync, get, searchParams } = useQuerySync(['q', 'category', 'top_k'])
 
-  const initialQuery = searchParams.get('q') || ''
-  const initialCategory = searchParams.get('category') || ''
-  const initialTopK = Math.min(50, Math.max(1, Number(searchParams.get('top_k')) || 5))
+  const initialQuery = get('q') || ''
+  const initialCategory = get('category') || ''
+  const initialTopK = Math.min(50, Math.max(1, Number(get('top_k')) || 5))
 
   const [query, setQuery] = useState(initialQuery)
   const [category, setCategory] = useState(initialCategory)
   const [topK, setTopK] = useState(initialTopK)
-  const [result, setResult] = useState(null)
   const [selected, setSelected] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
   const [validation, setValidation] = useState(null)
-  const [duration, setDuration] = useState(null)
 
-  const abortRef = useRef(null)
+  const { loading, error, result, duration, execute } = useAsyncRequest(searchText)
   const initialRunRef = useRef(false)
 
   async function runSearch(options = {}) {
@@ -59,29 +57,11 @@ export default function TextSearch() {
     setValidation(null)
 
     if (options.updateUrl !== false) {
-      const nextParams = { q: nextQuery, top_k: String(nextTopK) }
-      if (nextCategory) nextParams.category = nextCategory
-      setSearchParams(nextParams, { replace: true })
+      sync({ q: nextQuery, category: nextCategory, top_k: nextTopK }, true)
     }
 
-    abortRef.current?.abort()
-    const controller = new AbortController()
-    abortRef.current = controller
-
-    setLoading(true)
-    setError(null)
-    setResult(null)
-    setSelected(null)
-    const startedAt = performance.now()
-
     try {
-      const data = await searchText(
-        { query: nextQuery, topK: nextTopK, category: nextCategory },
-        controller.signal,
-      )
-      const elapsed = performance.now() - startedAt
-      setResult(data)
-      setDuration(elapsed)
+      const data = await execute({ query: nextQuery, topK: nextTopK, category: nextCategory })
       addRun({
         mode: 'text',
         input: { query: nextQuery, category: nextCategory, topK: nextTopK },
@@ -92,23 +72,20 @@ export default function TextSearch() {
         },
         status: 'ok',
         code: 0,
-        durationMs: elapsed,
+        durationMs: duration,
         placeholder: isPlaceholder,
       })
     } catch (requestError) {
       if (isCanceled(requestError)) return
-      setError(requestError)
       addRun({
         mode: 'text',
         input: { query: nextQuery, category: nextCategory, topK: nextTopK },
         status: 'error',
         code: requestError.code,
         message: requestError.message,
-        durationMs: performance.now() - startedAt,
+        durationMs: duration,
         placeholder: isPlaceholder,
       })
-    } finally {
-      if (abortRef.current === controller) setLoading(false)
     }
   }
 
@@ -123,7 +100,6 @@ export default function TextSearch() {
         updateUrl: false,
       })
     }
-    // 只在首次进入时读取 URL 参数
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -157,7 +133,9 @@ export default function TextSearch() {
         description="一句中文描述，交给文本塔编码，在 9 类商品库中找最相似的商品条目。"
         meta={
           <>
-            <Tag bordered={false} color="cyan">POST /api/v1/text</Tag>
+            <Tag bordered={false} color="cyan">
+              POST /api/v1/text
+            </Tag>
             <Tag bordered={false}>JSON</Tag>
             <Tag bordered={false}>top_k 1–50</Tag>
             {isPlaceholder && <Tag color="orange">结果仅联调</Tag>}
@@ -194,13 +172,19 @@ export default function TextSearch() {
           index="02"
           title="检索结果"
           extra={
-            result
-              ? <span className="sv-muted">{result.items?.length || 0} 条 · {formatDuration(duration)}</span>
-              : <span className="sv-muted">等待检索</span>
+            result ? (
+              <span className="sv-muted">
+                {result.items?.length || 0} 条 · {formatDuration(duration)}
+              </span>
+            ) : (
+              <span className="sv-muted">等待检索</span>
+            )
           }
         />
 
-        {error && <ErrorNotice error={error} onRetry={() => runSearch()} onDismiss={() => setError(null)} />}
+        {error && (
+          <ErrorNotice error={error} onRetry={() => runSearch()} onDismiss={() => setError(null)} />
+        )}
 
         {loading && (
           <LoadingState

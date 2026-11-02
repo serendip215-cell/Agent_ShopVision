@@ -1,0 +1,19 @@
+{
+  // 调试后端 FastAPI（F5 选 "backend: uvicorn"）。
+  // 解释器用你当前选的（Ctrl+Shift+P → Python: Select Interpreter）；
+  // 想按 .venv 跑就先 `pip install -r webapp/backend/requirements.txt`——那个 venv 目前没装 uvicorn。
+  // 没带 --reload：热重载会在改文件时换进程，断点容易掉；要热重载就 Ctrl+C 重跑。
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "backend: uvicorn",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["app.main:app", "--port", "8000"],
+      "cwd": "${workspaceFolder}/webapp/backend",
+      "justMyCode": false,
+      "console": "integratedTerminal"
+    }
+  ]
+}
