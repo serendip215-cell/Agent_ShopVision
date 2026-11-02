@@ -26,6 +26,14 @@ class Settings(BaseSettings):
     candidate_k: int = 50
     max_upload_mb: int = 10  # 上传图片大小上限，防止大文件全量读进内存
 
+    # 异步任务（Celery + Redis）。Redis 可以是云端托管，填 rediss:// 走 TLS。
+    # 只影响 /api/v1/tasks/*；三个同步接口不依赖 Redis。
+    celery_broker_url: str = "redis://localhost:6379/0"
+    celery_result_backend: str = "redis://localhost:6379/1"
+    celery_always_eager: bool = False  # 测试用：任务同步执行，不需要 Redis
+    celery_result_expires: int = 3600  # 任务结果保留秒数
+    async_batch_max_files: int = 12  # 单次批量任务的文件数上限
+
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 
     def repo_path(self, value: str) -> Path:

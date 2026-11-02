@@ -111,3 +111,42 @@ class TextResponse(ApiResponse):
 
 class MatchResponse(ApiResponse):
     result: MatchResult | None = None
+
+
+# ---------- 异步任务（Celery + Redis）：提交与轮询 ----------
+
+
+class TaskSubmitResult(BaseModel):
+    task_id: str = Field(description="任务 ID，用于轮询 GET /api/v1/tasks/{task_id}")
+    status: str = Field(description="提交后的初始状态，通常是 PENDING")
+    total: int | None = Field(default=None, description="批量任务的文件数；单张任务为 null")
+
+
+class TaskProgress(BaseModel):
+    done: int = Field(description="已完成数")
+    total: int = Field(description="总数")
+
+
+class TaskError(BaseModel):
+    code: int = Field(description="业务错误码，见错误码表")
+    msg: str = Field(description="面向用户的提示")
+
+
+class TaskStatusResult(BaseModel):
+    task_id: str = Field(description="任务 ID")
+    status: str = Field(description="PENDING / PROGRESS / SUCCESS / FAILURE")
+    progress: TaskProgress | None = Field(default=None, description="PROGRESS 时的进度")
+    result: Any = Field(
+        default=None,
+        description="SUCCESS 时的业务结果：单张任务为 ImageResult；"
+        "批量任务为逐张 [{file_name, code, result, msg}] 列表",
+    )
+    error: TaskError | None = Field(default=None, description="FAILURE 时的错误")
+
+
+class TaskSubmitResponse(ApiResponse):
+    result: TaskSubmitResult | None = None
+
+
+class TaskStatusResponse(ApiResponse):
+    result: TaskStatusResult | None = None

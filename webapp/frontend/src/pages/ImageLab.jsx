@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { App as AntApp } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
@@ -7,10 +7,21 @@ import { fileFromUrl, validateImageFile } from '../utils/samples'
 import { isCanceled } from '../utils/errors'
 import { useImagePreview } from '../hooks/useImagePreview'
 import { useAsyncRequest } from '../hooks/useAsyncRequest'
-import { classifyImage } from '../api/client'
+import {
+  classifyImage,
+  enqueueBatchTask,
+  enqueueImageTask,
+  waitForTask,
+} from '../api/client'
 import { ImageUploadSectionWithHeader, ImageUploadSection } from '../components/image/ImageUploadSection'
 import { ImageResultsSection, ImageErrorNotice } from '../components/image/ImageResultsSection'
 import { ImageHistorySection } from '../components/image/ImageHistorySection'
+
+const BATCH_MAX = 12
+// 大图走异步任务（Celery）：同步接口容易撞 30s 超时，也挡住 worker 处理其他请求
+const LARGE_IMAGE_BYTES = 2 * 1024 * 1024
+// 历史卡片持有 ObjectURL，数量封顶，超出的连同 URL 一起回收
+const HISTORY_MAX = 50
 
 export default function ImageLab() {
   const navigate = useNavigate()
@@ -18,13 +29,38 @@ export default function ImageLab() {
   const { addRun, isPlaceholder } = useApp()
   const { stageImage, takeImage } = useWorkflow()
 
-  const { previewUrl, replace: replacePreview, clear: clearPreview } = useImagePreview()
-  const { loading, error, result, duration, execute } = useAsyncRequest(classifyImage)
+  const {
+    previewUrl,
+    replace: replacePreview,
+    create: createThumb,
+    clear: clearPreview,
+    release,
+    releaseAll,
+  } = useImagePreview()
+
+  // 大图/批量都走异步任务，progress 给上传区显示“第几张”
+  const [taskProgress, setTaskProgress] = useState(null)
+  const [batch, setBatch] = useState(null)
+  const batchAbortRef = useRef(null)
+
+  const classify = useCallback(async (inputFile, signal) => {
+    if (inputFile.size <= LARGE_IMAGE_BYTES) {
+      return classifyImage(inputFile, signal)
+    }
+    setTaskProgress({ done: 0, total: 1 })
+    try {
+      const submit = await enqueueImageTask(inputFile, signal)
+      return await waitForTask(submit.task_id, { signal, onProgress: setTaskProgress })
+    } finally {
+      if (!signal.aborted) setTaskProgress(null)
+    }
+  }, [])
+
+  const { loading, error, result, duration, execute, abort, setResult } = useAsyncRequest(classify)
 
   const [file, setFile] = useState(null)
   const [validation, setValidation] = useState(null)
   const [history, setHistory] = useState([])
-  const [batch, setBatch] = useState(null)
   const batchInputRef = useRef(null)
   const initRef = useRef(false)
 
@@ -43,9 +79,11 @@ export default function ImageLab() {
 
   useEffect(
     () => () => {
-      clearPreview()
+      abort()
+      batchAbortRef.current?.abort()
+      releaseAll()
     },
-    [clearPreview]
+    [abort, releaseAll]
   )
 
   function selectFile(nextFile) {
@@ -72,7 +110,11 @@ export default function ImageLab() {
       category: data.category,
       confidence: data.confidence,
     }
-    setHistory((prev) => [entry, ...prev])
+    setHistory((prev) => {
+      const next = [entry, ...prev]
+      next.slice(HISTORY_MAX).forEach((old) => release(old.thumb))
+      return next.slice(0, HISTORY_MAX)
+    })
     return entry
   }
 
@@ -86,7 +128,7 @@ export default function ImageLab() {
     setValidation(null)
     try {
       const data = await execute(activeFile)
-      rememberRun(activeFile.name, activeFile, previewUrl, data)
+      rememberRun(activeFile.name, activeFile, createThumb(activeFile), data)
       addRun({
         mode: 'image',
         input: { fileName: activeFile.name, size: activeFile.size },
@@ -131,24 +173,80 @@ export default function ImageLab() {
   }
 
   async function runBatch(fileList) {
-    const list = [...fileList].filter(Boolean).slice(0, 12)
-    if (!list.length) return
-
-    let index = 0
-    for (const batchFile of list) {
-      index += 1
-      const invalid = validateImageFile(batchFile)
-      if (invalid) {
-        setValidation(`「${batchFile.name}」${invalid}`)
-        continue
-      }
-      setBatch({ index, total: list.length })
-      replacePreview(batchFile)
-      setFile(batchFile)
-      // eslint-disable-next-line no-await-in-loop
-      await analyze(batchFile)
+    const list = [...fileList].filter((item) => !validateImageFile(item)).slice(0, BATCH_MAX)
+    if (!list.length) {
+      setValidation('没有可识别的图片：仅支持 PNG / JPG / WEBP，单张 ≤ 10MB')
+      return
     }
-    setBatch(null)
+
+    setValidation(null)
+    batchAbortRef.current?.abort()
+    const controller = new AbortController()
+    batchAbortRef.current = controller
+
+    setBatch({ done: 0, total: list.length })
+    try {
+      const submit = await enqueueBatchTask(list, controller.signal)
+      const items = await waitForTask(submit.task_id, {
+        signal: controller.signal,
+        onProgress: (progress) => setBatch(progress),
+      })
+
+      const entries = []
+      let lastGood = null
+      items.forEach((item) => {
+        const source = list.find((item2) => item2.name === item.file_name) || list[0]
+        if (item.code !== 0 || !item.result) {
+          addRun({
+            mode: 'image',
+            input: { fileName: item.file_name },
+            status: 'error',
+            code: item.code,
+            message: item.msg,
+            placeholder: isPlaceholder,
+          })
+          return
+        }
+        const data = item.result
+        const entry = rememberRun(item.file_name, source, createThumb(source), data)
+        entries.push(entry)
+        lastGood = { source, data }
+        addRun({
+          mode: 'image',
+          input: { fileName: item.file_name, size: source.size },
+          summary: {
+            category: data.category,
+            confidence: data.confidence,
+            score: data.score,
+            topk: data.topk,
+          },
+          status: 'ok',
+          code: 0,
+          placeholder: isPlaceholder,
+        })
+      })
+
+      if (lastGood) {
+        replacePreview(lastGood.source)
+        setFile(lastGood.source)
+        setResult(lastGood.data)
+      }
+      const failed = items.length - entries.length
+      message.success(
+        failed
+          ? `批量识别完成：成功 ${entries.length} 张，失败 ${failed} 张`
+          : `批量识别完成：${entries.length} 张`
+      )
+    } catch (batchError) {
+      if (!isCanceled(batchError)) {
+        setValidation(`批量识别失败：${batchError.message}`)
+      }
+    } finally {
+      if (batchAbortRef.current === controller) {
+        batchAbortRef.current = null
+        setBatch(null)
+      }
+    }
   }
 
   function reviewHistory(entry) {
@@ -179,13 +277,14 @@ export default function ImageLab() {
       <ImageUploadSection
         file={file}
         previewUrl={previewUrl}
-        loading={loading}
-        batch={batch}
+        loading={loading || !!batch}
+        progress={taskProgress || batch}
         validation={validation}
         onSelect={selectFile}
-        onClear={clearAll}
         onLoadSample={loadSample}
+        onAnalyze={() => analyze()}
         onBatchClick={() => batchInputRef.current?.click()}
+        onBatchFiles={runBatch}
         batchInputRef={batchInputRef}
       />
 

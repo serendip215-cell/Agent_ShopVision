@@ -8,6 +8,10 @@ pillow>=10.0
 python-multipart>=0.0.9
 httpx>=0.27            # 仅测试用（fastapi TestClient 依赖）
 
+# 异步任务（/api/v1/tasks/*）：Celery + Redis broker/result backend。
+# Redis 可用云端托管，broker URL 走 SHOPVISION_CELERY_BROKER_URL（TLS 用 rediss://）。
+celery[redis]>=5.4,<6
+
 # 接真模型（SHOPVISION_MODEL_BACKEND=onnx）再加：
 # onnxruntime>=1.18
 # Chinese-CLIP：克隆官方仓库后安装（提供 cn_clip 的 tokenize / image_transform）

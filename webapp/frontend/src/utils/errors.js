@@ -43,6 +43,10 @@ const ERROR_COPY = {
     title: '请求超时',
     hint: '图片可能过大或模型繁忙，请压缩图片后重试。',
   },
+  TASK_TIMEOUT: {
+    title: '异步任务超时',
+    hint: '请确认后端已启动 Celery worker：celery -A app.celery_app worker --pool=solo。',
+  },
   NETWORK: {
     title: '无法连接后端',
     hint: '请确认后端已启动：uvicorn app.main:app --reload --port 8000。',
@@ -98,5 +102,9 @@ export function describeError(error) {
 }
 
 export function isCanceled(error) {
-  return error?.code === 'ERR_CANCELED' || error?.name === 'CanceledError'
+  return (
+    error?.code === 'ERR_CANCELED' ||
+    error?.name === 'CanceledError' ||
+    error?.name === 'AbortError'
+  )
 }

@@ -19,7 +19,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from .api import v1
+from .api import tasks, v1
 from .config import REPO_ROOT, get_settings
 from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
@@ -103,6 +103,7 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app.include_router(v1.router)
+    app.include_router(tasks.router)
     _register_handlers(app)
 
     # 静态文件服务：商品原图。用独立前缀，避免和前端 public/items 演示图冲突

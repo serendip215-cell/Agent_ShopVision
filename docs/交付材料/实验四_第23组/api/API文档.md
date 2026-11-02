@@ -163,3 +163,73 @@
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
 | `result.items[].image_height` | 字符串（可为空） | 图高（CSV 原样字符串） |
 | `result.items[].image_width` | 字符串（可为空） | 图宽（CSV 原样字符串） |
+
+### 异步任务
+
+#### `POST /api/v1/tasks/image` — 提交单张图片异步分类
+
+大图或需要立即返回的场景用这个：提交后拿 task_id，再轮询 GET /api/v1/tasks/{task_id}。校验（格式/大小）仍在这里做，错误立即返回。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `file` | 文件 | 文件 | 是 | 商品图（PNG/JPG/WEBP，≤10 MB） |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.task_id` | 字符串 | 任务 ID，用于轮询 GET /api/v1/tasks/{task_id} |
+| `result.status` | 字符串 | 提交后的初始状态，通常是 PENDING |
+| `result.total` | 整数（可为空） | 批量任务的文件数；单张任务为 null |
+
+
+#### `POST /api/v1/tasks/batch` — 提交批量图片异步分类
+
+一次提交多张图，worker 串行处理并上报进度。单批上限见 SHOPVISION_ASYNC_BATCH_MAX_FILES（默认 12）。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `files` | 表单字段 | 文件 的数组 | 是 | 多张商品图 |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.task_id` | 字符串 | 任务 ID，用于轮询 GET /api/v1/tasks/{task_id} |
+| `result.status` | 字符串 | 提交后的初始状态，通常是 PENDING |
+| `result.total` | 整数（可为空） | 批量任务的文件数；单张任务为 null |
+
+
+#### `GET /api/v1/tasks/{task_id}` — 轮询任务状态
+
+前端约每 800ms 轮询一次。PENDING/PROGRESS 时继续轮询；SUCCESS 拿结果；FAILURE 看 error。注意：不存在的 task_id 也会返回 PENDING（Celery 的语义）。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `task_id` | path | 字符串 | 是 |  |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.task_id` | 字符串 | 任务 ID |
+| `result.status` | 字符串 | PENDING / PROGRESS / SUCCESS / FAILURE |
+| `result.progress` | 对象（可为空） | PROGRESS 时的进度 |
+| `result.progress.done` | 整数 | 已完成数 |
+| `result.progress.total` | 整数 | 总数 |
+| `result.result` | 对象或数组 | SUCCESS 时的业务结果：单张任务为 ImageResult；批量任务为逐张 [{file_name, code, result, msg}] 列表 |
+| `result.error` | 对象（可为空） | FAILURE 时的错误 |
+| `result.error.code` | 整数 | 业务错误码，见错误码表 |
+| `result.error.msg` | 字符串 | 面向用户的提示 |

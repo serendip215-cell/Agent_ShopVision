@@ -12,12 +12,13 @@ export function ImageUploadSection({
   file,
   previewUrl,
   loading,
-  batch,
+  progress,
   validation,
   onSelect,
-  onClear,
   onLoadSample,
+  onAnalyze,
   onBatchClick,
+  onBatchFiles,
   batchInputRef,
 }) {
   function handleDragOver(e) {
@@ -36,7 +37,9 @@ export function ImageUploadSection({
         <div className="sv-il-loading" role="status">
           <span className="sv-il-ring" aria-hidden="true" />
           <strong>
-            {batch ? `AI 正在识别第 ${batch.index} / ${batch.total} 张...` : 'AI 正在解析图片特征...'}
+            {progress && progress.total > 1
+              ? `AI 正在识别第 ${Math.min(progress.done + 1, progress.total)} / ${progress.total} 张...`
+              : 'AI 正在解析图片特征...'}
           </strong>
           <span className="sv-il-loading-note">模型正在提取图像向量，对比商品类别库</span>
         </div>
@@ -112,7 +115,7 @@ export function ImageUploadSection({
                   if (err) console.warn(`跳过「${f.name}」：${err}`)
                   return !err
                 })
-              if (validated.length) onBatchClick(validated)
+              if (validated.length) onBatchFiles(validated)
             }
           }}
         />
@@ -126,12 +129,7 @@ export function ImageUploadSection({
         ) : (
           <span className="sv-il-upload-hint">不确定选什么？点一张示例图直接看效果</span>
         )}
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => file && onSelect(file)}
-          disabled={!file}
-        >
+        <Button type="primary" size="large" onClick={onAnalyze} disabled={!file}>
           开始识别
         </Button>
       </div>

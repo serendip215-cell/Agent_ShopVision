@@ -98,6 +98,50 @@
 { "match": false, "image_category": "手机壳", "text_category": "包", "items": [ … ] }
 ```
 
+### 异步任务（批量 / 大图）— Celery + Redis
+
+同步接口每次只处理一张图、且必须在请求内算完；批量或大图改走任务队列：**先提交拿
+`task_id`，前端轮询状态，`SUCCESS` 后取结果**。三张表共用同一个统一返回体。
+
+#### POST /api/v1/tasks/image — 提交单张图片异步分类
+
+- 请求：`multipart/form-data`，字段 `file`（校验同 `/image`，坏图直接 400，不入队）
+- 返回 `result`：`{ "task_id": "…", "status": "PENDING", "total": null }`
+
+#### POST /api/v1/tasks/batch — 提交批量图片异步分类
+
+- 请求：`multipart/form-data`，字段 `files`（可重复，单批上限
+  `SHOPVISION_ASYNC_BATCH_MAX_FILES`，默认 12；任意一张不过校验整批 400）
+- 返回 `result`：`{ "task_id": "…", "status": "PENDING", "total": 5 }`
+
+#### GET /api/v1/tasks/{task_id} — 轮询任务状态
+
+- 返回 `result`：
+
+```json
+{ "task_id": "…", "status": "PROGRESS",
+  "progress": { "done": 2, "total": 5 }, "result": null, "error": null }
+```
+
+| `status` | 含义 | 前端动作 |
+|---|---|---|
+| `PENDING` | 排队中（**不存在的 task_id 也返回这个**，Celery 语义） | 继续轮询 |
+| `PROGRESS` | 执行中，`progress` 给出已完成 / 总数 | 继续轮询（约 800ms） |
+| `SUCCESS` | 完成，`result` 是业务数据 | 停止轮询，渲染结果 |
+| `FAILURE` | 失败，`error: {code, msg}` | 停止轮询，按 `msg` 提示 |
+
+- 单图任务 `SUCCESS` 时 `result` 与 `/image` 的 `result` 同形；
+- 批量任务 `SUCCESS` 时 `result` 是数组，每项在单图返回体基础上多一个 `file_name`：
+
+```json
+[ { "code": 0, "result": { "category": "鞋", "confidence": 0.42, "topk": [ … ] },
+    "msg": "ok", "file_name": "a.png" }, … ]
+```
+
+- 队列不可用（Redis 不可达 / worker 没起）时，提交接口返回 `50001`
+  「任务队列不可用：请确认 SHOPVISION_CELERY_BROKER_URL 指向的 Redis 可达」；
+  三个同步接口不受影响。
+
 ## 四、前端约定（zzx / lfsy 照此写 Axios）
 
 - 图像接口用 `FormData`（`multipart/form-data`），文本接口用 JSON。

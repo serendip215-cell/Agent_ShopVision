@@ -10,10 +10,17 @@ from __future__ import annotations
 import csv
 import io
 import json
+import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from typing import Any
+from unittest import mock
+
+# 异步任务测试跑 eager 模式：任务在进程内同步执行，CI 不需要 Redis。
+# 必须在导入 app.* 之前设置（get_settings / celery_app 都是模块级单例）。
+os.environ.setdefault("SHOPVISION_CELERY_ALWAYS_EAGER", "true")
 
 import numpy as np
 from fastapi.testclient import TestClient
@@ -253,6 +260,80 @@ class ApiTest(unittest.TestCase):
         self.assertNotIn("boom-secret", response.json()["msg"])
 
 
+class AsyncTaskApiTest(unittest.TestCase):
+    """异步任务接口：eager 模式下任务同步执行，不需要真 Redis。"""
+
+    tmp: tempfile.TemporaryDirectory
+    service: MatchService
+    client: TestClient
+    patcher: mock._patch
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.tmp = tempfile.TemporaryDirectory()
+        cls.service = MatchService(PlaceholderEncoder(dim=DIM), _build_index(Path(cls.tmp.name)))
+        app.dependency_overrides[get_match_service] = lambda: cls.service
+        # 任务在进程内跑，不经过 FastAPI 依赖注入，直接 patch 任务模块里的取服务函数
+        cls.patcher = mock.patch("app.tasks.get_match_service", lambda: cls.service)
+        cls.patcher.start()
+        cls.client = TestClient(app, raise_server_exceptions=False)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.patcher.stop()
+        app.dependency_overrides.clear()
+        cls.tmp.cleanup()
+
+    def _submit_and_poll(self, response: Any) -> dict:
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertEqual(body["code"], 0)
+        task_id = body["result"]["task_id"]
+        polled = self.client.get(f"/api/v1/tasks/{task_id}").json()
+        self.assertEqual(polled["code"], 0)
+        return polled["result"]
+
+    def test_single_image_task_completes(self) -> None:
+        response = self.client.post(
+            "/api/v1/tasks/image", files={"file": ("p.png", _png_bytes(), "image/png")}
+        )
+        polled = self._submit_and_poll(response)
+        self.assertEqual(polled["status"], "SUCCESS")
+        self.assertIn(polled["result"]["category"], CATEGORIES)
+
+    def test_batch_task_returns_one_result_per_file(self) -> None:
+        files = [
+            ("files", ("a.png", _png_bytes(), "image/png")),
+            ("files", ("b.png", _png_bytes(), "image/png")),
+        ]
+        response = self.client.post("/api/v1/tasks/batch", files=files)
+        polled = self._submit_and_poll(response)
+        self.assertEqual(polled["status"], "SUCCESS")
+        self.assertEqual(len(polled["result"]), 2)
+        self.assertEqual({item["file_name"] for item in polled["result"]}, {"a.png", "b.png"})
+        for item in polled["result"]:
+            self.assertEqual(item["code"], 0)
+            self.assertIn(item["result"]["category"], CATEGORIES)
+
+    def test_batch_rejects_invalid_image_before_enqueue(self) -> None:
+        files = [("files", ("bad.txt", b"not an image", "text/plain"))]
+        response = self.client.post("/api/v1/tasks/batch", files=files)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["code"], ErrorCode.INVALID_IMAGE)
+
+    def test_batch_rejects_too_many_files(self) -> None:
+        limit = get_settings().async_batch_max_files
+        files = [("files", (f"{i}.png", _png_bytes(), "image/png")) for i in range(limit + 1)]
+        response = self.client.post("/api/v1/tasks/batch", files=files)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["code"], ErrorCode.BAD_REQUEST)
+
+    def test_unknown_task_id_reads_as_pending(self) -> None:
+        body = self.client.get("/api/v1/tasks/not-a-real-task").json()
+        self.assertEqual(body["code"], 0)
+        self.assertEqual(body["result"]["status"], "PENDING")
+
+
 class ErrorCodeTest(unittest.TestCase):
     def test_http_status_is_derived_from_business_code(self) -> None:
         for code in ErrorCode:
@@ -291,10 +372,18 @@ class OpenApiTest(unittest.TestCase):
     def setUp(self) -> None:
         self.schema = app.openapi()
 
-    def test_declares_the_four_endpoints(self) -> None:
+    def test_declares_the_seven_endpoints(self) -> None:
         self.assertEqual(
             set(self.schema["paths"]),
-            {"/api/v1/health", "/api/v1/image", "/api/v1/text", "/api/v1/match"},
+            {
+                "/api/v1/health",
+                "/api/v1/image",
+                "/api/v1/text",
+                "/api/v1/match",
+                "/api/v1/tasks/image",
+                "/api/v1/tasks/batch",
+                "/api/v1/tasks/{task_id}",
+            },
         )
 
     def test_every_response_keeps_the_three_field_shape(self) -> None:
@@ -303,6 +392,8 @@ class OpenApiTest(unittest.TestCase):
             ("ImageResponse", "ImageResult"),
             ("TextResponse", "TextResult"),
             ("MatchResponse", "MatchResult"),
+            ("TaskSubmitResponse", "TaskSubmitResult"),
+            ("TaskStatusResponse", "TaskStatusResult"),
         ]:
             props = self.schema["components"]["schemas"][name]["properties"]
             self.assertEqual(set(props), {"code", "result", "msg"}, name)
@@ -330,7 +421,15 @@ class ExportApiDocsTest(unittest.TestCase):
         self.markdown = render_markdown(schema, list(ErrorCode))
 
     def test_lists_every_endpoint(self) -> None:
-        for path in ("/api/v1/health", "/api/v1/image", "/api/v1/text", "/api/v1/match"):
+        for path in (
+            "/api/v1/health",
+            "/api/v1/image",
+            "/api/v1/text",
+            "/api/v1/match",
+            "/api/v1/tasks/image",
+            "/api/v1/tasks/batch",
+            "/api/v1/tasks/{task_id}",
+        ):
             self.assertIn(path, self.markdown)
 
     def test_expands_result_into_concrete_fields(self) -> None:
@@ -340,6 +439,13 @@ class ExportApiDocsTest(unittest.TestCase):
 
     def test_upload_field_is_marked_as_file(self) -> None:
         self.assertIn("| `file` | 文件 | 文件 | 是 |", self.markdown)
+
+    def test_nested_objects_use_dot_paths_not_array_suffix(self) -> None:
+        # progress / error 是对象，文档里必须写成 result.progress.done
+        for field in ("result.progress.done", "result.error.code"):
+            self.assertIn(f"`{field}`", self.markdown)
+        self.assertNotIn("result.progress[]", self.markdown)
+        self.assertNotIn("result.error[]", self.markdown)
 
     def test_carries_the_error_code_table(self) -> None:
         for code in (ErrorCode.FILE_TOO_LARGE, ErrorCode.DIM_MISMATCH):

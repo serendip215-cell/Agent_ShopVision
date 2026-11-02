@@ -30,8 +30,8 @@
 **能用**：传图出类别并给相似商品；中文查询出商品；图文比对出是否一致；错得明明白白有中文提示；
 `/docs` 能看接口文档；三浏览器打开正常、手机屏不塌。
 
-**不做**（明确划出去，报告里如实写）：登录注册、下单、数据库持久化、批量异步（Celery 是可选加分项，
-不排进主线）、模型训练（那是实验三的事）。
+**不做**（明确划出去，报告里如实写）：登录注册、下单、数据库持久化、模型训练（那是实验三的事）。
+批量 / 大图异步走 Celery + Redis，属于加分项，已经做了（见 §二.5），Redis 可以用云端免费层。
 
 ### 4. 怎么实现的（数据流）
 
@@ -64,12 +64,11 @@ services/matching.py  MatchService   业务编排
 
 | 项 | 状态 |
 |---|---|
-| **后端** | ✅ 可跑。`backend/app/` 分层完成，占位模式端到端通，22 项自检通过 |
-| **前端** | ❌ **未开始**。`frontend/` 只有占位 README |
-| 模型产物（双塔 ONNX） | ⏸ 不在仓库，待训练机上传，见 [`实验四模型产物上传说明.md`](../docs/流程与交接/实验四模型产物上传说明.md) |
+| **后端** | ✅ 可跑。`backend/app/` 分层完成，同步三接口 + 异步任务（Celery）均已自检通过 |
+| **前端** | ✅ 三页已实现（React 19 + Antd），dev 代理 `/api`、`/item-images` 到后端 |
+| 模型产物（双塔 ONNX） | ✅ 已拉取到本地（`scripts/fetch_model_assets.py` 从 GitHub Release 下载并校验 sha256），`.env` 切 `onnx` 即用 |
 
-**先跑后端 + 占位编码器，模型后接。** 编码器是可替换接缝，`SHOPVISION_MODEL_BACKEND`
-一行配置切换；接口形状不变，前端将来照 [`API约定.md`](API约定.md) 写即可。
+编码器是可替换接缝，`SHOPVISION_MODEL_BACKEND` 一行配置切换占位 / ONNX；接口形状不变。
 
 ## 二、跑起来
 
@@ -86,7 +85,8 @@ py -3 -m venv .venv                 # 建虚拟环境（.venv 已在 .gitignore 
 pip install -r requirements.txt
 ```
 
-> 依赖：fastapi / uvicorn / pydantic(-settings) / numpy / pillow / python-multipart（+ httpx 仅测试用）。
+> 依赖：fastapi / uvicorn / pydantic(-settings) / numpy / pillow / python-multipart（+ httpx 仅测试用）
+> / celery + redis（异步任务，见 §二.5）。
 > 接真 ONNX 才需要 `onnxruntime` 与 Chinese-CLIP，见 `requirements.txt` 注释。
 > 规范工具单独装：`pip install black ruff mypy`（不在运行依赖里，CI 与本地各自装）。
 
@@ -130,6 +130,42 @@ mypy .                              # 类型   可选依赖缺装不算错（已
 > CI：改动 `webapp/**` 推送或提 PR 时，GitHub Actions 自动跑这套
 > （[`.github/workflows/backend-tests.yml`](../.github/workflows/backend-tests.yml)）。
 
+### 5. 异步任务（批量 / 大图）——Celery + Redis
+
+**三个同步接口不依赖 Redis，上面几步跑起来就能用。** 只有批量识别和 >2 MB 大图走任务队列，
+需要额外起一个 worker（Redis 可以云端托管，不必本机装）：
+
+1. **Redis 用组内共享的那台**：`1.95.164.146:4141`（Redis 7.0.15，16 个 DB），地址已经写在
+   `.env.example` 里，`copy .env.example .env` 后直接可用；要换自己的就改这两行。
+   云端 TLS 用 `rediss://` 前缀；队列用 `/0`，结果用 `/1`。
+
+   ```env
+   SHOPVISION_CELERY_BROKER_URL=redis://default:<密码>@1.95.164.146:4141/0
+   SHOPVISION_CELERY_RESULT_BACKEND=redis://default:<密码>@1.95.164.146:4141/1
+   ```
+
+2. **另开一个终端起 worker**（在 `webapp\backend` 下；Windows 没有 prefork，必须 `--pool=solo`）：
+
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   celery -A app.celery_app worker --loglevel=info --pool=solo
+   ```
+
+3. **前端自动用**：图像分类页「批量测试」选多张（≤12 张），或单张 >2 MB，前端会先
+   `POST /api/v1/tasks/{image|batch}` 拿 `task_id`，再按 800 ms 轮询 `GET /api/v1/tasks/{task_id}`，
+   显示「第几张 / 共几张」，完成后把每张结果填回历史卡片。
+
+| 环境变量 | 默认 | 作用 |
+|---|---|---|
+| `SHOPVISION_CELERY_BROKER_URL` | `redis://localhost:6379/0` | 任务队列地址 |
+| `SHOPVISION_CELERY_RESULT_BACKEND` | `redis://localhost:6379/1` | 结果存储（与队列分库） |
+| `SHOPVISION_CELERY_RESULT_EXPIRES` | `3600` | 结果保留秒数 |
+| `SHOPVISION_ASYNC_BATCH_MAX_FILES` | `12` | 单批上限，与前端一致 |
+| `SHOPVISION_CELERY_ALWAYS_EAGER` | `false` | 设 `true` 时任务在进程内同步执行（CI / 无 Redis 冒烟） |
+
+> Redis 不可达时**只有异步提交接口**返回 `50001` 并提示检查 broker 地址，
+> 同步接口照常工作，页面不会整体挂掉。
+
 ## 三、接口与调用
 
 基址 `http://localhost:8000`，前缀 `/api/v1`；返回体统一 `{code, result, msg}`，
@@ -141,6 +177,12 @@ mypy .                              # 类型   可选依赖缺装不算错（已
 | POST | `/api/v1/image` | 图像分类 | `multipart/form-data`：`file` |
 | POST | `/api/v1/text` | 文本检索 | `application/json`：`{query, top_k?, category?}` |
 | POST | `/api/v1/match` | 图文匹配 | `multipart/form-data`：`file` + `text` + `top_k?` |
+| POST | `/api/v1/tasks/image` | 提交单张异步分类（大图） | `multipart/form-data`：`file` → `{task_id}` |
+| POST | `/api/v1/tasks/batch` | 提交批量异步分类 | `multipart/form-data`：`files`（≤12）→ `{task_id}` |
+| GET | `/api/v1/tasks/{task_id}` | 轮询任务状态 | — |
+
+异步三个接口的 `status` 流转、批量结果里多出的 `file_name`、队列不可用时的 `50001`，
+见 [`API约定.md`](API约定.md)「异步任务」一节。
 
 ### 接口文档（FastAPI 内置，不用装插件）
 
@@ -178,7 +220,7 @@ summary、description、参数说明、**返回值结构**与可能的错误码�
 
 **C. 拿去接前端 / 导工具**
 
-Postman **Import → File** 选中 `openapi.json`，四个请求（含文件上传字段）自动建好；
+Postman **Import → File** 选中 `openapi.json`，七个请求（含文件上传字段）自动建好；
 也可以把这份 json 直接丢给 AI，让它照着发请求。
 
 **按人分工**
@@ -243,7 +285,10 @@ app/
 ├── schemas.py         请求体、统一返回体、结果模型（后两者供 /docs 生成文档）
 ├── errors.py          错误码枚举 + 业务异常
 ├── deps.py            依赖注入：编码器 / 索引 / 服务
+├── celery_app.py      Celery 实例（broker / result backend 来自环境变量）
+├── tasks.py           Celery 任务：单图 / 批量分类（读临时文件，回报进度）
 ├── api/v1.py          路由（Controller）：只取参、校验、调服务
+├── api/tasks.py       异步任务路由：提交 → 返回 task_id，轮询 → 状态 + 结果
 └── services/
     ├── encoder.py     编码器接缝：PlaceholderEncoder / OnnxEncoder
     ├── index_store.py 数据访问：index_data_finetuned 的条目与向量
@@ -284,11 +329,12 @@ app/
 分词仍用 `cn_clip.clip.tokenize`，预处理用 `image_transform(224)`，ONNX 输出自行 L2 归一化（已在 `OnnxEncoder` 处理）。
 产物到位后只改 `.env` 路径，代码不动。**占位模式红线**：报告里不写实测推理延迟与检索指标。
 
-## 六、前端（未开始）
+## 六、前端
 
-React 19+ / Ant Design / Axios，三个页面（图像分类 / 文本分类 / 多模态匹配）一一对上三个接口。
-公共组件：导航栏、输入区（Upload / TextArea）、结果区（类别标签 + 置信度）、异常提示。
-按 [`API约定.md`](API约定.md) 写 Axios 封装；dev 环境把 `/api` 代理到 `http://localhost:8000`。
+React 19 + Ant Design v5 + Vite 5 + Axios，三页一一对上三个同步接口（大图/批量另走异步任务）。
+页面只做编排，通用逻辑抽在 `src/hooks/`：`useAsyncRequest`（loading / error / duration / abort）、
+`useImagePreview`（ObjectURL 生命周期）、`useQuerySync`（URL 参数持久化）。图像分类页再拆成
+`components/image/` 下的上传 / 结果 / 历史三块。结构与运行方式见 [`frontend/README.md`](frontend/README.md)。
 负责人：张梓萱（zzx）+ 刘凡思雨（lfsy）共同。
 
 ## 七、负责人
