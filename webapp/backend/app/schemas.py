@@ -102,10 +102,22 @@ class HealthResult(BaseModel):
     model_checkpoint: str | None = Field(default=None, description="建索引所用权重路径")
 
 
+class ItemAttributes(BaseModel):
+    """上传图的属性参考值：同类别最相似几条商品的多数投票，不是独立属性模型。"""
+
+    type: str | None = Field(default=None, description="细分类参考值")
+    color: str | None = Field(default=None, description="颜色参考值")
+    material: str | None = Field(default=None, description="材质参考值")
+
+
 class ImageResult(BaseModel):
     category: str | None = Field(description="判出的类别：全部可判类别里相似度最高的那个")
     confidence: float = Field(description="对全部可判类别最高分做 softmax 后的概率")
     score: float | None = Field(description="该类原始相似度")
+    attributes: ItemAttributes = Field(
+        default_factory=ItemAttributes,
+        description="按同类最相似商品投票得到的细分类/颜色/材质参考值，可能为空",
+    )
     topk: list[CategoryScore] = Field(description="各类最高分，降序前 3")
     items: list[MatchedItem] = Field(
         default_factory=list, description="判出类别内与上传图最相似的商品，供相似商品推荐"
@@ -204,6 +216,10 @@ class AdminItemResult(BaseModel):
     )
     suggested_category: str | None = Field(default=None, description="图像塔建议的类别")
     suggested_score: float | None = Field(default=None, description="建议类别的原始相似度")
+    suggested_attributes: ItemAttributes = Field(
+        default_factory=ItemAttributes,
+        description="按建议类别内最相似商品投票得到的细分类/颜色/材质参考值",
+    )
     topk: list[AdminTopCategory] = Field(
         default_factory=list, description="建议类别的相似度排序，最多 3 个"
     )

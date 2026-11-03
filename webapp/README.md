@@ -325,6 +325,8 @@ print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色�
 - 同一张图重复上传走 `image_sha256` 去重，返回原 `item_id`，计数不增。
 - 新类别是**检索桶**，不是模型重新训练：类别名不进模型词表，1 件商品即参与自动判类（`SHOPVISION_NEW_CATEGORY_MIN_ITEMS`）。
 - 空类别（只建类不传图）会出现在 `/health.categories`，但不参与自动判类，显式 `/text?category=` 返回空。
+- 选图建议会附带细分类/颜色/材质：取同类最相似 5 条商品投票，入库页自动预填、可修改；图像分类页也展示这组参考值。这是检索参考值，不是训练过的属性识别模型。
+- TODO：后续接入大模型或监督属性头直接识别属性，替换 `MatchService._attributes_from_hits` 即可，接口字段不变。
 
 批量导入目录（按类别建子目录，子目录名即类别；也可整目录指定一个类别）：
 

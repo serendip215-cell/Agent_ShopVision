@@ -69,6 +69,23 @@ export default function Admin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file, mode])
 
+  useEffect(() => {
+    const attrs = suggestion.result?.suggested_attributes
+    if (mode !== 'single' || !attrs) return
+    setMeta((prev) => {
+      const next = { ...prev }
+      let changed = false
+      for (const key of ['type', 'color', 'material']) {
+        const value = String(attrs[key] || '').trim()
+        if (value && !next[key].trim()) {
+          next[key] = value
+          changed = true
+        }
+      }
+      return changed ? next : prev
+    })
+  }, [suggestion.result, mode])
+
   useEffect(
     () => () => {
       abortSuggestion()
@@ -86,6 +103,11 @@ export default function Admin() {
     setFile(nextFile)
     replace(nextFile)
     setResult(null)
+    // 换图就是换商品：上一张的细分类/颜色/材质和建议结果都不能留
+    setMeta(EMPTY_META)
+    suggestion.clearResult()
+    suggestion.clearError()
+    ingest.clearResult()
     ingest.clearError()
   }
 
@@ -181,6 +203,11 @@ export default function Admin() {
   }
 
   const suggested = suggestion.result
+  const suggestedAttributes = [
+    ['细分类', suggested?.suggested_attributes?.type],
+    ['颜色', suggested?.suggested_attributes?.color],
+    ['材质', suggested?.suggested_attributes?.material],
+  ].filter(([, value]) => value)
   const trimmedCategory = category.trim()
   const isNewCategory = Boolean(trimmedCategory && !categories.includes(trimmedCategory))
   const canSubmit = Boolean(file && trimmedCategory && !isPlaceholder && !ingest.loading)
@@ -379,6 +406,15 @@ export default function Admin() {
                   </div>
                 ))}
               </div>
+              {suggestedAttributes.length > 0 && (
+                <div className="sv-admin-tip is-warn">
+                  <strong>参考值，不是模型识别</strong>：已按库里最相似的商品预填
+                  {suggestedAttributes
+                    .map(([label, value]) => `${label}「${value}」`)
+                    .join('、')}
+                  。没见过的款式可能不准，提交前请核对。
+                </div>
+              )}
             </div>
           )}
         </section>

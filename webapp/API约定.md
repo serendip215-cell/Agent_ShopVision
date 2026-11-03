@@ -79,6 +79,7 @@
 
 ```json
 { "category": "鞋", "confidence": 0.42, "score": 0.31,
+  "attributes": { "type": "女士小板鞋", "color": "白色", "material": "网面" },
   "topk": [ { "category": "鞋", "similarity": 0.31, "confidence": 0.42 },
             { "category": "包", "similarity": 0.28, "confidence": 0.33 } ],
   "items": [ { "category": "鞋", "similarity": 0.92, "item_id": "…", "item_name": "…" } ] }
@@ -86,6 +87,9 @@
 
 `topk[].confidence` 与顶层 `confidence` 同口径（对全部类别做 softmax），不是只对前 3 名归一化；
 `items` 是判出类别内与上传图最相似的商品（最多 4 条），供前端做相似商品推荐。
+
+`attributes` 不是独立属性识别模型，而是**同类最相似 4 条商品的属性投票**：细分类、颜色、材质
+各自取出现次数最多（同票按相似度总分）的值，可能为空。它适合做参考/预填，不应写成 ground truth。
 
 **图片地址口径**：静态索引条目的 `local_image_path` 指向清洗/增强后的图（`/item-images`），
 另带 `original_image_path` 指向原始商品图（`/item-originals`）。前端优先展示原图，缺字段时退回
@@ -155,6 +159,7 @@
     "created": false, "duplicate": false, "item_id": null, "category": null,
     "similarity": null,
     "suggested_category": "鞋", "suggested_score": 0.31,
+    "suggested_attributes": { "type": "女士小板鞋", "color": "白色", "material": "网面" },
     "topk": [ { "category": "鞋", "similarity": 0.31 }, { "category": "包", "similarity": 0.28 } ],
     "created_at": null, "item": null
 }, "msg": "ok" }
@@ -169,6 +174,7 @@
     "item_id": "upload_1a2b3c4d5e6f", "category": "鞋",
     "similarity": 0.92,
     "suggested_category": "鞋", "suggested_score": 0.31,
+    "suggested_attributes": { "type": "女士小板鞋", "color": "白色", "material": "网面" },
     "topk": [ … ], "created_at": "2026-11-03T06:00:00Z",
     "item": { "item_id": "upload_…", "category": "鞋", "item_name": "…",
               "local_image_path": "data/uploaded_data/鞋/images/upload_….png",
