@@ -89,7 +89,8 @@
 
 **图片地址口径**：静态索引条目的 `local_image_path` 指向清洗/增强后的图（`/item-images`），
 另带 `original_image_path` 指向原始商品图（`/item-originals`）。前端优先展示原图，缺字段时退回
-清洗图。上传入库的条目本身就是原图，只有 `local_image_path`，没有 `original_image_path`。
+清洗图。上传入库的条目本身就是原图，只有 `local_image_path`（`data/uploaded_data/...`，经
+`/item-uploads` 提供），没有 `original_image_path`。
 
 ### POST /api/v1/text — 文本检索
 
@@ -170,7 +171,7 @@
     "suggested_category": "鞋", "suggested_score": 0.31,
     "topk": [ … ], "created_at": "2026-11-03T06:00:00Z",
     "item": { "item_id": "upload_…", "category": "鞋", "item_name": "…",
-              "local_image_path": "data/processed_data_cleaning/鞋/images/upload_….png",
+              "local_image_path": "data/uploaded_data/鞋/images/upload_….png",
               "image_height": 800, "image_width": 600, "created_at": "…" }
 }, "msg": "ok" }
 ```
@@ -268,6 +269,6 @@
 以 `/health` 为准；报告里的实测推理延迟与检索指标只在 `onnx` 模式下记录。
 
 上传入库同样必须跑 `onnx`：占位模式写库会被拒绝（`50001`），避免随机向量污染真实索引。
-上传数据落 `data/webapp.db`（SQLite）与 `data/processed_data_cleaning/<类别>/images/upload_*`，
-两者都是运行产物、默认 gitignore；静态索引 `data/index_data_finetuned/` 始终保持只读。
+上传数据落 `data/webapp.db`（SQLite）与 `data/uploaded_data/<类别>/images/upload_*`，
+两者都是运行产物、默认 gitignore；静态索引 `data/index_data_finetuned/` 始终只读。
 切换 ONNX 产物后 `model_tag` 变化，旧上传库会被拒绝写入；备份并删除 `data/webapp.db` 后重新入库。

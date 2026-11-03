@@ -26,7 +26,7 @@ def get_upload_store() -> UploadStore:
     encoder = get_encoder()
     return UploadStore(
         settings.db_file,
-        settings.image_root_path,
+        settings.upload_image_root_path,
         dimension=encoder.dim,
         model_tag=encoder.model_tag,
     )

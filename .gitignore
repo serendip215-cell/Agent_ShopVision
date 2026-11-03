@@ -48,4 +48,6 @@ webapp/backend/celery-worker*.log
 
 # 增量入库的运行数据：SQLite 库、WAL 文件与上传原图，不纳入版本管理。
 /data/webapp.db*
+/data/uploaded_data/
+# 旧上传路径（2026-11-03 之前写进 cleaning 目录的历史数据）
 /data/processed_data_cleaning/*/images/upload_*

@@ -45,6 +45,24 @@ describe('resolveItemImage', () => {
     ).toBe('/item-images/包/images/a.jpg')
   })
 
+  it('上传原图走 /item-uploads，不混进 cleaning 目录', () => {
+    expect(
+      resolveItemImage({
+        item_id: 'upload_82ab83715acc',
+        local_image_path: 'data/uploaded_data/鞋/images/upload_82ab83715acc.jpg',
+      }),
+    ).toBe('/item-uploads/鞋/images/upload_82ab83715acc.jpg')
+  })
+
+  it('旧上传数据仍兼容 processed_data_cleaning 路径', () => {
+    expect(
+      resolveItemImage({
+        item_id: 'upload_old',
+        local_image_path: 'data/processed_data_cleaning/鞋/images/upload_old.jpg',
+      }),
+    ).toBe('/item-images/鞋/images/upload_old.jpg')
+  })
+
   it('兼容带前导斜杠的绝对路径', () => {
     expect(
       resolveItemImage({

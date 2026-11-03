@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { App as AntApp, AutoComplete, Button, Input, Tag } from 'antd'
+import { useEffect, useRef, useState } from 'react'
+import { App as AntApp, AutoComplete, Button, Input, Progress, Segmented, Tag } from 'antd'
 import { CameraOutlined, CloudUploadOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { ingestAdminItem, suggestAdminItem } from '../api/client'
@@ -7,6 +7,7 @@ import { useApp } from '../context/AppContext'
 import { useImagePreview } from '../hooks/useImagePreview'
 import { useAsyncRequest } from '../hooks/useAsyncRequest'
 import { validateImageFile } from '../utils/samples'
+import { isCanceled } from '../utils/errors'
 import { formatScore } from '../utils/format'
 import {
   CategoryGlyph,
@@ -40,12 +41,18 @@ export default function Admin() {
   const { categories, healthLoading, isPlaceholder, refreshHealth } = useApp()
   const { previewUrl, replace, clear, releaseAll } = useImagePreview()
 
+  const [mode, setMode] = useState('single')
   const [file, setFile] = useState(null)
   const [validation, setValidation] = useState(null)
   const [dragging, setDragging] = useState(false)
   const [category, setCategory] = useState('')
   const [meta, setMeta] = useState(EMPTY_META)
   const [result, setResult] = useState(null)
+  const [batchFiles, setBatchFiles] = useState([])
+  const [batchSkipped, setBatchSkipped] = useState(0)
+  const [batchResults, setBatchResults] = useState([])
+  const [batchRunning, setBatchRunning] = useState(false)
+  const batchAbortRef = useRef(null)
 
   const suggestion = useAsyncRequest(suggestAdminItem)
   const ingest = useAsyncRequest(ingestAdminItem)
@@ -53,19 +60,20 @@ export default function Admin() {
   const abortIngest = ingest.abort
 
   useEffect(() => {
-    if (!file || isPlaceholder) return undefined
+    if (mode !== 'single' || !file || isPlaceholder) return undefined
     suggestion.execute(file).catch(() => {
       // 错误已由 useAsyncRequest 收进 error，页面用 ErrorNotice 展示
     })
     return () => suggestion.abort()
     // 只在换图时重新建议；execute 是稳定回调
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [file])
+  }, [file, mode])
 
   useEffect(
     () => () => {
       abortSuggestion()
       abortIngest()
+      batchAbortRef.current?.abort()
       releaseAll()
     },
     [abortSuggestion, abortIngest, releaseAll]
@@ -88,10 +96,69 @@ export default function Admin() {
     setCategory('')
     setMeta(EMPTY_META)
     setResult(null)
+    setBatchFiles([])
+    setBatchSkipped(0)
+    setBatchResults([])
     suggestion.clearResult()
     suggestion.clearError()
     ingest.clearResult()
     ingest.clearError()
+  }
+
+  function changeMode(next) {
+    if (batchRunning || ingest.loading) return
+    setMode(next)
+    reset()
+  }
+
+  function selectBatchFiles(list) {
+    const picked = Array.from(list || [])
+    const valid = picked.filter((item) => !validateImageFile(item))
+    setBatchFiles(valid)
+    setBatchSkipped(picked.length - valid.length)
+    setBatchResults([])
+    batchAbortRef.current?.abort()
+    ingest.clearError()
+  }
+
+  async function submitBatch() {
+    const trimmed = category.trim()
+    if (!batchFiles.length || !trimmed || isPlaceholder || batchRunning) return
+    const controller = new AbortController()
+    batchAbortRef.current = controller
+    setBatchRunning(true)
+    setBatchResults([])
+    const rows = []
+    const createCategory = !categories.includes(trimmed)
+    try {
+      for (const current of batchFiles) {
+        if (controller.signal.aborted) break
+        try {
+          const data = await ingestAdminItem(
+            {
+              file: current,
+              category: trimmed,
+              createCategory,
+              metadata: { item_name: current.name.replace(/\.[^.]+$/, '') },
+            },
+            controller.signal
+          )
+          rows.push({
+            name: current.name,
+            status: data.duplicate ? 'duplicate' : 'created',
+            itemId: data.item_id,
+          })
+        } catch (err) {
+          if (isCanceled(err)) break
+          rows.push({ name: current.name, status: 'failed', message: err?.message })
+        }
+        setBatchResults([...rows])
+      }
+    } finally {
+      batchAbortRef.current = null
+      setBatchRunning(false)
+      refreshHealth()
+    }
   }
 
   function handleDragOver(event) {
@@ -107,14 +174,27 @@ export default function Admin() {
   function handleDrop(event) {
     event.preventDefault()
     setDragging(false)
-    const dropped = event.dataTransfer.files?.[0]
-    if (dropped) selectFile(dropped)
+    const dropped = Array.from(event.dataTransfer.files || [])
+    if (!dropped.length) return
+    if (mode === 'batch') selectBatchFiles(dropped)
+    else selectFile(dropped[0])
   }
 
   const suggested = suggestion.result
   const trimmedCategory = category.trim()
   const isNewCategory = Boolean(trimmedCategory && !categories.includes(trimmedCategory))
   const canSubmit = Boolean(file && trimmedCategory && !isPlaceholder && !ingest.loading)
+  const canSubmitBatch = Boolean(
+    batchFiles.length && trimmedCategory && !isPlaceholder && !batchRunning
+  )
+  const batchDone = batchResults.length
+  const batchCreated = batchResults.filter((row) => row.status === 'created').length
+  const batchDuplicate = batchResults.filter((row) => row.status === 'duplicate').length
+  const batchFailed = batchResults.filter((row) => row.status === 'failed').length
+  const batchTotalMb = (
+    batchFiles.reduce((sum, item) => sum + item.size, 0) /
+    1048576
+  ).toFixed(1)
 
   async function submit() {
     if (!canSubmit) return
@@ -142,15 +222,26 @@ export default function Admin() {
       <PageHeader
         eyebrow="Admin · Incremental Ingest"
         title="商品入库"
-        description="把一张商品图追加到已有类别，或新建类别后写入首条商品；入库后立即参与图像分类与文本检索。"
+        description="把商品图追加到已有类别，或新建类别后写入首条商品；单张可先看模型建议，批量可一次选多张，入库后立即参与图像分类与文本检索。"
         meta={<Tag bordered={false}>POST /api/v1/admin/items</Tag>}
         actions={
-          <Button
-            icon={<ReloadOutlined spin={healthLoading} />}
-            onClick={refreshHealth}
-          >
-            刷新索引
-          </Button>
+          <div className="sv-admin-mode">
+            <Segmented
+              value={mode}
+              onChange={changeMode}
+              disabled={batchRunning || ingest.loading}
+              options={[
+                { label: '单张入库', value: 'single' },
+                { label: '批量导入', value: 'batch' },
+              ]}
+            />
+            <Button
+              icon={<ReloadOutlined spin={healthLoading} />}
+              onClick={refreshHealth}
+            >
+              刷新索引
+            </Button>
+          </div>
         }
       />
 
@@ -168,11 +259,15 @@ export default function Admin() {
         <section className="sv-card sv-admin-upload">
           <SectionLabel
             index="01"
-            title="选择商品图"
-            extra={<span className="sv-muted">PNG / JPG / WEBP · ≤ 10MB</span>}
+            title={mode === 'batch' ? '选择商品图（可多选）' : '选择商品图'}
+            extra={
+              <span className="sv-muted">
+                PNG / JPG / WEBP · {mode === 'batch' ? '单张 ≤ 10MB' : '≤ 10MB'}
+              </span>
+            }
           />
           <label
-            className={`sv-admin-drop ${previewUrl ? 'has-file' : ''} ${
+            className={`sv-admin-drop ${mode === 'single' && previewUrl ? 'has-file' : ''} ${
               dragging ? 'is-drag' : ''
             }`}
             onDragOver={handleDragOver}
@@ -181,28 +276,68 @@ export default function Admin() {
           >
             <input
               type="file"
+              multiple={mode === 'batch'}
               accept="image/png,image/jpeg,image/webp"
+              disabled={batchRunning}
               onChange={(event) => {
-                selectFile(event.target.files?.[0])
+                const picked = Array.from(event.target.files || [])
+                if (mode === 'batch') selectBatchFiles(picked)
+                else selectFile(picked[0])
                 event.target.value = ''
               }}
             />
-            {previewUrl ? (
-              <img src={previewUrl} alt="待入库商品图预览" />
+            {mode === 'single' ? (
+              previewUrl ? (
+                <img src={previewUrl} alt="待入库商品图预览" />
+              ) : (
+                <span className="sv-admin-drop-empty">
+                  <CameraOutlined />
+                  <strong>拖拽图片到这里，或点击选择</strong>
+                  <small>选图后模型会先给出建议类别，不会自动写库</small>
+                </span>
+              )
+            ) : batchFiles.length ? (
+              <span className="sv-admin-drop-empty">
+                <CloudUploadOutlined />
+                <strong>{batchFiles.length} 张图片待入库</strong>
+                <small>
+                  共 {batchTotalMb} MB · 点击或拖拽可重新选择
+                </small>
+              </span>
             ) : (
               <span className="sv-admin-drop-empty">
-                <CameraOutlined />
-                <strong>拖拽图片到这里，或点击选择</strong>
-                <small>选图后模型会先给出建议类别，不会自动写库</small>
+                <CloudUploadOutlined />
+                <strong>拖拽多张图片到这里，或点击选择</strong>
+                <small>全部写入右侧的同一个类别；不逐张给建议</small>
               </span>
             )}
           </label>
 
+          {mode === 'batch' && batchFiles.length > 0 && (
+            <div className="sv-admin-batch-picked">
+              <span className="sv-muted">
+                已选 {batchFiles.length} 张 · 合计 {batchTotalMb} MB
+              </span>
+              <div className="sv-admin-batch-names">
+                {batchFiles.map((item, index) => (
+                  <span key={`${item.name}-${index}`} className="sv-mono">
+                    {item.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          {mode === 'batch' && batchSkipped > 0 && (
+            <div className="sv-admin-tip is-warn">
+              已跳过 {batchSkipped} 张不支持的文件：只收 PNG / JPG / WEBP，单张不超过 10 MB。
+            </div>
+          )}
+
           {validation && <div className="sv-admin-tip is-warn">{validation}</div>}
-          {suggestion.loading && (
+          {mode === 'single' && suggestion.loading && (
             <div className="sv-admin-tip">模型正在判断建议类别…</div>
           )}
-          {suggestion.error && (
+          {mode === 'single' && suggestion.error && (
             <ErrorNotice
               error={suggestion.error}
               onRetry={() => file && suggestion.execute(file).catch(() => undefined)}
@@ -210,7 +345,7 @@ export default function Admin() {
             />
           )}
 
-          {suggested && (
+          {mode === 'single' && suggested && (
             <div className="sv-admin-suggestion">
               <SectionLabel
                 index="02"
@@ -251,7 +386,7 @@ export default function Admin() {
         <section className="sv-card sv-admin-form">
           <SectionLabel
             index="03"
-            title="确认入库"
+            title={mode === 'batch' ? '确认批量入库' : '确认入库'}
             extra={<span className="sv-muted">确认前不会写库</span>}
           />
           <div className="sv-field">
@@ -264,6 +399,7 @@ export default function Admin() {
               value={category}
               options={categories.map((key) => ({ value: key, label: key }))}
               onChange={setCategory}
+              disabled={batchRunning || ingest.loading}
               placeholder="例如：鞋 / 测试类"
               filterOption={(input, option) =>
                 String(option?.value || '')
@@ -278,57 +414,84 @@ export default function Admin() {
             )}
           </div>
 
-          {META_FIELDS.map((field) => (
-            <div className="sv-field" key={field.key}>
-              <div className="sv-field-head">
-                <label htmlFor={`admin-${field.key}`}>{field.label}</label>
-              </div>
-              <Input
-                id={`admin-${field.key}`}
-                value={meta[field.key]}
-                placeholder={field.placeholder}
-                maxLength={field.key === 'item_name' ? 200 : 100}
-                onChange={(event) =>
-                  setMeta((prev) => ({ ...prev, [field.key]: event.target.value }))
-                }
-              />
+          {mode === 'batch' && (
+            <div className="sv-admin-tip">
+              批量模式按文件名写入商品标题，不逐张填元数据；所有图片写入下面这一个类别。
+              成百上千张时改用 backend/scripts/bulk_ingest.py 更快。
             </div>
-          ))}
+          )}
 
-          <div className="sv-field">
-            <div className="sv-field-head">
-              <label htmlFor="admin-description">商品文案</label>
-              <span>可选</span>
-            </div>
-            <Input.TextArea
-              id="admin-description"
-              value={meta.description}
-              rows={3}
-              maxLength={1000}
-              placeholder="例如：白色网面轻便运动鞋，适合日常通勤"
-              onChange={(event) =>
-                setMeta((prev) => ({ ...prev, description: event.target.value }))
-              }
-            />
-          </div>
+          {mode === 'single' && (
+            <>
+              {META_FIELDS.map((field) => (
+                <div className="sv-field" key={field.key}>
+                  <div className="sv-field-head">
+                    <label htmlFor={`admin-${field.key}`}>{field.label}</label>
+                  </div>
+                  <Input
+                    id={`admin-${field.key}`}
+                    value={meta[field.key]}
+                    placeholder={field.placeholder}
+                    maxLength={field.key === 'item_name' ? 200 : 100}
+                    onChange={(event) =>
+                      setMeta((prev) => ({ ...prev, [field.key]: event.target.value }))
+                    }
+                  />
+                </div>
+              ))}
+
+              <div className="sv-field">
+                <div className="sv-field-head">
+                  <label htmlFor="admin-description">商品文案</label>
+                  <span>可选</span>
+                </div>
+                <Input.TextArea
+                  id="admin-description"
+                  value={meta.description}
+                  rows={3}
+                  maxLength={1000}
+                  placeholder="例如：白色网面轻便运动鞋，适合日常通勤"
+                  onChange={(event) =>
+                    setMeta((prev) => ({ ...prev, description: event.target.value }))
+                  }
+                />
+              </div>
+            </>
+          )}
 
           <div className="sv-admin-actions">
-            <Button
-              type="primary"
-              size="large"
-              icon={<CloudUploadOutlined />}
-              loading={ingest.loading}
-              disabled={!canSubmit}
-              onClick={submit}
-            >
-              确认入库
-            </Button>
-            <Button onClick={reset} disabled={ingest.loading}>
+            {mode === 'single' ? (
+              <Button
+                type="primary"
+                size="large"
+                icon={<CloudUploadOutlined />}
+                loading={ingest.loading}
+                disabled={!canSubmit}
+                onClick={submit}
+              >
+                确认入库
+              </Button>
+            ) : (
+              <Button
+                type="primary"
+                size="large"
+                icon={<CloudUploadOutlined />}
+                loading={batchRunning}
+                disabled={!canSubmitBatch}
+                onClick={submitBatch}
+              >
+                批量入库{batchFiles.length ? `（${batchFiles.length} 张）` : ''}
+              </Button>
+            )}
+            {mode === 'batch' && batchRunning && (
+              <Button onClick={() => batchAbortRef.current?.abort()}>停止</Button>
+            )}
+            <Button onClick={reset} disabled={ingest.loading || batchRunning}>
               清空
             </Button>
           </div>
 
-          {ingest.error && (
+          {mode === 'single' && ingest.error && (
             <ErrorNotice
               error={ingest.error}
               onRetry={submit}
@@ -336,7 +499,63 @@ export default function Admin() {
             />
           )}
 
-          {result && (
+          {mode === 'batch' && (batchRunning || batchDone > 0) && (
+            <div className="sv-admin-result">
+              <Progress
+                percent={
+                  batchFiles.length
+                    ? Math.round((batchDone / batchFiles.length) * 100)
+                    : 0
+                }
+                status={batchFailed ? 'exception' : batchRunning ? 'active' : 'success'}
+                size="small"
+              />
+              <div className="sv-admin-batch-summary">
+                <span>
+                  已处理 {batchDone}/{batchFiles.length}
+                </span>
+                <span>新增 {batchCreated}</span>
+                <span>重复 {batchDuplicate}</span>
+                <span>失败 {batchFailed}</span>
+              </div>
+              <div className="sv-admin-batch-list">
+                {batchResults.map((row, index) => (
+                  <div className="sv-admin-batch-row" key={`${row.name}-${index}`}>
+                    <span className="sv-admin-batch-name sv-mono">{row.name}</span>
+                    {row.status === 'created' ? (
+                      <Tag bordered={false} color="green">新增</Tag>
+                    ) : row.status === 'duplicate' ? (
+                      <Tag bordered={false}>重复</Tag>
+                    ) : (
+                      <Tag bordered={false} color="red">失败</Tag>
+                    )}
+                    {row.itemId ? (
+                      <span className="sv-muted sv-mono">{row.itemId}</span>
+                    ) : row.message ? (
+                      <span className="sv-admin-batch-msg">{row.message}</span>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+              {!batchRunning && batchDone > 0 && (
+                <div className="sv-admin-result-actions">
+                  <Button onClick={reset}>继续导入</Button>
+                  {trimmedCategory && (
+                    <Button
+                      type="primary"
+                      onClick={() =>
+                        navigate(`/text?category=${encodeURIComponent(trimmedCategory)}`)
+                      }
+                    >
+                      去检索
+                    </Button>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {mode === 'single' && result && (
             <div className="sv-admin-result">
               <SuccessNote>
                 {result.duplicate

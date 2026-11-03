@@ -104,7 +104,8 @@ copy .env.example .env              # 默认 placeholder，开箱即用
 | 环境变量 | 默认 | 作用 |
 |---|---|---|
 | `SHOPVISION_DB_PATH` | `data/webapp.db` | 上传商品库（SQLite），运行产物，已 gitignore |
-| `SHOPVISION_IMAGE_ROOT` | `data/processed_data_cleaning` | 清洗/索引图片根目录；`/item-images` 挂这里 |
+| `SHOPVISION_IMAGE_ROOT` | `data/processed_data_cleaning` | 静态清洗图根目录；`/item-images` 挂这里 |
+| `SHOPVISION_UPLOAD_IMAGE_ROOT` | `data/uploaded_data` | 上传原图根目录；`/item-uploads` 挂这里 |
 | `SHOPVISION_RAW_IMAGE_ROOT` | `data/raw_data` | 原始商品图根目录；`/item-originals` 挂这里 |
 | `SHOPVISION_NEW_CATEGORY_MIN_ITEMS` | `1` | 新类别至少几条才参与自动判类 |
 
@@ -293,7 +294,7 @@ curl.exe -X POST http://localhost:8000/api/v1/admin/categories -H "Content-Type:
 ```
 
 > 入库需要 `SHOPVISION_MODEL_BACKEND=onnx`；占位模式会被拒绝（`50001`）。本轮无管理鉴权，只在本机演示。
-> 上传的商品图落到 `data/processed_data_cleaning/<类别>/images/`，元数据与向量落在 `data/webapp.db`。
+> 上传的商品图原样落到 `data/uploaded_data/<类别>/images/`，元数据与向量落在 `data/webapp.db`。
 
 Python 客户端：
 
@@ -315,7 +316,8 @@ print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色�
 | 落点 | 内容 |
 |---|---|
 | `data/webapp.db` | SQLite：类别、条目元数据、512 维向量、去重指纹 `image_sha256` |
-| `data/processed_data_cleaning/<类别>/images/upload_*` | 上传原图，经 `/item-images` 提供 |
+| `data/uploaded_data/<类别>/images/upload_*` | 上传原图，经 `/item-uploads` 提供 |
+| `data/processed_data_cleaning/<类别>/images/` | 静态索引的清洗图，经 `/item-images` 提供 |
 | `data/raw_data/*/images/` | 静态条目的原始商品图，经 `/item-originals` 提供给前台展示 |
 | `data/index_data_finetuned/` | 静态索引，**只读不动** |
 
@@ -323,6 +325,22 @@ print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色�
 - 同一张图重复上传走 `image_sha256` 去重，返回原 `item_id`，计数不增。
 - 新类别是**检索桶**，不是模型重新训练：类别名不进模型词表，1 件商品即参与自动判类（`SHOPVISION_NEW_CATEGORY_MIN_ITEMS`）。
 - 空类别（只建类不传图）会出现在 `/health.categories`，但不参与自动判类，显式 `/text?category=` 返回空。
+
+批量导入目录（按类别建子目录，子目录名即类别；也可整目录指定一个类别）：
+
+```bash
+cd webapp/backend
+# D:/新商品/鞋/*.jpg、D:/新商品/包/*.jpg → 两个类别
+python scripts/bulk_ingest.py D:/新商品
+
+# 整个目录都算「鞋」；新类别要显式允许
+python scripts/bulk_ingest.py D:/新商品 --category 鞋 --create-category
+
+# 类别文件夹下面还有分子目录时
+python scripts/bulk_ingest.py D:/新商品 --recursive --create-category
+```
+
+脚本复用同一套 ONNX 图像塔与 `UploadStore`：原图落盘、向量写库、按 `image_sha256` 去重，逐张打印新增/重复/失败并在结尾汇总。**导入完要重启 uvicorn**——脚本是独立进程，正在运行的后端看不到它写入的新条目。
 - `placeholder` 模式拒绝写库；切换 ONNX 产物后 `model_tag` 变化，旧库需备份删除后重建。
 - Celery worker 是独立进程，有自己那份索引缓存：同步接口立即生效，异步任务要重启 worker 才看得到新条目。
 

@@ -108,15 +108,21 @@ def create_app() -> FastAPI:
     logger.warning("管理入库接口未启用鉴权：仅限本机演示，不要暴露到公网。")
     _register_handlers(app)
 
-    # 静态文件服务：商品原图。用独立前缀，避免和前端 public/items 演示图冲突
+    # 静态清洗图：只服务 data/processed_data_cleaning 里的索引图。
     # 前端通过 /item-images/{category}/images/{file} 访问
     images_dir = settings.image_root_path
     images_dir.mkdir(parents=True, exist_ok=True)
     app.mount("/item-images", StaticFiles(directory=str(images_dir)), name="item-images")
-    logger.info(f"已挂载商品图片目录: {images_dir} -> /item-images")
+    logger.info(f"已挂载索引图片目录: {images_dir} -> /item-images")
+
+    # 上传原图单独放 upload_image_root：cleaning 是清洗产物目录，不混入用户上传原图。
+    uploads_dir = settings.upload_image_root_path
+    uploads_dir.mkdir(parents=True, exist_ok=True)
+    app.mount("/item-uploads", StaticFiles(directory=str(uploads_dir)), name="item-uploads")
+    logger.info(f"已挂载上传图片目录: {uploads_dir} -> /item-uploads")
 
     # 原始商品图（未清洗/未增强）。静态索引条目会带 original_image_path，
-    # 前台优先用它；上传条目没有这份原始文件，继续用 /item-images。
+    # 前台优先用它；上传条目的 local_image_path 指向 upload_image_root。
     raw_dir = settings.raw_image_root_path
     if raw_dir.is_dir():
         app.mount("/item-originals", StaticFiles(directory=str(raw_dir)), name="item-originals")

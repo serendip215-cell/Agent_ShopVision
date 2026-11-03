@@ -5988,6 +5988,66 @@ a {
   padding-top: 4px;
 }
 
+.sv-admin-mode {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sv-admin-batch-picked {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sv-admin-batch-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-height: 120px;
+  overflow-y: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sv-admin-batch-names > span {
+  overflow-wrap: anywhere;
+}
+
+.sv-admin-batch-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 13px;
+}
+
+.sv-admin-batch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.sv-admin-batch-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.sv-admin-batch-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sv-admin-batch-msg {
+  color: var(--warm-ink);
+  overflow-wrap: anywhere;
+}
+
 .sv-admin-result {
   display: flex;
   flex-direction: column;

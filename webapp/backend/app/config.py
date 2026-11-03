@@ -26,9 +26,11 @@ class Settings(BaseSettings):
     candidate_k: int = 50
     max_upload_mb: int = 10  # 上传图片大小上限，防止大文件全量读进内存
 
-    # 增量入库：静态索引只读，上传数据落 SQLite，图片落 image_root。
+    # 增量入库：静态索引只读，上传数据落 SQLite，上传原图单独落 upload_image_root。
+    # image_root 只服务静态清洗图；cleaning 目录不再混入上传原图。
     db_path: str = "data/webapp.db"
     image_root: str = "data/processed_data_cleaning"
+    upload_image_root: str = "data/uploaded_data"
     raw_image_root: str = "data/raw_data"  # 原始商品图，前台优先展示这份
     new_category_min_items: int = 1  # 新类别至少几条才参与自动判类
 
@@ -58,6 +60,10 @@ class Settings(BaseSettings):
     @property
     def image_root_path(self) -> Path:
         return self.repo_path(self.image_root)
+
+    @property
+    def upload_image_root_path(self) -> Path:
+        return self.repo_path(self.upload_image_root)
 
     @property
     def raw_image_root_path(self) -> Path:
