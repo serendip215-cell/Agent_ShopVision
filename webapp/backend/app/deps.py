@@ -40,6 +40,7 @@ def get_index() -> IndexStore:
         candidate_k=settings.candidate_k,
         upload_store=get_upload_store(),
         new_category_min_items=settings.new_category_min_items,
+        raw_image_root=settings.raw_image_root_path,
     )
 
 

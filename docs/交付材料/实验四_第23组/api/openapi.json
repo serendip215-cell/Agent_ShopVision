@@ -1672,7 +1672,19 @@
               }
             ],
             "title": "Local Image Path",
-            "description": "原图相对路径"
+            "description": "索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图）"
+          },
+          "original_image_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Original Image Path",
+            "description": "原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问"
           },
           "image_status": {
             "anyOf": [

@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     # 增量入库：静态索引只读，上传数据落 SQLite，图片落 image_root。
     db_path: str = "data/webapp.db"
     image_root: str = "data/processed_data_cleaning"
+    raw_image_root: str = "data/raw_data"  # 原始商品图，前台优先展示这份
     new_category_min_items: int = 1  # 新类别至少几条才参与自动判类
 
     # 异步任务（Celery + Redis）。Redis 可以是云端托管，填 rediss:// 走 TLS。
@@ -57,6 +58,10 @@ class Settings(BaseSettings):
     @property
     def image_root_path(self) -> Path:
         return self.repo_path(self.image_root)
+
+    @property
+    def raw_image_root_path(self) -> Path:
+        return self.repo_path(self.raw_image_root)
 
 
 @lru_cache(maxsize=1)

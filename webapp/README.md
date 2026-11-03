@@ -104,7 +104,8 @@ copy .env.example .env              # 默认 placeholder，开箱即用
 | 环境变量 | 默认 | 作用 |
 |---|---|---|
 | `SHOPVISION_DB_PATH` | `data/webapp.db` | 上传商品库（SQLite），运行产物，已 gitignore |
-| `SHOPVISION_IMAGE_ROOT` | `data/processed_data_cleaning` | 上传原图根目录；`/item-images` 也挂这里 |
+| `SHOPVISION_IMAGE_ROOT` | `data/processed_data_cleaning` | 清洗/索引图片根目录；`/item-images` 挂这里 |
+| `SHOPVISION_RAW_IMAGE_ROOT` | `data/raw_data` | 原始商品图根目录；`/item-originals` 挂这里 |
 | `SHOPVISION_NEW_CATEGORY_MIN_ITEMS` | `1` | 新类别至少几条才参与自动判类 |
 
 > 上传入库必须 `SHOPVISION_MODEL_BACKEND=onnx`；占位模式写库返回 `50001`，防止随机向量污染索引。
@@ -315,6 +316,7 @@ print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色�
 |---|---|
 | `data/webapp.db` | SQLite：类别、条目元数据、512 维向量、去重指纹 `image_sha256` |
 | `data/processed_data_cleaning/<类别>/images/upload_*` | 上传原图，经 `/item-images` 提供 |
+| `data/raw_data/*/images/` | 静态条目的原始商品图，经 `/item-originals` 提供给前台展示 |
 | `data/index_data_finetuned/` | 静态索引，**只读不动** |
 
 - 写库后 `IndexStore.reload(category)`，`/image`、`/text`、`/match` 无需重启即可检索到；`/health` 计数同步变化。

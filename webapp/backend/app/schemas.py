@@ -65,7 +65,13 @@ class MatchedItem(BaseModel):
     material: str | None = Field(default=None, description="材质")
     description: str | None = Field(default=None, description="商品文案（实验一清洗后）")
     type: str | None = Field(default=None, description="细分类，如「女士小板鞋」")
-    local_image_path: str | None = Field(default=None, description="原图相对路径")
+    local_image_path: str | None = Field(
+        default=None, description="索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图）"
+    )
+    original_image_path: str | None = Field(
+        default=None,
+        description="原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问",
+    )
     image_status: str | None = Field(default=None, description="图片处理状态")
     image_height: str | int | None = Field(
         default=None, description="图高（静态索引为 CSV 原样字符串，上传入库为整数）"

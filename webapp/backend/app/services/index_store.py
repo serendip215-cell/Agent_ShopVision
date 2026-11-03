@@ -23,6 +23,28 @@ if TYPE_CHECKING:
 _HIDDEN_FIELDS = {"vector_id", "text"}
 
 
+def _load_original_paths(root: Path | None) -> dict[str, str]:
+    """item_id -> 原始图片相对路径，来源是 raw_data/*/products.csv。
+
+    静态索引里的 local_image_path 指向清洗/增强后的图；前台要展示原图，
+    所以按 item_id 补一份原始路径。
+    """
+    if root is None or not root.is_dir():
+        return {}
+    mapping: dict[str, str] = {}
+    for csv_path in sorted(root.glob("*/products.csv")):
+        try:
+            with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    item_id = (row.get("item_id") or "").strip()
+                    original = (row.get("local_image_path") or "").strip()
+                    if item_id and original:
+                        mapping[item_id] = original
+        except OSError:
+            continue
+    return mapping
+
+
 @dataclass(frozen=True)
 class Hit:
     category: str
@@ -47,8 +69,10 @@ class IndexStore:
         candidate_k: int = 50,
         upload_store: "UploadStore | None" = None,
         new_category_min_items: int = 1,
+        raw_image_root: Path | None = None,
     ) -> None:
         self.index_dir = Path(index_dir)
+        self._original_paths = _load_original_paths(raw_image_root)
         registry_path = self.index_dir / "index_registry.json"
         if not registry_path.is_file():
             raise ApiError(ErrorCode.INDEX_MISSING, f"找不到索引注册表：{registry_path}")
@@ -198,6 +222,10 @@ class IndexStore:
         with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
             # 用行号而不是 CSV 里的 vector_id：search 的 key 必须与矩阵行号一致
             items = {index: dict(row) for index, row in enumerate(csv.DictReader(handle))}
+        for row in items.values():
+            original = self._original_paths.get(row.get("item_id", ""))
+            if original:
+                row["original_image_path"] = original
         embeddings_path = csv_path.parent / "image_embeddings.npy"
         if not embeddings_path.is_file():
             raise ApiError(ErrorCode.INDEX_MISSING, f"类别 {category} 缺少向量：{embeddings_path}")

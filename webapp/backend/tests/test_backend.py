@@ -61,14 +61,26 @@ def _build_index(root: Path) -> IndexStore:
         np.save(folder / "image_embeddings.npy", vectors)
         with (folder / "items.csv").open("w", encoding="utf-8", newline="") as handle:
             writer = csv.writer(handle)
-            writer.writerow(["vector_id", "item_name", "product_type", "type", "text"])
+            writer.writerow(
+                [
+                    "vector_id",
+                    "item_id",
+                    "item_name",
+                    "product_type",
+                    "type",
+                    "local_image_path",
+                    "text",
+                ]
+            )
             for i in range(ITEMS_PER_CATEGORY):
                 writer.writerow(
                     [
                         i,
+                        f"{category}_{i}",
                         f"{category}商品{i}",
                         category,
                         f"{category}细分类{i}",
+                        f"data/processed_data_cleaning/{category}/images/{category}_{i}.jpg",
                         f"{category} 的描述 {i}",
                     ]
                 )
@@ -134,6 +146,24 @@ class IndexStoreTest(unittest.TestCase):
         self.assertEqual(hits[0].vector_id, 2)
         self.assertEqual(hits[0].category, "甲")
         self.assertAlmostEqual(hits[0].score, 1.0, places=5)
+
+    def test_static_hit_carries_original_image_path(self) -> None:
+        raw_root = Path(self.tmp.name) / "raw_data"
+        domain = raw_root / "MUGE_data"
+        domain.mkdir(parents=True)
+        with (domain / "products.csv").open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.writer(handle)
+            writer.writerow(["item_id", "local_image_path"])
+            writer.writerow(["甲_2", "data/raw_data/MUGE_data/images/2.jpg"])
+        index = IndexStore(Path(self.tmp.name), candidate_k=10, raw_image_root=raw_root)
+        embeddings = np.load(Path(self.tmp.name) / "甲" / "image_embeddings.npy")
+
+        payload = index.search(embeddings[2], ["甲"], top_k=1)[0].as_dict()
+        self.assertEqual(payload["original_image_path"], "data/raw_data/MUGE_data/images/2.jpg")
+
+        # 没有原始图映射的条目不瞎编，前端会退回 local_image_path
+        other = index.search(embeddings[0], ["甲"], top_k=1)[0].as_dict()
+        self.assertNotIn("original_image_path", other)
 
     def test_result_hides_internal_fields(self) -> None:
         embeddings = np.load(Path(self.tmp.name) / "乙" / "image_embeddings.npy")

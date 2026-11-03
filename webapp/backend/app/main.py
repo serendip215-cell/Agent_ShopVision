@@ -115,6 +115,15 @@ def create_app() -> FastAPI:
     app.mount("/item-images", StaticFiles(directory=str(images_dir)), name="item-images")
     logger.info(f"已挂载商品图片目录: {images_dir} -> /item-images")
 
+    # 原始商品图（未清洗/未增强）。静态索引条目会带 original_image_path，
+    # 前台优先用它；上传条目没有这份原始文件，继续用 /item-images。
+    raw_dir = settings.raw_image_root_path
+    if raw_dir.is_dir():
+        app.mount("/item-originals", StaticFiles(directory=str(raw_dir)), name="item-originals")
+        logger.info(f"已挂载原始图片目录: {raw_dir} -> /item-originals")
+    else:
+        logger.warning(f"原始图片目录不存在：{raw_dir}，前台将退回清洗图")
+
     @app.get("/scalar", include_in_schema=False)
     def scalar_docs() -> FileResponse:
         """Scalar 版接口文档（比 Swagger UI 好看，同样能在页面上直接调）。"""

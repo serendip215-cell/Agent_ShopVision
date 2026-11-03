@@ -100,7 +100,8 @@
 | `result.items[].material` | 字符串（可为空） | 材质 |
 | `result.items[].description` | 字符串（可为空） | 商品文案（实验一清洗后） |
 | `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
-| `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
+| `result.items[].local_image_path` | 字符串（可为空） | 索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图） |
+| `result.items[].original_image_path` | 字符串（可为空） | 原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问 |
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
 | `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
 | `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
@@ -142,7 +143,8 @@
 | `result.items[].material` | 字符串（可为空） | 材质 |
 | `result.items[].description` | 字符串（可为空） | 商品文案（实验一清洗后） |
 | `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
-| `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
+| `result.items[].local_image_path` | 字符串（可为空） | 索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图） |
+| `result.items[].original_image_path` | 字符串（可为空） | 原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问 |
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
 | `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
 | `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
@@ -189,7 +191,8 @@
 | `result.items[].material` | 字符串（可为空） | 材质 |
 | `result.items[].description` | 字符串（可为空） | 商品文案（实验一清洗后） |
 | `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
-| `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
+| `result.items[].local_image_path` | 字符串（可为空） | 索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图） |
+| `result.items[].original_image_path` | 字符串（可为空） | 原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问 |
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
 | `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
 | `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |

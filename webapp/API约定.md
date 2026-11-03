@@ -87,6 +87,10 @@
 `topk[].confidence` 与顶层 `confidence` 同口径（对全部类别做 softmax），不是只对前 3 名归一化；
 `items` 是判出类别内与上传图最相似的商品（最多 4 条），供前端做相似商品推荐。
 
+**图片地址口径**：静态索引条目的 `local_image_path` 指向清洗/增强后的图（`/item-images`），
+另带 `original_image_path` 指向原始商品图（`/item-originals`）。前端优先展示原图，缺字段时退回
+清洗图。上传入库的条目本身就是原图，只有 `local_image_path`，没有 `original_image_path`。
+
 ### POST /api/v1/text — 文本检索
 
 - 请求：`application/json`
