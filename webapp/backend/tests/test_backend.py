@@ -187,6 +187,30 @@ class ServiceTest(unittest.TestCase):
         self.assertLessEqual(len(result["items"]), 3)
         self.assertEqual(result["query"], "白色运动鞋")
 
+    def test_search_text_reports_model_category_independent_of_filter(self) -> None:
+        result = self.service.search_text("白色运动鞋", top_k=3, category="甲")
+        self.assertEqual(result["category"], "甲")
+        self.assertIn(result["query_category"], CATEGORIES)
+        self.assertIsNotNone(result["query_score"])
+
+    def test_search_text_mismatched_category_returns_no_items(self) -> None:
+        model_category, _, _ = self.service.index.best_category(
+            self.service.encoder.encode_text("白色运动鞋")
+        )
+        other_category = next(c for c in CATEGORIES if c != model_category)
+        result = self.service.search_text("白色运动鞋", top_k=3, category=other_category)
+        self.assertEqual(result["category"], other_category)
+        self.assertEqual(result["query_category"], model_category)
+        self.assertEqual(result["items"], [])
+
+    def test_search_text_matching_category_returns_items(self) -> None:
+        model_category, _, _ = self.service.index.best_category(
+            self.service.encoder.encode_text("白色运动鞋")
+        )
+        result = self.service.search_text("白色运动鞋", top_k=3, category=model_category)
+        self.assertEqual(result["query_category"], model_category)
+        self.assertTrue(result["items"])
+
     def test_match_reports_both_categories(self) -> None:
         result = self.service.match(Image.open(io.BytesIO(_png_bytes())), "白色运动鞋", top_k=2)
         self.assertIsInstance(result["match"], bool)
@@ -274,6 +298,13 @@ class ApiTest(unittest.TestCase):
         response = self.client.post("/api/v1/text", json={"query": "白色运动鞋", "top_k": 2})
         self.assertEqual(response.status_code, 200)
         self.assertLessEqual(len(response.json()["result"]["items"]), 2)
+
+    def test_text_endpoint_returns_model_category(self) -> None:
+        response = self.client.post("/api/v1/text", json={"query": "白色运动鞋", "top_k": 2})
+        self.assertEqual(response.status_code, 200)
+        result = response.json()["result"]
+        self.assertIn("query_category", result)
+        self.assertIn("query_score", result)
 
     def test_unknown_path_returns_404_body(self) -> None:
         response = self.client.get("/api/v1/nope")

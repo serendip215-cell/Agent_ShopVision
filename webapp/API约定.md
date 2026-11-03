@@ -99,8 +99,15 @@
 
 ```json
 { "query": "白色运动鞋", "category": "鞋",
+  "query_category": "鞋", "query_score": 0.63,
   "items": [ { "category": "鞋", "similarity": 0.63, "item_name": "…", "product_type": "鞋", "brand": "…" } ] }
 ```
+
+`category` 是本次检索实际使用的范围（用户限定值；未限定时为命中 top-1 的类别）。
+`query_category` / `query_score` 是文本塔独立判出的类别与原始相似度，不受 `category`
+影响。当 `category` 与 `query_category` 不一致时，视为“用户限定”与“查询语义”没有
+交集，后端直接返回空 `items`；前端应提示并引导用户改搜 `query_category` 或全部类别，
+而不是把限定值当成模型判断。
 
 ### POST /api/v1/match — 图文匹配
 
@@ -177,11 +184,11 @@
 - 不新增返回字段、不改老码含义；要改就升 `/api/v2`（例外：`/match` 已追加
   `image_confidence` / `image_score` / `image_type` / `text_confidence` / `text_score` /
   `text_type`；`/health` 追加 `category_ready` / `updated_at` / `model_name` /
-  `model_checkpoint`；`/image` 追加 `topk[].confidence` 与 `items`。以上均为纯新增，
-  既有字段含义不变）
+  `model_checkpoint`；`/image` 追加 `topk[].confidence` 与 `items`；`/text` 追加
+  `query_category` / `query_score`。以上均为纯新增，既有字段含义不变）
 
 ## 六、现状提醒
 
-当前 `SHOPVISION_MODEL_BACKEND=placeholder`：接口形状、错误码、数据流都已联调通过，
-但**检索结果无意义**（占位向量 vs 真实索引）。报告里不写实测推理延迟与检索指标，
-等双塔 ONNX 到位切 `onnx` 后再出这些数字。
+`.env.example` 默认 `SHOPVISION_MODEL_BACKEND=placeholder`，只用于跑通链路；当前仓库的
+`webapp/backend/.env` 已切到 `onnx`，`/health` 返回 `backend=onnx`、`model_loaded=true`。
+以 `/health` 为准；报告里的实测推理延迟与检索指标只在 `onnx` 模式下记录。

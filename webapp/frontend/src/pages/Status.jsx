@@ -70,6 +70,8 @@ const ENDPOINTS = [
   "result": {
     "query": "白色运动鞋",
     "category": "鞋",
+    "query_category": "鞋",
+    "query_score": 0.63,
     "items": [
       {
         "category": "鞋",
