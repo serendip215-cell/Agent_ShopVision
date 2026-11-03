@@ -143,12 +143,7 @@ export default function Admin() {
         eyebrow="Admin · Incremental Ingest"
         title="商品入库"
         description="把一张商品图追加到已有类别，或新建类别后写入首条商品；入库后立即参与图像分类与文本检索。"
-        meta={
-          <>
-            <Tag bordered={false}>POST /api/v1/admin/items</Tag>
-            <Tag color="orange">未启用管理鉴权</Tag>
-          </>
-        }
+        meta={<Tag bordered={false}>POST /api/v1/admin/items</Tag>}
         actions={
           <Button
             icon={<ReloadOutlined spin={healthLoading} />}
@@ -158,14 +153,6 @@ export default function Admin() {
           </Button>
         }
       />
-
-      <div className="sv-note sv-note-warm">
-        <strong>仅限本机演示</strong>
-        <p>
-          当前没有管理鉴权，任何能访问 8000 端口的人都能写入。不要把后端暴露到公网；
-          Vite 代理会让请求看起来来自本机，也不能当作鉴权。
-        </p>
-      </div>
 
       {isPlaceholder && (
         <div className="sv-note sv-note-warm">
