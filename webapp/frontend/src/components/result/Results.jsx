@@ -75,7 +75,7 @@ export function ResultList({ items, loading, onSelect, highlightCategory, emptyT
       <div className="sv-item-grid">
         {[0, 1, 2, 3].map((key) => (
           <div className="sv-item-skeleton" key={key}>
-            <Skeleton.Image active style={{ width: '100%', height: 150 }} />
+            <Skeleton.Image active style={{ width: '100%', height: 210 }} />
             <Skeleton active paragraph={{ rows: 2 }} title={{ width: '60%' }} />
           </div>
         ))}

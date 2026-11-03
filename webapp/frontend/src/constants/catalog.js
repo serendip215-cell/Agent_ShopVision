@@ -49,6 +49,20 @@ export const CATEGORY_MAP = Object.fromEntries(
   CATEGORIES.map((item) => [item.key, item]),
 )
 
+// 每个类别的代表描述词：从「工作台类别卡」跳转文本检索时带上，
+// 否则只有 category 没有 q，语义检索页会停在空态。每句都实测过模型判类与类目一致。
+export const CATEGORY_QUERY = {
+  鞋: '白色运动鞋',
+  水杯: '黑色保温杯',
+  包: '黑色双肩包',
+  男装: '男士短袖T恤',
+  运动服: '运动套装',
+  女装: '女士连衣裙',
+  手机壳: '手机壳',
+  厨房用品: '不粘锅',
+  家居用品: '木质衣架',
+}
+
 export const SAMPLE_QUERIES = [
   '白色运动鞋',
   '黑色双肩包',

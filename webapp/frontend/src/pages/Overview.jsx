@@ -1,21 +1,15 @@
 import { useState } from 'react'
 import { Button, Tooltip } from 'antd'
 import {
-  ArrowRightOutlined,
   InfoCircleOutlined,
   NodeIndexOutlined,
   SearchOutlined,
   TagsOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import {
-  CATEGORY_MAP,
-  CATEGORY_PHOTOS,
-  SAMPLE_QUERIES,
-  categoryStyle,
-} from '../constants/catalog'
+import { CATEGORY_PHOTOS, CATEGORY_QUERY, SAMPLE_QUERIES } from '../constants/catalog'
 import { useApp } from '../context/AppContext'
-import { CategoryGlyph, EmptyState, SectionLabel } from '../components/common/Ui'
+import { EmptyState, SectionLabel } from '../components/common/Ui'
 import RunRow from '../components/common/RunRow'
 import useCountUp from '../utils/useCountUp'
 
@@ -43,19 +37,6 @@ function StatUnit({ icon: Icon, value, label, index }) {
       </span>
     </div>
   )
-}
-
-// 分类矩阵的大小错落：大卡 2x2、中卡 2x1、小卡 1x1，正好填满 6 列 3 行
-const CATEGORY_SIZE = {
-  鞋: 'is-size-l',
-  水杯: 'is-size-m',
-  包: 'is-size-m',
-  男装: 'is-size-m',
-  运动服: 'is-size-m',
-  手机壳: 'is-size-m',
-  厨房用品: 'is-size-m',
-  女装: 'is-size-s',
-  家居用品: 'is-size-s',
 }
 
 function Hero() {
@@ -136,6 +117,33 @@ function Hero() {
 function CategorySection() {
   const navigate = useNavigate()
   const { health, categories } = useApp()
+
+  // 当前轮播到第几个类别，默认 0 = 第一个
+  const [index, setIndex] = useState(0)
+
+  const total = categories.length
+  // 类别由 health 异步填充，首次渲染可能为空，先不渲染
+  if (!total) return null
+
+  // 切到上一个，到顶了就绕回最后一个
+  const goPrev = () => setIndex((i) => (i - 1 + total) % total)
+  // 切到下一个，到末尾了就绕回第一个
+  const goNext = () => setIndex((i) => (i + 1) % total)
+
+  // 当前类别、上一个类别、下一个类别（让旁边半露两张图）
+  const cursor = index % total
+  const current = categories[cursor]
+  const prev = categories[(cursor - 1 + total) % total]
+  const next = categories[(cursor + 1) % total]
+
+  // 点「探索系列」跳到文本检索页，必须带描述词，否则语义检索页停在空态
+  const goCategory = (key) => {
+    const sample = CATEGORY_QUERY[key] || key
+    navigate(`/text?q=${encodeURIComponent(sample)}&category=${encodeURIComponent(key)}`)
+  }
+
+  const count = health?.category_counts?.[current]
+
   return (
     <section className="sv-reveal">
       <div className="sv-strip-head">
@@ -143,54 +151,74 @@ function CategorySection() {
         <Tooltip title="点击任一类别，直接用该类别的热门查询开始检索">
           <span className="sv-strip-hint">
             <InfoCircleOutlined />
-            点击分类，直达热门检索
+            左右切换类别，点「探索系列」直接检索
           </span>
         </Tooltip>
       </div>
-      <div className="sv-category-grid">
-        {categories.map((key) => {
-          const meta = CATEGORY_MAP[key] || { key, hint: '新增类别' }
-          const style = categoryStyle(key)
-          const photo = CATEGORY_PHOTOS[key]
-          return (
-            <button
-              type="button"
-              key={key}
-              className={`sv-category-tile ${CATEGORY_SIZE[key] || 'is-size-s'}`}
-              style={{ background: style.bg, color: style.ink }}
-              onClick={() => navigate(`/text?category=${encodeURIComponent(key)}`)}
-            >
-              {photo ? (
-                <img
-                  src={photo}
-                  alt=""
-                  loading="lazy"
-                  onError={(event) => {
-                    event.currentTarget.closest('.sv-category-tile').classList.add('is-broken')
-                    event.currentTarget.remove()
-                  }}
-                />
-              ) : (
-                <span className="sv-category-glyph" aria-hidden="true">
-                  <CategoryGlyph category={key} size={56} />
-                </span>
-              )}
-              <span className="sv-category-shade" aria-hidden="true" />
-              <span className="sv-category-copy">
-                <span className="sv-category-name">{key}</span>
-                <span className="sv-category-hint">{meta.hint}</span>
-                <span className="sv-category-count sv-mono">
-                  {health?.category_counts?.[key] != null
-                    ? `${health.category_counts[key].toLocaleString('zh-CN')} 商品`
-                    : '数量未知'}
-                </span>
-              </span>
-              <span className="sv-category-go" aria-hidden="true">
-                <ArrowRightOutlined />
-              </span>
-            </button>
-          )
-        })}
+
+      <div className="sv-category-showcase">
+        {/* 左边：文字区 */}
+        <div className="sv-showcase-text">
+          <div className="sv-showcase-index">
+            <span className="sv-showcase-index-cur">
+              {String(cursor + 1).padStart(2, '0')}
+            </span>
+            <span className="sv-showcase-index-divider">/</span>
+            <span className="sv-showcase-index-total">
+              {String(total).padStart(2, '0')}
+            </span>
+          </div>
+
+          <h2 className="sv-showcase-name">{current}</h2>
+
+          <p className="sv-showcase-count">
+            {count != null ? `${count.toLocaleString('zh-CN')} 件高品质商品` : '精选好货'}
+          </p>
+
+          <button type="button" className="sv-showcase-go" onClick={() => goCategory(current)}>
+            探索系列 <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        {/* 右边：图区，三张图叠一起，中间大、两边半露 */}
+        <div className="sv-showcase-stage">
+          <img
+            className="sv-showcase-img is-prev"
+            src={CATEGORY_PHOTOS[prev]}
+            alt=""
+            loading="lazy"
+          />
+          <img
+            key={index}
+            className="sv-showcase-img is-current"
+            src={CATEGORY_PHOTOS[current]}
+            alt={current}
+          />
+          <img
+            className="sv-showcase-img is-next"
+            src={CATEGORY_PHOTOS[next]}
+            alt=""
+            loading="lazy"
+          />
+
+          {/* 左右箭头：浮在图区两侧中央 */}
+          <button
+            type="button"
+            className="sv-showcase-arrow is-left"
+            onClick={goPrev}
+            aria-label="上一个类别"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            className="sv-showcase-arrow is-right"
+            onClick={goNext}
+            aria-label="下一个类别"
+          >
+            ›
+          </button>
+        </div>
       </div>
     </section>
   )
