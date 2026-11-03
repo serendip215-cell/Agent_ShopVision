@@ -100,6 +100,12 @@ class ImageResult(BaseModel):
 class TextResult(BaseModel):
     query: str = Field(description="原查询词")
     category: str | None = Field(description="限定类别；搜全部时为命中最高的类别")
+    query_category: str | None = Field(
+        default=None, description="文本塔独立判出的类别，不受 category 限定影响"
+    )
+    query_score: float | None = Field(
+        default=None, description="文本塔对 query_category 的原始相似度"
+    )
     items: list[MatchedItem] = Field(description="相关商品，按相似度降序")
 
 

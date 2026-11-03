@@ -111,7 +111,7 @@
 
 #### `POST /api/v1/text` — 文本检索
 
-中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。`category` 留空表示搜全部类别。
+中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。`category` 留空表示搜全部类别；`query_category` 是文本塔独立判出的类别，不受 `category` 限定影响。两者不一致时视为没有交集，`items` 返回空数组。
 
 **请求**
 
@@ -129,6 +129,8 @@
 | `msg` | 字符串 | 面向用户的提示 |
 | `result.query` | 字符串 | 原查询词 |
 | `result.category` | 字符串（可为空） | 限定类别；搜全部时为命中最高的类别 |
+| `result.query_category` | 字符串（可为空） | 文本塔独立判出的类别，不受 category 限定影响 |
+| `result.query_score` | 小数（可为空） | 文本塔对 query_category 的原始相似度 |
 | `result.items` | 对象 的数组 | 相关商品，按相似度降序 |
 | `result.items[].category` | 字符串 | 命中类别 |
 | `result.items[].similarity` | 小数 | 余弦相似度（向量已 L2 归一化，故等于点积） |

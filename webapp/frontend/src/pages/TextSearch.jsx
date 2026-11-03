@@ -97,7 +97,7 @@ export default function TextSearch() {
     try {
       const data = await searchText(
         { query: nextQuery, topK: nextTopK, category: nextCategory },
-        controller.signal,
+        controller.signal
       )
       if (abortRef.current !== controller) return
       const elapsed = performance.now() - startedAt
@@ -241,9 +241,19 @@ export default function TextSearch() {
   const distribution = useMemo(() => categoryDistribution(items), [items])
   const visibleItems = useMemo(
     () => (distFilter ? items.filter((item) => item.category === distFilter) : items),
-    [items, distFilter],
+    [items, distFilter]
   )
   const rankedCategory = result?.category
+  const modelCategory = result?.query_category || null
+  const categoryMismatch = Boolean(
+    rankedCategory && modelCategory && rankedCategory !== modelCategory
+  )
+  let scopeBadge = '全部类别'
+  if (modelCategory) {
+    scopeBadge = `模型判断：${modelCategory}`
+  } else if (category) {
+    scopeBadge = `限定：${category}`
+  }
   const scopeText = category
     ? `当前限定：${category} · ${items.length} 条`
     : `${distribution.length} 类 · ${items.length} 条`
@@ -326,6 +336,33 @@ export default function TextSearch() {
           </Button>
         </div>
 
+        <div className="sv-tx-samples">
+          <span className="sv-tx-label">试试这些句子</span>
+          <div className="sv-tx-samples-row">
+            {SAMPLE_QUERIES.map((item) => (
+              <button
+                type="button"
+                key={item}
+                className={query === item ? 'is-active' : ''}
+                onClick={() => {
+                  if (query === item) {
+                    setQuery('')
+                    setValidation(null)
+                    const nextParams = { top_k: String(topK) }
+                    if (category) nextParams.category = category
+                    setSearchParams(nextParams, { replace: true })
+                    return
+                  }
+                  setQuery(item)
+                  runSearch({ query: item })
+                }}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="sv-tx-scope">
           <span className="sv-tx-label">检索范围</span>
           <div className="sv-tx-scope-chips">
@@ -354,25 +391,6 @@ export default function TextSearch() {
         </div>
 
         <div className="sv-tx-tools">
-          <div className="sv-tx-samples">
-            <span className="sv-tx-label">试试这些句子</span>
-            <div className="sv-tx-samples-row">
-              {SAMPLE_QUERIES.map((item) => (
-                <button
-                  type="button"
-                  key={item}
-                  className={query === item ? 'is-active' : ''}
-                  onClick={() => {
-                    setQuery(item)
-                    runSearch({ query: item })
-                  }}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="sv-tx-topk">
             <span className="sv-tx-label">返回条数</span>
             <Slider
@@ -425,93 +443,112 @@ export default function TextSearch() {
         <section className="sv-tx-result" ref={resultRef}>
           <div className="sv-tx-result-head">
             <div>
-              <h2>最相似的商品</h2>
-              <p>按相似度从高到低排序 · 点击卡片查看完整档案</p>
+              <h2>{categoryMismatch ? '检索范围与查询冲突' : '最相似的商品'}</h2>
+              <p>
+                {categoryMismatch
+                  ? '查询与当前类别不匹配'
+                  : '按相似度从高到低排序 · 点击卡片查看完整档案'}
+              </p>
             </div>
             <Button size="small" icon={<SwapOutlined />} onClick={useInMatch}>
               用这句做图文匹配
             </Button>
           </div>
 
-          <div className="sv-tx-summary">
-            <div className="sv-tx-summary-cell is-query">
-              <span>查询词</span>
-              <strong>
-                {result.query}
-                <em className="sv-tx-scope-badge">{rankedCategory || '全部类别'}</em>
-              </strong>
+          {categoryMismatch ? (
+            <div className="sv-note sv-note-warm sv-tx-mismatch">
+              <strong>模型认为这句话更像「{modelCategory}」</strong>
+              <p>
+                当前限定「{rankedCategory}」，与查询语义没有交集，本次不展示结果。
+                可以改搜「{modelCategory}」，或把检索范围切回「全部类别」。
+              </p>
+              <Button size="small" onClick={() => setCategory(modelCategory)}>
+                改搜「{modelCategory}」
+              </Button>
             </div>
-            <div className="sv-tx-summary-cell">
-              <span>命中商品</span>
-              <strong className="sv-mono">{items.length}</strong>
-            </div>
-            <div className="sv-tx-summary-cell">
-              <span>耗时</span>
-              <strong className="sv-mono">{formatDuration(duration)}</strong>
-            </div>
-          </div>
-
-          <div className="sv-tx-dist">
-            <div className="sv-tx-dist-head">
-              <span>命中的类别分布</span>
-              {distFilter ? (
-                <button
-                  type="button"
-                  className="sv-tx-dist-reset"
-                  onClick={() => setDistFilter(null)}
-                >
-                  已在结果内筛选「{distFilter}」 · 取消
-                </button>
-              ) : (
-                <span className="sv-muted">{scopeText}</span>
-              )}
-            </div>
-            {distribution.length > 0 ? (
-              <>
-                <div className="sv-tx-dist-bar">
-                  {distribution.map((row, index) => (
-                    <i
-                      key={row.category}
-                      className={distFilter && distFilter !== row.category ? 'is-dim' : ''}
-                      style={{
-                        width: `${row.share}%`,
-                        background: categoryStyle(row.category).ink,
-                        animationDelay: `${index * 70}ms`,
-                      }}
-                      title={`${row.category} ${row.count} 条`}
-                    />
-                  ))}
+          ) : (
+            <>
+              <div className="sv-tx-summary">
+                <div className="sv-tx-summary-cell is-query">
+                  <span>查询词</span>
+                  <strong>
+                    {result.query}
+                    <em className="sv-tx-scope-badge">{scopeBadge}</em>
+                  </strong>
                 </div>
-                <div className="sv-tx-dist-legend">
-                  {distribution.map((row) => (
+                <div className="sv-tx-summary-cell">
+                  <span>命中商品</span>
+                  <strong className="sv-mono">{items.length}</strong>
+                </div>
+                <div className="sv-tx-summary-cell">
+                  <span>耗时</span>
+                  <strong className="sv-mono">{formatDuration(duration)}</strong>
+                </div>
+              </div>
+
+              <div className="sv-tx-dist">
+                <div className="sv-tx-dist-head">
+                  <span>命中的类别分布</span>
+                  {distFilter ? (
                     <button
                       type="button"
-                      key={row.category}
-                      className={distFilter === row.category ? 'is-active' : ''}
-                      onClick={() =>
-                        setDistFilter((prev) => (prev === row.category ? null : row.category))
-                      }
+                      className="sv-tx-dist-reset"
+                      onClick={() => setDistFilter(null)}
                     >
-                      <i style={{ background: categoryStyle(row.category).ink }} />
-                      {row.category}
-                      <em className="sv-mono">{row.count}</em>
+                      已在结果内筛选「{distFilter}」 · 取消
                     </button>
-                  ))}
+                  ) : (
+                    <span className="sv-muted">{scopeText}</span>
+                  )}
                 </div>
-              </>
-            ) : (
-              <p className="sv-tx-dist-none">本次结果没有类别信息</p>
-            )}
-          </div>
+                {distribution.length > 0 ? (
+                  <>
+                    <div className="sv-tx-dist-bar">
+                      {distribution.map((row, index) => (
+                        <i
+                          key={row.category}
+                          className={distFilter && distFilter !== row.category ? 'is-dim' : ''}
+                          style={{
+                            width: `${row.share}%`,
+                            background: categoryStyle(row.category).ink,
+                            animationDelay: `${index * 70}ms`,
+                          }}
+                          title={`${row.category} ${row.count} 条`}
+                        />
+                      ))}
+                    </div>
+                    <div className="sv-tx-dist-legend">
+                      {distribution.map((row) => (
+                        <button
+                          type="button"
+                          key={row.category}
+                          className={distFilter === row.category ? 'is-active' : ''}
+                          onClick={() =>
+                            setDistFilter((prev) => (prev === row.category ? null : row.category))
+                          }
+                        >
+                          <i style={{ background: categoryStyle(row.category).ink }} />
+                          {row.category}
+                          <em className="sv-mono">{row.count}</em>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <p className="sv-tx-dist-none">本次结果没有类别信息</p>
+                )}
+              </div>
 
-          <ResultList
-            items={visibleItems}
-            loading={false}
-            onSelect={setSelected}
-            highlightCategory={distFilter || rankedCategory}
-            emptyTitle="这一类里没有找到商品"
-            emptyDescription="换一个描述方式，或者把检索范围切回「全部类别」再试一次。"
-          />
+              <ResultList
+                items={visibleItems}
+                loading={false}
+                onSelect={setSelected}
+                highlightCategory={distFilter || rankedCategory}
+                emptyTitle="这一类里没有找到商品"
+                emptyDescription="换一个描述方式，或者把检索范围切回「全部类别」再试一次。"
+              />
+            </>
+          )}
         </section>
       )}
 

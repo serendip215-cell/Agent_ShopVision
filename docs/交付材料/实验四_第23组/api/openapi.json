@@ -136,7 +136,7 @@
           "文本检索页"
         ],
         "summary": "文本检索",
-        "description": "中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。`category` 留空表示搜全部类别。",
+        "description": "中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。`category` 留空表示搜全部类别；`query_category` 是文本塔独立判出的类别，不受 `category` 限定影响。两者不一致时视为没有交集，`items` 返回空数组。",
         "operationId": "search_text_api_v1_text_post",
         "requestBody": {
           "content": {
@@ -1326,6 +1326,30 @@
             ],
             "title": "Category",
             "description": "限定类别；搜全部时为命中最高的类别"
+          },
+          "query_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query Category",
+            "description": "文本塔独立判出的类别，不受 category 限定影响"
+          },
+          "query_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query Score",
+            "description": "文本塔对 query_category 的原始相似度"
           },
           "items": {
             "items": {

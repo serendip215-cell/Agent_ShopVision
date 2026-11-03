@@ -4498,6 +4498,14 @@ a {
   gap: 14px;
 }
 
+.sv-tx-mismatch {
+  margin-top: 0;
+}
+
+.sv-tx-mismatch .ant-btn {
+  margin-top: 10px;
+}
+
 /* 摘要条 */
 
 .sv-tx-summary {

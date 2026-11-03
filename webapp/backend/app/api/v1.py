@@ -101,7 +101,8 @@ async def classify_image(
     tags=["文本检索页"],
     responses=_ERROR_RESPONSES,
     description="中文查询 → 文本塔编码 → 在商品库里按余弦相似度取 top_k。"
-    "`category` 留空表示搜全部类别。",
+    "`category` 留空表示搜全部类别；`query_category` 是文本塔独立判出的类别，"
+    "不受 `category` 限定影响。两者不一致时视为没有交集，`items` 返回空数组。",
 )
 def search_text(
     payload: TextQueryRequest,

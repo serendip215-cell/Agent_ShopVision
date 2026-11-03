@@ -63,10 +63,18 @@ class MatchService:
     # 文本分类页：中文查询 -> 相关商品
     def search_text(self, text: str, top_k: int = 5, category: str | None = None) -> dict:
         vector = self.encoder.encode_text(text)
-        hits = self.index.search(vector, [category] if category else None, top_k)
+        # 文本塔独立判类别：前端拿它和用户限定的 category 对照，提示语义冲突
+        query_category, query_score, _ = self.index.best_category(vector)
+        # 用户限定类别与模型判断不一致时，视为查询与限定类别没有交集，不返回该类别结果
+        if category and query_category and category != query_category:
+            hits = []
+        else:
+            hits = self.index.search(vector, [category] if category else None, top_k)
         return {
             "query": text,
             "category": category or (hits[0].category if hits else None),
+            "query_category": query_category,
+            "query_score": round(query_score, 6) if query_category else None,
             "items": [hit.as_dict() for hit in hits],
         }
 
