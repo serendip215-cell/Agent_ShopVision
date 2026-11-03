@@ -27,16 +27,16 @@
 | 业务码 | HTTP | 场景 | 默认 msg | 触发点 |
 |---:|---:|---|---|---|
 | `0` | 200 | 成功 | ok | — |
-| `40000` | 400 | 参数校验失败 | 参数错误 | Pydantic 校验（空查询、`top_k` 越界等） |
+| `40000` | 400 | 参数校验失败 | 参数错误 | Pydantic 校验（空查询、`top_k` 越界、`confirm=true` 却没给 `category`、非法类别名等） |
 | `40001` | 400 | 图像格式错误 / 损坏 | 图像格式错误，请上传 PNG/JPG | 上传内容不是可视 PNG/JPG/WEBP |
 | `40002` | 400 | 上传内容为空 | 上传内容为空 | `file` 为空字节 |
-| `40003` | 400 | 查询向量维度与索引不一致 | 查询向量维度与索引不一致 | 模型与索引不同源 |
+| `40003` | 400 | 查询向量维度与索引不一致 | 查询向量维度与索引不一致 | 模型与索引不同源；上传向量维度 ≠ 库维度 |
 | `40004` | 400 | 上传文件过大 | 上传文件过大 | `file` 超过 `SHOPVISION_MAX_UPLOAD_MB`（默认 10 MB） |
 | `40400` | 404 | 路径 / 资源不存在 | 资源不存在 | 访问了未注册的 URL |
-| `40401` | 404 | 类别不存在 | 类别不存在 | `category` 不在索引注册表里 |
+| `40401` | 404 | 类别不存在 | 类别不存在 | `category` 不在静态索引或上传库里；入库时需先建类或选已有类别 |
 | `40402` | 404 | 索引文件缺失 | 索引文件缺失 | 注册表 / items.csv / 向量文件缺失 |
 | `50000` | 500 | 未捕获服务器错误 | 服务器内部错误 | 未预料异常 |
-| `50001` | 500 | 模型 / 依赖不可用 | 模型或依赖不可用 | ONNX 产物缺失、`onnxruntime`/`cn_clip` 未装 |
+| `50001` | 500 | 模型 / 依赖不可用 | 模型或依赖不可用 | ONNX 产物缺失、`onnxruntime`/`cn_clip` 未装；占位模式禁止入库；上传库与当前模型指纹不一致 |
 
 约定：**新增场景就加一行、取一个同前缀新码，不改老码含义**；前端按整段码定位，按前三位做兜底。
 
@@ -66,9 +66,11 @@
 ```
 
 `model_loaded: false` 表示当前跑占位编码器，检索结果无意义。
-`category_counts` / `total_items` 来自索引注册表，是**建库时快照**，不是实时库存。
-`category_ready` 逐类检查 `items.csv` 与 `image_embeddings.npy` 是否存在，状态页据此显示可检索性；
-`updated_at` / `model_name` / `model_checkpoint` 也来自注册表，不在前端写死。
+`category_counts` / `total_items` = 静态索引注册表快照 **+ 上传入库实时条数**；上传后无需重启，
+下一次 `/health` 就能看到增量。
+`category_ready` 静态类别看 `items.csv` 与 `image_embeddings.npy` 是否齐全；仅上传的新类别看
+是否已有商品（0 条的空类别不参与自动判类）。
+`updated_at` / `model_name` / `model_checkpoint` 只描述静态索引；上传条目不改变它们。
 
 ### POST /api/v1/image — 图像分类
 
@@ -84,6 +86,10 @@
 
 `topk[].confidence` 与顶层 `confidence` 同口径（对全部类别做 softmax），不是只对前 3 名归一化；
 `items` 是判出类别内与上传图最相似的商品（最多 4 条），供前端做相似商品推荐。
+
+**图片地址口径**：静态索引条目的 `local_image_path` 指向清洗/增强后的图（`/item-images`），
+另带 `original_image_path` 指向原始商品图（`/item-originals`）。前端优先展示原图，缺字段时退回
+清洗图。上传入库的条目本身就是原图，只有 `local_image_path`，没有 `original_image_path`。
 
 ### POST /api/v1/text — 文本检索
 
@@ -122,9 +128,73 @@
   "text_type": "休闲鞋", "items": [ … ] }
 ```
 
-`image_confidence` / `text_confidence` 是两塔各自对判出类别做 9 类 softmax 的概率；
+`image_confidence` / `text_confidence` 是两塔各自对判出类别做 softmax 的概率，分母是
+**全部可判类别**（静态 9 类 + 达到门槛的新类别），不是只对前 3 名归一化；
 `image_type` / `text_type` 是各自类别内最相似商品的细分类，用于解释判断；
 `items` 是文本检索证据。细分类是**检索证据**，不是模型直接预测的细分类。
+
+### 数据入库（新增）— POST /api/v1/admin/items、POST /api/v1/admin/categories
+
+> **本轮未做管理鉴权**：任何能访问 8000 端口的人都能写入。只允许本机演示，禁止公网暴露；
+> Vite 代理会让请求看起来来自本机，不能当鉴权。后续再加 `X-Admin-Token`。
+> 入库必须跑真实 ONNX；`placeholder` 模式下写库返回 `50001`。
+
+#### POST /api/v1/admin/items — 上传商品入库
+
+- 请求：`multipart/form-data`
+  - `file`：商品图（PNG/JPG/WEBP，≤10 MB）
+  - `category`：目标类别；`confirm=false` 时可省略
+  - `confirm`：`true` 才真正写库；缺省或 `false` 只返回建议
+  - `create_category`：`true` 时类别不存在就自动建类
+  - 可选元数据：`item_name`、`type`、`color`、`material`、`brand`、`description`
+- 只传 `file`（或 `confirm=false`）：返回图像塔建议，**不写库**：
+
+```json
+{ "code": 0, "result": {
+    "created": false, "duplicate": false, "item_id": null, "category": null,
+    "similarity": null,
+    "suggested_category": "鞋", "suggested_score": 0.31,
+    "topk": [ { "category": "鞋", "similarity": 0.31 }, { "category": "包", "similarity": 0.28 } ],
+    "created_at": null, "item": null
+}, "msg": "ok" }
+```
+
+- `confirm=true` 且带 `category`：真正写库；`similarity` 是写入前目标类别内的最近邻
+  （空类别为 `null`），`item` 是写回条目：
+
+```json
+{ "code": 0, "result": {
+    "created": true, "duplicate": false,
+    "item_id": "upload_1a2b3c4d5e6f", "category": "鞋",
+    "similarity": 0.92,
+    "suggested_category": "鞋", "suggested_score": 0.31,
+    "topk": [ … ], "created_at": "2026-11-03T06:00:00Z",
+    "item": { "item_id": "upload_…", "category": "鞋", "item_name": "…",
+              "local_image_path": "data/processed_data_cleaning/鞋/images/upload_….png",
+              "image_height": 800, "image_width": 600, "created_at": "…" }
+}, "msg": "ok" }
+```
+
+- 同一张图重复上传：`duplicate=true`、`created=false`，返回原 `item_id`，计数不增。
+- `confirm=true` 却没给 `category` → `40000`；类别不存在且 `create_category=false` → `40401`；
+  类别名含路径分隔符 / 控制字符 / Windows 保留名 → `40000`。
+- 上传成功后立即写进内存索引缓存（`IndexStore.reload`），`/image`、`/text`、`/match` 无需重启即可检索到。
+- **新类别是检索桶，不是模型重新训练**：类别名不会进入模型词表；1 件商品即可参与自动判类
+  （`SHOPVISION_NEW_CATEGORY_MIN_ITEMS` 默认 1），样本越多越稳。
+
+#### POST /api/v1/admin/categories — 新建空类别
+
+- 请求：`application/json`：`{ "name": "测试类" }`
+- 返回：
+
+```json
+{ "code": 0, "result": { "created": true, "name": "测试类" }, "msg": "ok" }
+```
+
+已存在时 `created=false`。空类别会出现在 `/health.categories` 与前端类别列表里，但**不参与
+自动判类**；显式 `/text` 限定该类别返回空 `items`，上传首条商品后即参与。
+
+### 异步任务（批量 / 大图）— Celery + Redis
 
 ### 异步任务（批量 / 大图）— Celery + Redis
 
@@ -179,16 +249,25 @@
 
 ## 五、命名与版本
 
-- URL 用名词 + 版本：`/api/v1/image`、`/api/v1/text`、`/api/v1/match`；方法对应动作。
+- URL 用名词 + 版本：`/api/v1/image`、`/api/v1/text`、`/api/v1/match`、
+  `/api/v1/admin/items`、`/api/v1/admin/categories`；方法对应动作。
 - JSON 字段用 `snake_case`（与后端 Python 一致），不混 `camelCase`。
 - 不新增返回字段、不改老码含义；要改就升 `/api/v2`（例外：`/match` 已追加
   `image_confidence` / `image_score` / `image_type` / `text_confidence` / `text_score` /
   `text_type`；`/health` 追加 `category_ready` / `updated_at` / `model_name` /
   `model_checkpoint`；`/image` 追加 `topk[].confidence` 与 `items`；`/text` 追加
-  `query_category` / `query_score`。以上均为纯新增，既有字段含义不变）
+  `query_category` / `query_score`；新增 `/admin/items` 与 `/admin/categories`。
+  以上新增均为纯扩展。`/health` 的 `categories` / `category_counts` / `total_items` /
+  `category_ready` 字段名不变，但口径从“仅静态索引”扩展为“静态索引 + 上传入库”；
+  这是增量入库带来的口径变化，不是字段改名）
 
 ## 六、现状提醒
 
 `.env.example` 默认 `SHOPVISION_MODEL_BACKEND=placeholder`，只用于跑通链路；当前仓库的
 `webapp/backend/.env` 已切到 `onnx`，`/health` 返回 `backend=onnx`、`model_loaded=true`。
 以 `/health` 为准；报告里的实测推理延迟与检索指标只在 `onnx` 模式下记录。
+
+上传入库同样必须跑 `onnx`：占位模式写库会被拒绝（`50001`），避免随机向量污染真实索引。
+上传数据落 `data/webapp.db`（SQLite）与 `data/processed_data_cleaning/<类别>/images/upload_*`，
+两者都是运行产物、默认 gitignore；静态索引 `data/index_data_finetuned/` 始终保持只读。
+切换 ONNX 产物后 `model_tag` 变化，旧上传库会被拒绝写入；备份并删除 `data/webapp.db` 后重新入库。

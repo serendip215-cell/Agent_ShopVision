@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import AppShell from './components/layout/AppShell'
 import { AppProvider } from './context/AppContext'
 import { WorkflowProvider } from './context/WorkflowContext'
+import Admin from './pages/Admin'
 import History from './pages/History'
 import ImageLab from './pages/ImageLab'
 import MatchLab from './pages/MatchLab'
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="/image" element={<ImageLab />} />
             <Route path="/text" element={<TextSearch />} />
             <Route path="/match" element={<MatchLab />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/history" element={<History />} />
             <Route path="/status" element={<Status />} />
             <Route path="*" element={<NotFound />} />

@@ -1,13 +1,23 @@
+const RAW_PREFIX = 'data/raw_data/'
 const DATASET_PREFIX = 'data/processed_data_cleaning/'
 
-/**
- * 商品缩略图地址。后端结果带 local_image_path（数据集真实文件名），
- * 统一走 /item-images；只有老数据缺字段时才退回 public/items 的演示图。
- */
-export function resolveItemImage(item) {
-  const path = String(item?.local_image_path || '')
+function normalize(path) {
+  return String(path || '')
     .replace(/\\/g, '/')
     .replace(/^\/+/, '')
+}
+
+/**
+ * 商品缩略图地址。静态索引的 local_image_path 指向清洗/增强后的图，
+ * 后端另有 original_image_path（原始商品图）时优先用它走 /item-originals；
+ * 上传条目没有原始副本，继续走 /item-images。老数据缺字段时退回 public/items。
+ */
+export function resolveItemImage(item) {
+  const original = normalize(item?.original_image_path)
+  if (original.startsWith(RAW_PREFIX)) {
+    return `/item-originals/${original.slice(RAW_PREFIX.length)}`
+  }
+  const path = normalize(item?.local_image_path)
   if (path) {
     const relative = path.startsWith(DATASET_PREFIX) ? path.slice(DATASET_PREFIX.length) : path
     return `/item-images/${relative}`

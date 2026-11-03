@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     candidate_k: int = 50
     max_upload_mb: int = 10  # 上传图片大小上限，防止大文件全量读进内存
 
+    # 增量入库：静态索引只读，上传数据落 SQLite，图片落 image_root。
+    db_path: str = "data/webapp.db"
+    image_root: str = "data/processed_data_cleaning"
+    raw_image_root: str = "data/raw_data"  # 原始商品图，前台优先展示这份
+    new_category_min_items: int = 1  # 新类别至少几条才参与自动判类
+
     # 异步任务（Celery + Redis）。Redis 可以是云端托管，填 rediss:// 走 TLS。
     # 只影响 /api/v1/tasks/*；三个同步接口不依赖 Redis。
     celery_broker_url: str = "redis://localhost:6379/0"
@@ -44,6 +50,18 @@ class Settings(BaseSettings):
     @property
     def index_path(self) -> Path:
         return self.repo_path(self.index_dir)
+
+    @property
+    def db_file(self) -> Path:
+        return self.repo_path(self.db_path)
+
+    @property
+    def image_root_path(self) -> Path:
+        return self.repo_path(self.image_root)
+
+    @property
+    def raw_image_root_path(self) -> Path:
+        return self.repo_path(self.raw_image_root)
 
 
 @lru_cache(maxsize=1)

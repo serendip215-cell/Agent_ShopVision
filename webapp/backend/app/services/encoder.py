@@ -37,6 +37,8 @@ class Encoder(ABC):
 
     dim: int
     model_loaded: bool
+    # 向量空间指纹：入库时写进 SQLite，防止占位/换模型后的向量混进同一个库
+    model_tag: str
 
     @abstractmethod
     def encode_image(self, image: "Image") -> np.ndarray: ...
@@ -52,6 +54,7 @@ class PlaceholderEncoder(Encoder):
 
     def __init__(self, dim: int = 512) -> None:
         self.dim = dim
+        self.model_tag = f"placeholder:dim={dim}"
 
     def _vec(self, key: str) -> np.ndarray:
         seed = int.from_bytes(hashlib.sha256(key.encode("utf-8")).digest()[:8], "big")
@@ -97,6 +100,12 @@ class OnnxEncoder(Encoder):
         self._tokenize = tokenize
         self._preprocess = image_transform(image_size)
         self.context_length = context_length
+        try:
+            digest = hashlib.sha256(visual_path.read_bytes()).hexdigest()[:16]
+        except OSError as exc:
+            raise ApiError(ErrorCode.MODEL_UNAVAILABLE, f"无法读取视觉塔：{exc}") from exc
+        # 文件名 + 内容指纹 + 输入尺寸：三个都会改变向量空间
+        self.model_tag = f"onnx:{visual_path.name}:{digest}:{image_size}"
         try:
             self._visual = ort.InferenceSession(str(visual_path), providers=[provider])
             self._text = ort.InferenceSession(str(text_path), providers=[provider])

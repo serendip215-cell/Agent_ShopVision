@@ -103,6 +103,44 @@ const ENDPOINTS = [
   },
   {
     method: 'POST',
+    path: '/api/v1/admin/items',
+    title: '上传商品入库',
+    description:
+      '只传 file 返回建议，不写库；confirm=true 且带 category 才写；create_category=true 自动建类。',
+    request: `multipart/form-data:
+{ "file": "…", "category": "鞋", "confirm": "true", "create_category": "false", "item_name": "…" }`,
+    response: `{
+  "code": 0,
+  "result": {
+    "created": true,
+    "duplicate": false,
+    "item_id": "upload_…",
+    "category": "鞋",
+    "similarity": 0.92,
+    "suggested_category": "鞋",
+    "suggested_score": 0.31,
+    "topk": [ { "category": "鞋", "similarity": 0.31 } ],
+    "created_at": "…",
+    "item": { "item_id": "upload_…", "item_name": "…" }
+  },
+  "msg": "ok"
+}`,
+  },
+  {
+    method: 'POST',
+    path: '/api/v1/admin/categories',
+    title: '新建空类别',
+    description: '只建类别、不写商品；空类别不参与自动判类，显式检索返回空。',
+    request: `application/json:
+{ "name": "测试类" }`,
+    response: `{
+  "code": 0,
+  "result": { "created": true, "name": "测试类" },
+  "msg": "ok"
+}`,
+  },
+  {
+    method: 'POST',
     path: '/api/v1/tasks/image',
     title: '提交单张异步分类',
     description: '大图改走任务队列：先拿 task_id，再轮询 GET /tasks/{task_id}。',
@@ -146,16 +184,31 @@ const ENDPOINTS = [
 ]
 
 const ERROR_CODES = [
-  { code: 40000, http: 400, scene: '参数校验失败', ui: '输入框标红，提示检查查询词或 top_k' },
+  {
+    code: 40000,
+    http: 400,
+    scene: '参数校验失败（入库时 confirm=true 必须带 category）',
+    ui: '输入框标红，提示检查查询词、top_k 或类别名',
+  },
   { code: 40001, http: 400, scene: '图像格式错误 / 损坏', ui: '上传区提示 PNG / JPG / WEBP' },
   { code: 40002, http: 400, scene: '上传内容为空', ui: '提示重新选择图片' },
   { code: 40003, http: 400, scene: '向量维度与索引不一致', ui: '提示模型与索引不同源，引导状态页' },
   { code: 40004, http: 400, scene: '上传文件过大', ui: '提示压缩到 10 MB 以内' },
   { code: 40400, http: 404, scene: '路径 / 资源不存在', ui: '提示接口路径或版本不匹配' },
-  { code: 40401, http: 404, scene: '类别不存在', ui: '重置类别筛选为全部' },
+  {
+    code: 40401,
+    http: 404,
+    scene: '类别不存在（入库先建类或选已有类别）',
+    ui: '重置类别筛选，或先调 POST /admin/categories 建类',
+  },
   { code: 40402, http: 404, scene: '索引文件缺失', ui: '提示检查索引目录' },
   { code: 50000, http: 500, scene: '未捕获服务器错误', ui: '提示稍后重试，保留重试按钮' },
-  { code: 50001, http: 500, scene: '模型 / 依赖不可用', ui: '提示占位模式或 ONNX 依赖未安装' },
+  {
+    code: 50001,
+    http: 500,
+    scene: '模型 / 依赖不可用（占位模式禁止入库）',
+    ui: '提示切 ONNX，或检查 ONNX 依赖',
+  },
 ]
 
 const CATEGORY_COLUMNS = [
@@ -192,13 +245,15 @@ const CATEGORY_COLUMNS = [
     title: '状态',
     dataIndex: 'ready',
     align: 'right',
-    render: (value) =>
-      value == null ? (
+    render: (value, row) =>
+      row.empty ? (
+        <Tag bordered={false}>空类别</Tag>
+      ) : value == null ? (
         <Tag bordered={false}>未知</Tag>
       ) : value ? (
         <Tag bordered={false} color="green">可检索</Tag>
       ) : (
-        <Tag bordered={false} color="red">文件缺失</Tag>
+        <Tag bordered={false} color="red">不可检索</Tag>
       ),
   },
 ]
@@ -220,11 +275,15 @@ export default function Status() {
     categories,
   } = useApp()
 
-  const categoryRows = categories.map((key) => ({
-    key,
-    count: health?.category_counts?.[key] ?? null,
-    ready: health?.category_ready?.[key] ?? null,
-  }))
+  const categoryRows = categories.map((key) => {
+    const count = health?.category_counts?.[key] ?? null
+    return {
+      key,
+      count,
+      ready: health?.category_ready?.[key] ?? null,
+      empty: count === 0,
+    }
+  })
   const indexTotal = health?.total_items ?? null
   const rowsWithShare = categoryRows.map((item) => ({
     ...item,
@@ -366,7 +425,7 @@ export default function Status() {
         <SectionLabel
           index="03"
           title={`${rowsWithShare.length} 类索引明细`}
-          extra={<span className="sv-muted">来自 /health 的索引注册表</span>}
+          extra={<span className="sv-muted">来自 /health：静态索引 + 上传入库</span>}
         />
         <Table
           rowKey="key"

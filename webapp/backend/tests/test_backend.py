@@ -11,6 +11,7 @@ import csv
 import io
 import json
 import os
+import sqlite3
 import sys
 import tempfile
 import unittest
@@ -35,6 +36,7 @@ from app.main import app  # noqa: E402
 from app.services.encoder import PlaceholderEncoder, build_encoder  # noqa: E402
 from app.services.index_store import IndexStore  # noqa: E402
 from app.services.matching import MatchService  # noqa: E402
+from app.services.upload_store import UploadStore  # noqa: E402
 from scripts.export_api_docs import render_markdown  # noqa: E402
 
 DIM = 8
@@ -59,14 +61,26 @@ def _build_index(root: Path) -> IndexStore:
         np.save(folder / "image_embeddings.npy", vectors)
         with (folder / "items.csv").open("w", encoding="utf-8", newline="") as handle:
             writer = csv.writer(handle)
-            writer.writerow(["vector_id", "item_name", "product_type", "type", "text"])
+            writer.writerow(
+                [
+                    "vector_id",
+                    "item_id",
+                    "item_name",
+                    "product_type",
+                    "type",
+                    "local_image_path",
+                    "text",
+                ]
+            )
             for i in range(ITEMS_PER_CATEGORY):
                 writer.writerow(
                     [
                         i,
+                        f"{category}_{i}",
                         f"{category}商品{i}",
                         category,
                         f"{category}细分类{i}",
+                        f"data/processed_data_cleaning/{category}/images/{category}_{i}.jpg",
                         f"{category} 的描述 {i}",
                     ]
                 )
@@ -82,10 +96,20 @@ def _build_index(root: Path) -> IndexStore:
     return IndexStore(root, candidate_k=10)
 
 
-def _png_bytes() -> bytes:
+def _png_bytes(color: tuple[int, int, int] = (200, 30, 30)) -> bytes:
     buffer = io.BytesIO()
-    Image.new("RGB", (8, 8), (200, 30, 30)).save(buffer, format="PNG")
+    Image.new("RGB", (8, 8), color).save(buffer, format="PNG")
     return buffer.getvalue()
+
+
+class FakeEncoder(PlaceholderEncoder):
+    """真实模型替身：占位编码器但声明已加载，且带自己的向量空间指纹。"""
+
+    model_loaded = True
+
+    def __init__(self, dim: int = DIM) -> None:
+        super().__init__(dim=dim)
+        self.model_tag = f"test:dim={dim}"
 
 
 class IndexStoreTest(unittest.TestCase):
@@ -123,6 +147,24 @@ class IndexStoreTest(unittest.TestCase):
         self.assertEqual(hits[0].category, "甲")
         self.assertAlmostEqual(hits[0].score, 1.0, places=5)
 
+    def test_static_hit_carries_original_image_path(self) -> None:
+        raw_root = Path(self.tmp.name) / "raw_data"
+        domain = raw_root / "MUGE_data"
+        domain.mkdir(parents=True)
+        with (domain / "products.csv").open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.writer(handle)
+            writer.writerow(["item_id", "local_image_path"])
+            writer.writerow(["甲_2", "data/raw_data/MUGE_data/images/2.jpg"])
+        index = IndexStore(Path(self.tmp.name), candidate_k=10, raw_image_root=raw_root)
+        embeddings = np.load(Path(self.tmp.name) / "甲" / "image_embeddings.npy")
+
+        payload = index.search(embeddings[2], ["甲"], top_k=1)[0].as_dict()
+        self.assertEqual(payload["original_image_path"], "data/raw_data/MUGE_data/images/2.jpg")
+
+        # 没有原始图映射的条目不瞎编，前端会退回 local_image_path
+        other = index.search(embeddings[0], ["甲"], top_k=1)[0].as_dict()
+        self.assertNotIn("original_image_path", other)
+
     def test_result_hides_internal_fields(self) -> None:
         embeddings = np.load(Path(self.tmp.name) / "乙" / "image_embeddings.npy")
         hit = self.store.search(embeddings[0], ["乙"], top_k=1)[0].as_dict()
@@ -147,6 +189,282 @@ class IndexStoreTest(unittest.TestCase):
         with self.assertRaises(ApiError) as caught:
             self.store.best_category(np.zeros(DIM + 3, dtype="float32"))
         self.assertEqual(caught.exception.code, ErrorCode.DIM_MISMATCH)
+
+
+class UploadStoreTest(unittest.TestCase):
+    """增量入库：静态索引只读，SQLite 追加后立即可检索。"""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        root = Path(self.tmp.name)
+        self.index_dir = root / "index"
+        _build_index(self.index_dir)
+        self.store = UploadStore(
+            root / "webapp.db",
+            root / "images",
+            dimension=DIM,
+            model_tag="test:dim=8",
+        )
+        self.index = IndexStore(
+            self.index_dir,
+            candidate_k=10,
+            upload_store=self.store,
+            new_category_min_items=1,
+        )
+        self.encoder = FakeEncoder()
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def _add(
+        self,
+        category: str,
+        *,
+        color: tuple[int, int, int] = (200, 30, 30),
+        metadata: dict[str, str] | None = None,
+    ) -> tuple[dict, bool, np.ndarray]:
+        raw = _png_bytes(color)
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        vector = self.encoder.encode_image(image)
+        row, created = self.store.add_item(
+            category=category,
+            vector=vector,
+            raw=raw,
+            image_format="PNG",
+            metadata=metadata or {},
+            image_width=image.width,
+            image_height=image.height,
+        )
+        return row, created, vector
+
+    def test_suggestion_does_not_write(self) -> None:
+        raw = _png_bytes()
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        result = MatchService(self.encoder, self.index).ingest_item(
+            image,
+            raw,
+            "PNG",
+            category=None,
+            confirm=False,
+            create_category=False,
+            metadata={},
+        )
+        self.assertFalse(result["created"])
+        self.assertFalse(result["duplicate"])
+        self.assertIsNone(result["item_id"])
+        self.assertEqual(self.store.counts(), {})
+
+    def test_insert_into_existing_category_is_visible_immediately(self) -> None:
+        raw = _png_bytes((11, 22, 33))
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        vector = self.encoder.encode_image(image)
+        # 先加载一次，证明 reload 不是只对未缓存的类别有效
+        self.index.search(vector, ["甲"], top_k=1)
+        result = MatchService(self.encoder, self.index).ingest_item(
+            image,
+            raw,
+            "PNG",
+            category="甲",
+            confirm=True,
+            create_category=False,
+            metadata={"item_name": "新鞋"},
+        )
+        self.assertTrue(result["created"])
+        hits = self.index.search(vector, ["甲"], top_k=1)
+        self.assertEqual(hits[0].item["item_id"], result["item_id"])
+        self.assertEqual(self.index.summary()["category_counts"]["甲"], ITEMS_PER_CATEGORY + 1)
+
+    def test_new_category_is_classifiable_with_one_item(self) -> None:
+        row, created, vector = self._add("新类", color=(1, 2, 3))
+        self.assertTrue(created)
+        self.assertIn("新类", self.index.categories)
+        self.assertEqual(self.index.best_category(vector)[0], "新类")
+        self.assertEqual(self.store.counts()["新类"], 1)
+
+    def test_min_items_threshold_keeps_one_item_out_of_classification(self) -> None:
+        self.index.new_category_min_items = 2
+        _, _, vector = self._add("新类", color=(4, 5, 6))
+        category, _, scores = self.index.best_category(vector)
+        self.assertNotEqual(category, "新类")
+        self.assertNotIn("新类", scores)
+
+    def test_duplicate_returns_same_item(self) -> None:
+        first, created_first, _ = self._add("甲")
+        second, created_second, _ = self._add("甲")
+        self.assertTrue(created_first)
+        self.assertFalse(created_second)
+        self.assertEqual(first["item_id"], second["item_id"])
+        self.assertEqual(self.index.summary()["category_counts"]["甲"], ITEMS_PER_CATEGORY + 1)
+
+    def test_unknown_category_is_rejected(self) -> None:
+        raw = _png_bytes((7, 8, 9))
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        with self.assertRaises(ApiError) as caught:
+            MatchService(self.encoder, self.index).ingest_item(
+                image,
+                raw,
+                "PNG",
+                category="不存在",
+                confirm=True,
+                create_category=False,
+                metadata={},
+            )
+        self.assertEqual(caught.exception.code, ErrorCode.CATEGORY_NOT_FOUND)
+
+    def test_confirm_without_category_is_rejected(self) -> None:
+        raw = _png_bytes((10, 11, 12))
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        with self.assertRaises(ApiError) as caught:
+            MatchService(self.encoder, self.index).ingest_item(
+                image,
+                raw,
+                "PNG",
+                category=None,
+                confirm=True,
+                create_category=False,
+                metadata={},
+            )
+        self.assertEqual(caught.exception.code, ErrorCode.BAD_REQUEST)
+
+    def test_invalid_category_name_is_rejected(self) -> None:
+        with self.assertRaises(ApiError) as caught:
+            self.store.ensure_category("a/b")
+        self.assertEqual(caught.exception.code, ErrorCode.BAD_REQUEST)
+
+    def test_dimension_mismatch_is_rejected(self) -> None:
+        with self.assertRaises(ApiError) as caught:
+            self.store.add_item(
+                category="甲",
+                vector=np.zeros(DIM + 1, dtype="float32"),
+                raw=_png_bytes((13, 14, 15)),
+                image_format="PNG",
+                metadata={},
+                image_width=8,
+                image_height=8,
+            )
+        self.assertEqual(caught.exception.code, ErrorCode.DIM_MISMATCH)
+
+    def test_placeholder_refuses_ingest(self) -> None:
+        raw = _png_bytes((16, 17, 18))
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        with self.assertRaises(ApiError) as caught:
+            MatchService(PlaceholderEncoder(dim=DIM), self.index).ingest_item(
+                image,
+                raw,
+                "PNG",
+                category="甲",
+                confirm=True,
+                create_category=False,
+                metadata={},
+            )
+        self.assertEqual(caught.exception.code, ErrorCode.MODEL_UNAVAILABLE)
+
+    def test_model_tag_conflict_is_rejected(self) -> None:
+        self._add("甲")
+        other = UploadStore(
+            self.store.db_path,
+            self.store.image_root,
+            dimension=DIM,
+            model_tag="other:dim=8",
+        )
+        with self.assertRaises(ApiError) as caught:
+            other.add_item(
+                category="甲",
+                vector=self.encoder.encode_image(Image.open(io.BytesIO(_png_bytes((19, 20, 21))))),
+                raw=_png_bytes((19, 20, 21)),
+                image_format="PNG",
+                metadata={},
+                image_width=8,
+                image_height=8,
+            )
+        self.assertEqual(caught.exception.code, ErrorCode.MODEL_UNAVAILABLE)
+
+    def test_two_tags_are_rejected_at_init(self) -> None:
+        self._add("甲", color=(60, 61, 62))
+        self._add("甲", color=(63, 64, 65))
+        conn = sqlite3.connect(self.store.db_path)
+        try:
+            conn.execute(
+                "UPDATE items SET model_tag = 'other:dim=8' "
+                "WHERE rowid = (SELECT rowid FROM items LIMIT 1)"
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        with self.assertRaises(ApiError) as caught:
+            UploadStore(
+                self.store.db_path,
+                self.store.image_root,
+                dimension=DIM,
+                model_tag="test:dim=8",
+            )
+        self.assertEqual(caught.exception.code, ErrorCode.MODEL_UNAVAILABLE)
+
+    def test_os_replace_failure_rolls_back(self) -> None:
+        raw = _png_bytes((22, 23, 24))
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        vector = self.encoder.encode_image(image)
+        with mock.patch("app.services.upload_store.os.replace", side_effect=OSError("disk")):
+            with self.assertRaises(OSError):
+                self.store.add_item(
+                    category="甲",
+                    vector=vector,
+                    raw=raw,
+                    image_format="PNG",
+                    metadata={},
+                    image_width=image.width,
+                    image_height=image.height,
+                )
+        self.assertFalse(self.store.has_category("甲"))
+        self.assertEqual(list((self.store.image_root / "甲" / "images").glob("*")), [])
+
+    def test_persistence_across_store_instances(self) -> None:
+        row, _, _ = self._add("甲")
+        reopened = UploadStore(
+            self.store.db_path,
+            self.store.image_root,
+            dimension=DIM,
+            model_tag="test:dim=8",
+        )
+        items, vectors = reopened.items("甲")
+        self.assertEqual([item["item_id"] for item in items], [row["item_id"]])
+        self.assertEqual(vectors.shape, (1, DIM))
+
+    def test_empty_category_is_created_but_not_classifiable(self) -> None:
+        self.assertTrue(self.store.ensure_category("空类"))
+        self.assertFalse(self.store.ensure_category("空类"))
+        self.assertIn("空类", self.index.categories)
+        self.assertEqual(self.index.summary()["category_counts"]["空类"], 0)
+        category, _, scores = self.index.best_category(np.zeros(DIM, dtype="float32"))
+        self.assertNotEqual(category, "空类")
+        self.assertNotIn("空类", scores)
+        self.assertEqual(self.index.search(np.zeros(DIM, dtype="float32"), ["空类"], top_k=1), [])
+
+    def test_duplicate_does_not_create_unknown_category(self) -> None:
+        raw = _png_bytes((25, 26, 27))
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        vector = self.encoder.encode_image(image)
+        self.store.add_item(
+            category="甲",
+            vector=vector,
+            raw=raw,
+            image_format="PNG",
+            metadata={},
+            image_width=image.width,
+            image_height=image.height,
+        )
+        result = MatchService(self.encoder, self.index).ingest_item(
+            image,
+            raw,
+            "PNG",
+            category="新类",
+            confirm=True,
+            create_category=True,
+            metadata={},
+        )
+        self.assertTrue(result["duplicate"])
+        self.assertFalse(result["created"])
+        self.assertNotIn("新类", self.store.categories())
 
 
 class EncoderTest(unittest.TestCase):
@@ -425,6 +743,134 @@ class AsyncTaskApiTest(unittest.TestCase):
         self.assertEqual(body["result"]["error"]["msg"], "坏图")
 
 
+class AdminApiTest(unittest.TestCase):
+    """数据入库接口：建议不写库、确认才写、重复不计数。"""
+
+    tmp: tempfile.TemporaryDirectory
+    service: MatchService
+    client: TestClient
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.tmp = tempfile.TemporaryDirectory()
+        root = Path(cls.tmp.name)
+        index_dir = root / "index"
+        _build_index(index_dir)
+        store = UploadStore(
+            root / "webapp.db",
+            root / "images",
+            dimension=DIM,
+            model_tag="test:dim=8",
+        )
+        index = IndexStore(
+            index_dir,
+            candidate_k=10,
+            upload_store=store,
+            new_category_min_items=1,
+        )
+        cls.service = MatchService(FakeEncoder(), index)
+        app.dependency_overrides[get_match_service] = lambda: cls.service
+        cls.client = TestClient(app, raise_server_exceptions=False)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        app.dependency_overrides.clear()
+        cls.tmp.cleanup()
+
+    def _total(self) -> int:
+        store = self.service.index.upload_store
+        assert store is not None
+        return sum(store.counts().values())
+
+    def test_suggest_returns_category_without_writing(self) -> None:
+        before = self._total()
+        response = self.client.post(
+            "/api/v1/admin/items",
+            files={"file": ("p.png", _png_bytes((40, 41, 42)), "image/png")},
+        )
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertEqual(set(body), {"code", "result", "msg"})
+        self.assertFalse(body["result"]["created"])
+        self.assertIn(body["result"]["suggested_category"], CATEGORIES)
+        self.assertEqual(self._total(), before)
+
+    def test_confirm_without_category_is_rejected(self) -> None:
+        response = self.client.post(
+            "/api/v1/admin/items",
+            files={"file": ("p.png", _png_bytes((43, 44, 45)), "image/png")},
+            data={"confirm": "true"},
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["code"], ErrorCode.BAD_REQUEST)
+
+    def test_invalid_category_is_rejected(self) -> None:
+        response = self.client.post(
+            "/api/v1/admin/items",
+            files={"file": ("p.png", _png_bytes((46, 47, 48)), "image/png")},
+            data={"category": "a/b", "confirm": "true"},
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["code"], ErrorCode.BAD_REQUEST)
+
+    def test_ingest_existing_category_creates_item(self) -> None:
+        before = self.service.index.summary()["category_counts"]["甲"]
+        response = self.client.post(
+            "/api/v1/admin/items",
+            files={"file": ("p.png", _png_bytes((49, 50, 51)), "image/png")},
+            data={
+                "category": "甲",
+                "confirm": "true",
+                "item_name": "接口新增商品",
+                "type": "接口细分",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        result = response.json()["result"]
+        self.assertTrue(result["created"])
+        self.assertTrue(result["item_id"].startswith("upload_"))
+        self.assertEqual(result["item"]["item_name"], "接口新增商品")
+        self.assertEqual(self.service.index.summary()["category_counts"]["甲"], before + 1)
+
+    def test_duplicate_upload_returns_same_item(self) -> None:
+        raw = _png_bytes((52, 53, 54))
+        first = self.client.post(
+            "/api/v1/admin/items",
+            files={"file": ("p.png", raw, "image/png")},
+            data={"category": "甲", "confirm": "true"},
+        ).json()["result"]
+        second = self.client.post(
+            "/api/v1/admin/items",
+            files={"file": ("p.png", raw, "image/png")},
+            data={"category": "甲", "confirm": "true"},
+        ).json()["result"]
+        self.assertTrue(first["created"])
+        self.assertTrue(second["duplicate"])
+        self.assertEqual(first["item_id"], second["item_id"])
+
+    def test_create_empty_category(self) -> None:
+        response = self.client.post("/api/v1/admin/categories", json={"name": "空类-API"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["result"], {"created": True, "name": "空类-API"})
+        again = self.client.post("/api/v1/admin/categories", json={"name": "空类-API"})
+        self.assertFalse(again.json()["result"]["created"])
+        self.assertIn("空类-API", self.service.index.categories)
+
+    def test_placeholder_refuses_ingest(self) -> None:
+        placeholder = MatchService(PlaceholderEncoder(dim=DIM), self.service.index)
+        app.dependency_overrides[get_match_service] = lambda: placeholder
+        try:
+            response = self.client.post(
+                "/api/v1/admin/items",
+                files={"file": ("p.png", _png_bytes((55, 56, 57)), "image/png")},
+                data={"category": "甲", "confirm": "true"},
+            )
+        finally:
+            app.dependency_overrides[get_match_service] = lambda: self.service
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.json()["code"], ErrorCode.MODEL_UNAVAILABLE)
+
+
 class ErrorCodeTest(unittest.TestCase):
     def test_http_status_is_derived_from_business_code(self) -> None:
         for code in ErrorCode:
@@ -463,7 +909,7 @@ class OpenApiTest(unittest.TestCase):
     def setUp(self) -> None:
         self.schema = app.openapi()
 
-    def test_declares_the_seven_endpoints(self) -> None:
+    def test_declares_the_nine_endpoints(self) -> None:
         self.assertEqual(
             set(self.schema["paths"]),
             {
@@ -471,6 +917,8 @@ class OpenApiTest(unittest.TestCase):
                 "/api/v1/image",
                 "/api/v1/text",
                 "/api/v1/match",
+                "/api/v1/admin/items",
+                "/api/v1/admin/categories",
                 "/api/v1/tasks/image",
                 "/api/v1/tasks/batch",
                 "/api/v1/tasks/{task_id}",
@@ -483,6 +931,8 @@ class OpenApiTest(unittest.TestCase):
             ("ImageResponse", "ImageResult"),
             ("TextResponse", "TextResult"),
             ("MatchResponse", "MatchResult"),
+            ("AdminItemResponse", "AdminItemResult"),
+            ("AdminCategoryResponse", "AdminCategoryResult"),
             ("TaskSubmitResponse", "TaskSubmitResult"),
             ("TaskStatusResponse", "TaskStatusResult"),
         ]:
@@ -517,6 +967,8 @@ class ExportApiDocsTest(unittest.TestCase):
             "/api/v1/image",
             "/api/v1/text",
             "/api/v1/match",
+            "/api/v1/admin/items",
+            "/api/v1/admin/categories",
             "/api/v1/tasks/image",
             "/api/v1/tasks/batch",
             "/api/v1/tasks/{task_id}",

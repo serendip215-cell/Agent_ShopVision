@@ -1,7 +1,34 @@
 import { resolveItemImage } from '@/utils/itemImage'
 
 describe('resolveItemImage', () => {
-  it('优先用后端给的 local_image_path 走 /item-images', () => {
+  it('有原始图时优先走 /item-originals，而不是清洗图', () => {
+    expect(
+      resolveItemImage({
+        item_id: '12452469352',
+        local_image_path: 'data/processed_data_cleaning/包/images/12452469352.jpg',
+        original_image_path: 'data/raw_data/Suning_data/images/12452469352.jpg',
+      }),
+    ).toBe('/item-originals/Suning_data/images/12452469352.jpg')
+  })
+
+  it('原始图路径前缀不认识时退回 local_image_path', () => {
+    expect(
+      resolveItemImage({
+        local_image_path: 'data/processed_data_cleaning/鞋/images/a.jpg',
+        original_image_path: 'C:/elsewhere/a.jpg',
+      }),
+    ).toBe('/item-images/鞋/images/a.jpg')
+  })
+
+  it('兼容原始图的 Windows 反斜杠路径', () => {
+    expect(
+      resolveItemImage({
+        original_image_path: 'data\\raw_data\\MUGE_data\\images\\916.jpg',
+      }),
+    ).toBe('/item-originals/MUGE_data/images/916.jpg')
+  })
+
+  it('没有原始图时用后端给的 local_image_path 走 /item-images', () => {
     expect(
       resolveItemImage({
         item_id: 'muge_430640',

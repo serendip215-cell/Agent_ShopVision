@@ -31,6 +31,10 @@ class TextQueryRequest(BaseModel):
     category: str | None = Field(default=None, description="限定类别，留空搜全部", examples=["鞋"])
 
 
+class AdminCategoryRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=64, description="新类别名", examples=["测试类"])
+
+
 # ---------- 结果模型：字段与 data/index_data_finetuned 的 items.csv 对齐 ----------
 
 
@@ -61,10 +65,20 @@ class MatchedItem(BaseModel):
     material: str | None = Field(default=None, description="材质")
     description: str | None = Field(default=None, description="商品文案（实验一清洗后）")
     type: str | None = Field(default=None, description="细分类，如「女士小板鞋」")
-    local_image_path: str | None = Field(default=None, description="原图相对路径")
+    local_image_path: str | None = Field(
+        default=None, description="索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图）"
+    )
+    original_image_path: str | None = Field(
+        default=None,
+        description="原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问",
+    )
     image_status: str | None = Field(default=None, description="图片处理状态")
-    image_height: str | None = Field(default=None, description="图高（CSV 原样字符串）")
-    image_width: str | None = Field(default=None, description="图宽（CSV 原样字符串）")
+    image_height: str | int | None = Field(
+        default=None, description="图高（静态索引为 CSV 原样字符串，上传入库为整数）"
+    )
+    image_width: str | int | None = Field(
+        default=None, description="图宽（静态索引为 CSV 原样字符串，上传入库为整数）"
+    )
 
 
 class HealthResult(BaseModel):
@@ -72,24 +86,25 @@ class HealthResult(BaseModel):
         description="true=已接真 ONNX 双塔；false=占位编码器，检索结果无意义"
     )
     backend: str = Field(description="当前编码器后端：placeholder / onnx")
-    index_dir: str = Field(description="索引目录")
-    categories: list[str] = Field(description="索引里注册的类别")
+    index_dir: str = Field(description="静态索引目录")
+    categories: list[str] = Field(description="全部类别：静态索引 + 上传入库")
     dimension: int | None = Field(default=None, description="向量维度")
     category_counts: dict[str, int] = Field(
-        default_factory=dict, description="各类索引条数（构建时快照）"
+        default_factory=dict, description="各类条数：静态索引 + 上传入库"
     )
-    total_items: int = Field(default=0, description="索引总条数")
+    total_items: int = Field(default=0, description="可检索总条数")
     category_ready: dict[str, bool] = Field(
-        default_factory=dict, description="各类索引文件是否齐全（items.csv + image_embeddings.npy）"
+        default_factory=dict,
+        description="各类是否可检索：静态类别看文件是否齐全，仅上传的新类别看是否有商品",
     )
-    updated_at: str | None = Field(default=None, description="索引构建时间，来自注册表")
+    updated_at: str | None = Field(default=None, description="静态索引构建时间（不含上传入库）")
     model_name: str | None = Field(default=None, description="建索引所用视觉塔，如 ViT-B-16")
     model_checkpoint: str | None = Field(default=None, description="建索引所用权重路径")
 
 
 class ImageResult(BaseModel):
-    category: str | None = Field(description="判出的类别：9 类里相似度最高的那个")
-    confidence: float = Field(description="对 9 类最高分做 softmax 后的概率")
+    category: str | None = Field(description="判出的类别：全部可判类别里相似度最高的那个")
+    confidence: float = Field(description="对全部可判类别最高分做 softmax 后的概率")
     score: float | None = Field(description="该类原始相似度")
     topk: list[CategoryScore] = Field(description="各类最高分，降序前 3")
     items: list[MatchedItem] = Field(
@@ -114,7 +129,7 @@ class MatchResult(BaseModel):
     image_category: str | None = Field(default=None, description="图像塔判出的类别")
     text_category: str | None = Field(default=None, description="文本塔判出的类别")
     image_confidence: float = Field(
-        default=0.0, description="图像塔对判出类别的置信度（9 类最高分 softmax）"
+        default=0.0, description="图像塔对判出类别的置信度（全部可判类别最高分 softmax）"
     )
     image_score: float | None = Field(default=None, description="图像塔该类别原始相似度")
     image_type: str | None = Field(
@@ -122,7 +137,7 @@ class MatchResult(BaseModel):
         description="图像塔细分类：图像判出类别内最相似商品的 type",
     )
     text_confidence: float = Field(
-        default=0.0, description="文本塔对判出类别的置信度（9 类最高分 softmax）"
+        default=0.0, description="文本塔对判出类别的置信度（全部可判类别最高分 softmax）"
     )
     text_score: float | None = Field(default=None, description="文本塔该类别原始相似度")
     text_type: str | None = Field(
@@ -148,6 +163,65 @@ class TextResponse(ApiResponse):
 
 class MatchResponse(ApiResponse):
     result: MatchResult | None = None
+
+
+# ---------- 数据入库：上传商品 / 新建空类别 ----------
+
+
+class AdminTopCategory(BaseModel):
+    category: str = Field(description="候选类别")
+    similarity: float = Field(description="该类别最高余弦相似度")
+
+
+class AdminItem(BaseModel):
+    """一条上传商品；静态字段与 items.csv 对齐，宽高为整数。"""
+
+    model_config = ConfigDict(extra="allow")
+
+    item_id: str = Field(description="上传条目 ID，形如 upload_<sha256 前缀>")
+    category: str = Field(description="所属类别")
+    item_name: str | None = Field(default=None, description="商品标题")
+    product_type: str | None = Field(default=None, description="商品大类")
+    type: str | None = Field(default=None, description="细分类")
+    color: str | None = Field(default=None, description="颜色")
+    material: str | None = Field(default=None, description="材质")
+    brand: str | None = Field(default=None, description="品牌")
+    description: str | None = Field(default=None, description="商品文案")
+    local_image_path: str | None = Field(default=None, description="原图相对路径")
+    image_status: str | None = Field(default=None, description="图片处理状态")
+    image_height: int | None = Field(default=None, description="图高")
+    image_width: int | None = Field(default=None, description="图宽")
+    created_at: str | None = Field(default=None, description="入库时间（UTC）")
+
+
+class AdminItemResult(BaseModel):
+    created: bool = Field(description="true=本次真正写入；false=未写（建议或重复）")
+    duplicate: bool = Field(description="true=图片已存在，返回已有条目")
+    item_id: str | None = Field(default=None, description="写入或命中的条目 ID")
+    category: str | None = Field(default=None, description="实际所属类别")
+    similarity: float | None = Field(
+        default=None, description="写入前在目标类别内的最近邻相似度；空类别为 null"
+    )
+    suggested_category: str | None = Field(default=None, description="图像塔建议的类别")
+    suggested_score: float | None = Field(default=None, description="建议类别的原始相似度")
+    topk: list[AdminTopCategory] = Field(
+        default_factory=list, description="建议类别的相似度排序，最多 3 个"
+    )
+    created_at: str | None = Field(default=None, description="条目入库时间")
+    item: AdminItem | None = Field(default=None, description="写入或命中的完整条目")
+
+
+class AdminCategoryResult(BaseModel):
+    created: bool = Field(description="true=本次新建；false=类别已存在")
+    name: str = Field(description="规范化后的类别名")
+
+
+class AdminItemResponse(ApiResponse):
+    result: AdminItemResult | None = None
+
+
+class AdminCategoryResponse(ApiResponse):
+    result: AdminCategoryResult | None = None
 
 
 # ---------- 异步任务（Celery + Redis）：提交与轮询 ----------

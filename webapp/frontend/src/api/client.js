@@ -91,6 +91,31 @@ export function matchImageText({ file, text, topK = 5 }, signal) {
   return client.post('/match', form, { signal })
 }
 
+// ---- 数据入库（未启用管理鉴权，仅本机演示） ----
+
+export function suggestAdminItem(file, signal) {
+  const form = new FormData()
+  form.append('file', file)
+  return client.post('/admin/items', form, { signal })
+}
+
+export function ingestAdminItem({ file, category, createCategory = false, metadata = {} }, signal) {
+  const form = new FormData()
+  form.append('file', file)
+  form.append('category', category)
+  form.append('confirm', 'true')
+  if (createCategory) form.append('create_category', 'true')
+  Object.entries(metadata).forEach(([key, value]) => {
+    const text = String(value ?? '').trim()
+    if (text) form.append(key, text)
+  })
+  return client.post('/admin/items', form, { signal })
+}
+
+export function createAdminCategory(name, signal) {
+  return client.post('/admin/categories', { name }, { signal })
+}
+
 // ---- 异步任务（Celery + Redis）：提交拿 task_id，再轮询结果 ----
 
 export function enqueueImageTask(file, signal) {

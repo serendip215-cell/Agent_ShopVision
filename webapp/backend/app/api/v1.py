@@ -45,8 +45,8 @@ _ERROR_RESPONSES: dict[int | str, dict[str, Any]] = {
 }
 
 
-def _open_image(raw: bytes) -> "PILImage":
-    """上传字节 -> RGB 图片；所有上传都从这里过，大小/格式校验也集中在这一道。"""
+def _decode_image(raw: bytes) -> tuple["PILImage", str]:
+    """上传字节 -> (RGB 图片, 格式)；所有上传都从这里过，大小/格式校验也集中在这一道。"""
     limit = get_settings().max_upload_mb * 1024 * 1024
     if len(raw) > limit:
         raise ApiError(ErrorCode.FILE_TOO_LARGE, f"上限 {get_settings().max_upload_mb} MB")
@@ -57,9 +57,15 @@ def _open_image(raw: bytes) -> "PILImage":
         image.load()
     except Exception as exc:  # noqa: BLE001 - 任何解析失败都归为格式错误
         raise ApiError(ErrorCode.INVALID_IMAGE, f"无法解析：{type(exc).__name__}") from exc
-    if (image.format or "").upper() not in _ALLOWED_FORMATS:
+    image_format = (image.format or "").upper()
+    if image_format not in _ALLOWED_FORMATS:
         raise ApiError(ErrorCode.INVALID_IMAGE, f"不支持 {image.format}")
-    return image.convert("RGB")
+    return image.convert("RGB"), "JPEG" if image_format == "JPG" else image_format
+
+
+def _open_image(raw: bytes) -> "PILImage":
+    """只要图片、不要格式的调用方（异步任务）走这个薄包装。"""
+    return _decode_image(raw)[0]
 
 
 @router.get(
@@ -83,7 +89,7 @@ def health(service: MatchService = Depends(get_match_service)) -> HealthResponse
     summary="图像分类",
     tags=["图像分类页"],
     responses=_ERROR_RESPONSES,
-    description="上传商品图 → 图像塔编码成 512 维向量 → 与索引里 9 类向量比相似度 → "
+    description="上传商品图 → 图像塔编码成 512 维向量 → 与全部可判类别比相似度 → "
     "返回最可能的类别、置信度与相似商品类别排序。",
 )
 async def classify_image(
