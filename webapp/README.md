@@ -5,16 +5,17 @@
 
 ## 〇、这个系统最终是什么（先看这一段）
 
-一句话：**用户给一张商品图或一句中文查询，后端用实验三的双塔模型编码，在 9 类商品库（10,165 条）里检索，
-返回类别与相似商品。**
+一句话：**用户给一张商品图或一句中文查询，后端用实验三的双塔模型编码，在 9 类商品库（9,393 条）里检索，
+返回类别与相似商品；管理员还可以把新商品图增量写进已有类别或新类别。**
 
-### 1. 三个功能 = 任务书要的三个页面
+### 1. 三个功能 = 任务书要的三个页面（外加一个商品入库页）
 
 | 页面 | 用户怎么用 | 屏幕上看什么 | 后端接口 |
 |---|---|---|---|
 | 图像分类 | 拖 / 选一张商品图 → 点「分析」 | 判出的类别 + 置信度，下面列相似商品（名称 / 类别 / 相似度） | `POST /api/v1/image` |
 | 文本检索 | 输入「白色运动鞋」→ 类别可选 → 点「搜索」 | 相关商品列表（名称、类别、相似度） | `POST /api/v1/text` |
 | 图文匹配 | 同时传图 + 输文本 → 点「匹配」 | 图判出的类别 vs 文判出的类别；一致显示「匹配」，不一致把两个类别都摆出来 | `POST /api/v1/match` |
+| 商品入库 | 选图 → 看模型建议 → 选已有类别或输入新类别 → 确认 | 建议类别、候选相似度、写入后的 `item_id` 与入库时间 | `POST /api/v1/admin/items`、`POST /api/v1/admin/categories` |
 
 ### 2. 用户实际的一次操作（图像分类为例）
 
@@ -30,7 +31,8 @@
 **能用**：传图出类别并给相似商品；中文查询出商品；图文比对出是否一致；错得明明白白有中文提示；
 `/docs` 能看接口文档；三浏览器打开正常、手机屏不塌。
 
-**不做**（明确划出去，报告里如实写）：登录注册、下单、数据库持久化、模型训练（那是实验三的事）。
+**不做**（明确划出去，报告里如实写）：登录注册、下单、管理鉴权、商品编辑/删除、多实例同时写入、
+模型训练（那是实验三的事）。静态索引保持只读；上传数据用 SQLite 增量持久化，不是把整库重训。
 批量 / 大图异步走 Celery + Redis，属于加分项，已经做了（见 §二.5），Redis 可以用云端免费层。
 
 ### 4. 怎么实现的（数据流）
@@ -43,7 +45,8 @@ api/v1.py  FastAPI 路由     ← 只校验参数，不写业务
    ▼
 services/matching.py  MatchService   业务编排
    ├─ Encoder     双塔 ONNX 各编一路 → 512 维 L2 归一化向量
-   └─ IndexStore  data/index_data_finetuned 的 9 类向量 + items.csv 元数据
+   ├─ IndexStore  data/index_data_finetuned 的 9 类静态向量 + items.csv 元数据
+   └─ UploadStore SQLite 增量上传库；读时与静态索引按类别合并
    ▼
 {code, result, msg}  →  前端渲染 / 弹中文错误
 ```
@@ -95,6 +98,17 @@ pip install -r requirements.txt
 ```powershell
 copy .env.example .env              # 默认 placeholder，开箱即用
 ```
+
+#### 2.1 增量入库配置（可选）
+
+| 环境变量 | 默认 | 作用 |
+|---|---|---|
+| `SHOPVISION_DB_PATH` | `data/webapp.db` | 上传商品库（SQLite），运行产物，已 gitignore |
+| `SHOPVISION_IMAGE_ROOT` | `data/processed_data_cleaning` | 上传原图根目录；`/item-images` 也挂这里 |
+| `SHOPVISION_NEW_CATEGORY_MIN_ITEMS` | `1` | 新类别至少几条才参与自动判类 |
+
+> 上传入库必须 `SHOPVISION_MODEL_BACKEND=onnx`；占位模式写库返回 `50001`，防止随机向量污染索引。
+> 本轮未做管理鉴权，只允许本机演示，不要把 8000 端口暴露到公网。
 
 ### 3. 启动
 
@@ -177,6 +191,8 @@ mypy .                              # 类型   可选依赖缺装不算错（已
 | POST | `/api/v1/image` | 图像分类 | `multipart/form-data`：`file` |
 | POST | `/api/v1/text` | 文本检索 | `application/json`：`{query, top_k?, category?}` |
 | POST | `/api/v1/match` | 图文匹配 | `multipart/form-data`：`file` + `text` + `top_k?` |
+| POST | `/api/v1/admin/items` | 上传商品入库 | `multipart/form-data`：`file` + `category?` + `confirm?` + `create_category?` + 元数据 |
+| POST | `/api/v1/admin/categories` | 新建空类别 | `application/json`：`{name}` |
 | POST | `/api/v1/tasks/image` | 提交单张异步分类（大图） | `multipart/form-data`：`file` → `{task_id}` |
 | POST | `/api/v1/tasks/batch` | 提交批量异步分类 | `multipart/form-data`：`files`（≤12）→ `{task_id}` |
 | GET | `/api/v1/tasks/{task_id}` | 轮询任务状态 | — |
@@ -195,7 +211,7 @@ Java 那边用 springdoc / knife4j 挂 Swagger，FastAPI 是**自带**的，开�
 | `/redoc` | ReDoc，排版舒服的阅读版 | 写报告 API 文档那一节 |
 | `/openapi.json` | OpenAPI 3 规范，机器可读 | 导给别人 / 喂 Postman |
 
-接口分组按三个页面走（状态 / 图像分类页 / 文本检索页 / 多模态匹配页），每个接口都带
+接口分组按页面走（状态 / 图像分类页 / 文本检索页 / 多模态匹配页 / 数据入库 / 异步任务），每个接口都带
 summary、description、参数说明、**返回值结构**与可能的错误码（400/404/500）。
 所以 **wlz 写 API 文档那一节，直接把 `/docs` 里内容整理成表格即可**，不用猜。
 
@@ -220,7 +236,7 @@ summary、description、参数说明、**返回值结构**与可能的错误码�
 
 **C. 拿去接前端 / 导工具**
 
-Postman **Import → File** 选中 `openapi.json`，七个请求（含文件上传字段）自动建好；
+Postman **Import → File** 选中 `openapi.json`，九个请求（含文件上传字段）自动建好；
 也可以把这份 json 直接丢给 AI，让它照着发请求。
 
 **按人分工**
@@ -264,7 +280,19 @@ curl.exe -X POST http://localhost:8000/api/v1/text -H "Content-Type: application
 
 # 图文匹配
 curl.exe -X POST http://localhost:8000/api/v1/match -F "file=@xxx.jpg" -F "text=白色运动鞋"
+
+# 商品入库（先只传图看建议，不写库）
+curl.exe -X POST http://localhost:8000/api/v1/admin/items -F "file=@xxx.jpg"
+
+# 商品入库（确认写入已有类别；新类别加 create_category=true）
+curl.exe -X POST http://localhost:8000/api/v1/admin/items -F "file=@xxx.jpg" -F "category=鞋" -F "confirm=true"
+
+# 新建空类别
+curl.exe -X POST http://localhost:8000/api/v1/admin/categories -H "Content-Type: application/json" -d "{\"name\":\"测试类\"}"
 ```
+
+> 入库需要 `SHOPVISION_MODEL_BACKEND=onnx`；占位模式会被拒绝（`50001`）。本轮无管理鉴权，只在本机演示。
+> 上传的商品图落到 `data/processed_data_cleaning/<类别>/images/`，元数据与向量落在 `data/webapp.db`。
 
 Python 客户端：
 
@@ -275,6 +303,26 @@ print(requests.post("http://localhost:8000/api/v1/text", json={"query": "白色�
 ```
 
 > `health` 里 `model_loaded: false` = 当前占位模式，**检索结果无意义**；`true` = 已接真 ONNX。
+
+### 商品入库（增量数据，2026-11-03 起）
+
+前端「商品入库」页（`/admin`）走的就是下面两步，不写库那一步可以单独调接口验证：
+
+1. **选图看建议**：只传 `file`，图像塔给出 `suggested_category` 与 top3，**不写库**。
+2. **确认写入**：`confirm=true` + `category`；类别不存在时勾新类别 → 后端 `create_category=true` 自动建类。
+
+| 落点 | 内容 |
+|---|---|
+| `data/webapp.db` | SQLite：类别、条目元数据、512 维向量、去重指纹 `image_sha256` |
+| `data/processed_data_cleaning/<类别>/images/upload_*` | 上传原图，经 `/item-images` 提供 |
+| `data/index_data_finetuned/` | 静态索引，**只读不动** |
+
+- 写库后 `IndexStore.reload(category)`，`/image`、`/text`、`/match` 无需重启即可检索到；`/health` 计数同步变化。
+- 同一张图重复上传走 `image_sha256` 去重，返回原 `item_id`，计数不增。
+- 新类别是**检索桶**，不是模型重新训练：类别名不进模型词表，1 件商品即参与自动判类（`SHOPVISION_NEW_CATEGORY_MIN_ITEMS`）。
+- 空类别（只建类不传图）会出现在 `/health.categories`，但不参与自动判类，显式 `/text?category=` 返回空。
+- `placeholder` 模式拒绝写库；切换 ONNX 产物后 `model_tag` 变化，旧库需备份删除后重建。
+- Celery worker 是独立进程，有自己那份索引缓存：同步接口立即生效，异步任务要重启 worker 才看得到新条目。
 
 ## 四、后端架构（分层与扩展点）
 
@@ -288,11 +336,13 @@ app/
 ├── celery_app.py      Celery 实例（broker / result backend 来自环境变量）
 ├── tasks.py           Celery 任务：单图 / 批量分类（读临时文件，回报进度）
 ├── api/v1.py          路由（Controller）：只取参、校验、调服务
+├── api/admin.py       数据入库路由：上传商品 / 新建类别
 ├── api/tasks.py       异步任务路由：提交 → 返回 task_id，轮询 → 状态 + 结果
 └── services/
-    ├── encoder.py     编码器接缝：PlaceholderEncoder / OnnxEncoder
-    ├── index_store.py 数据访问：index_data_finetuned 的条目与向量
-    └── matching.py    业务：status / 图像分类 / 文本检索 / 图文匹配
+    ├── encoder.py     编码器接缝：PlaceholderEncoder / OnnxEncoder（带 model_tag 指纹）
+    ├── index_store.py 数据访问：静态索引 + 上传库按类别合并
+    ├── upload_store.py SQLite 增量库：事务写入、去重、路径安全
+    └── matching.py    业务：status / 图像分类 / 文本检索 / 图文匹配 / 入库
 ```
 
 调用方向**单向**：`api → services → 数据访问`。
@@ -302,6 +352,7 @@ app/
 | 换模型（占位 ↔ ONNX） | `.env` 的 `model_backend` + 路径 | 不改代码 |
 | 加一个接口 | `api/v1.py` 加路由 + `matching.py` 加方法 | 不动其它层 |
 | 换索引来源 / 存储 | 新写一个类，换 `deps.get_index` | api 层不动 |
+| 增量入库 / 加新类别 | `services/upload_store.py` + `POST /admin/*` | 静态索引保持只读 |
 | 改错误码 / 文案 | `errors.py` 一张表 | 全局一致 |
 | 加鉴权 / 限流 | `deps.py` 加依赖 + `api/v1.py` 挂 `Depends` | 业务层不动 |
 
@@ -331,7 +382,8 @@ app/
 
 ## 六、前端
 
-React 19 + Ant Design v5 + Vite 5 + Axios，三页一一对上三个同步接口（大图/批量另走异步任务）。
+React 19 + Ant Design v5 + Vite 5 + Axios，四个页面（状态 / 图像分类 / 文本检索 / 图文匹配）一一对上同步接口，
+外加「商品入库」页对接 `/admin/*`（大图/批量另走异步任务）。
 页面只做编排，通用逻辑抽在 `src/hooks/`：`useAsyncRequest`（loading / error / duration / abort）、
 `useImagePreview`（ObjectURL 生命周期）、`useQuerySync`（URL 参数持久化）。图像分类页再拆成
 `components/image/` 下的上传 / 结果 / 历史三块。结构与运行方式见 [`frontend/README.md`](frontend/README.md)。

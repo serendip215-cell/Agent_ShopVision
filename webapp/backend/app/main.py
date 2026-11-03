@@ -19,15 +19,14 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from .api import tasks, v1
-from .config import REPO_ROOT, get_settings
+from .api import admin, tasks, v1
+from .config import get_settings
 from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
 logger = logging.getLogger("shopvision.api")
 
 _STATIC_DIR = Path(__file__).resolve().parent / "static"
-_IMAGES_DIR = REPO_ROOT / "data" / "processed_data_cleaning"
 
 _DESCRIPTION = """实验四后端：电商商品图文检索服务，集成实验三优化后的 Chinese-CLIP 双塔（ONNX）。
 
@@ -45,6 +44,7 @@ _TAGS_META = [
     {"name": "图像分类页", "description": "对应前端「图像分类」页面"},
     {"name": "文本检索页", "description": "对应前端「文本检索」页面"},
     {"name": "多模态匹配页", "description": "对应前端「多模态匹配」页面"},
+    {"name": "数据入库", "description": "上传商品到已有/新类别，或新建空类别（未启用鉴权）"},
 ]
 
 
@@ -104,15 +104,16 @@ def create_app() -> FastAPI:
     )
     app.include_router(v1.router)
     app.include_router(tasks.router)
+    app.include_router(admin.router)
+    logger.warning("管理入库接口未启用鉴权：仅限本机演示，不要暴露到公网。")
     _register_handlers(app)
 
     # 静态文件服务：商品原图。用独立前缀，避免和前端 public/items 演示图冲突
     # 前端通过 /item-images/{category}/images/{file} 访问
-    if _IMAGES_DIR.exists():
-        app.mount("/item-images", StaticFiles(directory=str(_IMAGES_DIR)), name="item-images")
-        logger.info(f"已挂载商品图片目录: {_IMAGES_DIR} -> /item-images")
-    else:
-        logger.warning(f"商品图片目录不存在: {_IMAGES_DIR}")
+    images_dir = settings.image_root_path
+    images_dir.mkdir(parents=True, exist_ok=True)
+    app.mount("/item-images", StaticFiles(directory=str(images_dir)), name="item-images")
+    logger.info(f"已挂载商品图片目录: {images_dir} -> /item-images")
 
     @app.get("/scalar", include_in_schema=False)
     def scalar_docs() -> FileResponse:

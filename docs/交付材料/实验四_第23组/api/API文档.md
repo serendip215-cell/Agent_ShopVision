@@ -52,13 +52,13 @@
 | `msg` | 字符串 | 面向用户的提示 |
 | `result.model_loaded` | 布尔 | true=已接真 ONNX 双塔；false=占位编码器，检索结果无意义 |
 | `result.backend` | 字符串 | 当前编码器后端：placeholder / onnx |
-| `result.index_dir` | 字符串 | 索引目录 |
-| `result.categories` | 字符串 的数组 | 索引里注册的类别 |
+| `result.index_dir` | 字符串 | 静态索引目录 |
+| `result.categories` | 字符串 的数组 | 全部类别：静态索引 + 上传入库 |
 | `result.dimension` | 整数（可为空） | 向量维度 |
-| `result.category_counts` | 对象 | 各类索引条数（构建时快照） |
-| `result.total_items` | 整数 | 索引总条数 |
-| `result.category_ready` | 对象 | 各类索引文件是否齐全（items.csv + image_embeddings.npy） |
-| `result.updated_at` | 字符串（可为空） | 索引构建时间，来自注册表 |
+| `result.category_counts` | 对象 | 各类条数：静态索引 + 上传入库 |
+| `result.total_items` | 整数 | 可检索总条数 |
+| `result.category_ready` | 对象 | 各类是否可检索：静态类别看文件是否齐全，仅上传的新类别看是否有商品 |
+| `result.updated_at` | 字符串（可为空） | 静态索引构建时间（不含上传入库） |
 | `result.model_name` | 字符串（可为空） | 建索引所用视觉塔，如 ViT-B-16 |
 | `result.model_checkpoint` | 字符串（可为空） | 建索引所用权重路径 |
 
@@ -68,7 +68,7 @@
 
 #### `POST /api/v1/image` — 图像分类
 
-上传商品图 → 图像塔编码成 512 维向量 → 与索引里 9 类向量比相似度 → 返回最可能的类别、置信度与相似商品类别排序。
+上传商品图 → 图像塔编码成 512 维向量 → 与全部可判类别比相似度 → 返回最可能的类别、置信度与相似商品类别排序。
 
 **请求**
 
@@ -82,8 +82,8 @@
 |---|---|---|
 | `code` | 整数 | 0=成功；非 0 见错误码表 |
 | `msg` | 字符串 | 面向用户的提示 |
-| `result.category` | 字符串（可为空） | 判出的类别：9 类里相似度最高的那个 |
-| `result.confidence` | 小数 | 对 9 类最高分做 softmax 后的概率 |
+| `result.category` | 字符串（可为空） | 判出的类别：全部可判类别里相似度最高的那个 |
+| `result.confidence` | 小数 | 对全部可判类别最高分做 softmax 后的概率 |
 | `result.score` | 小数（可为空） | 该类原始相似度 |
 | `result.topk` | 对象 的数组 | 各类最高分，降序前 3 |
 | `result.topk[].category` | 字符串 | 类别名 |
@@ -102,8 +102,8 @@
 | `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
 | `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
-| `result.items[].image_height` | 字符串（可为空） | 图高（CSV 原样字符串） |
-| `result.items[].image_width` | 字符串（可为空） | 图宽（CSV 原样字符串） |
+| `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
 
 ### 文本检索页
 
@@ -144,8 +144,8 @@
 | `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
 | `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
-| `result.items[].image_height` | 字符串（可为空） | 图高（CSV 原样字符串） |
-| `result.items[].image_width` | 字符串（可为空） | 图宽（CSV 原样字符串） |
+| `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
 
 ### 多模态匹配页
 
@@ -172,10 +172,10 @@
 | `result.match` | 布尔 | 两条独立编码各自判出的类别是否一致 |
 | `result.image_category` | 字符串（可为空） | 图像塔判出的类别 |
 | `result.text_category` | 字符串（可为空） | 文本塔判出的类别 |
-| `result.image_confidence` | 小数 | 图像塔对判出类别的置信度（9 类最高分 softmax） |
+| `result.image_confidence` | 小数 | 图像塔对判出类别的置信度（全部可判类别最高分 softmax） |
 | `result.image_score` | 小数（可为空） | 图像塔该类别原始相似度 |
 | `result.image_type` | 字符串（可为空） | 图像塔细分类：图像判出类别内最相似商品的 type |
-| `result.text_confidence` | 小数 | 文本塔对判出类别的置信度（9 类最高分 softmax） |
+| `result.text_confidence` | 小数 | 文本塔对判出类别的置信度（全部可判类别最高分 softmax） |
 | `result.text_score` | 小数（可为空） | 文本塔该类别原始相似度 |
 | `result.text_type` | 字符串（可为空） | 文本塔细分类：同类命中里排最前的那条商品的 type |
 | `result.items` | 对象 的数组 | 文本检索结果，供对照 |
@@ -191,8 +191,84 @@
 | `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
 | `result.items[].local_image_path` | 字符串（可为空） | 原图相对路径 |
 | `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
-| `result.items[].image_height` | 字符串（可为空） | 图高（CSV 原样字符串） |
-| `result.items[].image_width` | 字符串（可为空） | 图宽（CSV 原样字符串） |
+| `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
+
+### 数据入库
+
+> 上传商品到已有/新类别，或新建空类别（未启用鉴权）
+
+#### `POST /api/v1/admin/items` — 上传商品入库
+
+只传 `file` 时只返回建议类别，不写库；`confirm=true` 且带 `category` 才真正入库。类别不存在时传 `create_category=true` 自动建类。同一张图重复上传返回已有条目（duplicate=true），不会重复计数。占位编码器下拒绝入库（50001）。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `file` | 文件 | 文件 | 是 | 商品图（PNG/JPG/WEBP，≤10 MB） |
+| `category` | 表单字段 | 字符串（可为空） | 否 | 目标类别；为空时只返回建议 |
+| `confirm` | 表单字段 | 布尔 | 否 | true 才真正写库 |
+| `create_category` | 表单字段 | 布尔 | 否 | 类别不存在时自动创建 |
+| `item_name` | 表单字段 | 字符串（可为空） | 否 | 商品标题 |
+| `type` | 表单字段 | 字符串（可为空） | 否 | 细分类 |
+| `color` | 表单字段 | 字符串（可为空） | 否 | 颜色 |
+| `material` | 表单字段 | 字符串（可为空） | 否 | 材质 |
+| `brand` | 表单字段 | 字符串（可为空） | 否 | 品牌 |
+| `description` | 表单字段 | 字符串（可为空） | 否 | 商品文案 |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.created` | 布尔 | true=本次真正写入；false=未写（建议或重复） |
+| `result.duplicate` | 布尔 | true=图片已存在，返回已有条目 |
+| `result.item_id` | 字符串（可为空） | 写入或命中的条目 ID |
+| `result.category` | 字符串（可为空） | 实际所属类别 |
+| `result.similarity` | 小数（可为空） | 写入前在目标类别内的最近邻相似度；空类别为 null |
+| `result.suggested_category` | 字符串（可为空） | 图像塔建议的类别 |
+| `result.suggested_score` | 小数（可为空） | 建议类别的原始相似度 |
+| `result.topk` | 对象 的数组 | 建议类别的相似度排序，最多 3 个 |
+| `result.topk[].category` | 字符串 | 候选类别 |
+| `result.topk[].similarity` | 小数 | 该类别最高余弦相似度 |
+| `result.created_at` | 字符串（可为空） | 条目入库时间 |
+| `result.item` | 对象（可为空） | 写入或命中的完整条目 |
+| `result.item.item_id` | 字符串 | 上传条目 ID，形如 upload_<sha256 前缀> |
+| `result.item.category` | 字符串 | 所属类别 |
+| `result.item.item_name` | 字符串（可为空） | 商品标题 |
+| `result.item.product_type` | 字符串（可为空） | 商品大类 |
+| `result.item.type` | 字符串（可为空） | 细分类 |
+| `result.item.color` | 字符串（可为空） | 颜色 |
+| `result.item.material` | 字符串（可为空） | 材质 |
+| `result.item.brand` | 字符串（可为空） | 品牌 |
+| `result.item.description` | 字符串（可为空） | 商品文案 |
+| `result.item.local_image_path` | 字符串（可为空） | 原图相对路径 |
+| `result.item.image_status` | 字符串（可为空） | 图片处理状态 |
+| `result.item.image_height` | 整数（可为空） | 图高 |
+| `result.item.image_width` | 整数（可为空） | 图宽 |
+| `result.item.created_at` | 字符串（可为空） | 入库时间（UTC） |
+
+
+#### `POST /api/v1/admin/categories` — 新建空类别
+
+只建类别、不写商品。空类别不会参与自动判类，但可以在检索页显式指定（结果为空）；上传首条商品后即参与判类。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `name` | 请求体 | 字符串 | 是 | 新类别名 |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.created` | 布尔 | true=本次新建；false=类别已存在 |
+| `result.name` | 字符串 | 规范化后的类别名 |
 
 ### 异步任务
 

@@ -64,7 +64,7 @@
           "图像分类页"
         ],
         "summary": "图像分类",
-        "description": "上传商品图 → 图像塔编码成 512 维向量 → 与索引里 9 类向量比相似度 → 返回最可能的类别、置信度与相似商品类别排序。",
+        "description": "上传商品图 → 图像塔编码成 512 维向量 → 与全部可判类别比相似度 → 返回最可能的类别、置信度与相似商品类别排序。",
         "operationId": "classify_image_api_v1_image_post",
         "requestBody": {
           "content": {
@@ -400,10 +400,548 @@
           }
         }
       }
+    },
+    "/api/v1/admin/items": {
+      "post": {
+        "tags": [
+          "数据入库",
+          "数据入库"
+        ],
+        "summary": "上传商品入库",
+        "description": "只传 `file` 时只返回建议类别，不写库；`confirm=true` 且带 `category` 才真正入库。类别不存在时传 `create_category=true` 自动建类。同一张图重复上传返回已有条目（duplicate=true），不会重复计数。占位编码器下拒绝入库（50001）。",
+        "operationId": "ingest_item_api_v1_admin_items_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_ingest_item_api_v1_admin_items_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminItemResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/categories": {
+      "post": {
+        "tags": [
+          "数据入库",
+          "数据入库"
+        ],
+        "summary": "新建空类别",
+        "description": "只建类别、不写商品。空类别不会参与自动判类，但可以在检索页显式指定（结果为空）；上传首条商品后即参与判类。",
+        "operationId": "create_category_api_v1_admin_categories_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminCategoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminCategoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AdminCategoryRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Name",
+            "description": "新类别名",
+            "examples": [
+              "测试类"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "AdminCategoryRequest"
+      },
+      "AdminCategoryResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdminCategoryResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "AdminCategoryResponse"
+      },
+      "AdminCategoryResult": {
+        "properties": {
+          "created": {
+            "type": "boolean",
+            "title": "Created",
+            "description": "true=本次新建；false=类别已存在"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "规范化后的类别名"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created",
+          "name"
+        ],
+        "title": "AdminCategoryResult"
+      },
+      "AdminItem": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id",
+            "description": "上传条目 ID，形如 upload_<sha256 前缀>"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "所属类别"
+          },
+          "item_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Name",
+            "description": "商品标题"
+          },
+          "product_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Type",
+            "description": "商品大类"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "细分类"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color",
+            "description": "颜色"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material",
+            "description": "材质"
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand",
+            "description": "品牌"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "商品文案"
+          },
+          "local_image_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Image Path",
+            "description": "原图相对路径"
+          },
+          "image_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Status",
+            "description": "图片处理状态"
+          },
+          "image_height": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Height",
+            "description": "图高"
+          },
+          "image_width": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Width",
+            "description": "图宽"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At",
+            "description": "入库时间（UTC）"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "item_id",
+          "category"
+        ],
+        "title": "AdminItem",
+        "description": "一条上传商品；静态字段与 items.csv 对齐，宽高为整数。"
+      },
+      "AdminItemResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdminItemResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "AdminItemResponse"
+      },
+      "AdminItemResult": {
+        "properties": {
+          "created": {
+            "type": "boolean",
+            "title": "Created",
+            "description": "true=本次真正写入；false=未写（建议或重复）"
+          },
+          "duplicate": {
+            "type": "boolean",
+            "title": "Duplicate",
+            "description": "true=图片已存在，返回已有条目"
+          },
+          "item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Id",
+            "description": "写入或命中的条目 ID"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "实际所属类别"
+          },
+          "similarity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Similarity",
+            "description": "写入前在目标类别内的最近邻相似度；空类别为 null"
+          },
+          "suggested_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Suggested Category",
+            "description": "图像塔建议的类别"
+          },
+          "suggested_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Suggested Score",
+            "description": "建议类别的原始相似度"
+          },
+          "topk": {
+            "items": {
+              "$ref": "#/components/schemas/AdminTopCategory"
+            },
+            "type": "array",
+            "title": "Topk",
+            "description": "建议类别的相似度排序，最多 3 个"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At",
+            "description": "条目入库时间"
+          },
+          "item": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdminItem"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "写入或命中的完整条目"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created",
+          "duplicate"
+        ],
+        "title": "AdminItemResult"
+      },
+      "AdminTopCategory": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "候选类别"
+          },
+          "similarity": {
+            "type": "number",
+            "title": "Similarity",
+            "description": "该类别最高余弦相似度"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "similarity"
+        ],
+        "title": "AdminTopCategory"
+      },
       "ApiResponse": {
         "properties": {
           "code": {
@@ -441,6 +979,124 @@
           "file"
         ],
         "title": "Body_classify_image_api_v1_image_post"
+      },
+      "Body_ingest_item_api_v1_admin_items_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "description": "商品图（PNG/JPG/WEBP，≤10 MB）"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "目标类别；为空时只返回建议"
+          },
+          "confirm": {
+            "type": "boolean",
+            "title": "Confirm",
+            "description": "true 才真正写库",
+            "default": false
+          },
+          "create_category": {
+            "type": "boolean",
+            "title": "Create Category",
+            "description": "类别不存在时自动创建",
+            "default": false
+          },
+          "item_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Name",
+            "description": "商品标题"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "细分类"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color",
+            "description": "颜色"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material",
+            "description": "材质"
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand",
+            "description": "品牌"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "商品文案"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_ingest_item_api_v1_admin_items_post"
       },
       "Body_multimodal_match_api_v1_match_post": {
         "properties": {
@@ -588,7 +1244,7 @@
           "index_dir": {
             "type": "string",
             "title": "Index Dir",
-            "description": "索引目录"
+            "description": "静态索引目录"
           },
           "categories": {
             "items": {
@@ -596,7 +1252,7 @@
             },
             "type": "array",
             "title": "Categories",
-            "description": "索引里注册的类别"
+            "description": "全部类别：静态索引 + 上传入库"
           },
           "dimension": {
             "anyOf": [
@@ -616,12 +1272,12 @@
             },
             "type": "object",
             "title": "Category Counts",
-            "description": "各类索引条数（构建时快照）"
+            "description": "各类条数：静态索引 + 上传入库"
           },
           "total_items": {
             "type": "integer",
             "title": "Total Items",
-            "description": "索引总条数",
+            "description": "可检索总条数",
             "default": 0
           },
           "category_ready": {
@@ -630,7 +1286,7 @@
             },
             "type": "object",
             "title": "Category Ready",
-            "description": "各类索引文件是否齐全（items.csv + image_embeddings.npy）"
+            "description": "各类是否可检索：静态类别看文件是否齐全，仅上传的新类别看是否有商品"
           },
           "updated_at": {
             "anyOf": [
@@ -642,7 +1298,7 @@
               }
             ],
             "title": "Updated At",
-            "description": "索引构建时间，来自注册表"
+            "description": "静态索引构建时间（不含上传入库）"
           },
           "model_name": {
             "anyOf": [
@@ -718,12 +1374,12 @@
               }
             ],
             "title": "Category",
-            "description": "判出的类别：9 类里相似度最高的那个"
+            "description": "判出的类别：全部可判类别里相似度最高的那个"
           },
           "confidence": {
             "type": "number",
             "title": "Confidence",
-            "description": "对 9 类最高分做 softmax 后的概率"
+            "description": "对全部可判类别最高分做 softmax 后的概率"
           },
           "score": {
             "anyOf": [
@@ -825,7 +1481,7 @@
           "image_confidence": {
             "type": "number",
             "title": "Image Confidence",
-            "description": "图像塔对判出类别的置信度（9 类最高分 softmax）",
+            "description": "图像塔对判出类别的置信度（全部可判类别最高分 softmax）",
             "default": 0.0
           },
           "image_score": {
@@ -855,7 +1511,7 @@
           "text_confidence": {
             "type": "number",
             "title": "Text Confidence",
-            "description": "文本塔对判出类别的置信度（9 类最高分 softmax）",
+            "description": "文本塔对判出类别的置信度（全部可判类别最高分 softmax）",
             "default": 0.0
           },
           "text_score": {
@@ -1036,11 +1692,14 @@
                 "type": "string"
               },
               {
+                "type": "integer"
+              },
+              {
                 "type": "null"
               }
             ],
             "title": "Image Height",
-            "description": "图高（CSV 原样字符串）"
+            "description": "图高（静态索引为 CSV 原样字符串，上传入库为整数）"
           },
           "image_width": {
             "anyOf": [
@@ -1048,11 +1707,14 @@
                 "type": "string"
               },
               {
+                "type": "integer"
+              },
+              {
                 "type": "null"
               }
             ],
             "title": "Image Width",
-            "description": "图宽（CSV 原样字符串）"
+            "description": "图宽（静态索引为 CSV 原样字符串，上传入库为整数）"
           }
         },
         "additionalProperties": true,
@@ -1426,6 +2088,10 @@
     {
       "name": "多模态匹配页",
       "description": "对应前端「多模态匹配」页面"
+    },
+    {
+      "name": "数据入库",
+      "description": "上传商品到已有/新类别，或新建空类别（未启用鉴权）"
     }
   ]
 }

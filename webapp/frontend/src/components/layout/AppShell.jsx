@@ -4,6 +4,7 @@ import { Button, Drawer, Tooltip } from 'antd'
 import {
   AppstoreOutlined,
   BlockOutlined,
+  CloudUploadOutlined,
   DashboardOutlined,
   FileSearchOutlined,
   HistoryOutlined,
@@ -20,6 +21,7 @@ const NAV = [
   { to: '/image', label: '图像分类', icon: <PictureOutlined /> },
   { to: '/text', label: '文本检索', icon: <FileSearchOutlined /> },
   { to: '/match', label: '图文匹配', icon: <BlockOutlined /> },
+  { to: '/admin', label: '商品入库', icon: <CloudUploadOutlined /> },
   { to: '/history', label: '运行记录', icon: <HistoryOutlined /> },
   { to: '/status', label: '系统状态', icon: <DashboardOutlined /> },
 ]

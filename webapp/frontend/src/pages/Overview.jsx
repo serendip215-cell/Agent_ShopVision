@@ -9,13 +9,13 @@ import {
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import {
-  CATEGORIES,
+  CATEGORY_MAP,
   CATEGORY_PHOTOS,
   SAMPLE_QUERIES,
   categoryStyle,
 } from '../constants/catalog'
 import { useApp } from '../context/AppContext'
-import { EmptyState, SectionLabel } from '../components/common/Ui'
+import { CategoryGlyph, EmptyState, SectionLabel } from '../components/common/Ui'
 import RunRow from '../components/common/RunRow'
 import useCountUp from '../utils/useCountUp'
 
@@ -135,7 +135,7 @@ function Hero() {
 
 function CategorySection() {
   const navigate = useNavigate()
-  const { health } = useApp()
+  const { health, categories } = useApp()
   return (
     <section className="sv-reveal">
       <div className="sv-strip-head">
@@ -148,32 +148,40 @@ function CategorySection() {
         </Tooltip>
       </div>
       <div className="sv-category-grid">
-        {CATEGORIES.map((category) => {
-          const style = categoryStyle(category.key)
+        {categories.map((key) => {
+          const meta = CATEGORY_MAP[key] || { key, hint: '新增类别' }
+          const style = categoryStyle(key)
+          const photo = CATEGORY_PHOTOS[key]
           return (
             <button
               type="button"
-              key={category.key}
-              className={`sv-category-tile ${CATEGORY_SIZE[category.key] || 'is-size-s'}`}
+              key={key}
+              className={`sv-category-tile ${CATEGORY_SIZE[key] || 'is-size-s'}`}
               style={{ background: style.bg, color: style.ink }}
-              onClick={() => navigate(`/text?category=${encodeURIComponent(category.key)}`)}
+              onClick={() => navigate(`/text?category=${encodeURIComponent(key)}`)}
             >
-              <img
-                src={CATEGORY_PHOTOS[category.key]}
-                alt=""
-                loading="lazy"
-                onError={(event) => {
-                  event.currentTarget.closest('.sv-category-tile').classList.add('is-broken')
-                  event.currentTarget.remove()
-                }}
-              />
+              {photo ? (
+                <img
+                  src={photo}
+                  alt=""
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.closest('.sv-category-tile').classList.add('is-broken')
+                    event.currentTarget.remove()
+                  }}
+                />
+              ) : (
+                <span className="sv-category-glyph" aria-hidden="true">
+                  <CategoryGlyph category={key} size={56} />
+                </span>
+              )}
               <span className="sv-category-shade" aria-hidden="true" />
               <span className="sv-category-copy">
-                <span className="sv-category-name">{category.key}</span>
-                <span className="sv-category-hint">{category.hint}</span>
+                <span className="sv-category-name">{key}</span>
+                <span className="sv-category-hint">{meta.hint}</span>
                 <span className="sv-category-count sv-mono">
-                  {health?.category_counts?.[category.key] != null
-                    ? `${health.category_counts[category.key].toLocaleString('zh-CN')} 商品`
+                  {health?.category_counts?.[key] != null
+                    ? `${health.category_counts[key].toLocaleString('zh-CN')} 商品`
                     : '数量未知'}
                 </span>
               </span>

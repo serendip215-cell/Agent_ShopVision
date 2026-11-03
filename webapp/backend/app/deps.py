@@ -12,6 +12,7 @@ from .config import get_settings
 from .services.encoder import Encoder, build_encoder
 from .services.index_store import IndexStore
 from .services.matching import MatchService
+from .services.upload_store import UploadStore
 
 
 @lru_cache(maxsize=1)
@@ -20,9 +21,26 @@ def get_encoder() -> Encoder:
 
 
 @lru_cache(maxsize=1)
+def get_upload_store() -> UploadStore:
+    settings = get_settings()
+    encoder = get_encoder()
+    return UploadStore(
+        settings.db_file,
+        settings.image_root_path,
+        dimension=encoder.dim,
+        model_tag=encoder.model_tag,
+    )
+
+
+@lru_cache(maxsize=1)
 def get_index() -> IndexStore:
     settings = get_settings()
-    return IndexStore(settings.index_path, candidate_k=settings.candidate_k)
+    return IndexStore(
+        settings.index_path,
+        candidate_k=settings.candidate_k,
+        upload_store=get_upload_store(),
+        new_category_min_items=settings.new_category_min_items,
+    )
 
 
 def get_match_service() -> MatchService:

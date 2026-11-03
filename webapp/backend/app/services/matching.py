@@ -9,8 +9,10 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
+from ..errors import ApiError, ErrorCode
 from .encoder import Encoder
 from .index_store import IndexStore
+from .upload_store import normalize_category
 
 if TYPE_CHECKING:
     from PIL.Image import Image
@@ -36,6 +38,93 @@ class MatchService:
     # 系统状态：api 的 health 只调这个，不穿透到 encoder/index
     def status(self) -> dict:
         return {"model_loaded": self.encoder.model_loaded, **self.index.summary()}
+
+    # 数据入库：先给建议，confirm 后才写；写库后立即可检索
+    def ingest_item(
+        self,
+        image: "Image",
+        raw: bytes,
+        image_format: str,
+        *,
+        category: str | None,
+        confirm: bool,
+        create_category: bool,
+        metadata: dict[str, str],
+    ) -> dict:
+        if not self.encoder.model_loaded:
+            raise ApiError(
+                ErrorCode.MODEL_UNAVAILABLE,
+                "占位编码器禁止入库；请切换 SHOPVISION_MODEL_BACKEND=onnx",
+            )
+
+        vector = self.encoder.encode_image(image)
+        suggested_category, suggested_score, scores = self.index.best_category(vector)
+        ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:3]
+        topk = [{"category": name, "similarity": round(score, 6)} for name, score in ranked]
+        suggestion = {
+            "created": False,
+            "duplicate": False,
+            "item_id": None,
+            "category": None,
+            "similarity": None,
+            "suggested_category": suggested_category,
+            "suggested_score": round(suggested_score, 6) if suggested_category else None,
+            "topk": topk,
+            "created_at": None,
+            "item": None,
+        }
+        if not confirm:
+            return suggestion
+
+        if not category or not category.strip():
+            raise ApiError(ErrorCode.BAD_REQUEST, "confirm=true 时必须指定 category")
+        category = normalize_category(category)
+        store = self.index.upload_store
+        if store is None:
+            raise ApiError(ErrorCode.MODEL_UNAVAILABLE, "上传存储未启用")
+
+        known = set(self.index.categories)
+        if category not in known and not create_category:
+            raise ApiError(ErrorCode.CATEGORY_NOT_FOUND, category)
+
+        similarity = None
+        if category in known:
+            hits = self.index.search(vector, [category], top_k=1)
+            if hits:
+                similarity = round(hits[0].score, 6)
+
+        metadata = dict(metadata)
+        metadata["item_name"] = metadata.get("item_name") or f"{category} 新增商品"
+        item, created = store.add_item(
+            category=category,
+            vector=vector,
+            raw=raw,
+            image_format=image_format,
+            metadata=metadata,
+            image_width=image.width,
+            image_height=image.height,
+        )
+        if created:
+            # 已有类别也要 reload：否则 search 还会读到提交前的缓存
+            self.index.reload(category)
+
+        return {
+            **suggestion,
+            "created": created,
+            "duplicate": not created,
+            "item_id": item.get("item_id"),
+            "category": item.get("category", category),
+            "similarity": similarity,
+            "created_at": item.get("created_at"),
+            "item": item,
+        }
+
+    def create_category(self, name: str) -> dict:
+        category = normalize_category(name)
+        store = self.index.upload_store
+        if store is None:
+            raise ApiError(ErrorCode.MODEL_UNAVAILABLE, "上传存储未启用")
+        return {"created": store.ensure_category(category), "name": category}
 
     # 图像分类页：商品图 -> 最近类别
     def classify_image(self, image: "Image") -> dict:
