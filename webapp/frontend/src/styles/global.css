@@ -167,6 +167,7 @@ a {
 .sv-header-search {
   display: flex;
   align-items: center;
+  min-width: 0;
   gap: 10px;
   height: 42px;
   padding: 0 6px 0 16px;
@@ -690,6 +691,10 @@ a {
   border: 1px solid var(--border);
 }
 
+.sv-hero-copy {
+  min-width: 0;
+}
+
 .sv-hero-kicker {
   color: var(--primary-deep);
   font-size: 12px;
@@ -726,6 +731,7 @@ a {
 .sv-hero-search {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: 12px;
   animation: sv-fade-up 600ms 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -2814,7 +2820,8 @@ a {
   }
 
   .sv-hero-banner {
-    grid-template-columns: 1fr;
+    /* 单列也要 minmax(0,1fr)：否则搜索框的 min-content 会把整块撑出屏幕 */
+    grid-template-columns: minmax(0, 1fr);
     gap: 26px;
     padding: 30px 26px;
   }
@@ -2875,7 +2882,8 @@ a {
   }
 
   .sv-topbar-row {
-    grid-template-columns: auto 1fr auto;
+    /* 中间列必须允许压到 0，否则搜索框的 min-content 会把右侧按钮挤出屏幕 */
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: 12px;
     padding: 12px 14px 8px;
   }
@@ -4492,7 +4500,8 @@ a {
 .sv-tx-topk {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px 10px;
   min-width: 0;
 }
 

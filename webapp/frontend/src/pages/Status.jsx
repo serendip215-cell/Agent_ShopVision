@@ -234,6 +234,7 @@ const CATEGORY_COLUMNS = [
     title: '占索引总量',
     dataIndex: 'share',
     width: 180,
+    responsive: ['md'],
     render: (value) =>
       value == null ? (
         <span className="sv-muted">—</span>
@@ -433,7 +434,6 @@ export default function Status() {
           dataSource={rowsWithShare}
           pagination={false}
           size="middle"
-          scroll={{ x: 640 }}
         />
       </section>
 
