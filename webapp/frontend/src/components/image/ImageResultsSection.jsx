@@ -96,6 +96,11 @@ export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCa
     percent: Math.max(0, Math.min(100, (Number(row.confidence) || 0) * 100)),
   }))
   const recommendations = buildRecommendations(result)
+  const attributes = [
+    ['细分类', result?.attributes?.type],
+    ['颜色', result?.attributes?.color],
+    ['材质', result?.attributes?.material],
+  ].filter(([, value]) => value)
 
   return (
     <>
@@ -109,6 +114,22 @@ export function ImageResultsSection({ result, previewUrl, onUseInMatch, onViewCa
               <CheckCircleOutlined /> 图像分类
             </span>
             <strong className="sv-il-result-name">{result.category || '未判定'}</strong>
+            {attributes.length > 0 && (
+              <>
+                <div className="sv-il-attrs">
+                  {attributes.map(([label, value]) => (
+                    <span key={label}>
+                      <em>{label}</em>
+                      {value}
+                    </span>
+                  ))}
+                </div>
+                <span className="sv-il-attrs-note">
+                  <strong>参考值，不是模型识别</strong>：取自库内最相似商品的属性，
+                  没见过的款式可能不准。
+                </span>
+              </>
+            )}
             <div className="sv-il-result-actions">
               <Button size="small" type="text" onClick={onUseInMatch}>
                 用这张图做图文匹配 <ArrowRightOutlined />

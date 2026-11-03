@@ -3811,6 +3811,40 @@ a {
   letter-spacing: -0.02em;
 }
 
+.sv-il-attrs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-top: 2px;
+}
+
+.sv-il-attrs span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 12px;
+  color: var(--text);
+}
+
+.sv-il-attrs em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.sv-il-attrs-note {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.sv-il-attrs-note strong {
+  color: var(--warm-ink);
+}
+
 .sv-il-result-info .sv-il-result-actions {
   margin-top: 2px;
 }

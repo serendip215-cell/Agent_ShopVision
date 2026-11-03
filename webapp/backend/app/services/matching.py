@@ -11,11 +11,36 @@ import numpy as np
 
 from ..errors import ApiError, ErrorCode
 from .encoder import Encoder
-from .index_store import IndexStore
+from .index_store import Hit, IndexStore
 from .upload_store import normalize_category
 
 if TYPE_CHECKING:
     from PIL.Image import Image
+
+
+_ATTRIBUTE_KEYS = ("type", "color", "material")
+
+
+def _vote_attribute(hits: list[Hit], key: str) -> str | None:
+    """同类别最相似几条商品做多数投票；空值和频次相同的按相似度总分决胜。"""
+    stats: dict[str, tuple[int, float]] = {}
+    for hit in hits:
+        value = str(hit.item.get(key) or "").strip()
+        if not value:
+            continue
+        count, score = stats.get(value, (0, 0.0))
+        stats[value] = (count + 1, score + hit.score)
+    if not stats:
+        return None
+    return max(stats, key=lambda value: (stats[value][0], stats[value][1]))
+
+
+# TODO(exp4, 2026-11-03): 属性目前是「同类别近邻标注投票」的参考值，白色商品可能继承黑色邻居的
+# color。短期保留人工核对；后续接入大模型或监督属性头直接识别 type/color/material 时，
+# 只需替换下面的实现，接口字段保持不变。
+def _attributes_from_hits(hits: list[Hit]) -> dict[str, str | None]:
+    """细分类/颜色/材质只是「相近商品的参考值」，不是独立的属性识别模型。"""
+    return {key: _vote_attribute(hits, key) for key in _ATTRIBUTE_KEYS}
 
 
 def _softmax_pick(scores: dict[str, float], key: str) -> float:
@@ -61,6 +86,10 @@ class MatchService:
         suggested_category, suggested_score, scores = self.index.best_category(vector)
         ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:3]
         topk = [{"category": name, "similarity": round(score, 6)} for name, score in ranked]
+        # 属性建议取建议类别内最相似的几条商品投票；没有建议类别就留空
+        attribute_hits = (
+            self.index.search(vector, [suggested_category], top_k=5) if suggested_category else []
+        )
         suggestion = {
             "created": False,
             "duplicate": False,
@@ -69,6 +98,7 @@ class MatchService:
             "similarity": None,
             "suggested_category": suggested_category,
             "suggested_score": round(suggested_score, 6) if suggested_category else None,
+            "suggested_attributes": _attributes_from_hits(attribute_hits),
             "topk": topk,
             "created_at": None,
             "item": None,
@@ -137,6 +167,7 @@ class MatchService:
             "category": category,
             "confidence": round(_softmax_pick(scores, category or ""), 6),
             "score": round(score, 6) if category else None,
+            "attributes": _attributes_from_hits(hits),
             "topk": [
                 {
                     "category": c,

@@ -68,6 +68,8 @@ def _build_index(root: Path) -> IndexStore:
                     "item_name",
                     "product_type",
                     "type",
+                    "color",
+                    "material",
                     "local_image_path",
                     "text",
                 ]
@@ -80,6 +82,8 @@ def _build_index(root: Path) -> IndexStore:
                         f"{category}商品{i}",
                         category,
                         f"{category}细分类{i}",
+                        "黑色",
+                        "塑料",
                         f"data/processed_data_cleaning/{category}/images/{category}_{i}.jpg",
                         f"{category} 的描述 {i}",
                     ]
@@ -496,6 +500,10 @@ class ServiceTest(unittest.TestCase):
         self.assertIn(result["category"], CATEGORIES)
         self.assertLessEqual(len(result["topk"]), 3)
         self.assertTrue(all("confidence" in row for row in result["topk"]))
+        # 属性参考值来自同类近邻投票，不是独立模型
+        self.assertTrue(result["attributes"]["type"].startswith(result["category"]))
+        self.assertEqual(result["attributes"]["color"], "黑色")
+        self.assertEqual(result["attributes"]["material"], "塑料")
         # 相似商品推荐来自判出类别内的真实检索结果
         self.assertTrue(result["items"])
         self.assertTrue(all(hit["category"] == result["category"] for hit in result["items"]))
@@ -793,6 +801,10 @@ class AdminApiTest(unittest.TestCase):
         self.assertEqual(set(body), {"code", "result", "msg"})
         self.assertFalse(body["result"]["created"])
         self.assertIn(body["result"]["suggested_category"], CATEGORIES)
+        attrs = body["result"]["suggested_attributes"]
+        self.assertEqual(set(attrs), {"type", "color", "material"})
+        self.assertTrue(attrs["type"].startswith(body["result"]["suggested_category"]))
+        self.assertEqual(attrs["color"], "黑色")
         self.assertEqual(self._total(), before)
 
     def test_confirm_without_category_is_rejected(self) -> None:

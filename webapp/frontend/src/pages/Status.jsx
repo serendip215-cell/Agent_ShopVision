@@ -49,6 +49,7 @@ const ENDPOINTS = [
     "category": "鞋",
     "confidence": 0.42,
     "score": 0.31,
+    "attributes": { "type": "女士小板鞋", "color": "白色", "material": "网面" },
     "topk": [
       { "category": "鞋", "similarity": 0.31, "confidence": 0.42 },
       { "category": "包", "similarity": 0.28, "confidence": 0.33 }
@@ -119,6 +120,7 @@ const ENDPOINTS = [
     "similarity": 0.92,
     "suggested_category": "鞋",
     "suggested_score": 0.31,
+    "suggested_attributes": { "type": "女士小板鞋", "color": "白色", "material": "网面" },
     "topk": [ { "category": "鞋", "similarity": 0.31 } ],
     "created_at": "…",
     "item": { "item_id": "upload_…", "item_name": "…" }
