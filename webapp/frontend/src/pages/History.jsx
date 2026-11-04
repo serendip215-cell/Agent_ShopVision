@@ -3,8 +3,11 @@ import { App as AntApp, Button, Input, Popconfirm, Segmented, Tag } from 'antd'
 import {
   DeleteOutlined,
   DownloadOutlined,
+  FileTextOutlined,
   HistoryOutlined,
+  PictureOutlined,
   SearchOutlined,
+  SwapOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
@@ -98,38 +101,76 @@ export default function History() {
 
   return (
     <div className="sv-history-page">
-      <PageHeader
-        eyebrow="Local Trace · Run History"
-        title="运行记录"
-        description="三次检索的输入、结果摘要和耗时都保存在浏览器本地，用于联调、答辩回看和报告截图。"
-        meta={
-          <>
-            <Tag bordered={false}>localStorage</Tag>
-            <Tag bordered={false}>最多保留 50 条</Tag>
-            <Tag bordered={false}>不上传服务器</Tag>
-          </>
-        }
-        actions={
-          <>
-            <Button icon={<DownloadOutlined />} onClick={exportHistory}>
-              导出 JSON
-            </Button>
-            <Popconfirm
-              title="清空全部运行记录？"
-              description="清空后无法恢复，已导出的 JSON 不受影响。"
-              okText="清空"
-              cancelText="取消"
-              okButtonProps={{ danger: true }}
-              onConfirm={clear}
-              disabled={!history.length}
+      <header className="sv-page-head">
+        <div className="sv-page-head-lines" aria-hidden="true">
+          <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+            <path
+              d="M 0 100 C 200 60, 400 120, 800 80"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.15"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 0 130 C 250 90, 500 150, 800 110"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.1"
+              strokeWidth="1"
+            />
+            <circle cx="300" cy="95" r="3" fill="#5fa8b0" fillOpacity="0.25" />
+            <circle cx="500" cy="120" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+          </svg>
+        </div>
+        <div className="sv-page-head-copy">
+          <span className="sv-eyebrow">RUN HISTORY</span>
+          <h1>View Your Queries</h1>
+          <div className="sv-page-head-modes">
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/image')}
             >
-              <Button danger icon={<DeleteOutlined />} disabled={!history.length}>
-                清空
-              </Button>
-            </Popconfirm>
-          </>
-        }
-      />
+              <PictureOutlined />
+              <span>Image</span>
+            </button>
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/text')}
+            >
+              <FileTextOutlined />
+              <span>Text</span>
+            </button>
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/match')}
+            >
+              <SwapOutlined />
+              <span>Similar</span>
+            </button>
+          </div>
+        </div>
+        <div className="sv-page-head-actions">
+          <Button icon={<DownloadOutlined />} onClick={exportHistory}>
+            导出 JSON
+          </Button>
+          <Popconfirm
+            title="清空全部运行记录？"
+            description="清空后无法恢复，已导出的 JSON 不受影响。"
+            okText="清空"
+            cancelText="取消"
+            okButtonProps={{ danger: true }}
+            onConfirm={clear}
+            disabled={!history.length}
+          >
+            <Button danger icon={<DeleteOutlined />} disabled={!history.length}>
+              清空
+            </Button>
+          </Popconfirm>
+        </div>
+      </header>
 
       <div className="sv-history-stats sv-reveal">
         <div className="sv-card">

@@ -138,20 +138,6 @@ function SystemBanner() {
     )
   }
 
-  if (isPlaceholder) {
-    return (
-      <div className="sv-system-banner sv-banner-warm">
-        <span className="sv-banner-dot" />
-        <div>
-          <strong>当前为占位编码器</strong>
-          <p>
-            接口与数据流已经跑通，但检索结果仅用于联调。切到真实双塔 ONNX 之前，不要把这里的相似度、置信度写进报告。
-          </p>
-        </div>
-      </div>
-    )
-  }
-
   return null
 }
 

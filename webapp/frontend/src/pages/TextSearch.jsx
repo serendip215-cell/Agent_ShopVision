@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { App as AntApp, Button, Slider, Tooltip } from 'antd'
 import {
   CloseCircleFilled,
+  FileTextOutlined,
+  PictureOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
   SwapOutlined,
@@ -267,19 +269,56 @@ export default function TextSearch() {
 
       {/* 区块 1：页面头部 */}
       <header className="sv-tx-head">
+        <div className="sv-tx-head-lines" aria-hidden="true">
+          <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+            <path
+              d="M 0 100 C 200 60, 400 120, 800 80"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.15"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 0 130 C 250 90, 500 150, 800 110"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.1"
+              strokeWidth="1"
+            />
+            <circle cx="300" cy="95" r="3" fill="#5fa8b0" fillOpacity="0.25" />
+            <circle cx="500" cy="120" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+            <circle cx="650" cy="90" r="2" fill="#5fa8b0" fillOpacity="0.15" />
+          </svg>
+        </div>
         <div className="sv-tx-head-copy">
-          <span className="sv-eyebrow">文本检索 · 语义搜索</span>
-          <h1>用一句中文描述找商品</h1>
-          <p>
-            写清颜色、品类、材质会更准，比如「黑色真皮双肩包」；结果按相似度排序，
-            点开任意商品可查看完整档案。
-          </p>
-          <span className="sv-tx-head-meta">
-            {health?.total_items != null
-              ? `已索引 ${health.total_items.toLocaleString('zh-CN')} 件商品`
-              : '索引统计暂不可用'}
-            {isPlaceholder && <em>联调模式 · 结果仅验证链路</em>}
-          </span>
+          <span className="sv-eyebrow">TEXT SEARCH</span>
+          <h1>Search by Description</h1>
+          <div className="sv-tx-head-modes">
+            <button
+              type="button"
+              className="sv-tx-mode-chip"
+              onClick={() => navigate('/image')}
+            >
+              <PictureOutlined />
+              <span>Image</span>
+            </button>
+            <button
+              type="button"
+              className="sv-tx-mode-chip"
+              onClick={() => navigate('/text')}
+            >
+              <FileTextOutlined />
+              <span>Text</span>
+            </button>
+            <button
+              type="button"
+              className="sv-tx-mode-chip"
+              onClick={() => navigate('/match')}
+            >
+              <SwapOutlined />
+              <span>Similar</span>
+            </button>
+          </div>
         </div>
         <Tooltip title="描述越具体越容易命中：颜色 + 品类 + 材质，例如「白色透气运动鞋」。不限类别时会在全库跨类别检索。">
           <button type="button" className="sv-tx-help" aria-label="使用帮助">

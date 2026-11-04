@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { Button, Tooltip } from 'antd'
 import {
+  FileTextOutlined,
   InfoCircleOutlined,
   NodeIndexOutlined,
+  PictureOutlined,
   SearchOutlined,
+  SwapOutlined,
   TagsOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
@@ -57,51 +60,89 @@ function Hero() {
   return (
     <section className="sv-hero sv-reveal">
       <div className="sv-hero-banner">
-        <div className="sv-hero-copy">
-          <span className="sv-hero-kicker">
-            Chinese-CLIP 双塔
-            {heroStats[1].value != null && ` · ${heroStats[1].value} 类`}
-            {heroStats[0].value != null &&
-              ` · ${heroStats[0].value.toLocaleString('zh-CN')} 条索引`}
-          </span>
-          <h2>
-            用图像和文字
-            <br />
-            找到<em>同款</em>商品。
-          </h2>
-          <p>
-            上传图片、输入描述，跨模态检索同一个商品库。
-            分类、检索、匹配，是一次向量编码的三种看法。
-          </p>
+        <div className="sv-hero-lines" aria-hidden="true">
+          <svg viewBox="0 0 800 300" preserveAspectRatio="none">
+            <path
+              d="M 10 150 C 150 100, 280 120, 380 150 S 600 160, 750 140"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.25"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 20 180 C 180 140, 300 160, 400 175 S 620 180, 760 165"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.15"
+              strokeWidth="1"
+              strokeDasharray="5 5"
+            />
+            <path
+              d="M 30 220 C 200 190, 320 200, 430 210 S 650 215, 780 200"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.12"
+              strokeWidth="1"
+            />
+            <path
+              d="M 5 120 C 140 80, 260 90, 370 130 S 580 145, 740 125"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.1"
+              strokeWidth="0.8"
+            />
+            <circle cx="300" cy="135" r="4" fill="#5fa8b0" fillOpacity="0.35" />
+            <circle cx="380" cy="150" r="3" fill="#5fa8b0" fillOpacity="0.3" />
+            <circle cx="450" cy="172" r="3.5" fill="#5fa8b0" fillOpacity="0.25" />
+            <circle cx="280" cy="195" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+            <circle cx="340" cy="230" r="4" fill="#5fa8b0" fillOpacity="0.15" />
+          </svg>
         </div>
-        <div className="sv-hero-search">
+        <h1 className="sv-hero-title">
+          <span className="sv-hero-title-letter">F</span>ind{" "}
+          <span className="sv-hero-title-letter">S</span>imilar
+        </h1>
+        <div className="sv-hero-search-wrap">
           <div className="sv-hero-search-field">
-            <SearchOutlined aria-hidden="true" />
+            <PictureOutlined aria-hidden="true" />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               onKeyDown={(event) => {
                 if (event.key === 'Enter') goSearch(query)
               }}
-              placeholder="输入商品描述，如：白色运动鞋"
+              placeholder="描述图片、商品特征或关键词"
               aria-label="搜索商品"
             />
             <Button type="primary" onClick={() => goSearch(query)}>
-              开始检索
+              搜索
             </Button>
           </div>
-          <div className="sv-hero-chips">
-            <span>试试：</span>
-            {SAMPLE_QUERIES.slice(0, 4).map((item) => (
-              <button
-                key={item}
-                type="button"
-                className="sv-chip"
-                onClick={() => goSearch(item)}
-              >
-                {item}
-              </button>
-            ))}
+          <div className="sv-hero-modes">
+            <button
+              type="button"
+              className="sv-mode-chip"
+              onClick={() => navigate('/image')}
+            >
+              <PictureOutlined />
+              <span>Image</span>
+            </button>
+            <button
+              type="button"
+              className="sv-mode-chip"
+              onClick={() => navigate('/text')}
+            >
+              <FileTextOutlined />
+              <span>Text</span>
+            </button>
+            <button
+              type="button"
+              className="sv-mode-chip"
+              onClick={() => navigate('/match')}
+            >
+              <SwapOutlined />
+              <span>Similar</span>
+            </button>
           </div>
         </div>
       </div>
@@ -118,25 +159,19 @@ function CategorySection() {
   const navigate = useNavigate()
   const { health, categories } = useApp()
 
-  // 当前轮播到第几个类别，默认 0 = 第一个
   const [index, setIndex] = useState(0)
 
   const total = categories.length
-  // 类别由 health 异步填充，首次渲染可能为空，先不渲染
   if (!total) return null
 
-  // 切到上一个，到顶了就绕回最后一个
   const goPrev = () => setIndex((i) => (i - 1 + total) % total)
-  // 切到下一个，到末尾了就绕回第一个
   const goNext = () => setIndex((i) => (i + 1) % total)
 
-  // 当前类别、上一个类别、下一个类别（让旁边半露两张图）
   const cursor = index % total
   const current = categories[cursor]
   const prev = categories[(cursor - 1 + total) % total]
   const next = categories[(cursor + 1) % total]
 
-  // 点「探索系列」跳到文本检索页，必须带描述词，否则语义检索页停在空态
   const goCategory = (key) => {
     const sample = CATEGORY_QUERY[key] || key
     navigate(`/text?q=${encodeURIComponent(sample)}&category=${encodeURIComponent(key)}`)
@@ -148,138 +183,63 @@ function CategorySection() {
     <section className="sv-reveal">
       <div className="sv-strip-head">
         <h2>从类别进去逛</h2>
-        <Tooltip title="点击任一类别，直接用该类别的热门查询开始检索">
-          <span className="sv-strip-hint">
-            <InfoCircleOutlined />
-            左右切换类别，点「探索系列」直接检索
-          </span>
-        </Tooltip>
       </div>
 
-      <div className="sv-category-showcase">
-        {/* 左边：文字区 */}
-        <div className="sv-showcase-text">
-          <div className="sv-showcase-index">
-            <span className="sv-showcase-index-cur">
-              {String(cursor + 1).padStart(2, '0')}
-            </span>
-            <span className="sv-showcase-index-divider">/</span>
-            <span className="sv-showcase-index-total">
-              {String(total).padStart(2, '0')}
-            </span>
+      <div className="sv-category-carousel">
+        {/* 左侧箭头：极小极淡 */}
+        <button
+          type="button"
+          className="sv-carousel-arrow is-left"
+          onClick={goPrev}
+          aria-label="上一个类别"
+        >
+          ‹
+        </button>
+
+        {/* 轮播轨道 */}
+        <div className="sv-carousel-track">
+          {/* 左侧半露卡片 */}
+          <div className="sv-carousel-card is-side is-left" aria-hidden="true">
+            <img src={CATEGORY_PHOTOS[prev]} alt="" loading="lazy" />
           </div>
 
-          <h2 className="sv-showcase-name">{current}</h2>
-
-          <p className="sv-showcase-count">
-            {count != null ? `${count.toLocaleString('zh-CN')} 件高品质商品` : '精选好货'}
-          </p>
-
-          <button type="button" className="sv-showcase-go" onClick={() => goCategory(current)}>
-            探索系列 <span aria-hidden="true">→</span>
-          </button>
-        </div>
-
-        {/* 右边：图区，三张图叠一起，中间大、两边半露 */}
-        <div className="sv-showcase-stage">
-          <img
-            className="sv-showcase-img is-prev"
-            src={CATEGORY_PHOTOS[prev]}
-            alt=""
-            loading="lazy"
-          />
-          <img
-            key={index}
-            className="sv-showcase-img is-current"
-            src={CATEGORY_PHOTOS[current]}
-            alt={current}
-          />
-          <img
-            className="sv-showcase-img is-next"
-            src={CATEGORY_PHOTOS[next]}
-            alt=""
-            loading="lazy"
-          />
-
-          {/* 左右箭头：浮在图区两侧中央 */}
-          <button
-            type="button"
-            className="sv-showcase-arrow is-left"
-            onClick={goPrev}
-            aria-label="上一个类别"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            className="sv-showcase-arrow is-right"
-            onClick={goNext}
-            aria-label="下一个类别"
-          >
-            ›
-          </button>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function RecentRuns() {
-  const navigate = useNavigate()
-  const { history } = useApp()
-
-  return (
-    <section className="sv-card sv-reveal">
-      <SectionLabel
-        index=""
-        title="最近运行"
-        extra={
-          <Button type="link" size="small" onClick={() => navigate('/history')}>
-            全部记录
-          </Button>
-        }
-      />
-      {history.length ? (
-        <div className="sv-run-list">
-          {history.slice(0, 5).map((run) => (
-            <RunRow
-              key={run.id}
-              run={run}
-              onReplay={(run) =>
-                navigate(
-                  run.mode === 'text'
-                    ? `/text?q=${encodeURIComponent(run.input?.query || '')}`
-                    : run.mode === 'match'
-                      ? `/match?text=${encodeURIComponent(run.input?.text || '')}`
-                      : '/image',
-                )
-              }
+          {/* 中间主卡片 */}
+          <div className="sv-carousel-card is-main">
+            <img
+              key={index}
+              src={CATEGORY_PHOTOS[current]}
+              alt={current}
             />
-          ))}
+            <div className="sv-carousel-info">
+              <h3 className="sv-carousel-name">{current}</h3>
+              <p className="sv-carousel-count">
+                {count != null ? `${count.toLocaleString('zh-CN')} 件商品` : '精选好货'}
+              </p>
+              <button
+                type="button"
+                className="sv-carousel-go"
+                onClick={() => goCategory(current)}
+              >
+                探索系列 <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          {/* 右侧半露卡片 */}
+          <div className="sv-carousel-card is-side is-right" aria-hidden="true">
+            <img src={CATEGORY_PHOTOS[next]} alt="" loading="lazy" />
+          </div>
         </div>
-      ) : (
-        <EmptyState
-          compact
-          title="还没有运行记录"
-          description="完成一次图像分类或文本检索后，这里会留下最近 5 条轨迹。"
-          action={
-            <Button type="primary" onClick={() => navigate('/image')}>
-              先做一次图像分类
-            </Button>
-          }
-        />
-      )}
-      <div className="sv-quick-queries">
-        <span>快捷查询</span>
-        {SAMPLE_QUERIES.slice(0, 4).map((query) => (
-          <button
-            key={query}
-            type="button"
-            onClick={() => navigate(`/text?q=${encodeURIComponent(query)}`)}
-          >
-            {query}
-          </button>
-        ))}
+
+        {/* 右侧箭头：极小极淡 */}
+        <button
+          type="button"
+          className="sv-carousel-arrow is-right"
+          onClick={goNext}
+          aria-label="下一个类别"
+        >
+          ›
+        </button>
       </div>
     </section>
   )
@@ -290,7 +250,6 @@ export default function Overview() {
     <div className="sv-overview">
       <Hero />
       <CategorySection />
-      <RecentRuns />
     </div>
   )
 }

@@ -8,7 +8,9 @@ import {
   CloseCircleFilled,
   DeleteOutlined,
   FileTextOutlined,
+  PictureOutlined,
   QuestionCircleOutlined,
+  SwapOutlined,
 } from '@ant-design/icons'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { matchImageText } from '../api/client'
@@ -248,18 +250,64 @@ export default function MatchLab() {
         <i />
       </div>
 
-      <PageHeader
-        eyebrow="图文一致性校验"
-        title="这张图和描述说的是同一件商品吗"
-        description="上传一张商品图、写一句中文描述，分别识别两侧的类别，再核对它们是否指向同一类商品。"
-        actions={
-          <Tooltip title="两侧只比对顶层大类是否相同，不比较细分类。">
-            <button type="button" className="sv-mm-help" aria-label="使用帮助">
-              <QuestionCircleOutlined />
+      <header className="sv-mm-head">
+        <div className="sv-mm-head-lines" aria-hidden="true">
+          <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+            <path
+              d="M 0 100 C 200 60, 400 120, 800 80"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.15"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 0 130 C 250 90, 500 150, 800 110"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.1"
+              strokeWidth="1"
+            />
+            <circle cx="300" cy="95" r="3" fill="#5fa8b0" fillOpacity="0.25" />
+            <circle cx="500" cy="120" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+            <circle cx="650" cy="90" r="2" fill="#5fa8b0" fillOpacity="0.15" />
+          </svg>
+        </div>
+        <div className="sv-mm-head-copy">
+          <span className="sv-eyebrow">MATCH CHECK</span>
+          <h1>Verify Image & Text Match</h1>
+          <div className="sv-mm-head-modes">
+            <button
+              type="button"
+              className="sv-mm-mode-chip"
+              onClick={() => navigate('/image')}
+            >
+              <PictureOutlined />
+              <span>Image</span>
             </button>
-          </Tooltip>
-        }
-      />
+            <button
+              type="button"
+              className="sv-mm-mode-chip"
+              onClick={() => navigate('/text')}
+            >
+              <FileTextOutlined />
+              <span>Text</span>
+            </button>
+            <button
+              type="button"
+              className="sv-mm-mode-chip"
+              onClick={() => navigate('/match')}
+            >
+              <SwapOutlined />
+              <span>Similar</span>
+            </button>
+          </div>
+        </div>
+        <Tooltip title="两侧只比对顶层大类是否相同，不比较细分类。">
+          <button type="button" className="sv-mm-help" aria-label="使用帮助">
+            <QuestionCircleOutlined />
+          </button>
+        </Tooltip>
+      </header>
 
       <div className="sv-mm-body">
         {/* 左栏：比对准备 */}

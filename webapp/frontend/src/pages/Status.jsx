@@ -3,12 +3,15 @@ import {
   ApiOutlined,
   CloudServerOutlined,
   DatabaseOutlined,
+  FileTextOutlined,
+  PictureOutlined,
   ReloadOutlined,
+  SwapOutlined,
 } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import {
   CategoryGlyph,
-  PageHeader,
   SectionLabel,
 } from '../components/common/Ui'
 
@@ -269,6 +272,7 @@ const ERROR_COLUMNS = [
 ]
 
 export default function Status() {
+  const navigate = useNavigate()
   const {
     health,
     healthLoading,
@@ -298,23 +302,63 @@ export default function Status() {
 
   return (
     <div className="sv-status-page">
-      <PageHeader
-        eyebrow="System Console · API Contract"
-        title="系统状态与接口"
-        description="模型、索引和接口契约集中在这里。答辩前先看这一页，确认后端到底加载了什么。"
-        meta={
-          <>
-            <Tag bordered={false}>GET /api/v1/health</Tag>
-            <Tag bordered={false}>统一返回体 { '{ code, result, msg }' }</Tag>
-            {isPlaceholder && <Tag color="orange">占位模式</Tag>}
-          </>
-        }
-        actions={
+      <header className="sv-page-head">
+        <div className="sv-page-head-lines" aria-hidden="true">
+          <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+            <path
+              d="M 0 100 C 200 60, 400 120, 800 80"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.15"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 0 130 C 250 90, 500 150, 800 110"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.1"
+              strokeWidth="1"
+            />
+            <circle cx="300" cy="95" r="3" fill="#5fa8b0" fillOpacity="0.25" />
+            <circle cx="500" cy="120" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+          </svg>
+        </div>
+        <div className="sv-page-head-copy">
+          <span className="sv-eyebrow">SYSTEM STATUS</span>
+          <h1>Check Backend Health</h1>
+          <div className="sv-page-head-modes">
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/image')}
+            >
+              <PictureOutlined />
+              <span>Image</span>
+            </button>
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/text')}
+            >
+              <FileTextOutlined />
+              <span>Text</span>
+            </button>
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/match')}
+            >
+              <SwapOutlined />
+              <span>Similar</span>
+            </button>
+          </div>
+        </div>
+        <div className="sv-page-head-actions">
           <Button icon={<ReloadOutlined spin={healthLoading} />} onClick={refreshHealth}>
             刷新状态
           </Button>
-        }
-      />
+        </div>
+      </header>
 
       <div className="sv-status-grid sv-reveal">
         <section className="sv-card">

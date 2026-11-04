@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { App as AntApp, AutoComplete, Button, Input, Progress, Segmented, Tag } from 'antd'
-import { CameraOutlined, CloudUploadOutlined, ReloadOutlined } from '@ant-design/icons'
+import {
+  CameraOutlined,
+  CloudUploadOutlined,
+  FileTextOutlined,
+  PictureOutlined,
+  ReloadOutlined,
+  SwapOutlined,
+} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { ingestAdminItem, suggestAdminItem } from '../api/client'
 import { useApp } from '../context/AppContext'
@@ -246,12 +253,58 @@ export default function Admin() {
 
   return (
     <div className="sv-admin">
-      <PageHeader
-        eyebrow="Admin · Incremental Ingest"
-        title="商品入库"
-        description="把商品图追加到已有类别，或新建类别后写入首条商品；单张可先看模型建议，批量可一次选多张，入库后立即参与图像分类与文本检索。"
-        meta={<Tag bordered={false}>POST /api/v1/admin/items</Tag>}
-        actions={
+      <header className="sv-page-head">
+        <div className="sv-page-head-lines" aria-hidden="true">
+          <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+            <path
+              d="M 0 100 C 200 60, 400 120, 800 80"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.15"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 0 130 C 250 90, 500 150, 800 110"
+              fill="none"
+              stroke="#5fa8b0"
+              strokeOpacity="0.1"
+              strokeWidth="1"
+            />
+            <circle cx="300" cy="95" r="3" fill="#5fa8b0" fillOpacity="0.25" />
+            <circle cx="500" cy="120" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+          </svg>
+        </div>
+        <div className="sv-page-head-copy">
+          <span className="sv-eyebrow">ADMIN INGEST</span>
+          <h1>Add Products to Index</h1>
+          <div className="sv-page-head-modes">
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/image')}
+            >
+              <PictureOutlined />
+              <span>Image</span>
+            </button>
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/text')}
+            >
+              <FileTextOutlined />
+              <span>Text</span>
+            </button>
+            <button
+              type="button"
+              className="sv-page-mode-chip"
+              onClick={() => navigate('/match')}
+            >
+              <SwapOutlined />
+              <span>Similar</span>
+            </button>
+          </div>
+        </div>
+        <div className="sv-page-head-actions">
           <div className="sv-admin-mode">
             <Segmented
               value={mode}
@@ -269,8 +322,8 @@ export default function Admin() {
               刷新索引
             </Button>
           </div>
-        }
-      />
+        </div>
+      </header>
 
       {isPlaceholder && (
         <div className="sv-note sv-note-warm">

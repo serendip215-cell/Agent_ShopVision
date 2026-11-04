@@ -2,10 +2,14 @@ import { useState } from 'react'
 import { Button, Tooltip } from 'antd'
 import {
   CameraOutlined,
+  FileTextOutlined,
+  PictureOutlined,
   PlusOutlined,
   QuestionCircleOutlined,
+  SwapOutlined,
   WarningOutlined,
 } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 import { DEMO_IMAGES } from '../../constants/catalog'
 import { useApp } from '../../context/AppContext'
 import { validateImageFile } from '../../utils/samples'
@@ -152,13 +156,60 @@ export function ImageUploadSection({
 }
 
 export function ImageUploadSectionWithHeader({ eyebrow, title, description }) {
+  const navigate = useNavigate()
   const { categories } = useApp()
   return (
     <header className="sv-il-head">
+      <div className="sv-il-head-lines" aria-hidden="true">
+        <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+          <path
+            d="M 0 100 C 200 60, 400 120, 800 80"
+            fill="none"
+            stroke="#5fa8b0"
+            strokeOpacity="0.15"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M 0 130 C 250 90, 500 150, 800 110"
+            fill="none"
+            stroke="#5fa8b0"
+            strokeOpacity="0.1"
+            strokeWidth="1"
+          />
+          <circle cx="300" cy="95" r="3" fill="#5fa8b0" fillOpacity="0.25" />
+          <circle cx="500" cy="120" r="2.5" fill="#5fa8b0" fillOpacity="0.2" />
+          <circle cx="650" cy="90" r="2" fill="#5fa8b0" fillOpacity="0.15" />
+        </svg>
+      </div>
       <div className="sv-il-head-copy">
-        <span className="sv-eyebrow">{eyebrow}</span>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <span className="sv-eyebrow">IMAGE CLASSIFICATION</span>
+        <h1>Recognize Product Category</h1>
+        <div className="sv-il-head-modes">
+          <button
+            type="button"
+            className="sv-il-mode-chip"
+            onClick={() => navigate('/image')}
+          >
+            <PictureOutlined />
+            <span>Image</span>
+          </button>
+          <button
+            type="button"
+            className="sv-il-mode-chip"
+            onClick={() => navigate('/text')}
+          >
+            <FileTextOutlined />
+            <span>Text</span>
+          </button>
+          <button
+            type="button"
+            className="sv-il-mode-chip"
+            onClick={() => navigate('/match')}
+          >
+            <SwapOutlined />
+            <span>Similar</span>
+          </button>
+        </div>
       </div>
       <Tooltip
         title={`模型一共识别 ${categories.length} 类商品，会给出最匹配结果 + 备选猜测`}
