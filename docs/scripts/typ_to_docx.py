@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """实验四报告转 Word（.docx）：从 Typst 源语义化导出，经 pandoc 生成。
 
 为什么不用 PDF→Word：
@@ -182,18 +182,54 @@ COVER = {
 
 def _line_para(doc, label: str, value: str, label_size: float,
                value_size: float, indent_pt: float = 60):
-    """封面「标签：____值____」一行：标签在左、值加下划线。
+    """封面「标签：__________值__________」一行。
+
+    横线不用下划线空格拼（长度不可控、右端常断开），改用**段落下边框**：
+    边框自动贯穿到右边距，值用制表位居中压在这条线上，与模板的
+    「固定宽横线 + 居中值」一致。
 
     返回该段落的 XML 元素——不要用 doc.paragraphs[-1] 反查：
     表格也属于 body 的子元素，插入表格后段落列表的末尾就会错位，
     曾导致封面的「时间」行丢失。
     """
+    from docx.enum.text import WD_TAB_ALIGNMENT
+
     p = doc.add_paragraph()
     pf = p.paragraph_format
     pf.first_line_indent = Pt(0)
-    pf.line_spacing = Pt(value_size * 1.4)
+    pf.line_spacing = Pt(value_size * 1.5)
     pf.left_indent = Pt(indent_pt)
+    pf.right_indent = Pt(0)
     pf.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    pf.space_after = Pt(10)
+
+    # 段落下边框即在整行宽度上画线（横贯到右侧边界）。
+    # python-docx 没有 pBdr 的 get_or_add_*，需手工插入；
+    # OOXML 规定 pPr 子元素有固定顺序，pBdr 必须排在 spacing/ind/jc 之前，
+    # 否则 Word 会忽略它（实测 append 到末尾时横线不显示）。
+    pPr = p._p.get_or_add_pPr()
+    for old in pPr.findall(qn("w:pBdr")):
+        pPr.remove(old)
+    pBdr = OxmlElement("w:pBdr")
+    bottom = OxmlElement("w:bottom")
+    bottom.set(qn("w:val"), "single")
+    bottom.set(qn("w:sz"), "6")
+    bottom.set(qn("w:space"), "4")
+    bottom.set(qn("w:color"), "000000")
+    pBdr.append(bottom)
+    # pBdr 在 CT_PPr 中的合法前驱：pStyle、keepNext、keepLines、pageBreakBefore、
+    # framePr、widowControl、numPr、suppressLineNumbers；插到第一个既有元素之前。
+    after_tags = ("w:pStyle", "w:keepNext", "w:keepLines", "w:pageBreakBefore",
+                  "w:framePr", "w:widowControl", "w:numPr", "w:suppressLineNumbers")
+    anchor = None
+    for tag in after_tags:
+        found = pPr.find(qn(tag))
+        if found is not None:
+            anchor = found
+    if anchor is not None:
+        anchor.addnext(pBdr)
+    else:
+        pPr.insert(0, pBdr)
 
     lab = p.add_run(label)
     set_font(lab, "Times New Roman", "SimSun")
@@ -201,12 +237,19 @@ def _line_para(doc, label: str, value: str, label_size: float,
     lab.font.bold = True
     lab.font.color.rgb = RGBColor(0, 0, 0)
 
-    val = p.add_run("  " + value + "  ")
+    # 制表位：把值置于横线中央。
+    # 版心宽 = A4 纸宽 595.3pt − 左右边距各 70.9pt(2.5cm) ≈ 453.5pt；
+    # 该行左侧还有 indent_pt 的缩进，剩余可用宽度即为横线长度。
+    usable_pt = 453.5 - indent_pt
+    pf.tab_stops.add_tab_stop(Pt(max(usable_pt / 2 + indent_pt, 80)), WD_TAB_ALIGNMENT.CENTER)
+
+    tab = p.add_run("\t")
+    set_font(tab, "Times New Roman", "SimSun")
+    val = p.add_run(value)
     set_font(val, "Times New Roman", "SimSun")
     val.font.size = Pt(value_size)
     val.font.bold = True
     val.font.color.rgb = RGBColor(0, 0, 0)
-    val.font.underline = True
     return p._element
 
 
@@ -448,6 +491,19 @@ def polish(doc) -> None:
                 r.font.size = Pt(9)
                 r.font.color.rgb = RGBColor(0, 0, 0)
             continue
+        # 含图片的段落：必须用单倍行距、无缩进、居中。
+        # 若沿用正文的固定 20 磅行距，图片会被压进行高里几乎不可见
+        # （实测 extent 约 8.3cm 高却只剩一条灰线）。
+        if "<w:drawing" in para._element.xml or "<w:pict" in para._element.xml:
+            pf.first_line_indent = Pt(0)
+            pf.left_indent = Pt(0)
+            pf.line_spacing = 1.0
+            pf.space_before = Pt(6)
+            pf.space_after = Pt(3)
+            para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            # 图片段落本身不含文字 run，无需处理字体
+            continue
+
         # 正文：行距 20 磅、首行缩进 2 字符
         pf.line_spacing = Pt(20)
         pf.first_line_indent = Pt(24)     # 12pt 字号的 2 字符
@@ -464,11 +520,21 @@ def polish(doc) -> None:
             for cell in row.cells:
                 for p in cell.paragraphs:
                     p.paragraph_format.first_line_indent = Pt(0)
+                    p.paragraph_format.left_indent = Pt(0)
                     p.paragraph_format.line_spacing = Pt(12)
                     for r in p.runs:
                         set_font(r, "Times New Roman", "SimSun")
                         r.font.size = Pt(10.5)
                         r.font.color.rgb = RGBColor(0, 0, 0)
+
+    # 参考文献：清掉 pandoc 带来的左缩进（实测 31.2pt），改为按条目悬挂观感
+    for para in doc.paragraphs:
+        if para.style.name == "Bibliography":
+            pf = para.paragraph_format
+            pf.left_indent = Pt(0)
+            pf.first_line_indent = Pt(0)
+            pf.line_spacing = Pt(18)
+            pf.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
     # 题注编号与页码
     n_fig, n_tbl = number_captions(doc)
