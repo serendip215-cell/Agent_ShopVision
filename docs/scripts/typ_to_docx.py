@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """实验四报告转 Word（.docx）：从 Typst 源语义化导出，经 pandoc 生成。
 
 为什么不用 PDF→Word：
@@ -31,7 +31,7 @@ import urllib.request
 from pathlib import Path
 
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
@@ -155,6 +155,177 @@ def style_font(style, latin: str, eastasia: str, size: float | None = None,
     rFonts.set(qn("w:ascii"), latin)
     rFonts.set(qn("w:hAnsi"), latin)
     rFonts.set(qn("w:eastAsia"), eastasia)
+
+
+# 封面信息（与 docs/typ/实验四.typ 封面区一致，按课程模板
+# AI全栈开发实验报告模板-2026-4.doc 的版式排布）
+COVER = {
+    "school": "西 安 邮 电 大 学",
+    "title": "AI 全栈开发实验",
+    "subject_label": "题目：",
+    "subject": "前后端开发实验",
+    "group_label": "组　号：",
+    "group": "23",
+    "members_label": "组员信息：",
+    "time_label": "时　间：",
+    "time": "2026.11.05",
+    "members": [
+        ("2610321101", "何朝杨", "后端 AI 服务、架构设计文档与成员分工表"),
+        ("2610321103", "杜军博", "报告整合、排版与正式 PDF；核对推理耗时口径"),
+        ("2610321135", "王陆洲", "API 文档与测试报告、模型产物上传"),
+        ("2610320046", "张梓萱", "前端页面架构与公共组件、响应式与浏览器兼容"),
+        ("2610320033", "刘凡思雨", "前端三页面交互与数据流、端到端与性能测试"),
+        ("2610321168", "秦鑫洋", "问题与解决方案、截图录屏与交付材料整理"),
+    ],
+}
+
+
+def _line_para(doc, label: str, value: str, label_size: float,
+               value_size: float, indent_pt: float = 60):
+    """封面「标签：____值____」一行：标签在左、值加下划线。
+
+    返回该段落的 XML 元素——不要用 doc.paragraphs[-1] 反查：
+    表格也属于 body 的子元素，插入表格后段落列表的末尾就会错位，
+    曾导致封面的「时间」行丢失。
+    """
+    p = doc.add_paragraph()
+    pf = p.paragraph_format
+    pf.first_line_indent = Pt(0)
+    pf.line_spacing = Pt(value_size * 1.4)
+    pf.left_indent = Pt(indent_pt)
+    pf.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    lab = p.add_run(label)
+    set_font(lab, "Times New Roman", "SimSun")
+    lab.font.size = Pt(label_size)
+    lab.font.bold = True
+    lab.font.color.rgb = RGBColor(0, 0, 0)
+
+    val = p.add_run("  " + value + "  ")
+    set_font(val, "Times New Roman", "SimSun")
+    val.font.size = Pt(value_size)
+    val.font.bold = True
+    val.font.color.rgb = RGBColor(0, 0, 0)
+    val.font.underline = True
+    return p._element
+
+
+def build_cover(doc) -> None:
+    """在文档最前面插入课程模板样式的封面页。
+
+    语义化导出时封面被去掉（Word 另行排版），此处按
+    AI全栈开发实验报告模板-2026-4.doc 的要素重建：
+    校名、实验名、题目、组号、组员信息表、时间，随后分页。
+    """
+    from docx.oxml import OxmlElement as OE
+
+    new_elems = []
+
+    def add_para(text="", size=12.0, bold=False, align=WD_ALIGN_PARAGRAPH.CENTER,
+                 space_before=0, space_after=0, font_cn="SimSun",
+                 font_en="Times New Roman"):
+        p = doc.add_paragraph()
+        if text:
+            r = p.add_run(text)
+            set_font(r, font_en, font_cn)
+            r.font.size = Pt(size)
+            r.font.bold = bold
+            r.font.color.rgb = RGBColor(0, 0, 0)
+        pf = p.paragraph_format
+        pf.alignment = align
+        pf.first_line_indent = Pt(0)
+        pf.space_before = Pt(space_before)
+        pf.space_after = Pt(space_after)
+        pf.line_spacing = Pt(size * 1.4)
+        new_elems.append(p._element)
+        return p
+
+    # 校名：宋体 26pt 粗体，字间加空格（与模板一致）
+    add_para(COVER["school"], size=26, bold=True, space_before=54)
+    # 实验名：26pt 粗体
+    add_para(COVER["title"], size=26, bold=True, space_before=40)
+    # 题目
+    add_para("", size=6, space_before=26)
+    new_elems.append(_line_para(doc, COVER["subject_label"], COVER["subject"], 20, 22, indent_pt=70))
+    # 组号
+    add_para("", size=6, space_before=20)
+    new_elems.append(_line_para(doc, COVER["group_label"], COVER["group"], 14, 14, indent_pt=70))
+    # 组员信息
+    add_para("", size=6, space_before=16)
+    p = doc.add_paragraph()
+    r = p.add_run(COVER["members_label"])
+    set_font(r, "Times New Roman", "SimSun")
+    r.font.size = Pt(14)
+    r.font.bold = True
+    r.font.color.rgb = RGBColor(0, 0, 0)
+    p.paragraph_format.first_line_indent = Pt(0)
+    p.paragraph_format.left_indent = Pt(70)
+    p.paragraph_format.space_after = Pt(2)
+    new_elems.append(p._element)
+
+    # 组员表：全网格 0.5pt，三列
+    tbl = doc.add_table(rows=1 + len(COVER["members"]), cols=3)
+    tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
+    # add_table 会把表追加到文档末尾；这里把它登记进待搬移列表，
+    # 稍后与封面段落一起挪到正文最前（否则组员表会跑到文末）。
+    new_elems.append(tbl._tbl)
+    # 先移除默认样式带来的边框，再绘制 0.5pt 全网格
+    tblPr = tbl._tbl.tblPr
+    for el in tblPr.findall(qn("w:tblBorders")):
+        tblPr.remove(el)
+    borders = OE("w:tblBorders")
+    for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        e = OE(f"w:{edge}")
+        e.set(qn("w:val"), "single")
+        e.set(qn("w:sz"), "4")
+        e.set(qn("w:color"), "000000")
+        borders.append(e)
+    tblPr.append(borders)
+    tbl.autofit = False
+    widths = (Cm(3.9), Cm(3.5), Cm(7.0))
+    headers = ("学号", "姓名", "分工")
+    for j, (h, w) in enumerate(zip(headers, widths)):
+        cell = tbl.rows[0].cells[j]
+        cell.width = w
+        cp = cell.paragraphs[0]
+        cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        cp.paragraph_format.first_line_indent = Pt(0)
+        cr = cp.add_run(h)
+        set_font(cr, "Times New Roman", "SimSun")
+        cr.font.size = Pt(14)
+        cr.font.bold = True
+        cr.font.color.rgb = RGBColor(0, 0, 0)
+    for i, (sid, name, duty) in enumerate(COVER["members"], start=1):
+        for j, val in enumerate((sid, name, duty)):
+            cell = tbl.rows[i].cells[j]
+            cell.width = widths[j]
+            cp = cell.paragraphs[0]
+            cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            cp.paragraph_format.first_line_indent = Pt(0)
+            cr = cp.add_run(val)
+            set_font(cr, "Times New Roman", "SimSun")
+            cr.font.size = Pt(14)
+            cr.font.color.rgb = RGBColor(0, 0, 0)
+            if j == 0:
+                cr.font.bold = True
+
+    # 时间
+    add_para("", size=6, space_before=14)
+    new_elems.append(_line_para(doc, COVER["time_label"], COVER["time"], 14, 14, indent_pt=70))
+
+    # 封面后分页：也登记进列表，与封面元素一起按顺序搬移
+    brk = doc.add_paragraph()
+    brk.paragraph_format.first_line_indent = Pt(0)
+    brk.add_run().add_break(WD_BREAK.PAGE)
+    new_elems.append(brk._element)
+
+    # 把封面元素按登记顺序整体插到正文最前
+    body = doc.element.body
+    anchor = body[0]
+    for el in new_elems:
+        anchor.addprevious(el)
+
+    print(f"  封面: 已生成（校名/实验名/题目/组号/组员表 {len(COVER['members'])} 行/时间）")
 
 
 def number_captions(doc) -> tuple[int, int]:
@@ -304,6 +475,9 @@ def polish(doc) -> None:
     add_page_numbers(doc)
     print(f"  题注编号: 图 {n_fig} 条、表 {n_tbl} 条")
     print("  页面: A4 / 边距 2.5cm / 页脚页码已插入")
+
+    # 封面：最后生成，避免被前面的段落遍历与表格处理影响
+    build_cover(doc)
 
 
 def main(argv: list[str]) -> int:
