@@ -1,0 +1,756 @@
+{
+  "image": [
+    {
+      "sample": "cat-shoe.png",
+      "expected": "鞋",
+      "got": "鞋",
+      "ok": true,
+      "confidence": 0.137206,
+      "score": 0.957258,
+      "attributes": {
+        "type": "低帮运动休闲鞋",
+        "color": "白色",
+        "material": "皮革"
+      },
+      "top3": [
+        {
+          "category": "鞋",
+          "similarity": 0.957258,
+          "confidence": 0.137206
+        },
+        {
+          "category": "男装",
+          "similarity": 0.765967,
+          "confidence": 0.113317
+        },
+        {
+          "category": "包",
+          "similarity": 0.760332,
+          "confidence": 0.112681
+        }
+      ],
+      "top_item": "PUMA CARE OF 男士皮质低帮运动鞋，白色，美国尺码 11.5",
+      "elapsed_ms": 247.4,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-bag.png",
+      "expected": "包",
+      "got": "包",
+      "ok": true,
+      "confidence": 0.126438,
+      "score": 0.904385,
+      "attributes": {
+        "type": "双肩背包",
+        "color": "白色",
+        "material": "真皮"
+      },
+      "top3": [
+        {
+          "category": "包",
+          "similarity": 0.904385,
+          "confidence": 0.126438
+        },
+        {
+          "category": "家居用品",
+          "similarity": 0.784841,
+          "confidence": 0.112192
+        },
+        {
+          "category": "鞋",
+          "similarity": 0.774066,
+          "confidence": 0.110989
+        }
+      ],
+      "top_item": "香港真皮双肩背包女",
+      "elapsed_ms": 250.7,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-bottle.png",
+      "expected": "水杯",
+      "got": "水杯",
+      "ok": true,
+      "confidence": 0.124144,
+      "score": 0.917973,
+      "attributes": {
+        "type": "保温杯",
+        "color": "黑色",
+        "material": "聚丙烯（PP）"
+      },
+      "top3": [
+        {
+          "category": "水杯",
+          "similarity": 0.917973,
+          "confidence": 0.124144
+        },
+        {
+          "category": "厨房用品",
+          "similarity": 0.890413,
+          "confidence": 0.12077
+        },
+        {
+          "category": "包",
+          "similarity": 0.845908,
+          "confidence": 0.115513
+        }
+      ],
+      "top_item": "水杯科技",
+      "elapsed_ms": 281.1,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-phonecase.png",
+      "expected": "手机壳",
+      "got": "手机壳",
+      "ok": true,
+      "confidence": 0.123859,
+      "score": 0.838832,
+      "attributes": {
+        "type": "设计师款3D打印硬壳手机壳",
+        "color": "灰色、黑色、白色",
+        "material": "塑料"
+      },
+      "top3": [
+        {
+          "category": "手机壳",
+          "similarity": 0.838832,
+          "confidence": 0.123859
+        },
+        {
+          "category": "家居用品",
+          "similarity": 0.813891,
+          "confidence": 0.120808
+        },
+        {
+          "category": "包",
+          "similarity": 0.72819,
+          "confidence": 0.110886
+        }
+      ],
+      "top_item": "亚马逊自有品牌 - Solimo 设计师款 Gary 帆布 3D 打印硬壳手机壳，适用于三星 Galaxy Core Prime",
+      "elapsed_ms": 257.9,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-shirt.png",
+      "expected": "男装",
+      "got": "男装",
+      "ok": true,
+      "confidence": 0.123382,
+      "score": 0.898662,
+      "attributes": {
+        "type": "短袖T恤",
+        "color": "浅灰色",
+        "material": "棉"
+      },
+      "top3": [
+        {
+          "category": "男装",
+          "similarity": 0.898662,
+          "confidence": 0.123382
+        },
+        {
+          "category": "运动服",
+          "similarity": 0.879642,
+          "confidence": 0.121057
+        },
+        {
+          "category": "女装",
+          "similarity": 0.863068,
+          "confidence": 0.119067
+        }
+      ],
+      "top_item": "假两件小V领短袖男T恤2026夏季新款长绒棉简约纯色透气男士T恤",
+      "elapsed_ms": 286.5,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-dress.png",
+      "expected": "女装",
+      "got": "女装",
+      "ok": true,
+      "confidence": 0.124485,
+      "score": 0.863956,
+      "attributes": {
+        "type": "连衣裙",
+        "color": "粉色",
+        "material": "针织面料"
+      },
+      "top3": [
+        {
+          "category": "女装",
+          "similarity": 0.863956,
+          "confidence": 0.124485
+        },
+        {
+          "category": "家居用品",
+          "similarity": 0.787526,
+          "confidence": 0.115325
+        },
+        {
+          "category": "鞋",
+          "similarity": 0.761368,
+          "confidence": 0.112347
+        }
+      ],
+      "top_item": "茶歇法式性感粉色连衣裙女春秋修身内搭甜辣妹别致a字裙子新款潮",
+      "elapsed_ms": 269.7,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-sportswear.png",
+      "expected": "运动服",
+      "got": "运动服",
+      "ok": true,
+      "confidence": 0.122879,
+      "score": 0.855378,
+      "attributes": {
+        "type": "保暖内衣套装",
+        "color": "黑色",
+        "material": "高弹速干面料"
+      },
+      "top3": [
+        {
+          "category": "运动服",
+          "similarity": 0.855378,
+          "confidence": 0.122879
+        },
+        {
+          "category": "男装",
+          "similarity": 0.813656,
+          "confidence": 0.117858
+        },
+        {
+          "category": "女装",
+          "similarity": 0.777768,
+          "confidence": 0.113703
+        }
+      ],
+      "top_item": "信柏合保暖内衣套装BH7/套",
+      "elapsed_ms": 263.8,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-pan.png",
+      "expected": "厨房用品",
+      "got": "厨房用品",
+      "ok": true,
+      "confidence": 0.13351,
+      "score": 0.951186,
+      "attributes": {
+        "type": "不锈钢煎锅",
+        "color": "银色",
+        "material": "不锈钢"
+      },
+      "top3": [
+        {
+          "category": "厨房用品",
+          "similarity": 0.951186,
+          "confidence": 0.13351
+        },
+        {
+          "category": "家居用品",
+          "similarity": 0.928461,
+          "confidence": 0.13051
+        },
+        {
+          "category": "水杯",
+          "similarity": 0.807905,
+          "confidence": 0.115687
+        }
+      ],
+      "top_item": "AmazonBasics 不锈钢煎锅，8英寸",
+      "elapsed_ms": 249.8,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "sample": "cat-vase.png",
+      "expected": "家居用品",
+      "got": "家居用品",
+      "ok": true,
+      "confidence": 0.117544,
+      "score": 0.786209,
+      "attributes": {
+        "type": "相框",
+        "color": "白色、棕色",
+        "material": "陶瓷"
+      },
+      "top3": [
+        {
+          "category": "家居用品",
+          "similarity": 0.786209,
+          "confidence": 0.117544
+        },
+        {
+          "category": "水杯",
+          "similarity": 0.763089,
+          "confidence": 0.114858
+        },
+        {
+          "category": "厨房用品",
+          "similarity": 0.761889,
+          "confidence": 0.11472
+        }
+      ],
+      "top_item": "AmazonBasics 芳香疗法超声波精油扩散器，120 毫升陶瓷材质，底座采用木纹饰面，对称图案",
+      "elapsed_ms": 251.7,
+      "http": 200,
+      "code": 0
+    }
+  ],
+  "text": [
+    {
+      "query": "白色运动鞋",
+      "expected": "鞋",
+      "got": "鞋",
+      "ok": true,
+      "score": 0.466226,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "高帮鞋男欧货",
+          "sim": 0.466226,
+          "type": "高帮运动鞋"
+        },
+        {
+          "name": "真皮y3高帮男鞋2020年新款潮牌男",
+          "sim": 0.465698,
+          "type": "高帮运动鞋"
+        },
+        {
+          "name": "小白鞋男生小码",
+          "sim": 0.463588,
+          "type": "休闲鞋"
+        }
+      ],
+      "elapsed_ms": 85.8,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "双肩包",
+      "expected": "包",
+      "got": "包",
+      "ok": true,
+      "score": 0.437303,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "背包男士双肩包黑色",
+          "sim": 0.437303,
+          "type": "双肩包"
+        },
+        {
+          "name": "高端奢侈双肩背包",
+          "sim": 0.436343,
+          "type": "双肩背包"
+        },
+        {
+          "name": "书包4一6",
+          "sim": 0.435996,
+          "type": "双肩背包"
+        }
+      ],
+      "elapsed_ms": 63.2,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "保温水杯",
+      "expected": "水杯",
+      "got": "水杯",
+      "ok": true,
+      "score": 0.468155,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "保温杯150ml进口",
+          "sim": 0.468155,
+          "type": "保温杯"
+        },
+        {
+          "name": "泡茶杯创意 个性不锈钢",
+          "sim": 0.467889,
+          "type": "保温杯"
+        },
+        {
+          "name": "贝谷保温杯",
+          "sim": 0.467782,
+          "type": "保温杯"
+        }
+      ],
+      "elapsed_ms": 84.6,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "手机壳",
+      "expected": "手机壳",
+      "got": "手机壳",
+      "ok": true,
+      "score": 0.449704,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "亚马逊自有品牌 - Solimo 设计师骷髅花卉 3D 打印硬壳手机保护壳（适用于华为 G8）",
+          "sim": 0.449704,
+          "type": "硬壳保护壳"
+        },
+        {
+          "name": "亚马逊自有品牌 - Solimo 设计师款 Pink Lady 图案 3D 打印硬壳手机壳，适用于 Realme 3 Pro",
+          "sim": 0.449078,
+          "type": "图案硬壳手机壳"
+        },
+        {
+          "name": "亚马逊自有品牌 - Solimo 设计师花卉 3D 打印硬壳手机壳，适用于华为 G8",
+          "sim": 0.446802,
+          "type": "花卉图案硬壳手机壳"
+        }
+      ],
+      "elapsed_ms": 74.5,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "男士衬衫",
+      "expected": "男装",
+      "got": "男装",
+      "ok": true,
+      "score": 0.444042,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "100%长绒棉男士格子衬衫长袖商务休闲翻领纯棉透气亲肤衬衣男",
+          "sim": 0.444042,
+          "type": "男士格子长袖衬衫"
+        },
+        {
+          "name": "春秋男士衬衫免烫磨毛长袖格子中老年人宽松商务休闲衬衣",
+          "sim": 0.44399,
+          "type": "长袖格子衬衫"
+        },
+        {
+          "name": "啄木鸟纯棉磨毛格子衬衫男士长袖2025春秋新款休闲宽松爸爸装衬衣",
+          "sim": 0.43682,
+          "type": "格子长袖衬衫"
+        }
+      ],
+      "elapsed_ms": 62.4,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "连衣裙",
+      "expected": "女装",
+      "got": "女装",
+      "ok": true,
+      "score": 0.399563,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "辣妹v领小众设计感褶皱飘带连衣裙女秋季修身显瘦a字长裙新款",
+          "sim": 0.399563,
+          "type": "连衣裙"
+        },
+        {
+          "name": "长款鱼尾裙秋冬季新款修身显瘦打底连衣裙女内搭方领纯色包臀裙潮",
+          "sim": 0.396746,
+          "type": "连衣裙"
+        },
+        {
+          "name": "泡泡袖方领赫本风连衣裙女装夏季裙子收腰显瘦气质过膝长裙子夏款",
+          "sim": 0.392535,
+          "type": "连衣裙"
+        }
+      ],
+      "elapsed_ms": 76.2,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "运动裤",
+      "expected": "运动服",
+      "got": "运动服",
+      "ok": true,
+      "score": 0.417979,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "TDUO 运动套装 H4 套 拍下备注颜色 拍下备注尺码",
+          "sim": 0.417979,
+          "type": "运动套装"
+        },
+        {
+          "name": "大口袋迷彩工装裤男系绳宽松直筒拖地裤子青年显高学生休闲裤_351",
+          "sim": 0.417947,
+          "type": "迷彩工装长裤"
+        },
+        {
+          "name": "统狮运动套装 C09 套",
+          "sim": 0.415736,
+          "type": "运动套装"
+        }
+      ],
+      "elapsed_ms": 78.2,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "炒锅",
+      "expected": "厨房用品",
+      "got": "厨房用品",
+      "ok": true,
+      "score": 0.46764,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "亚马逊自有品牌 - Solimo 不粘煎锅（24 厘米，双层涂层，厚度 2 毫米）",
+          "sim": 0.46764,
+          "type": "不粘煎锅"
+        },
+        {
+          "name": "亚马逊自有品牌 – Solimo 不粘煎锅（28 厘米，双层涂层，厚度 2 毫米）",
+          "sim": 0.465768,
+          "type": "不粘煎锅"
+        },
+        {
+          "name": "AmazonBasics 14英寸硬质阳极氧化不粘煎锅，带辅助手柄",
+          "sim": 0.464794,
+          "type": "不粘煎锅"
+        }
+      ],
+      "elapsed_ms": 62.3,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "query": "花瓶",
+      "expected": "家居用品",
+      "got": "水杯",
+      "ok": false,
+      "score": 0.432044,
+      "hit_count": 5,
+      "top_items": [
+        {
+          "name": "珊瑚奶嘴杯",
+          "sim": 0.432044,
+          "type": "无柄直筒杯"
+        },
+        {
+          "name": "紫砂小号主人杯",
+          "sim": 0.427177,
+          "type": "紫砂主人杯"
+        },
+        {
+          "name": "蝶恋花茶杯",
+          "sim": 0.425785,
+          "type": "茶杯"
+        }
+      ],
+      "elapsed_ms": 77.1,
+      "http": 200,
+      "code": 0
+    }
+  ],
+  "match": [
+    {
+      "image": "cat-shoe.png",
+      "text": "白色运动鞋",
+      "expected_match": true,
+      "got_match": true,
+      "ok": true,
+      "image_category": "鞋",
+      "text_category": "鞋",
+      "image_type": "低帮运动休闲鞋",
+      "text_type": "高帮运动鞋",
+      "elapsed_ms": 349.7,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "image": "cat-bag.png",
+      "text": "双肩包",
+      "expected_match": true,
+      "got_match": true,
+      "ok": true,
+      "image_category": "包",
+      "text_category": "包",
+      "image_type": "双肩背包",
+      "text_type": "双肩包",
+      "elapsed_ms": 321.0,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "image": "cat-bottle.png",
+      "text": "保温水杯",
+      "expected_match": true,
+      "got_match": true,
+      "ok": true,
+      "image_category": "水杯",
+      "text_category": "水杯",
+      "image_type": "保温杯",
+      "text_type": "保温杯",
+      "elapsed_ms": 322.3,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "image": "cat-shoe.png",
+      "text": "双肩包",
+      "expected_match": false,
+      "got_match": false,
+      "ok": true,
+      "image_category": "鞋",
+      "text_category": "包",
+      "image_type": "低帮运动休闲鞋",
+      "text_type": "双肩包",
+      "elapsed_ms": 362.0,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "image": "cat-bag.png",
+      "text": "白色运动鞋",
+      "expected_match": false,
+      "got_match": false,
+      "ok": true,
+      "image_category": "包",
+      "text_category": "鞋",
+      "image_type": "双肩背包",
+      "text_type": "高帮运动鞋",
+      "elapsed_ms": 350.6,
+      "http": 200,
+      "code": 0
+    },
+    {
+      "image": "cat-dress.png",
+      "text": "炒锅",
+      "expected_match": false,
+      "got_match": false,
+      "ok": true,
+      "image_category": "女装",
+      "text_category": "厨房用品",
+      "image_type": "连衣裙",
+      "text_type": "不粘煎锅",
+      "elapsed_ms": 322.4,
+      "http": 200,
+      "code": 0
+    }
+  ],
+  "errors": [
+    {
+      "case": "上传 txt 冒充图片",
+      "expected_code": 40001,
+      "got_code": 40001,
+      "http": 400,
+      "msg": "图像格式错误，请上传 PNG/JPG：无法解析：UnidentifiedImageError",
+      "ok": true
+    },
+    {
+      "case": "空查询词",
+      "expected_code": 40000,
+      "got_code": 40000,
+      "http": 400,
+      "msg": "query String should have at least 1 character",
+      "ok": true
+    },
+    {
+      "case": "top_k 越界(999)",
+      "expected_code": 40000,
+      "got_code": 40000,
+      "http": 400,
+      "msg": "top_k Input should be less than or equal to 50",
+      "ok": true
+    },
+    {
+      "case": "top_k 越界(0)",
+      "expected_code": 40000,
+      "got_code": 40000,
+      "http": 400,
+      "msg": "top_k Input should be greater than or equal to 1",
+      "ok": true
+    },
+    {
+      "case": "查询词超长(201字)",
+      "expected_code": 40000,
+      "got_code": 40000,
+      "http": 400,
+      "msg": "query String should have at most 200 characters",
+      "ok": true
+    },
+    {
+      "case": "不存在的路径",
+      "expected_code": 40400,
+      "got_code": 40400,
+      "http": 404,
+      "msg": "Not Found",
+      "ok": true
+    },
+    {
+      "case": "match 缺文本",
+      "expected_code": 400,
+      "got_code": 40000,
+      "http": 400,
+      "msg": "text Field required",
+      "ok": true
+    },
+    {
+      "case": "空文件上传",
+      "expected_code": 40002,
+      "got_code": 40002,
+      "http": 400,
+      "msg": "上传内容为空",
+      "ok": true
+    }
+  ],
+  "perf": {
+    "GET /health": {
+      "median": 30.8,
+      "mean": 29.0,
+      "min": 15.0,
+      "max": 32.4,
+      "p90": 32.1,
+      "n": 10
+    },
+    "POST /text": {
+      "median": 70.6,
+      "mean": 70.1,
+      "min": 61.7,
+      "max": 80.0,
+      "p90": 76.5,
+      "n": 10
+    },
+    "POST /image": {
+      "median": 266.1,
+      "mean": 264.4,
+      "min": 244.0,
+      "max": 279.2,
+      "p90": 275.2,
+      "n": 10
+    },
+    "POST /match": {
+      "median": 335.5,
+      "mean": 338.9,
+      "min": 310.5,
+      "max": 387.0,
+      "p90": 354.6,
+      "n": 10
+    }
+  },
+  "summary": {
+    "image": "9/9",
+    "text": "8/9",
+    "match": "6/6",
+    "errors": "8/8"
+  }
+}
