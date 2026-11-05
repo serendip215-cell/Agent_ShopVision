@@ -85,13 +85,18 @@ class OnnxEncoder(Encoder):
     ) -> None:
         try:
             import onnxruntime as ort
-            from cn_clip.clip import image_transform, tokenize
             from PIL import Image  # noqa: F401
-        except ImportError as exc:
-            raise ApiError(
-                ErrorCode.MODEL_UNAVAILABLE,
-                f"ONNX 后端缺依赖（onnxruntime / Pillow / cn_clip）：{exc}",
-            ) from exc
+            from cn_clip.clip import image_transform, tokenize
+        except ImportError:
+            # 官方 cn_clip 顶层依赖 torch/torchvision（约 2 GB）。只是推理时用不到它们，
+            # 回退到本仓库内等价的 torch-free 实现（见 cn_clip_shim.py，逐行对齐官方）。
+            try:
+                from .cn_clip_shim import image_transform, tokenize
+            except ImportError as exc:
+                raise ApiError(
+                    ErrorCode.MODEL_UNAVAILABLE,
+                    f"ONNX 后端缺依赖（onnxruntime / Pillow / cn_clip）：{exc}",
+                ) from exc
         if not visual_path.is_file() or not text_path.is_file():
             raise ApiError(
                 ErrorCode.MODEL_UNAVAILABLE,

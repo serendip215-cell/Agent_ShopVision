@@ -3,3 +3,7 @@
 # （典型报错：$'\r': command not found）。Python 同理会在 shebang 后带 \r。
 *.sh text eol=lf
 *.py text eol=lf
+
+# 分词器词表是数据文件：每行一个词，行尾被 CRLF 化会让词条多出 \r，
+# 导致 token -> id 映射错位、向量与训练时不一致。必须强制 LF。
+webapp/backend/app/services/vocab.txt text eol=lf
