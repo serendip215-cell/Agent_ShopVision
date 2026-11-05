@@ -454,6 +454,15 @@ def polish(doc) -> None:
         pf.space_after = Pt(0)
     except KeyError:
         pass
+    # pandoc 给 Body Text 带 9pt 段前 + 9pt 段后，段间显得松。
+    # 统一为：段前 0、段后 18 磅（只留一种间距，避免叠加成 18pt 双份）。
+    for style_name in ("Body Text", "First Paragraph", "Normal (Web)"):
+        try:
+            spf = doc.styles[style_name].paragraph_format
+            spf.space_before = Pt(0)
+            spf.space_after = Pt(18)
+        except KeyError:
+            pass
     heading_spec = {"Heading 1": 14, "Heading 2": 12, "Heading 3": 12}
     for name, size in heading_spec.items():
         try:
@@ -526,15 +535,19 @@ def polish(doc) -> None:
             pf.line_spacing = Pt(20)
             pf.first_line_indent = Pt(0)
             pf.left_indent = Pt(0)
+            pf.space_before = Pt(0)
+            pf.space_after = Pt(18)
             for r in para.runs:
                 set_font(r, "Times New Roman", "SimSun")
                 r.font.color.rgb = RGBColor(0, 0, 0)
             para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
             continue
 
-        # 正文：行距 20 磅、首行缩进 2 字符
+        # 正文：行距 20 磅、首行缩进 2 字符、段前 0 / 段后 18 磅
         pf.line_spacing = Pt(20)
         pf.first_line_indent = Pt(24)     # 12pt 字号的 2 字符
+        pf.space_before = Pt(0)
+        pf.space_after = Pt(18)
         for r in para.runs:
             set_font(r, "Times New Roman", "SimSun")
             r.font.color.rgb = RGBColor(0, 0, 0)
