@@ -86,6 +86,29 @@ def run(cmd: list[str]) -> None:
 
 
 # --------------------------- 后处理 ---------------------------
+def set_table_repeat_header(table) -> None:
+    """表格跨页时重复表头（Word 的"标题行重复"），即英文的 repeat header rows。
+
+    没有这一步，表格翻页后续表就没有列名，读者无法判断各列含义。
+    同时允许行内跨页断行（cantSplit 关闭），避免长单元格把整行顶到下一页。
+    """
+    if not table.rows:
+        return
+    # 首行标记为标题行
+    trPr = table.rows[0]._tr.get_or_add_trPr()
+    for old in trPr.findall(qn("w:tblHeader")):
+        trPr.remove(old)
+    tblHeader = OxmlElement("w:tblHeader")
+    tblHeader.set(qn("w:val"), "true")
+    trPr.append(tblHeader)
+
+    # 允许各行在页间拆分
+    for row in table.rows:
+        rpr = row._tr.get_or_add_trPr()
+        for old in rpr.findall(qn("w:cantSplit")):
+            rpr.remove(old)
+
+
 def set_three_line(table) -> None:
     """三线表：去掉全部框线，仅保留顶线、栏目线、底线。"""
     tbl = table._tbl
@@ -372,6 +395,46 @@ def build_cover(doc) -> None:
     print(f"  封面: 已生成（校名/实验名/题目/组号/组员表 {len(COVER['members'])} 行/时间）")
 
 
+def number_code_captions(doc) -> int:
+    """给代码块题注补上「代码 N」编号。
+
+    语义化导出把 #figure(kind: raw) 解包成 fenced code + 一行「代码：xxx」，
+    题注因此是普通段落而非 Caption 样式，number_captions() 覆盖不到。
+    这里按「紧跟 Source Code 段落、且以"代码"开头」识别，补回编号。
+    """
+    import re as _re
+
+    paras = doc.paragraphs
+    n = 0
+    for i, para in enumerate(paras):
+        if para.style.name != "Source Code":
+            continue
+        # 向后找第一条非空段落
+        j = i + 1
+        while j < len(paras) and not paras[j].text.strip():
+            j += 1
+        if j >= len(paras):
+            continue
+        cap = paras[j]
+        text = cap.text.strip()
+        if not text.startswith("代码"):
+            continue
+        # 已经有「代码 N」形式就跳过（注意 N 后应跟空白或冒号）
+        if _re.match(r"^代码\s*\d+\s*[：:]\s*\S", text):
+            continue
+        n += 1
+        rest = _re.sub(r"^代码\s*\d*\s*[：:]\s*", "", text)
+        if cap.runs:
+            first = cap.runs[0]
+            # 清掉原有的所有 run，用首个 run 承载新文本以保留字体
+            for r in cap.runs[1:]:
+                r.text = ""
+            first.text = f"代码 {n}：{rest}"
+        else:
+            cap.add_run(f"代码 {n}：{rest}")
+    return n
+
+
 def number_captions(doc) -> tuple[int, int]:
     """给题注补上「图 N」「表 N」前缀。
 
@@ -449,24 +512,33 @@ def polish(doc) -> None:
         normal = doc.styles["Normal"]
         style_font(normal, "Times New Roman", "SimSun", size=12)
         pf = normal.paragraph_format
-        pf.line_spacing = Pt(20)          # 原文行距 20 磅
+        pf.line_spacing = Pt(18)          # 行距 18 磅（按用户要求）
         pf.space_before = Pt(0)
         pf.space_after = Pt(0)
     except KeyError:
         pass
-    # pandoc 给 Body Text 带 9pt 段前 + 9pt 段后，段间显得松。
-    # 统一为：段前 0、段后 18 磅（只留一种间距，避免叠加成 18pt 双份）。
+    # 段前段后统一为 0：段间距离完全由 18 磅行距体现（按用户要求）。
     for style_name in ("Body Text", "First Paragraph", "Normal (Web)"):
         try:
             spf = doc.styles[style_name].paragraph_format
+            spf.line_spacing = Pt(18)
             spf.space_before = Pt(0)
-            spf.space_after = Pt(18)
+            spf.space_after = Pt(0)
         except KeyError:
             pass
     heading_spec = {"Heading 1": 14, "Heading 2": 12, "Heading 3": 12}
+    # 标题段前段后与 docs/typ/实验四.typ 的 #show heading 一致：
+    #   v(level1 ? 13pt : 8pt)  —— 段前
+    #   v(level1 ? 6pt : 3pt)   —— 段后
+    heading_gaps = {"Heading 1": (13, 6), "Heading 2": (8, 3), "Heading 3": (8, 3)}
     for name, size in heading_spec.items():
         try:
-            style_font(doc.styles[name], "Times New Roman", "SimSun", size=size, bold=True)
+            st = doc.styles[name]
+            style_font(st, "Times New Roman", "SimSun", size=size, bold=True)
+            before, after = heading_gaps[name]
+            st.paragraph_format.space_before = Pt(before)
+            st.paragraph_format.space_after = Pt(after)
+            st.paragraph_format.line_spacing = Pt(size * 1.35)
         except KeyError:
             pass
 
@@ -509,7 +581,10 @@ def polish(doc) -> None:
             continue
         if name == "Source Code":
             pf.first_line_indent = Pt(0)
+            pf.left_indent = Pt(0)
             pf.line_spacing = Pt(11)
+            pf.space_before = Pt(0)
+            pf.space_after = Pt(0)
             for r in para.runs:
                 set_font(r, "Consolas", "SimSun")
                 r.font.size = Pt(9)
@@ -532,22 +607,22 @@ def polish(doc) -> None:
         # 中文里这类列举项常顶格排版，加缩进反而与正文段落混淆。
         t_stripped = para.text.strip()
         if re.match(r"^\d+[.．、]\s*\S", t_stripped) and not re.match(r"^\d+\.\d", t_stripped):
-            pf.line_spacing = Pt(20)
+            pf.line_spacing = Pt(18)
             pf.first_line_indent = Pt(0)
             pf.left_indent = Pt(0)
             pf.space_before = Pt(0)
-            pf.space_after = Pt(18)
+            pf.space_after = Pt(0)
             for r in para.runs:
                 set_font(r, "Times New Roman", "SimSun")
                 r.font.color.rgb = RGBColor(0, 0, 0)
             para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
             continue
 
-        # 正文：行距 20 磅、首行缩进 2 字符、段前 0 / 段后 18 磅
-        pf.line_spacing = Pt(20)
+        # 正文：行距 18 磅、首行缩进 2 字符、段前段后 0
+        pf.line_spacing = Pt(18)
         pf.first_line_indent = Pt(24)     # 12pt 字号的 2 字符
         pf.space_before = Pt(0)
-        pf.space_after = Pt(18)
+        pf.space_after = Pt(0)
         for r in para.runs:
             set_font(r, "Times New Roman", "SimSun")
             r.font.color.rgb = RGBColor(0, 0, 0)
@@ -557,12 +632,15 @@ def polish(doc) -> None:
 
     for table in doc.tables:
         set_three_line(table)
+        set_table_repeat_header(table)
         for row in table.rows:
             for cell in row.cells:
                 for p in cell.paragraphs:
                     p.paragraph_format.first_line_indent = Pt(0)
                     p.paragraph_format.left_indent = Pt(0)
                     p.paragraph_format.line_spacing = Pt(12)
+                    p.paragraph_format.space_before = Pt(0)
+                    p.paragraph_format.space_after = Pt(0)
                     for r in p.runs:
                         set_font(r, "Times New Roman", "SimSun")
                         r.font.size = Pt(10.5)
@@ -579,9 +657,11 @@ def polish(doc) -> None:
 
     # 题注编号与页码
     n_fig, n_tbl = number_captions(doc)
+    n_code = number_code_captions(doc)
     add_page_numbers(doc)
-    print(f"  题注编号: 图 {n_fig} 条、表 {n_tbl} 条")
+    print(f"  题注编号: 图 {n_fig} 条、表 {n_tbl} 条、代码 {n_code} 条")
     print("  页面: A4 / 边距 2.5cm / 页脚页码已插入")
+    print(f"  表格跨页: {len(doc.tables)} 个表已设标题行重复")
 
     # 封面：最后生成，避免被前面的段落遍历与表格处理影响
     build_cover(doc)
