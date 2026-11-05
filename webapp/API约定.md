@@ -270,9 +270,23 @@
 
 ## 六、现状提醒
 
-`.env.example` 默认 `SHOPVISION_MODEL_BACKEND=placeholder`，只用于跑通链路；当前仓库的
-`webapp/backend/.env` 已切到 `onnx`，`/health` 返回 `backend=onnx`、`model_loaded=true`。
-以 `/health` 为准；报告里的实测推理延迟与检索指标只在 `onnx` 模式下记录。
+`.env.example` 默认 `SHOPVISION_MODEL_BACKEND=placeholder`，只用于跑通链路；`.env` 本身
+被 `.gitignore` 忽略，**不入库**，因此"已切到 onnx"只是本机的运行状态，新克隆的仓库拿到的仍是占位模式。
+
+切到 `onnx` 需要两步，缺一步都会启动失败（`/health` 无法访问，日志报 `50001 模型或依赖不可用`）：
+
+1. 先拉取双塔 ONNX 产物（约 754 MB，托管在 GitHub Release，见
+   [`docs/流程与交接/实验四模型产物上传说明.md`](../docs/流程与交接/实验四模型产物上传说明.md)）：
+
+   ```powershell
+   python scripts/fetch_model_assets.py        # 下载 + 校验 sha256 + 自动改 .env
+   ```
+
+2. 装齐可选依赖 `onnxruntime`（本仓库另提供免 torch 的 `cn_clip` 等价实现，无需安装 torch/torchvision）。
+
+**以 `/health` 返回为准**：`backend=onnx` 且 `model_loaded=true` 才算真实模型已接入；
+`placeholder` 下的类别、置信度与相似度均为哈希噪声，不能写进报告。报告里的实测推理
+延迟与检索指标只在 `onnx` 模式下记录。
 
 上传入库同样必须跑 `onnx`：占位模式写库会被拒绝（`50001`），避免随机向量污染真实索引。
 上传数据落 `data/webapp.db`（SQLite）与 `data/uploaded_data/<类别>/images/upload_*`，
