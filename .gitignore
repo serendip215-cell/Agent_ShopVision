@@ -36,6 +36,13 @@ __pycache__/
 # Word 样式模板，由 docs/scripts/make_word_template.py 调用 Word COM 现场生成。
 /docs/typ/word/
 
+# typ_to_docx.py 的中间产物：语义化 typst 副本（下划线前缀，用后即删）。
+/docs/typ/_*_semantic.typ
+
+# Word 打开文档时产生的锁文件。
+~$*.docx
+~$*.doc
+
 # Chinese-CLIP 官方仓库克隆，只读使用，不纳入版本管理。
 /Chinese-CLIP/
 
