@@ -34,7 +34,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docx.shared import Pt
+from docx.shared import Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[2]
 TYP = ROOT / "docs" / "typ" / "实验四.typ"
@@ -114,22 +114,97 @@ def set_three_line(table) -> None:
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
 
+def set_font(run, latin: str, eastasia: str) -> None:
+    """同时设置西文与中文（东亚）字体，否则 Word 中文仍走默认字体。"""
+    run.font.name = latin
+    rPr = run._element.get_or_add_rPr()
+    rFonts = rPr.find(qn("w:rFonts"))
+    if rFonts is None:
+        rFonts = OxmlElement("w:rFonts")
+        rPr.append(rFonts)
+    rFonts.set(qn("w:ascii"), latin)
+    rFonts.set(qn("w:hAnsi"), latin)
+    rFonts.set(qn("w:eastAsia"), eastasia)
+
+
+def style_font(style, latin: str, eastasia: str, size: float | None = None,
+               bold: bool | None = None) -> None:
+    """在样式定义上设置字体/字号/粗体，并清除主题色（默认是蓝色 0F4761）。"""
+    f = style.font
+    f.name = latin
+    if size is not None:
+        f.size = Pt(size)
+    if bold is not None:
+        f.bold = bold
+    # 颜色强制为黑色：显式写 w:color，并把主题色属性去掉
+    rgb = f.color
+    rgb.rgb = RGBColor(0, 0, 0)
+    rPr = style.element.get_or_add_rPr()
+    color_el = rPr.find(qn("w:color"))
+    if color_el is None:
+        color_el = OxmlElement("w:color")
+        rPr.append(color_el)
+    color_el.set(qn("w:val"), "000000")
+    for attr in ("w:themeColor", "w:themeShade", "w:themeTint"):
+        if color_el.get(qn(attr)) is not None:
+            del color_el.attrib[qn(attr)]
+    rFonts = rPr.find(qn("w:rFonts"))
+    if rFonts is None:
+        rFonts = OxmlElement("w:rFonts")
+        rPr.append(rFonts)
+    rFonts.set(qn("w:ascii"), latin)
+    rFonts.set(qn("w:hAnsi"), latin)
+    rFonts.set(qn("w:eastAsia"), eastasia)
+
+
 def polish(doc) -> None:
-    """正文两端对齐、题注居中、表格三线表化、字号五号。"""
+    """按课程模板口径统一字体与颜色：正文宋体小四、标题宋体 14/12pt 黑色加粗。"""
+    # ---- 样式层：先把样式定义的字体、字号、颜色改成原文口径 ----
+    try:
+        style_font(doc.styles["Normal"], "Times New Roman", "SimSun", size=12)
+    except KeyError:
+        pass
+    heading_spec = {
+        "Heading 1": 14,
+        "Heading 2": 12,
+        "Heading 3": 12,
+    }
+    for name, size in heading_spec.items():
+        try:
+            style_font(doc.styles[name], "Times New Roman", "SimSun", size=size, bold=True)
+        except KeyError:
+            pass
+
     for para in doc.paragraphs:
         name = para.style.name
         if name.startswith("Heading"):
             para.alignment = WD_ALIGN_PARAGRAPH.LEFT
-            continue
-        if name in ("Image Caption", "Table Caption", "Caption"):
-            para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            size = heading_spec.get(name, 12)
+            # 段落级 run 也强制一遍：样式改了但 run 上的直接格式会覆盖样式
             for r in para.runs:
+                set_font(r, "Times New Roman", "SimSun")
+                r.font.size = Pt(size)
+                r.font.bold = True
+                r.font.color.rgb = RGBColor(0, 0, 0)
+            continue
+        if name in ("Image Caption", "Table Caption", "Caption", "Title"):
+            if name != "Title":
+                para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            for r in para.runs:
+                set_font(r, "Times New Roman", "SimSun")
                 r.font.size = Pt(10.5)
+                r.font.color.rgb = RGBColor(0, 0, 0)
             continue
         if name == "Source Code":
             for r in para.runs:
+                set_font(r, "Consolas", "SimSun")
                 r.font.size = Pt(9)
+                r.font.color.rgb = RGBColor(0, 0, 0)
             continue
+        # 正文
+        for r in para.runs:
+            set_font(r, "Times New Roman", "SimSun")
+            r.font.color.rgb = RGBColor(0, 0, 0)
         t = para.text.strip()
         if len(t) > 24 and not t.startswith(("表 ", "图 ", "代码 ")):
             para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
@@ -140,7 +215,9 @@ def polish(doc) -> None:
             for cell in row.cells:
                 for p in cell.paragraphs:
                     for r in p.runs:
+                        set_font(r, "Times New Roman", "SimSun")
                         r.font.size = Pt(10.5)
+                        r.font.color.rgb = RGBColor(0, 0, 0)
 
 
 def main(argv: list[str]) -> int:
