@@ -34,7 +34,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docx.shared import Pt, RGBColor
+from docx.shared import Cm, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[2]
 TYP = ROOT / "docs" / "typ" / "实验四.typ"
@@ -157,18 +157,89 @@ def style_font(style, latin: str, eastasia: str, size: float | None = None,
     rFonts.set(qn("w:eastAsia"), eastasia)
 
 
+def number_captions(doc) -> tuple[int, int]:
+    """给题注补上「图 N」「表 N」前缀。
+
+    pandoc 只保留 caption 正文，不输出编号（实测 20 条题注全部无编号），
+    而 PDF 里是「图 1 xxx」「表 1 xxx」。这里按出现顺序补回。
+    """
+    n_fig = n_tbl = 0
+    for para in doc.paragraphs:
+        st = para.style.name
+        if st not in ("Image Caption", "Table Caption", "Caption"):
+            continue
+        text = para.text.strip()
+        if not text or text.startswith(("图 ", "表 ")):
+            continue
+        if st == "Image Caption":
+            n_fig += 1
+            prefix = f"图 {n_fig} "
+        else:
+            n_tbl += 1
+            prefix = f"表 {n_tbl} "
+        # 保留首个 run 的字体设置，把前缀拼到它前面
+        if para.runs:
+            para.runs[0].text = prefix + para.runs[0].text
+        else:
+            para.add_run(prefix)
+    return n_fig, n_tbl
+
+
+def set_page_layout(doc) -> None:
+    """A4 纸、页边距 2.5cm，与 PDF 一致。"""
+    for sec in doc.sections:
+        sec.page_width = Cm(21)
+        sec.page_height = Cm(29.7)
+        sec.top_margin = Cm(2.5)
+        sec.bottom_margin = Cm(2.5)
+        sec.left_margin = Cm(2.5)
+        sec.right_margin = Cm(2.5)
+        sec.header_distance = Cm(1.5)
+        sec.footer_distance = Cm(1.5)
+
+
+def add_page_numbers(doc) -> None:
+    """页脚居中插入页码域（与 PDF 的页脚一致）。"""
+    for sec in doc.sections:
+        footer = sec.footer
+        # 清空原有内容
+        for p in list(footer.paragraphs):
+            p._element.getparent().remove(p._element)
+        p = footer.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+        run = p.add_run()
+        fld_begin = OxmlElement("w:fldChar")
+        fld_begin.set(qn("w:fldCharType"), "begin")
+        instr = OxmlElement("w:instrText")
+        instr.set(qn("xml:space"), "preserve")
+        instr.text = " PAGE "
+        fld_end = OxmlElement("w:fldChar")
+        fld_end.set(qn("w:fldCharType"), "end")
+        run._r.append(fld_begin)
+        run._r.append(instr)
+        run._r.append(fld_end)
+
+        set_font(run, "Times New Roman", "SimSun")
+        run.font.size = Pt(10.5)
+        run.font.color.rgb = RGBColor(0, 0, 0)
+
+
 def polish(doc) -> None:
-    """按课程模板口径统一字体与颜色：正文宋体小四、标题宋体 14/12pt 黑色加粗。"""
-    # ---- 样式层：先把样式定义的字体、字号、颜色改成原文口径 ----
+    """按课程模板口径统一版式：字体颜色、字号、行距、缩进、题注编号、页码。"""
+    set_page_layout(doc)
+
+    # ---- 样式层 ----
     try:
-        style_font(doc.styles["Normal"], "Times New Roman", "SimSun", size=12)
+        normal = doc.styles["Normal"]
+        style_font(normal, "Times New Roman", "SimSun", size=12)
+        pf = normal.paragraph_format
+        pf.line_spacing = Pt(20)          # 原文行距 20 磅
+        pf.space_before = Pt(0)
+        pf.space_after = Pt(0)
     except KeyError:
         pass
-    heading_spec = {
-        "Heading 1": 14,
-        "Heading 2": 12,
-        "Heading 3": 12,
-    }
+    heading_spec = {"Heading 1": 14, "Heading 2": 12, "Heading 3": 12}
     for name, size in heading_spec.items():
         try:
             style_font(doc.styles[name], "Times New Roman", "SimSun", size=size, bold=True)
@@ -177,10 +248,11 @@ def polish(doc) -> None:
 
     for para in doc.paragraphs:
         name = para.style.name
+        pf = para.paragraph_format
         if name.startswith("Heading"):
             para.alignment = WD_ALIGN_PARAGRAPH.LEFT
             size = heading_spec.get(name, 12)
-            # 段落级 run 也强制一遍：样式改了但 run 上的直接格式会覆盖样式
+            pf.first_line_indent = Pt(0)
             for r in para.runs:
                 set_font(r, "Times New Roman", "SimSun")
                 r.font.size = Pt(size)
@@ -190,18 +262,24 @@ def polish(doc) -> None:
         if name in ("Image Caption", "Table Caption", "Caption", "Title"):
             if name != "Title":
                 para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            pf.first_line_indent = Pt(0)
+            pf.line_spacing = Pt(15)
             for r in para.runs:
                 set_font(r, "Times New Roman", "SimSun")
                 r.font.size = Pt(10.5)
                 r.font.color.rgb = RGBColor(0, 0, 0)
             continue
         if name == "Source Code":
+            pf.first_line_indent = Pt(0)
+            pf.line_spacing = Pt(11)
             for r in para.runs:
                 set_font(r, "Consolas", "SimSun")
                 r.font.size = Pt(9)
                 r.font.color.rgb = RGBColor(0, 0, 0)
             continue
-        # 正文
+        # 正文：行距 20 磅、首行缩进 2 字符
+        pf.line_spacing = Pt(20)
+        pf.first_line_indent = Pt(24)     # 12pt 字号的 2 字符
         for r in para.runs:
             set_font(r, "Times New Roman", "SimSun")
             r.font.color.rgb = RGBColor(0, 0, 0)
@@ -214,10 +292,18 @@ def polish(doc) -> None:
         for row in table.rows:
             for cell in row.cells:
                 for p in cell.paragraphs:
+                    p.paragraph_format.first_line_indent = Pt(0)
+                    p.paragraph_format.line_spacing = Pt(12)
                     for r in p.runs:
                         set_font(r, "Times New Roman", "SimSun")
                         r.font.size = Pt(10.5)
                         r.font.color.rgb = RGBColor(0, 0, 0)
+
+    # 题注编号与页码
+    n_fig, n_tbl = number_captions(doc)
+    add_page_numbers(doc)
+    print(f"  题注编号: 图 {n_fig} 条、表 {n_tbl} 条")
+    print("  页面: A4 / 边距 2.5cm / 页脚页码已插入")
 
 
 def main(argv: list[str]) -> int:
