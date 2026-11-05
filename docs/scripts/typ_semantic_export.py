@@ -131,6 +131,51 @@ def collect_numbering(text: str) -> dict[str, int]:
     return numbering
 
 
+def flatten_lists(text: str) -> tuple[str, int]:
+    """把 Typst 的 `+` 列表转成「1. 内容」这样的普通段落。
+
+    为什么要在源层做：pandoc 会把 `+` 列表解析成 OrderedList，写 docx 时
+    变成 Word 自动编号（numPr）。自动编号的数字不在段落文本里，
+    后续想统一顶格就会把编号一起弄丢；且编号定义带 left=720/hanging=360
+    的缩进，渲染出来"标号左边空得太宽"。
+
+    改成普通段落后，编号成为正文的一部分，既可顶格又不丢编号。
+    """
+    lines = text.split("\n")
+    out: list[str] = []
+    n = 0
+    counter = 0
+    in_list = False
+    for line in lines:
+        stripped = line.lstrip()
+        # 连续 `+ ` 列表项
+        if stripped.startswith("+ ") or stripped == "+":
+            if not in_list:
+                in_list = True
+                counter = 0
+                if out and out[-1].strip():
+                    out.append("")   # 列表前留空行，保证段落独立
+            counter += 1
+            indent = line[: len(line) - len(stripped)]
+            # 用全角句点「．」而非半角「.」：pandoc 会把 `1. ` 识别成有序列表
+            # （转 Word 后又变回 numPr 自动编号，编号不进文本）；
+            # 「1．」不触发列表解析，编号作为普通文本保留下来。
+            out.append(f"{indent}{counter}．{stripped[2:].strip()}")
+            # 每条之后留空行，否则相邻两行会被合并成同一段
+            out.append("")
+            n += 1
+            continue
+        # 空行不结束列表（Typst 允许列表项间隔空行）
+        if stripped == "" and in_list:
+            out.append(line)
+            continue
+        if in_list:
+            in_list = False
+            counter = 0
+        out.append(line)
+    return "\n".join(out), n
+
+
 def resolve_crossrefs(text: str, numbering: dict[str, int]) -> tuple[str, int]:
     """把 @fig-x / @tbl-x / @lst-x 替换成实际编号文字。
 
@@ -212,6 +257,11 @@ def main(argv: list[str]) -> int:
     # 顺序很重要：先从**原始文本**抽出 #let 定义（此时它们还在），
     # 再屏蔽版式规则、去掉封面，最后把定义插回正文前。
     lets = extract_lets(text) if not args.keep_cover else ""
+
+    # 列表先展开成带编号的普通段落：pandoc 会把 `+` 列表做成 Word 自动编号，
+    # 编号数字不在文本里，后续按"顶格"处理时编号会丢失。
+    text, nlist = flatten_lists(text)
+    print(f"列表展开: {nlist} 项（转为「N. 内容」普通段落）")
 
     if not args.keep_style:
         text, n = shield_styles(text)

@@ -24,6 +24,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -460,6 +461,20 @@ def polish(doc) -> None:
         except KeyError:
             pass
 
+    # 编号列表项统一顶格：pandoc 把它们做成 Word 自动编号（numPr），
+    # 编号定义的 w:ind 是 left=720/hanging=360，即左侧 36pt 缩进，
+    # 看起来"标号左边空得太宽"。这里把自动编号拆掉——编号文本已经
+    # 在段落里（"1. …"），去掉 numPr 后按普通段落处理并顶格。
+    n_unlisted = 0
+    for para in doc.paragraphs:
+        pPr = para._p.find(qn("w:pPr"))
+        if pPr is None:
+            continue
+        numPr = pPr.find(qn("w:numPr"))
+        if numPr is not None:
+            pPr.remove(numPr)
+            n_unlisted += 1
+
     for para in doc.paragraphs:
         name = para.style.name
         pf = para.paragraph_format
@@ -502,6 +517,19 @@ def polish(doc) -> None:
             pf.space_after = Pt(3)
             para.alignment = WD_ALIGN_PARAGRAPH.CENTER
             # 图片段落本身不含文字 run，无需处理字体
+            continue
+
+        # 编号列表项（"1. xxx" / "2. xxx" 等）顶格：左缩进与首行缩进都清零。
+        # 中文里这类列举项常顶格排版，加缩进反而与正文段落混淆。
+        t_stripped = para.text.strip()
+        if re.match(r"^\d+[.．、]\s*\S", t_stripped) and not re.match(r"^\d+\.\d", t_stripped):
+            pf.line_spacing = Pt(20)
+            pf.first_line_indent = Pt(0)
+            pf.left_indent = Pt(0)
+            for r in para.runs:
+                set_font(r, "Times New Roman", "SimSun")
+                r.font.color.rgb = RGBColor(0, 0, 0)
+            para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
             continue
 
         # 正文：行距 20 磅、首行缩进 2 字符
