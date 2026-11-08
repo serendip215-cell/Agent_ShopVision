@@ -1,0 +1,113 @@
+W1108 21:20:19.463000 46084 site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+W1108 21:20:22.919000 46084 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/398 [00:01<11:52,  1.79s/it]
+Loading weights:   1%|          | 3/398 [00:02<03:51,  1.71it/s]
+Loading weights:   1%|▏         | 5/398 [00:02<02:05,  3.14it/s]
+Loading weights:   4%|▎         | 14/398 [00:02<00:33, 11.40it/s]
+Loading weights:   4%|▍         | 17/398 [00:02<00:29, 13.03it/s]
+Loading weights:   6%|▋         | 25/398 [00:02<00:17, 21.03it/s]
+Loading weights:   7%|▋         | 29/398 [00:02<00:16, 22.43it/s]
+Loading weights:   9%|▉         | 36/398 [00:02<00:12, 28.52it/s]
+Loading weights:  10%|█         | 40/398 [00:03<00:12, 28.51it/s]
+Loading weights:  12%|█▏        | 47/398 [00:03<00:10, 33.49it/s]
+Loading weights:  13%|█▎        | 51/398 [00:03<00:10, 31.69it/s]
+Loading weights:  15%|█▍        | 58/398 [00:03<00:09, 35.24it/s]
+Loading weights:  16%|█▌        | 62/398 [00:03<00:10, 32.94it/s]
+Loading weights:  17%|█▋        | 69/398 [00:03<00:08, 37.35it/s]
+Loading weights:  18%|█▊        | 73/398 [00:04<00:09, 34.75it/s]
+Loading weights:  20%|██        | 80/398 [00:04<00:08, 38.01it/s]
+Loading weights:  21%|██        | 84/398 [00:04<00:09, 34.73it/s]
+Loading weights:  23%|██▎       | 91/398 [00:04<00:08, 38.03it/s]
+Loading weights:  24%|██▍       | 95/398 [00:04<00:08, 35.09it/s]
+Loading weights:  26%|██▌       | 102/398 [00:04<00:07, 38.44it/s]
+Loading weights:  27%|██▋       | 106/398 [00:04<00:08, 34.78it/s]
+Loading weights:  28%|██▊       | 113/398 [00:05<00:07, 38.07it/s]
+Loading weights:  29%|██▉       | 117/398 [00:05<00:08, 34.21it/s]
+Loading weights:  31%|███       | 124/398 [00:05<00:07, 36.99it/s]
+Loading weights:  32%|███▏      | 128/398 [00:05<00:08, 33.35it/s]
+Loading weights:  34%|███▍      | 135/398 [00:05<00:07, 36.52it/s]
+Loading weights:  35%|███▍      | 139/398 [00:05<00:07, 33.23it/s]
+Loading weights:  37%|███▋      | 146/398 [00:06<00:06, 36.56it/s]
+Loading weights:  38%|███▊      | 150/398 [00:06<00:07, 33.83it/s]
+Loading weights:  39%|███▉      | 157/398 [00:06<00:06, 35.96it/s]
+Loading weights:  40%|████      | 161/398 [00:06<00:06, 33.86it/s]
+Loading weights:  42%|████▏     | 168/398 [00:06<00:06, 35.81it/s]
+Loading weights:  43%|████▎     | 172/398 [00:06<00:06, 32.60it/s]
+Loading weights:  45%|████▍     | 179/398 [00:06<00:06, 35.76it/s]
+Loading weights:  46%|████▌     | 183/398 [00:07<00:06, 31.92it/s]
+Loading weights:  48%|████▊     | 190/398 [00:07<00:05, 35.61it/s]
+Loading weights:  49%|████▊     | 194/398 [00:07<00:06, 32.78it/s]
+Loading weights:  51%|█████     | 201/398 [00:07<00:05, 34.87it/s]
+Loading weights:  52%|█████▏    | 205/398 [00:07<00:05, 32.31it/s]
+Loading weights:  53%|█████▎    | 212/398 [00:07<00:05, 35.13it/s]
+Loading weights:  54%|█████▍    | 216/398 [00:08<00:05, 31.72it/s]
+Loading weights:  56%|█████▌    | 223/398 [00:08<00:05, 34.88it/s]
+Loading weights:  57%|█████▋    | 227/398 [00:08<00:05, 32.18it/s]
+Loading weights:  59%|█████▉    | 234/398 [00:08<00:04, 35.52it/s]
+Loading weights:  60%|█████▉    | 238/398 [00:08<00:04, 33.18it/s]
+Loading weights:  62%|██████▏   | 245/398 [00:08<00:04, 35.42it/s]
+Loading weights:  63%|██████▎   | 249/398 [00:09<00:04, 31.84it/s]
+Loading weights:  64%|██████▍   | 256/398 [00:09<00:04, 34.01it/s]
+Loading weights:  65%|██████▌   | 260/398 [00:09<00:04, 30.85it/s]
+Loading weights:  67%|██████▋   | 267/398 [00:09<00:03, 34.93it/s]
+Loading weights:  68%|██████▊   | 271/398 [00:09<00:03, 33.18it/s]
+Loading weights:  70%|██████▉   | 278/398 [00:09<00:03, 36.66it/s]
+Loading weights:  71%|███████   | 282/398 [00:10<00:03, 33.84it/s]
+Loading weights:  73%|███████▎  | 289/398 [00:10<00:03, 35.96it/s]
+Loading weights:  74%|███████▎  | 293/398 [00:10<00:03, 32.37it/s]
+Loading weights:  75%|███████▌  | 300/398 [00:10<00:02, 35.50it/s]
+Loading weights:  76%|███████▋  | 304/398 [00:10<00:02, 32.26it/s]
+Loading weights:  77%|███████▋  | 308/398 [00:10<00:02, 32.65it/s]
+Loading weights:  78%|███████▊  | 312/398 [00:11<00:02, 29.50it/s]
+Loading weights:  80%|███████▉  | 317/398 [00:11<00:02, 33.32it/s]
+Loading weights:  81%|████████  | 322/398 [00:11<00:02, 36.05it/s]
+Loading weights:  82%|████████▏ | 326/398 [00:11<00:02, 35.06it/s]
+Loading weights:  84%|████████▎ | 333/398 [00:11<00:01, 40.24it/s]
+Loading weights:  85%|████████▍ | 338/398 [00:11<00:01, 41.00it/s]
+Loading weights:  86%|████████▋ | 344/398 [00:11<00:01, 44.31it/s]
+Loading weights:  88%|████████▊ | 349/398 [00:11<00:01, 40.66it/s]
+Loading weights:  89%|████████▉ | 355/398 [00:12<00:01, 40.04it/s]
+Loading weights:  90%|█████████ | 360/398 [00:12<00:01, 35.01it/s]
+Loading weights:  92%|█████████▏| 366/398 [00:12<00:01, 31.87it/s]
+Loading weights:  93%|█████████▎| 370/398 [00:12<00:00, 28.28it/s]
+Loading weights:  95%|█████████▍| 377/398 [00:12<00:00, 31.33it/s]
+Loading weights:  96%|█████████▌| 381/398 [00:12<00:00, 29.24it/s]
+Loading weights:  97%|█████████▋| 388/398 [00:13<00:00, 30.86it/s]
+Loading weights:  98%|█████████▊| 392/398 [00:13<00:00, 24.05it/s]
+Loading weights:  99%|█████████▉| 396/398 [00:13<00:00, 25.80it/s]
+Loading weights: 100%|██████████| 398/398 [00:13<00:00, 29.21it/s]
+[ 1/10] ✓  帮我找黑色木纹手机壳，5个
+[ 2/10] ✓  我想找白色运动鞋
+[ 3/10] ✓  推荐3个蓝色运动水杯
+[ 4/10] ✓  找卡其色立领夹克
+[ 5/10] ✗  有没有灰色的双肩包
+[ 6/10] ✓  红色带盖炒锅
+[ 7/10] ✓  帮我搜透明玻璃杯，10个
+[ 8/10] ✓  黑色运动长袖套装
+[ 9/10] ✓  找一下白色T恤
+[10/10] ✓  随便看看有什么
+
+==============================================================
+工具调用准确率（model 模式，10 轮）
+==============================================================
+✓ # 1  帮我找黑色木纹手机壳，5个               
+✓ # 2  我想找白色运动鞋                    
+✓ # 3  推荐3个蓝色运动水杯                  
+✓ # 4  找卡其色立领夹克                    
+✗ # 5  有没有灰色的双肩包                     失败项: query
+✓ # 6  红色带盖炒锅                      
+✓ # 7  帮我搜透明玻璃杯，10个                
+✓ # 8  黑色运动长袖套装                    
+✓ # 9  找一下白色T恤                     
+✓ #10  随便看看有什么                     
+--------------------------------------------------------------
+命中 9/10 = 90%   目标 ≥90% → 达标
+  工具名      10/10 = 100%
+  query    9/10 = 90%
+  类目       10/10 = 100%
+  top_k    10/10 = 100%
+
+明细已写入：D:\Document\Agent_ShopVision\data\agent\eval_5060_v2_base.json
