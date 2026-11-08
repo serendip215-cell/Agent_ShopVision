@@ -73,8 +73,31 @@ def _parse_intent(user_input: str) -> dict[str, Any]:
     """用户话 → 结构化意图 {tool, arguments}。
 
     走 5.2 微调模型；模型加载或推理失败时自动降级到规则解析，前端永远有响应。
+
+    **意图拿到后还要过一层确定性后处理**（category_map.fill_arguments）：
+      - 规范化 query：模型常把「找」「有没有」留在 query 里
+      - 补类目：训练数据里类目是明写的，模型没学会从商品名推断
+
+    后处理放在这里而不是只放评测脚本，是为了保证**评测分与实际演示行为一致**。
+    见 docs/实验五/08-5.3准确率根因与修复.md
     """
-    return _get_parser().parse(user_input)
+    intent = _get_parser().parse(user_input)
+
+    try:
+        from .category_map import fill_arguments
+
+        args, notes = fill_arguments(intent.get("arguments") or {}, user_input)
+        if isinstance(args, dict):
+            intent = {**intent, "arguments": args}
+        if notes:
+            # 记录后处理动作，供 /chat 接口的 thinking 文案与调试用
+            intent["post_process"] = notes
+            logger.info("后处理：%s", notes)
+    except Exception as e:  # noqa: BLE001
+        # 后处理失败不能影响主链路
+        logger.warning("后处理失败，返回原始意图：%s", e)
+
+    return intent
 
 
 def create_agent() -> Agent:

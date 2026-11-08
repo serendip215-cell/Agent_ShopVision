@@ -144,5 +144,49 @@ class EndToEndOnEvalSetTest(unittest.TestCase):
         self.assertEqual(missed, [], f"后处理未覆盖：{missed}")
 
 
+
+class ProductionPipelineTest(unittest.TestCase):
+    """生产链路必须也走后处理 —— 否则评测分与实际演示行为不一致。"""
+
+    def test_parse_intent_applies_post_process(self):
+        from unittest.mock import patch
+
+        import scripts.agent.agent as ag
+
+        fake_output = {
+            "tool": "text_search",
+            "arguments": {"query": "找卡其色立领夹克", "top_k": 5},
+        }
+
+        class FakeParser:
+            def parse(self, user_input):
+                return dict(fake_output)
+
+        with patch.object(ag, "_get_parser", return_value=FakeParser()):
+            out = ag._parse_intent("找卡其色立领夹克")
+
+        self.assertEqual(out["arguments"]["category"], "男装")
+        self.assertEqual(out["arguments"]["query"], "卡其色立领夹克")
+        self.assertIn("post_process", out)
+
+    def test_post_process_exception_does_not_break_pipeline(self):
+        """后处理出错不能影响主链路。"""
+        from unittest.mock import patch
+
+        import scripts.agent.agent as ag
+
+        class FakeParser:
+            def parse(self, user_input):
+                return {"tool": "text_search", "arguments": {"query": "鞋", "top_k": 5}}
+
+        with patch.object(ag, "_get_parser", return_value=FakeParser()), \
+             patch("scripts.agent.category_map.fill_arguments", side_effect=RuntimeError("boom")):
+            out = ag._parse_intent("找鞋")
+
+        # 原始意图仍然返回
+        self.assertEqual(out["tool"], "text_search")
+        self.assertIn("arguments", out)
+
+
 if __name__ == "__main__":
     unittest.main()
