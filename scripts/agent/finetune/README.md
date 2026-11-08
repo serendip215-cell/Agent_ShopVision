@@ -70,3 +70,41 @@ python -c "import json; d=[json.loads(l) for l in open('data/agent/sft/train.jso
 `final_adapter/` 整个目录（约 30–60MB）。5.3 的 `_parse_intent` 用 peft 挂载，实现可复用本目录 `eval_baseline_vs_lora.py` 里的 `load_model()`。
 
 **注意口轻**：valid 只 11 条，其中 tool_call 仅 1 条。这个单项分数不具统计意义，不能拿来汇报「工具调用准确率 ≥90%」——那要在 5.4 用 10 轮真实对话测。
+## 实跑结果（2026-11-08，AutoDL RTX 4090 48GB）
+
+| 任务 | 基座 | LoRA | 样本 |
+|---|---:|---:|---:|
+| attribute | 28.33% | **100.00%** | 5 |
+| intent | 0.00% | **66.67%** | 5 |
+| tool_call | 0.00% | 0.00% | 1 |
+| **总体** | **12.88%** | **75.76%** | 11 |
+
+训练 57.53 秒 / 3 epoch / 18 步 / train_loss 2.161。完整记录见
+[`docs/实验五/03-微调结果实跑记录.md`](../../../docs/实验五/03-微调结果实跑记录.md)。
+
+## 关键坑：HuggingFace 下不动模型
+
+国内机器上 `HF_ENDPOINT=https://hf-mirror.com` **不一定管用**：
+`huggingface_hub 2.4.0` 对它的处理变了，`AutoConfig.from_pretrained("Qwen/...")` 照样报
+`OSError: Can't load the configuration`，`hf_hub_download` 还会报
+`TypeError: process() takes no keyword arguments`。
+
+**可行解法：走 ModelScope，然后把本地路径喂给 `--model`。**
+
+```python
+from modelscope import snapshot_download
+p = snapshot_download('Qwen/Qwen3-4B-Instruct-2507', cache_dir='/root/models')
+# /root/models/models/Qwen--Qwen3-4B-Instruct-2507/snapshots/master
+```
+
+```bash
+python scripts/agent/finetune/train_lora.py --model /root/models/.../snapshots/master --output /root/runs/run1
+```
+
+约 8GB，5–19 MB/s，实测 9 分 17 秒。
+
+## tool_call 为 0 的原因（别当成评测 bug）
+
+唯一验证样本把 `text_search` 写成了 `tool_search`，三个参数全对。训练集 tool_call 仅 14 条，
+4B 记不牢专有名词。该单项 n=1，**不具统计意义**，不能汇报成「工具调用准确率」。
+改进方向：补样本到 40–60 条 / system prompt 列白名单 / `_parse_intent` 加编辑距离纠错。
