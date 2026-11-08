@@ -136,7 +136,9 @@ def normalize_intent(raw: dict | None, user_input: str) -> dict[str, Any]:
     if not raw:
         return rule_parse(user_input)
 
-    tool_raw = raw.get("tool") or raw.get("intent") or ""
+    # 实测：模型有时输出 {"name": "text_search"} 而不是 {"tool": ...}（5060 上 10 条里有 7 条）
+    tool_raw = (raw.get("tool") or raw.get("name")
+                or raw.get("intent") or raw.get("function") or "")
     tool = closest_tool(str(tool_raw))
     if tool is None:
         logger.warning("模型给出未知工具 %r，降级规则解析", tool_raw)

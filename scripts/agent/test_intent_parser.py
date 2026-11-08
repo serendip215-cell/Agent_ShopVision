@@ -119,5 +119,31 @@ class NormalizeIntentTest(unittest.TestCase):
         self.assertEqual(out["tool"], "text_search")
 
 
+
+class NameFieldTest(unittest.TestCase):
+    """5060 实测：模型有 4/10 条输出 {"name": ...} 而不是 {"tool": ...}。
+
+    这算真实的模型行为差异，解析层必须兼容 —— 否则整条判为「未知工具」。
+    """
+
+    def test_name_field_recognized(self):
+        raw = {"name": "text_search", "arguments": {"query": "黑色木纹手机壳", "top_k": 5}}
+        out = normalize_intent(raw, "帮我找黑色木纹手机壳，5个")
+        self.assertEqual(out["tool"], "text_search")
+        self.assertEqual(out["arguments"]["query"], "黑色木纹手机壳")
+
+    def test_name_field_with_typo_still_corrected(self):
+        """name 字段 + 工具名拼错，两个问题都要处理。"""
+        raw = {"name": "tool_search", "arguments": {"query": "鞋", "top_k": 5}}
+        out = normalize_intent(raw, "找鞋")
+        self.assertEqual(out["tool"], "text_search")
+
+    def test_function_field_recognized(self):
+        """OpenAI function calling 风格。"""
+        raw = {"function": "text_search", "arguments": {"query": "水杯", "top_k": 3}}
+        out = normalize_intent(raw, "找水杯")
+        self.assertEqual(out["tool"], "text_search")
+
+
 if __name__ == "__main__":
     unittest.main()
