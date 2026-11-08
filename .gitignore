@@ -62,3 +62,5 @@ webapp/backend/celery-worker*.log
 # 实验五 5.2 微调产物：LoRA 权重、训练日志与评测明细，体积大/可重建，不入库。
 # 数据集本身（data/agent/sft/）是 5.2 的输入产物，纳入版本管理。
 /data/agent/finetune/
+# SCNet 最小上传包（由 make_upload_package.sh 生成，可重建，不入库）。
+/dist/
