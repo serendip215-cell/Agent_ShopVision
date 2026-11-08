@@ -291,3 +291,18 @@ class IndexStore:
             if top > best[1]:
                 best = (category, top)
         return best[0], best[1], scores
+
+    def find_item(self, item_id: str) -> dict[str, Any] | None:
+        """按 item_id 精确查一条商品（供 get_item_detail 工具用）。
+
+        只在静态索引里找；上传入库的条目走 UploadStore，属于后续扩展。
+        """
+        target = (item_id or "").strip()
+        if not target:
+            return None
+        for category in self.categories:
+            items, _ = self._load(category)
+            for row in items.values():
+                if str(row.get("item_id")) == target:
+                    return {"category": category, **row}
+        return None

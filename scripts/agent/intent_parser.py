@@ -31,6 +31,18 @@ JSON_BLOCK = re.compile(r"\{.*\}", re.S)
 # 白名单工具（与 scripts/agent/tools.py 的 TOOLS 保持一致）
 WHITELIST = ["text_search"]
 
+# v3 协议：动作二选一（tool / reply），工具扩到 4 个
+TOOLS = ["text_search", "image_search", "list_categories", "get_item_detail"]
+
+# v3 的系统提示词与训练数据同源，避免训练/推理不一致
+try:  # 生成脚本与解析器同目录，正常都能导入
+    from .build_dialogue_sft import SYSTEM_PROMPT as V3_SYSTEM_PROMPT
+except Exception:  # pragma: no cover - 只做兜底，正常不会走到
+    V3_SYSTEM_PROMPT = (
+        "你是电商导购助手。可用工具：text_search / image_search / list_categories / "
+        "get_item_detail。只输出一个 JSON：{\"action\":\"tool\",...} 或 {\"action\":\"reply\",\"text\":\"...\"}。"
+    )
+
 CATEGORIES = ["鞋", "水杯", "包", "男装", "运动服", "女装", "手机壳", "厨房用品", "家居用品"]
 
 
@@ -160,6 +172,66 @@ def normalize_intent(raw: dict | None, user_input: str) -> dict[str, Any]:
     return {"tool": tool, "arguments": args}
 
 
+def as_action(intent: dict[str, Any]) -> dict[str, Any]:
+    """把 v2 的 {tool, arguments} 包装成 v3 的 tool 动作。"""
+    return {"action": "tool", **intent}
+
+
+def _tool_payload(payload: dict[str, Any], user_input: str) -> dict[str, Any]:
+    """校验并规范化工具动作；工具名走白名单纠错。"""
+    raw_tool = (
+        payload.get("tool")
+        or payload.get("name")
+        or payload.get("intent")
+        or payload.get("function")
+        or ""
+    )
+    tool = closest_tool(str(raw_tool), TOOLS)
+    if tool is None:
+        return as_action(rule_parse(user_input))
+
+    args = payload.get("arguments")
+    if not isinstance(args, dict):
+        args = {
+            key: payload[key]
+            for key in ("query", "category", "top_k", "item_id", "alpha")
+            if key in payload
+        }
+
+    if tool == "text_search":
+        args = normalize_intent(payload, user_input)["arguments"]
+    else:
+        args = {key: value for key, value in args.items() if value not in (None, "")}
+
+    out: dict[str, Any] = {"action": "tool", "tool": tool, "arguments": args}
+    say = payload.get("say")
+    if isinstance(say, str) and say.strip():
+        out["say"] = say.strip()[:30]
+    return out
+
+
+def normalize_action(payload: dict[str, Any] | None, user_input: str) -> dict[str, Any]:
+    """统一成 v3 动作；兼容 v2 只给 {tool, arguments} 的输出。"""
+    if not payload:
+        return as_action(rule_parse(user_input))
+
+    action = str(payload.get("action") or "").strip().lower()
+    if action == "reply":
+        text = str(payload.get("text") or "").strip()
+        if text:
+            return {"action": "reply", "text": text}
+        return as_action(rule_parse(user_input))
+
+    if action == "tool":
+        return _tool_payload(payload, user_input)
+
+    # v2 兼容：没有 action，但有工具名
+    if any(key in payload for key in ("tool", "name", "intent", "function")):
+        return _tool_payload(payload, user_input)
+
+    return as_action(rule_parse(user_input))
+
+
 class IntentParser:
     """持有微调模型的意图解析器。首次 parse 时才加载权重。"""
 
@@ -257,12 +329,77 @@ class IntentParser:
             return rule_parse(user_input)
 
 
+    # ---------- v3：动作协议与第二轮点评 ----------
+
+    def _generate(self, system: str, user: str, max_new_tokens: int | None = None) -> str:
+        """按 system + user 生成文本（动作解析与点评复用）。"""
+        import torch
+
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ]
+        try:
+            prompt = self._tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
+            )
+        except TypeError:
+            prompt = self._tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+        inputs = self._tokenizer(prompt, return_tensors="pt").to(self._model.device)
+        with torch.inference_mode():
+            out = self._model.generate(
+                **inputs,
+                max_new_tokens=max_new_tokens or self.max_new_tokens,
+                do_sample=False,
+                pad_token_id=self._tokenizer.pad_token_id or self._tokenizer.eos_token_id,
+            )
+        return self._tokenizer.decode(
+            out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True
+        ).strip()
+
+    def parse_action(self, user_input: str) -> dict[str, Any]:
+        """v3 入口：返回 {action: tool|reply, ...}；任何异常都退回规则动作。"""
+        if not self._ensure_model():
+            return as_action(rule_parse(user_input))
+        try:
+            generated = self._generate(V3_SYSTEM_PROMPT, user_input)
+            logger.debug("模型动作原始输出：%r", generated)
+            return normalize_action(parse_json_lenient(generated), user_input)
+        except Exception as exc:  # noqa: BLE001
+            logger.error("动作解析失败，降级规则：%s", exc)
+            return as_action(rule_parse(user_input))
+
+    def comment(self, user_input: str, items_json: str) -> str | None:
+        """第二轮点评：基于检索结果写 60-120 字；失败返回 None 由调用方降级模板。"""
+        if not self._ensure_model():
+            return None
+        try:
+            user = (
+                f"用户想要{user_input}，检索结果：\n{items_json}\n"
+                "请基于以上字段写 60-120 字的点评。"
+            )
+            generated = self._generate(V3_SYSTEM_PROMPT, user, max_new_tokens=200)
+            payload = parse_json_lenient(generated)
+            if not payload:
+                return None
+            text = str(payload.get("text") or "").strip()
+            return text or None
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("点评生成失败：%s", exc)
+            return None
+
+
 __all__ = [
     "IntentParser",
     "closest_tool",
     "parse_json_lenient",
     "rule_parse",
     "normalize_intent",
+    "normalize_action",
+    "as_action",
     "WHITELIST",
+    "TOOLS",
     "CATEGORIES",
 ]

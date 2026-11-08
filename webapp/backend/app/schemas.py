@@ -297,12 +297,14 @@ class AgentChatRequest(BaseModel):
 
 
 class AgentToolCall(BaseModel):
-    name: str = Field(description="工具名，当前白名单只有 text_search")
+    name: str = Field(
+        description="工具名：text_search / image_search / list_categories / get_item_detail"
+    )
     arguments: dict[str, Any] = Field(default_factory=dict, description="工具实参")
 
 
 class AgentChatResult(BaseModel):
-    reply: str = Field(description="助手回复（模板拼装，商品信息全部来自检索结果）")
+    reply: str = Field(description="助手回复（模型直接回答，或检索结果 + 点评）")
     thinking: list[str] = Field(
         default_factory=list, description="思考过程，前端折叠展示"
     )
@@ -310,7 +312,10 @@ class AgentChatResult(BaseModel):
         default_factory=list, description="本轮调用过的工具（名称 + 参数）"
     )
     items: list[MatchedItem] = Field(
-        default_factory=list, description="检索命中的商品；前端当前忽略，供后续商品卡片使用"
+        default_factory=list, description="检索命中的商品；前端渲染为并排小图"
+    )
+    say: str | None = Field(
+        default=None, description="工具调用前的过渡语（仅有 tool 动作时出现，≤30 字）"
     )
 
 

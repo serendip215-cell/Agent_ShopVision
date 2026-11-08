@@ -16,5 +16,5 @@
   },
   "source": "data/index_data_finetuned/*/items.csv",
   "format": "multi-turn; tool result injected as user message with prefix 检索结果：",
-  "generated_at": "2026-11-08T18:15:51+00:00"
+  "generated_at": "2026-11-08T18:20:13+00:00"
 }

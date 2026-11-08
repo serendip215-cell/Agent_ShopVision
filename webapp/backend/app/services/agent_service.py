@@ -1,17 +1,24 @@
-"""对话导购业务层：用户话 -> 意图 -> 白名单工具 -> 模板化回复。
+"""对话导购业务层：用户输入 -> 动作（tool / reply）-> 工具执行 -> 回复。
 
-对应契约 webapp/backend/README-agent-chat.md：
-* 意图解析复用 5.3 的 scripts/agent（IntentParser：Qwen3-4B + LoRA v2）；
-* 模型不可用（没下载 / 显存不足 / 加载失败）时自动降级 rule_parse，接口永远有响应；
-* 模型在后台线程预热，不阻塞 uvicorn 启动；预热未完成时先用规则模式回答；
-* 回复一律模板化拼装，商品信息只取工具真实返回，禁止模型编造。
+协议（与 docs/实验五/10-5.4-对话Agent训练规范.md 一致）：
+  * v3：{"action":"tool","tool":...,"arguments":{...},"say":"..."} 或 {"action":"reply","text":"..."}
+  * v2 兼容：模型只输出 {"tool":"text_search","arguments":{...}} 时按 tool 动作处理
+
+三档降级，保证前端永远有响应：
+  1. 模型输出合法动作 -> 走对应工具（或直接回话）；
+  2. 模型不可用 -> rule_parse 生成 text_search 动作；
+  3. 工具失败 -> 模板化错误文案，不抛 500。
+
+第二轮点评：工具返回商品后，把字段回喂给模型写 60-120 字说明；失败则用模板拼。
 """
 
 from __future__ import annotations
 
 import importlib
 import importlib.util
+import json
 import logging
+import re
 import sys
 import threading
 from typing import Any, Callable
@@ -26,6 +33,20 @@ _CATEGORIES = ["鞋", "水杯", "包", "男装", "运动服", "女装", "手机�
 # 仓库根 scripts/agent 以独立包名加载：webapp/backend/scripts 是同名包，
 # 直接 `import scripts.agent` 会命中它（且一旦被导入就缓存进 sys.modules），必然失败。
 _AGENT_PKG = "sv_agent_pkg"
+
+# 点评/回复里出现“具体价格断言”或“销量断言”就算编造：199元 / ¥19.9 / 5000+人买过
+_PRICE_CLAIM = re.compile(
+    r"(\d+(?:\.\d+)?\s*元)|([¥￥]\s*\d)|((?:售价|价格)\s*[为是:：]?\s*\d)|(\d+\s*折)"
+    r"|((?:销量|已售|已有)\s*\d)|(\d+\s*[+万多]?\s*人(?:买|付款|购买|好评))"
+)
+
+_SAFE_FALLBACK = (
+    "这个我需要查一下商品库才能回答。"
+    "可以补充品类或颜色，或者直接上传一张图片，我来检索。"
+)
+
+# v3 训练数据里用户话都是「帮我找…」，模型偶尔把主语说反（“能帮我找点什么吗”）
+_OWNER_FIX = re.compile(r"能帮我(?=找|推荐|看看|搜|查)")
 
 
 def _agent_module(name: str) -> Any:
@@ -52,7 +73,7 @@ def _default_search(**kwargs: Any) -> dict[str, Any]:
 
 
 class AgentService:
-    """进程内单例：持有意图模型、工具调用与模板回复。"""
+    """进程内单例：持有意图模型、工具路由与模板回复。"""
 
     def __init__(
         self,
@@ -87,9 +108,10 @@ class AgentService:
             IntentParser = _agent_module("intent_parser").IntentParser
 
             base = self.settings.agent_model or self._guess_model_path()
+            adapter = self.settings.agent_adapter or self._guess_adapter_path()
             parser = IntentParser(
                 base,
-                self.settings.agent_adapter or self._guess_adapter_path(),
+                adapter,
                 no_4bit=self.settings.agent_no_4bit,
                 max_new_tokens=self.settings.agent_max_new_tokens,
             )
@@ -97,7 +119,7 @@ class AgentService:
                 raise RuntimeError("IntentParser 加载失败（详见日志）")
             self._parser = parser
             self._state = "ready"
-            logger.info("agent 意图模型就绪：%s", base)
+            logger.info("agent 意图模型就绪：%s（adapter=%s）", base, adapter or "无")
             return True
         except Exception as exc:  # noqa: BLE001 - 模型问题不能拖垮服务
             self._state = "failed"
@@ -115,8 +137,12 @@ class AgentService:
         return "Qwen/Qwen3-4B-Instruct-2507"
 
     def _guess_adapter_path(self) -> str | None:
-        default = REPO_ROOT / "dist" / "lora_adapter_v2"
-        return str(default) if default.is_dir() else None
+        """按优先级自动选适配器：v3（对话+多工具）> v2（仅文本检索）。"""
+        for name in ("lora_adapter_v3", "lora_adapter_v2"):
+            candidate = REPO_ROOT / "dist" / name
+            if candidate.is_dir():
+                return str(candidate)
+        return None
 
     # ---------- 对外能力 ----------
 
@@ -124,6 +150,7 @@ class AgentService:
         return {"state": self._state, "reason": self._reason}
 
     def chat(self, message: str) -> dict[str, Any]:
+        """一句话 -> 动作 -> 工具 -> 回复。"""
         text = (message or "").strip()
         if not text:
             raise ApiError(ErrorCode.BAD_REQUEST, "请输入想找的商品")
@@ -131,24 +158,200 @@ class AgentService:
         if len(text) > limit:
             raise ApiError(ErrorCode.BAD_REQUEST, f"消息过长（最多 {limit} 字）")
 
-        intent, thinking = self._parse_intent(text)
-        arguments = self._sanitize(intent.get("arguments") or {})
-        thinking.append(f"调用工具：{intent['tool']}({_brief(arguments)})")
+        action, thinking = self._decide(text)
 
-        result, error = self._run_tool(intent["tool"], arguments)
+        # 模型选择直接回答：不检索
+        if action.get("action") == "reply":
+            reply = self._guard_reply(action["text"])
+            thinking.append("直接回答（未检索）")
+            return {
+                "reply": reply,
+                "thinking": thinking,
+                "tool_calls": [],
+                "items": [],
+                "say": None,
+            }
+
+        tool = action.get("tool") or "text_search"
+        arguments = self._sanitize_tool(tool, action.get("arguments") or {})
+        thinking.append(f"调用工具：{tool}({_brief(arguments)})")
+
+        result, error = self._run_tool(tool, arguments)
+        say = action.get("say")
         if error:
-            reply = f"检索暂时不可用（{error}）。可以稍后再试，或换个说法。"
-            items: list[dict] = []
-        else:
-            items = result.get("items") or []
-            reply = self._compose_reply(items)
+            return {
+                "reply": f"没办成：{error}。换个说法，或者直接上传一张图给我看看。",
+                "thinking": thinking,
+                "tool_calls": [{"name": tool, "arguments": arguments}],
+                "items": [],
+                "say": say,
+            }
 
+        items = result.get("items") or []
+        reply = self._render_tool_result(tool, result, items, text)
+        top_k = int(arguments.get("top_k") or self.settings.agent_tool_top_k)
         return {
             "reply": reply,
             "thinking": thinking,
-            "tool_calls": [{"name": intent["tool"], "arguments": arguments}],
-            "items": items[: arguments["top_k"]],
+            "tool_calls": [{"name": tool, "arguments": arguments}],
+            "items": items[:top_k],
+            "say": say,
         }
+
+    # ---------- 动作决策 ----------
+
+    def _decide(self, text: str) -> tuple[dict[str, Any], list[str]]:
+        """让模型决定调工具还是直接回答；不可用时退回规则动作。"""
+        intent_parser = _agent_module("intent_parser")
+
+        if self._state == "ready" and self._parser is not None:
+            try:
+                action = self._parser.parse_action(text)
+                return action, [f"动作：{action['action']}（微调模型）"]
+            except Exception as exc:  # noqa: BLE001 - 单次推理失败也降级
+                logger.warning("动作解析失败，改用规则：%s", exc)
+                return (
+                    intent_parser.as_action(intent_parser.rule_parse(text)),
+                    ["规则模式（模型推理失败）"],
+                )
+
+        note = {
+            "failed": "规则模式（模型不可用）",
+            "loading": "规则模式（模型加载中，稍后自动切换）",
+        }.get(self._state, "规则模式（未接 LLM）")
+        return intent_parser.as_action(intent_parser.rule_parse(text)), [note]
+
+    # ---------- 工具执行 ----------
+
+    def _guard_reply(self, text: str) -> str:
+        """回复安全闸：修主语口误 + 拦截价格/销量断言（模型不许编造）。"""
+        candidate = (text or "").strip()
+        if not candidate:
+            return _SAFE_FALLBACK
+        # 助手自称“能帮我找”属口误，改成“能帮你找”
+        candidate = _OWNER_FIX.sub("能帮你", candidate)
+        if _PRICE_CLAIM.search(candidate):
+            logger.warning("回复含价格/销量断言，已替换为安全话术：%s", candidate[:80])
+            return _SAFE_FALLBACK
+        return candidate[:300]
+
+    def _sanitize_tool(self, tool: str, arguments: dict[str, Any]) -> dict[str, Any]:
+        if tool == "text_search":
+            return self._sanitize(arguments)
+        if tool == "image_search":
+            try:
+                alpha = float(arguments.get("alpha", 0.6))
+            except (TypeError, ValueError):
+                alpha = 0.6
+            return {"alpha": max(0.0, min(alpha, 1.0))}
+        if tool == "get_item_detail":
+            item_id = str(arguments.get("item_id") or "").strip()
+            if not item_id:
+                raise ApiError(ErrorCode.BAD_REQUEST, "缺少 item_id，无法查详情")
+            return {"item_id": item_id}
+        return {}
+
+    def _run_tool(self, tool: str, arguments: dict[str, Any]) -> tuple[dict[str, Any], str]:
+        if tool == "text_search":
+            return self._search_with_retry(arguments)
+        if tool == "image_search":
+            return {}, "当前是文字对话，没有图片；请点「上传图片」按图检索"
+        if tool == "list_categories":
+            if self._match is None:
+                return {}, "索引服务未装配"
+            return {"categories": self._match.index.categories}, ""
+        if tool == "get_item_detail":
+            if self._match is None:
+                return {}, "索引服务未装配"
+            item = self._match.index.find_item(arguments["item_id"])
+            if item is None:
+                return {}, "库里没有这件商品"
+            return {"item": item}, ""
+        raise ApiError(ErrorCode.BAD_REQUEST, f"暂不支持的工具：{tool}")
+
+    def _search_with_retry(self, arguments: dict[str, Any]) -> tuple[dict[str, Any], str]:
+        last = ""
+        for attempt in range(1, max(1, self.settings.agent_retry_times) + 1):
+            try:
+                result = self._search(**arguments)
+            except Exception as exc:  # noqa: BLE001 - HTTP/网络异常统一重试
+                last = f"{type(exc).__name__}: {exc}"
+                logger.warning("第 %s 次工具调用失败：%s", attempt, last)
+                continue
+            if result.get("error"):
+                last = str(result["error"])
+                logger.warning("第 %s 次工具返回错误：%s", attempt, last)
+                continue
+            return result, ""
+        return {}, last or "检索服务无响应"
+
+    def _sanitize(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        query = str(arguments.get("query") or "").strip()[:200]
+        if not query:
+            raise ApiError(ErrorCode.BAD_REQUEST, "没听清要找什么，请再描述一下")
+        try:
+            top_k = int(arguments.get("top_k") or self.settings.agent_tool_top_k)
+        except (TypeError, ValueError):
+            top_k = self.settings.agent_tool_top_k
+        top_k = max(1, min(top_k, 50))
+
+        category = arguments.get("category")
+        if category not in _CATEGORIES:
+            category = None
+        out: dict[str, Any] = {"query": query, "top_k": top_k}
+        if category:
+            out["category"] = category
+        return out
+
+    # ---------- 第二轮点评 ----------
+
+    # ---------- 工具结果渲染 ----------
+
+    def _render_tool_result(
+        self, tool: str, result: dict[str, Any], items: list[dict], text: str
+    ) -> str:
+        """按工具类型生成回复：检索类走点评，其余走结构化模板。"""
+        if tool == "list_categories":
+            categories = result.get("categories") or []
+            if not categories:
+                return "索引里暂时没有可检索的类目。"
+            return f"库里可检索 {len(categories)} 类：{'、'.join(categories)}。"
+
+        if tool == "get_item_detail":
+            item = result.get("item") or {}
+            if not item:
+                return "没找到这件商品的详情。"
+            name = item.get("item_name") or "未命名商品"
+            return (
+                f"「{name}」属于{item.get('category') or '未知类目'}，"
+                f"细分类 {item.get('type') or item.get('product_type') or '未标注'}，"
+                f"颜色 {item.get('color') or '未标注'}，"
+                f"材质 {item.get('material') or '未识别'}。"
+            )
+
+        # text_search / image_search：先让模型写点评，失败再走模板
+        return self._second_round(text, items) or self._compose_reply(items)
+
+    def _second_round(self, text: str, items: list[dict]) -> str | None:
+        """把检索结果回喂给模型写点评；失败或不合规时返回 None，由模板兜底。"""
+        if not items or self._state != "ready" or self._parser is None:
+            return None
+        comment_fn = getattr(self._parser, "comment", None)
+        if not callable(comment_fn):
+            return None
+        fields = ("item_name", "type", "color", "material", "similarity")
+        payload = {"items": [{key: item.get(key) for key in fields} for item in items[:5]]}
+        comment = comment_fn(text, json.dumps(payload, ensure_ascii=False))
+        if not comment:
+            return None
+        comment = comment.strip()
+        if not 20 <= len(comment) <= 200:
+            logger.info("点评长度不合规（%s 字），改用模板", len(comment))
+            return None
+        if _PRICE_CLAIM.search(comment):
+            logger.warning("点评出现具体价格断言，改用模板：%s", comment)
+            return None
+        return comment
 
     # ---------- 以图搜图（图 + 可选文字融合） ----------
 
@@ -187,8 +390,11 @@ class AgentService:
         items = [hit.as_dict() for hit in hits]
         thinking.append(f"检索：{len(index.categories)} 类索引，命中 {len(items)} 条")
 
+        reply = self._second_round(
+            text or "与上传图片相似的商品", items
+        ) or self._compose_image_reply(category, items, bool(text))
         return {
-            "reply": self._compose_image_reply(category, items, bool(text)),
+            "reply": reply,
             "thinking": thinking,
             "tool_calls": [
                 {
@@ -230,77 +436,6 @@ class AgentService:
                 score = ""
             lines.append(f"{position}. {name}{score}")
         return "\n".join(lines)
-
-    # ---------- 内部步骤 ----------
-
-    def _parse_intent(self, text: str) -> tuple[dict[str, Any], list[str]]:
-        intent_parser = _agent_module("intent_parser")
-        normalize_intent = intent_parser.normalize_intent
-        rule_parse = intent_parser.rule_parse
-
-        if self._state == "ready" and self._parser is not None:
-            try:
-                raw = self._parser.parse(text)
-                intent = normalize_intent(raw, text)
-                thinking = [f"识别意图：{intent['tool']}（微调模型）"]
-            except Exception as exc:  # noqa: BLE001 - 单次推理失败也降级
-                logger.warning("模型推理失败，改用规则解析：%s", exc)
-                intent, thinking = rule_parse(text), ["规则模式（模型推理失败）"]
-        elif self._state == "failed":
-            intent, thinking = rule_parse(text), ["规则模式（模型不可用）"]
-        elif self._state == "loading":
-            intent, thinking = rule_parse(text), ["规则模式（模型加载中，稍后自动切换）"]
-        else:
-            intent, thinking = rule_parse(text), ["规则模式（未接 LLM）"]
-
-        # 统一后处理：本地模型和远程 LangChain 工具共用同一套规则。
-        normalize_tool_call = _agent_module("intent_postprocessor").normalize_tool_call
-        tool, arguments, notes = normalize_tool_call(
-            intent.get("tool"), intent.get("arguments"), text, max_top_k=50
-        )
-        intent["tool"] = tool
-        intent["arguments"] = arguments
-        if notes:
-            thinking.append(f"后处理：{notes}")
-        return intent, thinking
-
-    def _sanitize(self, arguments: dict[str, Any]) -> dict[str, Any]:
-        query = str(arguments.get("query") or "").strip()[:200]
-        if not query:
-            raise ApiError(ErrorCode.BAD_REQUEST, "没听清要找什么，请再描述一下")
-        try:
-            top_k = int(arguments.get("top_k") or self.settings.agent_tool_top_k)
-        except (TypeError, ValueError):
-            top_k = self.settings.agent_tool_top_k
-        top_k = max(1, min(top_k, 50))
-
-        category = arguments.get("category")
-        if category not in _CATEGORIES:
-            category = None
-        out: dict[str, Any] = {"query": query, "top_k": top_k}
-        if category:
-            out["category"] = category
-        return out
-
-    def _run_tool(self, name: str, arguments: dict[str, Any]) -> tuple[dict[str, Any], str]:
-        if name != "text_search":
-            # 白名单外：按契约不落到 404xx（前端会把 404 一律当成"接口未上线"）
-            raise ApiError(ErrorCode.BAD_REQUEST, f"暂不支持的工具：{name}")
-
-        last = ""
-        for attempt in range(1, max(1, self.settings.agent_retry_times) + 1):
-            try:
-                result = self._search(**arguments)
-            except Exception as exc:  # noqa: BLE001 - HTTP/网络异常统一重试
-                last = f"{type(exc).__name__}: {exc}"
-                logger.warning("第 %s 次工具调用失败：%s", attempt, last)
-                continue
-            if result.get("error"):
-                last = str(result["error"])
-                logger.warning("第 %s 次工具返回错误：%s", attempt, last)
-                continue
-            return result, ""
-        return {}, last or "检索服务无响应"
 
     def _compose_reply(self, items: list[dict]) -> str:
         if not items:

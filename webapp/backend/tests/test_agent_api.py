@@ -161,7 +161,7 @@ class AgentServiceTest(unittest.TestCase):
         result = service.chat("我想找白色运动鞋")
 
         self.assertEqual(len(attempts), 3)
-        self.assertIn("检索暂时不可用", result["reply"])
+        self.assertIn("没办成", result["reply"])
         self.assertEqual(result["items"], [])
 
     def test_sanitizes_arguments(self) -> None:
@@ -172,6 +172,128 @@ class AgentServiceTest(unittest.TestCase):
         self.assertEqual(cleaned["query"], "白色运动鞋")
         self.assertEqual(cleaned["top_k"], 50)
         self.assertNotIn("category", cleaned)
+
+    def test_reply_action_skips_tools(self) -> None:
+        """模型选择 reply 时不应调用检索工具。"""
+
+        class _ReplyParser:
+            def parse_action(self, text: str) -> dict:
+                return {"action": "reply", "text": "你好，我是导购助手。"}
+
+        called: list[int] = []
+        service = AgentService(
+            _settings(), search_fn=lambda **kw: called.append(1) or {"items": []}
+        )
+        service._state = "ready"
+        service._parser = _ReplyParser()
+
+        result = service.chat("你好")
+        self.assertEqual(result["reply"], "你好，我是导购助手。")
+        self.assertEqual(result["items"], [])
+        self.assertEqual(result["tool_calls"], [])
+        self.assertEqual(called, [])
+
+    def test_say_is_passed_through(self) -> None:
+        """v3 的过渡语 say 要原样带给前端。"""
+
+        class _SayParser:
+            def parse_action(self, text: str) -> dict:
+                return {
+                    "action": "tool",
+                    "tool": "text_search",
+                    "arguments": {"query": "白色运动鞋", "category": "鞋", "top_k": 5},
+                    "say": "我先帮你找找",
+                }
+
+        service = AgentService(
+            _settings(), search_fn=lambda **kw: {"items": [{"category": "鞋", "item_name": "白鞋", "similarity": 0.5}]}
+        )
+        service._state = "ready"
+        service._parser = _SayParser()
+
+        result = service.chat("找白色运动鞋")
+        self.assertEqual(result["say"], "我先帮你找找")
+        self.assertEqual(result["tool_calls"][0]["name"], "text_search")
+
+    def test_unknown_tool_is_rejected(self) -> None:
+        """白名单外的工具直接报 40000，而不是 500。"""
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+        with self.assertRaises(ApiError) as caught:
+            service._run_tool("delete_everything", {})
+        self.assertEqual(caught.exception.code, ErrorCode.BAD_REQUEST)
+
+    def test_reply_with_price_is_replaced(self) -> None:
+        """模型直接回答里出现价格/销量断言时必须换成安全话术。"""
+
+        class _FabricatingParser:
+            def parse_action(self, text: str) -> dict:
+                return {"action": "reply", "text": "推荐白色小熊水杯，¥19.9，5000+人买过。"}
+
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+        service._state = "ready"
+        service._parser = _FabricatingParser()
+
+        result = service.chat("随便看看")
+        self.assertNotIn("19.9", result["reply"])
+        self.assertNotIn("人买过", result["reply"])
+        self.assertIn("查一下商品库", result["reply"])
+
+    def test_reply_owner_pronoun_is_fixed(self) -> None:
+        """助手口误“能帮我找”要改成“能帮你找”。"""
+
+        class _WrongVoiceParser:
+            def parse_action(self, text: str) -> dict:
+                return {"action": "reply", "text": "你好，能帮我找点什么吗？"}
+
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+        service._state = "ready"
+        service._parser = _WrongVoiceParser()
+
+        result = service.chat("你好")
+        self.assertIn("能帮你找", result["reply"])
+        self.assertNotIn("能帮我找", result["reply"])
+
+    def test_list_categories_reply(self) -> None:
+        """list_categories 没有 items，不能套“没找到商品”的模板。"""
+
+        class _Index:
+            categories = ["鞋", "包", "水杯"]
+
+        class _Match:
+            index = _Index()
+
+        service = AgentService(_settings(), match_service=_Match())
+        result, error = service._run_tool("list_categories", {})
+        self.assertEqual(error, "")
+        reply = service._render_tool_result("list_categories", result, [], "有哪些类目")
+        self.assertIn("3 类", reply)
+        self.assertIn("鞋", reply)
+
+    def test_get_item_detail_reply(self) -> None:
+        """商品详情要按字段渲染，不调模型。"""
+
+        class _Index:
+            categories = ["鞋"]
+
+            def find_item(self, item_id: str) -> dict:
+                return {
+                    "category": "鞋",
+                    "item_id": item_id,
+                    "item_name": "白色运动鞋",
+                    "type": "运动鞋",
+                    "color": "白色",
+                    "material": "网布",
+                }
+
+        class _Match:
+            index = _Index()
+
+        service = AgentService(_settings(), match_service=_Match())
+        result, error = service._run_tool("get_item_detail", {"item_id": "muge_1"})
+        self.assertEqual(error, "")
+        reply = service._render_tool_result("get_item_detail", result, [], "第二个")
+        self.assertIn("白色运动鞋", reply)
+        self.assertIn("网布", reply)
 
 
 class AgentImageRouteTest(unittest.TestCase):
