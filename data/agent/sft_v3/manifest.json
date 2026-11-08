@@ -1,0 +1,18 @@
+{
+  "version": "v3",
+  "seed": 20261109,
+  "total": 440,
+  "train": 396,
+  "valid": 44,
+  "counts": {
+    "tool": 200,
+    "tool:text_search": 120,
+    "with_say": 73,
+    "tool:image_search": 40,
+    "tool:list_categories": 20,
+    "tool:get_item_detail": 20,
+    "reply": 240
+  },
+  "source": "data/index_data_finetuned/*/items.csv",
+  "generated_at": "2026-11-08T17:39:38+00:00"
+}
