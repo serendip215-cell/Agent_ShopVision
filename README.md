@@ -38,7 +38,7 @@
 <p align="center">
   读取本地商品图片和结构化字段，做属性识别、检索推荐、标题描述生成。<br>
   当前已完成实验 1 数据清洗、中文图文检索基线（含 FAISS 索引）、Chinese-CLIP 微调（test R@1 37.4→58.7）和实验三推理加速（ONNX + TensorRT）；<br>
-  实验一至实验三的报告与评测图表均已交付；实验四后端已跑通、前端待开工，剩实验三现场演示/录屏、可选剪枝以及 Agent 继续推进。
+  实验一至实验三的报告与评测图表均已交付；实验四前后端已完成（双塔 ONNX 待切真模型）；实验五 5.1–5.3 已完成，5.3 工具调用准确率纯模型达 90%（任务书要求 ≥90%），剩 5.4 的 Agent 接口与前后端联调。另剩实验三现场演示/录屏、可选剪枝。
 </p>
 
 ## ✨ 当前进度
@@ -61,8 +61,11 @@
 | 实验三 量化（3.1.1） | 🧊 冻结 | 6 种配置实测（FP32 / FP16 / INT8 / per-channel / 分塔），裸动态量化最好 −13.06pp，未达 ≤2% 要求；数据与文档保留在 [`docs/optimize/runs/`](docs/optimize/runs/) |
 | 实验三评测与绘图交付 | ✅ 完成 | 杜军博沿用已核验训练机结果完成速度/精度判定、9张中文PNG/PDF/SVG与132历史查询指标复算；[统一结果](evaluation/retrieval/results/runs/exp3_inference_acceleration_20261025/测试结果说明.md)，[本人现场操作待办](docs/流程与交接/实验三杜军博任务交付.md) |
 | 实验三报告整合 | ✅ 完成 | Typst 正文 `docs/typ/实验三.typ` 已编译；Word/PDF 版报告、9 张结果图表与测量凭证入库 [`docs/交付材料/实验三_第23组/`](docs/交付材料/实验三_第23组/) |
-| 实验 4 前后端 | 🚧 进行中 | **后端已完成主体**：分层 FastAPI、统一 `{code, result, msg}` 与错误码表、4 个接口、占位/ONNX 编码器接缝、34 项自检 + CI（black / ruff / mypy / unittest），接口文档 `/docs` `/scalar` `/redoc` 与离线 [`API文档.md`](docs/交付材料/实验四_第23组/api/API文档.md)；**前端未开始**；双塔 ONNX 待训练机上传 Release 后切真模型。见 [`webapp/README.md`](webapp/README.md) |
-| Agent | ⏳ 未开始 | 实验 5 |
+| 实验 4 前后端 | ✅ 基本完成 | **后端**：分层 FastAPI、统一 `{code, result, msg}` 与错误码表、4 个检索接口、占位/ONNX 编码器接缝、CI（black / ruff / mypy / unittest），接口文档 `/docs` `/scalar` `/redoc` 与离线 [`API文档.md`](docs/交付材料/实验四_第23组/api/API文档.md)。**前端**：React + Ant Design 已完成 8 个页面（工作台 `/`、图像分类 `/image`、文本检索 `/text`、图文匹配 `/match`、商品入库 `/admin`、运行记录 `/history`、系统状态 `/status`、对话导购 `/agent`），路由均已注册。双塔 ONNX 待训练机上传 Release 后切真模型。见 [`webapp/README.md`](webapp/README.md) |
+| 实验五 5.1 环境与数据 | ✅ 完成 | 100 条微调数据（`data/agent/agent_finetune_data.json`），见 [`docs/实验五/01`](docs/实验五/01-环境与数据准备.md) |
+| 实验五 5.2 模型选择与微调 | ✅ 完成 | 基座 Qwen3-4B-Instruct-2507，QLoRA 4-bit，LoRA 适配器 `dist/lora_adapter_v2/`（64MB）。验证集总体 12.88% → **75.76%**，见 [`docs/实验五/03`](docs/实验五/03-微调结果实跑记录.md) |
+| 实验五 5.3 Agent 框架集成 | ✅ 完成 | LangChain `create_agent` 封装实验4接口 + 多轮槽位继承 + 10 轮准确率评测。**纯模型 90%**（类目 100%），加后处理 100%，见 [`docs/实验五/09`](docs/实验五/09-5.3优化实跑：扩充数据重训.md) |
+| 实验五 5.4 部署与测试 | 🚧 进行中 | 前端对话页 `AgentChat.jsx` 已提交；**后端 `/api/v1/agent/chat` 未实现**，前后端待联调。接口契约见 [`webapp/backend/README-agent-chat.md`](webapp/backend/README-agent-chat.md) |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
 
@@ -278,6 +281,17 @@ docs/typst/typst.exe compile --format svg docs/typ/figures/pipeline.typ docs/typ
 | [`configs/retrieval.json`](configs/retrieval.json) | 检索脚本默认 JSON 配置 |
 | [`configs/retrieval.md`](configs/retrieval.md) | 检索环境、参数和运行流程 |
 | [`scripts/finetune/README.md`](scripts/finetune/README.md) | 微调入口、目录约定、本机 NCCL 问题与解决 |
+| **[`docs/实验五/00-当前进度总览.md`](docs/实验五/00-当前进度总览.md)** | **实验五入口**：当前进度、谁该做什么、报告口径红线 |
+| [`docs/实验五/01-环境与数据准备.md`](docs/实验五/01-环境与数据准备.md) | 5.1 数据生成（100 条 instruction/input/output） |
+| [`docs/实验五/02-基座选型与LoRA微调.md`](docs/实验五/02-基座选型与LoRA微调.md) | 5.2 选型依据、超参设计、SCNet 表单对照 |
+| [`docs/实验五/03-微调结果实跑记录.md`](docs/实验五/03-微调结果实跑记录.md) | 5.2 实跑数字（12.88% → 75.76%）与环境 |
+| [`docs/实验五/04-5.2交接说明.md`](docs/实验五/04-5.2交接说明.md) | 5.2 → 5.3 交接、演示方案 |
+| [`docs/实验五/05-5.3完成说明.md`](docs/实验五/05-5.3完成说明.md) | 5.3 任务书要求对照、测试覆盖 |
+| [`docs/实验五/06-5.3在5060上执行指南.md`](docs/实验五/06-5.3在5060上执行指南.md) | 5060 机器上的操作手册 |
+| [`docs/实验五/07-5.3优化方案.md`](docs/实验五/07-5.3优化方案.md) | 四阶段优化方案（ZXCcs231） |
+| [`docs/实验五/08-5.3准确率根因与修复.md`](docs/实验五/08-5.3准确率根因与修复.md) | 20% 根因分析、报告红线 |
+| [`docs/实验五/09-5.3优化实跑：扩充数据重训.md`](docs/实验五/09-5.3优化实跑：扩充数据重训.md) | **v2 重训全过程，纯模型 10% → 90%** |
+| [`docs/流程与交接/实验五流程与分工.md`](docs/流程与交接/实验五流程与分工.md) | 实验五分工与交接（含 5.2/5.3 完成记录） |
 | [`docs/finetune/01-数据转换脚本说明.md`](docs/finetune/01-数据转换脚本说明.md) | 微调第 1 步：数据转换脚本 |
 | [`docs/finetune/02-微调训练.md`](docs/finetune/02-微调训练.md) | 微调第 2 步：训练环境与参数（含现状更正） |
 | [`docs/finetune/03-微调结果.md`](docs/finetune/03-微调结果.md) | **本次微调实验结果**：超参、valid 曲线、test 前后对比 |
