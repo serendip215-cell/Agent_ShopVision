@@ -71,3 +71,6 @@ webapp/backend/celery-worker*.log
 # 体积约 74MB（63MB 权重 + 11MB tokenizer），一次性成本，换来 git pull 即用。
 !/dist/lora_adapter/
 !/dist/lora_adapter/**
+# v2 适配器（扩充数据重训版，2026-11-08），同样入库供组员直接使用
+!/dist/lora_adapter_v2/
+!/dist/lora_adapter_v2/**

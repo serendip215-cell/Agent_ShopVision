@@ -63,6 +63,14 @@ def to_record(row: dict) -> dict:
     }
 
 
+def _rel(p: Path) -> str:
+    """相对仓库根；不在仓库内则返回绝对路径（不抛异常）。"""
+    try:
+        return str(p.resolve().relative_to(REPO_ROOT.resolve())).replace("\\", "/")
+    except ValueError:
+        return str(p.resolve()).replace("\\", "/")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="转换 5.1 数据为 SFT chat 格式")
     ap.add_argument("--src", type=Path, default=DEFAULT_SRC)
@@ -98,7 +106,7 @@ def main() -> None:
 
     manifest = {
         "schema_version": 1,
-        "source": str(args.src.relative_to(REPO_ROOT)).replace("\\", "/"),
+        "source": _rel(args.src),
         "source_sha256": hashlib.sha256(args.src.read_bytes()).hexdigest(),
         "split_strategy": "sha256(item_id)[:8] % 100 < valid_ratio*100",
         "valid_ratio": args.valid_ratio,

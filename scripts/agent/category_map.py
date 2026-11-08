@@ -195,6 +195,19 @@ _COLOR_WORDS = ["白色", "黑色", "红色", "蓝色", "灰色", "卡其色", "
 _QUANTITY_RE = re.compile(r"\d+\s*(?:个|件|条|款|双|只|套)")
 
 
+# 指令词/数量词 —— 用来判断 query 是否真的需要清洗
+_NOISE_HINT = re.compile(
+    r"(帮我|我想|我要|有没有|推荐|找一下|搜一下|搜索|^找|^搜|^买|"
+    r"\d+\s*[个件条款双只套款]|"
+    r"(?:白色|黑色|红色|蓝色|灰色|卡其色|米色|粉色|绿色|黄色|紫色|棕色|银色|金色|透明)的)"
+)
+
+
+def _has_noise(s: str) -> bool:
+    """query 里是否含需要清洗的指令词或数量词。"""
+    return bool(_NOISE_HINT.search(str(s or "")))
+
+
 def clean_query(text: str) -> str:
     """把用户原话清洗成检索词。
 
@@ -290,12 +303,17 @@ def fill_arguments(arguments: dict, text: str) -> tuple[dict, dict]:
     out = dict(arguments)
     notes: dict = {}
 
-    # query 规范化：模型常把「找」「有没有」留在 query 里
+    # query 规范化：只在**确实带指令词/数量词**时才介入
+    # （模型输出已经干净就别动它，少改一次就少一次「规则代劳」）
     raw_q = out.get("query") or ""
-    cleaned = clean_query(raw_q) if raw_q else clean_query(text)
-    if cleaned != raw_q:
-        out["query"] = cleaned
-        notes["query_cleaned"] = {"from": raw_q, "to": cleaned}
+    if raw_q:
+        cleaned = clean_query(raw_q)
+        # 只有在变短且没删掉关键内容时才采纳
+        if cleaned != raw_q and len(cleaned) >= 2 and _has_noise(raw_q):
+            out["query"] = cleaned
+            notes["query_cleaned"] = {"from": raw_q, "to": cleaned}
+    else:
+        out["query"] = clean_query(text)
 
     # 补类目：模型没输出时用关键词映射
     if not out.get("category"):

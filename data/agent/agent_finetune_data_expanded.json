@@ -1,0 +1,1469 @@
+[
+  {
+    "id": "tc_exp_006",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "找一下白色 儿童家居拖鞋 宝宝家用拖鞋4岁",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 儿童家居拖鞋 宝宝家用拖鞋4岁\", \"category\": \"鞋\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_060",
+    "task": "attribute",
+    "item_id": "muge_559262",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：带盖马克杯；颜色：绿色；材质：陶瓷；商品标题：情侣对杯马克杯一对带盖",
+    "output": "商品大类：水杯；细分类：带盖马克杯；颜色：绿色；材质：陶瓷"
+  },
+  {
+    "id": "tc_exp_021",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "黑色 双肩书包 大猩猩书包",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 双肩书包 大猩猩书包\", \"category\": \"包\", \"top_k\": 5}}"
+  },
+  {
+    "id": "intent_078",
+    "task": "intent",
+    "item_id": "muge_73898",
+    "category": "水杯",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找蓝色 玻璃牛奶杯，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"蓝色 玻璃牛奶杯\",\"category\":\"水杯\",\"top_k\":5}"
+  },
+  {
+    "id": "intent_061",
+    "task": "intent",
+    "item_id": "12453050350",
+    "category": "男装",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找卡其色、蓝色、黑色 立领夹克外套，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"卡其色、蓝色、黑色 立领夹克外套\",\"category\":\"男装\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_021",
+    "task": "attribute",
+    "item_id": "12450574687",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：高领针织衫；颜色：米色；材质：山羊绒；商品标题：半高领插肩袖山羊绒针织打底衫女长袖百搭宽松保暖上衣内搭毛衣",
+    "output": "商品大类：女装；细分类：高领针织衫；颜色：米色；材质：山羊绒"
+  },
+  {
+    "id": "attribute_007",
+    "task": "attribute",
+    "item_id": "12449108522",
+    "category": "男装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：男装；细分类：男士修身直筒牛仔裤；颜色：白色；材质：棉；商品标题：春夏高端欧货白色牛仔裤男士修身小直筒休闲弹力纯棉男长裤",
+    "output": "商品大类：男装；细分类：男士修身直筒牛仔裤；颜色：白色；材质：棉"
+  },
+  {
+    "id": "attribute_016",
+    "task": "attribute",
+    "item_id": "12449730985",
+    "category": "男装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：男装；细分类：男士长袖衬衫；颜色：灰色、卡其色、黑色；材质：磨毛面料；商品标题：啄木鸟磨毛衬衫男士长袖秋冬加绒加厚保暖轻商务休闲中年爸爸衬衣",
+    "output": "商品大类：男装；细分类：男士长袖衬衫；颜色：灰色、卡其色、黑色；材质：磨毛面料"
+  },
+  {
+    "id": "intent_073",
+    "task": "intent",
+    "item_id": "muge_350616",
+    "category": "包",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找蓝色 儿童拉杆书包，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"蓝色 儿童拉杆书包\",\"category\":\"包\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_015",
+    "task": "attribute",
+    "item_id": "12449282636",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：便携保温水壶；颜色：粉色、透明；材质：塑料；商品标题：希乐Cille户外超轻便携保温水壶350ml真空不锈钢防漏设计时尚便携易携带",
+    "output": "商品大类：水杯；细分类：便携保温水壶；颜色：粉色、透明；材质：塑料"
+  },
+  {
+    "id": "attribute_001",
+    "task": "attribute",
+    "item_id": "muge_461823",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：双肩包；颜色：灰色；材质：织物面料；商品标题：男士商务包背包",
+    "output": "商品大类：包；细分类：双肩包；颜色：灰色；材质：织物面料"
+  },
+  {
+    "id": "tc_exp_065",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找浅灰色 布艺收纳盒",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅灰色 布艺收纳盒\", \"category\": \"家居用品\", \"top_k\": 8}}"
+  },
+  {
+    "id": "tc_exp_071",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "深蓝色、白色 装饰画 当代石材与光束——父亲多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"深蓝色、白色 装饰画 当代石材与光束——父亲\", \"category\": \"家居用品\", \"top_k\": 8}}"
+  },
+  {
+    "id": "intent_084",
+    "task": "intent",
+    "item_id": "12451114989",
+    "category": "女装",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找蓝色、白色、棕色 短袖针织开衫，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"蓝色、白色、棕色 短袖针织开衫\",\"category\":\"女装\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_064",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "黑色 深煎锅多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 深煎锅\", \"category\": \"厨房用品\", \"top_k\": 10}}"
+  },
+  {
+    "id": "tc_exp_023",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想买黑色、红色、灰色 双肩背包 无印风书包，要3个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色、红色、灰色 双肩背包 无印风书包\", \"category\": \"包\", \"top_k\": 3}}"
+  },
+  {
+    "id": "intent_062",
+    "task": "intent",
+    "item_id": "12440040509",
+    "category": "运动服",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找白色、黑色 运动长袖套装，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"白色、黑色 运动长袖套装\",\"category\":\"运动服\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_024",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐黑色 宠物背包 中型犬背包",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 宠物背包 中型犬背包\", \"category\": \"包\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_073",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "随便看看有什么",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"随便看看有什么\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_072",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐绿色 枕套",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"绿色 枕套\", \"category\": \"家居用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_046",
+    "task": "attribute",
+    "item_id": "muge_571161",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：手提单肩包；颜色：黑色、灰色、白色；材质：；商品标题：欧式旅行背包",
+    "output": "商品大类：包；细分类：手提单肩包；颜色：黑色、灰色、白色；材质："
+  },
+  {
+    "id": "attribute_012",
+    "task": "attribute",
+    "item_id": "12437762472",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：露肩针织衫；颜色：白色；材质：针织面料；商品标题：纯欲风斜领露肩针织衫女秋季新款设计感修身显瘦辣妹短款上衣_65",
+    "output": "商品大类：女装；细分类：露肩针织衫；颜色：白色；材质：针织面料"
+  },
+  {
+    "id": "tc_exp_055",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "看看粉色、绿色、蓝色 耳机图案硬壳手机壳",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"粉色、绿色、蓝色 耳机图案硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_014",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找白色 易拉罐保温杯 保温杯男易拉罐",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 易拉罐保温杯 保温杯男易拉罐\", \"category\": \"水杯\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_031",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找白色、蓝色 男士短袖POLO衫",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、蓝色 男士短袖POLO衫\", \"category\": \"男装\", \"top_k\": 10}}"
+  },
+  {
+    "id": "intent_066",
+    "task": "intent",
+    "item_id": "12426887236",
+    "category": "女装",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 女士针织打底衫，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 女士针织打底衫\",\"category\":\"女装\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_024",
+    "task": "attribute",
+    "item_id": "12443184784",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：带盖会议杯；颜色：白色；材质：陶瓷；商品标题：琅柯 白色金边会议杯 陶瓷茶杯 400ml",
+    "output": "商品大类：水杯；细分类：带盖会议杯；颜色：白色；材质：陶瓷"
+  },
+  {
+    "id": "attribute_010",
+    "task": "attribute",
+    "item_id": "muge_94776",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：儿童双肩书包；颜色：深蓝色、蓝色、橙色；材质：；商品标题：小学生书包超轻轻便",
+    "output": "商品大类：包；细分类：儿童双肩书包；颜色：深蓝色、蓝色、橙色；材质："
+  },
+  {
+    "id": "attribute_049",
+    "task": "attribute",
+    "item_id": "B08F9TTZBL",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：枕套；颜色：；材质：；商品标题：UMI 真丝枕套 40x60cm，100% 桑蚕丝 25 姆米，护发护肤枕套，香槟色，拉链设计，双面真丝",
+    "output": "商品大类：家居用品；细分类：枕套；颜色：；材质："
+  },
+  {
+    "id": "tc_exp_042",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "深灰色、粉色 针织打底衫多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"深灰色、粉色 针织打底衫\", \"category\": \"女装\", \"top_k\": 8}}"
+  },
+  {
+    "id": "intent_080",
+    "task": "intent",
+    "item_id": "12451885054",
+    "category": "运动服",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 短袖衬衫五分短裤套装，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 短袖衬衫五分短裤套装\",\"category\":\"运动服\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_017",
+    "task": "attribute",
+    "item_id": "12437942341",
+    "category": "运动服",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：运动服；细分类：连帽卫衣；颜色：棕色；材质：；商品标题：彪马(PUMA)男装女装新款跑步健身运动服户外时尚舒适透气休闲卫衣套衫 625801-81 ZP",
+    "output": "商品大类：运动服；细分类：连帽卫衣；颜色：棕色；材质："
+  },
+  {
+    "id": "attribute_037",
+    "task": "attribute",
+    "item_id": "muge_827761",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：毛绒儿童背包；颜色：紫色、粉色；材质：绒毛布料；商品标题：可爱儿童书包",
+    "output": "商品大类：包；细分类：毛绒儿童背包；颜色：紫色、粉色；材质：绒毛布料"
+  },
+  {
+    "id": "tc_exp_060",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "想买银色 餐勺",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"银色 餐勺\", \"category\": \"厨房用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_010",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "找一下红色、白色 保温杯 潮流水杯",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"红色、白色 保温杯 潮流水杯\", \"category\": \"水杯\", \"top_k\": 8}}"
+  },
+  {
+    "id": "tc_exp_002",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我找红色 人字拖鞋",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"红色 人字拖鞋\", \"category\": \"鞋\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_046",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我搜米白色 半高领长袖打底衫",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"米白色 半高领长袖打底衫\", \"category\": \"女装\", \"top_k\": 5}}"
+  },
+  {
+    "id": "intent_077",
+    "task": "intent",
+    "item_id": "B0856BHCMS",
+    "category": "手机壳",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找蓝色 印花软壳手机壳，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"蓝色 印花软壳手机壳\",\"category\":\"手机壳\",\"top_k\":5}"
+  },
+  {
+    "id": "intent_070",
+    "task": "intent",
+    "item_id": "10608057136",
+    "category": "男装",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 皮夹克，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 皮夹克\",\"category\":\"男装\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_033",
+    "task": "attribute",
+    "item_id": "12442475949",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：喷雾水杯；颜色：蓝色；材质：塑料；商品标题：火象JIMMY喷雾杯 HXF-PC056/个",
+    "output": "商品大类：水杯；细分类：喷雾水杯；颜色：蓝色；材质：塑料"
+  },
+  {
+    "id": "tc_exp_019",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我找黑色 双肩背包 高三男生书包",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 双肩背包 高三男生书包\", \"category\": \"包\", \"top_k\": 10}}"
+  },
+  {
+    "id": "attribute_014",
+    "task": "attribute",
+    "item_id": "B07TH2YQK5",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：图案硬壳手机保护壳；颜色：红色、黑色；材质：塑料；商品标题：亚马逊自有品牌 - Solimo Designer Malte 巧克力色 3D 打印硬壳手机保护壳，适用于 LG Stylus 2",
+    "output": "商品大类：手机壳；细分类：图案硬壳手机保护壳；颜色：红色、黑色；材质：塑料"
+  },
+  {
+    "id": "intent_069",
+    "task": "intent",
+    "item_id": "12453571214",
+    "category": "水杯",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 玻璃泡茶杯，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 玻璃泡茶杯\",\"category\":\"水杯\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_048",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "米色 中长款针织开衫，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"米色 中长款针织开衫\", \"category\": \"女装\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_034",
+    "task": "attribute",
+    "item_id": "12449745953",
+    "category": "男装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：男装；细分类：半高领长袖打底衫；颜色：红色；材质：德绒；商品标题：啄木鸟双面德绒半高领打底衫男士长袖t恤秋冬季加绒加厚保暖内衣K",
+    "output": "商品大类：男装；细分类：半高领长袖打底衫；颜色：红色；材质：德绒"
+  },
+  {
+    "id": "tc_exp_062",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "黑色 单柄炖锅多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 单柄炖锅\", \"category\": \"厨房用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_038",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有白色、卡其色、黑色 运动套装，来5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、卡其色、黑色 运动套装\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_015",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "黑色 双层玻璃茶水分离泡茶杯多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 双层玻璃茶水分离泡茶杯\", \"category\": \"水杯\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_025",
+    "task": "attribute",
+    "item_id": "12452021321",
+    "category": "男装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：男装；细分类：POLO衫；颜色：黑色；材质：冰丝；商品标题：夏季新款冰丝POLO衫男士轻商务高级短袖T恤免烫抗皱休闲半袖上衣",
+    "output": "商品大类：男装；细分类：POLO衫；颜色：黑色；材质：冰丝"
+  },
+  {
+    "id": "tc_exp_025",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐深灰色 男士休闲束脚裤",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"深灰色 男士休闲束脚裤\", \"category\": \"男装\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_039",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有黑色 运动套装 健卡侬运动服 J205，来5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 运动套装 健卡侬运动服 J205\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_003",
+    "task": "attribute",
+    "item_id": "12453056921",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：翻领条纹短袖针织T恤；颜色：白色；材质：针织面料（标题称冰丝）；商品标题：夏季新款女冰丝翻领条纹拼色短袖T恤时尚修身百搭气质上衣针织衫",
+    "output": "商品大类：女装；细分类：翻领条纹短袖针织T恤；颜色：白色；材质：针织面料（标题称冰丝）"
+  },
+  {
+    "id": "attribute_006",
+    "task": "attribute",
+    "item_id": "muge_375305",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：红酒高脚杯；颜色：金色；材质：玻璃；商品标题：红酒杯高脚杯ktv",
+    "output": "商品大类：水杯；细分类：红酒高脚杯；颜色：金色；材质：玻璃"
+  },
+  {
+    "id": "intent_082",
+    "task": "intent",
+    "item_id": "12410423009",
+    "category": "包",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 女士双肩包，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 女士双肩包\",\"category\":\"包\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_075",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "你们卖什么",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"你们卖什么\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_050",
+    "task": "attribute",
+    "item_id": "B07TG42WV5",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：3D打印硬壳手机壳；颜色：多色；材质：；商品标题：亚马逊自有品牌 - Solimo 设计师系列 墙绘多色 3D 打印硬壳手机壳，适用于金立马拉松 M5 Plus",
+    "output": "商品大类：手机壳；细分类：3D打印硬壳手机壳；颜色：多色；材质："
+  },
+  {
+    "id": "tc_exp_056",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "想买黑色、黄色、绿色 印花手机壳",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色、黄色、绿色 印花手机壳\", \"category\": \"手机壳\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_042",
+    "task": "attribute",
+    "item_id": "12447490502",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：大容量运动水壶；颜色：蓝色；材质：塑料；商品标题：梓南北 大容量水壶 2700ML 个",
+    "output": "商品大类：水杯；细分类：大容量运动水壶；颜色：蓝色；材质：塑料"
+  },
+  {
+    "id": "intent_085",
+    "task": "intent",
+    "item_id": "B085GNS9F4",
+    "category": "家居用品",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找白色、银色、蓝色 旋转晾衣架，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"白色、银色、蓝色 旋转晾衣架\",\"category\":\"家居用品\",\"top_k\":5}"
+  },
+  {
+    "id": "intent_079",
+    "task": "intent",
+    "item_id": "12449632396",
+    "category": "男装",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找深灰色 圆领针织毛衣，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"深灰色 圆领针织毛衣\",\"category\":\"男装\",\"top_k\":5}"
+  },
+  {
+    "id": "intent_064",
+    "task": "intent",
+    "item_id": "12231350130",
+    "category": "包",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找蓝色 儿童双肩书包，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"蓝色 儿童双肩书包\",\"category\":\"包\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_023",
+    "task": "attribute",
+    "item_id": "B07T8Q1CYH",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：设计师图案硬壳手机壳；颜色：粉色；材质：塑料；商品标题：Amazon Brand - Solimo Designer Daddy's Girl 3D打印硬壳手机壳，适用于Vivo V5",
+    "output": "商品大类：手机壳；细分类：设计师图案硬壳手机壳；颜色：粉色；材质：塑料"
+  },
+  {
+    "id": "intent_072",
+    "task": "intent",
+    "item_id": "muge_655785",
+    "category": "鞋",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找白色 拼色平底鞋，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"白色 拼色平底鞋\",\"category\":\"鞋\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_013",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐透明 玻璃杯 50ml钢化杯",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"透明 玻璃杯 50ml钢化杯\", \"category\": \"水杯\", \"top_k\": 8}}"
+  },
+  {
+    "id": "tc_exp_066",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有白色、多色 床单套装",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、多色 床单套装\", \"category\": \"家居用品\", \"top_k\": 3}}"
+  },
+  {
+    "id": "attribute_058",
+    "task": "attribute",
+    "item_id": "B07X8LXCC1",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：相框；颜色：白色；材质：玻璃；商品标题：Eono by Amazon - 实心木质与高清玻璃相框，适用于壁挂或桌面摆放，10x15 厘米，白色",
+    "output": "商品大类：家居用品；细分类：相框；颜色：白色；材质：玻璃"
+  },
+  {
+    "id": "intent_076",
+    "task": "intent",
+    "item_id": "B07R4Q7SLG",
+    "category": "家居用品",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 壁挂式衣帽架，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 壁挂式衣帽架\",\"category\":\"家居用品\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_049",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "绿色、黄色、橙色 3D打印图案硬壳手机壳多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"绿色、黄色、橙色 3D打印图案硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_027",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐3个浅灰色 休闲长裤",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅灰色 休闲长裤\", \"category\": \"男装\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_052",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "红色、蓝色、白色 3D打印图案硬壳手机壳，要10个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"红色、蓝色、白色 3D打印图案硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 10}}"
+  },
+  {
+    "id": "tc_exp_011",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找白色 陶瓷杯壶套装 水杯水壶家用套装",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 陶瓷杯壶套装 水杯水壶家用套装\", \"category\": \"水杯\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_045",
+    "task": "attribute",
+    "item_id": "muge_548734",
+    "category": "鞋",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：鞋；细分类：军靴；颜色：绿色、棕色、黑色；材质：皮革；商品标题：军用大头鞋",
+    "output": "商品大类：鞋；细分类：军靴；颜色：绿色、棕色、黑色；材质：皮革"
+  },
+  {
+    "id": "tc_exp_005",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想买黑色 健步鞋，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 健步鞋\", \"category\": \"鞋\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_039",
+    "task": "attribute",
+    "item_id": "12426887460",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：高领针织毛衣；颜色：白色；材质：针织面料；商品标题：高领加厚保暖学生毛衣女秋冬季新款打底衫宽松灯笼袖外穿针织上衣",
+    "output": "商品大类：女装；细分类：高领针织毛衣；颜色：白色；材质：针织面料"
+  },
+  {
+    "id": "intent_071",
+    "task": "intent",
+    "item_id": "12453600251",
+    "category": "运动服",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 保暖内衣套装，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 保暖内衣套装\",\"category\":\"运动服\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_004",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "白色 帆布休闲鞋 帆布鞋女春秋增高，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 帆布休闲鞋 帆布鞋女春秋增高\", \"category\": \"鞋\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_026",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "浅蓝色 男士牛仔裤",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅蓝色 男士牛仔裤\", \"category\": \"男装\", \"top_k\": 3}}"
+  },
+  {
+    "id": "attribute_038",
+    "task": "attribute",
+    "item_id": "B000WI9CTA",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：带把手烤盘；颜色：红色；材质：金属；商品标题：falksson 闪粉派对蛋糕架 25 厘米",
+    "output": "商品大类：厨房用品；细分类：带把手烤盘；颜色：红色；材质：金属"
+  },
+  {
+    "id": "tc_exp_054",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有浅蓝色、绿色 柠檬汁图案3D打印硬壳手机壳，来5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅蓝色、绿色 柠檬汁图案3D打印硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_032",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找黑色 棒球服夹克",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 棒球服夹克\", \"category\": \"男装\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_057",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我找银色 不锈钢锅具套装",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"银色 不锈钢锅具套装\", \"category\": \"厨房用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_030",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐10个蓝色 牛仔裤",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"蓝色 牛仔裤\", \"category\": \"男装\", \"top_k\": 10}}"
+  },
+  {
+    "id": "intent_083",
+    "task": "intent",
+    "item_id": "B08BVNDMCP",
+    "category": "厨房用品",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找白色、黑色 餐具套装，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"白色、黑色 餐具套装\",\"category\":\"厨房用品\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_005",
+    "task": "attribute",
+    "item_id": "B07T8Q1W95",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：3D印花硬壳手机保护壳；颜色：白色；材质：硬壳材质；商品标题：亚马逊自有品牌 - Solimo 设计师款熊猫体验 3D 打印硬壳手机保护壳，适用于 OPPO A5",
+    "output": "商品大类：手机壳；细分类：3D印花硬壳手机保护壳；颜色：白色；材质：硬壳材质"
+  },
+  {
+    "id": "attribute_051",
+    "task": "attribute",
+    "item_id": "12446567766",
+    "category": "水杯",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：水杯；细分类：运动水杯；颜色：粉色；材质：塑料；商品标题：铁洋 大容量运动水杯 1900ML 个",
+    "output": "商品大类：水杯；细分类：运动水杯；颜色：粉色；材质：塑料"
+  },
+  {
+    "id": "attribute_008",
+    "task": "attribute",
+    "item_id": "12449692902",
+    "category": "运动服",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：运动服；细分类：连帽运动夹克；颜色：白色；材质：；商品标题：安德玛(Under Armour)女装 新款健身休闲时尚潮流舒适连帽运动夹克23600402-009 ZP",
+    "output": "商品大类：运动服；细分类：连帽运动夹克；颜色：白色；材质："
+  },
+  {
+    "id": "attribute_056",
+    "task": "attribute",
+    "item_id": "B08CHJ6ZZK",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：不粘炒锅（带盖）；颜色：红色、黑色、银色；材质：铝；商品标题：(焕新款) 亚马逊自有品牌 - Solimo 不粘阿帕切蒂锅/炒锅（带盖，22厘米，双层涂层）",
+    "output": "商品大类：厨房用品；细分类：不粘炒锅（带盖）；颜色：红色、黑色、银色；材质：铝"
+  },
+  {
+    "id": "tc_exp_041",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想买浅蓝色 V领针织衫，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅蓝色 V领针织衫\", \"category\": \"女装\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_050",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐白色、粉色、黑色 印花硬壳手机壳",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、粉色、黑色 印花硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_061",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我找银色 带盖炖锅",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"银色 带盖炖锅\", \"category\": \"厨房用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_044",
+    "task": "attribute",
+    "item_id": "12452321400",
+    "category": "运动服",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：运动服；细分类：运动T恤；颜色：白色；材质：；商品标题：361°运动T恤女新款简约运动百搭圆领短T恤562522117",
+    "output": "商品大类：运动服；细分类：运动T恤；颜色：白色；材质："
+  },
+  {
+    "id": "tc_exp_040",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "白色 跑步运动套装多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 跑步运动套装\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_009",
+    "task": "attribute",
+    "item_id": "B0791XYDVY",
+    "category": "鞋",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：鞋；细分类：低帮帆布运动鞋；颜色：蓝色、白色、红色；材质：帆布；商品标题：Amazon Brand - Symbol 男士运动鞋",
+    "output": "商品大类：鞋；细分类：低帮帆布运动鞋；颜色：蓝色、白色、红色；材质：帆布"
+  },
+  {
+    "id": "tc_exp_017",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想买棕色 双肩包 斜背包男牛皮大容量，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"棕色 双肩包 斜背包男牛皮大容量\", \"category\": \"包\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_058",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "银色 汤锅多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"银色 汤锅\", \"category\": \"厨房用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_078",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有什么好东西",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"有什么好东西\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_019",
+    "task": "attribute",
+    "item_id": "muge_1085837",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：儿童双肩书包；颜色：红色、黑色；材质：；商品标题：儿童小书包男汽车型",
+    "output": "商品大类：包；细分类：儿童双肩书包；颜色：红色、黑色；材质："
+  },
+  {
+    "id": "attribute_057",
+    "task": "attribute",
+    "item_id": "12448906849",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：女式圆领针织衫；颜色：；材质：羊绒；商品标题：羊绒衫女圆领元宝针加厚显瘦简约百搭纯色针织衫秋冬针织打底毛衣",
+    "output": "商品大类：女装；细分类：女式圆领针织衫；颜色：；材质：羊绒"
+  },
+  {
+    "id": "attribute_004",
+    "task": "attribute",
+    "item_id": "B000T2TA8W",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：浴室地垫；颜色：；材质：棉；商品标题：Pinzon Luxury Loop 17×24英寸浴垫，李子色",
+    "output": "商品大类：家居用品；细分类：浴室地垫；颜色：；材质：棉"
+  },
+  {
+    "id": "tc_exp_034",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "找一下白色、黑色 运动套装",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、黑色 运动套装\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_044",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "白色 半高领针织毛衣多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 半高领针织毛衣\", \"category\": \"女装\", \"top_k\": 3}}"
+  },
+  {
+    "id": "intent_067",
+    "task": "intent",
+    "item_id": "B07HSJX4TG",
+    "category": "家居用品",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找米白色、黑色 圆形收纳篮套装，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"米白色、黑色 圆形收纳篮套装\",\"category\":\"家居用品\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_059",
+    "task": "attribute",
+    "item_id": "B07T24RS8F",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：图案硬壳保护壳；颜色：白色；材质：塑料；商品标题：亚马逊自有品牌 - Solimo 设计师系列 多形状图案 3D 打印硬壳手机保护壳，适用于华硕 Zenfone Selfie ZD551KL",
+    "output": "商品大类：手机壳；细分类：图案硬壳保护壳；颜色：白色；材质：塑料"
+  },
+  {
+    "id": "tc_exp_020",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有蓝色 儿童双肩书包，来10个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"蓝色 儿童双肩书包\", \"category\": \"包\", \"top_k\": 10}}"
+  },
+  {
+    "id": "tc_exp_063",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐白色、蓝色、黄色 餐具套装",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、蓝色、黄色 餐具套装\", \"category\": \"厨房用品\", \"top_k\": 10}}"
+  },
+  {
+    "id": "attribute_055",
+    "task": "attribute",
+    "item_id": "muge_415215",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：双肩包；颜色：黑色、棕色；材质：布料；商品标题：高端轻薄电脑包",
+    "output": "商品大类：包；细分类：双肩包；颜色：黑色、棕色；材质：布料"
+  },
+  {
+    "id": "tc_exp_018",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐10个白色、黑色 双肩包 网红小背包男",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、黑色 双肩包 网红小背包男\", \"category\": \"包\", \"top_k\": 10}}"
+  },
+  {
+    "id": "attribute_018",
+    "task": "attribute",
+    "item_id": "12382042583",
+    "category": "鞋",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：鞋；细分类：跑步运动鞋；颜色：白色；材质：网面；商品标题：La Chessiers春秋季2025新款男鞋网面透气情侣款爆米花运动休闲鞋防滑耐磨韩版跑步鞋 奔驰白 41码",
+    "output": "商品大类：鞋；细分类：跑步运动鞋；颜色：白色；材质：网面"
+  },
+  {
+    "id": "attribute_030",
+    "task": "attribute",
+    "item_id": "12453388567",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：女式中长款羽绒服；颜色：黑色；材质：羽绒；商品标题：90绒柔软泡芙羽绒女中长款新款连帽简约面包服外套加厚",
+    "output": "商品大类：女装；细分类：女式中长款羽绒服；颜色：黑色；材质：羽绒"
+  },
+  {
+    "id": "tc_exp_016",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我搜白色 马克杯",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 马克杯\", \"category\": \"水杯\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_035",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐白色、黑色 运动套装 健卡侬运动服J208",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、黑色 运动套装 健卡侬运动服J208\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "intent_068",
+    "task": "intent",
+    "item_id": "B081HM8VY7",
+    "category": "手机壳",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 3D打印图案硬壳手机壳，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 3D打印图案硬壳手机壳\",\"category\":\"手机壳\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_069",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "找一下浅蓝色 枕套",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅蓝色 枕套\", \"category\": \"家居用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_036",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "想买灰色 连帽卫衣",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"灰色 连帽卫衣\", \"category\": \"运动服\", \"top_k\": 8}}"
+  },
+  {
+    "id": "attribute_020",
+    "task": "attribute",
+    "item_id": "B08B5JV8M5",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：餐叉；颜色：银色；材质：不锈钢；商品标题：(翻新) AmazonBasics 不锈钢餐叉（边缘呈珍珠纹），12支装",
+    "output": "商品大类：厨房用品；细分类：餐叉；颜色：银色；材质：不锈钢"
+  },
+  {
+    "id": "tc_exp_051",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "想买红色、白色、蓝色 爱心图案硬壳手机壳",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"红色、白色、蓝色 爱心图案硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_053",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "手机壳",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我搜紫色、黑色 图案硬壳手机壳",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"紫色、黑色 图案硬壳手机壳\", \"category\": \"手机壳\", \"top_k\": 5}}"
+  },
+  {
+    "id": "intent_081",
+    "task": "intent",
+    "item_id": "muge_416993",
+    "category": "鞋",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找黑色 尖头细跟包头高跟鞋，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"黑色 尖头细跟包头高跟鞋\",\"category\":\"鞋\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_047",
+    "task": "attribute",
+    "item_id": "B08988PX7K",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：美耐皿；商品标题：AmazonBasics - 美耐皿餐具套装（12件，4人份），餐具，蓝色搪瓷配乡村风边饰，10 1/2英寸、8 9/16英寸、6英寸、1",
+    "output": "商品大类：厨房用品；细分类：餐具套装；颜色：白色；材质：美耐皿"
+  },
+  {
+    "id": "attribute_054",
+    "task": "attribute",
+    "item_id": "muge_1058214",
+    "category": "鞋",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：鞋；细分类：乐福鞋；颜色：黑色、棕色、深灰色；材质：皮革；商品标题：休闲皮鞋中根",
+    "output": "商品大类：鞋；细分类：乐福鞋；颜色：黑色、棕色、深灰色；材质：皮革"
+  },
+  {
+    "id": "tc_exp_012",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "白色 带盖茶杯 茶杯瓷杯个人专用多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 带盖茶杯 茶杯瓷杯个人专用\", \"category\": \"水杯\", \"top_k\": 10}}"
+  },
+  {
+    "id": "tc_exp_007",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找白色、黑色、粉色 老爹鞋",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色、黑色、粉色 老爹鞋\", \"category\": \"鞋\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_048",
+    "task": "attribute",
+    "item_id": "12453057560",
+    "category": "女装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：女装；细分类：针织短袖上衣；颜色：米白色；材质：莱赛尔；商品标题：新款短袖上衣女夏天丝莱赛尔镂空纯色修身正肩五分袖简约百搭针织",
+    "output": "商品大类：女装；细分类：针织短袖上衣；颜色：米白色；材质：莱赛尔"
+  },
+  {
+    "id": "attribute_035",
+    "task": "attribute",
+    "item_id": "12441184715",
+    "category": "运动服",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：运动服；细分类：男士长袖运动套装；颜色：黑色；材质：；商品标题：统狮男长袖套装 284-1 套 颜色请备注 尺码请备注",
+    "output": "商品大类：运动服；细分类：男士长袖运动套装；颜色：黑色；材质："
+  },
+  {
+    "id": "tc_exp_068",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "蓝色、绿色、米色 装饰画，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"蓝色、绿色、米色 装饰画\", \"category\": \"家居用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_022",
+    "task": "attribute",
+    "item_id": "B07XCTG1M5",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：相框；颜色：黑色；材质：木材；商品标题：Eono by Amazon - 15x20 厘米实木相框，配备高清玻璃，适用于 10x15 厘米照片（带衬纸）或 15x20 厘米照片（不带衬纸），黑色",
+    "output": "商品大类：家居用品；细分类：相框；颜色：黑色；材质：木材"
+  },
+  {
+    "id": "intent_065",
+    "task": "intent",
+    "item_id": "B000UCZFVW",
+    "category": "厨房用品",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找紫色、橙色、黑色 随行杯，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"紫色、橙色、黑色 随行杯\",\"category\":\"厨房用品\",\"top_k\":5}"
+  },
+  {
+    "id": "intent_074",
+    "task": "intent",
+    "item_id": "B06XQZXQ2B",
+    "category": "厨房用品",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找绿色 搅拌机备用杯，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"绿色 搅拌机备用杯\",\"category\":\"厨房用品\",\"top_k\":5}"
+  },
+  {
+    "id": "tc_exp_003",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐黑色、红色 尖头平底鞋 黑色尖头鞋女平底夏",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色、红色 尖头平底鞋 黑色尖头鞋女平底夏\", \"category\": \"鞋\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_037",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找红色、黑色 运动套装",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"红色、黑色 运动套装\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "intent_063",
+    "task": "intent",
+    "item_id": "12447553411",
+    "category": "鞋",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找白色、蓝色 篮球鞋，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"白色、蓝色 篮球鞋\",\"category\":\"鞋\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_002",
+    "task": "attribute",
+    "item_id": "B07JVNJL2J",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：玻璃直筒水杯套装；颜色：透明；材质：玻璃；商品标题：亚马逊自有品牌 – Solimo Nia 高脚杯套装，325 毫升，6 件装，透明款",
+    "output": "商品大类：厨房用品；细分类：玻璃直筒水杯套装；颜色：透明；材质：玻璃"
+  },
+  {
+    "id": "tc_exp_022",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "包",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "推荐10个黑色 双肩包",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 双肩包\", \"category\": \"包\", \"top_k\": 10}}"
+  },
+  {
+    "id": "tc_exp_074",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有什么推荐的吗",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"有什么推荐的吗\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_052",
+    "task": "attribute",
+    "item_id": "12451554241",
+    "category": "男装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：男装；细分类：男士短袖POLO衫；颜色：米白色；材质：；商品标题：春夏新款男士短袖T恤简约圆领纯色休闲透气薄款青年潮流短袖",
+    "output": "商品大类：男装；细分类：男士短袖POLO衫；颜色：米白色；材质："
+  },
+  {
+    "id": "attribute_032",
+    "task": "attribute",
+    "item_id": "B07TG4PDQY",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：印花硬壳手机壳；颜色：粉色、红色、黑色；材质：塑料；商品标题：亚马逊品牌 - Solimo 设计师系列爱心印花布纹 3D 打印硬壳手机壳，适用于诺基亚 7.1",
+    "output": "商品大类：手机壳；细分类：印花硬壳手机壳；颜色：粉色、红色、黑色；材质：塑料"
+  },
+  {
+    "id": "attribute_036",
+    "task": "attribute",
+    "item_id": "muge_259626",
+    "category": "鞋",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：鞋；细分类：休闲运动鞋；颜色：红色；材质：；商品标题：温尔缦 鞋 加绒",
+    "output": "商品大类：鞋；细分类：休闲运动鞋；颜色：红色；材质："
+  },
+  {
+    "id": "tc_exp_001",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "想买棕色、米色 坡跟凉鞋 真皮凉鞋妈妈款",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"棕色、米色 坡跟凉鞋 真皮凉鞋妈妈款\", \"category\": \"鞋\", \"top_k\": 10}}"
+  },
+  {
+    "id": "tc_exp_009",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "水杯",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有白色 茶杯，来3个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 茶杯\", \"category\": \"水杯\", \"top_k\": 3}}"
+  },
+  {
+    "id": "attribute_040",
+    "task": "attribute",
+    "item_id": "B000PU35MA",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：床单套装；颜色：蓝色、米色、棕色；材质：棉；商品标题：Pinzon 440支 100%纯棉提花条纹特大号床单套装，联邦蓝",
+    "output": "商品大类：家居用品；细分类：床单套装；颜色：蓝色、米色、棕色；材质：棉"
+  },
+  {
+    "id": "attribute_026",
+    "task": "attribute",
+    "item_id": "12452969165",
+    "category": "运动服",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：运动服；细分类：卫衣；颜色：红色、白色；材质：；商品标题：酒红色条纹卫衣男上衣春秋新款重磅超柔男士长袖打底衫复古老钱风",
+    "output": "商品大类：运动服；细分类：卫衣；颜色：红色、白色；材质："
+  },
+  {
+    "id": "tc_exp_043",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想买米白色 女式针织打底衫，要3个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"米白色 女式针织打底衫\", \"category\": \"女装\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_067",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想买白色 布艺收纳盒，要5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 布艺收纳盒\", \"category\": \"家居用品\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_029",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我找蓝色 男士牛仔长裤，5个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"蓝色 男士牛仔长裤\", \"category\": \"男装\", \"top_k\": 5}}"
+  },
+  {
+    "id": "intent_075",
+    "task": "intent",
+    "item_id": "12437762689",
+    "category": "女装",
+    "instruction": "解析用户商品检索需求，输出结构化意图 JSON，不要编造商品信息。",
+    "input": "我想找米色 露肩挂脖长袖针织衫，推荐 5 件。",
+    "output": "{\"intent\":\"search_products\",\"query\":\"米色 露肩挂脖长袖针织衫\",\"category\":\"女装\",\"top_k\":5}"
+  },
+  {
+    "id": "attribute_041",
+    "task": "attribute",
+    "item_id": "B07TH37KCP",
+    "category": "手机壳",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：手机壳；细分类：3D打印砖纹硬壳手机壳；颜色：黑色；材质：塑料；商品标题：Amazon Brand - Solimo 设计师款微黄砖纹 3D 打印硬壳手机保护壳，适用于 LG K10 (2017)",
+    "output": "商品大类：手机壳；细分类：3D打印砖纹硬壳手机壳；颜色：黑色；材质：塑料"
+  },
+  {
+    "id": "tc_exp_008",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "鞋",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "有没有黑色、灰色 运动跑鞋，来10个",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色、灰色 运动跑鞋\", \"category\": \"鞋\", \"top_k\": 10}}"
+  },
+  {
+    "id": "attribute_053",
+    "task": "attribute",
+    "item_id": "12445296648",
+    "category": "运动服",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：运动服；细分类：运动POLO衫短袖上衣；颜色：紫色；材质：；商品标题：361°运动t恤女夏季新款瑜伽健身POLO衫上衣速干薄款透气短袖女",
+    "output": "商品大类：运动服；细分类：运动POLO衫短袖上衣；颜色：紫色；材质："
+  },
+  {
+    "id": "attribute_031",
+    "task": "attribute",
+    "item_id": "B08154GBFT",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：装饰画；颜色：蓝色、灰色、白色；材质：；商品标题：Stone & Beam Modern Family Living Oliver GAL 20271_17x20_GLOS_SILV_NLC - 装饰画",
+    "output": "商品大类：家居用品；细分类：装饰画；颜色：蓝色、灰色、白色；材质："
+  },
+  {
+    "id": "attribute_043",
+    "task": "attribute",
+    "item_id": "12451139323",
+    "category": "男装",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：男装；细分类：男士直筒牛仔长裤；颜色：蓝色；材质：牛仔布；商品标题：春夏季新款时尚牛仔裤弹力宽松百搭直筒裤子男士韩版潮流直筒长裤",
+    "output": "商品大类：男装；细分类：男士直筒牛仔长裤；颜色：蓝色；材质：牛仔布"
+  },
+  {
+    "id": "tc_exp_077",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "随便推荐点东西",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"随便推荐点东西\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_045",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我搜浅灰色 短袖T恤",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"浅灰色 短袖T恤\", \"category\": \"女装\", \"top_k\": 3}}"
+  },
+  {
+    "id": "attribute_011",
+    "task": "attribute",
+    "item_id": "B000FUIYXA",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：烧烤工具套装；颜色：银色；材质：不锈钢；商品标题：Strathwood 锻造不锈钢 4 件装烧烤工具套装",
+    "output": "商品大类：厨房用品；细分类：烧烤工具套装；颜色：银色；材质：不锈钢"
+  },
+  {
+    "id": "tc_exp_059",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "厨房用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "我想找白色 电饭煲",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 电饭煲\", \"category\": \"厨房用品\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_076",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "帮我找找看",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"帮我找找看\", \"top_k\": 5}}"
+  },
+  {
+    "id": "attribute_028",
+    "task": "attribute",
+    "item_id": "muge_970911",
+    "category": "包",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：包；细分类：运动背包；颜色：蓝色、灰色；材质：；商品标题：运动背包跑步包",
+    "output": "商品大类：包；细分类：运动背包；颜色：蓝色、灰色；材质："
+  },
+  {
+    "id": "attribute_029",
+    "task": "attribute",
+    "item_id": "B001CGMKA4",
+    "category": "厨房用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：厨房用品；细分类：手动意面机；颜色：银色、棕色；材质：；商品标题：Pinzon 5-9-Inch 意面机",
+    "output": "商品大类：厨房用品；细分类：手动意面机；颜色：银色、棕色；材质："
+  },
+  {
+    "id": "tc_exp_033",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "运动服",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "白色 长袖卫衣 苏宁卫衣",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"白色 长袖卫衣 苏宁卫衣\", \"category\": \"运动服\", \"top_k\": 5}}"
+  },
+  {
+    "id": "tc_exp_028",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "男装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "蓝色 男士牛仔裤",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"蓝色 男士牛仔裤\", \"category\": \"男装\", \"top_k\": 8}}"
+  },
+  {
+    "id": "attribute_013",
+    "task": "attribute",
+    "item_id": "B074MR2C61",
+    "category": "家居用品",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：家居用品；细分类：迷你电暖器；颜色：白色；材质：陶瓷；商品标题：AmazonBasics 500瓦陶瓷小空间个人迷你取暖器 - 白色",
+    "output": "商品大类：家居用品；细分类：迷你电暖器；颜色：白色；材质：陶瓷"
+  },
+  {
+    "id": "attribute_027",
+    "task": "attribute",
+    "item_id": "12448386638",
+    "category": "鞋",
+    "instruction": "根据商品信息提取商品大类、细分类、颜色和材质，并生成标准商品描述。只输出模板描述。",
+    "input": "商品大类：鞋；细分类：跑步鞋；颜色：白色；材质：网面；商品标题：耐克(NIKE)男鞋新款运动鞋VOMERO 18缓震耐磨轻便透气公路跑步鞋 HM6803-009 ZP",
+    "output": "商品大类：鞋；细分类：跑步鞋；颜色：白色；材质：网面"
+  },
+  {
+    "id": "tc_exp_070",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "家居用品",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "黑色 相框多少钱",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"黑色 相框\", \"category\": \"家居用品\", \"top_k\": 3}}"
+  },
+  {
+    "id": "tc_exp_047",
+    "task": "tool_call",
+    "item_id": "",
+    "category": "女装",
+    "instruction": "把用户需求转换为白名单检索工具调用参数，只输出 JSON。",
+    "input": "找一下灰色 针织衫",
+    "output": "{\"tool\": \"text_search\", \"arguments\": {\"query\": \"灰色 针织衫\", \"category\": \"女装\", \"top_k\": 5}}"
+  }
+]

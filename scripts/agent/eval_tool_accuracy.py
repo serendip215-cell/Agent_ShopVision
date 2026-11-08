@@ -70,9 +70,13 @@ CASES: list[dict[str, Any]] = [
     {"id": 8, "input": "黑色运动长袖套装",
      "gold": {"tool": "text_search",
               "arguments": {"query": "黑色 运动长袖套装", "category": "运动服", "top_k": 5}}},
+    # #9 注意：T恤在库里男装/女装/运动服都有，标注单一类目会造成假失败。
+    # 用 category_accept 声明可接受集合，命中任一即算对（统计时仍记主类目）。
     {"id": 9, "input": "找一下白色T恤",
      "gold": {"tool": "text_search",
-              "arguments": {"query": "白色 T恤", "category": "女装", "top_k": 5}}},
+              "arguments": {"query": "白色 T恤", "category": "女装",
+                            "category_accept": ["女装", "男装", "运动服"],
+                            "top_k": 5}}},
     {"id": 10, "input": "随便看看有什么",
      "gold": {"tool": "text_search",
               "arguments": {"query": "随便看看有什么", "top_k": 5}}},
@@ -90,7 +94,14 @@ def score_one(pred: dict, gold: dict) -> tuple[bool, dict]:
     pa, ga = pred.get("arguments") or {}, gold.get("arguments") or {}
 
     query_ok = normalize_text(pa.get("query")) == normalize_text(ga.get("query"))
-    cat_ok = (pa.get("category") or "") == (ga.get("category") or "")
+    # category_accept：某些商品天然属于多个类目（如 T 恤男女装都有），
+    # 标注单一答案会造成假失败。命中集合里任一即算对。
+    accept = ga.get("category_accept") or []
+    pred_cat = pa.get("category") or ""
+    if accept:
+        cat_ok = pred_cat in accept
+    else:
+        cat_ok = pred_cat == (ga.get("category") or "")
     try:
         topk_ok = int(pa.get("top_k", 0)) == int(ga.get("top_k", 0))
     except (TypeError, ValueError):
