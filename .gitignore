@@ -26,6 +26,9 @@ __pycache__/
 # Chinese-CLIP 权重；图文检索索引需要纳入数据版本管理。
 /models/chinese_clip/
 
+# Agent 基座模型缓存（Qwen 等，体积较大，由 ModelScope/Hugging Face 重新下载）。
+/models/
+
 # 实验三产物（量化权重、ONNX、bench 结果），体积大且可由脚本重建。
 /data/optimize/
 
