@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-08T07:10:28.638985+00:00",
+  "source": "data/processed_data_cleaning",
+  "output": "data/agent/agent_finetune_data.json",
+  "seed": 42,
+  "record_count": 100,
+  "task_counts": {
+    "attribute": 60,
+    "intent": 25,
+    "tool_call": 15
+  },
+  "category_counts": {
+    "包": 12,
+    "厨房用品": 11,
+    "女装": 11,
+    "家居用品": 11,
+    "手机壳": 11,
+    "水杯": 11,
+    "男装": 11,
+    "运动服": 11,
+    "鞋": 11
+  },
+  "source_rows_available": 9393,
+  "sha256": "ef5351a1b8e0c8d1cd6e7b83c265dbb8c5b3ece6d4e37ca0307e8fac83357387"
+}
