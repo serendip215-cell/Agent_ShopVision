@@ -1,0 +1,20 @@
+{
+  "version": "v4",
+  "seed": 20261110,
+  "conversations": 549,
+  "train": 494,
+  "valid": 55,
+  "stats": {
+    "tool": 569,
+    "tool:text_search": 470,
+    "conversations": 549,
+    "turns": 1029,
+    "tool:image_search": 25,
+    "tool:list_categories": 12,
+    "tool:get_item_detail": 62,
+    "reply": 460
+  },
+  "source": "data/index_data_finetuned/*/items.csv",
+  "format": "multi-turn; tool result injected as user message with prefix 检索结果：",
+  "generated_at": "2026-11-08T18:15:51+00:00"
+}
