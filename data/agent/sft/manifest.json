@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source": "data/agent/agent_finetune_data.json",
+  "source_sha256": "ef5351a1b8e0c8d1cd6e7b83c265dbb8c5b3ece6d4e37ca0307e8fac83357387",
+  "split_strategy": "sha256(item_id)[:8] % 100 < valid_ratio*100",
+  "valid_ratio": 0.1,
+  "train_count": 89,
+  "valid_count": 11,
+  "train_task_counts": {
+    "attribute": 55,
+    "intent": 20,
+    "tool_call": 14
+  },
+  "valid_task_counts": {
+    "attribute": 5,
+    "intent": 5,
+    "tool_call": 1
+  },
+  "format": "openai-messages(user+assistant), no system prompt"
+}

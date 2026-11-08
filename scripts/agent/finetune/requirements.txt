@@ -1,0 +1,16 @@
+# 实验5 5.2 微调依赖（与 scripts/agent/requirements.txt 叠加）
+# 说明：本文件只补 5.2 训练侧缺的，基础四项 torch/transformers/peft/datasets 见上级目录
+torch>=2.5
+transformers>=4.46
+peft>=0.13
+datasets>=2.18
+accelerate>=0.34
+
+# SFTTrainer 来自 trl；0.16+ 改成了 SFTConfig，脚本已做版本兼容
+trl>=0.16
+
+# QLoRA 4-bit（仅 NVIDIA CUDA 卡可用；国产 DTK 异构加速卡不支持）
+bitsandbytes>=0.44
+
+sentencepiece
+safetensors
