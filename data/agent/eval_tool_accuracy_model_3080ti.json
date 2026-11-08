@@ -1,0 +1,269 @@
+{
+  "mode": "model",
+  "total": 10,
+  "hits": 1,
+  "accuracy": 0.1,
+  "target": 0.9,
+  "passed": false,
+  "details": [
+    {
+      "id": 1,
+      "input": "帮我找黑色木纹手机壳，5个",
+      "raw": "{\"name\":\"text_search\",\"arguments\":{\"query\":\"黑色木纹手机壳\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "黑色木纹手机壳",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "黑色 木纹手机壳",
+          "category": "手机壳",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 2,
+      "input": "我想找白色运动鞋",
+      "raw": "{\"tool\":\"text_search\",\"arguments\":{\"query\":\"白色运动鞋\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "白色运动鞋",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "白色 运动鞋",
+          "category": "鞋",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 3,
+      "input": "推荐3个蓝色运动水杯",
+      "raw": "{\"name\":\"text_search\",\"arguments\":{\"query\":\"推荐3个蓝色运动水杯\",\"top_k\":3}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "推荐3个蓝色运动水杯",
+          "top_k": 3
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "蓝色 运动水杯",
+          "category": "水杯",
+          "top_k": 3
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": false,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 4,
+      "input": "找卡其色立领夹克",
+      "raw": "{\"tool\":\"text_search\",\"arguments\":{\"query\":\"找卡其色立领夹克\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "找卡其色立领夹克",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "卡其色 立领夹克",
+          "category": "男装",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": false,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 5,
+      "input": "有没有灰色的双肩包",
+      "raw": "{\"tool\":\"text_search\",\"arguments\":{\"query\":\"有没有灰色的双肩包\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "有没有灰色的双肩包",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "灰色 双肩包",
+          "category": "包",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": false,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 6,
+      "input": "红色带盖炒锅",
+      "raw": "{\"tool\":\"text_search\",\"args\":{\"text\":\"红色带盖炒锅\"}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "红色带盖炒锅",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "红色 带盖炒锅",
+          "category": "厨房用品",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 7,
+      "input": "帮我搜透明玻璃杯，10个",
+      "raw": "{\"name\":\"text_search\",\"arguments\":{\"query\":\"透明玻璃杯\",\"top_k\":10}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "透明玻璃杯",
+          "top_k": 10
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "透明 玻璃杯",
+          "category": "水杯",
+          "top_k": 10
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 8,
+      "input": "黑色运动长袖套装",
+      "raw": "{\"tool\":\"text_search\",\"arguments\":{\"query\":\"黑色运动长袖套装\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "黑色运动长袖套装",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "黑色 运动长袖套装",
+          "category": "运动服",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 9,
+      "input": "找一下白色T恤",
+      "raw": "{\"name\":\"text_search\",\"arguments\":{\"query\":\"白色T恤\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "白色T恤",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "白色 T恤",
+          "category": "女装",
+          "top_k": 5
+        }
+      },
+      "hit": false,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": false,
+      "top_k_ok": true
+    },
+    {
+      "id": 10,
+      "input": "随便看看有什么",
+      "raw": "{\"name\":\"text_search\",\"arguments\":{\"query\":\"随便看看有什么\",\"top_k\":5}}",
+      "pred": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "随便看看有什么",
+          "top_k": 5
+        }
+      },
+      "gold": {
+        "tool": "text_search",
+        "arguments": {
+          "query": "随便看看有什么",
+          "top_k": 5
+        }
+      },
+      "hit": true,
+      "post_process": {},
+      "tool_ok": true,
+      "query_ok": true,
+      "category_ok": true,
+      "top_k_ok": true
+    }
+  ]
+}
