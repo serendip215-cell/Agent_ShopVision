@@ -10,8 +10,9 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import { sendAgentChat } from '../api/client'
-import { ItemRow } from '../components/result/Results'
+import { sendAgentChat, sendAgentImage } from '../api/client'
+import { DetailDrawer } from '../components/result/Results'
+import { ItemThumbRow } from '../components/result/ItemThumbRow'
 import { isCanceled } from '../utils/errors'
 import { EmptyState, SectionLabel } from '../components/common/Ui'
 
@@ -67,6 +68,10 @@ export default function AgentChat() {
   const [input, setInput] = useState('')
   const [pending, setPending] = useState(false)
   const [error, setError] = useState(null)
+  const [activeItem, setActiveItem] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
+  const [previewUrl, setPreviewUrl] = useState('')
+  const fileRef = useRef(null)
   const controllerRef = useRef(null)
   const idRef = useRef(0)
   const streamRef = useRef(null)
@@ -78,6 +83,21 @@ export default function AgentChat() {
   }, [messages, pending, error])
 
   useEffect(() => () => controllerRef.current?.abort(), [])
+
+  // 页面任意位置 Ctrl+V 都能贴图（焦点不在输入框也生效），与豆包一致
+  useEffect(() => {
+    function onWindowPaste(event) {
+      const items = Array.from(event.clipboardData?.items || [])
+      const imageItem = items.find((item) => String(item.type).startsWith('image/'))
+      if (!imageItem) return
+      const file = imageItem.getAsFile()
+      if (!file) return
+      event.preventDefault()
+      acceptFile(file)
+    }
+    window.addEventListener('paste', onWindowPaste)
+    return () => window.removeEventListener('paste', onWindowPaste)
+  }, [previewUrl])
 
   function pushMessage(message) {
     idRef.current += 1
@@ -128,10 +148,98 @@ export default function AgentChat() {
   }
 
   function submit() {
+    if (pending) return
+    if (imageFile) {
+      runImage()
+      return
+    }
     const text = input.trim()
-    if (!text || pending) return
+    if (!text) return
     setInput('')
     run(text)
+  }
+
+  function pickImage() {
+    fileRef.current?.click()
+  }
+
+  function acceptFile(file) {
+    if (!file) return
+    if (!String(file.type).startsWith('image/')) {
+      setError({ title: '文件类型不支持', message: '请选择 PNG / JPG / WEBP 图片。' })
+      return
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setError({ title: '图片过大', message: '上限 10 MB，压缩后再试。' })
+      return
+    }
+    if (previewUrl) URL.revokeObjectURL(previewUrl)
+    setImageFile(file)
+    setPreviewUrl(URL.createObjectURL(file))
+    setError(null)
+  }
+
+  function onPickImage(event) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    acceptFile(file)
+  }
+
+  // 直接 Ctrl+V 粘贴截图：由 window 级 paste 监听统一处理（见上面的 useEffect）
+
+  function handleDrop(event) {
+    event.preventDefault()
+    const file = event.dataTransfer?.files?.[0]
+    if (file) acceptFile(file)
+  }
+
+  function clearImage() {
+    if (previewUrl) URL.revokeObjectURL(previewUrl)
+    setImageFile(null)
+    setPreviewUrl('')
+  }
+
+  async function runImage() {
+    if (!imageFile || pending) return
+    controllerRef.current?.abort()
+    const controller = new AbortController()
+    controllerRef.current = controller
+
+    const text = input.trim()
+    pushMessage({ role: 'user', text: text || '（图片）', imageUrl: previewUrl })
+    setInput('')
+    setError(null)
+    setPending(true)
+
+    try {
+      const result = await sendAgentImage({ file: imageFile, message: text }, controller.signal)
+      const reply = typeof result?.reply === 'string' ? result.reply.trim() : ''
+      if (!reply) {
+        setError({
+          title: '返回内容不完整',
+          message: '接口已连通，但返回体里没有可展示的 reply 字段。',
+        })
+        return
+      }
+      pushMessage({
+        role: 'assistant',
+        text: reply,
+        thinking: readTraceText(result.thinking),
+        tools: readToolCalls(result.tool_calls),
+        items: Array.isArray(result.items) ? result.items : [],
+      })
+      // 不 revoke：消息里还要用这个预览地址展示用户上传的图
+      setImageFile(null)
+      setPreviewUrl('')
+    } catch (err) {
+      if (isCanceled(err)) return
+      setError({ ...describeAgentError(err) })
+    } finally {
+      if (controllerRef.current === controller) {
+        controllerRef.current = null
+        setPending(false)
+      }
+    }
   }
 
   function handleKeyDown(event) {
@@ -256,6 +364,9 @@ export default function AgentChat() {
                 <div className="sv-ag-bubble-wrap">
                   <span className="sv-ag-role">{message.role === 'user' ? '你' : '助手'}</span>
                   <div className={`sv-ag-bubble ${message.role === 'user' ? 'is-user' : 'is-assistant'}`}>
+                    {message.imageUrl && (
+                      <img className="sv-ag-bubble-img" src={message.imageUrl} alt="上传的图片" />
+                    )}
                     {message.text}
                   </div>
 
@@ -267,37 +378,26 @@ export default function AgentChat() {
                   )}
 
                   {message.tools?.length > 0 && (
-                    <div className="sv-ag-tools">
-                      <div className="sv-ag-tools-head">
-                        <ToolOutlined />
-                        工具调用
+                    <details className="sv-ag-trace">
+                      <summary>工具调用（{message.tools.length}）</summary>
+                      <div className="sv-ag-tools">
+                        {message.tools.map((call, index) => (
+                          <div key={`${message.id}-tool-${index}`} className="sv-ag-tool">
+                            <span className="sv-ag-tool-name">
+                              {String(call.name || call.tool || '未命名工具')}
+                            </span>
+                            {call.arguments != null && (
+                              <code className="sv-ag-tool-args">
+                                {JSON.stringify(call.arguments)}
+                              </code>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                      {message.tools.map((call, index) => (
-                        <div key={`${message.id}-tool-${index}`} className="sv-ag-tool">
-                          <span className="sv-ag-tool-name">
-                            {String(call.name || call.tool || '未命名工具')}
-                          </span>
-                          {call.arguments != null && (
-                            <code className="sv-ag-tool-args">
-                              {JSON.stringify(call.arguments)}
-                            </code>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                    </details>
                   )}
 
-                  {message.items?.length > 0 && (
-                    <div className="sv-item-grid" style={{ marginTop: 10 }}>
-                      {message.items.slice(0, 5).map((item, index) => (
-                        <ItemRow
-                          key={`${message.id}-item-${index}`}
-                          item={item}
-                          rank={index + 1}
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <ItemThumbRow items={message.items} onSelect={setActiveItem} />
                 </div>
               </div>
             ))}
@@ -342,23 +442,57 @@ export default function AgentChat() {
               event.preventDefault()
               submit()
             }}
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={handleDrop}
           >
+            {imageFile && (
+              <div className="sv-ag-attach">
+                <span className="sv-ag-attach-thumb">
+                  <img src={previewUrl} alt="待检索图片" />
+                  <button
+                    type="button"
+                    className="sv-ag-attach-remove"
+                    aria-label="移除图片"
+                    onClick={clearImage}
+                  >
+                    ×
+                  </button>
+                </span>
+                <span className="sv-ag-attach-info">
+                  已选 1 张图 · 可直接发送，或输入文字一起检索
+                </span>
+              </div>
+            )}
             <textarea
               className="sv-ag-input"
               value={input}
               onChange={(event) => setInput(event.target.value)}
               onKeyDown={handleKeyDown}
               rows={2}
-              placeholder="描述你的购物需求，例如「找一双白色运动鞋」"
+              placeholder={
+                imageFile
+                  ? '可选：补充一句描述（如「黑色的」「高帮」），会和图片一起检索'
+                  : '描述你的购物需求，例如「找一双白色运动鞋」'
+              }
               aria-label="输入导购需求"
             />
             <div className="sv-ag-composer-side">
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                hidden
+                onChange={onPickImage}
+              />
+              <Button icon={<PictureOutlined />} onClick={pickImage} disabled={pending}>
+                上传图片
+              </Button>
               <Button
                 type="primary"
                 htmlType="submit"
                 icon={<SendOutlined />}
                 loading={pending}
-                disabled={!input.trim() || pending}
+                disabled={(!input.trim() && !imageFile) || pending}
               >
                 发送
               </Button>
@@ -367,6 +501,12 @@ export default function AgentChat() {
           </form>
         </div>
       </section>
+
+      <DetailDrawer
+        item={activeItem}
+        open={!!activeItem}
+        onClose={() => setActiveItem(null)}
+      />
     </div>
   )
 }

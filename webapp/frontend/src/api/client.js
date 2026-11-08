@@ -102,6 +102,19 @@ export function sendAgentChat({ message }, signal) {
   return client.post('/agent/chat', { message }, { signal })
 }
 
+/**
+ * 以图搜图（可叠加文字融合）。
+ * 约定返回：{ reply, thinking?, tool_calls?, items?, category?, similarity? }
+ */
+export function sendAgentImage({ file, message = '', alpha = 0.6, topK = 5 }, signal) {
+  const form = new FormData()
+  form.append('file', file)
+  if (String(message || '').trim()) form.append('message', String(message).trim())
+  form.append('alpha', String(alpha))
+  form.append('top_k', String(topK))
+  return client.post('/agent/image', form, { signal })
+}
+
 // ---- 数据入库（未启用管理鉴权，仅本机演示） ----
 
 export function suggestAdminItem(file, signal) {
