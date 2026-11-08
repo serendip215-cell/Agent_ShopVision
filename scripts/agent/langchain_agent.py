@@ -96,9 +96,14 @@ if LANGCHAIN_AVAILABLE:
             category: 限定类目，可选。必须是：鞋/水杯/包/男装/运动服/女装/手机壳/厨房用品/家居用品
             top_k: 返回条数，默认 5，最大 20
         """
-        payload: dict[str, Any] = {"query": query, "top_k": max(1, min(int(top_k), 20))}
-        if category:
-            payload["category"] = category
+        from .intent_postprocessor import normalize_tool_call
+
+        _, payload, _ = normalize_tool_call(
+            "text_search",
+            {"query": query, "category": category, "top_k": top_k},
+            query,
+            max_top_k=20,
+        )
         result = _http_post("/api/v1/text", payload)
         if result.get("error"):
             return json.dumps({"error": result["error"]}, ensure_ascii=False)

@@ -106,6 +106,21 @@ class TextSearchToolTest(unittest.TestCase):
             la.text_search.invoke({"query": "鞋", "top_k": 999})
         self.assertLessEqual(captured["top_k"], 20)
 
+    def test_remote_tool_uses_shared_postprocessor(self):
+        if not la.LANGCHAIN_AVAILABLE:
+            self.skipTest("本机未安装 LangChain")
+        captured = {}
+
+        def fake_post(path, payload, timeout=30):
+            captured.update(payload)
+            return {"items": []}
+
+        with patch.object(la, "_http_post", side_effect=fake_post):
+            la.text_search.invoke({"query": "有没有灰色的双肩包", "top_k": 999})
+        self.assertEqual(captured["query"], "灰色双肩包")
+        self.assertEqual(captured["category"], "包")
+        self.assertEqual(captured["top_k"], 20)
+
 
 class RunOnceTest(unittest.TestCase):
     def test_structure_on_success(self):

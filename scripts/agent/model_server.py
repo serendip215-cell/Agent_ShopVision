@@ -43,6 +43,7 @@ BASE_MODEL_PATH = _resolve_path(
     os.getenv("SHOPVISION_BASE_MODEL", ""), DEFAULT_BASE_MODEL
 )
 ADAPTER_PATH = _resolve_path(os.getenv("SHOPVISION_ADAPTER", ""), DEFAULT_ADAPTER)
+TOOL_ALIASES = {"tool_search": "text_search"}
 
 app = FastAPI(title="ShopVision Fine-tuned Model Server", version="1.0.0")
 _tokenizer: Any = None
@@ -119,6 +120,7 @@ def _parse_json(raw: str) -> dict[str, Any] | None:
 
 def _tool_call_response(parsed: dict[str, Any]) -> dict[str, Any] | None:
     tool_name = parsed.get("tool") or parsed.get("name")
+    tool_name = TOOL_ALIASES.get(str(tool_name), tool_name)
     arguments = parsed.get("arguments") or parsed.get("args")
     if not tool_name or not isinstance(arguments, dict):
         return None

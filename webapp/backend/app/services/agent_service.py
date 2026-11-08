@@ -253,10 +253,12 @@ class AgentService:
         else:
             intent, thinking = rule_parse(text), ["规则模式（未接 LLM）"]
 
-        # 确定性后处理：洗掉指令词、按关键词补类目。
-        # 与 5.3 生产链路一致（评测里对应 --hybrid：纯模型 90% → 加后处理 100%）。
-        fill_arguments = _agent_module("category_map").fill_arguments
-        arguments, notes = fill_arguments(dict(intent.get("arguments") or {}), text)
+        # 统一后处理：本地模型和远程 LangChain 工具共用同一套规则。
+        normalize_tool_call = _agent_module("intent_postprocessor").normalize_tool_call
+        tool, arguments, notes = normalize_tool_call(
+            intent.get("tool"), intent.get("arguments"), text, max_top_k=50
+        )
+        intent["tool"] = tool
         intent["arguments"] = arguments
         if notes:
             thinking.append(f"后处理：{notes}")
