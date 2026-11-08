@@ -63,12 +63,12 @@ services/matching.py  MatchService   业务编排
 > 模型产物没到位之前（见下节「现状」），流程能走通但**结果是占位向量算的，无意义**；
 > 置信度、相似度这类数字等切到真 ONNX 再写进报告。
 
-## 一、现状（2026-11-01）
+## 一、现状（2026-11-08 更新）
 
 | 项 | 状态 |
 |---|---|
-| **后端** | ✅ 可跑。`backend/app/` 分层完成，同步三接口 + 异步任务（Celery）均已自检通过 |
-| **前端** | ✅ 三页已实现（React 19 + Antd），dev 代理 `/api`、`/item-images` 到后端 |
+| **后端** | ✅ 可跑。`backend/app/` 分层完成，同步三接口 + 异步任务（Celery）均已自检通过。**注：`/api/v1/agent/chat` 尚未实现**（属实验五 5.4） |
+| **前端** | ✅ **8 页已实现**（React 19 + Antd），dev 代理 `/api`、`/item-images` 到后端。含实验五对话导购页 `AgentChat.jsx`（路由 `/agent`），等后端接口 |
 | 模型产物（双塔 ONNX） | ✅ 已拉取到本地（`scripts/fetch_model_assets.py` 从 GitHub Release 下载并校验 sha256），`.env` 切 `onnx` 即用 |
 
 编码器是可替换接缝，`SHOPVISION_MODEL_BACKEND` 一行配置切换占位 / ONNX；接口形状不变。

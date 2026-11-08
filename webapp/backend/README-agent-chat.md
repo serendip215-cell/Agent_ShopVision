@@ -30,7 +30,7 @@
 | 后端现有路由 | 只有 `health / image / text / match` + `admin/*` + `tasks/*` | `app/api/v1.py`、`app/main.py` |
 | agent 路由 | **不存在** → 请求落到 404 | `app/main.py` 未 include agent router |
 | 可复用 Agent | `scripts/agent/tools.py`（`text_search`）、`agent.py`（`create_agent` / `run_intent`） | `scripts/agent/README.md`（5.3→5.4 交接） |
-| 待接的坑 | `scripts/agent/agent.py:_parse_intent` 仍是 `NotImplementedError`（等 5.2 微调模型） | 同上 |
+| ~~待接的坑~~ | ~~`_parse_intent` 仍是桩~~ → **已落地**：`scripts/agent/intent_parser.py` 已接 v2 微调模型，含工具名纠错与规则降级 | 已解除 |
 
 > 注：`scripts/agent/tools.py` 通过 HTTP 调本机 `/api/v1/text`，所以它要求「后端自己已经在 8000 端口跑着」。
 > 若在同一进程内实现，建议直接把 `MatchService.search_text` 包成工具（见 §5.1），避免自己请求自己。
@@ -247,7 +247,16 @@ export SHOPVISION_AGENT_ADAPTER=dist/lora_adapter
 **降级的 `thinking` 文案必须写明「规则模式（未接 LLM）」**，避免报告里把规则结果
 当成 LLM 能力——这条红线和原文一致，不放松。
 
-5.2 实测成绩：基座 12.88% → LoRA 75.76%（验证集 11 条，详见 `docs/实验五/03`）。
+5.2 实测成绩：基座 12.88% → LoRA v1 75.76%（验证集 11 条，详见 `docs/实验五/03`）。
+
+**5.3 工具调用准确率**（10 轮评测集，真跑推理）：
+
+| 版本 | 纯模型 | 加后处理 |
+|---|---:|---:|
+| v1（原数据） | 10% | 100% |
+| **v2（扩充重训）** | **90%** | **100%** |
+
+演示与报告用 **`dist/lora_adapter_v2/`**。详见 `docs/实验五/09`。
 
 ---
 

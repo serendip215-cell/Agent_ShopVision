@@ -1,12 +1,16 @@
 # scripts/agent/finetune — 实验5 5.2 模型选型与 LoRA 微调
 
+> **2026-11-08 22:15 修订**：原文写「在 SCNet 上训练」，**实际全部在 AutoDL 完成**
+> （SCNet 机时配额为 0，没用成）。本文已改为实际路径，并补上 v2 重训说明。
+
 > 对应任务书 5.2.1（选型与评估）与 5.2.2（LoRA 微调）。
 > 负责人：刘凡思雨。前置：5.1 的 `data/agent/agent_finetune_data.json`。
 > 选型结论与对比数据见 [`docs/实验五/02-基座选型与LoRA微调.md`](../../../docs/实验五/02-基座选型与LoRA微调.md)。
 
 ## 结论一句话
 
-基座用 **`Qwen/Qwen3-4B-Instruct-2507`**（4.02B，Apache-2.0），QLoRA 4-bit，SCNet 单卡 10–20 分钟、成本不到 ¥1。
+基座用 **`Qwen/Qwen3-4B-Instruct-2507`**（4.02B，Apache-2.0），QLoRA 4-bit。
+AutoDL 单卡数十秒到几分钟跑完，成本不到 ¥1（v1 实测 57.53 秒、约 ¥0.13）。
 
 方案文档点名的 DeepSeek-V4.1-Flash（763B）与 GLM-5.3（753B）是几百 B 的 MoE，全参与 LoRA 都超出本组资源，**不可行**。
 
@@ -17,26 +21,57 @@
 | `prepare_sft_data.py` | 5.1 的 instruction/input/output → OpenAI messages，按 `item_id` 哈希切 train/valid |
 | `train_lora.py` | SFTTrainer + peft QLoRA 训练入口，trl 新旧版本自适应 |
 | `eval_baseline_vs_lora.py` | 基座 vs LoRA 评测 + `--compare` 出对比表 |
-| `scnet_start.sh` | **SCNet「模型训练」启动脚本**，整段贴进控制台即可 |
+| `scnet_start.sh` / `scnet_platform_start.sh` | SCNet「模型训练」启动脚本（**当前未使用**，机时配额为 0；保留供未来） |
+| `build_tool_call_expanded.py` | **v2 数据生成**：tool_call 从 15 扩到 78 条，query 不含类目名 |
+| `make_upload_package.sh` | 生成 22KB 最小上传包（只含训练必需文件，不用传整个仓库） |
+| `_t_config.py` / `_t_locate.sh` / `_t_package.sh` | 配置与服务包的自检脚本 |
 | `_selfcheck.py` | 评分函数自检（不加载模型，纯逻辑，11 项） |
 | `requirements.txt` | 5.2 训练侧依赖（在上级 `requirements.txt` 基础上补 trl/bitsandbytes） |
 
-## 三步跑完
+## 实际走过的流程
+
+### v1（初始 100 条数据）
 
 ```bash
-# 1. 数据转换（本机已验证：train 89 / valid 11）
+# 1. 数据转换（train 89 / valid 11）
 python scripts/agent/finetune/prepare_sft_data.py
 
-# 2. 训练（SCNet 上；本地 4GB 显存跑不动）
-bash scripts/agent/finetune/scnet_start.sh
+# 2. 训练（AutoDL RTX 4090 48GB，57.53 秒）
+python scripts/agent/finetune/train_lora.py \
+    --model <模型本地路径> \
+    --train-file data/agent/sft/train.jsonl \
+    --valid-file data/agent/sft/valid.jsonl \
+    --output runs/5.2_lora --epochs 3
 
 # 3. 评测与对比
 python scripts/agent/finetune/eval_baseline_vs_lora.py --tag baseline
 python scripts/agent/finetune/eval_baseline_vs_lora.py \
-    --adapter data/agent/finetune/scnet_run1/final_adapter --tag lora
+    --adapter runs/5.2_lora/final_adapter --tag lora
 python scripts/agent/finetune/eval_baseline_vs_lora.py --compare \
     data/agent/finetune/eval_baseline.json data/agent/finetune/eval_lora.json
 ```
+
+### v2（扩充 163 条数据，纯模型 10% → 90%）
+
+```bash
+# 1. 生成扩充数据（tool_call 15 → 78，query 不含类目名）
+python scripts/agent/finetune/build_tool_call_expanded.py
+
+# 2. 转 SFT 格式（train 153 / valid 10）
+python scripts/agent/finetune/prepare_sft_data.py \
+    --src data/agent/agent_finetune_data_expanded.json \
+    --out-dir data/agent/sft_expanded
+
+# 3. 重训（AutoDL RTX 3080Ti 12GB，5 epoch）
+python scripts/agent/finetune/train_lora.py \
+    --model <模型本地路径> \
+    --train-file data/agent/sft_expanded/train.jsonl \
+    --valid-file data/agent/sft_expanded/valid.jsonl \
+    --output runs/5.2_lora_v2 --epochs 5
+```
+
+v2 的评测用 `scripts/agent/eval_tool_accuracy.py`（10 轮工具调用集），
+结果见 [`docs/实验五/09`](../../../docs/实验五/09-5.3优化实跑：扩充数据重训.md)。
 
 ## 验证
 
