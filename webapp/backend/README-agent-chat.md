@@ -1,5 +1,9 @@
 # 对话导购页（/agent）后端新增说明
 
+> **2026-11-08 更新**：5.2 微调模型与 5.3 Agent 已交付，本文 §4.1 / §5.1 / §5.2
+> 三节从「待定/选一条」改为「已实现」，其余章节（前端契约、错误码、自测）保持原样有效。
+> 实际交付能力见 `docs/实验五/05-5.3完成说明.md`。
+
 > 对应前端页面：`webapp/frontend/src/pages/AgentChat.jsx`（导航里的「对话导购」）。
 > 本文只说明**这个页面要跑起来，后端需要新增什么**，不含前端改动。
 > 依据是当前源码实读结果（2026-11-08），不是设想稿。
@@ -112,16 +116,34 @@ Content-Type: application/json
 
 ## 4 实现要点
 
-### 4.1 工具层：两条路，选一条
+### 4.1 工具层：已按方案 B 落地（2026-11-08 更新）
 
-| 方案 | 做法 | 优点 | 代价 |
-|---|---|---|---|
-| A（推荐，进程内） | 用 `Depends(get_match_service)` 取 `MatchService`，包一个本地 `text_search` 工具函数 | 无自请求、无端口依赖、延迟低（省一次 HTTP 往返） | 与 `scripts/agent/tools.py` 的 HTTP 版并存，需注明「同一契约、两份实现」 |
-| B（复用现成） | 直接 import `scripts.agent.tools.text_search` | 零新代码 | 后端必须自己在 8000 跑着；单测要 mock；多一层序列化 |
+**5.2 / 5.3 已交付，本节从「待定」改为「已实现」。**
 
-不管选哪条，`tool_calls[].arguments` 必须与 5.2 微调数据里模型学会的参数完全一致：
-`{"query": str, "category": str|None, "top_k": int}`，工具名固定 `text_search`。
-**`image_search` / `match` 不进 LLM 工具白名单**（5.2 没教过），要图搜就走前端已有的 `/image`、`/match` 页面。
+现成可用的入口（`scripts/agent/`）：
+
+| 入口 | 用途 | 是否需 GPU |
+|---|---|---|
+| `agent.run(user_input)` | 一站式：用户话 → 意图 → 工具 → 结果 | 是（首次加载 4B，约 8-10GB） |
+| `agent._parse_intent(text)` | 只做意图解析 `{tool, arguments}` | 是 |
+| `intent_parser.rule_parse(text)` | 规则降级（不加载模型） | 否 |
+| `langchain_agent.create_shopvision_agent(...)` | LangChain 版（任务书 5.3.1 要求） | 是 |
+| `conversation.ConversationStore` | 多轮槽位继承 | 否 |
+
+**采用方案 B（HTTP 复用）**，不用进程内 `MatchService`，理由：
+1. `scripts/agent/tools.py` 与 `langchain_agent.py` 已经实现并测过 HTTP 版（同一契约）
+2. 进程内耦合会让 `scripts/agent` 依赖 `webapp/backend` 的模块结构，破坏解耦
+3. 多一次 HTTP 往返在内网约 5-15ms，相对 4B 推理（数百 ms~2s）可忽略
+
+**代价接受方式**：后端自己在 8000 端口监听时 HTTP 自请求才成立；
+单测用 mock（`test_langchain_agent.py` 已有先例）。
+若要规避自请求，可把 `tools.py` 的 `API_BASE` 指向同进程的 TestClient。
+
+`tool_calls[].arguments` 与 5.2 微调数据严格一致：
+`{"query": str, "category": str|None, "top_k": int}`，工具名 `text_search`。
+**`image_search` / `match` 不进 LLM 工具白名单**（5.2 没教过），要图搜走前端 `/image`、`/match`。
+`langchain_agent.py` 里虽然定义了这两个 `@tool`，但 description 明确写了「占位，由 5.4 前端直调」，
+实际不会被模型选中。
 
 ### 4.2 配置（追加到 `Settings`，前缀沿用 `SHOPVISION_`）
 
@@ -170,24 +192,62 @@ agent_tool_top_k: int = 5
 
 ## 5 两个需要拍板的点
 
-### 5.1 多轮对话（前端目前不支持）
+### 5.1 多轮对话：后端能力已就绪，前端待接（2026-11-08 更新）
 
-前端每轮只发 `{message}`，历史只存在页面内存里，**后端拿不到上文**。两条路：
+**方案 B 的后端部分已经实现**：`scripts/agent/conversation.py` 的 `ConversationStore`。
 
-| 方案 | 后端 | 前端 | 适用 |
-|---|---|---|---|
-| **A 无状态单轮（建议先做）** | 只按当前 message 处理 | 零改动 | P0 答辩演示，能覆盖「说需求 → 出商品」 |
-| B 有状态多轮 | 收 `session_id`（+ 可选 `messages`），内存/Redis 存最近 N 轮 | 需加 `session_id` 字段与前端生成逻辑 | 任务书"多轮推理测试"要写进报告时再做 |
+能力（16 项单测覆盖）：
+- 槽位继承：先说「手机壳」，再说「黑色的」→ 自动带上类目
+- 换类目清空旧描述：「手机壳」→「运动鞋」时不会把「黑色」串过去
+- 「还有别的吗」/「换一批」：沿用上一轮全部条件
+- 按 `thread_id` 会话隔离 + TTL 自动过期
 
-建议：先按 A 上线，把 `AgentChatRequest` 里预留 `session_id: str | None = None`、`messages: list | None = None`（可选字段，前端不传也能用）。
-这样 B 期只改前端 + 后端读字段，不用改契约形状。
+**前端仍只发 `{message}`**，所以现在只能走单轮。接通多轮需要两处改动：
 
-### 5.2 意图解析谁来做
+```python
+# AgentChatRequest 加两个可选字段（前端不传也能用，向后兼容）
+session_id: str | None = None      # 前端生成，存 localStorage
+messages: list[dict] | None = None  # 可选：前端直接传历史
+```
 
-- 5.2 交付前：`_parse_intent` 仍是桩 → 用规则降级（关键词命中 9 个类目词 `鞋/水杯/包/男装/女装/运动服/手机壳/厨房用品/家居用品`，其余按 `text_search(query=原话)`）。
-- 5.2 交付后：把 LLM 调用塞进 `_parse_intent`，输出 `{tool, arguments}`，其余流程不变。
+```javascript
+// AgentChat.jsx 发请求处
+const sid = localStorage.getItem('agent_session') || crypto.randomUUID()
+localStorage.setItem('agent_session', sid)
+const result = await sendAgentChat({ message, session_id: sid }, controller.signal)
+```
 
-两种模式对外返回形状完全一致，只差 `thinking` 文案。
+**任务书 5.3.2 要求「单轮 + 多轮推理测试」**，多轮必须在报告里体现，
+所以这两处改动建议在 5.4 联调时一并做掉，不要留给"以后"。
+
+### 5.2 意图解析：已接 5.2 微调模型（2026-11-08 更新）
+
+**不再是待定项。** `scripts/agent/agent.py` 的 `_parse_intent` 已落地：
+
+```python
+from scripts.agent.agent import run
+result = run("帮我找黑色木纹手机壳，5个")
+```
+
+模型路径走环境变量，不写死：
+
+```bash
+export SHOPVISION_AGENT_MODEL=Qwen/Qwen3-4B-Instruct-2507
+export SHOPVISION_AGENT_ADAPTER=dist/lora_adapter
+```
+
+**三层保障，不会白屏**：
+
+| 层 | 触发条件 | 行为 |
+|---|---|---|
+| 1. 微调模型 | 正常情况 | 输出 `{tool, arguments}` |
+| 2. 工具名纠错 | 模型把 `text_search` 写成 `tool_search` 等 | 编辑距离对齐白名单（实测错例从 0 分修正到 1.00） |
+| 3. 规则降级 | 模型加载失败 / OOM / 推理超时 | `rule_parse()` 从原话抓类目和数量 |
+
+**降级的 `thinking` 文案必须写明「规则模式（未接 LLM）」**，避免报告里把规则结果
+当成 LLM 能力——这条红线和原文一致，不放松。
+
+5.2 实测成绩：基座 12.88% → LoRA 75.76%（验证集 11 条，详见 `docs/实验五/03`）。
 
 ---
 
@@ -265,10 +325,52 @@ cd webapp\backend
 
 | 文档 | 内容 |
 |---|---|
-| [`scripts/agent/README.md`](../../scripts/agent/README.md) | 5.3 产出与严格留 TODO：`_parse_intent` 必须等 5.2；image/match 不进 LLM 工具白名单 |
+| [`scripts/agent/README.md`](../../scripts/agent/README.md) | 5.3 产出说明。**注：原「`_parse_intent` 必须等 5.2」的限制已解除**（2026-11-08 落地），现由 `intent_parser.py` 实现 |
 | [`docs/方案与指南/实验五-对话式导购助手方案.md`](../../docs/方案与指南/实验五-对话式导购助手方案.md) | 范围、架构、红线、验收口径 |
 | [`docs/流程与交接/实验五流程与分工.md`](../../docs/流程与交接/实验五流程与分工.md) | 5.4.1 归王陆洲：`/agent/chat` + `404 ToolNotFound`；5.4.2 前端组件归张梓萱 |
 | [`webapp/API约定.md`](../API约定.md) | 统一返回体、错误码表、前端 Axios 约定 |
 
 > 本文与上述文档不冲突，只把「前端已经按什么契约在等」这一步补全：前端代码里冻结的形状是
 > `{ code, result: { reply, thinking?, tool_calls? } }`，后端照此返回即可，无需再讨论字段名。
+
+---
+
+## 9 附：5.3 已交付能力速查（2026-11-08）
+
+给写 `/api/v1/agent/chat` 的人直接照着用，不用再翻 `scripts/agent/`。
+
+```python
+# 一站式：用户话 -> 意图 -> 工具 -> 结果（需 GPU，首次加载 4B 约 8-10GB）
+from scripts.agent.agent import run
+result = run("帮我找黑色木纹手机壳，5个")
+# {"ok": True, "tool": "text_search", "arguments": {...}, "result": {"items": [...]}}
+
+# 多轮：槽位继承（不需要 GPU）
+from scripts.agent.conversation import ConversationStore
+store = ConversationStore()
+r1 = store.chat("session-1", "我想找手机壳", executor=...)   # executor 传你的工具调用函数
+r2 = store.chat("session-1", "黑色的")                        # 自动继承 category=手机壳
+r2["slots"]   # {"category": "手机壳", "query": "黑色", "top_k": 5}
+
+# LangChain 版（任务书 5.3.1 要求，需 GPU + 已起 OpenAI 兼容服务）
+from scripts.agent.langchain_agent import create_shopvision_agent, run_once
+agent = create_shopvision_agent(base_url="http://localhost:8000/v1", model="qwen3-4b-shopvision")
+r = run_once(agent, "找白色运动鞋", thread_id="session-1")
+
+# 规则降级（不需要 GPU，永远可用）
+from scripts.agent.intent_parser import rule_parse
+rule_parse("找3个蓝色水杯")
+# {"tool": "text_search", "arguments": {"query": "蓝色水杯", "top_k": 3, "category": "水杯"}}
+# 已实测：指令词「找/帮我找/推荐/有没有」等会被剔除，只留描述词
+```
+
+**准确的 `thinking` 文案建议**（前端要展开显示）：
+
+| 场景 | thinking 内容 |
+|---|---|
+| 微调模型命中 | `["识别意图：text_search", "调用工具：text_search(query=白色运动鞋)"]` |
+| 工具名被纠错 | 追加一条 `["注意：工具名 tool_search 已纠错为 text_search"]` |
+| 规则降级 | `["规则模式（未接 LLM）：按关键词匹配类目", "调用工具：text_search(...)"]` |
+
+**注意**：`scripts/agent/conversation.py` 里的 `_compose_reply()` 已经能生成
+「找到 N 件商品，例如：xxx」这类模板回复，可直接复用，不必重写。
