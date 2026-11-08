@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import logging
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -19,8 +20,9 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from .api import admin, tasks, v1
+from .api import admin, agent, tasks, v1
 from .config import get_settings
+from .deps import get_agent_service
 from .errors import ApiError, ErrorCode
 from .schemas import ApiResponse
 
@@ -45,6 +47,7 @@ _TAGS_META = [
     {"name": "文本检索页", "description": "对应前端「文本检索」页面"},
     {"name": "多模态匹配页", "description": "对应前端「多模态匹配」页面"},
     {"name": "数据入库", "description": "上传商品到已有/新类别，或新建空类别（未启用鉴权）"},
+    {"name": "对话导购页", "description": "一句话需求 → 意图解析 → 检索 → 模板回复（对应前端「对话导购」页面）"},
 ]
 
 
@@ -87,6 +90,19 @@ def _register_handlers(app: FastAPI) -> None:
         return _body(ErrorCode.INTERNAL_ERROR)
 
 
+@asynccontextmanager
+async def _lifespan(_: FastAPI):
+    """启动时后台预热 4B 意图模型；失败只记日志，服务照常可用（走规则降级）。
+
+    放在 lifespan 而不是 create_app，是为了让 TestClient(app) 的测试不触发 8GB 模型加载。
+    """
+    try:
+        get_agent_service().warmup()
+    except Exception as exc:  # noqa: BLE001 - 预热失败不影响其它接口
+        logger.warning("agent 模型预热启动失败：%s", exc)
+    yield
+
+
 def create_app() -> FastAPI:
     settings = get_settings()
     app = FastAPI(
@@ -94,6 +110,7 @@ def create_app() -> FastAPI:
         version="0.1.0",
         description=_DESCRIPTION,
         openapi_tags=_TAGS_META,
+        lifespan=_lifespan,
     )
     app.add_middleware(
         CORSMiddleware,
@@ -105,6 +122,7 @@ def create_app() -> FastAPI:
     app.include_router(v1.router)
     app.include_router(tasks.router)
     app.include_router(admin.router)
+    app.include_router(agent.router)
     logger.warning("管理入库接口未启用鉴权：仅限本机演示，不要暴露到公网。")
     _register_handlers(app)
 

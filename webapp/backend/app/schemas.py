@@ -277,3 +277,42 @@ class TaskSubmitResponse(ApiResponse):
 
 class TaskStatusResponse(ApiResponse):
     result: TaskStatusResult | None = None
+
+
+# ---------- 对话导购（Agent）：/api/v1/agent/chat ----------
+
+
+class AgentChatRequest(BaseModel):
+    message: str = Field(
+        min_length=1,
+        max_length=500,
+        description="用户一句话需求",
+        examples=["找一双白色运动鞋"],
+    )
+    session_id: str | None = Field(
+        default=None,
+        max_length=64,
+        description="多轮会话 ID；可留空（后端 ConversationStore 已支持，前端暂未传）",
+    )
+
+
+class AgentToolCall(BaseModel):
+    name: str = Field(description="工具名，当前白名单只有 text_search")
+    arguments: dict[str, Any] = Field(default_factory=dict, description="工具实参")
+
+
+class AgentChatResult(BaseModel):
+    reply: str = Field(description="助手回复（模板拼装，商品信息全部来自检索结果）")
+    thinking: list[str] = Field(
+        default_factory=list, description="思考过程，前端折叠展示"
+    )
+    tool_calls: list[AgentToolCall] = Field(
+        default_factory=list, description="本轮调用过的工具（名称 + 参数）"
+    )
+    items: list[MatchedItem] = Field(
+        default_factory=list, description="检索命中的商品；前端当前忽略，供后续商品卡片使用"
+    )
+
+
+class AgentChatResponse(ApiResponse):
+    result: AgentChatResult | None = None

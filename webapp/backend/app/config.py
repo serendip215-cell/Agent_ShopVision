@@ -42,6 +42,16 @@ class Settings(BaseSettings):
     celery_result_expires: int = 3600  # 任务结果保留秒数
     async_batch_max_files: int = 12  # 单次批量任务的文件数上限
 
+    # 对话导购（Agent / 5.4）：意图解析复用 5.3 的 scripts/agent（Qwen3-4B + LoRA）。
+    agent_model: str = ""  # 空 = 自动用 models/models/Qwen--Qwen3-4B-Instruct-2507/snapshots/master
+    agent_adapter: str = ""  # 空 = 自动用 dist/lora_adapter_v2
+    agent_no_4bit: bool = False  # true 时不量化（显存不足别开）
+    agent_max_new_tokens: int = 128  # 意图 JSON 很短，128 足够
+    agent_warmup: bool = True  # 启动时后台加载模型；false = 只走规则模式
+    agent_max_message_len: int = 500  # 与前端契约一致
+    agent_retry_times: int = 3  # 工具调用失败重试次数（任务书要求 3 次重试 + 日志）
+    agent_tool_top_k: int = 5  # 未指定 top_k 时的默认值
+
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 
     def repo_path(self, value: str) -> Path:

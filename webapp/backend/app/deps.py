@@ -9,6 +9,7 @@ from __future__ import annotations
 from functools import lru_cache
 
 from .config import get_settings
+from .services.agent_service import AgentService
 from .services.encoder import Encoder, build_encoder
 from .services.index_store import IndexStore
 from .services.matching import MatchService
@@ -46,3 +47,9 @@ def get_index() -> IndexStore:
 
 def get_match_service() -> MatchService:
     return MatchService(get_encoder(), get_index())
+
+
+@lru_cache(maxsize=1)
+def get_agent_service() -> AgentService:
+    """对话导购单例：持有意图模型（后台预热）与工具调用逻辑。"""
+    return AgentService(get_settings())

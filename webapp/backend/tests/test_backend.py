@@ -921,7 +921,7 @@ class OpenApiTest(unittest.TestCase):
     def setUp(self) -> None:
         self.schema = app.openapi()
 
-    def test_declares_the_nine_endpoints(self) -> None:
+    def test_declares_the_ten_endpoints(self) -> None:
         self.assertEqual(
             set(self.schema["paths"]),
             {
@@ -934,6 +934,7 @@ class OpenApiTest(unittest.TestCase):
                 "/api/v1/tasks/image",
                 "/api/v1/tasks/batch",
                 "/api/v1/tasks/{task_id}",
+                "/api/v1/agent/chat",
             },
         )
 
