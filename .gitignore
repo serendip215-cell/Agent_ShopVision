@@ -76,4 +76,6 @@ webapp/backend/celery-worker*.log
 !/dist/lora_adapter_v2/**
 !/dist/lora_adapter_v3/
 !/dist/lora_adapter_v3/**
+!/dist/lora_adapter_v4/
+!/dist/lora_adapter_v4/**
 !/dist/lora_adapter_v2/**

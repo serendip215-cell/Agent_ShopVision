@@ -1,0 +1,23 @@
+{
+  "model": "/root/models/models/Qwen--Qwen3-4B-Instruct-2507/snapshots/master",
+  "train_file": "data/agent/sft_v4/train.jsonl",
+  "valid_file": "data/agent/sft_v4/valid.jsonl",
+  "output": "/root/runs/5.2_lora_v4",
+  "no_4bit": false,
+  "epochs": 3.0,
+  "batch_size": 4,
+  "grad_accum": 4,
+  "lr": 0.0001,
+  "max_seq_len": 2048,
+  "warmup_ratio": 0.1,
+  "seed": 42,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "logging_steps": 5,
+  "save_steps": 0,
+  "quantized_4bit": true,
+  "train_count": 494,
+  "valid_count": 55,
+  "torch": "2.12.1+cu130"
+}
