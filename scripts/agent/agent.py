@@ -5,17 +5,18 @@
     - run()：照标准流程「意图匹配工具 → 调工具 → 返回结果」跑一轮
     - 纯意图 dict 输入即可跑通，可用于工具链路 / 准确率统计测试
 
-5.3 严格留 TODO（依赖 5.2 微调模型，未交付前不写实现）：
-    - _parse_intent()：把用户自然语言解析为 {"tool", "arguments"} 结构化意图
-      ——这一步要接 5.2 微调后的 LLM（模型学会输出 text_search 调用格式）。
-      未接前，run() 的入参直接给结构化意图 dict 占位。
+5.2 交付后已补上（见 scripts/agent/intent_parser.py）：
+    - _parse_intent()：用户话 → {"tool", "arguments"}，走 Qwen3-4B LoRA 微调模型；
+      工具名走白名单编辑距离纠错（修 text_search 被写成 tool_search 的实测问题）；
+      模型不可用时自动降级到规则解析，前端永远有响应。
+仍待补：
     - 多轮对话的槽位继承/记忆（见方案 §9 待定）
-    - 无 LLM 时的规则降级解析（若组内决定在 5.3 提前做，另行补）
 """
 
 from __future__ import annotations
 
 import logging
+import os
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
@@ -33,8 +34,8 @@ class Agent:
     def run_intent(self, intent: dict[str, Any]) -> dict[str, Any]:
         """给定结构化意图 {"tool": <名>, "arguments": {...}} 执行一轮。
 
-        TODO(5.2)：真实路径里 intent 由 LLM 从用户话解析得到（_parse_intent）；
-        这里直接接收 intent，用于 5.3 的工具链路测试与准确率统计。
+        正常路径下 intent 由 _parse_intent 从用户话解析得到；
+        这里直接接收 intent，也用于单测与准确率统计。
         """
         name = intent.get("tool") or intent.get("intent")
         args = intent.get("arguments") or {}
@@ -50,12 +51,30 @@ class Agent:
                     "reason": f"工具参数异常：{e}"}
 
 
-# TODO(5.2)：接微调后的 LLM。当前桩：接受结构化意图 dict（或能转成 dict 的对象）。
+# 5.2 已交付：意图解析走微调模型，模型不可用时自动降级规则解析。
+# 模型路径由环境变量提供，避免把权重路径写死进代码。
+DEFAULT_MODEL = os.environ.get("SHOPVISION_AGENT_MODEL", "Qwen/Qwen3-4B-Instruct-2507")
+DEFAULT_ADAPTER = os.environ.get("SHOPVISION_AGENT_ADAPTER") or None
+
+_parser = None
+
+
+def _get_parser():
+    """懒加载单例，避免每次调用都重新载入 4B 权重。"""
+    global _parser
+    if _parser is None:
+        from .intent_parser import IntentParser
+
+        _parser = IntentParser(DEFAULT_MODEL, DEFAULT_ADAPTER)
+    return _parser
+
+
 def _parse_intent(user_input: str) -> dict[str, Any]:
-    raise NotImplementedError(
-        "5.2 微调模型未交付：意图解析(用户话→{tool,arguments})尚未接入。"
-        "5.3 阶段请直接调用 agent.run_intent(intent) 测试工具链路。"
-    )
+    """用户话 → 结构化意图 {tool, arguments}。
+
+    走 5.2 微调模型；模型加载或推理失败时自动降级到规则解析，前端永远有响应。
+    """
+    return _get_parser().parse(user_input)
 
 
 def create_agent() -> Agent:
@@ -68,8 +87,7 @@ def create_agent() -> Agent:
 def run(user_input: str) -> dict[str, Any]:
     """注入入口：用户话 → 意图 → 工具 → 结果。
 
-    TODO(5.2)：接 _parse_intent 后启用真意图解析；当前桩直接抛 NotImplementedError，
-    run() 在 5.2 交付后才会被 5.4 的 /chat 接口调用。
+    5.4 的 /api/v1/agent/chat 接口调用此入口。
     """
     agent = create_agent()
     intent = _parse_intent(user_input)  # 5.2 后真实接入
