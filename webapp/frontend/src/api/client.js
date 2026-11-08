@@ -91,6 +91,17 @@ export function matchImageText({ file, text, topK = 5 }, signal) {
   return client.post('/match', form, { signal })
 }
 
+// ---- 实验五：对话式导购（后端路由由 5.4 实现，未上线时这里会拿到 404 / NETWORK） ----
+
+/**
+ * 发送一条导购对话。
+ * 约定返回：{ reply: string, thinking?: string | string[], tool_calls?: Array<{ name, arguments }> }
+ * 未上线的接口或不可达的服务会抛 AppError，由页面如实提示，不做兜底回复。
+ */
+export function sendAgentChat({ message }, signal) {
+  return client.post('/agent/chat', { message }, { signal })
+}
+
 // ---- 数据入库（未启用管理鉴权，仅本机演示） ----
 
 export function suggestAdminItem(file, signal) {

@@ -11,6 +11,7 @@ import {
   MenuOutlined,
   PictureOutlined,
   ReloadOutlined,
+  RobotOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
 import { useApp } from '../../context/AppContext'
@@ -21,6 +22,7 @@ const NAV = [
   { to: '/image', label: '图像分类', icon: <PictureOutlined /> },
   { to: '/text', label: '文本检索', icon: <FileSearchOutlined /> },
   { to: '/match', label: '图文匹配', icon: <BlockOutlined /> },
+  { to: '/agent', label: '对话导购', icon: <RobotOutlined /> },
   { to: '/admin', label: '商品入库', icon: <CloudUploadOutlined /> },
   { to: '/history', label: '运行记录', icon: <HistoryOutlined /> },
   { to: '/status', label: '系统状态', icon: <DashboardOutlined /> },
