@@ -5,3 +5,9 @@ peft>=0.10
 datasets>=2.18
 sentencepiece
 safetensors
+
+# 5.3 LangChain 集成（任务书要求 LangChain>=1.0）
+langchain>=1.0
+langchain-core>=1.0
+langchain-openai>=1.0
+langgraph>=1.0

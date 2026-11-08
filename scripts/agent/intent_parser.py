@@ -115,8 +115,11 @@ def rule_parse(user_input: str) -> dict[str, Any]:
 
     # 去掉指令性词缀，留检索词
     query = text
-    for noise in ["帮我找", "帮我搜", "我想找", "想找", "搜索", "找一下", "推荐", "一下", "吧", "，", ","]:
+    for noise in ["帮我找", "帮我搜", "我想找", "想找", "搜索", "找一下", "推荐",
+                  "有没有", "随便看看", "看看", "一下", "吧", "呢", "，", ","]:
         query = query.replace(noise, " ")
+    # 去掉数量词（"5个" / "3件"），它属于 top_k 不属于 query
+    query = re.sub(r"\d+\s*(?:个|件|条|款)", " ", query)
     query = re.sub(r"\s+", " ", query).strip() or text
 
     args: dict[str, Any] = {"query": query, "top_k": top_k}

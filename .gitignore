@@ -64,3 +64,6 @@ webapp/backend/celery-worker*.log
 /data/agent/finetune/
 # SCNet 最小上传包（由 make_upload_package.sh 生成，可重建，不入库）。
 /dist/
+
+# 实验五 5.3 评测产物（可重跑生成，不入库）。
+/data/agent/eval_tool_accuracy_*.json
