@@ -239,7 +239,9 @@ def main() -> None:
             )
         return {"text": text}
 
-    ds = ds.map(render, remove_columns=["messages", "meta"])
+    # 只移除实际存在的列（v2 数据带 meta，v3 数据只有 messages）
+    drop_cols = [c for c in ("messages", "meta") if c in ds["train"].column_names]
+    ds = ds.map(render, remove_columns=drop_cols)
     print(f"[info] train {len(ds['train'])} 条 / valid {len(ds['valid'])} 条")
     print("[info] 样例渲染结果：\n" + ds["train"][0]["text"])
 

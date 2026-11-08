@@ -74,3 +74,6 @@ webapp/backend/celery-worker*.log
 # v2 适配器（扩充数据重训版，2026-11-08），同样入库供组员直接使用
 !/dist/lora_adapter_v2/
 !/dist/lora_adapter_v2/**
+!/dist/lora_adapter_v3/
+!/dist/lora_adapter_v3/**
+!/dist/lora_adapter_v2/**
