@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { sendAgentChat } from '../api/client'
+import { ItemRow } from '../components/result/Results'
 import { isCanceled } from '../utils/errors'
 import { EmptyState, SectionLabel } from '../components/common/Ui'
 
@@ -113,6 +114,7 @@ export default function AgentChat() {
         text: reply,
         thinking: readTraceText(result.thinking),
         tools: readToolCalls(result.tool_calls),
+        items: Array.isArray(result.items) ? result.items : [],
       })
     } catch (err) {
       if (isCanceled(err)) return
@@ -281,6 +283,18 @@ export default function AgentChat() {
                             </code>
                           )}
                         </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {message.items?.length > 0 && (
+                    <div className="sv-item-grid" style={{ marginTop: 10 }}>
+                      {message.items.slice(0, 5).map((item, index) => (
+                        <ItemRow
+                          key={`${message.id}-item-${index}`}
+                          item={item}
+                          rank={index + 1}
+                        />
                       ))}
                     </div>
                   )}
