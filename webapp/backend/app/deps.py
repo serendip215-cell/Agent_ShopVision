@@ -51,5 +51,5 @@ def get_match_service() -> MatchService:
 
 @lru_cache(maxsize=1)
 def get_agent_service() -> AgentService:
-    """对话导购单例：持有意图模型（后台预热）与工具调用逻辑。"""
-    return AgentService(get_settings())
+    """对话导购单例：意图模型（后台预热）+ 工具调用 + 图搜（复用 MatchService）。"""
+    return AgentService(get_settings(), match_service=get_match_service())

@@ -316,3 +316,22 @@ class AgentChatResult(BaseModel):
 
 class AgentChatResponse(ApiResponse):
     result: AgentChatResult | None = None
+
+
+class AgentImageResult(BaseModel):
+    """以图搜图（可叠加文字融合）的结果。"""
+
+    reply: str = Field(description="助手回复（模板拼装，商品信息来自检索结果）")
+    thinking: list[str] = Field(default_factory=list, description="编码与检索过程")
+    tool_calls: list[AgentToolCall] = Field(
+        default_factory=list, description="图搜不走 LLM 工具调用，固定为空"
+    )
+    items: list[MatchedItem] = Field(default_factory=list, description="相似商品，按相似度降序")
+    category: str | None = Field(default=None, description="查询向量判出的类别")
+    similarity: float | None = Field(
+        default=None, description="查询向量与该类别最高相似度（余弦，非概率）"
+    )
+
+
+class AgentImageResponse(ApiResponse):
+    result: AgentImageResult | None = None

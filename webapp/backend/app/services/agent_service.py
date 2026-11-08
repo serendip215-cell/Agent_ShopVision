@@ -54,9 +54,15 @@ def _default_search(**kwargs: Any) -> dict[str, Any]:
 class AgentService:
     """进程内单例：持有意图模型、工具调用与模板回复。"""
 
-    def __init__(self, settings: Settings, search_fn: Callable[..., dict] | None = None) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        search_fn: Callable[..., dict] | None = None,
+        match_service: Any | None = None,
+    ) -> None:
         self.settings = settings
         self._search = search_fn or _default_search
+        self._match = match_service
         self._parser = None
         self._state = "cold"  # cold | loading | ready | failed
         self._reason = ""
@@ -143,6 +149,87 @@ class AgentService:
             "tool_calls": [{"name": intent["tool"], "arguments": arguments}],
             "items": items[: arguments["top_k"]],
         }
+
+    # ---------- 以图搜图（图 + 可选文字融合） ----------
+
+    def search_by_image(
+        self,
+        image: Any,
+        message: str = "",
+        alpha: float = 0.6,
+        top_k: int = 5,
+    ) -> dict[str, Any]:
+        """图片 -> 相似商品；message 非空时按 α 融合图像/文本向量再检索。"""
+        if self._match is None:
+            raise ApiError(ErrorCode.MODEL_UNAVAILABLE, "检索服务未装配（match_service 为空）")
+        encoder = self._match.encoder
+        index = self._match.index
+        if not encoder.model_loaded:
+            raise ApiError(
+                ErrorCode.MODEL_UNAVAILABLE,
+                "当前是占位编码器，图搜结果无意义；请切换 SHOPVISION_MODEL_BACKEND=onnx",
+            )
+
+        text = (message or "").strip()[:200]
+        v_img = encoder.encode_image(image)
+        thinking = ["图像塔编码：visual 塔 → 512 维"]
+        vector = v_img
+
+        if text:
+            alpha = max(0.0, min(float(alpha), 1.0))
+            v_txt = encoder.encode_text(text)
+            vector = self._unit(alpha * v_img + (1.0 - alpha) * v_txt)
+            thinking.append(f"文本塔编码：text 塔（{text}）")
+            thinking.append(f"向量融合：α={alpha:.2f}（图像 {alpha:.0%} / 文字 {1 - alpha:.0%}）")
+
+        category, score, _ = index.best_category(vector)
+        hits = index.search(vector, top_k=top_k)
+        items = [hit.as_dict() for hit in hits]
+        thinking.append(f"检索：{len(index.categories)} 类索引，命中 {len(items)} 条")
+
+        return {
+            "reply": self._compose_image_reply(category, items, bool(text)),
+            "thinking": thinking,
+            "tool_calls": [
+                {
+                    "name": "image_search",
+                    "arguments": {
+                        "alpha": round(float(alpha), 2),
+                        "top_k": top_k,
+                        **({"message": text} if text else {}),
+                    },
+                }
+            ],
+            "items": items,
+            "category": category,
+            "similarity": round(float(score), 4) if score else None,
+        }
+
+    @staticmethod
+    def _unit(vector: Any) -> Any:
+        """L2 归一化（融合后的向量必须重新归一化，余弦才等价于点积）。"""
+        import numpy as np
+
+        array = np.asarray(vector, dtype="float32").reshape(-1)
+        return array / (np.linalg.norm(array) + 1e-12)
+
+    def _compose_image_reply(
+        self, category: str | None, items: list[dict], fused: bool
+    ) -> str:
+        if not items:
+            return "这张图没检索到相近商品，换一张更清晰的正视图再试。"
+        kind = "图 + 文" if fused else "这张图"
+        head = f"{kind}看起来属于「{category or '未知类别'}」，找到 {len(items)} 件相似商品："
+        lines = [head]
+        for position, item in enumerate(items[:3], start=1):
+            name = item.get("item_name") or "未命名商品"
+            similarity = item.get("similarity")
+            try:
+                score = f"，相似度 {float(similarity):.2f}"
+            except (TypeError, ValueError):
+                score = ""
+            lines.append(f"{position}. {name}{score}")
+        return "\n".join(lines)
 
     # ---------- 内部步骤 ----------
 

@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+import base64
 import os
 
 # 必须在导入 app.* 之前设置：本文件按字母序先于 test_backend 加载，
@@ -49,6 +50,29 @@ class _FakeService:
 class _BoomService:
     def chat(self, message: str) -> dict:
         raise ApiError(ErrorCode.BAD_REQUEST, "请输入想找的商品")
+
+
+# 1×1 透明 PNG：只用于过 _open_image 的格式校验
+_PNG_1PX = base64.b64decode(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+)
+
+
+class _FakeImageService:
+    """图搜接口用的假服务：不加载模型、不碰索引。"""
+
+    def search_by_image(self, image, message="", alpha=0.6, top_k=5) -> dict:
+        return {
+            "reply": "这张图看起来属于「鞋」，找到 2 件相似商品：\n1. 白色运动鞋",
+            "thinking": ["图像塔编码：visual 塔 → 512 维", "检索：9 类索引，命中 2 条"],
+            "tool_calls": [],
+            "items": [
+                {"category": "鞋", "item_name": "白色运动鞋", "similarity": 0.52},
+                {"category": "鞋", "item_name": "小白鞋", "similarity": 0.48},
+            ],
+            "category": "鞋",
+            "similarity": 0.52,
+        }
 
 
 class AgentChatRouteTest(unittest.TestCase):
@@ -148,6 +172,40 @@ class AgentServiceTest(unittest.TestCase):
         self.assertEqual(cleaned["query"], "白色运动鞋")
         self.assertEqual(cleaned["top_k"], 50)
         self.assertNotIn("category", cleaned)
+
+
+class AgentImageRouteTest(unittest.TestCase):
+    """图搜接口：成功路径用假服务；格式校验走真实的 _open_image。"""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.client = TestClient(app, raise_server_exceptions=False)
+
+    def tearDown(self) -> None:
+        app.dependency_overrides.clear()
+
+    def test_image_search_returns_items(self) -> None:
+        app.dependency_overrides[get_agent_service] = _FakeImageService
+        resp = self.client.post(
+            "/api/v1/agent/image",
+            files={"file": ("shoe.png", _PNG_1PX, "image/png")},
+            data={"message": "", "alpha": "0.6", "top_k": "5"},
+        )
+        body = resp.json()
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(body["code"], 0)
+        self.assertTrue(body["result"]["reply"].strip())
+        self.assertEqual(body["result"]["category"], "鞋")
+        self.assertEqual(len(body["result"]["items"]), 2)
+
+    def test_non_image_is_invalid_image_error(self) -> None:
+        app.dependency_overrides[get_agent_service] = _FakeImageService
+        resp = self.client.post(
+            "/api/v1/agent/image",
+            files={"file": ("fake.png", b"not-an-image", "image/png")},
+        )
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.json()["code"], 40001)
 
 
 if __name__ == "__main__":
