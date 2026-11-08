@@ -6647,6 +6647,14 @@ a {
   letter-spacing: 0.04em;
 }
 
+/* v4 的工具调用过渡语（“我先帮你找找”），一行灰字，不抢正文 */
+.sv-ag-say {
+  padding: 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .sv-ag-bubble {
   padding: 12px 16px;
   border: 1px solid var(--border);

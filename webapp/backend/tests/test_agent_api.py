@@ -38,7 +38,7 @@ class _FakeService:
     def __init__(self, reply: str = "在「鞋」里找到 1 件相近商品，最接近的是：\n1. 白色运动鞋") -> None:
         self.reply = reply
 
-    def chat(self, message: str) -> dict:
+    def chat(self, message: str, session_id: str | None = None) -> dict:
         return {
             "reply": self.reply,
             "thinking": ["规则模式（未接 LLM）", "调用工具：text_search(query=白色运动鞋, top_k=5)"],
@@ -46,9 +46,12 @@ class _FakeService:
             "items": [],
         }
 
+    def drop_session(self, session_id: str | None) -> bool:
+        return bool(session_id)
+
 
 class _BoomService:
-    def chat(self, message: str) -> dict:
+    def chat(self, message: str, session_id: str | None = None) -> dict:
         raise ApiError(ErrorCode.BAD_REQUEST, "请输入想找的商品")
 
 
@@ -58,10 +61,47 @@ _PNG_1PX = base64.b64decode(
 )
 
 
+def _fake_match():
+    """图搜用的最小替身：一个编码器 + 一个只返回一条结果的索引。"""
+
+    class _Encoder:
+        model_loaded = True
+
+        def encode_image(self, image):
+            return [0.6, 0.8]
+
+        def encode_text(self, text):
+            return [0.6, 0.8]
+
+    class _Hit:
+        def as_dict(self):
+            return {"category": "鞋", "item_name": "白色运动鞋", "similarity": 0.5}
+
+    class _Index:
+        categories = ["鞋"]
+
+        def best_category(self, vector):
+            return "鞋", 0.6, {}
+
+        def search(self, vector, top_k=5):
+            return [_Hit()]
+
+    class _Match:
+        encoder = _Encoder()
+        index = _Index()
+
+    return _Match()
+
+
 class _FakeImageService:
     """图搜接口用的假服务：不加载模型、不碰索引。"""
 
-    def search_by_image(self, image, message="", alpha=0.6, top_k=5) -> dict:
+    last_session = None
+
+    def search_by_image(
+        self, image, message="", alpha=0.6, top_k=5, session_id=None
+    ) -> dict:
+        type(self).last_session = session_id
         return {
             "reply": "这张图看起来属于「鞋」，找到 2 件相似商品：\n1. 白色运动鞋",
             "thinking": ["图像塔编码：visual 塔 → 512 维", "检索：9 类索引，命中 2 条"],
@@ -104,6 +144,14 @@ class AgentChatRouteTest(unittest.TestCase):
         resp = self.client.post("/api/v1/agent/chat", json={"message": "鞋" * 501})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.json()["code"], 40000)
+
+    def test_delete_session_route(self) -> None:
+        """DELETE /agent/session/{id} 应释放上下文并返回 deleted。"""
+        app.dependency_overrides[get_agent_service] = _FakeService
+        resp = self.client.delete("/api/v1/agent/session/abc")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.json()["code"], 0)
+        self.assertTrue(resp.json()["result"]["deleted"])
 
     def test_error_body_keeps_three_field_shape(self) -> None:
         app.dependency_overrides[get_agent_service] = _BoomService
@@ -173,6 +221,26 @@ class AgentServiceTest(unittest.TestCase):
         self.assertEqual(cleaned["top_k"], 50)
         self.assertNotIn("category", cleaned)
 
+    def test_normalizes_polite_and_measure_words(self) -> None:
+        """量词/客套话要剥掉，“N 个”要变成 top_k（对齐 v4 评测口径）。"""
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+
+        cleaned = service._sanitize(
+            {"query": "找一双白色运动鞋", "category": "鞋", "top_k": 5}
+        )
+        self.assertEqual(cleaned["query"], "白色运动鞋")
+
+        cleaned = service._sanitize(
+            {"query": "帮我搜透明玻璃杯，10个", "category": "厨房用品", "top_k": 5}
+        )
+        self.assertEqual(cleaned["query"], "透明玻璃杯")
+        self.assertEqual(cleaned["top_k"], 10)
+
+        cleaned = service._sanitize(
+            {"query": "有没有黑色的双肩包", "category": "包", "top_k": 5}
+        )
+        self.assertEqual(cleaned["query"], "黑色的双肩包")
+
     def test_reply_action_skips_tools(self) -> None:
         """模型选择 reply 时不应调用检索工具。"""
 
@@ -239,19 +307,19 @@ class AgentServiceTest(unittest.TestCase):
         self.assertIn("查一下商品库", result["reply"])
 
     def test_reply_owner_pronoun_is_fixed(self) -> None:
-        """助手口误“能帮我找”要改成“能帮你找”。"""
+        """助手口误“能/可以帮我找”要改成“帮你找”。"""
 
         class _WrongVoiceParser:
             def parse_action(self, text: str) -> dict:
-                return {"action": "reply", "text": "你好，能帮我找点什么吗？"}
+                return {"action": "reply", "text": "你好，可以帮我找点什么吗？"}
 
         service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
         service._state = "ready"
         service._parser = _WrongVoiceParser()
 
         result = service.chat("你好")
-        self.assertIn("能帮你找", result["reply"])
-        self.assertNotIn("能帮我找", result["reply"])
+        self.assertIn("可以帮你找", result["reply"])
+        self.assertNotIn("帮我找", result["reply"])
 
     def test_list_categories_reply(self) -> None:
         """list_categories 没有 items，不能套“没找到商品”的模板。"""
@@ -295,6 +363,140 @@ class AgentServiceTest(unittest.TestCase):
         self.assertIn("白色运动鞋", reply)
         self.assertIn("网布", reply)
 
+    def test_session_history_is_recorded(self) -> None:
+        """带 session_id 时把「用户 -> 工具 -> 检索结果 -> 回复」写进历史。"""
+        service = AgentService(
+            _settings(),
+            search_fn=lambda **kw: {
+                "items": [{"category": "鞋", "item_name": "白色运动鞋", "similarity": 0.5}]
+            },
+        )
+        service.chat("找白色运动鞋", session_id="s1")
+
+        history = service._history("s1")
+        self.assertGreaterEqual(len(history), 3)
+        self.assertEqual(history[0]["role"], "user")
+        self.assertIn("检索结果：", history[2]["content"])
+        self.assertEqual(service._history("unknown"), [])
+
+    def test_history_is_trimmed(self) -> None:
+        """历史最多保留 8 条（约 2 轮），避免上下文无限增长。"""
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+        for index in range(10):
+            service.chat(f"找点东西{index}", session_id="s2")
+        self.assertLessEqual(len(service._history("s2")), 8)
+
+    def test_summary_keeps_user_utterances(self) -> None:
+        """B1 摘要只记用户原话，不包含注入的检索结果。"""
+        service = AgentService(
+            _settings(),
+            search_fn=lambda **kw: {
+                "items": [{"category": "鞋", "item_name": "白色运动鞋", "similarity": 0.5}]
+            },
+        )
+        service.chat("找白色运动鞋", session_id="s3")
+        service.chat("要高帮的", session_id="s3")
+
+        summary = service._summary_line("s3")
+        self.assertIn("找白色运动鞋", summary)
+        self.assertIn("要高帮的", summary)
+        self.assertNotIn("检索结果", summary)
+
+    def test_image_search_records_session(self) -> None:
+        """图搜带 session_id 时，结果要写进历史，后续文字才能引用。"""
+        service = AgentService(_settings(), match_service=_fake_match())
+        service.search_by_image(object(), "", 0.6, 5, "img-1")
+
+        history = service._history("img-1")
+        self.assertTrue(any("检索结果：" in message["content"] for message in history))
+        self.assertTrue(any(message["role"] == "assistant" for message in history))
+
+    def test_image_category_inherited_by_next_text_turn(self) -> None:
+        """图搜后模型拿不到 category，后端要用槽位补上“鞋”。"""
+
+        class _Parser:
+            def parse_action_messages(self, messages) -> dict:
+                return {
+                    "action": "tool",
+                    "tool": "text_search",
+                    "arguments": {"query": "黑色", "top_k": 5},
+                }
+
+        service = AgentService(_settings(), match_service=_fake_match())
+        service._state = "ready"
+        service._multi_turn = True
+        service._parser = _Parser()
+
+        service.search_by_image(object(), "", 0.6, 5, "img-2")
+
+        captured: dict = {}
+
+        def fake_search(**kwargs):
+            captured.update(kwargs)
+            return {"items": []}
+
+        service._search = fake_search
+        service.chat("换成黑色的吧", session_id="img-2")
+
+        self.assertEqual(captured.get("category"), "鞋")
+
+    def test_drop_session_releases_memory(self) -> None:
+        """前端点清空后，后端要立刻释放历史与摘要。"""
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+        service.chat("找点东西", session_id="s9")
+        self.assertTrue(service._history("s9"))
+
+        self.assertTrue(service.drop_session("s9"))
+        self.assertEqual(service._history("s9"), [])
+        self.assertEqual(service._summary_line("s9"), "")
+        self.assertFalse(service.drop_session("s9"))
+
+    def test_query_merged_across_turns(self) -> None:
+        """第二句只说“白色”时，后端要拼成“运动鞋 白色”，否则检索为空。"""
+
+        class _Parser:
+            def __init__(self) -> None:
+                self.calls = 0
+
+            def parse_action_messages(self, messages) -> dict:
+                self.calls += 1
+                query = "运动鞋" if self.calls == 1 else "白色"
+                return {
+                    "action": "tool",
+                    "tool": "text_search",
+                    "arguments": {"query": query, "category": "鞋", "top_k": 5},
+                }
+
+        seen: list[str] = []
+
+        def fake_search(**kwargs):
+            seen.append(kwargs["query"])
+            return {"items": []}
+
+        service = AgentService(_settings(), search_fn=fake_search)
+        service._state = "ready"
+        service._multi_turn = True
+        service._parser = _Parser()
+
+        service.chat("找运动鞋", session_id="m1")
+        service.chat("要白色的", session_id="m1")
+
+        self.assertEqual(seen[0], "运动鞋")
+        self.assertEqual(seen[1], "运动鞋 白色")
+
+    def test_gc_evicts_expired_sessions(self) -> None:
+        """超过 TTL 的会话要被回收，防止内存无限增长。"""
+        service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
+        for index in range(3):
+            service.chat(f"找东西{index}", session_id=f"g{index}")
+
+        with service._session_lock:
+            service._seen["g0"] = 0  # 很久没活动
+        service._gc()
+
+        self.assertEqual(service._history("g0"), [])
+        self.assertTrue(service._history("g2"))
+
 
 class AgentImageRouteTest(unittest.TestCase):
     """图搜接口：成功路径用假服务；格式校验走真实的 _open_image。"""
@@ -311,7 +513,7 @@ class AgentImageRouteTest(unittest.TestCase):
         resp = self.client.post(
             "/api/v1/agent/image",
             files={"file": ("shoe.png", _PNG_1PX, "image/png")},
-            data={"message": "", "alpha": "0.6", "top_k": "5"},
+            data={"message": "", "alpha": "0.6", "top_k": "5", "session_id": "img-1"},
         )
         body = resp.json()
         self.assertEqual(resp.status_code, 200)
@@ -319,6 +521,8 @@ class AgentImageRouteTest(unittest.TestCase):
         self.assertTrue(body["result"]["reply"].strip())
         self.assertEqual(body["result"]["category"], "鞋")
         self.assertEqual(len(body["result"]["items"]), 2)
+        # session_id 要透传给服务，图搜结果才能进多轮上下文
+        self.assertEqual(_FakeImageService.last_session, "img-1")
 
     def test_non_image_is_invalid_image_error(self) -> None:
         app.dependency_overrides[get_agent_service] = _FakeImageService

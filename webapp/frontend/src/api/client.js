@@ -95,23 +95,34 @@ export function matchImageText({ file, text, topK = 5 }, signal) {
 
 /**
  * 发送一条导购对话。
- * 约定返回：{ reply: string, thinking?: string | string[], tool_calls?: Array<{ name, arguments }> }
+ * 约定返回：{ reply, thinking?, tool_calls?, items?, say?, session_id? }
+ * 带 sessionId 时后端按多轮处理（保存最近 6 轮上下文）。
  * 未上线的接口或不可达的服务会抛 AppError，由页面如实提示，不做兜底回复。
  */
-export function sendAgentChat({ message }, signal) {
-  return client.post('/agent/chat', { message }, { signal })
+export function sendAgentChat({ message, sessionId }, signal) {
+  const payload = { message }
+  if (sessionId) payload.session_id = sessionId
+  return client.post('/agent/chat', payload, { signal })
+}
+
+/** 清空一段会话上下文：后端立刻释放历史与摘要，避免内存累积。 */
+export function deleteAgentSession(sessionId, signal) {
+  if (!sessionId) return Promise.resolve(null)
+  return client.delete(`/agent/session/${encodeURIComponent(sessionId)}`, { signal })
 }
 
 /**
  * 以图搜图（可叠加文字融合）。
  * 约定返回：{ reply, thinking?, tool_calls?, items?, category?, similarity? }
+ * 带 sessionId 时图搜结果进入多轮上下文，后续文字可继续引用。
  */
-export function sendAgentImage({ file, message = '', alpha = 0.6, topK = 5 }, signal) {
+export function sendAgentImage({ file, message = '', alpha = 0.6, topK = 5, sessionId }, signal) {
   const form = new FormData()
   form.append('file', file)
   if (String(message || '').trim()) form.append('message', String(message).trim())
   form.append('alpha', String(alpha))
   form.append('top_k', String(topK))
+  if (sessionId) form.append('session_id', sessionId)
   return client.post('/agent/image', form, { signal })
 }
 

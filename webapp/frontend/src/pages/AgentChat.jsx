@@ -10,7 +10,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import { sendAgentChat, sendAgentImage } from '../api/client'
+import { deleteAgentSession, sendAgentChat, sendAgentImage } from '../api/client'
 import { DetailDrawer } from '../components/result/Results'
 import { ItemThumbRow } from '../components/result/ItemThumbRow'
 import { isCanceled } from '../utils/errors'
@@ -18,6 +18,43 @@ import { EmptyState, SectionLabel } from '../components/common/Ui'
 
 // 只会把输入框填上，不自动发送；不是示例商品，也不是假数据。
 const PROMPTS = ['找一双白色运动鞋', '有没有黑色的双肩包', '推荐一款保温水杯']
+
+// 多轮会话：session_id 与历史都放 localStorage，刷新后仍能接着聊
+const SESSION_KEY = 'shopvision_agent_session'
+const HISTORY_KEY = 'shopvision_agent_history'
+const HISTORY_LIMIT = 40
+
+function newSessionId() {
+  const id =
+    globalThis.crypto?.randomUUID?.() ||
+    `s-${Date.now()}-${Math.random().toString(16).slice(2)}`
+  try {
+    localStorage.setItem(SESSION_KEY, id)
+  } catch {
+    /* 隐私模式忽略 */
+  }
+  return id
+}
+
+function loadSessionId() {
+  try {
+    const id = localStorage.getItem(SESSION_KEY)
+    if (id) return id
+  } catch {
+    /* 忽略：读不到就当新会话 */
+  }
+  return newSessionId()
+}
+
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY)
+    const parsed = raw ? JSON.parse(raw) : []
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
 
 function describeAgentError(error) {
   const code = String(error?.code ?? '')
@@ -64,7 +101,8 @@ function readToolCalls(value) {
 
 export default function AgentChat() {
   const navigate = useNavigate()
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(loadHistory)
+  const [sessionId, setSessionId] = useState(loadSessionId)
   const [input, setInput] = useState('')
   const [pending, setPending] = useState(false)
   const [error, setError] = useState(null)
@@ -81,6 +119,18 @@ export default function AgentChat() {
     const node = streamRef.current
     if (node) node.scrollTop = node.scrollHeight
   }, [messages, pending, error])
+
+  // 历史持久化：图片预览是 blob 地址，刷新即失效，落盘时去掉
+  useEffect(() => {
+    try {
+      const plain = messages
+        .map(({ imageUrl, ...rest }) => rest)
+        .slice(-HISTORY_LIMIT)
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(plain))
+    } catch {
+      /* 隐私模式或配额不足时忽略，不影响对话 */
+    }
+  }, [messages])
 
   useEffect(() => () => controllerRef.current?.abort(), [])
 
@@ -118,7 +168,7 @@ export default function AgentChat() {
     setPending(true)
 
     try {
-      const result = await sendAgentChat({ message }, controller.signal)
+      const result = await sendAgentChat({ message, sessionId }, controller.signal)
       const reply = typeof result?.reply === 'string' ? result.reply.trim() : ''
       if (!reply) {
         setError({
@@ -135,6 +185,7 @@ export default function AgentChat() {
         thinking: readTraceText(result.thinking),
         tools: readToolCalls(result.tool_calls),
         items: Array.isArray(result.items) ? result.items : [],
+        say: typeof result.say === 'string' ? result.say.trim() : '',
       })
     } catch (err) {
       if (isCanceled(err)) return
@@ -212,7 +263,10 @@ export default function AgentChat() {
     setPending(true)
 
     try {
-      const result = await sendAgentImage({ file: imageFile, message: text }, controller.signal)
+      const result = await sendAgentImage(
+        { file: imageFile, message: text, sessionId },
+        controller.signal,
+      )
       const reply = typeof result?.reply === 'string' ? result.reply.trim() : ''
       if (!reply) {
         setError({
@@ -227,6 +281,7 @@ export default function AgentChat() {
         thinking: readTraceText(result.thinking),
         tools: readToolCalls(result.tool_calls),
         items: Array.isArray(result.items) ? result.items : [],
+        say: typeof result.say === 'string' ? result.say.trim() : '',
       })
       // 不 revoke：消息里还要用这个预览地址展示用户上传的图
       setImageFile(null)
@@ -252,10 +307,18 @@ export default function AgentChat() {
   function clearSession() {
     controllerRef.current?.abort()
     controllerRef.current = null
+    // 通知后端释放这段会话的历史与摘要，再换一个新的 session_id
+    if (sessionId) deleteAgentSession(sessionId).catch(() => {})
+    setSessionId(newSessionId())
     setMessages([])
     setError(null)
     setInput('')
     setPending(false)
+    try {
+      localStorage.removeItem(HISTORY_KEY)
+    } catch {
+      /* 忽略：清不掉也不影响本次会话 */
+    }
   }
 
   const hasSession = messages.length > 0 || Boolean(error)
@@ -363,6 +426,7 @@ export default function AgentChat() {
                 </span>
                 <div className="sv-ag-bubble-wrap">
                   <span className="sv-ag-role">{message.role === 'user' ? '你' : '助手'}</span>
+                  {message.say && <div className="sv-ag-say">{message.say}</div>}
                   <div className={`sv-ag-bubble ${message.role === 'user' ? 'is-user' : 'is-assistant'}`}>
                     {message.imageUrl && (
                       <img className="sv-ag-bubble-img" src={message.imageUrl} alt="上传的图片" />

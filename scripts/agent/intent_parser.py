@@ -22,6 +22,7 @@ import json
 import logging
 import re
 from difflib import SequenceMatcher
+from pathlib import Path
 from typing import Any
 
 logger = logging.getLogger("shopvision.intent")
@@ -34,14 +35,49 @@ WHITELIST = ["text_search"]
 # v3 协议：动作二选一（tool / reply），工具扩到 4 个
 TOOLS = ["text_search", "image_search", "list_categories", "get_item_detail"]
 
-# v3 的系统提示词与训练数据同源，避免训练/推理不一致
+# v4 多轮：工具结果以该前缀注入，与训练数据保持一致
+RESULT_PREFIX = "检索结果："
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+
+
+def dataset_system_prompt(version: str) -> str | None:
+    """从训练集第一条读 system 消息。
+
+    训练时用的提示词就是它；推理必须**逐字一致**，否则模型行为会漂。
+    数据不存在（还没训练）时返回 None，由调用方退回脚本常量。
+    """
+    path = _REPO_ROOT / "data" / "agent" / f"sft_{version}" / "train.jsonl"
+    if not path.is_file():
+        return None
+    try:
+        with path.open("r", encoding="utf-8") as handle:
+            first = json.loads(handle.readline())
+        messages = first.get("messages") or []
+        if messages and messages[0].get("role") == "system":
+            return str(messages[0]["content"])
+    except Exception as exc:  # noqa: BLE001 - 读不到就当没有
+        logger.warning("读取 %s 训练提示词失败：%s", version, exc)
+    return None
+
+
+# 优先用训练数据里的提示词；没有数据时退回脚本里的常量
 try:  # 生成脚本与解析器同目录，正常都能导入
-    from .build_dialogue_sft import SYSTEM_PROMPT as V3_SYSTEM_PROMPT
+    from .build_dialogue_sft import SYSTEM_PROMPT as _V3_SCRIPT_PROMPT
 except Exception:  # pragma: no cover - 只做兜底，正常不会走到
-    V3_SYSTEM_PROMPT = (
+    _V3_SCRIPT_PROMPT = (
         "你是电商导购助手。可用工具：text_search / image_search / list_categories / "
         "get_item_detail。只输出一个 JSON：{\"action\":\"tool\",...} 或 {\"action\":\"reply\",\"text\":\"...\"}。"
     )
+
+V3_SYSTEM_PROMPT = dataset_system_prompt("v3") or _V3_SCRIPT_PROMPT
+
+try:
+    from .build_v4_dialogues import V4_SYSTEM_PROMPT as _V4_SCRIPT_PROMPT
+except Exception:  # pragma: no cover
+    _V4_SCRIPT_PROMPT = V3_SYSTEM_PROMPT
+
+V4_SYSTEM_PROMPT = dataset_system_prompt("v4") or _V4_SCRIPT_PROMPT
 
 CATEGORIES = ["鞋", "水杯", "包", "男装", "运动服", "女装", "手机壳", "厨房用品", "家居用品"]
 
@@ -329,16 +365,12 @@ class IntentParser:
             return rule_parse(user_input)
 
 
-    # ---------- v3：动作协议与第二轮点评 ----------
+    # ---------- v3/v4：动作协议、多轮与点评 ----------
 
-    def _generate(self, system: str, user: str, max_new_tokens: int | None = None) -> str:
-        """按 system + user 生成文本（动作解析与点评复用）。"""
+    def generate_messages(self, messages: list[dict], max_new_tokens: int | None = None) -> str:
+        """按完整 messages（可含多轮历史）生成文本。"""
         import torch
 
-        messages = [
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ]
         try:
             prompt = self._tokenizer.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
@@ -358,6 +390,46 @@ class IntentParser:
         return self._tokenizer.decode(
             out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True
         ).strip()
+
+    def _generate(self, system: str, user: str, max_new_tokens: int | None = None) -> str:
+        """system + user 的便捷入口（单轮场景）。"""
+        return self.generate_messages(
+            [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            max_new_tokens=max_new_tokens,
+        )
+
+    def parse_action_messages(self, messages: list[dict]) -> dict[str, Any]:
+        """v4 多轮入口：带历史判断 tool / reply；异常退回规则动作。"""
+        last_user = ""
+        for message in reversed(messages):
+            if message.get("role") == "user":
+                last_user = str(message.get("content") or "")
+                break
+
+        if not self._ensure_model():
+            return as_action(rule_parse(last_user))
+        try:
+            generated = self.generate_messages(messages)
+            logger.debug("模型动作原始输出：%r", generated)
+            return normalize_action(parse_json_lenient(generated), last_user)
+        except Exception as exc:  # noqa: BLE001
+            logger.error("动作解析失败，降级规则：%s", exc)
+            return as_action(rule_parse(last_user))
+
+    def reply_messages(self, messages: list[dict]) -> str | None:
+        """v4：基于检索结果写点评；失败返回 None 由调用方降级模板。"""
+        if not self._ensure_model():
+            return None
+        try:
+            generated = self.generate_messages(messages, max_new_tokens=220)
+            payload = parse_json_lenient(generated)
+            if not payload:
+                return None
+            text = str(payload.get("text") or "").strip()
+            return text or None
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("点评生成失败：%s", exc)
+            return None
 
     def parse_action(self, user_input: str) -> dict[str, Any]:
         """v3 入口：返回 {action: tool|reply, ...}；任何异常都退回规则动作。"""
