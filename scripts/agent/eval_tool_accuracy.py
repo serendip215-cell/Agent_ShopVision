@@ -33,6 +33,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from scripts.agent.category_map import fill_arguments  # noqa: E402
 from scripts.agent.intent_parser import (  # noqa: E402
     IntentParser,
     normalize_intent,
@@ -119,8 +120,14 @@ def run_rule_mode() -> list[dict]:
     return results
 
 
-def run_model_mode(model: str, adapter: str | None, no_4bit: bool) -> list[dict]:
-    """真实模型模式。"""
+def run_model_mode(model: str, adapter: str | None, no_4bit: bool,
+                   hybrid: bool = False) -> list[dict]:
+    """真实模型模式。
+
+    Args:
+        hybrid: True 时，模型没输出 category 就用规则层补（category_map）。
+                这是**生产环境的实际行为**——报告中应说明是混合方案。
+    """
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -165,9 +172,15 @@ def run_model_mode(model: str, adapter: str | None, no_4bit: bool) -> list[dict]
         raw = tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
 
         pred = normalize_intent(parse_json_lenient(raw), case["input"])
+        post_notes = {}
+        if hybrid:
+            pred["arguments"], post_notes = fill_arguments(
+                pred.get("arguments") or {}, case["input"]
+            )
         hit, detail = score_one(pred, case["gold"])
         results.append({"id": case["id"], "input": case["input"], "raw": raw,
-                        "pred": pred, "gold": case["gold"], "hit": hit, **detail})
+                        "pred": pred, "gold": case["gold"], "hit": hit,
+                        "post_process": post_notes, **detail})
         print(f"[{case['id']:2d}/10] {'✓' if hit else '✗'}  {case['input'][:24]}")
     return results
 
@@ -212,16 +225,21 @@ def main() -> None:
     ap.add_argument("--model", default="Qwen/Qwen3-4B-Instruct-2507")
     ap.add_argument("--adapter", default=None)
     ap.add_argument("--no-4bit", action="store_true")
+    ap.add_argument("--hybrid", action="store_true",
+                    help="模型输出后做确定性后处理：规范化 query + 补类目"
+                         "（生产环境实际行为；报告须说明这是混合方案）")
     ap.add_argument("--out", type=Path, default=None)
     args = ap.parse_args()
 
-    out = args.out or (REPO_ROOT / f"data/agent/eval_tool_accuracy_{args.mode}.json")
+    suffix = args.mode + ("_hybrid" if getattr(args, "hybrid", False) else "")
+    out = args.out or (REPO_ROOT / f"data/agent/eval_tool_accuracy_{suffix}.json")
 
     if args.mode == "rule":
         print("规则模式：不加载模型，用于验证评测脚本本身的判分逻辑\n")
         results = run_rule_mode()
     else:
-        results = run_model_mode(args.model, args.adapter, args.no_4bit)
+        results = run_model_mode(args.model, args.adapter, args.no_4bit,
+                                hybrid=args.hybrid)
 
     acc = report(results, args.mode, out)
     raise SystemExit(0 if acc >= 0.9 else 1)
