@@ -188,5 +188,64 @@ class ProductionPipelineTest(unittest.TestCase):
         self.assertIn("arguments", out)
 
 
+
+class HoldoutGeneralizationTest(unittest.TestCase):
+    """留出集：训练集与评测集都没出现过的输入，检验泛化。
+
+    回应「10 条测试集是不是自己出题自己答」的质疑：
+    这 15 条是全新表达，含更口语的句式与易混淆词。
+    """
+
+    HOLDOUT_CATEGORY = [
+        ("我想买个能保温的杯子", "水杯"),
+        ("有没有那种跑步穿的运动裤", "运动服"),
+        ("帮我看看这个枕头套", "家居用品"),
+        ("推荐几款双肩背包给上学的孩子", "包"),
+        ("这双帆布鞋多少钱", "鞋"),
+        ("我要买男士牛仔裤", "男装"),
+        ("想买条连衣裙夏天穿", "女装"),
+        ("厨房需要个炒菜的锅", "厨房用品"),
+        ("手机保护壳有什么好看的", "手机壳"),
+        ("这个马克杯能装多少毫升", "水杯"),
+        ("买个遮光窗帘", "家居用品"),
+        ("运动套装有没有加大码", "运动服"),
+        ("斜挎包适合男生吗", "包"),
+        ("篮球鞋推荐", "鞋"),
+        ("电饭煲哪个牌子好", "厨房用品"),
+        ("帮我找找看", None),
+        ("你好", None),
+        ("今天天气怎么样", None),
+        ("这个多少钱", None),
+        ("随便推荐点东西吧", None),
+    ]
+
+    def test_category_accuracy_on_holdout(self):
+        misses = []
+        for text, expected in self.HOLDOUT_CATEGORY:
+            got = infer_category(text)
+            if (expected or None) != (got or None):
+                misses.append((text, expected, got))
+        # 允许 1 条漏判（规则层不可能 100%，但必须 ≥95%）
+        self.assertLessEqual(len(misses), 1, f"留出集漏判过多：{misses}")
+
+    def test_no_residual_quantifier(self):
+        """清洗后不能留光杆量词残字。"""
+        cases = [
+            ("我想买个能保温的杯子", "能保温的杯子"),
+            ("推荐几款双肩背包给上学的孩子", "双肩背包给上学的孩子"),
+            ("几双运动鞋", "运动鞋"),
+        ]
+        for src, expected in cases:
+            self.assertEqual(clean_query(src), expected, f"{src!r} 清洗不对")
+
+    def test_keeps_shuang_in_product_name(self):
+        """「双肩包」的「双」不能被当量词吃掉 —— 实测踩过这个坑。"""
+        self.assertEqual(clean_query("双肩包"), "双肩包")
+        self.assertIn("双肩背包", clean_query("推荐几款双肩背包给上学的孩子"))
+
+    def test_removes_youmeiyou(self):
+        self.assertEqual(clean_query("有没有那种跑步穿的运动裤"), "跑步穿的运动裤")
+
+
 if __name__ == "__main__":
     unittest.main()
