@@ -16,6 +16,7 @@
 | 40400 | 404 | 路径/资源不存在 | 资源不存在 |
 | 40401 | 404 | 类别不存在 | 类别不存在 |
 | 40402 | 404 | 索引文件缺失 | 索引文件缺失 |
+| 40403 | 404 | 工具不存在（白名单外） | 工具不存在 |
 | 50000 | 500 | 未捕获服务器错误 | 服务器内部错误 |
 | 50001 | 500 | 模型/依赖不可用 | 模型或依赖不可用 |
 
@@ -41,6 +42,7 @@ class ErrorCode(IntEnum):
     NOT_FOUND = 40400
     CATEGORY_NOT_FOUND = 40401
     INDEX_MISSING = 40402
+    TOOL_NOT_FOUND = 40403
 
     # 500 系：服务端问题
     INTERNAL_ERROR = 50000
@@ -65,6 +67,7 @@ _MESSAGES: dict[ErrorCode, str] = {
     ErrorCode.NOT_FOUND: "资源不存在",
     ErrorCode.CATEGORY_NOT_FOUND: "类别不存在",
     ErrorCode.INDEX_MISSING: "索引文件缺失",
+    ErrorCode.TOOL_NOT_FOUND: "工具不存在",
     ErrorCode.INTERNAL_ERROR: "服务器内部错误",
     ErrorCode.MODEL_UNAVAILABLE: "模型或依赖不可用",
 }

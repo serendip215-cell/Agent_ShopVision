@@ -35,6 +35,7 @@
 | `40400` | 404 | 路径 / 资源不存在 | 资源不存在 | 访问了未注册的 URL |
 | `40401` | 404 | 类别不存在 | 类别不存在 | `category` 不在静态索引或上传库里；入库时需先建类或选已有类别 |
 | `40402` | 404 | 索引文件缺失 | 索引文件缺失 | 注册表 / items.csv / 向量文件缺失 |
+| `40403` | 404 | 工具不存在 | 工具不存在 | Agent 请求了白名单外的工具（仅调试 / 异常扫描用；前端会把 `404xx` 显示成「接口未上线」，用户可见失败请走 `40000` / `50001`） |
 | `50000` | 500 | 未捕获服务器错误 | 服务器内部错误 | 未预料异常 |
 | `50001` | 500 | 模型 / 依赖不可用 | 模型或依赖不可用 | ONNX 产物缺失、`onnxruntime`/`cn_clip` 未装；占位模式禁止入库；上传库与当前模型指纹不一致 |
 
@@ -246,6 +247,34 @@
 - 队列不可用（Redis 不可达 / worker 没起）时，提交接口返回 `50001`
   「任务队列不可用：请确认 SHOPVISION_CELERY_BROKER_URL 指向的 Redis 可达」；
   三个同步接口不受影响。
+
+### 对话导购 — POST /api/v1/agent/chat、POST /api/v1/agent/image、DELETE /api/v1/agent/session/{session_id}
+
+请求体（`/agent/chat`）：
+
+```json
+{ "message": "帮我找白色运动鞋", "session_id": "s-20261113-01" }
+```
+
+`session_id` 可省略；带上则按多轮处理，服务端保存最近 8 条历史、一句原话摘要和 `{category, query}` 槽位，
+下一句可以省略类目（“要白色的”会继承“鞋”）。会话状态在**进程内存**里，重启即丢。
+
+返回体 `result`：
+
+```json
+{ "reply": "……", "thinking": ["解析意图：text_search", "检索：白色运动鞋 / 鞋"],
+  "tool_calls": [ { "tool": "text_search", "arguments": { … }, "ok": true } ],
+  "items": [ { "category": "鞋", "item_id": "…", "item_name": "…", "similarity": 0.42 } ],
+  "say": "我先帮你找找" }
+```
+
+- `reply` 里的商品事实全部来自检索结果，模型不编造价格、销量和品牌；
+- `thinking` 是给前端展示的调用过程，不是模型原文；
+- `/agent/image` 用 `multipart/form-data`：`file` 必填，`message`、`alpha`（默认 0.6）、`top_k`（默认 5）、
+  `session_id` 可选，返回 `reply`、`thinking`、`tool_calls`、`items`、`category`、`similarity`；
+- `DELETE /agent/session/{session_id}` 立即释放该会话，返回 `{"deleted": true}`；
+- 工具不存在时表里有 `40403`，但**用户可见的失败不用 404xx**（前端会显示成「接口未上线」），
+  参数问题走 `40000`、模型/依赖不可用走 `50001`。
 
 ## 四、前端约定（zzx / lfsy 照此写 Axios）
 
