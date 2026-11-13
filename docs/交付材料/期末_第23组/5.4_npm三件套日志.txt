@@ -1,0 +1,144 @@
+﻿=== TEST 20:56:59 ===
+
+> shopvision-frontend@0.1.0 test
+> vitest run
+
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mE:/人工智能/AI/Agent_ShopVision/webapp/frontend[39m
+
+ [32m✓[39m src/__tests__/utils/errors.test.js [2m([22m[2m3 tests[22m[2m)[22m[90m 3[2mms[22m[39m
+ [32m✓[39m src/__tests__/utils/itemImage.test.js [2m([22m[2m11 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m✓[39m src/__tests__/utils/validateImageFile.test.js [2m([22m[2m5 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m✓[39m src/__tests__/api/client.test.js [2m([22m[2m2 tests[22m[2m)[22m[90m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m21 passed[39m[22m[90m (21)[39m
+[2m   Start at [22m 20:57:00
+[2m   Duration [22m 3.50s[2m (transform 323ms, setup 170ms, collect 1.63s, tests 22ms, environment 6.14s, prepare 758ms)[22m
+
+TEST_EXIT=0
+=== LINT ===
+
+> shopvision-frontend@0.1.0 lint
+> eslint src --ext .js,.jsx
+
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\components\image\ImageUploadSection.jsx
+  158:48  warning  'eyebrow' is defined but never used. Allowed unused args must match /^_/u      no-unused-vars
+  158:57  warning  'title' is defined but never used. Allowed unused args must match /^_/u        no-unused-vars
+  158:64  warning  'description' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\components\layout\AppShell.jsx
+  132:62  warning  'isPlaceholder' is assigned a value but never used  no-unused-vars
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\pages\Admin.jsx
+  22:3  warning  'PageHeader' is defined but never used  no-unused-vars
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\pages\AgentChat.jsx
+    9:3   warning  'ToolOutlined' is defined but never used                                                                       no-unused-vars
+  127:17  warning  'imageUrl' is defined but never used. Allowed unused args must match /^_/u                                     no-unused-vars
+  150:6   warning  React Hook useEffect has a missing dependency: 'acceptFile'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\pages\History.jsx
+   2:63  warning  'Tag' is defined but never used         no-unused-vars
+  16:22  warning  'PageHeader' is defined but never used  no-unused-vars
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\pages\MatchLab.jsx
+  28:3  warning  'PageHeader' is defined but never used  no-unused-vars
+
+E:\人工智能\AI\Agent_ShopVision\webapp\frontend\src\pages\Overview.jsx
+   2:18  warning  'Tooltip' is defined but never used             no-unused-vars
+   5:3   warning  'InfoCircleOutlined' is defined but never used  no-unused-vars
+  13:43  warning  'SAMPLE_QUERIES' is defined but never used      no-unused-vars
+  15:10  warning  'EmptyState' is defined but never used          no-unused-vars
+  15:22  warning  'SectionLabel' is defined but never used        no-unused-vars
+  16:8   warning  'RunRow' is defined but never used              no-unused-vars
+
+✖ 17 problems (0 errors, 17 warnings)
+
+LINT_EXIT=0
+=== BUILD ===
+
+> shopvision-frontend@0.1.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 3138 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                                                 [39m[1m[2m    0.99 kB[22m[1m[22m[2m │ gzip:   0.66 kB[22m
+[2mdist/[22m[32massets/jetbrains-mono-greek-400-normal-C190GLew.woff2      [39m[1m[2m    4.23 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-greek-500-normal-JpySY46c.woff2      [39m[1m[2m    4.28 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-500-normal-DCXiE_xi.woff2        [39m[1m[2m    4.32 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-400-normal-DHb3EETF.woff2        [39m[1m[2m    4.46 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-600-normal-C1J5PCl_.woff2        [39m[1m[2m    4.47 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-700-normal-CUqMx5-1.woff2        [39m[1m[2m    4.55 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-600-normal-BoRV6lzK.woff2             [39m[1m[2m    5.23 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-700-normal-CHUG9PD8.woff2             [39m[1m[2m    5.24 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-500-normal-GeMIHyWm.woff2             [39m[1m[2m    5.25 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-400-normal-CM4qok81.woff2             [39m[1m[2m    5.28 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-cyrillic-400-normal-BEIGL1Tu.woff2   [39m[1m[2m    5.33 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-cyrillic-500-normal-DmUKJPL_.woff2   [39m[1m[2m    5.36 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-vietnamese-400-normal-CqNFfHCs.woff  [39m[1m[2m    5.37 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-vietnamese-500-normal-DNRqzVM1.woff  [39m[1m[2m    5.48 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-greek-400-normal-B9oWc5Lo.woff       [39m[1m[2m    5.66 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-greek-500-normal-D7SFKleX.woff       [39m[1m[2m    5.72 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-500-normal-DaZ8i3XM.woff         [39m[1m[2m    6.06 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-400-normal-D7E_mLGF.woff         [39m[1m[2m    6.11 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-600-normal-lA7a_7Ok.woff         [39m[1m[2m    6.14 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-vietnamese-700-normal-pt65Fn2Z.woff         [39m[1m[2m    6.36 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-600-normal-CF2i9ZRY.woff              [39m[1m[2m    6.74 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-700-normal-DyfsrCpP.woff              [39m[1m[2m    6.74 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-500-normal-DyxYGEtJ.woff              [39m[1m[2m    6.76 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-greek-400-normal-DuX9RsAR.woff              [39m[1m[2m    6.77 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-cyrillic-400-normal-ugxPyKxw.woff    [39m[1m[2m    6.98 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-cyrillic-500-normal-DJqRU3vO.woff    [39m[1m[2m    7.02 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-ext-400-normal-Bc8Ftmh3.woff2  [39m[1m[2m    7.34 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-ext-500-normal-Cut-4mMH.woff2  [39m[1m[2m    7.53 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-400-normal-BMzJvInZ.woff2          [39m[1m[2m    7.84 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-700-normal-Dw_fZAg2.woff2          [39m[1m[2m    7.85 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-500-normal-B1OEZity.woff2          [39m[1m[2m    7.87 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-600-normal-DvRl3Mj-.woff2          [39m[1m[2m    7.87 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-500-normal-dm74KBQw.woff2         [39m[1m[2m    8.19 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-700-normal-DYOwVNan.woff2         [39m[1m[2m    8.28 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-400-normal-CMDvPJRp.woff2         [39m[1m[2m    8.29 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-600-normal-_gBojHdJ.woff2         [39m[1m[2m    8.30 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-700-normal-7JNVKxyl.woff           [39m[1m[2m   10.00 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-500-normal-CNwnNrRC.woff           [39m[1m[2m   10.01 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-400-normal-Dvx59UGC.woff           [39m[1m[2m   10.03 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-cyrillic-600-normal-It4mZcQk.woff           [39m[1m[2m   10.06 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-ext-400-normal-fXTG6kC5.woff   [39m[1m[2m   10.13 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-ext-500-normal-ckzbgY84.woff   [39m[1m[2m   10.34 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-500-normal-EtoS1VaI.woff          [39m[1m[2m   11.25 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-600-normal-u5Pl7hTU.woff          [39m[1m[2m   11.25 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-400-normal-C-X6QNXX.woff          [39m[1m[2m   11.32 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-ext-700-normal-eVCcYqtJ.woff          [39m[1m[2m   11.35 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-500-normal-BYYD-dBL.woff2             [39m[1m[2m   14.04 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-400-normal-PaqtzbVb.woff2             [39m[1m[2m   14.11 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-600-normal-4f0koTD-.woff2             [39m[1m[2m   14.17 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-700-normal-BZp_XxE4.woff2             [39m[1m[2m   14.21 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-500-normal-DMZssgOp.woff              [39m[1m[2m   18.24 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-400-normal-8tf8FM3T.woff              [39m[1m[2m   18.29 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-600-normal-BqgrALkZ.woff              [39m[1m[2m   18.38 kB[22m[1m[22m
+[2mdist/[22m[32massets/manrope-latin-700-normal-DGRFkw-m.woff              [39m[1m[2m   18.41 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-400-normal-V6pRDFza.woff2      [39m[1m[2m   21.17 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-500-normal-BWZEU5yA.woff2      [39m[1m[2m   21.83 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-400-normal-6-qcROiO.woff       [39m[1m[2m   27.50 kB[22m[1m[22m
+[2mdist/[22m[32massets/jetbrains-mono-latin-500-normal-CJOVTJB7.woff       [39m[1m[2m   28.21 kB[22m[1m[22m
+[2mdist/[22m[35massets/index-B4Oao_H_.css                                  [39m[1m[2m  146.66 kB[22m[1m[22m[2m │ gzip:  45.65 kB[22m
+[2mdist/[22m[36massets/index-DC7V6Jp5.js                                   [39m[1m[33m1,314.16 kB[39m[22m[2m │ gzip: 419.38 kB[22m
+npm.cmd : [33m
+所在位置 行:1 字符: 542
++ ... Encoding UTF8; & "D:\APPS\node.js\npm.cmd" run build *>> $log; "BUILD ...
++                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-m
+anualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[32m✓ built in 58.18s[39m
+BUILD_EXIT=0
