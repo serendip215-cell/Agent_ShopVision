@@ -82,6 +82,4 @@ async def agent_image(
     service: AgentService = Depends(get_agent_service),
 ) -> AgentImageResponse:
     image = _open_image(await file.read())
-    return AgentImageResponse.ok(
-        service.search_by_image(image, message, alpha, top_k, session_id)
-    )
+    return AgentImageResponse.ok(service.search_by_image(image, message, alpha, top_k, session_id))

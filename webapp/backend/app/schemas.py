@@ -305,9 +305,7 @@ class AgentToolCall(BaseModel):
 
 class AgentChatResult(BaseModel):
     reply: str = Field(description="助手回复（模型直接回答，或检索结果 + 点评）")
-    thinking: list[str] = Field(
-        default_factory=list, description="思考过程，前端折叠展示"
-    )
+    thinking: list[str] = Field(default_factory=list, description="思考过程，前端折叠展示")
     tool_calls: list[AgentToolCall] = Field(
         default_factory=list, description="本轮调用过的工具（名称 + 参数）"
     )

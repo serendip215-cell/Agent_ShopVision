@@ -18,5 +18,5 @@ python_version = "3.11"
 
 # 可选依赖按需安装，缺了不算错：接真模型才装 onnxruntime / Chinese-CLIP
 [[tool.mypy.overrides]]
-module = ["onnxruntime.*", "cn_clip.*", "celery.*"]
+module = ["onnxruntime.*", "cn_clip.*", "celery.*", "six.*"]
 ignore_missing_imports = true

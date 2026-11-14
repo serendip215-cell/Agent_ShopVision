@@ -1,7 +1,8 @@
 """对话导购业务层：用户输入 -> 动作（tool / reply）-> 工具执行 -> 回复。
 
 协议（与 docs/实验五/10-5.4-对话Agent训练规范.md 一致）：
-  * v3：{"action":"tool","tool":...,"arguments":{...},"say":"..."} 或 {"action":"reply","text":"..."}
+  * v3：{"action":"tool","tool":...,"arguments":{...},"say":"..."}
+        或 {"action":"reply","text":"..."}
   * v2 兼容：模型只输出 {"tool":"text_search","arguments":{...}} 时按 tool 动作处理
 
 三档降级，保证前端永远有响应：
@@ -46,8 +47,7 @@ _SESSION_TTL = 30 * 60
 _MAX_SESSIONS = 500
 
 _SAFE_FALLBACK = (
-    "这个我需要查一下商品库才能回答。"
-    "可以补充品类或颜色，或者直接上传一张图片，我来检索。"
+    "这个我需要查一下商品库才能回答。" "可以补充品类或颜色，或者直接上传一张图片，我来检索。"
 )
 
 # 助手把主语说反（“能/可以/帮我找点什么吗”）：凡“帮我+动作”都改成“帮你”
@@ -183,8 +183,12 @@ class AgentService:
 
     def _guess_model_path(self) -> str:
         default = (
-            REPO_ROOT / "models" / "models"
-            / "Qwen--Qwen3-4B-Instruct-2507" / "snapshots" / "master"
+            REPO_ROOT
+            / "models"
+            / "models"
+            / "Qwen--Qwen3-4B-Instruct-2507"
+            / "snapshots"
+            / "master"
         )
         if default.is_dir():
             return str(default)
@@ -246,9 +250,7 @@ class AgentService:
             return ""
         return "早前用户说过：" + "；".join(spoken)
 
-    def _merge_query(
-        self, session_id: str | None, category: str | None, query: str
-    ) -> str:
+    def _merge_query(self, session_id: str | None, category: str | None, query: str) -> str:
         """同类目下把上一轮的查询拼进来（模型常只给“白色”，单独检索太泛）。"""
         if not session_id:
             return query
@@ -293,9 +295,7 @@ class AgentService:
         """防止内存无限增长：先清过期会话，再按 LRU 淘汰超量会话。"""
         now = time.time()
         with self._session_lock:
-            expired = [
-                sid for sid, seen in self._seen.items() if now - seen > _SESSION_TTL
-            ]
+            expired = [sid for sid, seen in self._seen.items() if now - seen > _SESSION_TTL]
             for sid in expired:
                 self._sessions.pop(sid, None)
                 self._summaries.pop(sid, None)
@@ -357,19 +357,13 @@ class AgentService:
         tool = action.get("tool") or "text_search"
         arguments = self._sanitize_tool(tool, action.get("arguments") or {})
         # 模型没给类目时，用上一轮槽位兜底（图搜场景模型拿不到 category）
-        if (
-            tool == "text_search"
-            and self._multi_turn
-            and not arguments.get("category")
-        ):
+        if tool == "text_search" and self._multi_turn and not arguments.get("category"):
             slot_category = self._slot_category(session_id)
             if slot_category:
                 arguments["category"] = slot_category
                 thinking.append(f"沿用上一轮类目：{slot_category}")
         if tool == "text_search" and self._multi_turn:
-            merged = self._merge_query(
-                session_id, arguments.get("category"), arguments["query"]
-            )
+            merged = self._merge_query(session_id, arguments.get("category"), arguments["query"])
             if merged and merged != arguments["query"]:
                 thinking.append(f"继承上一轮查询：{merged}")
                 arguments["query"] = merged
@@ -443,11 +437,7 @@ class AgentService:
 
         if self._state == "ready" and self._parser is not None:
             try:
-                if (
-                    self._multi_turn
-                    and messages
-                    and hasattr(self._parser, "parse_action_messages")
-                ):
+                if self._multi_turn and messages and hasattr(self._parser, "parse_action_messages"):
                     action = self._parser.parse_action_messages(messages)
                 else:
                     action = self._parser.parse_action(text)
@@ -728,9 +718,7 @@ class AgentService:
         array = np.asarray(vector, dtype="float32").reshape(-1)
         return array / (np.linalg.norm(array) + 1e-12)
 
-    def _compose_image_reply(
-        self, category: str | None, items: list[dict], fused: bool
-    ) -> str:
+    def _compose_image_reply(self, category: str | None, items: list[dict], fused: bool) -> str:
         if not items:
             return "这张图没检索到相近商品，换一张更清晰的正视图再试。"
         kind = "图 + 文" if fused else "这张图"
@@ -740,7 +728,7 @@ class AgentService:
             name = item.get("item_name") or "未命名商品"
             similarity = item.get("similarity")
             try:
-                score = f"，相似度 {float(similarity):.2f}"
+                score = f"，相似度 {float(similarity):.2f}"  # type: ignore[arg-type]
             except (TypeError, ValueError):
                 score = ""
             lines.append(f"{position}. {name}{score}")
@@ -749,13 +737,14 @@ class AgentService:
     def _compose_reply(self, items: list[dict]) -> str:
         if not items:
             return "库里没找到符合条件的商品。换个关键词试试，或者直接上传一张图让我看图找。"
-        head = f"在「{items[0].get('category') or '全部'}」里找到 {len(items)} 件相近商品，最接近的是："
+        cat = items[0].get("category") or "全部"
+        head = f"在「{cat}」里找到 {len(items)} 件相近商品，最接近的是："
         lines = [head]
         for index, item in enumerate(items[:3], start=1):
             name = item.get("item_name") or "未命名商品"
             similarity = item.get("similarity")
             try:
-                score = f"，相似度 {float(similarity):.2f}"
+                score = f"，相似度 {float(similarity):.2f}"  # type: ignore[arg-type]
             except (TypeError, ValueError):
                 score = ""
             lines.append(f"{index}. {name}{score}")

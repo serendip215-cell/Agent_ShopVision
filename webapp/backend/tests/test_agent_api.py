@@ -22,6 +22,7 @@ import os
 os.environ.setdefault("SHOPVISION_CELERY_ALWAYS_EAGER", "true")
 
 import unittest
+from typing import Any, cast
 
 from fastapi.testclient import TestClient
 
@@ -35,14 +36,21 @@ from app.services.agent_service import AgentService
 class _FakeService:
     """接口层用的假服务：不碰模型、不碰索引。"""
 
-    def __init__(self, reply: str = "在「鞋」里找到 1 件相近商品，最接近的是：\n1. 白色运动鞋") -> None:
+    def __init__(
+        self, reply: str = "在「鞋」里找到 1 件相近商品，最接近的是：\n1. 白色运动鞋"
+    ) -> None:
         self.reply = reply
 
     def chat(self, message: str, session_id: str | None = None) -> dict:
         return {
             "reply": self.reply,
-            "thinking": ["规则模式（未接 LLM）", "调用工具：text_search(query=白色运动鞋, top_k=5)"],
-            "tool_calls": [{"name": "text_search", "arguments": {"query": "白色运动鞋", "top_k": 5}}],
+            "thinking": [
+                "规则模式（未接 LLM）",
+                "调用工具：text_search(query=白色运动鞋, top_k=5)",
+            ],
+            "tool_calls": [
+                {"name": "text_search", "arguments": {"query": "白色运动鞋", "top_k": 5}}
+            ],
             "items": [],
         }
 
@@ -98,9 +106,7 @@ class _FakeImageService:
 
     last_session = None
 
-    def search_by_image(
-        self, image, message="", alpha=0.6, top_k=5, session_id=None
-    ) -> dict:
+    def search_by_image(self, image, message="", alpha=0.6, top_k=5, session_id=None) -> dict:
         type(self).last_session = session_id
         return {
             "reply": "这张图看起来属于「鞋」，找到 2 件相似商品：\n1. 白色运动鞋",
@@ -116,6 +122,8 @@ class _FakeImageService:
 
 
 class AgentChatRouteTest(unittest.TestCase):
+    client: TestClient
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.client = TestClient(app, raise_server_exceptions=False)
@@ -164,7 +172,7 @@ class AgentChatRouteTest(unittest.TestCase):
 
 
 def _settings(**kwargs) -> Settings:
-    base = {
+    base: dict[str, Any] = {
         "agent_warmup": False,
         "agent_model": "unused",
         "agent_adapter": "",
@@ -225,9 +233,7 @@ class AgentServiceTest(unittest.TestCase):
         """量词/客套话要剥掉，“N 个”要变成 top_k（对齐 v4 评测口径）。"""
         service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
 
-        cleaned = service._sanitize(
-            {"query": "找一双白色运动鞋", "category": "鞋", "top_k": 5}
-        )
+        cleaned = service._sanitize({"query": "找一双白色运动鞋", "category": "鞋", "top_k": 5})
         self.assertEqual(cleaned["query"], "白色运动鞋")
 
         cleaned = service._sanitize(
@@ -236,9 +242,7 @@ class AgentServiceTest(unittest.TestCase):
         self.assertEqual(cleaned["query"], "透明玻璃杯")
         self.assertEqual(cleaned["top_k"], 10)
 
-        cleaned = service._sanitize(
-            {"query": "有没有黑色的双肩包", "category": "包", "top_k": 5}
-        )
+        cleaned = service._sanitize({"query": "有没有黑色的双肩包", "category": "包", "top_k": 5})
         self.assertEqual(cleaned["query"], "黑色的双肩包")
 
     def test_reply_action_skips_tools(self) -> None:
@@ -249,11 +253,14 @@ class AgentServiceTest(unittest.TestCase):
                 return {"action": "reply", "text": "你好，我是导购助手。"}
 
         called: list[int] = []
-        service = AgentService(
-            _settings(), search_fn=lambda **kw: called.append(1) or {"items": []}
-        )
+
+        def fake_search(**kwargs: object) -> dict:
+            called.append(1)
+            return {"items": []}
+
+        service = AgentService(_settings(), search_fn=fake_search)
         service._state = "ready"
-        service._parser = _ReplyParser()
+        service._parser = cast(Any, _ReplyParser())
 
         result = service.chat("你好")
         self.assertEqual(result["reply"], "你好，我是导购助手。")
@@ -274,10 +281,13 @@ class AgentServiceTest(unittest.TestCase):
                 }
 
         service = AgentService(
-            _settings(), search_fn=lambda **kw: {"items": [{"category": "鞋", "item_name": "白鞋", "similarity": 0.5}]}
+            _settings(),
+            search_fn=lambda **kw: {
+                "items": [{"category": "鞋", "item_name": "白鞋", "similarity": 0.5}]
+            },
         )
         service._state = "ready"
-        service._parser = _SayParser()
+        service._parser = cast(Any, _SayParser())
 
         result = service.chat("找白色运动鞋")
         self.assertEqual(result["say"], "我先帮你找找")
@@ -299,7 +309,7 @@ class AgentServiceTest(unittest.TestCase):
 
         service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
         service._state = "ready"
-        service._parser = _FabricatingParser()
+        service._parser = cast(Any, _FabricatingParser())
 
         result = service.chat("随便看看")
         self.assertNotIn("19.9", result["reply"])
@@ -315,7 +325,7 @@ class AgentServiceTest(unittest.TestCase):
 
         service = AgentService(_settings(), search_fn=lambda **kw: {"items": []})
         service._state = "ready"
-        service._parser = _WrongVoiceParser()
+        service._parser = cast(Any, _WrongVoiceParser())
 
         result = service.chat("你好")
         self.assertIn("可以帮你找", result["reply"])
@@ -425,7 +435,7 @@ class AgentServiceTest(unittest.TestCase):
         service = AgentService(_settings(), match_service=_fake_match())
         service._state = "ready"
         service._multi_turn = True
-        service._parser = _Parser()
+        service._parser = cast(Any, _Parser())
 
         service.search_by_image(object(), "", 0.6, 5, "img-2")
 
@@ -476,7 +486,7 @@ class AgentServiceTest(unittest.TestCase):
         service = AgentService(_settings(), search_fn=fake_search)
         service._state = "ready"
         service._multi_turn = True
-        service._parser = _Parser()
+        service._parser = cast(Any, _Parser())
 
         service.chat("找运动鞋", session_id="m1")
         service.chat("要白色的", session_id="m1")
@@ -500,6 +510,8 @@ class AgentServiceTest(unittest.TestCase):
 
 class AgentImageRouteTest(unittest.TestCase):
     """图搜接口：成功路径用假服务；格式校验走真实的 _open_image。"""
+
+    client: TestClient
 
     @classmethod
     def setUpClass(cls) -> None:

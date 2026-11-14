@@ -85,8 +85,8 @@ class OnnxEncoder(Encoder):
     ) -> None:
         try:
             import onnxruntime as ort
-            from PIL import Image  # noqa: F401
             from cn_clip.clip import image_transform, tokenize
+            from PIL import Image  # noqa: F401
         except ImportError:
             # 官方 cn_clip 顶层依赖 torch/torchvision（约 2 GB）。只是推理时用不到它们，
             # 回退到本仓库内等价的 torch-free 实现（见 cn_clip_shim.py，逐行对齐官方）。

@@ -118,7 +118,9 @@ class _Resize:
         self.size = size
 
     def __call__(self, image: Image.Image) -> Image.Image:
-        return image.resize((self.size[1], self.size[0]), Image.BICUBIC)
+        # PIL<10 的 Image.BICUBIC 是常量，PIL>=10 迁到 Image.Resampling；运行时取其一
+        bicubic = getattr(Image, "BICUBIC", None) or Image.Resampling.BICUBIC
+        return image.resize((self.size[1], self.size[0]), bicubic)
 
 
 class _ConvertRGB:
@@ -130,11 +132,11 @@ class _Compose:
     def __init__(self, steps) -> None:
         self._steps = steps
 
-    def __call__(self, image: Image.Image):
-        out = image
+    def __call__(self, image) -> _ArrayLike:
+        out: object = image
         for step in self._steps:
             out = step(out)
-        return _ArrayLike(out)
+        return _ArrayLike(np.asarray(out))  # 步骤链最终产出 ndarray
 
 
 def image_transform(image_size: int = 224) -> _Compose:
