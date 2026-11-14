@@ -532,11 +532,10 @@ def polish(doc) -> None:
             spf.space_after = Pt(0)
         except KeyError:
             pass
-    heading_spec = {"Heading 1": 14, "Heading 2": 12, "Heading 3": 12}
-    # 标题段前段后与 docs/typ/实验四.typ 的 #show heading 一致：
-    #   v(level1 ? 13pt : 8pt)  —— 段前
-    #   v(level1 ? 6pt : 3pt)   —— 段后
-    heading_gaps = {"Heading 1": (13, 6), "Heading 2": (8, 3), "Heading 3": (8, 3)}
+    heading_spec = {"Heading 1": 16, "Heading 2": 14, "Heading 3": 12}
+    # 论文级层级（2026-11-14 与 typ 排版同步）：章另起一页、居中、三号黑体；
+    # 节四号左对齐；条小四。段前段后按 typ 的 v() 间距换算。
+    heading_gaps = {"Heading 1": (12, 20), "Heading 2": (13, 6), "Heading 3": (10, 4)}
     for name, size in heading_spec.items():
         try:
             st = doc.styles[name]
@@ -566,11 +565,18 @@ def polish(doc) -> None:
         name = para.style.name
         pf = para.paragraph_format
         if name.startswith("Heading"):
-            para.alignment = WD_ALIGN_PARAGRAPH.LEFT
             size = heading_spec.get(name, 12)
+            if name == "Heading 1":
+                # 章标题：另起一页 + 居中 + 黑体（与 typ 的 pagebreak(weak)+center 对齐）
+                pf.page_break_before = True
+                para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                heading_font_east = "SimHei"
+            else:
+                para.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                heading_font_east = "SimSun"
             pf.first_line_indent = Pt(0)
             for r in para.runs:
-                set_font(r, "Times New Roman", "SimSun")
+                set_font(r, "Times New Roman", heading_font_east)
                 r.font.size = Pt(size)
                 r.font.bold = True
                 r.font.color.rgb = RGBColor(0, 0, 0)

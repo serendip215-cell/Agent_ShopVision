@@ -7,11 +7,23 @@
 #set page(paper: "a4", margin: 0pt)
 #let faux-bold = 0.025em
 #show strong: it => text(weight: "bold", stroke: faux-bold, it.body)
-#show heading: it => {
-  let sz = if it.level == 1 { 14pt } else { 12pt }
-  v(if it.level == 1 { 13pt } else { 8pt })
-  par(first-line-indent: 0pt, text(size: sz, weight: "bold", stroke: faux-bold, font: ("Times New Roman", "SimSun"), it.body))
-  v(if it.level == 1 { 6pt } else { 3pt })
+// 论文级层级：章（level 1）另起一页、居中、三号；节（level 2）左对齐、四号；
+// 条（level 3+）左对齐、小四。章前留白由 pagebreak(weak) 承担，正文页不再叠加段前距。
+#show heading.where(level: 1): it => {
+  pagebreak(weak: true)
+  v(6pt)
+  align(center, text(size: 16pt, weight: "bold", stroke: faux-bold, font: ("Times New Roman", "SimHei"), it.body))
+  v(10pt)
+}
+#show heading.where(level: 2): it => {
+  v(13pt)
+  par(first-line-indent: 0pt, text(size: 14pt, weight: "bold", stroke: faux-bold, font: ("Times New Roman", "SimSun"), it.body))
+  v(6pt)
+}
+#show heading.where(level: 3): it => {
+  v(10pt)
+  par(first-line-indent: 0pt, text(size: 12pt, weight: "bold", stroke: faux-bold, font: ("Times New Roman", "SimSun"), it.body))
+  v(4pt)
 }
 #show figure.where(kind: image): set figure(supplement: [图])
 #show figure.where(kind: table): set figure(supplement: [表])
@@ -92,7 +104,6 @@
 + 系统层实现了文本检索、图片检索、图文匹配、商品入库、Agent 对话和会话管理接口，工具调用结果由检索服务提供，模型只负责意图解析和结果点评。
 + 工程层使用相对路径、配置文件和运行凭证目录组织代码，模型和索引可以独立替换，评测结果按 run 归档，便于其他开发者复现。
 
-#pagebreak()
 = 第一章 项目背景与概述
 
 == 1.1 项目背景与研究意义
