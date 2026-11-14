@@ -65,7 +65,7 @@
 | 实验五 5.1 环境与数据 | ✅ 完成 | 100 条微调数据（`data/agent/agent_finetune_data.json`），见 [`docs/实验五/01`](docs/实验五/01-环境与数据准备.md) |
 | 实验五 5.2 模型选择与微调 | ✅ 完成 | 基座 Qwen3-4B-Instruct-2507，QLoRA 4-bit，LoRA 适配器 `dist/lora_adapter_v2/`（64MB）。验证集总体 12.88% → **75.76%**，见 [`docs/实验五/03`](docs/实验五/03-微调结果实跑记录.md) |
 | 实验五 5.3 Agent 框架集成 | ✅ 完成 | LangChain `create_agent` 封装实验4接口 + 多轮槽位继承 + 10 轮准确率评测。**纯模型 90%**（类目 100%），加后处理 100%，见 [`docs/实验五/09`](docs/实验五/09-5.3优化实跑：扩充数据重训.md) |
-| 实验五 5.4 部署与测试 | 🚧 进行中 | 前端对话页 `AgentChat.jsx` 已提交；**后端 `/api/v1/agent/chat` 未实现**，前后端待联调。接口契约见 [`webapp/backend/README-agent-chat.md`](webapp/backend/README-agent-chat.md) |
+| 实验五 5.4 部署与测试 | ✅ 完成 | 后端 `/agent/chat`、`/agent/image`、`/agent/session` 已实现入库，前端对话页已对接并通过回归（回归截图与 npm 三件套日志 2026-11-13 入库）；v4 多轮 40 条评测 JSON 100%/动作 90%/命中 82.5%。演示机端到端演练待做，见 [`docs/交付材料/期末_第23组/演示机验证checklist.md`](docs/交付材料/期末_第23组/演示机验证checklist.md) |
 
 当前数据规模和字段以本页、[`data/raw_data/README.md`](data/raw_data/README.md) 和 `data/processed_data/dataset_summary.csv` 为准。除 [`docs/finetune/`](docs/finetune/)（已完成步骤的实际记录）外，`docs/` 里的方案和指南写于对应步骤之前，不代表仓库已经做到那一步。
 
