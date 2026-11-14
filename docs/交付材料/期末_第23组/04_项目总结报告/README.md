@@ -30,9 +30,15 @@ PDF（在仓库根目录执行，图片与 refs.bib 路径按 docs/typ 布局解
 typst compile --root . 'docs/typ/实验五.typ' 'docs/build/实验五-第23组-YYYYMMDD.pdf'
 ```
 
-Word 版由 `docs/scripts/typ_to_docx.py` 管线（语义化导出 + pandoc + python-docx 后处理）生成，
-当前 04 目录的 20261114.docx 由临时脚本（scratch/build_exp5_docx.py，含 exp5 适配：
-SVG→PNG 替身、裸下划线转义、叠词折叠、绝对图片路径）产出，需要重建时把该脚本并入 docs/scripts。
+Word 版由 `docs/scripts/build_exp5_docx.py` 生成（语义化导出 + pandoc + python-docx 后处理，
+含 exp5 适配：SVG→PNG 替身、裸下划线转义、交叉引用叠词折叠、绝对图片路径）：
+
+```powershell
+python docs/scripts/build_exp5_docx.py     # 产物 docs/build/_word/实验五-第23组-YYYYMMDD.docx
+```
+
+PNG 替身已入库 `docs/typ/figs_exp5/00_实验闭环架构.png`、`02_微调流水线.png`
+（闭环架构=20261113 版 Word 内栅格件提取；流水线=svglib 栅格化，2x）。
 
 报告已加入文献引用、图表交叉引用、实验阶段复用关系、问题解决方案和小模型/生成式模型微调对比，并写入两张 v2 评测截图。
 
