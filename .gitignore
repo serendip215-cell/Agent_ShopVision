@@ -79,3 +79,4 @@ webapp/backend/celery-worker*.log
 !/dist/lora_adapter_v4/
 !/dist/lora_adapter_v4/**
 !/dist/lora_adapter_v2/**
+.alma-snapshots

@@ -546,6 +546,196 @@
           }
         }
       }
+    },
+    "/api/v1/agent/session/{session_id}": {
+      "delete": {
+        "tags": [
+          "对话导购页",
+          "对话导购页"
+        ],
+        "summary": "清空一段会话上下文",
+        "description": "前端点「清空」时调用：立即释放该 session 的历史与摘要，避免内存累积。",
+        "operationId": "delete_agent_session_api_v1_agent_session__session_id__delete",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/agent/chat": {
+      "post": {
+        "tags": [
+          "对话导购页",
+          "对话导购页"
+        ],
+        "summary": "对话导购",
+        "description": "一句话需求 → 意图解析（Qwen3-4B + LoRA，不可用时自动降级规则解析）→ 调工具检索 → 回复。\n\n带 `session_id` 时按多轮处理：服务端保存最近 6 轮（含检索结果），下一句可省略类目/颜色。\n\n`reply` 中的商品信息全部来自检索结果，模型只输出工具调用与点评，不编造价格销量。",
+        "operationId": "agent_chat_api_v1_agent_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChatResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/agent/image": {
+      "post": {
+        "tags": [
+          "对话导购页",
+          "对话导购页"
+        ],
+        "summary": "以图搜图",
+        "description": "上传商品图 → 图像塔编码 → 与 9 类索引比对，返回相似商品。\n\n`message` 非空时做**向量融合**：`q = α·图像向量 + (1−α)·文本向量`，α 默认 0.6；融合后重新 L2 归一化再检索。\n\n带 `session_id` 时把本轮写进会话历史，后续文字提问可继续引用这些商品。\n\n`thinking` 会列出图像塔、文本塔与融合系数，便于报告核对口径。",
+        "operationId": "agent_image_api_v1_agent_image_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_agent_image_api_v1_agent_image_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "40000 参数错误 / 40001 图片格式错 / 40002 空上传 / 40003 维度不一致 / 40004 文件过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "40401 类别不存在 / 40402 索引文件缺失",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000 未捕获异常 / 50001 模型或依赖不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -883,6 +1073,10 @@
             "title": "Suggested Score",
             "description": "建议类别的原始相似度"
           },
+          "suggested_attributes": {
+            "$ref": "#/components/schemas/ItemAttributes",
+            "description": "按建议类别内最相似商品投票得到的细分类/颜色/材质参考值"
+          },
           "topk": {
             "items": {
               "$ref": "#/components/schemas/AdminTopCategory"
@@ -942,6 +1136,227 @@
         ],
         "title": "AdminTopCategory"
       },
+      "AgentChatRequest": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Message",
+            "description": "用户一句话需求",
+            "examples": [
+              "找一双白色运动鞋"
+            ]
+          },
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id",
+            "description": "多轮会话 ID；可留空（后端 ConversationStore 已支持，前端暂未传）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "AgentChatRequest"
+      },
+      "AgentChatResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentChatResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "AgentChatResponse"
+      },
+      "AgentChatResult": {
+        "properties": {
+          "reply": {
+            "type": "string",
+            "title": "Reply",
+            "description": "助手回复（模型直接回答，或检索结果 + 点评）"
+          },
+          "thinking": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Thinking",
+            "description": "思考过程，前端折叠展示"
+          },
+          "tool_calls": {
+            "items": {
+              "$ref": "#/components/schemas/AgentToolCall"
+            },
+            "type": "array",
+            "title": "Tool Calls",
+            "description": "本轮调用过的工具（名称 + 参数）"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MatchedItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "检索命中的商品；前端渲染为并排小图"
+          },
+          "say": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Say",
+            "description": "工具调用前的过渡语（仅有 tool 动作时出现，≤30 字）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reply"
+        ],
+        "title": "AgentChatResult"
+      },
+      "AgentImageResponse": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "Code",
+            "description": "0=成功；非 0 见错误码表（前三位即 HTTP 状态码）",
+            "default": 0
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentImageResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "description": "面向用户的提示，前端可直接展示",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "AgentImageResponse"
+      },
+      "AgentImageResult": {
+        "properties": {
+          "reply": {
+            "type": "string",
+            "title": "Reply",
+            "description": "助手回复（模板拼装，商品信息来自检索结果）"
+          },
+          "thinking": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Thinking",
+            "description": "编码与检索过程"
+          },
+          "tool_calls": {
+            "items": {
+              "$ref": "#/components/schemas/AgentToolCall"
+            },
+            "type": "array",
+            "title": "Tool Calls",
+            "description": "图搜不走 LLM 工具调用，固定为空"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MatchedItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "相似商品，按相似度降序"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "查询向量判出的类别"
+          },
+          "similarity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Similarity",
+            "description": "查询向量与该类别最高相似度（余弦，非概率）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reply"
+        ],
+        "title": "AgentImageResult",
+        "description": "以图搜图（可叠加文字融合）的结果。"
+      },
+      "AgentToolCall": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "工具名：text_search / image_search / list_categories / get_item_detail"
+          },
+          "arguments": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Arguments",
+            "description": "工具实参"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "AgentToolCall"
+      },
       "ApiResponse": {
         "properties": {
           "code": {
@@ -964,6 +1379,56 @@
         "type": "object",
         "title": "ApiResponse",
         "description": "所有接口的统一返回体（成功与失败同形）。"
+      },
+      "Body_agent_image_api_v1_agent_image_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "description": "商品图（PNG/JPG/WEBP，≤10 MB）"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Message",
+            "description": "可选文字描述，参与向量融合",
+            "default": ""
+          },
+          "alpha": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Alpha",
+            "description": "图像权重（0=纯文字，1=纯图像）",
+            "default": 0.6
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "description": "返回相似商品条数",
+            "default": 5
+          },
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id",
+            "description": "会话 id；带上则图搜结果进入多轮上下文"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_agent_image_api_v1_agent_image_post"
       },
       "Body_classify_image_api_v1_image_post": {
         "properties": {
@@ -1393,6 +1858,10 @@
             "title": "Score",
             "description": "该类原始相似度"
           },
+          "attributes": {
+            "$ref": "#/components/schemas/ItemAttributes",
+            "description": "按同类最相似商品投票得到的细分类/颜色/材质参考值，可能为空"
+          },
           "topk": {
             "items": {
               "$ref": "#/components/schemas/CategoryScore"
@@ -1418,6 +1887,49 @@
           "topk"
         ],
         "title": "ImageResult"
+      },
+      "ItemAttributes": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "细分类参考值"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color",
+            "description": "颜色参考值"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material",
+            "description": "材质参考值"
+          }
+        },
+        "type": "object",
+        "title": "ItemAttributes",
+        "description": "上传图的属性参考值：同类别最相似几条商品的多数投票，不是独立属性模型。"
       },
       "MatchResponse": {
         "properties": {
@@ -2104,6 +2616,10 @@
     {
       "name": "数据入库",
       "description": "上传商品到已有/新类别，或新建空类别（未启用鉴权）"
+    },
+    {
+      "name": "对话导购页",
+      "description": "一句话需求 → 意图解析 → 检索 → 模板回复（对应前端「对话导购」页面）"
     }
   ]
 }

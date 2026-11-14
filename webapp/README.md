@@ -67,8 +67,8 @@ services/matching.py  MatchService   业务编排
 
 | 项 | 状态 |
 |---|---|
-| **后端** | ✅ 可跑。`backend/app/` 分层完成，同步三接口 + 异步任务（Celery）均已自检通过。**注：`/api/v1/agent/chat` 尚未实现**（属实验五 5.4） |
-| **前端** | ✅ **8 页已实现**（React 19 + Antd），dev 代理 `/api`、`/item-images` 到后端。含实验五对话导购页 `AgentChat.jsx`（路由 `/agent`），等后端接口 |
+| **后端** | ✅ 可跑。`backend/app/` 分层完成，同步三接口 + 异步任务（Celery）均已自检通过。实验五 5.4 的 `/api/v1/agent/chat`、`/agent/image`、`/agent/session/{id}` 已实现并入库 |
+| **前端** | ✅ **8 页已实现**（React 19 + Antd），dev 代理 `/api`、`/item-images` 到后端。含实验五对话导购页 `AgentChat.jsx`（路由 `/agent`），已对接后端 Agent 接口 |
 | 模型产物（双塔 ONNX） | ✅ 已拉取到本地（`scripts/fetch_model_assets.py` 从 GitHub Release 下载并校验 sha256），`.env` 切 `onnx` 即用 |
 
 编码器是可替换接缝，`SHOPVISION_MODEL_BACKEND` 一行配置切换占位 / ONNX；接口形状不变。

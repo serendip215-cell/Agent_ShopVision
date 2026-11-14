@@ -31,6 +31,7 @@
 | `40400` | 404 | 资源不存在 | NOT_FOUND |
 | `40401` | 404 | 类别不存在 | CATEGORY_NOT_FOUND |
 | `40402` | 404 | 索引文件缺失 | INDEX_MISSING |
+| `40403` | 404 | 工具不存在 | TOOL_NOT_FOUND |
 | `50000` | 500 | 服务器内部错误 | INTERNAL_ERROR |
 | `50001` | 500 | 模型或依赖不可用 | MODEL_UNAVAILABLE |
 
@@ -85,6 +86,10 @@
 | `result.category` | 字符串（可为空） | 判出的类别：全部可判类别里相似度最高的那个 |
 | `result.confidence` | 小数 | 对全部可判类别最高分做 softmax 后的概率 |
 | `result.score` | 小数（可为空） | 该类原始相似度 |
+| `result.attributes` | 对象 | 按同类最相似商品投票得到的细分类/颜色/材质参考值，可能为空 |
+| `result.attributes.type` | 字符串（可为空） | 细分类参考值 |
+| `result.attributes.color` | 字符串（可为空） | 颜色参考值 |
+| `result.attributes.material` | 字符串（可为空） | 材质参考值 |
 | `result.topk` | 对象 的数组 | 各类最高分，降序前 3 |
 | `result.topk[].category` | 字符串 | 类别名 |
 | `result.topk[].similarity` | 小数 | 该类最高余弦相似度 |
@@ -233,6 +238,10 @@
 | `result.similarity` | 小数（可为空） | 写入前在目标类别内的最近邻相似度；空类别为 null |
 | `result.suggested_category` | 字符串（可为空） | 图像塔建议的类别 |
 | `result.suggested_score` | 小数（可为空） | 建议类别的原始相似度 |
+| `result.suggested_attributes` | 对象 | 按建议类别内最相似商品投票得到的细分类/颜色/材质参考值 |
+| `result.suggested_attributes.type` | 字符串（可为空） | 细分类参考值 |
+| `result.suggested_attributes.color` | 字符串（可为空） | 颜色参考值 |
+| `result.suggested_attributes.material` | 字符串（可为空） | 材质参考值 |
 | `result.topk` | 对象 的数组 | 建议类别的相似度排序，最多 3 个 |
 | `result.topk[].category` | 字符串 | 候选类别 |
 | `result.topk[].similarity` | 小数 | 该类别最高余弦相似度 |
@@ -272,6 +281,113 @@
 | `msg` | 字符串 | 面向用户的提示 |
 | `result.created` | 布尔 | true=本次新建；false=类别已存在 |
 | `result.name` | 字符串 | 规范化后的类别名 |
+
+### 对话导购页
+
+> 一句话需求 → 意图解析 → 检索 → 模板回复（对应前端「对话导购」页面）
+
+#### `DELETE /api/v1/agent/session/{session_id}` — 清空一段会话上下文
+
+前端点「清空」时调用：立即释放该 session 的历史与摘要，避免内存累积。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `session_id` | path | 字符串 | 是 |  |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+
+
+#### `POST /api/v1/agent/chat` — 对话导购
+
+一句话需求 → 意图解析（Qwen3-4B + LoRA，不可用时自动降级规则解析）→ 调工具检索 → 回复。  带 `session_id` 时按多轮处理：服务端保存最近 6 轮（含检索结果），下一句可省略类目/颜色。  `reply` 中的商品信息全部来自检索结果，模型只输出工具调用与点评，不编造价格销量。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `message` | 请求体 | 字符串 | 是 | 用户一句话需求 |
+| `session_id` | 请求体 | 字符串（可为空） | 否 | 多轮会话 ID；可留空（后端 ConversationStore 已支持，前端暂未传） |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.reply` | 字符串 | 助手回复（模型直接回答，或检索结果 + 点评） |
+| `result.thinking` | 字符串 的数组 | 思考过程，前端折叠展示 |
+| `result.tool_calls` | 对象 的数组 | 本轮调用过的工具（名称 + 参数） |
+| `result.tool_calls[].name` | 字符串 | 工具名：text_search / image_search / list_categories / get_item_detail |
+| `result.tool_calls[].arguments` | 对象 | 工具实参 |
+| `result.items` | 对象 的数组 | 检索命中的商品；前端渲染为并排小图 |
+| `result.items[].category` | 字符串 | 命中类别 |
+| `result.items[].similarity` | 小数 | 余弦相似度（向量已 L2 归一化，故等于点积） |
+| `result.items[].item_id` | 字符串（可为空） | 数据源商品 ID |
+| `result.items[].item_name` | 字符串（可为空） | 商品标题 |
+| `result.items[].product_type` | 字符串（可为空） | 商品大类 |
+| `result.items[].brand` | 字符串（可为空） | 品牌，可能为空串 |
+| `result.items[].color` | 字符串（可为空） | 颜色 |
+| `result.items[].material` | 字符串（可为空） | 材质 |
+| `result.items[].description` | 字符串（可为空） | 商品文案（实验一清洗后） |
+| `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
+| `result.items[].local_image_path` | 字符串（可为空） | 索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图） |
+| `result.items[].original_image_path` | 字符串（可为空） | 原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问 |
+| `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
+| `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.say` | 字符串（可为空） | 工具调用前的过渡语（仅有 tool 动作时出现，≤30 字） |
+
+
+#### `POST /api/v1/agent/image` — 以图搜图
+
+上传商品图 → 图像塔编码 → 与 9 类索引比对，返回相似商品。  `message` 非空时做**向量融合**：`q = α·图像向量 + (1−α)·文本向量`，α 默认 0.6；融合后重新 L2 归一化再检索。  带 `session_id` 时把本轮写进会话历史，后续文字提问可继续引用这些商品。  `thinking` 会列出图像塔、文本塔与融合系数，便于报告核对口径。
+
+**请求**
+
+| 参数 | 位置 | 类型 | 必填 | 说明 |
+|---|---|---|---|---|
+| `file` | 文件 | 文件 | 是 | 商品图（PNG/JPG/WEBP，≤10 MB） |
+| `message` | 表单字段 | 字符串 | 否 | 可选文字描述，参与向量融合 |
+| `alpha` | 表单字段 | 小数 | 否 | 图像权重（0=纯文字，1=纯图像） |
+| `top_k` | 表单字段 | 整数 | 否 | 返回相似商品条数 |
+| `session_id` | 表单字段 | 字符串（可为空） | 否 | 会话 id；带上则图搜结果进入多轮上下文 |
+
+**返回**（`result` 结构如下；`code`/`msg` 见基础约定）
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `code` | 整数 | 0=成功；非 0 见错误码表 |
+| `msg` | 字符串 | 面向用户的提示 |
+| `result.reply` | 字符串 | 助手回复（模板拼装，商品信息来自检索结果） |
+| `result.thinking` | 字符串 的数组 | 编码与检索过程 |
+| `result.tool_calls` | 对象 的数组 | 图搜不走 LLM 工具调用，固定为空 |
+| `result.tool_calls[].name` | 字符串 | 工具名：text_search / image_search / list_categories / get_item_detail |
+| `result.tool_calls[].arguments` | 对象 | 工具实参 |
+| `result.items` | 对象 的数组 | 相似商品，按相似度降序 |
+| `result.items[].category` | 字符串 | 命中类别 |
+| `result.items[].similarity` | 小数 | 余弦相似度（向量已 L2 归一化，故等于点积） |
+| `result.items[].item_id` | 字符串（可为空） | 数据源商品 ID |
+| `result.items[].item_name` | 字符串（可为空） | 商品标题 |
+| `result.items[].product_type` | 字符串（可为空） | 商品大类 |
+| `result.items[].brand` | 字符串（可为空） | 品牌，可能为空串 |
+| `result.items[].color` | 字符串（可为空） | 颜色 |
+| `result.items[].material` | 字符串（可为空） | 材质 |
+| `result.items[].description` | 字符串（可为空） | 商品文案（实验一清洗后） |
+| `result.items[].type` | 字符串（可为空） | 细分类，如「女士小板鞋」 |
+| `result.items[].local_image_path` | 字符串（可为空） | 索引图片相对路径（静态条目是清洗/增强后的图；上传条目即原图） |
+| `result.items[].original_image_path` | 字符串（可为空） | 原始商品图相对路径；仅静态索引条目有，经 /item-originals 访问 |
+| `result.items[].image_status` | 字符串（可为空） | 图片处理状态 |
+| `result.items[].image_height` | 字符串 或 整数（可为空） | 图高（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.items[].image_width` | 字符串 或 整数（可为空） | 图宽（静态索引为 CSV 原样字符串，上传入库为整数） |
+| `result.category` | 字符串（可为空） | 查询向量判出的类别 |
+| `result.similarity` | 小数（可为空） | 查询向量与该类别最高相似度（余弦，非概率） |
 
 ### 异步任务
 
