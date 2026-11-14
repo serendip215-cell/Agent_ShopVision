@@ -67,17 +67,10 @@ def prepare_workdir() -> None:
         shutil.rmtree(WORK)
     FIGS.mkdir(parents=True)
     orig = ROOT / "docs" / "typ" / "figs_exp5"
-    for name in (
-        "01_系统架构.png",
-        "03_工具调用评测_纯模型90%.png",
-        "03_工具调用评测_混合100%.png",
-        "04_系统首页.png",
-        "05_检索评测仪表盘.png",
-    ):
-        shutil.copy2(orig / name, FIGS / name)
-    for png in PNG_STANDINS.values():
-        shutil.copy2(orig / png, FIGS / png)
-    print("工作目录就绪:", WORK)
+    # 自动同步全部 PNG（新增图不用改清单）；SVG 不拷（docx 管线用 PNG 替身）
+    for png in sorted(orig.glob("*.png")):
+        shutil.copy2(png, FIGS / png.name)
+    print("工作目录就绪:", WORK, "（PNG", len(list(FIGS.glob("*.png"))), "张）")
 
 
 def fix_semantic(semantic: Path) -> None:

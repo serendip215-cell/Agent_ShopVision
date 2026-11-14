@@ -1,4 +1,4 @@
-// AI全栈开发实验五：项目总结报告
+﻿// AI全栈开发实验五：项目总结报告
 // 依据课程任务书、项目总结报告模板和仓库既有 Typst 报告排版。
 // 报告数字均来自仓库中的训练凭证、评测 JSON、实验三结果目录与实验五实跑记录。
 #set document(title: "AI全栈开发实验五：项目总结报告")
@@ -151,6 +151,12 @@
 
 == 3.3 数据预处理流程
 
+两类来源数据的类目构成与样本分布如图 @fig-categories 和图 @fig-dist 所示。9 个类别的样本量并不均衡，鞋类与服装类样本最多，厨房用品和家居用品相对较少；这一分布决定了微调时各类别的学习机会，也是后文按类别分析检索效果时的参照。所有样本在入库前都经过图片可读性校验，坏图与重复图在清洗日志中留痕。
+
+#figure(image("figs_exp5/07_数据来源与类目.png", width: 92%), caption: [数据来源与类目构成]) <fig-categories>
+
+#figure(image("figs_exp5/06_九类别基线分布.png", width: 92%), caption: [九类别样本分布与零样本基线]) <fig-dist>
+
 处理流程为：原始数据读取 → 类别整理 → 图片存在性检查 → 非本类商品剔除 → 颜色、材质和细分类补全 → 商品描述模板化 → 按 `item_id` 哈希切分 train/valid/test → 生成 Chinese-CLIP 文本 → 建立 FAISS 索引。每一步都保留 CSV 和 JSONL 日志，清洗脚本写入 `is_read` 标志，后续增量加入的数据可跳过已读记录。
 
 == 3.4 数据清洗与增强
@@ -187,6 +193,10 @@ Agent 微调与推理流水线如图 @fig-train 所示。
 
 初始 v1 数据中工具调用样本只有 15 条，模型容易把 `text_search` 写成 `tool_search`，纯模型准确率只有 10%。随后扩充到 78 条工具调用样本，去掉输入中写死的类目提示，让模型学习从商品词推断类目，得到 v2 适配器。v2 在 10 轮评测中纯模型工具调用准确率达到 90%，加入参数规范化后达到 100%。v3 和 v4 进一步加入四工具动作协议、多轮上下文和检索结果回喂。
 
+微调过程的训练损失与验证准确率曲线如图 @fig-curves 所示。3 个 epoch 内训练损失持续下降，验证集总体准确率从 12.88% 提升到 75.76%；由于验证集规模小，曲线波动较大，训练轮数不再增加以避免过拟合风险。
+
+#figure(image("figs_exp5/09_训练曲线.png", width: 88%), caption: [QLoRA 微调训练曲线]) <fig-curves>
+
 5.2 验证集微调前后结果如表 @tbl-finetune 所示。
 
 #figure(sxx((auto, auto, auto, auto), ([指标], [基座], [LoRA v1], [变化]), (([attribute], [28.33%], [100.00%], [+71.67pp]), ([intent], [0.00%], [66.67%], [+66.67pp]), ([tool_call], [0.00%], [0.00%], [n=1，样本过少]), ([总体], [12.88%], [75.76%], [+62.88pp]))), caption: [5.2 验证集微调前后对比]) <tbl-finetune>
@@ -197,6 +207,14 @@ Agent 微调与推理流水线如图 @fig-train 所示。
 
 实验二的微调结果见@tbl-finetune，实验二在 934 条 test 图文对上评估图文检索。预训练零样本基线 R\@1 为 37.37%，清洗数据微调后 R\@1 为 58.67%，R\@5 为 89.08%，R\@10 为 96.90%。实验三以同源 FP32 基线重新复算，R\@1 为 58.5653%，用于 ONNX 和 TensorRT 的一致性比较。
 
+双塔微调在测试集上的精度对比与召回曲线分别如图 @fig-precision 和图 @fig-recall 所示。清洗数据微调相比零样本基线的提升集中在 R\@1 与 R\@5 档位，说明微调主要改善的是排序头部质量；R\@10 已达 96.90%，候选池尾部接近饱和。
+
+#figure(image("figs_exp5/08_双塔检索精度.png", width: 92%), caption: [双塔检索精度：零样本基线与微调对比]) <fig-precision>
+
+清洗与未清洗数据的对照实验见 9.3 节。召回率随候选数变化的曲线如图 @fig-recall 所示。
+
+#figure(image("figs_exp5/fig_recall.png", width: 82%), caption: [图文检索召回曲线]) <fig-recall>
+
 == 5.2 推理优化一：双塔导出
 
 模型先导出为 ONNX FP32，再进行图层级 FP16 转换。ONNX 作为跨框架模型交换格式 @onnx，便于将训练代码与部署代码解耦。这样可以避开直接将 PyTorch 模型 `.half()` 导出时 LayerNorm 混合精度错误。图像塔固定 224×224，文本塔保留 batch 和序列长度动态维度。推理侧使用同一批候选和同一测试集，确保优化结果可比较。
@@ -205,9 +223,25 @@ Agent 微调与推理流水线如图 @fig-train 所示。
 
 ONNX Runtime CPU 在同线程配置下相比 PyTorch CPU 没有实质加速，ORT-CUDA 也受内存拷贝和算子回退影响。TensorRT FP16 通过算子融合和 kernel 重写取得稳定收益。图像塔 batch=1 加速比 2.366×，batch=32 加速比 2.115×，两档延迟降低和吞吐提升均达到任务书阈值。
 
+推理加速的完整流水线（导出、转换、引擎构建、配对测速）如图 @fig-accel-pipeline 所示。
+
+#figure(image("figs_exp5/14_推理加速流水线.png", width: 90%), caption: [ONNX 与 TensorRT 推理加速流水线]) <fig-accel-pipeline>
+
 不同推理后端的延迟与加速比如表 @tbl-speed 所示。
 
 #figure(sxx((auto, auto, auto, auto, auto), ([后端], [batch], [基线 ms], [优化 ms], [加速比]), (([ORT-CPU FP32], [1], [90.56], [85.24], [1.062×]), ([ORT-CUDA FP16], [1], [4.98], [4.54], [1.097×]), ([TensorRT FP16], [1], [4.59], [1.94], [2.366×]), ([TensorRT FP16], [32], [50.43], [23.84], [2.115×]))), caption: [图像塔推理延迟与加速比]) <tbl-speed>
+
+延迟与吞吐的可视化对比分别如图 @fig-latency 和图 @fig-throughput 所示。两档 batch 下的加速比稳定在 2 倍以上，收益来自 TensorRT 的算子融合与 FP16 kernel 重写，而非简单的半精度转换。
+
+#figure(image("figs_exp5/10_延迟对比.png", width: 92%), caption: [图像塔推理延迟对比（batch=1 与 batch=32）]) <fig-latency>
+
+#figure(image("figs_exp5/11_吞吐对比.png", width: 92%), caption: [图像塔推理吞吐对比]) <fig-throughput>
+
+精度代价方面，FP16 与 FP32 在 934 条测试查询上的逐后端误差如图 @fig-err-heat 所示，TensorRT FP16 的双塔 R\@1 净差为 0.4283pp，远小于任务书 1pp 的上限。量化后模型文件体积变化如图 @fig-filesize 所示，FP16 相比 FP32 显著缩小，便于部署分发。
+
+#figure(image("figs_exp5/12_精度误差热力图.png", width: 92%), caption: [各推理后端精度误差热力图]) <fig-err-heat>
+
+#figure(image("figs_exp5/13_模型文件大小.png", width: 88%), caption: [不同精度模型的文件大小对比]) <fig-filesize>
 
 == 5.4 Agent 推理优化
 
@@ -232,6 +266,16 @@ Agent 侧的优化重点是减少模型输出格式错误和工具参数错误�
 前端系统首页如图 @fig-home 所示。
 
 #figure(image("figs_exp5/04_系统首页.png", width: 92%), caption: [前端系统首页]) <fig-home>
+
+文本检索与图文匹配两个核心页面的运行效果分别如图 @fig-text-page 和图 @fig-match-page 所示。文本检索页展示命中类别分布与按相似度排序的 Top-K 结果；图文匹配页将图像与文本两条链路的判定并排呈现，用户可以直接对比两类判定是否一致。
+
+#figure(image("figs_exp5/16_文本检索页.png", width: 88%), caption: [文本检索页运行效果]) <fig-text-page>
+
+#figure(image("figs_exp5/15_图文匹配页.png", width: 96%), caption: [图文匹配页：图与文判定并排对比]) <fig-match-page>
+
+输入不完整、模型后端不可用等异常场景的中文提示如图 @fig-error 所示，错误码遵循统一的 40000/40001/50001 语义，前端按码表映射为可读文案。
+
+#figure(image("figs_exp5/17_异常提示.png", width: 88%), caption: [异常输入的中文错误提示]) <fig-error>
 
 == 6.3 后端开发
 
@@ -269,6 +313,16 @@ LangChain 负责模型与工具的编排，工具层只暴露白名单函数。A
 
 v2 在 RTX 3080Ti 与 RTX 5060 8GB 上结果一致，纯模型工具调用准确率均为 90%，加入后处理均为 100%，失败项为同一条“有没有灰色的双肩包”，差异来自查询词中的“的”。v4 多轮评测包含 40 条对话，JSON 解析率 100%，动作准确率 90%，检索命中率 82.5%，安全通过率 100%。这些结果说明模型已经能完成主要工具路由，但多轮参数和查询命中仍有优化空间。
 
+前端集成回归的关键路径截图如图 @fig-agent-card 至图 @fig-agent-clear 所示。需要说明的是，本轮回归在无 Qwen3-4B 基座权重的本机执行，Agent 走规则降级模式：图 @fig-agent-card 验证首轮检索的商品卡片渲染链路；图 @fig-agent-multi 验证多轮追问的会话保持；图 @fig-agent-image 验证图搜结果并入同一会话（图中首位相似度 0.9573 来自真实 ONNX 图像塔）；图 @fig-agent-clear 验证清空会话时前后端同步释放。say 过渡语与槽位继承的端到端效果需在装有 v4 模型的演示机上复测，清单已单列交付。
+
+#figure(image("figs_exp5/18_Agent首轮卡片.png", width: 72%), caption: [Agent 首轮检索：回复正文与商品卡片]) <fig-agent-card>
+
+#figure(image("figs_exp5/20_多轮追问.png", width: 72%), caption: [多轮追问：会话历史保持]) <fig-agent-multi>
+
+#figure(image("figs_exp5/19_图搜接话.png", width: 72%), caption: [图搜接话：图像结果并入会话]) <fig-agent-image>
+
+#figure(image("figs_exp5/21_清空会话.png", width: 72%), caption: [清空会话：前后端同步释放]) <fig-agent-clear>
+
 除同步接口外，后端还实现了基于 Celery 与 Redis 的异步任务队列，用于批量图片分类等耗时请求。提交 `POST /api/v1/tasks/image` 或 `POST /api/v1/tasks/batch` 后立即返回 `task_id`，前端轮询 `GET /api/v1/tasks/{task_id}` 获取 `PENDING`、`PROGRESS`、`SUCCESS`、`FAILURE` 状态和进度，批量任务单批上限 12 张，worker 串行处理并上报已完成数量。broker 与结果后端地址通过 `SHOPVISION_CELERY_BROKER_URL`、`SHOPVISION_CELERY_RESULT_BACKEND` 配置，可指向云端 Redis；测试与无 Redis 环境设 `SHOPVISION_CELERY_ALWAYS_EAGER=true`，任务在进程内同步执行，因此单测不需要真实 Redis。Redis 不可达时只有异步提交接口返回 `50001` 并提示检查 broker 地址，文本检索、图片检索和图文匹配三个同步接口不受影响。
 
 = 第八章 系统测试与评估
@@ -297,7 +351,7 @@ v2 在 RTX 3080Ti 与 RTX 5060 8GB 上结果一致，纯模型工具调用准确
 
 现场演示采用十轮脚本，如表 @tbl-demo 所示。前九条都能对到 5.1 的 intent 与 tool_call 样本格式，第十条“随便看看有什么”不指定类目，用于验证规则降级路径。
 
-#figure(sxx((auto, 2fr, 1.7fr), ([轮次], [输入], [期望动作]), ((1, [帮我找黑色木纹手机壳，5个], [text_search / 手机壳 / 5]), (2, [我想找白色运动鞋], [text_search / 鞋 / 5]), (3, [推荐3个蓝色运动水杯], [text_search / 水杯 / 3]), (4, [找卡其色立领夹克], [text_search / 男装]), (5, [有没有灰色的双肩包], [text_search / 包]), (6, [红色带盖炒锅], [text_search / 厨房用品]), (7, [帮我搜透明玻璃杯，10个], [text_search / 水杯 / 10]), (8, [黑色运动长袖套装], [text_search / 运动服]), (9, [找一下白色T恤], [text_search / 女装]), (10, [随便看看有什么], [text_search（不指定类目）]))), caption: [十轮演示脚本与期望动作]) <tbl-demo>
+#figure(sxx((auto, 2fr, 1.7fr), ([轮次], [输入], [期望动作]), (([1], [帮我找黑色木纹手机壳，5个], [text_search / 手机壳 / 5]), ([2], [我想找白色运动鞋], [text_search / 鞋 / 5]), ([3], [推荐3个蓝色运动水杯], [text_search / 水杯 / 3]), ([4], [找卡其色立领夹克], [text_search / 男装]), ([5], [有没有灰色的双肩包], [text_search / 包]), ([6], [红色带盖炒锅], [text_search / 厨房用品]), ([7], [帮我搜透明玻璃杯，10个], [text_search / 水杯 / 10]), ([8], [黑色运动长袖套装], [text_search / 运动服]), ([9], [找一下白色T恤], [text_search / 女装]), ([10], [随便看看有什么], [text_search（不指定类目）]))), caption: [十轮演示脚本与期望动作]) <tbl-demo>
 
 #block(stroke: (dash: "dashed", paint: luma(55%)), inset: 12pt, radius: 4pt)[
   *待补截图 1：* Chrome、Edge、移动端三种视口下的 Agent 页面，需能看见输入框、工具调用过程和商品卡片。
