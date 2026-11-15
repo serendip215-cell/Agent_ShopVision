@@ -1,4 +1,4 @@
-.env
+﻿.env
 
 # 已弃用的 Amazon 本地 Ollama 翻译脚本，仅保留在本机供历史参考。
 /scripts/translate_amazon_products.py
@@ -52,6 +52,7 @@ __pycache__/
 
 # JetBrains IDE ����
 /.idea/
+webapp/.idea/
 
 # Celery worker 本地日志（运行产物，不纳入版本管理）。
 webapp/backend/celery-worker*.log

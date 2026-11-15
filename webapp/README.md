@@ -114,12 +114,47 @@ copy .env.example .env              # 默认 placeholder，开箱即用
 
 ### 3. 启动
 
+**推荐：一键起前后端**（在仓库根目录执行）
+
 ```powershell
-uvicorn app.main:app --reload --port 8000
+.\.venv\Scripts\python.exe scripts\start_all.py
+```
+
+脚本会自动检查虚拟环境与 ONNX 产物、探测端口占用、先后启动后端与前端，
+并等 `/api/v1/health` 返回 `model_loaded` 后才提示就绪。常用参数：
+
+```powershell
+python scripts/start_all.py --api-port 8001 --web-port 3000   # 端口被占用时换端口
+python scripts/start_all.py --no-web                          # 只起后端
+python scripts/start_all.py --no-api                          # 只起前端
+```
+
+脚本特意做了两件事，避免常见的启动踩坑：
+
+- 后端监听 `0.0.0.0` 而非 `127.0.0.1`，同时兼容 IPv4/IPv6；
+- 通过 `SHOPVISION_API_TARGET` 把 Vite 代理目标设为**字面 IPv4**
+  `http://127.0.0.1:<port>`。若写 `localhost`，Node 可能优先解析到
+  IPv6 `[::1]` 而后端只监听 IPv4，表现为前端所有 `/api` 请求 **502**。
+
+**手动分别启动**
+
+```powershell
+# 后端（webapp/backend 目录下）
+cd webapp\backend
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+# 前端（webapp/frontend 目录下，另开一个终端）
+cd webapp\frontend
+$env:SHOPVISION_API_TARGET = "http://127.0.0.1:8000"   # 端口与后端一致
+npx vite --port 5173
 ```
 
 - 接口文档（自动生成，见 §三）：http://localhost:8000/docs （还有 `/scalar`、`/redoc`）
 - 健康检查：http://localhost:8000/api/v1/health
+- 前端页面：http://localhost:5173
+
+> 端口被占用时换端口即可，例如前端 `--port 3000`。5173 常被其他项目的
+> Vite 占用，8000 也常被别的服务占用；`start_all.py` 会先探测再报错。
 
 ### 4. 自检
 
