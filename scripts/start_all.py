@@ -66,6 +66,8 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--web-port", type=int, default=5173)
     ap.add_argument("--no-api", action="store_true")
     ap.add_argument("--no-web", action="store_true")
+    ap.add_argument("--lan", action="store_true",
+                    help="监听 0.0.0.0 供局域网其他设备访问（默认仅本机 127.0.0.1）")
     args = ap.parse_args(argv)
 
     procs: list[subprocess.Popen] = []
@@ -117,11 +119,13 @@ def main(argv: list[str]) -> int:
         # 代理目标写字面 IPv4，避免 Node 把 localhost 解析到 [::1] 导致 502
         env["SHOPVISION_API_TARGET"] = f"http://127.0.0.1:{args.api_port}"
         npx = shutil.which("npx") or "npx"
-        print(f"[2/2] 启动前端 http://127.0.0.1:{args.web_port} ...")
+        bind_host = "0.0.0.0" if args.lan else "127.0.0.1"
+        print(f"[2/2] 启动前端 http://127.0.0.1:{args.web_port} "
+              f"（监听 {bind_host}）...")
         procs.append(
             subprocess.Popen(
                 [npx, "vite", "--port", str(args.web_port), "--strictPort",
-                 "--host", "127.0.0.1"],
+                 "--host", bind_host],
                 cwd=str(FRONTEND),
                 env=env,
             )
