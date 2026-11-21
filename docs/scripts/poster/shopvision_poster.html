@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1240, initial-scale=1.0" />
+<title>ShopVision · 电商商品多模态推荐与上架 Agent — 期末宣传海报</title>
+<style>
+  @font-face {
+    font-family: "NotoSansSC";
+    src: url("file:///C:/Windows/Fonts/NotoSansSC-VF.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "NotoSansLatin";
+    src: url("file:///C:/Windows/Fonts/NotoSans-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "NotoSansLatin";
+    src: url("file:///C:/Windows/Fonts/NotoSans-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  :root {
+    --canvas: #f4f6f6;
+    --surface: #ffffff;
+    --deep: #10262a;
+    --deep-2: #18363c;
+    --teal-ink: #226068;
+    --teal: #3c868f;
+    --teal-soft: #ddefef;
+    --warm-ink: #b06239;
+    --warm: #d4885c;
+    --warm-soft: #f5d8c4;
+    --text-strong: #111b1f;
+    --text: #2d373d;
+    --text-muted: #5d6a71;
+    --line: #d6e0e2;
+    --font-sans: "NotoSansLatin", "NotoSansSC", "Microsoft YaHei", sans-serif;
+    --font-mono: Consolas, "Courier New", monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    width: 1240px;
+    height: 1754px;
+    overflow: hidden;
+    background: var(--canvas);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  .poster {
+    width: 1240px;
+    height: 1754px;
+    padding: 40px 52px 40px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background:
+      radial-gradient(circle at 86% 6%, rgba(95, 168, 176, 0.14) 0%, rgba(95, 168, 176, 0) 38%),
+      radial-gradient(circle at 12% 22%, rgba(245, 216, 196, 0.22) 0%, rgba(245, 216, 196, 0) 34%),
+      var(--canvas);
+  }
+
+  /* 1. 顶部极简元数据标尺 */
+  .meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--deep);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--deep);
+  }
+  .meta-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .group-pill {
+    background: var(--deep);
+    color: #ffffff;
+    padding: 3px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  /* 2. 巨幅居中主题区 */
+  .hero-header {
+    text-align: center;
+    padding: 12px 0 4px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .brand-logo {
+    width: 68px;
+    height: 68px;
+  }
+  .wordmark {
+    font-size: 82px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--deep);
+  }
+  .wordmark span {
+    color: var(--teal-ink);
+  }
+  .main-title {
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.18;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+  }
+  .tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--teal-ink);
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+  .tagline i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--warm);
+    display: inline-block;
+  }
+
+  /* 3. 极简工业摄影主视觉画框 */
+  .visual-frame {
+    width: 100%;
+    height: 590px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    background: var(--deep);
+    box-shadow: 0 22px 48px rgba(16, 38, 42, 0.16);
+  }
+  .visual-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 48%;
+    display: block;
+  }
+  .visual-ribbon {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 20px;
+    background: rgba(12, 31, 35, 0.72);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(221, 239, 239, 0.16);
+    border-radius: 12px;
+    padding: 11px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e6f2f3;
+  }
+  .ribbon-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--warm-soft);
+  }
+  .ribbon-stack {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #d3e7e9;
+  }
+  .ribbon-stack .sep {
+    color: rgba(245, 216, 196, 0.45);
+  }
+
+  /* 4. 三大核心能力（一眼看懂项目做了什么） */
+  .pillars-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .pillars-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pillars-head h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--deep);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .pillars-head .rule {
+    height: 1.5px;
+    flex: 1;
+    background: var(--line);
+  }
+  .pillars-head .sub {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .pillar-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 24px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pillar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    background: var(--teal-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pillar-card.is-warm .pillar-icon {
+    background: #faece2;
+  }
+  .pillar-num {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: #8ca0a5;
+    letter-spacing: 0.06em;
+  }
+  .pillar-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    line-height: 1.28;
+  }
+  .pillar-desc {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .pillar-desc strong {
+    color: var(--text-strong);
+    font-weight: 700;
+  }
+
+  /* 5. 四大核心实测成果（超大数字 + 严守口径红线） */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--teal-ink);
+    border-radius: 15px;
+    padding: 20px 20px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .metric-card.is-warm {
+    border-top-color: var(--warm-ink);
+  }
+  .metric-val {
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-card.is-warm .metric-val {
+    color: var(--warm-ink);
+    font-size: 36px;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+  }
+  .metric-name {
+    font-size: 16.5px;
+    font-weight: 800;
+    color: var(--text-strong);
+    margin-top: 2px;
+  }
+  .metric-note {
+    font-size: 12.2px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .metric-note strong {
+    color: var(--text-strong);
+    font-weight: 700;
+  }
+
+  /* 6. 极简底部人名条（仅罗列人名，不写分工，严格核对：秦鑫洋） */
+  .footer {
+    background: var(--deep);
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 22px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .foot-tag {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--warm-soft);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .foot-names {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+  }
+  .foot-names .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--warm);
+    display: inline-block;
+    opacity: 0.9;
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- 1. 顶部标尺 -->
+  <div class="meta-bar">
+    <div>西安邮电大学 · AI 全栈开发课程设计</div>
+    <div class="meta-right">
+      <span class="group-pill">第 23 组</span>
+      <span>2026.11</span>
+    </div>
+  </div>
+
+  <!-- 2. 巨幅核心主题 -->
+  <header class="hero-header">
+    <div class="brand-row">
+      <svg class="brand-logo" viewBox="0 0 48 48" aria-hidden="true">
+        <rect width="48" height="48" rx="14" fill="#DDEFEF" />
+        <path d="M12 19h24l-3 18H15z" fill="none" stroke="#226068" stroke-width="3.2" stroke-linejoin="round" />
+        <path d="M18 19v-2.4a6 6 0 0 1 12 0V19" fill="none" stroke="#226068" stroke-width="3.2" stroke-linecap="round" />
+        <circle cx="34" cy="14" r="3.8" fill="#D4885C" />
+      </svg>
+      <div class="wordmark">Shop<span>Vision</span></div>
+    </div>
+    <h1 class="main-title">电商商品多模态推荐与上架 Agent</h1>
+    <div class="tagline">
+      <span>以图搜图</span><i></i>
+      <span>以文搜图</span><i></i>
+      <span>上架图文核验</span><i></i>
+      <span>多轮对话导购</span>
+    </div>
+  </header>
+
+  <!-- 3. 极简工业设计多模态主视觉 -->
+  <section class="visual-frame">
+    <img src="file:///D:/Document/Agent_ShopVision/docs/scripts/poster/hero_visual.jpg" alt="ShopVision 多模态视觉核心" />
+    <div class="visual-ribbon">
+      <span class="ribbon-label">全栈技术引擎</span>
+      <div class="ribbon-stack">
+        <span>Chinese-CLIP ViT-B-16</span><span class="sep">·</span>
+        <span>FAISS 512d</span><span class="sep">·</span>
+        <span>ONNX &amp; TensorRT FP16</span><span class="sep">·</span>
+        <span>Qwen3-4B QLoRA</span><span class="sep">·</span>
+        <span>FastAPI + React 19</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 三大核心能力（一眼看懂项目做了什么） -->
+  <section class="pillars-section">
+    <div class="pillars-head">
+      <h2>项目核心内容</h2>
+      <div class="rule"></div>
+      <span class="sub">数据治理 → 双塔微调 → 推理加速 → Web 服务 → 对话 Agent 全链路闭环</span>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-top">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#226068" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+              <path d="M8.5 11h5M11 8.5v5" />
+            </svg>
+          </div>
+          <span class="pillar-num">01</span>
+        </div>
+        <h3 class="pillar-title">多模态检索与上架核验</h3>
+        <p class="pillar-desc">
+          清洗 9 类商品图文并微调 <strong>Chinese-CLIP</strong> 双塔与 FAISS 向量库，实现以图搜图、以文搜图及上架图文一致性核验。
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-top">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#226068" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </div>
+          <span class="pillar-num">02</span>
+        </div>
+        <h3 class="pillar-title">推理加速与全栈系统</h3>
+        <p class="pillar-desc">
+          导出 ONNX 并以 <strong>TensorRT FP16</strong> 引擎加速部署，构建 FastAPI 统一接口、异步任务队列与 React 19 多模态工作台。
+        </p>
+      </div>
+
+      <div class="pillar-card is-warm">
+        <div class="pillar-top">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B06239" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              <path d="M8 10h8M8 14h5" />
+            </svg>
+          </div>
+          <span class="pillar-num">03</span>
+        </div>
+        <h3 class="pillar-title">多轮对话导购 Agent</h3>
+        <p class="pillar-desc">
+          基于 <strong>Qwen3-4B QLoRA</strong> 完成意图解析、四工具路由与多轮槽位继承；商品事实一律由检索返回，安全闸防幻觉编造。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 四大实测核心成果 -->
+  <section class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-val">9,393</div>
+      <div class="metric-name">清洗图文商品库</div>
+      <div class="metric-note">9 大商品类目 · 512 维 FAISS 索引<br/>按 item_id 防泄漏切分</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-val">58.67%</div>
+      <div class="metric-name">图文检索 R@1</div>
+      <div class="metric-note">test 934 对实测（基线 37.37%）<br/>R@5 <strong>89.08%</strong> · R@10 <strong>96.90%</strong></div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-val">−57.73%</div>
+      <div class="metric-name">图像塔推理延迟</div>
+      <div class="metric-note">4.59 → 1.94 ms · 吞吐 <strong>+136.6%</strong><br/>TRT FP16 · <strong>RTX 3080Ti 测速</strong></div>
+    </div>
+
+    <div class="metric-card is-warm">
+      <div class="metric-val">90% → 100%</div>
+      <div class="metric-name">Agent 工具调用率</div>
+      <div class="metric-note">纯模型 <strong>90%</strong>，<strong>加参数规范化后 100%</strong><br/>v4 多轮安全通过率 <strong>100%</strong></div>
+    </div>
+  </section>
+
+  <!-- 6. 极简底部人名栏（仅罗列人名，不写分工） -->
+  <footer class="footer">
+    <div class="foot-tag">
+      <svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true">
+        <rect width="48" height="48" rx="14" fill="#21464D" />
+        <path d="M12 19h24l-3 18H15z" fill="none" stroke="#9BD3D9" stroke-width="3.2" stroke-linejoin="round" />
+        <path d="M18 19v-2.4a6 6 0 0 1 12 0V19" fill="none" stroke="#9BD3D9" stroke-width="3.2" stroke-linecap="round" />
+        <circle cx="34" cy="14" r="3.8" fill="#F5D8C4" />
+      </svg>
+      <span>项目组成员</span>
+    </div>
+    <div class="foot-names">
+      <span>何朝杨</span><i class="dot"></i>
+      <span>杜军博</span><i class="dot"></i>
+      <span>王陆洲</span><i class="dot"></i>
+      <span>张梓萱</span><i class="dot"></i>
+      <span>刘凡思雨</span><i class="dot"></i>
+      <span>秦鑫洋</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
