@@ -114,27 +114,44 @@ copy .env.example .env              # 默认 placeholder，开箱即用
 
 ### 3. 启动
 
-**推荐：一键起前后端**（在仓库根目录执行）
+**最简单：直接双击启动（Windows 推荐）**
+
+在仓库根目录直接双击 **`一键启动ShopVision.cmd`** 即可自动拉起前后端，就绪后自动打开默认浏览器进入页面；保持终端窗口开启，按 `Ctrl+C` 或直接关闭窗口即可完整停止全部服务（不会残留后台进程）。
+
+脚本会自动完成：
+- 自动定位项目内置 `webapp\backend\.venv`（无需配置系统 Python PATH，避开 Windows Store 别名）；
+- 首次缺失 `.env` 时自动从 `.env.example` 初始化（若检测到本地 ONNX 双塔模型则自动切为 `onnx`）；
+- 缺失 `.venv` 或前端 `node_modules` 时交互引导一键安装；
+- 8000 / 5173 被其他项目占用时自动顺延至空闲端口并同步放行 CORS；
+- 后端 `/api/v1/health` 与前端 Vite 全部就绪后自动打开默认浏览器。
+
+**命令行方式**（在仓库根目录执行，支持 `一键启动ShopVision.cmd` 或直接跑 Python）：
 
 ```powershell
-.\.venv\Scripts\python.exe scripts\start_all.py
+.\一键启动ShopVision.cmd
+# 或
+.\webapp\backend\.venv\Scripts\python.exe scripts\start_all.py
 ```
 
-脚本会自动检查虚拟环境与 ONNX 产物、探测端口占用、先后启动后端与前端，
-并等 `/api/v1/health` 返回 `model_loaded` 后才提示就绪。常用参数：
+常用参数（`.cmd` 与 `start_all.py` 均支持透传）：
 
 ```powershell
-python scripts/start_all.py --api-port 8001 --web-port 3000   # 端口被占用时换端口
-python scripts/start_all.py --no-web                          # 只起后端
-python scripts/start_all.py --no-api                          # 只起前端
+.\一键启动ShopVision.cmd --lan                              # 开放局域网访问并打印局域网地址
+.\一键启动ShopVision.cmd --api-port 8001 --web-port 3000    # 指定首选端口
+.\一键启动ShopVision.cmd --no-web                           # 只起后端
+.\一键启动ShopVision.cmd --no-api                           # 只起前端
+.\一键启动ShopVision.cmd --no-browser                       # 就绪后不自动打开浏览器
+.\一键启动ShopVision.cmd --strict-port                      # 端口被占用时直接报错，不自动顺延
 ```
 
-脚本特意做了两件事，避免常见的启动踩坑：
+脚本特意做了几项防踩坑处理：
 
 - 后端监听 `0.0.0.0` 而非 `127.0.0.1`，同时兼容 IPv4/IPv6；
 - 通过 `SHOPVISION_API_TARGET` 把 Vite 代理目标设为**字面 IPv4**
   `http://127.0.0.1:<port>`。若写 `localhost`，Node 可能优先解析到
-  IPv6 `[::1]` 而后端只监听 IPv4，表现为前端所有 `/api` 请求 **502**。
+  IPv6 `[::1]` 而后端只监听 IPv4，表现为前端所有 `/api` 请求 **502**；
+- 本地健康检查禁用系统代理，防止开启代理软件时探测超时；
+- 通过 Windows Job Object 与进程树回收确保关闭窗口时不残留僵尸进程。
 
 **手动分别启动**
 
@@ -153,8 +170,7 @@ npx vite --port 5173
 - 健康检查：http://localhost:8000/api/v1/health
 - 前端页面：http://localhost:5173
 
-> 端口被占用时换端口即可，例如前端 `--port 3000`。5173 常被其他项目的
-> Vite 占用，8000 也常被别的服务占用；`start_all.py` 会先探测再报错。
+> 端口被占用时默认会自动顺延到下一个空闲端口并在终端标明实际地址；如需固定端口，可传 `--api-port` / `--web-port` 并配合 `--strict-port`。
 
 ### 4. 自检
 
