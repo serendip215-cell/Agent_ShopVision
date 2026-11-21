@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face {
+    font-family: "NotoSansSC";
+    src: url("file:///C:/Windows/Fonts/NotoSansSC-VF.ttf") format("truetype");
+    font-weight: 100 900;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 680px;
+    height: 760px;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: "Segoe UI", "NotoSansSC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    width: 680px;
+    height: 760px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #ffffff;
+  }
+  .stage {
+    border-radius: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid #c6d8dc;
+    background: #f5f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .stage.s-train { background: #eef6f7; border-color: #8ebbc3; }
+  .stage.s-model { background: #10262a; border-color: #10262a; color: #ffffff; }
+  .stage.s-guard { background: #fdf4ec; border-color: #e0b391; }
+  .stage.s-tool { background: #eef6f2; border-color: #97c7b2; }
+  .stage.s-out { background: #f1f4fa; border-color: #b1c1de; }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 9px;
+    border-radius: 4px;
+    background: #226068;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+  }
+  .stage.s-model .tag { background: #d4885c; }
+  .stage.s-guard .tag { background: #b06239; }
+  .stage.s-tool .tag { background: #266b4e; }
+  .stage.s-out .tag { background: #365083; }
+
+  .sub {
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #4f636a;
+  }
+  .stage.s-model .sub { color: #f5d8c4; }
+
+  .title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #10262a;
+  }
+  .stage.s-model .title { color: #ffffff; }
+
+  .desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #36444b;
+  }
+  .stage.s-model .desc { color: #d6e7e9; }
+
+  .pills {
+    display: flex;
+    gap: 7px;
+    margin-top: 2px;
+    flex-wrap: nowrap;
+  }
+  .pill {
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #b06239;
+    background: #ffffff;
+    border: 1px solid #e3bfa3;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+
+  .down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="stage s-train">
+    <div class="top">
+      <span class="tag">01 · SFT 语料构建</span>
+      <span class="sub">v1 → v2 → v3 → v4 迭代</span>
+    </div>
+    <div class="title">基于实验一 9,393 商品表构造指令与多轮对话</div>
+    <div class="desc">v1 初始 100 条 → v2 扩充 78 条无类目提示 tool_call → v3 440 条四工具协议 → v4 549 段 / 1,029 轮多轮上下文语料</div>
+  </div>
+
+  <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#226068" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="stage s-model">
+    <div class="top">
+      <span class="tag">02 · QLoRA 4-bit 微调</span>
+      <span class="sub">Qwen3-4B-Instruct-2507</span>
+    </div>
+    <div class="title">NF4 + Double Quant 单卡微调（r=16 / α=32 / dropout=0.05）</div>
+    <div class="desc">AutoDL RTX 4090 / 3080Ti 产出 64MB 适配器（v2 / v3 / v4）；模型仅输出结构化 JSON 动作，绝不编造商品事实</div>
+  </div>
+
+  <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#10262a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="stage s-guard">
+    <div class="top">
+      <span class="tag">03 · 运行时三道防线</span>
+      <span class="sub">LangChain + 规则兜底</span>
+    </div>
+    <div class="title">白名单校验 + 编辑距离纠错 + 参数规范化 + 离线规则降级</div>
+    <div class="pills">
+      <span class="pill">text_search</span>
+      <span class="pill">image_search</span>
+      <span class="pill">list_categories</span>
+      <span class="pill">get_item_detail</span>
+    </div>
+  </div>
+
+  <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#b06239" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="stage s-tool">
+    <div class="top">
+      <span class="tag">04 · 工具执行与槽位继承</span>
+      <span class="sub">HTTP 回调实验四 API</span>
+    </div>
+    <div class="title">合并多轮类目槽位 → 调用双塔 ONNX + FAISS 检索真实商品</div>
+    <div class="desc">同会话维护 8 条历史窗口与 ≤6 句摘要；图搜结果直接并入会话历史，支持后续追问继承图片判出的类目</div>
+  </div>
+
+  <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#266b4e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="stage s-out">
+    <div class="top">
+      <span class="tag">05 · 结果回喂与安全闸</span>
+      <span class="sub">两轮生成 · 零幻觉防线</span>
+    </div>
+    <div class="title">以「检索结果：」回喂生成导购点评，拦截价格/销量臆造</div>
+    <div class="desc">安全闸拦截价格/销量断言、纠正主语口误、剥离量词客套；模型异常自动退回模板，确保接口 100% 稳定可用</div>
+  </div>
+</div>
+</body>
+</html>

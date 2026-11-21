@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face {
+    font-family: "NotoSansSC";
+    src: url("file:///C:/Windows/Fonts/NotoSansSC-VF.ttf") format("truetype");
+    font-weight: 100 900;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1120px;
+    height: 440px;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: "Segoe UI", "NotoSansSC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    width: 1120px;
+    height: 440px;
+    padding: 18px 18px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #ffffff;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr;
+    align-items: stretch;
+    height: 274px;
+  }
+  .card {
+    border-radius: 12px;
+    padding: 14px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1.5px solid #cbd9dc;
+    background: #f5f9fa;
+  }
+  .card.c1 { background: #eef6f7; border-color: #9ec5cb; }
+  .card.c2 { background: #eef6f2; border-color: #9dc8b5; }
+  .card.c3 { background: #fdf5ee; border-color: #e4bfa2; }
+  .card.c4 { background: #f1f4fa; border-color: #b4c2df; }
+  .card.c5 { background: #10262a; border-color: #10262a; color: #ffffff; }
+
+  .badge {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    background: #226068;
+    color: #ffffff;
+  }
+  .card.c2 .badge { background: #266b4e; }
+  .card.c3 .badge { background: #b06239; }
+  .card.c4 .badge { background: #365083; }
+  .card.c5 .badge { background: #d4885c; color: #ffffff; }
+
+  .title {
+    font-size: 16.5px;
+    font-weight: 800;
+    color: #10262a;
+    line-height: 1.25;
+  }
+  .card.c5 .title { color: #ffffff; }
+
+  .bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12.2px;
+    line-height: 1.45;
+    color: #36434a;
+  }
+  .card.c5 .bullets { color: #d6e7e9; }
+
+  .foot {
+    margin-top: auto;
+    padding-top: 7px;
+    border-top: 1px dashed rgba(16, 38, 42, 0.18);
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #226068;
+  }
+  .card.c2 .foot { color: #266b4e; }
+  .card.c3 .foot { color: #b06239; }
+  .card.c4 .foot { color: #365083; }
+  .card.c5 .foot { color: #f5d8c4; border-top-color: rgba(245, 216, 196, 0.28); }
+
+  .arr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .down-arrows {
+    height: 30px;
+    display: grid;
+    grid-template-columns: 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr;
+    align-items: center;
+  }
+  .da {
+    display: flex;
+    justify-content: center;
+  }
+
+  .reuse {
+    height: 92px;
+    border-radius: 12px;
+    background: #f3f7f8;
+    border: 1.5px solid #226068;
+    padding: 12px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+  .reuse-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #10262a;
+    letter-spacing: 0.03em;
+  }
+  .reuse-line {
+    font-size: 12.6px;
+    color: #2f3b41;
+    line-height: 1.45;
+  }
+  .reuse-line strong {
+    color: #226068;
+    font-weight: 800;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="card c1">
+      <span class="badge">EXP 01</span>
+      <div class="title">三源数据建设</div>
+      <ul class="bullets">
+        <li>MUGE / 苏宁 / Amazon</li>
+        <li>10,165 → 视觉清洗</li>
+        <li>9 类 9,393 条图文对</li>
+        <li>MD5(item_id) 防泄漏</li>
+      </ul>
+      <div class="foot">products.csv + 图片</div>
+    </div>
+
+    <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#226068" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+    <div class="card c2">
+      <span class="badge">EXP 02</span>
+      <div class="title">双塔全参微调</div>
+      <ul class="bullets">
+        <li>Chinese-CLIP ViT-B-16</li>
+        <li>AMP + 梯度检查点全参</li>
+        <li>5060 Ti 单卡 3 epoch</li>
+        <li>R@1: 37.37 → 58.67%</li>
+      </ul>
+      <div class="foot">epoch3.pt + FAISS</div>
+    </div>
+
+    <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#266b4e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+    <div class="card c3">
+      <span class="badge">EXP 03</span>
+      <div class="title">推理加速优化</div>
+      <ul class="bullets">
+        <li>导出双塔 ONNX FP32</li>
+        <li>图层级 FP16 + TRT 引擎</li>
+        <li>GPU 训练机配对测速</li>
+        <li>延迟 −57.73% / Δ0.43pp</li>
+      </ul>
+      <div class="foot">ONNX / TensorRT</div>
+    </div>
+
+    <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#b06239" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+    <div class="card c4">
+      <span class="badge">EXP 04</span>
+      <div class="title">Web 全栈服务</div>
+      <ul class="bullets">
+        <li>FastAPI 12 个路径</li>
+        <li>Celery + Redis 异步队列</li>
+        <li>占位 / ONNX 同形接缝</li>
+        <li>React 19 八大页面</li>
+      </ul>
+      <div class="foot">/image /text /match</div>
+    </div>
+
+    <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#365083" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+    <div class="card c5">
+      <span class="badge">EXP 05</span>
+      <div class="title">对话导购 Agent</div>
+      <ul class="bullets">
+        <li>Qwen3-4B QLoRA 4-bit</li>
+        <li>LangChain 四工具白名单</li>
+        <li>多轮槽位继承与图搜接话</li>
+        <li>安全闸控管、事实由检索提供</li>
+      </ul>
+      <div class="foot">/agent/chat · /image</div>
+    </div>
+  </div>
+
+  <div class="down-arrows">
+    <div class="da"><svg width="16" height="24" viewBox="0 0 16 24"><path d="M8 2v17M3 14l5 6 5-6" fill="none" stroke="#226068" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div></div>
+    <div class="da"><svg width="16" height="24" viewBox="0 0 16 24"><path d="M8 2v17M3 14l5 6 5-6" fill="none" stroke="#266b4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div></div>
+    <div class="da"><svg width="16" height="24" viewBox="0 0 16 24"><path d="M8 2v17M3 14l5 6 5-6" fill="none" stroke="#b06239" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div></div>
+    <div class="da"><svg width="16" height="24" viewBox="0 0 16 24"><path d="M8 2v17M3 14l5 6 5-6" fill="none" stroke="#365083" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div></div>
+    <div class="da"><svg width="16" height="24" viewBox="0 0 16 24"><path d="M8 2v17M3 14l5 6 5-6" fill="none" stroke="#10262a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+
+  <div class="reuse">
+    <div class="reuse-title">关键数据流与工程复用闭环</div>
+    <div class="reuse-line"><strong>数据复用：</strong>三源清洗图文 → 统一 build_product_text 模板 → 双塔训练与 FAISS 索引同源 → API 返回真实商品事实</div>
+    <div class="reuse-line"><strong>模型与服务复用：</strong>实验 2 全参微调权重 → 实验 3 ONNX/TRT 推理加速 → 实验 4 FastAPI 封装为实验 5 Agent 四工具</div>
+  </div>
+</div>
+</body>
+</html>
