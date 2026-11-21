@@ -28,7 +28,7 @@
   }
   .stage {
     border-radius: 12px;
-    padding: 12px 16px;
+    padding: 13px 16px;
     border: 1.5px solid #c6d8dc;
     background: #f5f9fa;
     display: flex;
@@ -41,19 +41,14 @@
   .stage.s-tool { background: #eef6f2; border-color: #97c7b2; }
   .stage.s-out { background: #f1f4fa; border-color: #b1c1de; }
 
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  .top { display: flex; justify-content: space-between; align-items: center; }
   .tag {
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 800;
     padding: 2px 9px;
     border-radius: 4px;
     background: #226068;
     color: #ffffff;
-    letter-spacing: 0.04em;
   }
   .stage.s-model .tag { background: #d4885c; }
   .stage.s-guard .tag { background: #b06239; }
@@ -68,75 +63,56 @@
   }
   .stage.s-model .sub { color: #f5d8c4; }
 
-  .title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #10262a;
-  }
+  .title { font-size: 17px; font-weight: 800; color: #10262a; }
   .stage.s-model .title { color: #ffffff; }
 
-  .desc {
-    font-size: 13px;
-    line-height: 1.5;
-    color: #36444b;
-  }
+  .desc { font-size: 13.5px; line-height: 1.48; color: #36444b; }
   .stage.s-model .desc { color: #d6e7e9; }
 
-  .pills {
-    display: flex;
-    gap: 7px;
-    margin-top: 2px;
-    flex-wrap: nowrap;
-  }
+  .pills { display: flex; gap: 7px; margin-top: 3px; flex-wrap: nowrap; }
   .pill {
     font-family: Consolas, monospace;
-    font-size: 11.5px;
+    font-size: 11.8px;
     font-weight: 700;
     color: #b06239;
     background: #ffffff;
     border: 1px solid #e3bfa3;
-    padding: 2px 8px;
+    padding: 2.5px 9px;
     border-radius: 5px;
   }
-
-  .down {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 22px;
-  }
+  .down { display: flex; justify-content: center; align-items: center; height: 22px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="stage s-train">
     <div class="top">
-      <span class="tag">01 · SFT 语料构建</span>
-      <span class="sub">v1 → v2 → v3 → v4 迭代</span>
+      <span class="tag">第 1 步 · 准备对话教材</span>
+      <span class="sub">v1 → v4 四代迭代</span>
     </div>
-    <div class="title">基于实验一 9,393 商品表构造指令与多轮对话</div>
-    <div class="desc">v1 初始 100 条 → v2 扩充 78 条无类目提示 tool_call → v3 440 条四工具协议 → v4 549 段 / 1,029 轮多轮上下文语料</div>
+    <div class="title">用 9,393 条真实商品，造出单轮与多轮导购题库</div>
+    <div class="desc">从 100 条起步，逐步扩充到 v4 的 549 段 / 1,029 轮多轮对话，教会模型自己猜类目、看懂上下文</div>
   </div>
 
   <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#226068" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
   <div class="stage s-model">
     <div class="top">
-      <span class="tag">02 · QLoRA 4-bit 微调</span>
-      <span class="sub">Qwen3-4B-Instruct-2507</span>
+      <span class="tag">第 2 步 · 轻量微调大脑</span>
+      <span class="sub">Qwen3-4B + QLoRA 4-bit</span>
     </div>
-    <div class="title">NF4 + Double Quant 单卡微调（r=16 / α=32 / dropout=0.05）</div>
-    <div class="desc">AutoDL RTX 4090 / 3080Ti 产出 64MB 适配器（v2 / v3 / v4）；模型仅输出结构化 JSON 动作，绝不编造商品事实</div>
+    <div class="title">只训 64MB 轻量插件（r=16 / α=32），8GB 显卡可跑</div>
+    <div class="desc">模型只负责“听懂话 → 输出 JSON 指令”，绝不凭空编商品，把找商品的事交给检索接口</div>
   </div>
 
   <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#10262a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
   <div class="stage s-guard">
     <div class="top">
-      <span class="tag">03 · 运行时三道防线</span>
+      <span class="tag">第 3 步 · 三道防错保险</span>
       <span class="sub">LangChain + 规则兜底</span>
     </div>
-    <div class="title">白名单校验 + 编辑距离纠错 + 参数规范化 + 离线规则降级</div>
+    <div class="title">白名单锁死 4 个工具 · 自动纠错洗参数 · 断线切规则</div>
     <div class="pills">
       <span class="pill">text_search</span>
       <span class="pill">image_search</span>
@@ -149,22 +125,22 @@
 
   <div class="stage s-tool">
     <div class="top">
-      <span class="tag">04 · 工具执行与槽位继承</span>
-      <span class="sub">HTTP 回调实验四 API</span>
+      <span class="tag">第 4 步 · 查真实商品库</span>
+      <span class="sub">回调实验四 ONNX + FAISS</span>
     </div>
-    <div class="title">合并多轮类目槽位 → 调用双塔 ONNX + FAISS 检索真实商品</div>
-    <div class="desc">同会话维护 8 条历史窗口与 ≤6 句摘要；图搜结果直接并入会话历史，支持后续追问继承图片判出的类目</div>
+    <div class="title">接住上一轮类目，去双塔索引里捞出真实商品</div>
+    <div class="desc">先找“运动鞋”、再说“要白色的”自动合并检索；刚搜完图也能直接用文字接着追问</div>
   </div>
 
   <div class="down"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M9 1v15M4 11l5 6 5-6" fill="none" stroke="#266b4e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
   <div class="stage s-out">
     <div class="top">
-      <span class="tag">05 · 结果回喂与安全闸</span>
-      <span class="sub">两轮生成 · 零幻觉防线</span>
+      <span class="tag">第 5 步 · 生成安全点评</span>
+      <span class="sub">两轮回喂 · 防胡说安全闸</span>
     </div>
-    <div class="title">以「检索结果：」回喂生成导购点评，拦截价格/销量臆造</div>
-    <div class="desc">安全闸拦截价格/销量断言、纠正主语口误、剥离量词客套；模型异常自动退回模板，确保接口 100% 稳定可用</div>
+    <div class="title">把真商品喂回模型写推荐语，拦截乱报价与吹销量</div>
+    <div class="desc">数据库没有价格和销量，安全闸一律拦截违规断言，保证每句导购回复真实可靠</div>
   </div>
 </div>
 </body>

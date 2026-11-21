@@ -34,10 +34,10 @@
   }
   .card {
     border-radius: 12px;
-    padding: 14px 13px;
+    padding: 15px 14px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
     border: 1.5px solid #cbd9dc;
     background: #f5f9fa;
   }
@@ -50,7 +50,7 @@
   .badge {
     display: inline-block;
     align-self: flex-start;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 800;
     padding: 2px 8px;
     border-radius: 4px;
@@ -64,7 +64,7 @@
   .card.c5 .badge { background: #d4885c; color: #ffffff; }
 
   .title {
-    font-size: 16.5px;
+    font-size: 17.5px;
     font-weight: 800;
     color: #10262a;
     line-height: 1.25;
@@ -75,19 +75,19 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    font-size: 12.2px;
-    line-height: 1.45;
-    color: #36434a;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 1.42;
+    color: #313e45;
   }
-  .card.c5 .bullets { color: #d6e7e9; }
+  .card.c5 .bullets { color: #d9eaec; }
 
   .foot {
     margin-top: auto;
     padding-top: 7px;
     border-top: 1px dashed rgba(16, 38, 42, 0.18);
     font-family: Consolas, monospace;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 700;
     color: #226068;
   }
@@ -96,25 +96,18 @@
   .card.c4 .foot { color: #365083; }
   .card.c5 .foot { color: #f5d8c4; border-top-color: rgba(245, 216, 196, 0.28); }
 
-  .arr {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .arr { display: flex; align-items: center; justify-content: center; }
 
   .down-arrows {
-    height: 30px;
+    height: 28px;
     display: grid;
     grid-template-columns: 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr;
     align-items: center;
   }
-  .da {
-    display: flex;
-    justify-content: center;
-  }
+  .da { display: flex; justify-content: center; }
 
   .reuse {
-    height: 92px;
+    height: 94px;
     border-radius: 12px;
     background: #f3f7f8;
     border: 1.5px solid #226068;
@@ -125,14 +118,13 @@
     gap: 6px;
   }
   .reuse-title {
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 800;
     color: #10262a;
-    letter-spacing: 0.03em;
   }
   .reuse-line {
-    font-size: 12.6px;
-    color: #2f3b41;
+    font-size: 13.2px;
+    color: #2c383e;
     line-height: 1.45;
   }
   .reuse-line strong {
@@ -145,13 +137,13 @@
 <div class="wrap">
   <div class="row">
     <div class="card c1">
-      <span class="badge">EXP 01</span>
-      <div class="title">三源数据建设</div>
+      <span class="badge">实验一</span>
+      <div class="title">洗干净数据</div>
       <ul class="bullets">
         <li>MUGE / 苏宁 / Amazon</li>
-        <li>10,165 → 视觉清洗</li>
-        <li>9 类 9,393 条图文对</li>
-        <li>MD5(item_id) 防泄漏</li>
+        <li>剔除错图错类 765 条</li>
+        <li>留 9 类 9,393 条图文</li>
+        <li>按商品 ID 切分防泄题</li>
       </ul>
       <div class="foot">products.csv + 图片</div>
     </div>
@@ -159,13 +151,13 @@
     <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#226068" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
     <div class="card c2">
-      <span class="badge">EXP 02</span>
-      <div class="title">双塔全参微调</div>
+      <span class="badge">实验二</span>
+      <div class="title">训准双塔模型</div>
       <ul class="bullets">
         <li>Chinese-CLIP ViT-B-16</li>
-        <li>AMP + 梯度检查点全参</li>
-        <li>5060 Ti 单卡 3 epoch</li>
-        <li>R@1: 37.37 → 58.67%</li>
+        <li>双塔全参微调（AMP）</li>
+        <li>5060 Ti 跑 3 轮 6 分钟</li>
+        <li>R@1：37.4% → 58.7%</li>
       </ul>
       <div class="foot">epoch3.pt + FAISS</div>
     </div>
@@ -173,13 +165,13 @@
     <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#266b4e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
     <div class="card c3">
-      <span class="badge">EXP 03</span>
-      <div class="title">推理加速优化</div>
+      <span class="badge">实验三</span>
+      <div class="title">加速模型推理</div>
       <ul class="bullets">
-        <li>导出双塔 ONNX FP32</li>
-        <li>图层级 FP16 + TRT 引擎</li>
-        <li>GPU 训练机配对测速</li>
-        <li>延迟 −57.73% / Δ0.43pp</li>
+        <li>导出 ONNX 脱离训练框架</li>
+        <li>转 TensorRT FP16 引擎</li>
+        <li>速度翻倍（延迟 −57.7%）</li>
+        <li>精度几乎不掉（−0.43pp）</li>
       </ul>
       <div class="foot">ONNX / TensorRT</div>
     </div>
@@ -187,13 +179,13 @@
     <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#b06239" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
     <div class="card c4">
-      <span class="badge">EXP 04</span>
-      <div class="title">Web 全栈服务</div>
+      <span class="badge">实验四</span>
+      <div class="title">做成可用网站</div>
       <ul class="bullets">
-        <li>FastAPI 12 个路径</li>
+        <li>FastAPI 12 个标准接口</li>
         <li>Celery + Redis 异步队列</li>
-        <li>占位 / ONNX 同形接缝</li>
-        <li>React 19 八大页面</li>
+        <li>React 19 八个功能页</li>
+        <li>能搜图、搜文、查匹配</li>
       </ul>
       <div class="foot">/image /text /match</div>
     </div>
@@ -201,13 +193,13 @@
     <div class="arr"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 9h12M10 4l5 5-5 5" fill="none" stroke="#365083" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
     <div class="card c5">
-      <span class="badge">EXP 05</span>
-      <div class="title">对话导购 Agent</div>
+      <span class="badge">实验五</span>
+      <div class="title">装上对话大脑</div>
       <ul class="bullets">
-        <li>Qwen3-4B QLoRA 4-bit</li>
-        <li>LangChain 四工具白名单</li>
-        <li>多轮槽位继承与图搜接话</li>
-        <li>安全闸控管、事实由检索提供</li>
+        <li>Qwen3-4B QLoRA 微调</li>
+        <li>LangChain 管 4 个工具</li>
+        <li>支持连续追问、图搜接话</li>
+        <li>只查真库，绝不胡编价格</li>
       </ul>
       <div class="foot">/agent/chat · /image</div>
     </div>
@@ -226,9 +218,9 @@
   </div>
 
   <div class="reuse">
-    <div class="reuse-title">关键数据流与工程复用闭环</div>
-    <div class="reuse-line"><strong>数据复用：</strong>三源清洗图文 → 统一 build_product_text 模板 → 双塔训练与 FAISS 索引同源 → API 返回真实商品事实</div>
-    <div class="reuse-line"><strong>模型与服务复用：</strong>实验 2 全参微调权重 → 实验 3 ONNX/TRT 推理加速 → 实验 4 FastAPI 封装为实验 5 Agent 四工具</div>
+    <div class="reuse-title">五个实验环环相扣：上一步的产出直接给下一步用</div>
+    <div class="reuse-line"><strong>数据一条线：</strong>洗净图文 → 统一模板训练与建 FAISS 索引 → 接口返回真实商品（不编造）</div>
+    <div class="reuse-line"><strong>模型一条线：</strong>实验 2 训好权重 → 实验 3 加速成 ONNX/TRT → 实验 4 封装成接口 → 实验 5 交给 Agent 当工具</div>
   </div>
 </div>
 </body>
